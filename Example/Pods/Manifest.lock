@@ -1,0 +1,220 @@
+PODS:
+  - BTFoundation (1.4.4):
+    - BTFoundation/Array (= 1.4.4)
+    - BTFoundation/Bundle (= 1.4.4)
+    - BTFoundation/DispatchQueue (= 1.4.4)
+    - BTFoundation/Double (= 1.4.4)
+    - BTFoundation/Int (= 1.4.4)
+    - BTFoundation/Link (= 1.4.4)
+    - BTFoundation/NotificationCenter (= 1.4.4)
+    - BTFoundation/NSDictionary (= 1.4.4)
+    - BTFoundation/NSMutableAttributedString (= 1.4.4)
+    - BTFoundation/NSNumber (= 1.4.4)
+    - BTFoundation/String (= 1.4.4)
+    - BTFoundation/Time (= 1.4.4)
+    - BTFoundation/URL (= 1.4.4)
+    - BTFoundation/UserDefaults (= 1.4.4)
+    - BTNameSpace
+  - BTFoundation/Array (1.4.4):
+    - BTFoundation/String
+    - BTNameSpace
+  - BTFoundation/Bundle (1.4.4):
+    - BTNameSpace
+  - BTFoundation/DispatchQueue (1.4.4):
+    - BTNameSpace
+  - BTFoundation/Double (1.4.4):
+    - BTNameSpace
+  - BTFoundation/Int (1.4.4):
+    - BTNameSpace
+  - BTFoundation/Link (1.4.4):
+    - BTNameSpace
+  - BTFoundation/NotificationCenter (1.4.4):
+    - BTNameSpace
+  - BTFoundation/NSDictionary (1.4.4):
+    - BTNameSpace
+  - BTFoundation/NSMutableAttributedString (1.4.4):
+    - BTNameSpace
+  - BTFoundation/NSNumber (1.4.4):
+    - BTNameSpace
+  - BTFoundation/String (1.4.4):
+    - BTFoundation/NSMutableAttributedString
+    - BTNameSpace
+  - BTFoundation/Time (1.4.4):
+    - BTNameSpace
+  - BTFoundation/URL (1.4.4):
+    - BTNameSpace
+  - BTFoundation/UserDefaults (1.4.4):
+    - BTNameSpace
+  - BTNameSpace (1.2.0)
+  - BTUIKit (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/Adapter (= 2.0.16)
+    - BTUIKit/BTTextView (= 2.0.16)
+    - BTUIKit/CALayer (= 2.0.16)
+    - BTUIKit/CoreText (= 2.0.16)
+    - BTUIKit/KeyValueKit (= 2.0.16)
+    - BTUIKit/Kingfisher (= 2.0.16)
+    - BTUIKit/UIAlertController (= 2.0.16)
+    - BTUIKit/UIBarButtonItem (= 2.0.16)
+    - BTUIKit/UIButton (= 2.0.16)
+    - BTUIKit/UICollectionView (= 2.0.16)
+    - BTUIKit/UIColor (= 2.0.16)
+    - BTUIKit/UIDevice (= 2.0.16)
+    - BTUIKit/UIEdgeInsets (= 2.0.16)
+    - BTUIKit/UIFeedbackGenerator (= 2.0.16)
+    - BTUIKit/UIFont (= 2.0.16)
+    - BTUIKit/UIImage (= 2.0.16)
+    - BTUIKit/UIImageView (= 2.0.16)
+    - BTUIKit/UILabel (= 2.0.16)
+    - BTUIKit/UINavigationItem (= 2.0.16)
+    - BTUIKit/UIPasteboard (= 2.0.16)
+    - BTUIKit/UITableView (= 2.0.16)
+    - BTUIKit/UIView (= 2.0.16)
+    - BTUIKit/UIViewController (= 2.0.16)
+    - BTUIKit/UIWindow (= 2.0.16)
+    - SnapKit
+  - BTUIKit/Adapter (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/BTTextView (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/CALayer (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/UIColor
+    - SnapKit
+  - BTUIKit/CoreText (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/KeyValueKit (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/CoreText
+    - BTUIKit/UIColor
+    - BTUIKit/UILabel
+    - BTUIKit/UIPasteboard
+    - SnapKit
+  - BTUIKit/Kingfisher (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIAlertController (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/UIViewController
+    - SnapKit
+  - BTUIKit/UIBarButtonItem (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIButton (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/UIColor
+    - SnapKit
+  - BTUIKit/UICollectionView (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIColor (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIDevice (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIEdgeInsets (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIFeedbackGenerator (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIFont (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIImage (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/UIColor
+    - SnapKit
+  - BTUIKit/UIImageView (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/Kingfisher
+    - BTUIKit/UIColor
+    - BTUIKit/UIImage
+    - SnapKit
+  - BTUIKit/UILabel (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/CoreText
+    - BTUIKit/UIColor
+    - BTUIKit/UIDevice
+    - BTUIKit/UIPasteboard
+    - SnapKit
+  - BTUIKit/UINavigationItem (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/UIDevice
+    - BTUIKit/UIImageView
+    - SnapKit
+  - BTUIKit/UIPasteboard (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UITableView (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - BTUIKit/UIView (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/UIColor
+    - SnapKit
+  - BTUIKit/UIViewController (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit/UIColor
+    - SnapKit
+  - BTUIKit/UIWindow (2.0.16):
+    - BTFoundation
+    - BTNameSpace
+    - SnapKit
+  - SmartCodable (0.1.0)
+  - SnapKit (5.6.0)
+
+DEPENDENCIES:
+  - BTUIKit
+  - SmartCodable (from `../`)
+
+SPEC REPOS:
+  http://git.qixin007.com/app/component/QXBSpecs.git:
+    - BTFoundation
+    - BTNameSpace
+    - BTUIKit
+  https://github.com/CocoaPods/Specs.git:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  SmartCodable:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BTFoundation: 895a13c10d05e108aa1b1ecddf3bf6134c2a2b1a
+  BTNameSpace: 28a519cc78117b7d37cad61954bff701a1982937
+  BTUIKit: 6277a918614b21594c8d424998430a96d2c35e10
+  SmartCodable: ad674fd915c64d1bcc1bef967f1ce983a66c9ce1
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+
+PODFILE CHECKSUM: 39f4e87416477471ce0fa172c9775364da25a92c
+
+COCOAPODS: 1.11.2

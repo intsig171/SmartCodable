@@ -1,0 +1,27 @@
+#
+# Be sure to run `pod lib lint SmartCodable.podspec' to ensure this is a
+# valid spec before submitting.
+#
+# Any lines starting with a # are optional, but their use is encouraged
+# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
+#
+
+Pod::Spec.new do |s|
+  s.name             = 'SmartCodable'
+  s.version          = '0.1.0'
+  s.summary          = '数据解析库'
+  
+  s.homepage         = 'http://git.qixin007.com/app/component'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.author           = { 'Mccc' => 'mancong@bertadata.com' }
+  s.source           = { :git => 'http://git.qixin007.com/app/component/SmartCodable.git', :tag => s.version.to_s }
+  
+  s.platform              = :ios, '11.0'
+  s.ios.deployment_target = '11.0'
+  s.swift_version         = '5.0'
+  
+  
+  
+  s.source_files = 'SmartCodable/Classes/**/*'
+
+end

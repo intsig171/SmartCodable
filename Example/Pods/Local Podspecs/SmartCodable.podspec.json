@@ -1,0 +1,23 @@
+{
+  "name": "SmartCodable",
+  "version": "0.1.0",
+  "summary": "数据解析库",
+  "homepage": "http://git.qixin007.com/app/component",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Mccc": "mancong@bertadata.com"
+  },
+  "source": {
+    "git": "http://git.qixin007.com/app/component/SmartCodable.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "swift_versions": "5.0",
+  "source_files": "SmartCodable/Classes/**/*",
+  "swift_version": "5.0"
+}

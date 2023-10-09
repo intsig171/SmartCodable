@@ -1,0 +1,6 @@
+framework module BTUIKit {
+  umbrella header "BTUIKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
