@@ -8,13 +8,13 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
-  s.version          = '0.1.0'
+  s.version          = '1.1.0'
   s.summary          = '数据解析库'
   
-  s.homepage         = 'http://git.qixin007.com/app/component'
+  s.homepage         = 'https://github.com/intsig171'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Mccc' => 'mancong@bertadata.com' }
-  s.source           = { :git => 'http://git.qixin007.com/app/component/SmartCodable.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/intsig171/SmartCodable.git', :tag => s.version.to_s }
   
   s.platform              = :ios, '11.0'
   s.ios.deployment_target = '11.0'

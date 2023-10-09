@@ -24,12 +24,3 @@ extension Dictionary {
     }
 }
 
-
-extension Dictionary {
-    /// 字典拼接 (必须要同类型)
-    public mutating func append(_ dict: Dictionary) {
-        dict.forEach { (key, value) in
-            self.updateValue(value, forKey: key)
-        }
-    }
-}

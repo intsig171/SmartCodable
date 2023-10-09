@@ -9,14 +9,13 @@
 import Foundation
 import UIKit
 import SnapKit
-import BTFoundation
 
 class ComplexDataStructureDetailCell: UITableViewCell {
     
     var model: Student = Student() {
         didSet {
             nameLabel.text = "姓名：" + model.name
-            idLabel.text = "学号：" + model.id.bt.stringValue
+            idLabel.text = "学号：" + "\(model.id)"
             sexLabel.text = "性别：" + model.sex.rawValue
             areaLabel.text = "籍贯：" + model.area
         }

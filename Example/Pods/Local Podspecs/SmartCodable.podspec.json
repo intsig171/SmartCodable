@@ -1,8 +1,8 @@
 {
   "name": "SmartCodable",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "summary": "数据解析库",
-  "homepage": "http://git.qixin007.com/app/component",
+  "homepage": "https://github.com/intsig171",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -11,8 +11,8 @@
     "Mccc": "mancong@bertadata.com"
   },
   "source": {
-    "git": "http://git.qixin007.com/app/component/SmartCodable.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/intsig171/SmartCodable.git",
+    "tag": "1.1.0"
   },
   "platforms": {
     "ios": "11.0"

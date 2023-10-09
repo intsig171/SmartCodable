@@ -8,17 +8,14 @@
 
 import UIKit
 
-import BTNameSpace
 
 
 
 
 public typealias UITableViewProtocol = UITableViewDelegate & UITableViewDataSource
 
-public protocol UITableViewNamespaceWrappable: NamespaceWrappable { }
 
-extension UITableView: UITableViewNamespaceWrappable { }
-extension NamespaceWrapper where T: UITableView {
+extension UITableView {
     
     /// UITableView初始化方法
     /// - Parameters:
@@ -46,18 +43,18 @@ extension NamespaceWrapper where T: UITableView {
         tb.estimatedSectionFooterHeight = 0
         
         for item in cells {
-            tb.bt.registerCell(item)
+            tb.registerCell(item)
         }
         
         if let temp = headers {
             for item in temp {
-                tb.bt.registerSectionHeader(item)
+                tb.registerSectionHeader(item)
             }
         }
         
         if let temp = footers {
             for item in temp {
-                tb.bt.registerSectionFooter(item)
+                tb.registerSectionFooter(item)
             }
         }
         
@@ -67,13 +64,13 @@ extension NamespaceWrapper where T: UITableView {
 
 
 
-extension NamespaceWrapper where T: UITableView {
+extension UITableView {
     
     /// 注册cell
     /// - Parameter type: 要注册的类型
     public func registerCell<T: UITableViewCell>(_ type: T.Type) {
         let identifier = self.getClassName(type.classForCoder())
-        wrappedValue.register(type.self, forCellReuseIdentifier: identifier)
+        register(type.self, forCellReuseIdentifier: identifier)
     }
     
     
@@ -81,26 +78,26 @@ extension NamespaceWrapper where T: UITableView {
     /// - Parameter type: 要注册的类型
     public func registerSectionHeader<T: UITableViewHeaderFooterView>(_ type: T.Type) {
         let identifier = self.getClassName(type.classForCoder())
-        wrappedValue.register(type.self, forHeaderFooterViewReuseIdentifier: identifier)
+        register(type.self, forHeaderFooterViewReuseIdentifier: identifier)
     }
     
     /// 注册sectionFooter
     /// - Parameter type: 要注册的类型
     public func registerSectionFooter<T: UITableViewHeaderFooterView>(_ type: T.Type) {
         let identifier = self.getClassName(type.classForCoder())
-        wrappedValue.register(type.self, forHeaderFooterViewReuseIdentifier: identifier)
+        register(type.self, forHeaderFooterViewReuseIdentifier: identifier)
     }
 }
 
 
 
-extension NamespaceWrapper where T: UITableView {
-    
+extension UITableView {
+
     /// 获取cell，从复用池获取cell
     /// - Parameter indexPath: IndexPath
     public func makeCell<T: UITableViewCell>(indexPath: IndexPath) -> T {
         let identifier = self.getClassName(T.classForCoder())
-        guard let cell = wrappedValue.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? T else {
+        guard let cell = dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? T else {
             return T()
         }
         cell.selectionStyle = .none
@@ -110,22 +107,22 @@ extension NamespaceWrapper where T: UITableView {
     /// 获取复用的 SectionHeader
     public func makeSectionHeader<T: UITableViewHeaderFooterView>(_: T.Type) -> T {
         let identifier = getClassName(T.classForCoder())
-        guard let header = wrappedValue.dequeueReusableHeaderFooterView(withIdentifier: identifier)  as? T else { return T() }
+        guard let header = dequeueReusableHeaderFooterView(withIdentifier: identifier)  as? T else { return T() }
         return header
     }
     
     /// 获取复用的 SectionFooter
     public func makeSectionFooter<T: UITableViewHeaderFooterView>(_: T.Type) -> T {
         let identifier = getClassName(T.classForCoder())
-        guard let footer = wrappedValue.dequeueReusableHeaderFooterView(withIdentifier: identifier)  as? T else { return T() }
+        guard let footer = dequeueReusableHeaderFooterView(withIdentifier: identifier)  as? T else { return T() }
         return footer
     }
     
 }
 
 
-extension NamespaceWrapper where T: UITableView {
-    
+extension UITableView {
+
     fileprivate func getClassName(_ obj:Any) -> String {
         let mirro = Mirror(reflecting: obj)
         let className = String(describing: mirro.subjectType).components(separatedBy: ".").first ?? ""

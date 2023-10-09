@@ -1,6 +1,0 @@
-framework module BTFoundation {
-  umbrella header "BTFoundation-umbrella.h"
-
-  export *
-  module * { export * }
-}

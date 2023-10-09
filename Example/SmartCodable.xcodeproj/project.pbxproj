@@ -17,6 +17,9 @@
 		9930EFD42AA1898500F48622 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930EFD32AA1898500F48622 /* TestViewController.swift */; };
 		9930EFD82AA1950800F48622 /* CompatibleKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930EFD72AA1950800F48622 /* CompatibleKeylessViewController.swift */; };
 		9930EFDA2AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930EFD92AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift */; };
+		9973EC212AD3A6C50085D782 /* NSDictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973EC202AD3A6C50085D782 /* NSDictionary+Extension.swift */; };
+		9973EC232AD3A7210085D782 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973EC222AD3A7210085D782 /* UITableView+Reusable.swift */; };
+		9973EC252AD3A73C0085D782 /* ArraySafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973EC242AD3A73C0085D782 /* ArraySafe.swift */; };
 		997CB1D22AA7298800A2077D /* BaseCompatibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997CB1D12AA7298800A2077D /* BaseCompatibilityViewController.swift */; };
 		997CB1D42AA72E7C00A2077D /* CompatibleClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997CB1D32AA72E7C00A2077D /* CompatibleClassViewController.swift */; };
 		997CB1D62AA82AF100A2077D /* DictionaryAndModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997CB1D52AA82AF100A2077D /* DictionaryAndModelViewController.swift */; };
@@ -78,6 +81,9 @@
 		9930EFD32AA1898500F48622 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		9930EFD72AA1950800F48622 /* CompatibleKeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleKeylessViewController.swift; sourceTree = "<group>"; };
 		9930EFD92AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleTypeMismatchViewController.swift; sourceTree = "<group>"; };
+		9973EC202AD3A6C50085D782 /* NSDictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+Extension.swift"; sourceTree = "<group>"; };
+		9973EC222AD3A7210085D782 /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
+		9973EC242AD3A73C0085D782 /* ArraySafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySafe.swift; sourceTree = "<group>"; };
 		997CB1D12AA7298800A2077D /* BaseCompatibilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCompatibilityViewController.swift; sourceTree = "<group>"; };
 		997CB1D32AA72E7C00A2077D /* CompatibleClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleClassViewController.swift; sourceTree = "<group>"; };
 		997CB1D52AA82AF100A2077D /* DictionaryAndModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryAndModelViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +325,9 @@
 		99AA64732A95DDA600BCA1D9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				9973EC242AD3A73C0085D782 /* ArraySafe.swift */,
+				9973EC222AD3A7210085D782 /* UITableView+Reusable.swift */,
+				9973EC202AD3A6C50085D782 /* NSDictionary+Extension.swift */,
 				9930EFD32AA1898500F48622 /* TestViewController.swift */,
 			);
 			path = Other;
@@ -464,17 +473,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BTFoundation/BTFoundation.framework",
-				"${BUILT_PRODUCTS_DIR}/BTNameSpace/BTNameSpace.framework",
-				"${BUILT_PRODUCTS_DIR}/BTUIKit/BTUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SmartCodable/SmartCodable.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BTFoundation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BTNameSpace.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BTUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmartCodable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -512,8 +515,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9973EC252AD3A73C0085D782 /* ArraySafe.swift in Sources */,
 				99AA646E2A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift in Sources */,
 				9930EFD42AA1898500F48622 /* TestViewController.swift in Sources */,
+				9973EC212AD3A6C50085D782 /* NSDictionary+Extension.swift in Sources */,
 				997CB2052AAABD2200A2077D /* OptionalPropertyViewController.swift in Sources */,
 				997CB20A2AAB163800A2077D /* InvalidDefaultValueController.swift in Sources */,
 				99AA64792A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift in Sources */,
@@ -531,6 +536,7 @@
 				99925F2C2AA203EA0057934B /* CompatibleIntViewController.swift in Sources */,
 				997CB1DD2AA8681C00A2077D /* ComplexDataStructureModel.swift in Sources */,
 				997CB1DF2AA8682300A2077D /* ComplexDataStructureCell.swift in Sources */,
+				9973EC232AD3A7210085D782 /* UITableView+Reusable.swift in Sources */,
 				997CB1D82AA8316600A2077D /* ArrayAndModelViewController.swift in Sources */,
 				997CB1D62AA82AF100A2077D /* DictionaryAndModelViewController.swift in Sources */,
 				99AA64772A95EB7F00BCA1D9 /* AboutAnyViewController.swift in Sources */,

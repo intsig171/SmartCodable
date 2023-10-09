@@ -8,8 +8,6 @@
 
 import Foundation
 import SmartCodable
-import BTUIKit
-import BTFoundation
 
 // 兼容 解析失败的情况。 
 
@@ -41,7 +39,7 @@ class ComplexDataStructureViewController: BaseViewController {
     
     var dataArray: [Class] = []
     
-    lazy var tableView = UITableView.bt.make(registerCells: [ComplexDataStructureDetailCell.self], registerHeaders: [ComplexDataStructureSectionHeader.self], registerFooters: [ComplexDataStructureSectionHeader.self], delegate: self, style: .grouped)
+    lazy var tableView = UITableView.make(registerCells: [ComplexDataStructureDetailCell.self], registerHeaders: [ComplexDataStructureSectionHeader.self], registerFooters: [ComplexDataStructureSectionHeader.self], delegate: self, style: .grouped)
 }
 
 extension ComplexDataStructureViewController {
@@ -101,7 +99,7 @@ extension ComplexDataStructureViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.bt.makeSectionHeader(ComplexDataStructureSectionHeader.self)
+        let header = tableView.makeSectionHeader(ComplexDataStructureSectionHeader.self)
         if let classModel = dataArray[section~] {
             header.model = classModel
         }
@@ -113,7 +111,7 @@ extension ComplexDataStructureViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = tableView.bt.makeSectionFooter(ComplexDataStructureSectionFooter.self)
+        let footer = tableView.makeSectionFooter(ComplexDataStructureSectionFooter.self)
         return footer
     }
     
@@ -130,7 +128,7 @@ extension ComplexDataStructureViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ComplexDataStructureDetailCell = tableView.bt.makeCell(indexPath: indexPath)
+        let cell: ComplexDataStructureDetailCell = tableView.makeCell(indexPath: indexPath)
         if let classModel = dataArray[indexPath.section~] {
             if let student = classModel.students[indexPath.row~] {
                 cell.model = student

@@ -8,7 +8,6 @@
 
 import Foundation
 
-import BTFoundation
 import SmartCodable
 
 

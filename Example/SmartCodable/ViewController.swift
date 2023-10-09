@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import BTUIKit
-import BTFoundation
 import SmartCodable
 
 
@@ -47,7 +45,7 @@ class ViewController: UIViewController {
         tableView.reloadData()
     }
     
-    lazy var tableView = UITableView.bt.make(registerCells: [UITableViewCell.self], delegate: self, style: .grouped)
+    lazy var tableView = UITableView.make(registerCells: [UITableViewCell.self], delegate: self, style: .grouped)
 }
 
 
@@ -129,7 +127,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.bt.makeCell(indexPath: indexPath)
+        let cell = tableView.makeCell(indexPath: indexPath)
         
         if let arr = dataArray[indexPath.section~] {
             

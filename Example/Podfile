@@ -1,13 +1,10 @@
 platform :ios, '11.0'
 use_frameworks!
 
-source 'https://github.com/CocoaPods/Specs.git'        #官方仓库地址
-source 'http://git.qixin007.com/app/component/QXBSpecs.git'
-
 
 target 'SmartCodable_Example' do
   pod 'SmartCodable', :path => '../'
-  pod 'BTUIKit'
+  pod 'SnapKit'
 
   target 'SmartCodable_Tests' do
     inherit! :search_paths
