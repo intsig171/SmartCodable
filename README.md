@@ -1,4 +1,14 @@
 
+这是Swift数据解析方案的系列文章：
+[Swift数据解析(第一篇) - 技术选型](https://juejin.cn/post/7288517000581070902)
+[Swift数据解析(第二篇) - Codable 上](https://juejin.cn/post/7288517000581087286)
+[Swift数据解析(第二篇) - Codable 下](https://juejin.cn/post/7288517000581120054)
+[Swift数据解析(第三篇) - Codable源码学习](https://juejin.cn/spost/7288504491506090023)
+[Swift数据解析(第四篇) - SmartCodable 上](https://juejin.cn/post/7288513881735151670)
+[Swift数据解析(第四篇) - SmartCodable 下](https://juejin.cn/post/7288517000581169206)
+
+
+
 使用**Codable** 协议 进行 **decode** 时候，遇到以下三种情况就会失败。并且只有一个属性解析失败时就抛出异常，导致整个解析失败：
 
 -   类型键不存在
