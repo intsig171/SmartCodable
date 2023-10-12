@@ -14,7 +14,8 @@ import Foundation
 // ])
 
 
-public typealias SmartMappingKeys = [String]
+public typealias SmartMappingKey = String
+
 
 public extension JSONDecoder.KeyDecodingStrategy {
     
@@ -23,17 +24,30 @@ public extension JSONDecoder.KeyDecodingStrategy {
     ///   - SmartMappingKeys： 原始字段名，可以支持多个
     ///   - String： 模型中的字段名称
     /// - Returns: 解析策略
-    static func mapper(_ container: [SmartMappingKeys: String]) -> JSONDecoder.KeyDecodingStrategy {
+    static func mapper(_ container: [[SmartMappingKey]: String]) -> JSONDecoder.KeyDecodingStrategy {
         .custom {
             CodingKeysConverter(container)($0)
+        }
+    }
+    
+    
+    
+    static func mapper(_ container: [SmartMappingKey: String]) -> JSONDecoder.KeyDecodingStrategy {
+        var newContainer: [[SmartMappingKey]: String] = [:]
+        for (key, value) in container {
+            newContainer.updateValue(value, forKey: [key])
+        }
+        
+        return .custom {
+            CodingKeysConverter(newContainer)($0)
         }
     }
 }
 
 struct CodingKeysConverter {
-    let container: [SmartMappingKeys: String]
+    let container: [[SmartMappingKey]: String]
     
-    init(_ container: [SmartMappingKeys: String]) {
+    init(_ container: [[SmartMappingKey]: String]) {
         self.container = container
     }
 
@@ -59,7 +73,7 @@ struct CodingKeysConverter {
         guard !codingPath.isEmpty else { return SmartCodingKey.super }
         let stringKeys = codingPath.map { $0.stringValue }
         
-        var targetMappingKeys: SmartMappingKeys = []
+        var targetMappingKeys: [SmartMappingKey] = []
         for keys in container.keys {
             if keys._contains(stringKeys) {
                 targetMappingKeys = keys

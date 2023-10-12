@@ -190,7 +190,8 @@ extension KeyedDecodingContainer {
         }
     }
     
-    
+    /// 完全的的兼容处理
+    /// 尝试兼容类型不匹配的情况。如果兼容失败，尝试使用默认值填充，如果填充失败，抛出异常。
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         // 无法解析的时候，尝试提供默认值，不得已再抛出异常（理论上不应该会抛出异常）
         do {
@@ -210,6 +211,11 @@ extension KeyedDecodingContainer {
             throw error
         }
     }
+}
+
+
+// MARK: - KeyedDecodingContainer support
+extension KeyedDecodingContainer {
     
     // 底层的解码方法，核心功能是：拦截抛出的异常，抛给调用放处理。
     private func smartDecode<T: Decodable>(_ type: T.Type, forKey key: Key, isOptional: Bool = false) throws -> T {
@@ -253,11 +259,8 @@ extension KeyedDecodingContainer {
             throw error
         }
     }
-}
-
-
-// MARK: - KeyedDecodingContainer support
-extension KeyedDecodingContainer {
+    
+    
     /// 当完成decode的时候，接纳didFinishMapping方法内的改变。
     fileprivate func acceptChangesAfterMappingCompleted<T: Decodable>(decodeValue: T) -> T {
         if var value = decodeValue as? SmartDecodable {

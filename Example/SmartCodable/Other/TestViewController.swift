@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-//import SmartCodable
+import SmartCodable
 
 
 
@@ -26,34 +26,20 @@ class TestViewController : BaseViewController {
           "age": 10
         }
         """
-        
-
 
         
         
 
-  
-//        let model = Person.deserialize(dict: dict)
-//        print(model)
-
-        
-        guard let jsonData = json.data(using: .utf8) else { return }
-        do {
-            let decoder = JSONDecoder()
-            let feed = try decoder.decode(Person.self, from: jsonData)
-            print(feed)
-        } catch let error {
-            print(error)
-        }
     }
 
 
 }
 
-// 不可变属性将不会被解码，因为它是用无法覆盖的初始值声明的
-
-struct Person: Codable {
+struct PersonTest: SmartCodable {
     var name: String = ""
     var age: Int = 0
+    init() {
+        
+    }
 }
 

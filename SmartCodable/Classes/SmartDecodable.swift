@@ -9,12 +9,15 @@ import Foundation
 
 
 public protocol SmartDecodable: Decodable {
+    
+    /// 自定义映射策略
+    static func mapping() -> JSONDecoder.KeyDecodingStrategy?
+    
     /// 映射完成的完成的回调
     mutating func didFinishMapping()
-    static func mapping() -> JSONDecoder.KeyDecodingStrategy?
+    
     init()
 }
-
 
 
 extension SmartDecodable {
@@ -45,6 +48,9 @@ extension SmartDecodable {
 
     }
     
+    /// 反序列化成模型
+    /// - Parameter json: json字符串
+    /// - Returns: 模型
     public static func deserialize(json: String?) -> Self? {
         guard let _json = json else {
             SmartLog.logDebug("\(Self.self)中，提供的json为nil")

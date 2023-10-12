@@ -142,3 +142,6 @@ struct JsonToModelDetail: SmartCodable {
     
     init() { }
 }
+
+
+
