@@ -29,6 +29,8 @@
 ![示例.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f882f8dbe06f4427a3e448b4b69039bb~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=440&h=888&s=121262&e=png&b=fefefe)
 
 
+
+
 ## 环境要求
 Swift 5.0+
 
@@ -127,21 +129,35 @@ $ pod install
     "class_name": "35班"
  ] as [String : Any]
  ​
- guard let feed = FieldNameMapOne.deserialize(dict: dict) else { return }
+ guard let feed1 = FieldNameMapSingle.deserialize(dict: dict) else { return }
+ guard let feed2 = FieldNameMapDouble.deserialize(dict: dict) else { return }
  ​
  ​
- struct FieldNameMapOne: SmartCodable {
-     
-    var name: String = ""
-    var className: String = ""
-     
-    /// 字段映射
-    static func mapping() -> JSONDecoder.KeyDecodingStrategy? {
-        .mapper([
-            ["class_name"]: "className",
-        ])
-    }
- }
+// 1. 单个字段映射成模型字段。
+struct FieldNameMapSingle: SmartCodable {
+    var name: String = ""
+    var className: String = ""
+    /// 字段映射
+    static func mapping() -> JSONDecoder.KeyDecodingStrategy? {
+        .mapper([
+            "class_name": "className",
+        ])
+    }
+}
+
+struct FieldNameMapDouble: SmartCodable {
+    var name: String = ""
+    var className: String = ""
+    /// 字段映射
+    static func mapping() -> JSONDecoder.KeyDecodingStrategy? {
+        // 支持多余值的兼容，相同值的兼容
+        // 数据中有 两个 映射字段到同一个属性值，由于是解析的字典（无序），所以具体使用哪个值。
+        .mapper([
+            ["class_name", "other1", "other1", "className"]: "className",
+            ["class_name"]: "name"
+        ])
+    }
+}
 ```
 
 通过实现mapping方法，返回解码key的映射关系。
@@ -476,13 +492,45 @@ $ pod install
 
 如果要解析嵌套结构，该模型属性要设置为可选，需要使用 **@SmartOptional** 属性包装器修饰。
 
+```
+ struct Firend: SmartDecodable {
+    var age: Int?
+    var name: String = ""
+    @SmartOptional var location: Location?
+    var hobby: Hobby = Hobby()
+ }
+ ​
+ class Location: SmartDecodable {
+    var pronince: String = ""
+    var city: String = ""
+     
+    required init() { }
+ }
+ ​
+ struct Hobby: SmartDecodable {
+    var name: String = ""
+    init() {
+        name = ""
+    }
+ }
+```
+**Firend 的 location属性** 是一个遵守了 **SmartDecodable** 的模型。如果设置为可选属性需要使用 **@SmartOptional** 属性包装器修饰。
+
 #### 使用SmartOptional的限制
 
 SmartOptional修饰的对象必须满足一下三个要求：
 
-0.  必须遵循SmartDecodable协议。
+1.  必须遵循SmartDecodable协议
+
+    常规的属性（Bool/String/Int等）没有使用 **@SmartOptional** 属性包装器的必要，因此做了该限制。
+
 0.  必须是可选属性
+
+    非可选的属性没有使用 **@SmartOptional** 属性包装器的必要，因此做了该限制。
+
 0.  必须是class类型
+
+    通过 `didFinishMapping` 修改该属性的值的情况下，借用 **class** 的引用类型的特性，达到修改的目的。可以查看 **acceptChangesAfterMappingCompleted** 该方法的实现。
 
 #### 为什么这么做？
 
@@ -499,10 +547,17 @@ SmartOptional修饰的对象必须满足一下三个要求：
 ### 2. Any无法使用
 
 Any无法实现Codable，所以在使用Codable的时候，一切跟Any有关的均不允许，比如[String：Any]，[Any]。
+```
+struct Feed: SmartCodable {
 
-可以通过指定类型，比如[Sting: String], 放弃Any得使用。
+    /// Type 'Feed' does not conform to protocol 'Decodable'
+    var dict: [String: Any] = [:]
+}
+```
 
-或者通过范型，比如：struct AboutAny<T: Codable>。
+可以通过指定类型，比如[Sting: String], 放弃Any的使用。
+
+或者通过范型，比如
 
 ```
  struct AboutAny<T: Codable>: SmartCodable {
@@ -516,3 +571,9 @@ Any无法实现Codable，所以在使用Codable的时候，一切跟Any有关的
 ### 3. 模型中设置的默认值无效
 
 Codable在进行解码的时候，是无法知道这个属性的。所以在decode的时候，如果解析失败，使用默认值进行填充时，拿不到这个默认值。再处理解码兼容时，只能自己生成一个对应类型的默认值填充。
+```
+struct Feed: SmartCodable {
+    /// 如果解码失败，会被填充 ““，导致defalut value被替换掉。
+    var name: String = "defalut value"
+}
+```

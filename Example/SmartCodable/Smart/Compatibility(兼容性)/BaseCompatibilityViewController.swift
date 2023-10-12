@@ -164,3 +164,4 @@ struct OptionalCompatibleTypes: SmartDecodable {
 
     @SmartOptional var z: CompatibleItem?
 }
+

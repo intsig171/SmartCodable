@@ -19,7 +19,7 @@ public typealias SmartMappingKey = String
 
 public extension JSONDecoder.KeyDecodingStrategy {
     
-    /// 模型字段名称映射
+    /// 多模型字段名称映射
     /// - Parameter container: 要映射的项
     ///   - SmartMappingKeys： 原始字段名，可以支持多个
     ///   - String： 模型中的字段名称
@@ -31,7 +31,11 @@ public extension JSONDecoder.KeyDecodingStrategy {
     }
     
     
-    
+    /// 单模型字段名称映射
+    /// - Parameter container: 要映射的项
+    ///   - SmartMappingKeys： 原始字段名，可以支持多个
+    ///   - String： 模型中的字段名称
+    /// - Returns: 解析策略
     static func mapper(_ container: [SmartMappingKey: String]) -> JSONDecoder.KeyDecodingStrategy {
         var newContainer: [[SmartMappingKey]: String] = [:]
         for (key, value) in container {
