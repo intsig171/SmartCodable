@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
-  s.version          = '1.1.1'
+  s.version          = '1.1.2'
   s.summary          = '数据解析库'
   
   s.homepage         = 'https://github.com/intsig171'
@@ -23,5 +23,7 @@ Pod::Spec.new do |s|
   
   
   s.source_files = 'SmartCodable/Classes/**/*'
+  
+  
 
 end

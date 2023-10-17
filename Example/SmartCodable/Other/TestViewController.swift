@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import SmartCodable
+//import SmartCodable
 
 
 
@@ -22,24 +22,25 @@ class TestViewController : BaseViewController {
         
         let json = """
         {
-          "name": 123,
-          "age": 10
+          "name": null
         }
         """
 
-        
-        
 
+        guard let jsonData = json.data(using: .utf8) else { return }
+        let decoder = JSONDecoder()
+        do {
+            let feed = try decoder.decode(Person.self, from: jsonData)
+            print(feed)
+        } catch let error {
+            print(error)
+        }
     }
 
 
 }
 
-struct PersonTest: SmartCodable {
+struct Person: Codable {
     var name: String = ""
-    var age: Int = 0
-    init() {
-        
-    }
 }
 
