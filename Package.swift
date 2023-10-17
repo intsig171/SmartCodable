@@ -1,9 +1,9 @@
-
+// swift-tools-version: 5.9
 import PackageDescription
 
 let package = Package(
     name: "SmartCodable",
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v12)],
     products: [
         .library(
             name: "SmartCodable",
@@ -17,9 +17,10 @@ let package = Package(
         .target(
             name: "SmartCodable",
             dependencies: [
-                "SmartCodable"
+                
             ],
             path: "SmartCodable/Classes"
         )
-    ]
+    ],
+   swiftLanguageVersions: [.v5]
 )
