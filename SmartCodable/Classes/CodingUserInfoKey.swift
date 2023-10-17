@@ -10,9 +10,9 @@ import Foundation
 
 extension CodingUserInfoKey {
     /// 类型的名称
-    static var typeNmaeKey = CodingUserInfoKey.init(rawValue: "Stamrt.typeNmae")
+    static var typeName = CodingUserInfoKey.init(rawValue: "Stamrt.typeNmae")
     /// 原始的字典
-    static var originDictKey = CodingUserInfoKey.init(rawValue: "Stamrt.originDict")
+    static var originData = CodingUserInfoKey.init(rawValue: "Stamrt.originData")
 }
 
 

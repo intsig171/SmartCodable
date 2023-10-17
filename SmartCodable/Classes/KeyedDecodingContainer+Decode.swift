@@ -179,7 +179,7 @@ extension KeyedDecodingContainer {
             return acceptChangesAfterMappingCompleted(decodeValue: value)
         } catch let error as DecodingError {
             guard let superDe = try? superDecoder() else { return nil }
-            let userKey = CodingUserInfoKey.originDictKey
+            let userKey = CodingUserInfoKey.originData
             guard let tempKey = userKey, let originDict = superDe.userInfo[tempKey] as? [String: Any] else { return nil }
             if let value: T = Patcher.tryPatch(.typeMismatch, decodeError: error, originDict: originDict) {
                 return acceptChangesAfterMappingCompleted(decodeValue: value)
@@ -200,7 +200,7 @@ extension KeyedDecodingContainer {
         } catch let error as DecodingError {
             
             let superDe = try superDecoder()
-            let userKey = CodingUserInfoKey.originDictKey
+            let userKey = CodingUserInfoKey.originData
             guard let tempKey = userKey, let originDict = superDe.userInfo[tempKey] as? [String: Any] else {
                 guard let value: T = try? DefaultValuePatcher.makeDefaultValue() else { throw error }
                 return acceptChangesAfterMappingCompleted(decodeValue: value)
@@ -289,7 +289,7 @@ extension KeyedDecodingContainer {
     
     /// 获取当前模型的名称
     fileprivate func getModelName() -> String? {
-        if let superDe = try? superDecoder(), let key = CodingUserInfoKey.typeNmaeKey, let info = superDe.userInfo[key] {
+        if let superDe = try? superDecoder(), let key = CodingUserInfoKey.typeName, let info = superDe.userInfo[key] {
             return "\(info)"
         }
         return nil
