@@ -24,6 +24,7 @@ class SimpleSmartCodableViewController: BaseViewController {
 
 
 
+
 struct SimpleSmartCodableModel: SmartCodable {
     var name: String = ""
 }
