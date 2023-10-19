@@ -359,6 +359,8 @@
 			dependencies = (
 			);
 			name = SmartCodable_Example;
+			packageProductDependencies = (
+			);
 			productName = SmartCodable;
 			productReference = 607FACD01AFB9204008FA782 /* 数据解析.app */;
 			productType = "com.apple.product-type.application";
@@ -413,6 +415,8 @@
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
+			packageReferences = (
+			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
