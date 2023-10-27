@@ -178,11 +178,11 @@ extension KeyedDecodingContainer {
             let value = try smartDecode(type, forKey: key)
             return didFinishMapping(decodeValue: value)
         } catch let error as DecodingError {
-            guard let superDe = try? superDecoder() else { return nil }
-            let userKey = CodingUserInfoKey.originData
-            guard let tempKey = userKey, let originDict = superDe.userInfo[tempKey] as? [String: Any] else { return nil }
-            if let value: T = Patcher.tryPatch(.typeMismatch, decodeError: error, originDict: originDict) {
-                return didFinishMapping(decodeValue: value)
+            // 尝试进行类型兼容
+            if let dict = findMappingDict(with: key) {
+                if let value: T = Patcher.tryPatch(.all, decodeError: error, originDict: dict) {
+                    return didFinishMapping(decodeValue: value)
+                }
             }
             return nil
         } catch {
