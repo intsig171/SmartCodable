@@ -176,13 +176,13 @@ extension KeyedDecodingContainer {
     func optionalDecode<T: Decodable>(_ type: T.Type, forKey key: Key) -> T? {
         do {
             let value = try smartDecode(type, forKey: key)
-            return acceptChangesAfterMappingCompleted(decodeValue: value)
+            return didFinishMapping(decodeValue: value)
         } catch let error as DecodingError {
             guard let superDe = try? superDecoder() else { return nil }
             let userKey = CodingUserInfoKey.originData
             guard let tempKey = userKey, let originDict = superDe.userInfo[tempKey] as? [String: Any] else { return nil }
             if let value: T = Patcher.tryPatch(.typeMismatch, decodeError: error, originDict: originDict) {
-                return acceptChangesAfterMappingCompleted(decodeValue: value)
+                return didFinishMapping(decodeValue: value)
             }
             return nil
         } catch {
@@ -196,25 +196,100 @@ extension KeyedDecodingContainer {
         // 无法解析的时候，尝试提供默认值，不得已再抛出异常（理论上不应该会抛出异常）
         do {
             let value = try smartDecode(type, forKey: key)
-            return acceptChangesAfterMappingCompleted(decodeValue: value)
+            return didFinishMapping(decodeValue: value)
         } catch let error as DecodingError {
             // 尝试进行类型兼容
             if let dict = findMappingDict(with: key) {
                 if let value: T = Patcher.tryPatch(.all, decodeError: error, originDict: dict) {
-                    return acceptChangesAfterMappingCompleted(decodeValue: value)
+                    return didFinishMapping(decodeValue: value)
                 }
             }
             
             // 尝试进行默认值兼容
             if let value: T = try? DefaultValuePatcher.makeDefaultValue()  {
-                return acceptChangesAfterMappingCompleted(decodeValue: value)
+                return didFinishMapping(decodeValue: value)
             }
             
             // 抛出异常，不做处理。理论上不会出现这样的情况。
             throw error
         }
     }
+}
+
+
+
+// MARK: - KeyedDecodingContainer support
+extension KeyedDecodingContainer {
     
+    // 底层的解码方法，核心功能是：拦截抛出的异常，抛给调用放处理。
+    private func smartDecode<T: Decodable>(_ type: T.Type, forKey key: Key, isOptional: Bool = false) throws -> T {
+        
+        /** 解码兼容逻辑
+         * 1. try decodeNil(forKey: key)
+         *   - 抛出异常说明无此字段
+         *   - 如果为true，说明是null
+         *   - 如果为false，说明有值，但有可能是类型结果不一致的情况。
+         * 2. try decodeIfPresent(type, forKey: key)
+         *   - 抛出异常说明类型不匹配
+         *   - nil的情况应该不存在。
+         * 3. 汇总所有的异常，将error抛出，交给下级处理。
+         *   - 如果是可选类型，只尝试类型转换的兼容，如果失败，就可以返回nil了。
+         *   - 如果是非可以类型，先尝试类型转换兼容，再尝试填充该类型的默认值，如果失败抛出异常（理论上抛出异常的情况不存在，除非还有没兼容到的情况）。
+         */
+        do {
+            let isNil = try decodeNil(forKey: key)
+            if isNil { // 只有是null的时候会进来，类型错误的值，会返回false
+                var paths = codingPath
+                paths.append(key)
+                let context = DecodingError.Context.init(codingPath: paths, debugDescription: " \(key.stringValue) 在json中对应的值是null")
+                let error = DecodingError.valueNotFound(type, context)
+                throw error
+            } else {
+                do {
+                    if let v = try decodeIfPresent(type, forKey: key) {
+                        return v
+                    } else {
+                        // 应该不会进来了。
+                        let context = DecodingError.Context.init(codingPath: [key], debugDescription: "在json中未找到 \(key.stringValue) 对应的有效值")
+                        let error = DecodingError.valueNotFound(type, context)
+                        throw error
+                    }
+                } catch {
+                    throw error
+                }
+            }
+        } catch let error as DecodingError {
+            SmartLog.logError(error, className: getModelName())
+            throw error
+        }
+    }
+    
+    
+    /// 当完成decode的时候，接纳didFinishMapping方法内的改变。
+    fileprivate func didFinishMapping<T: Decodable>(decodeValue: T) -> T {
+        if var value = decodeValue as? SmartDecodable {
+            value.didFinishMapping()
+            if let temp = value as? T {
+                return temp
+            }
+        } else if let value = decodeValue as? [SmartDecodable] {
+            var array: [SmartDecodable] = []
+            for var item in value {
+                item.didFinishMapping()
+                array.append(item)
+            }
+            if let temp = array as? T {
+                return temp
+            }
+        }
+        
+        // 如果使用了SmartOptional修饰，获取被修饰的属性。
+        if var v = PropertyWrapperValue.getSmartObject(decodeValue: decodeValue) {
+            v.didFinishMapping()
+        }
+        
+        return decodeValue
+    }
     
     // 查找当前解析key对应的字典信息
     fileprivate func findMappingDict(with key: Key) -> [String: Any]? {
@@ -267,95 +342,6 @@ extension KeyedDecodingContainer {
             return nil
         }
     }
-}
-
-
-//验证情况
-//1. 字典，stirng
-//2. 字典，字典，string
-//3. 字典，数组，字典，string
-//
-//4. 数组，string
-//5. 数组，字典，string
-//6. 数组，数组，string
-//7. 数组，字典，数组，string
-//8. 数组，字典，数组，字典，sting。
-
-
-
-
-// MARK: - KeyedDecodingContainer support
-extension KeyedDecodingContainer {
-    
-    // 底层的解码方法，核心功能是：拦截抛出的异常，抛给调用放处理。
-    private func smartDecode<T: Decodable>(_ type: T.Type, forKey key: Key, isOptional: Bool = false) throws -> T {
-        
-        /** 解码兼容逻辑
-         * 1. try decodeNil(forKey: key)
-         *   - 抛出异常说明无此字段
-         *   - 如果为true，说明是null
-         *   - 如果为false，说明有值，但有可能是类型结果不一致的情况。
-         * 2. try decodeIfPresent(type, forKey: key)
-         *   - 抛出异常说明类型不匹配
-         *   - nil的情况应该不存在。
-         * 3. 汇总所有的异常，将error抛出，交给下级处理。
-         *   - 如果是可选类型，只尝试类型转换的兼容，如果失败，就可以返回nil了。
-         *   - 如果是非可以类型，先尝试类型转换兼容，再尝试填充该类型的默认值，如果失败抛出异常（理论上抛出异常的情况不存在，除非还有没兼容到的情况）。
-         */
-        do {
-            let isNil = try decodeNil(forKey: key)
-            if isNil { // 只有是null的时候会进来，类型错误的值，会返回false
-                var paths = codingPath
-                paths.append(key)
-                let context = DecodingError.Context.init(codingPath: paths, debugDescription: " \(key.stringValue) 在json中对应的值是null")
-                let error = DecodingError.valueNotFound(type, context)
-                throw error
-            } else {
-                do {
-                    if let v = try decodeIfPresent(type, forKey: key) {
-                        return v
-                    } else {
-                        // 应该不会进来了。
-                        let context = DecodingError.Context.init(codingPath: [key], debugDescription: "在json中未找到 \(key.stringValue) 对应的有效值")
-                        let error = DecodingError.valueNotFound(type, context)
-                        throw error
-                    }
-                } catch {
-                    throw error
-                }
-            }
-        } catch let error as DecodingError {
-            SmartLog.logError(error, className: getModelName())
-            throw error
-        }
-    }
-    
-    
-    /// 当完成decode的时候，接纳didFinishMapping方法内的改变。
-    fileprivate func acceptChangesAfterMappingCompleted<T: Decodable>(decodeValue: T) -> T {
-        if var value = decodeValue as? SmartDecodable {
-            value.didFinishMapping()
-            if let temp = value as? T {
-                return temp
-            }
-        } else if let value = decodeValue as? [SmartDecodable] {
-            var array: [SmartDecodable] = []
-            for var item in value {
-                item.didFinishMapping()
-                array.append(item)
-            }
-            if let temp = array as? T {
-                return temp
-            }
-        }
-        
-        // 如果使用了SmartOptional修饰，获取被修饰的属性。
-        if var v = PropertyWrapperValue.getSmartObject(decodeValue: decodeValue) {
-            v.didFinishMapping()
-        }
-        
-        return decodeValue
-    }
     
     /// 获取当前模型的名称
     fileprivate func getModelName() -> String? {
@@ -365,6 +351,5 @@ extension KeyedDecodingContainer {
         return nil
     }
 }
-
 
 

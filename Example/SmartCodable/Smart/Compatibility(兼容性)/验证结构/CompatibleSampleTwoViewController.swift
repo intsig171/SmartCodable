@@ -43,5 +43,9 @@ struct CompatibleSampleTwo: SmartCodable {
     var numbers: [Int] = []
     var sampleOne = CompatibleSampleOne()
 
+    mutating func didFinishMapping() {
+        self.numbers = self.numbers.reversed()
+    }
+    
     init() { }
 }
