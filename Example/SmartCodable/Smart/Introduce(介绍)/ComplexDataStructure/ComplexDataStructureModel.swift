@@ -39,7 +39,6 @@ struct Student: SmartCodable {
     
     mutating func didFinishMapping() {
         
-        print("Student 解析完成了")
         
         if area.count == 0 {
             area = "-"

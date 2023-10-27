@@ -198,20 +198,90 @@ extension KeyedDecodingContainer {
             let value = try smartDecode(type, forKey: key)
             return acceptChangesAfterMappingCompleted(decodeValue: value)
         } catch let error as DecodingError {
+            // 尝试进行类型兼容
+            if let dict = findMappingDict(with: key) {
+                if let value: T = Patcher.tryPatch(.all, decodeError: error, originDict: dict) {
+                    return acceptChangesAfterMappingCompleted(decodeValue: value)
+                }
+            }
             
-            let superDe = try superDecoder()
-            let userKey = CodingUserInfoKey.originData
-            guard let tempKey = userKey, let originDict = superDe.userInfo[tempKey] as? [String: Any] else {
-                guard let value: T = try? DefaultValuePatcher.makeDefaultValue() else { throw error }
+            // 尝试进行默认值兼容
+            if let value: T = try? DefaultValuePatcher.makeDefaultValue()  {
                 return acceptChangesAfterMappingCompleted(decodeValue: value)
             }
-            if let value: T = Patcher.tryPatch(.all, decodeError: error, originDict: originDict) {
-                return acceptChangesAfterMappingCompleted(decodeValue: value)
-            }
+            
+            // 抛出异常，不做处理。理论上不会出现这样的情况。
             throw error
         }
     }
+    
+    
+    // 查找当前解析key对应的字典信息
+    fileprivate func findMappingDict(with key: Key) -> [String: Any]? {
+
+        guard let superDe = try? superDecoder() else { return nil }
+        guard let userKey = CodingUserInfoKey.originData else { return nil }
+
+        
+        var lastData = superDe.userInfo[userKey]
+        
+        // 拼接成完整的当前解析的codingPath
+        var lastCodingPath = superDe.codingPath
+        lastCodingPath.append(key)
+
+        for path in lastCodingPath {
+            
+            if let index = path.intValue { // 当前层级是数组
+                if let tempArr = lastData as? [Any] {
+                    if tempArr.count > index {
+                        lastData = tempArr[index]
+                    } else { // 异常情况，中断兼容
+                        break
+                    }
+                }  else {
+                    break
+                }
+            } else { // 当前层级是字典或singleContainer
+                if path.stringValue == "super" {  // 字典容器层路径（忽略）
+                    continue
+                } else {
+                    if let data = lastData as? [String: Any] { // 根据数据判断是否字典容器
+                        let nextValue = data[path.stringValue]
+                        if let v = nextValue as? [Any] { // 如果取到的值是数组类型，就承接住
+                            lastData = v
+                        } else if let v = nextValue as? [String: Any]  {
+                            lastData = v
+                        } else { // 当前是singleContainer
+                            break
+                        }
+                    }  else { // 当前是singleContainer
+                        break
+                    }
+                }
+            }
+        }
+            
+        if let originDict = lastData as? [String: Any] {
+            return originDict
+        } else {
+            return nil
+        }
+    }
 }
+
+
+//验证情况
+//1. 字典，stirng
+//2. 字典，字典，string
+//3. 字典，数组，字典，string
+//
+//4. 数组，string
+//5. 数组，字典，string
+//6. 数组，数组，string
+//7. 数组，字典，数组，string
+//8. 数组，字典，数组，字典，sting。
+
+
 
 
 // MARK: - KeyedDecodingContainer support
@@ -295,5 +365,6 @@ extension KeyedDecodingContainer {
         return nil
     }
 }
+
 
 

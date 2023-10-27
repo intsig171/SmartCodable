@@ -20,27 +20,27 @@ class TestViewController : BaseViewController {
         
 
         
-        let json = """
-        {
-          "name": null
-        }
-        """
+       let json = """
+       {
+         "name": "小明",
+         "id": 2
+       }
+       """
+       guard let jsonData = json.data(using: .utf8) else { return }
+       let decoder = JSONDecoder()
+       do {
+           let feed = try decoder.decode(Feed.self, from: jsonData)
+           print(feed)
+       } catch let error {
+           print(error)
+       }
 
-
-        guard let jsonData = json.data(using: .utf8) else { return }
-        let decoder = JSONDecoder()
-        do {
-            let feed = try decoder.decode(Person.self, from: jsonData)
-            print(feed)
-        } catch let error {
-            print(error)
-        }
     }
 
 
 }
 
-struct Person: Codable {
-    var name: String = ""
+struct Feed: Codable {
+    var name: String
+    var id: Int
 }
-

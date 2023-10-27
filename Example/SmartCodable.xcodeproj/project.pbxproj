@@ -14,9 +14,18 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		99079A872AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99079A862AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift */; };
+		99079A892AEBCDA1009A1ED3 /* CompatibleSampleThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99079A882AEBCDA1009A1ED3 /* CompatibleSampleThreeViewController.swift */; };
+		99079A8B2AEBD4E6009A1ED3 /* CompatibleSampleTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99079A8A2AEBD4E6009A1ED3 /* CompatibleSampleTwoViewController.swift */; };
+		99079A8D2AEBD623009A1ED3 /* CompatibleSampleFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99079A8C2AEBD623009A1ED3 /* CompatibleSampleFourViewController.swift */; };
+		99079A912AEBD732009A1ED3 /* BTPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99079A8F2AEBD732009A1ED3 /* BTPrint.swift */; };
+		99079A922AEBD732009A1ED3 /* PrintFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99079A902AEBD732009A1ED3 /* PrintFormat.swift */; };
+		99079A942AEBE05E009A1ED3 /* CompatibleSampleFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99079A932AEBE05E009A1ED3 /* CompatibleSampleFiveViewController.swift */; };
 		9930EFD42AA1898500F48622 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930EFD32AA1898500F48622 /* TestViewController.swift */; };
 		9930EFD82AA1950800F48622 /* CompatibleKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930EFD72AA1950800F48622 /* CompatibleKeylessViewController.swift */; };
 		9930EFDA2AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930EFD92AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift */; };
+		99373B302AEBEC8B008CB2F5 /* CompatibleSampleSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99373B2F2AEBEC8B008CB2F5 /* CompatibleSampleSixViewController.swift */; };
+		99373B322AEBF22C008CB2F5 /* CaseTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99373B312AEBF22C008CB2F5 /* CaseTwoViewController.swift */; };
 		9973EC212AD3A6C50085D782 /* NSDictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973EC202AD3A6C50085D782 /* NSDictionary+Extension.swift */; };
 		9973EC232AD3A7210085D782 /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973EC222AD3A7210085D782 /* UITableView+Reusable.swift */; };
 		9973EC252AD3A73C0085D782 /* ArraySafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973EC242AD3A73C0085D782 /* ArraySafe.swift */; };
@@ -78,9 +87,18 @@
 		6C7219316AB42098EFAE233B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		95E07B9A67E17CE3A8DB88D1 /* Pods_SmartCodable_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartCodable_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		978E5B1486124E44C742BB4D /* Pods-SmartCodable_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		99079A862AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleSampleOneViewController.swift; sourceTree = "<group>"; };
+		99079A882AEBCDA1009A1ED3 /* CompatibleSampleThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleSampleThreeViewController.swift; sourceTree = "<group>"; };
+		99079A8A2AEBD4E6009A1ED3 /* CompatibleSampleTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleSampleTwoViewController.swift; sourceTree = "<group>"; };
+		99079A8C2AEBD623009A1ED3 /* CompatibleSampleFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleSampleFourViewController.swift; sourceTree = "<group>"; };
+		99079A8F2AEBD732009A1ED3 /* BTPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTPrint.swift; sourceTree = "<group>"; };
+		99079A902AEBD732009A1ED3 /* PrintFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintFormat.swift; sourceTree = "<group>"; };
+		99079A932AEBE05E009A1ED3 /* CompatibleSampleFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleSampleFiveViewController.swift; sourceTree = "<group>"; };
 		9930EFD32AA1898500F48622 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		9930EFD72AA1950800F48622 /* CompatibleKeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleKeylessViewController.swift; sourceTree = "<group>"; };
 		9930EFD92AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleTypeMismatchViewController.swift; sourceTree = "<group>"; };
+		99373B2F2AEBEC8B008CB2F5 /* CompatibleSampleSixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleSampleSixViewController.swift; sourceTree = "<group>"; };
+		99373B312AEBF22C008CB2F5 /* CaseTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTwoViewController.swift; sourceTree = "<group>"; };
 		9973EC202AD3A6C50085D782 /* NSDictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+Extension.swift"; sourceTree = "<group>"; };
 		9973EC222AD3A7210085D782 /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		9973EC242AD3A73C0085D782 /* ArraySafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySafe.swift; sourceTree = "<group>"; };
@@ -230,6 +248,46 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		99079A842AEBCC5F009A1ED3 /* 验证结构 */ = {
+			isa = PBXGroup;
+			children = (
+				99079A862AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift */,
+				99079A8A2AEBD4E6009A1ED3 /* CompatibleSampleTwoViewController.swift */,
+				99079A882AEBCDA1009A1ED3 /* CompatibleSampleThreeViewController.swift */,
+				99079A8C2AEBD623009A1ED3 /* CompatibleSampleFourViewController.swift */,
+				99079A932AEBE05E009A1ED3 /* CompatibleSampleFiveViewController.swift */,
+				99373B2F2AEBEC8B008CB2F5 /* CompatibleSampleSixViewController.swift */,
+			);
+			path = "验证结构";
+			sourceTree = "<group>";
+		};
+		99079A852AEBCC5F009A1ED3 /* 验证类型 */ = {
+			isa = PBXGroup;
+			children = (
+				9930EFD72AA1950800F48622 /* CompatibleKeylessViewController.swift */,
+				9930EFD92AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift */,
+				99925F222AA1EA750057934B /* CompatibleEmptyObjectViewController.swift */,
+				99925F242AA1F4110057934B /* CompatibleNullViewController.swift */,
+				99AA64612A95B94D00BCA1D9 /* CompatibleEnumViewController.swift */,
+				99925F272AA202800057934B /* CompatibleFloatViewController.swift */,
+				99925F292AA203DC0057934B /* CompatibleBoolViewController.swift */,
+				99925F2D2AA203F80057934B /* CompatibleStringViewController.swift */,
+				99925F2B2AA203EA0057934B /* CompatibleIntViewController.swift */,
+				997CB1D32AA72E7C00A2077D /* CompatibleClassViewController.swift */,
+				997CB1D12AA7298800A2077D /* BaseCompatibilityViewController.swift */,
+			);
+			path = "验证类型";
+			sourceTree = "<group>";
+		};
+		99079A8E2AEBD732009A1ED3 /* Print */ = {
+			isa = PBXGroup;
+			children = (
+				99079A8F2AEBD732009A1ED3 /* BTPrint.swift */,
+				99079A902AEBD732009A1ED3 /* PrintFormat.swift */,
+			);
+			path = Print;
+			sourceTree = "<group>";
+		};
 		9930EFD52AA194A000F48622 /* Smart */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,17 +303,8 @@
 		9930EFD62AA194BF00F48622 /* Compatibility(兼容性) */ = {
 			isa = PBXGroup;
 			children = (
-				9930EFD72AA1950800F48622 /* CompatibleKeylessViewController.swift */,
-				9930EFD92AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift */,
-				99925F222AA1EA750057934B /* CompatibleEmptyObjectViewController.swift */,
-				99925F242AA1F4110057934B /* CompatibleNullViewController.swift */,
-				99AA64612A95B94D00BCA1D9 /* CompatibleEnumViewController.swift */,
-				99925F272AA202800057934B /* CompatibleFloatViewController.swift */,
-				99925F292AA203DC0057934B /* CompatibleBoolViewController.swift */,
-				99925F2D2AA203F80057934B /* CompatibleStringViewController.swift */,
-				99925F2B2AA203EA0057934B /* CompatibleIntViewController.swift */,
-				997CB1D32AA72E7C00A2077D /* CompatibleClassViewController.swift */,
-				997CB1D12AA7298800A2077D /* BaseCompatibilityViewController.swift */,
+				99079A852AEBCC5F009A1ED3 /* 验证类型 */,
+				99079A842AEBCC5F009A1ED3 /* 验证结构 */,
 			);
 			path = "Compatibility(兼容性)";
 			sourceTree = "<group>";
@@ -292,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				999537D52AB164A700BA6512 /* CaseOneViewController.swift */,
+				99373B312AEBF22C008CB2F5 /* CaseTwoViewController.swift */,
 			);
 			path = "Case(案例)";
 			sourceTree = "<group>";
@@ -325,6 +375,7 @@
 		99AA64732A95DDA600BCA1D9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				99079A8E2AEBD732009A1ED3 /* Print */,
 				9973EC242AD3A73C0085D782 /* ArraySafe.swift */,
 				9973EC222AD3A7210085D782 /* UITableView+Reusable.swift */,
 				9973EC202AD3A6C50085D782 /* NSDictionary+Extension.swift */,
@@ -519,27 +570,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99079A8D2AEBD623009A1ED3 /* CompatibleSampleFourViewController.swift in Sources */,
 				9973EC252AD3A73C0085D782 /* ArraySafe.swift in Sources */,
 				99AA646E2A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift in Sources */,
 				9930EFD42AA1898500F48622 /* TestViewController.swift in Sources */,
 				9973EC212AD3A6C50085D782 /* NSDictionary+Extension.swift in Sources */,
+				99079A912AEBD732009A1ED3 /* BTPrint.swift in Sources */,
 				997CB2052AAABD2200A2077D /* OptionalPropertyViewController.swift in Sources */,
 				997CB20A2AAB163800A2077D /* InvalidDefaultValueController.swift in Sources */,
 				99AA64792A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift in Sources */,
 				99AA64752A95DDC800BCA1D9 /* FinishMappingViewController.swift in Sources */,
 				99AA646B2A95B94D00BCA1D9 /* CodableBaseViewController.swift in Sources */,
+				99079A872AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift in Sources */,
 				997CB1E12AA86E9800A2077D /* ComplexDataStructureSectionHeader.swift in Sources */,
 				997CB1D42AA72E7C00A2077D /* CompatibleClassViewController.swift in Sources */,
 				9930EFD82AA1950800F48622 /* CompatibleKeylessViewController.swift in Sources */,
+				99373B302AEBEC8B008CB2F5 /* CompatibleSampleSixViewController.swift in Sources */,
 				99AA64692A95B94D00BCA1D9 /* CodableMatchingStructureViewController.swift in Sources */,
 				99925F232AA1EA750057934B /* CompatibleEmptyObjectViewController.swift in Sources */,
 				99925F2A2AA203DC0057934B /* CompatibleBoolViewController.swift in Sources */,
 				9930EFDA2AA1C0F700F48622 /* CompatibleTypeMismatchViewController.swift in Sources */,
+				99079A892AEBCDA1009A1ED3 /* CompatibleSampleThreeViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				997CB1D22AA7298800A2077D /* BaseCompatibilityViewController.swift in Sources */,
 				99925F2C2AA203EA0057934B /* CompatibleIntViewController.swift in Sources */,
 				997CB1DD2AA8681C00A2077D /* ComplexDataStructureModel.swift in Sources */,
+				99373B322AEBF22C008CB2F5 /* CaseTwoViewController.swift in Sources */,
 				997CB1DF2AA8682300A2077D /* ComplexDataStructureCell.swift in Sources */,
+				99079A8B2AEBD4E6009A1ED3 /* CompatibleSampleTwoViewController.swift in Sources */,
+				99079A922AEBD732009A1ED3 /* PrintFormat.swift in Sources */,
 				9973EC232AD3A7210085D782 /* UITableView+Reusable.swift in Sources */,
 				997CB1D82AA8316600A2077D /* ArrayAndModelViewController.swift in Sources */,
 				997CB1D62AA82AF100A2077D /* DictionaryAndModelViewController.swift in Sources */,
@@ -554,6 +613,7 @@
 				99AA64722A95B94D00BCA1D9 /* FieldNameMapViewController.swift in Sources */,
 				99AA64702A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift in Sources */,
 				99925F252AA1F4110057934B /* CompatibleNullViewController.swift in Sources */,
+				99079A942AEBE05E009A1ED3 /* CompatibleSampleFiveViewController.swift in Sources */,
 				99925F282AA202800057934B /* CompatibleFloatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -60,12 +60,32 @@ extension ComplexDataStructureViewController {
               },
               {
                 "id" : 2,
-                "sex" : "女",
-                "name" : "小花",
-                "area" : "苏州",
+                "sex" : "未知",
+                "name" :  2,
+                "area" : {},
                }
             ]
-          }
+          },
+        
+        
+                  {
+                    "name" : "高三2班",
+                    "number" : "30",
+                    "students" : [
+                      {
+                        "id" : "1",
+                        "sex" : "男",
+                        "name" : 123,
+                        "area" : "山东",
+                      },
+                      {
+                        "id" : 2,
+                        "sex" : "未知",
+                        "name" :  2,
+                        "area" : false,
+                       }
+                    ]
+                  }
         ]
         """
 
