@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  SmartCodable
 //
-//  Created by mancong@bertadata.com on 08/23/2023.
-//  Copyright (c) 2023 mancong@bertadata.com. All rights reserved.
+//  Created by Mccc on 08/23/2023.
+//  Copyright (c) 2023 Mccc. All rights reserved.
 //
 
 import UIKit

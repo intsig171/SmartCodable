@@ -64,7 +64,7 @@ struct DefaultValuePatcher<T: Decodable> {
             if let object = T.self as? SmartDecodable.Type {
                 return object.init() as? T
             } else {
-                SmartLog.logDebug("\(Self.self)提供默认值失败, 发现未知类型，无法提供默热值。如有遇到请反馈，感谢")
+                SmartLog.logDebug("\(Self.self)提供默认值失败, 发现未知类型，无法提供默认值。如有遇到请反馈，感谢")
                 return nil
             }
         }

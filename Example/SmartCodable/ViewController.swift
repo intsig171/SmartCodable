@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  SmartCodable
 //
-//  Created by mancong@bertadata.com on 08/08/2023.
-//  Copyright (c) 2023 mancong@bertadata.com. All rights reserved.
+//  Created by Mccc on 08/08/2023.
+//  Copyright (c) 2023 Mccc. All rights reserved.
 //
 
 import UIKit
@@ -88,7 +88,7 @@ extension ViewController {
     // 兼容性 - 不同结构下的
     var smart_compatible_structure: [String: Any] {
        [
-        "title": "Smart兼容性 - 不同数据结构",
+        "title": "Smart兼容性 - 验证不同数据结构",
         "list": [
             ["name": "字典 -> String", "vc": "CompatibleSampleOneViewController"],
             ["name": "字典 -> 字典 -> String", "vc": "CompatibleSampleTwoViewController"],

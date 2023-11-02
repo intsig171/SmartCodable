@@ -14,7 +14,7 @@ class BaseViewController: UIViewController {
     
     var contentText: String = "" {
         didSet {
-            contentLabel.text = contentText
+            contentLabel.text = contentText + "\n\n 请查看控制台输出"
         }
     }
     

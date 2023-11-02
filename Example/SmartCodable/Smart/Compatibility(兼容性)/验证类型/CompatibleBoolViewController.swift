@@ -65,6 +65,8 @@ class CompatibleBoolViewController: BaseCompatibilityViewController {
          "属性：n 的类型是 Bool， 其值为 false"
          "属性：o 的类型是 Bool， 其值为 false"
          "属性：p 的类型是 Bool， 其值为 false"
+         "属性：q 的类型是 Bool， 其值为 false"
+         "属性：r 的类型是 Bool， 其值为 false"
          */
     }
 }

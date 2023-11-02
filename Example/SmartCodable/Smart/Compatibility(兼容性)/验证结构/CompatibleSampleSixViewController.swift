@@ -41,7 +41,7 @@ class CompatibleSampleSixViewController: BaseCompatibilityViewController {
                         ]
                     ]
                 ]
-            ],
+            ]
         ] as [Any]
         
         guard let feed = [CompatibleSampleSix].deserialize(array: arr) else { return }
@@ -59,3 +59,4 @@ struct CompatibleSampleSix: SmartCodable {
     
     init() { }
 }
+
