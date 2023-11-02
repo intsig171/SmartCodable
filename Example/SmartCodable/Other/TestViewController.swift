@@ -21,83 +21,49 @@ class TestViewController : BaseViewController {
         
         let json = """
         {
-         "x" : 1,
-         "y" : 2,
-         "z" : 3
+          "name": null
         }
         """
         
-        guard let point = Point3D.deserialize(json: json) else { return }
-        print(point)
         
-        
-        point.encode()
-        
-        guard let json11 = point.toJSONString(prettyPrint: true) else { return }
-        print(json11)
-        
+        guard let jsonData = json.data(using: .utf8) else { return }
+
+        let decoder = JSONDecoder()
+        do {
+            let feed = try decoder.decode(Feed.self, from: jsonData)
+            print(feed)
+        } catch let error {
+            print(error)
+        }
+
     }
     
     
 }
 
-class Point2D: SmartCodable {
-    required init() {
-        
-    }
 
+struct Feed: Codable {
+    var name: String
     
-    var x: Double = 0.0
-    var y: Double = 0.0
-     
-    enum CodingKeys: CodingKey {
-        case x
-        case y
-    }
-     
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.x = try container.decode(Double.self, forKey: .x)
-        self.y = try container.decode(Double.self, forKey: .y)
+          // 1.数据中是否否包含该键
+        if container.contains(.name) {
+            // 2.是否为nil
+            if try container.decodeNil(forKey: .name) {
+                self.name = ""
+            } else {
+                do {
+                    // 3.是否类型正确
+                    self.name = try container.decode(String.self, forKey: .name)
+                } catch {
+                    self.name = ""
+                }
+            }
+        } else {
+            self.name = ""
+        }
     }
-    
- }
+}
  
-class Point3D: Point2D {
-
-    
-    var z = 0.0
-   
-    enum CodingKeys: CodingKey {
-        case z
-        case point2D
-        case `super`
-    }
-     
-    required init(from decoder: Decoder) throws {
-
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.z = try container.decode(Double.self, forKey: .z)
-
-        try super.init(from: decoder)
-
-    }
-    
-    required init() {
-        fatalError("init() has not been implemented")
-    }
-    
-
-    
-    override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.z, forKey: .z)
-         
-        let superEncoder = container.superEncoder(forKey: .super)
-        
-//        let superEncoder = container.superEncoder()
-        try super.encode(to: superEncoder)
-    }
- }
-
 

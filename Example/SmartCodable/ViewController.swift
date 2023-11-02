@@ -127,7 +127,7 @@ extension ViewController {
     
     var smart_disadvantage: [String: Any] {
         [
-            "title": "Smart缺点",
+            "title": "Smart缺点（Codable的缺点）",
             "list": [
                 ["name": "Any无法使用", "vc": "AboutAnyViewController"],
                 ["name": "默认值无效", "vc": "InvalidDefaultValueController"],
