@@ -30,6 +30,8 @@ public struct SmartConfig {
             _mode = newValue
         }
     }
+    
+    /// 是否开启断言
     public static var openErrorAssert: Bool = true
 }
 

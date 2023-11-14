@@ -10,9 +10,6 @@ import Foundation
 
 public protocol SmartDecodable: Decodable {
     
-    /// 自定义映射策略
-    static func mapping() -> JSONDecoder.KeyDecodingStrategy?
-    
     /// 映射完成的完成的回调
     mutating func didFinishMapping()
     
@@ -22,7 +19,6 @@ public protocol SmartDecodable: Decodable {
 
 extension SmartDecodable {
     public mutating func didFinishMapping() { }
-    public static func mapping() -> JSONDecoder.KeyDecodingStrategy? { return nil }
 }
 
 
@@ -31,15 +27,14 @@ extension SmartDecodable {
     
     /// 反序列化成模型
     /// - Parameter dict: 字典
+    /// - Parameter strategy: 解码策略
     /// - Returns: 模型
-    public static func deserialize(dict: [AnyHashable: Any]?) -> Self? {
+    public static func deserialize(dict: [AnyHashable: Any]?, strategy: JSONDecoder.KeyDecodingStrategy? = nil) -> Self? {
         guard let _dict = dict else {
             SmartLog.logDebug("\(Self.self)中，提供的字典为nil")
             return nil
         }
-        
-        let strategy = Self.mapping()
-        
+                
         do {
             return try _dict._deserialize(type: Self.self, strategy: strategy)
         } catch  {
@@ -49,8 +44,9 @@ extension SmartDecodable {
     
     /// 反序列化成模型
     /// - Parameter json: json字符串
+    /// - Parameter strategy: 解码策略
     /// - Returns: 模型
-    public static func deserialize(json: String?) -> Self? {
+    public static func deserialize(json: String?, strategy: JSONDecoder.KeyDecodingStrategy? = nil) -> Self? {
         guard let _json = json else {
             SmartLog.logDebug("\(Self.self)中，提供的json为nil")
             return nil
@@ -61,7 +57,6 @@ extension SmartDecodable {
             return nil
         }
         
-        let strategy = Self.mapping()
         do {
             return try dict._deserialize(type: Self.self, strategy: strategy)
         } catch  {
@@ -77,8 +72,9 @@ extension Array where Element: SmartDecodable {
     
     /// 反序列化为模型数组
     /// - Parameter array: 数组
+    /// - Parameter strategy: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(array: [Any]?) -> [Element?]? {
+    public static func deserialize(array: [Any]?, strategy: JSONDecoder.KeyDecodingStrategy? = nil) -> [Element?]? {
 
         guard let _arr = array else {
             SmartLog.logDebug("\(Self.self)提供的反序列化的数组为空")
@@ -86,7 +82,7 @@ extension Array where Element: SmartDecodable {
         }
         
         do {
-            return try _arr._deserialize(type: Self.self, strategy: Element.mapping())
+            return try _arr._deserialize(type: Self.self, strategy: strategy)
         } catch  {
             return nil
         }
@@ -95,8 +91,9 @@ extension Array where Element: SmartDecodable {
     
     /// 反序列化为模型数组
     /// - Parameter json: json字符串
+    /// - Parameter strategy: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(json: String?) -> [Element?]? {
+    public static func deserialize(json: String?, strategy: JSONDecoder.KeyDecodingStrategy? = nil) -> [Element?]? {
         guard let _json = json else {
             SmartLog.logDebug("提供的json为nil")
             return nil
@@ -108,7 +105,7 @@ extension Array where Element: SmartDecodable {
         }
         
         do {
-            return try _arr._deserialize(type: Self.self, strategy: Element.mapping())
+            return try _arr._deserialize(type: Self.self, strategy: strategy)
         } catch  {
             return nil
         }
