@@ -79,7 +79,7 @@ struct CodingKeysConverter {
         
         var targetMappingKeys: [SmartMappingKey] = []
         for keys in container.keys {
-            if keys._contains(stringKeys) {
+            if stringKeys._contains(keys) {
                 targetMappingKeys = keys
                 break
             }
