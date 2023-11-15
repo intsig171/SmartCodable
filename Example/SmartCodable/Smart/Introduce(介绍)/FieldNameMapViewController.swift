@@ -10,11 +10,11 @@ import Foundation
 import SmartCodable
 
 
-/** 演示字段映射
- * 1. 单个字段映射成模型字段。
- * 2. 多个字段映射成模型字段。
- * 3. 多个字段在数据中有存在时，使用第一个字段。
- * 4. 兼容映射失败的情况。
+
+
+/** 修改字段映射关系
+ * 使用CodingKeys：修改当前Model的属性。建议使用。
+ * 使用keyDecodingStrategy： 当前解析的所有Model生效（包含嵌套Model），
  
  */
 
@@ -24,78 +24,87 @@ class FieldNameMapViewController: BaseViewController {
         super.viewDidLoad()
         
         
-        // 1. 单字段映射
-        guard let xiaoMing = FieldNameMapSingle.deserialize(dict: getFieldNameMapSingle()) else { return }
-        print("xiaoMing.name = \(xiaoMing.name)")
-        print("xiaoMing.className = \(xiaoMing.className)")
+        SmartConfig.debugMode = .none
+        // 1. CodingKeys 映射
+        guard let feedOne = FeedOne.deserialize(json: getJsonOne()) else { return }
+        print("feedOne.name = \(feedOne.name)")
+
+        // 2. 通过初始化decoder, 使用keyDecodingStrategy的驼峰命名
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let feedTwo = FeedTwo.deserialize(json: getJsonTwo(), decoder: decoder) else { return }
+        print("feedTwo.nickName = \(feedTwo.nickName)")
         
-        // 2. 多字段映射
-        guard let daHuang1 = FieldNameMapDouble.deserialize(dict: getFieldNameMapDouble()) else { return }
-        print("daHuang1.name = \(daHuang1.name)")
-        print("daHuang1.className = \(daHuang1.className)")
+        
+        // 3. 通过初始化decoder, 使用keyDecodingStrategy的自定义策略
+        let decoder2 = JSONDecoder()
+        decoder2.keyDecodingStrategy = .mapper(
+            [["nick_name"]: "name"]
+        )
+        guard let feedThree = FeedThree.deserialize(json: getJsonThree(), decoder: decoder2) else { return }
+        print("feedThree.nickName = \(feedThree.name)")
+
     }
 }
 
 
-extension FieldNameMapViewController {
-    func getFieldNameMapSingle() -> [String: Any] {
-        let dict = [
-            "name": "xiaoming",
-            "class_name": "35班"
-        ] as [String : Any]
-        
-        return dict
-    }
-    
-    // 1. 单个字段映射成模型字段。
-    struct FieldNameMapSingle: SmartCodable {
-        
-        var name: String = ""
-        var className: String = ""
-        
-        /// 字段映射
-        static func mapping() -> JSONDecoder.KeyDecodingStrategy? {
-            .mapper([
-                "class_name": "className",
-            ])
-        }
-    }
-}
+
+
 
 
 
 
 extension FieldNameMapViewController {
-    func getFieldNameMapDouble() -> [String: Any] {
-        let dict = [
-            "personName": "大黄",
-            "className": "1班"
-        ] as [String : Any]
+    func getJsonOne() -> String {
+        let json = """
+        {
+          "nick_name": "小明"
+        }
+        """
         
-        return dict
+        return json
     }
     
-    struct FieldNameMapDouble: SmartCodable {
-        
+    struct FeedOne: SmartCodable {
         var name: String = ""
-        var className: String = ""
         
-        /// 字段映射
-        static func mapping() -> JSONDecoder.KeyDecodingStrategy? {
-            // 支持多余值的兼容，相同值的兼容
-            // 数据中有 两个 映射字段到同一个属性值，由于是解析的字典（无序），所以具体使用哪个值。
-            .mapper([
-                ["class_name", "other1", "other1", "className"]: "className",
-                ["personName"]: "name"
-            ])
+        enum CodingKeys: String, CodingKey {
+            case name = "nick_name"
         }
     }
+}
+
+
+extension FieldNameMapViewController {
+    func getJsonTwo() -> String {
+        let json = """
+        {
+          "nick_name": "小明2"
+        }
+        """
+        
+        return json
+    }
     
+    struct FeedTwo: SmartCodable {
+        var nickName: String = ""
+    }
 }
 
 
 
-
-
-
-
+extension FieldNameMapViewController {
+    func getJsonThree() -> String {
+        let json = """
+        {
+          "nick_name": "小明3"
+        }
+        """
+        
+        return json
+    }
+    
+    struct FeedThree: SmartCodable {
+        var name: String = ""
+    }
+}
