@@ -34,12 +34,17 @@ extension SmartDecodable {
             SmartLog.logDebug("\(Self.self)中，提供的字典为nil")
             return nil
         }
-                
-        do {
-            return try _dict._deserialize(type: Self.self, decoder: decoder)
-        } catch  {
+        
+        guard let _json = _dict.toJSONString() else {
+            SmartLog.logDebug("\(self)转json字符串失败")
             return nil
         }
+        guard let _jsonData = _json.data(using: .utf8) else {
+            SmartLog.logDebug("\(self) 转data失败")
+            return nil
+        }
+        
+        return deserialize(data: _jsonData, decoder: decoder)
     }
     
     /// 反序列化成模型
@@ -51,14 +56,24 @@ extension SmartDecodable {
             SmartLog.logDebug("\(Self.self)中，提供的json为nil")
             return nil
         }
+    
+        guard let jsonData = _json.data(using: .utf8) else {
+            SmartLog.logDebug("\(self) 转data失败")
+            return nil
+        }
         
-        guard let dict = _json.toDictionary() else {
-            SmartLog.logDebug("\(Self.self)中，提供的json为非法json")
+        return deserialize(data: jsonData, decoder: decoder)
+    }
+    
+    
+    public static func deserialize(data: Data?, decoder: JSONDecoder? = nil) -> Self? {
+        guard let _data = data else {
+            SmartLog.logDebug("\(Self.self)中，提供的data为nil")
             return nil
         }
         
         do {
-            return try dict._deserialize(type: Self.self, decoder: decoder)
+            return try _data._deserializeDict(type: Self.self, decoder: decoder)
         } catch  {
             return nil
         }
@@ -81,11 +96,16 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        do {
-            return try _arr._deserialize(type: Self.self, decoder: decoder)
-        } catch  {
+        guard let _json = _arr.toJSONString() else {
+            SmartLog.logDebug("\(self)转json字符串失败")
             return nil
         }
+        
+        guard let _jsonData = _json.data(using: .utf8) else {
+            SmartLog.logDebug("\(self) 转data失败")
+            return nil
+        }
+        return deserialize(data: _jsonData)
     }
     
     
@@ -99,13 +119,24 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        guard let _arr = _json.toArray() else {
-            SmartLog.logDebug("提供的json为非法json")
+        
+        guard let _jsonData = _json.data(using: .utf8) else {
+            SmartLog.logDebug("\(self) 转data失败")
+            return nil
+        }
+        
+        return deserialize(data: _jsonData)
+    }
+    
+    
+    public static func deserialize(data: Data?, decoder: JSONDecoder? = nil) -> [Element?]? {
+        guard let _data = data else {
+            SmartLog.logDebug("\(Self.self)中，提供的data为nil")
             return nil
         }
         
         do {
-            return try _arr._deserialize(type: Self.self, decoder: decoder)
+            return try _data._deserializeArray(type: Self.self, decoder: decoder)
         } catch  {
             return nil
         }
@@ -113,17 +144,11 @@ extension Array where Element: SmartDecodable {
 }
 
 
-extension Dictionary {
-    fileprivate func _deserialize<T>(type: T.Type, decoder: JSONDecoder?) throws -> T? where T: SmartDecodable {
+extension Data {
+    
+    /// 字典
+    fileprivate func _deserializeDict<T>(type: T.Type, decoder: JSONDecoder?) throws -> T? where T: SmartDecodable {
 
-        guard let json = toJSONString() else {
-            SmartLog.logDebug("\(self)转json字符串失败")
-            return nil
-        }
-        guard let jsonData = json.data(using: .utf8) else {
-            SmartLog.logDebug("\(self) 转data失败")
-            return nil
-        }
         do {
             let _decoder = decoder ?? JSONDecoder()
             
@@ -137,37 +162,22 @@ extension Dictionary {
                 }
                 _decoder.userInfo = userInfo
             }
-            
 
-            var obj = try _decoder.decode(type, from: jsonData)
-                    
+            var obj = try _decoder.decode(type, from: self)
             obj.didFinishMapping()
-
             return obj
         } catch let error {
             SmartLog.logError(error, className: "\(type)")
             return nil
         }
     }
-}
-
-
-extension Array {
     
-    fileprivate func _deserialize<T>(type: [T].Type, decoder: JSONDecoder?) throws -> [T]? where T: SmartDecodable {
+    
+    /// 数组
+    fileprivate func _deserializeArray<T>(type: [T].Type, decoder: JSONDecoder?) throws -> [T]? where T: SmartDecodable {
 
-        guard let json = toJSONString() else {
-            SmartLog.logDebug("\(self)转json字符串失败")
-            return nil
-        }
-        
-        guard let jsonData = json.data(using: .utf8) else {
-            SmartLog.logDebug("\(self) 转data失败")
-            return nil
-        }
         do {
             let _decoder = decoder ?? JSONDecoder()
-            
             // 设置userInfo
             if let key = CodingUserInfoKey.typeName {
                 var userInfo = _decoder.userInfo
@@ -179,9 +189,7 @@ extension Array {
                 _decoder.userInfo = userInfo
             }
                         
-       
-            let decodeValue = try _decoder.decode(type, from: jsonData)
-            
+            let decodeValue = try _decoder.decode(type, from: self)
             var finishValue: [SmartDecodable] = []
             for var item in decodeValue {
                 item.didFinishMapping()
@@ -194,7 +202,6 @@ extension Array {
         }
     }
 }
-
 
 
 
