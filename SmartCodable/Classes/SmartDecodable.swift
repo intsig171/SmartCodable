@@ -105,7 +105,7 @@ extension Array where Element: SmartDecodable {
             SmartLog.logDebug("\(self) 转data失败")
             return nil
         }
-        return deserialize(data: _jsonData)
+        return deserialize(data: _jsonData, decoder: decoder)
     }
     
     
@@ -125,7 +125,7 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        return deserialize(data: _jsonData)
+        return deserialize(data: _jsonData, decoder: decoder)
     }
     
     

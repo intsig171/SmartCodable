@@ -298,7 +298,9 @@ extension KeyedDecodingContainer {
         guard let userKey = CodingUserInfoKey.originData else { return nil }
 
         
-        var lastData = superDe.userInfo[userKey]
+        guard let data = superDe.userInfo[userKey] as? Data else { return nil }
+        var lastData = data.serialize()
+        
         
         // 拼接成完整的当前解析的codingPath
         var lastCodingPath = superDe.codingPath
@@ -320,8 +322,8 @@ extension KeyedDecodingContainer {
                 if path.stringValue == "super" {  // 字典容器层路径（忽略）
                     continue
                 } else {
-                    if let data = lastData as? [String: Any] { // 根据数据判断是否字典容器
-                        let nextValue = data[path.stringValue]
+                    if let tempDict = lastData as? [String: Any] { // 根据数据判断是否字典容器
+                        let nextValue = tempDict[path.stringValue]
                         if let v = nextValue as? [Any] { // 如果取到的值是数组类型，就承接住
                             lastData = v
                         } else if let v = nextValue as? [String: Any]  {
@@ -353,3 +355,15 @@ extension KeyedDecodingContainer {
 }
 
 
+
+extension Data {
+    fileprivate func serialize() -> Any? {
+        let value = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
+        return value
+    }
+}
+
+
+// 缺少一个 字段映射改变的还原逻辑
+// 驼峰的情况
+// 自定义的情况。
