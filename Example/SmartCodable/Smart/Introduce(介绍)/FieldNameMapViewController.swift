@@ -23,16 +23,22 @@ class FieldNameMapViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         SmartConfig.debugMode = .none
+
+        let json = """
+        {
+          "nick_name": "小明"
+        }
+        """
+        
         // 1. CodingKeys 映射
-        guard let feedOne = FeedOne.deserialize(json: getJsonOne()) else { return }
+        guard let feedOne = FeedOne.deserialize(json: json) else { return }
         print("feedOne.name = \(feedOne.name)")
 
         // 2. 通过初始化decoder, 使用keyDecodingStrategy的驼峰命名
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        guard let feedTwo = FeedTwo.deserialize(json: getJsonTwo(), decoder: decoder) else { return }
+        guard let feedTwo = FeedTwo.deserialize(json: json, decoder: decoder) else { return }
         print("feedTwo.nickName = \(feedTwo.nickName)")
         
         
@@ -41,70 +47,30 @@ class FieldNameMapViewController: BaseViewController {
         decoder2.keyDecodingStrategy = .mapper(
             [["nick_name"]: "name"]
         )
-        guard let feedThree = FeedThree.deserialize(json: getJsonThree(), decoder: decoder2) else { return }
-        print("feedThree.nickName = \(feedThree.name)")
-
+        guard let feedThree = FeedThree.deserialize(json: json, decoder: decoder2) else { return }
+        print("feedThree.name = \(feedThree.name)")
     }
 }
 
 
 
-
-
-
-
-
 extension FieldNameMapViewController {
-    func getJsonOne() -> String {
-        let json = """
-        {
-          "nick_name": "小明"
-        }
-        """
-        
-        return json
-    }
-    
+
     struct FeedOne: SmartCodable {
         var name: String = ""
-        
         enum CodingKeys: String, CodingKey {
             case name = "nick_name"
         }
     }
-}
-
-
-extension FieldNameMapViewController {
-    func getJsonTwo() -> String {
-        let json = """
-        {
-          "nick_name": "小明2"
-        }
-        """
-        
-        return json
-    }
     
     struct FeedTwo: SmartCodable {
         var nickName: String = ""
-    }
-}
-
-
-
-extension FieldNameMapViewController {
-    func getJsonThree() -> String {
-        let json = """
-        {
-          "nick_name": "小明3"
-        }
-        """
-        
-        return json
     }
     
     struct FeedThree: SmartCodable {
         var name: String = ""
     }
 }
+
+
+

@@ -1,4 +1,3 @@
-
 这是Swift数据解析方案的系列文章：
 
 [Swift数据解析(第一篇) - 技术选型](https://juejin.cn/post/7288517000581070902)
@@ -14,7 +13,6 @@
 [Swift数据解析(第四篇) - SmartCodable 下](https://juejin.cn/post/7288517000581169206)
 
 
-
 使用**Codable** 协议 进行 **decode** 时候，遇到以下三种情况就会失败。并且只有一个属性解析失败时就抛出异常，导致整个解析失败：
 
 -   类型键不存在
@@ -24,6 +22,8 @@
 **SmartCodable** 旨在兼容处理 **Codable** 解码抛出的异常，使解析顺利进行下去。
 
 **SmartCodable** 提供穷尽了各种异常场景验证兼容性，均成功兼容。
+
+[SmartCodable的github地址](https://github.com/intsig171/SmartCodable)
 
 
 ![示例.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f882f8dbe06f4427a3e448b4b69039bb~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=440&h=888&s=121262&e=png&b=fefefe)
@@ -123,40 +123,45 @@ $ pod install
 ### 字段重命名
 
 ```
- ​
- let dict = [
-    "name": "xiaoming",
-    "class_name": "35班"
- ] as [String : Any]
- ​
- guard let feed1 = FieldNameMapSingle.deserialize(dict: dict) else { return }
- guard let feed2 = FieldNameMapDouble.deserialize(dict: dict) else { return }
- ​
- ​
-// 1. 单个字段映射成模型字段。
-struct FieldNameMapSingle: SmartCodable {
+ let json = """
+{
+  "nick_name": "小明"
+}
+"""
+
+// 1. CodingKeys 映射
+guard let feedOne = FeedOne.deserialize(json: json) else { return }
+print("feedOne.name = \(feedOne.name)")
+
+// 2. 通过初始化decoder, 使用keyDecodingStrategy的驼峰命名
+let decoder = JSONDecoder()
+decoder.keyDecodingStrategy = .convertFromSnakeCase
+guard let feedTwo = FeedTwo.deserialize(json: json, decoder: decoder) else { return }
+print("feedTwo.nickName = \(feedTwo.nickName)")
+
+
+// 3. 通过初始化decoder, 使用keyDecodingStrategy的自定义策略
+let decoder2 = JSONDecoder()
+decoder2.keyDecodingStrategy = .mapper(
+    [["nick_name"]: "name"]
+)
+guard let feedThree = FeedThree.deserialize(json: json, decoder: decoder2) else { return }
+print("feedThree.name = \(feedThree.name)")
+
+
+struct FeedOne: SmartCodable {
     var name: String = ""
-    var className: String = ""
-    /// 字段映射
-    static func mapping() -> JSONDecoder.KeyDecodingStrategy? {
-        .mapper([
-            "class_name": "className",
-        ])
+    enum CodingKeys: String, CodingKey {
+        case name = "nick_name"
     }
 }
 
-struct FieldNameMapDouble: SmartCodable {
+struct FeedTwo: SmartCodable {
+    var nickName: String = ""
+}
+
+struct FeedThree: SmartCodable {
     var name: String = ""
-    var className: String = ""
-    /// 字段映射
-    static func mapping() -> JSONDecoder.KeyDecodingStrategy? {
-        // 支持多余值的兼容，相同值的兼容
-        // 数据中有 两个 映射字段到同一个属性值，由于是解析的字典（无序），所以具体使用哪个值。
-        .mapper([
-            ["class_name", "other1", "other1", "className"]: "className",
-            ["class_name"]: "name"
-        ])
-    }
 }
 ```
 
@@ -576,9 +581,3 @@ struct Feed: SmartCodable {
     /// 如果解码失败，会被填充 ““，导致defalut value被替换掉。
     var name: String = "defalut value"
 }
-```
-
-
-## 联系我们
-![wecom-temp-215158-f6b36c903ca3fb0bae5625620f1762b4](https://github.com/intsig171/SmartCodable/assets/87351449/62283298-ea8e-4014-8727-16cd077c7998)
-
