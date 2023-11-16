@@ -14,45 +14,25 @@ import Foundation
 // ])
 
 
-public typealias SmartMappingKey = String
-
 
 public extension JSONDecoder.KeyDecodingStrategy {
     
-    /// 多模型字段名称映射
-    /// ⚠️ 使用注意：会在当前的解析生效（包含嵌套的模型的字段）
-    /// - Parameter container: 要映射的项
-    ///   - SmartMappingKeys： 原始字段名，可以支持多个
+    /// 字段名称映射 ⚠️会对当前所有满足条件的字段进行映射转化。
+    /// - Parameter container: 映射关系名，将json中的字段映射到模型的属性名上。
+    ///   - String： json中的字段名
     ///   - String： 模型中的字段名称
     /// - Returns: 解析策略
-    static func mapper(_ container: [[SmartMappingKey]: String]) -> JSONDecoder.KeyDecodingStrategy {
-        .custom {
+    static func mapper(_ container: [String: String]) -> JSONDecoder.KeyDecodingStrategy {
+        return .custom {
             CodingKeysConverter(container)($0)
         }
     }
-    
-    
-    /// 单模型字段名称映射 ⚠️ 请直接重写CodingKeys，没必要使用该方法
-    /// - Parameter container: 要映射的项
-    ///   - SmartMappingKeys： 原始字段名，可以支持多个
-    ///   - String： 模型中的字段名称
-    /// - Returns: 解析策略
-//    static func mapper(_ container: [SmartMappingKey: String]) -> JSONDecoder.KeyDecodingStrategy {
-//        var newContainer: [[SmartMappingKey]: String] = [:]
-//        for (key, value) in container {
-//            newContainer.updateValue(value, forKey: [key])
-//        }
-//
-//        return .custom {
-//            CodingKeysConverter(newContainer)($0)
-//        }
-//    }
 }
 
 struct CodingKeysConverter {
-    let container: [[SmartMappingKey]: String]
+    let container: [String: String]
     
-    init(_ container: [[SmartMappingKey]: String]) {
+    init(_ container: [String: String]) {
         self.container = container
     }
 
@@ -78,21 +58,22 @@ struct CodingKeysConverter {
         guard !codingPath.isEmpty else { return SmartCodingKey.super }
         let stringKeys = codingPath.map { $0.stringValue }
         
-        var targetMappingKeys: [SmartMappingKey] = []
-        for keys in container.keys {
-            if stringKeys._contains(keys) {
-                targetMappingKeys = keys
+        var targetMappingKey: String = ""
+        for key in container.keys {
+            if stringKeys.contains(key) {
+                targetMappingKey = key
                 break
             }
         }
         
-        guard !targetMappingKeys.isEmpty else { return codingPath.last! }
-        
-        if let value = container[targetMappingKeys] {
+        guard !targetMappingKey.isEmpty else { return codingPath.last! }
+
+        if let value = container[targetMappingKey] {
             return SmartCodingKey(stringValue: value, intValue: nil)
         } else {
             return codingPath.last!
         }
+
     }
 }
 

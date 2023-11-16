@@ -43,14 +43,14 @@ struct Patcher<T: Decodable> {
     ///   - decodeError: 解码错误
     ///   - originDict: 原始数据字典
     /// - Returns: 兼容之后的值（兼容失败，返回nil）
-    static func tryPatch(_ mode: PatchMode, decodeError: DecodingError, originDict: [String: Any]?) -> T? {
+    static func tryPatch(_ mode: PatchMode, decodeError: DecodingError, originValue: Any?) -> T? {
      
         if mode == .none { return nil }
         
         switch decodeError {
         case .typeMismatch(_, let context):
             if mode.isTypeMismatch() {
-                if let dict = originDict, let value = TypeCumulator<T>.compatible(context: context, originDict: dict) {
+                if let value = originValue, let value = TypeCumulator<T>.compatible(context: context, originValue: value) {
                     return value
                 }
             }

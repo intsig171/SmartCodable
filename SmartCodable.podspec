@@ -5,6 +5,10 @@
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
 #
+## pod trunk register 邮箱名 'intsig171' --verbose
+## pod me
+## pod trunk push SmartCodable.podspec --allow-warnings
+
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
@@ -27,3 +31,5 @@ Pod::Spec.new do |s|
   
 
 end
+
+

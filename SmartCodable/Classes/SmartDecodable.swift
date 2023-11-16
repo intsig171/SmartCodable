@@ -23,13 +23,35 @@ extension SmartDecodable {
 
 
 
+
+/// key解码策略
+public enum SmartKeyDecodingStrategy {
+    case useDefaultKeys
+    case convertFromSnakeCase
+    case custom([String: String])
+    
+    func toSystem() -> JSONDecoder.KeyDecodingStrategy {
+        switch self {
+        case .useDefaultKeys:
+            return JSONDecoder.KeyDecodingStrategy.useDefaultKeys
+        case .convertFromSnakeCase:
+            return JSONDecoder.KeyDecodingStrategy.convertFromSnakeCase
+        case .custom(let t):
+            return JSONDecoder.KeyDecodingStrategy.mapper(
+                t
+            )
+        }
+    }
+}
+
+
 extension SmartDecodable {
     
     /// 反序列化成模型
     /// - Parameter dict: 字典
-    /// - Parameter decoder: 解码器，可以通过此完成一些配置，例如：keyDecodingStrategy。
+    /// - Parameter strategy: 解码策略
     /// - Returns: 模型
-    public static func deserialize(dict: [AnyHashable: Any]?, decoder: JSONDecoder? = nil) -> Self? {
+    public static func deserialize(dict: [AnyHashable: Any]?, strategy: SmartKeyDecodingStrategy? = nil) -> Self? {
         guard let _dict = dict else {
             SmartLog.logDebug("\(Self.self)中，提供的字典为nil")
             return nil
@@ -44,14 +66,14 @@ extension SmartDecodable {
             return nil
         }
         
-        return deserialize(data: _jsonData, decoder: decoder)
+        return deserialize(data: _jsonData, strategy: strategy)
     }
     
     /// 反序列化成模型
     /// - Parameter json: json字符串
     /// - Parameter decoder: 解码器，可以通过此完成一些配置，例如：keyDecodingStrategy。
     /// - Returns: 模型
-    public static func deserialize(json: String?, decoder: JSONDecoder? = nil) -> Self? {
+    public static func deserialize(json: String?, strategy: SmartKeyDecodingStrategy? = nil) -> Self? {
         guard let _json = json else {
             SmartLog.logDebug("\(Self.self)中，提供的json为nil")
             return nil
@@ -62,18 +84,18 @@ extension SmartDecodable {
             return nil
         }
         
-        return deserialize(data: jsonData, decoder: decoder)
+        return deserialize(data: jsonData, strategy: strategy)
     }
     
     
-    public static func deserialize(data: Data?, decoder: JSONDecoder? = nil) -> Self? {
+    public static func deserialize(data: Data?, strategy: SmartKeyDecodingStrategy? = nil) -> Self? {
         guard let _data = data else {
             SmartLog.logDebug("\(Self.self)中，提供的data为nil")
             return nil
         }
         
         do {
-            return try _data._deserializeDict(type: Self.self, decoder: decoder)
+            return try _data._deserializeDict(type: Self.self, strategy: strategy)
         } catch  {
             return nil
         }
@@ -89,7 +111,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter array: 数组
     /// - Parameter decoder: 解码器，可以通过此完成一些配置，例如：keyDecodingStrategy。
     /// - Returns: 模型数组
-    public static func deserialize(array: [Any]?, decoder: JSONDecoder? = nil) -> [Element?]? {
+    public static func deserialize(array: [Any]?, strategy: SmartKeyDecodingStrategy? = nil) -> [Element?]? {
 
         guard let _arr = array else {
             SmartLog.logDebug("\(Self.self)提供的反序列化的数组为空")
@@ -105,7 +127,7 @@ extension Array where Element: SmartDecodable {
             SmartLog.logDebug("\(self) 转data失败")
             return nil
         }
-        return deserialize(data: _jsonData, decoder: decoder)
+        return deserialize(data: _jsonData, strategy: strategy)
     }
     
     
@@ -113,7 +135,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter json: json字符串
     /// - Parameter decoder: 解码器，可以通过此完成一些配置，例如：keyDecodingStrategy。
     /// - Returns: 模型数组
-    public static func deserialize(json: String?, decoder: JSONDecoder? = nil) -> [Element?]? {
+    public static func deserialize(json: String?, strategy: SmartKeyDecodingStrategy? = nil) -> [Element?]? {
         guard let _json = json else {
             SmartLog.logDebug("提供的json为nil")
             return nil
@@ -125,18 +147,18 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        return deserialize(data: _jsonData, decoder: decoder)
+        return deserialize(data: _jsonData, strategy: strategy)
     }
     
     
-    public static func deserialize(data: Data?, decoder: JSONDecoder? = nil) -> [Element?]? {
+    public static func deserialize(data: Data?, strategy: SmartKeyDecodingStrategy? = nil) -> [Element?]? {
         guard let _data = data else {
             SmartLog.logDebug("\(Self.self)中，提供的data为nil")
             return nil
         }
         
         do {
-            return try _data._deserializeArray(type: Self.self, decoder: decoder)
+            return try _data._deserializeArray(type: Self.self, strategy: strategy)
         } catch  {
             return nil
         }
@@ -145,24 +167,35 @@ extension Array where Element: SmartDecodable {
 
 
 extension Data {
+
+    fileprivate func createDecoder<T>(type: T.Type, strategy: SmartKeyDecodingStrategy? = nil) -> JSONDecoder {
+        let _decoder = JSONDecoder()
+        var userInfo = _decoder.userInfo
+
+        // 设置userInfo
+        if let key = CodingUserInfoKey.typeName {
+            userInfo.updateValue(type, forKey: key)
+        }
+        
+        if let userInfoKey = CodingUserInfoKey.originData {
+            userInfo.updateValue(self, forKey: userInfoKey)
+        }
+        
+        if let temp = strategy, let key = CodingUserInfoKey.strategy {
+            _decoder.keyDecodingStrategy = temp.toSystem()
+            userInfo.updateValue(temp, forKey: key)
+        }
+        _decoder.userInfo = userInfo
+        
+        return _decoder
+    }
+    
     
     /// 字典
-    fileprivate func _deserializeDict<T>(type: T.Type, decoder: JSONDecoder?) throws -> T? where T: SmartDecodable {
+    fileprivate func _deserializeDict<T>(type: T.Type, strategy: SmartKeyDecodingStrategy? = nil) throws -> T? where T: SmartDecodable {
 
         do {
-            let _decoder = decoder ?? JSONDecoder()
-            
-            // 设置userInfo
-            if let key = CodingUserInfoKey.typeName {
-                var userInfo = _decoder.userInfo
-                userInfo.updateValue(type, forKey: key)
-                
-                if let userInfoKey = CodingUserInfoKey.originData {
-                    userInfo.updateValue(self, forKey: userInfoKey)
-                }
-                _decoder.userInfo = userInfo
-            }
-
+            let _decoder = createDecoder(type: type, strategy: strategy)
             var obj = try _decoder.decode(type, from: self)
             obj.didFinishMapping()
             return obj
@@ -174,20 +207,10 @@ extension Data {
     
     
     /// 数组
-    fileprivate func _deserializeArray<T>(type: [T].Type, decoder: JSONDecoder?) throws -> [T]? where T: SmartDecodable {
+    fileprivate func _deserializeArray<T>(type: [T].Type, strategy: SmartKeyDecodingStrategy? = nil) throws -> [T]? where T: SmartDecodable {
 
         do {
-            let _decoder = decoder ?? JSONDecoder()
-            // 设置userInfo
-            if let key = CodingUserInfoKey.typeName {
-                var userInfo = _decoder.userInfo
-                userInfo.updateValue(type, forKey: key)
-                
-                if let userInfoKey = CodingUserInfoKey.originData {
-                    userInfo.updateValue(self, forKey: userInfoKey)
-                }
-                _decoder.userInfo = userInfo
-            }
+            let _decoder = createDecoder(type: type, strategy: strategy)
                         
             let decodeValue = try _decoder.decode(type, from: self)
             var finishValue: [SmartDecodable] = []

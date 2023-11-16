@@ -13,6 +13,8 @@ extension CodingUserInfoKey {
     static var typeName = CodingUserInfoKey.init(rawValue: "Stamrt.typeName")
     /// 原始的字典
     static var originData = CodingUserInfoKey.init(rawValue: "Stamrt.originData")
+    /// 解码策略
+    static var strategy = CodingUserInfoKey.init(rawValue: "Stamrt.keyDecodingStrategy")
 }
 
 

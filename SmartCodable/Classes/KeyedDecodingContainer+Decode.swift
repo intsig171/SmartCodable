@@ -179,8 +179,8 @@ extension KeyedDecodingContainer {
             return didFinishMapping(decodeValue: value)
         } catch let error as DecodingError {
             // 尝试进行类型兼容
-            if let dict = findMappingDict(with: key) {
-                if let value: T = Patcher.tryPatch(.all, decodeError: error, originDict: dict) {
+            if let jsonValue = JSONValueFinder.findValue(decoder: try? superDecoder(), key: key) {
+                if let value: T = Patcher.tryPatch(.typeMismatch, decodeError: error, originValue: jsonValue) {
                     return didFinishMapping(decodeValue: value)
                 }
             }
@@ -199,8 +199,8 @@ extension KeyedDecodingContainer {
             return didFinishMapping(decodeValue: value)
         } catch let error as DecodingError {
             // 尝试进行类型兼容
-            if let dict = findMappingDict(with: key) {
-                if let value: T = Patcher.tryPatch(.all, decodeError: error, originDict: dict) {
+            if let jsonValue = JSONValueFinder.findValue(decoder: try? superDecoder(), key: key) {
+                if let value: T = Patcher.tryPatch(.all, decodeError: error, originValue: jsonValue) {
                     return didFinishMapping(decodeValue: value)
                 }
             }
@@ -291,60 +291,7 @@ extension KeyedDecodingContainer {
         return decodeValue
     }
     
-    // 查找当前解析key对应的字典信息
-    fileprivate func findMappingDict(with key: Key) -> [String: Any]? {
 
-        guard let superDe = try? superDecoder() else { return nil }
-        guard let userKey = CodingUserInfoKey.originData else { return nil }
-
-        
-        guard let data = superDe.userInfo[userKey] as? Data else { return nil }
-        var lastData = data.serialize()
-        
-        
-        // 拼接成完整的当前解析的codingPath
-        var lastCodingPath = superDe.codingPath
-        lastCodingPath.append(key)
-
-        for path in lastCodingPath {
-            
-            if let index = path.intValue { // 当前层级是数组
-                if let tempArr = lastData as? [Any] {
-                    if tempArr.count > index {
-                        lastData = tempArr[index]
-                    } else { // 异常情况，中断兼容
-                        break
-                    }
-                }  else {
-                    break
-                }
-            } else { // 当前层级是字典或singleContainer
-                if path.stringValue == "super" {  // 字典容器层路径（忽略）
-                    continue
-                } else {
-                    if let tempDict = lastData as? [String: Any] { // 根据数据判断是否字典容器
-                        let nextValue = tempDict[path.stringValue]
-                        if let v = nextValue as? [Any] { // 如果取到的值是数组类型，就承接住
-                            lastData = v
-                        } else if let v = nextValue as? [String: Any]  {
-                            lastData = v
-                        } else { // 当前是singleContainer
-                            break
-                        }
-                    }  else { // 当前是singleContainer
-                        break
-                    }
-                }
-            }
-        }
-            
-        if let originDict = lastData as? [String: Any] {
-            return originDict
-        } else {
-            return nil
-        }
-    }
-    
     /// 获取当前模型的名称
     fileprivate func getModelName() -> String? {
         if let superDe = try? superDecoder(), let key = CodingUserInfoKey.typeName, let info = superDe.userInfo[key] {
@@ -354,16 +301,3 @@ extension KeyedDecodingContainer {
     }
 }
 
-
-
-extension Data {
-    fileprivate func serialize() -> Any? {
-        let value = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
-        return value
-    }
-}
-
-
-// 缺少一个 字段映射改变的还原逻辑
-// 驼峰的情况
-// 自定义的情况。
