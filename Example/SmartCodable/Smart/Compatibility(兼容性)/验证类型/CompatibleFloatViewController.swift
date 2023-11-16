@@ -29,16 +29,12 @@ class CompatibleFloatViewController: BaseCompatibilityViewController {
           "doubleValue": "nan",
         }
         """
-        
-        // todo? inf
-            
         guard let model = CompatibleFloat.deserialize(json: json) else { return }
         print(model.floatValue)
         print(model.floatValue1)
         print(model.floatValue2)
         print(model.floatValue3)
         print(model.floatValue4)
-
 
         print(model.cgfloatValue)
         print(model.doubleValue)
@@ -53,9 +49,6 @@ class CompatibleFloatViewController: BaseCompatibilityViewController {
          */
     }
 }
-
-
-
 
 
 struct CompatibleFloat: SmartCodable {

@@ -1,5 +1,5 @@
 PODS:
-  - SmartCodable (2.0.0)
+  - SmartCodable (2.0.1)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SmartCodable: dd14e3013ecff57e357d534e4c886b208b6f487d
+  SmartCodable: 0d870ed22994d233b56e62146452f8a6bf7e66a1
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
 PODFILE CHECKSUM: a617ea17c25b320ebcc12eb52f5a8fcdf27f8201

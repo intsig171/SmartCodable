@@ -66,30 +66,43 @@ extension ComplexDataStructureViewController {
                }
             ]
           },
-        
-        
-                  {
-                    "name" : "高三2班",
-                    "number" : "30",
-                    "students" : [
-                      {
-                        "id" : "1",
-                        "sex" : "男",
-                        "name" : 123,
-                        "area" : "山东",
-                      },
-                      {
-                        "id" : 2,
-                        "sex" : "未知",
-                        "name" :  2,
-                        "area" : false,
-                       }
-                    ]
-                  }
+          {
+            "name" : "高三2班",
+            "number" : "30",
+            "students" : [
+              {
+                "id" : "1",
+                "sex" : "男",
+                "name" : 123,
+                "area" : "山东",
+              },
+              {
+                "id" : 2,
+                "sex" : "未知",
+                "name" :  2,
+                "area" : false,
+               }
+            ]
+          }
         ]
         """
 
-        guard let models = [Class].deserialize(json: classArrayJson) as? [Class] else { return }
+        let arr = classArrayJson.toArray() ?? []
+        
+        
+        var endArr: [Any] = []
+        
+        for _ in 0...100 {
+            
+            for item in arr {
+                endArr.append(item)
+            }
+        }
+        
+        
+        
+        
+        guard let models = [Class].deserialize(array: endArr) as? [Class] else { return }
         dataArray = models
         tableView.reloadData()
     }
@@ -160,3 +173,27 @@ extension ComplexDataStructureViewController: UITableViewDataSource, UITableView
 
 
 
+
+extension String {
+    /// JSONString转换为字典
+    fileprivate func toDictionary() -> Dictionary<String, Any>? {
+        guard let jsonData:Data = data(using: .utf8) else { return nil }
+        if let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) {
+            if let temp = dict as? Dictionary<String, Any> {
+                return temp
+            }
+        }
+        return nil
+    }
+
+    /// JSONString转换为数组
+    fileprivate func toArray() -> Array<Any>? {
+        guard let jsonData:Data = data(using: .utf8) else { return nil }
+        if let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) {
+            if let temp = array as? Array<Any> {
+                return temp
+            }
+        }
+        return nil
+    }
+}

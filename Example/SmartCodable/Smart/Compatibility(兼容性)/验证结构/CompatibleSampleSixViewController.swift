@@ -15,12 +15,12 @@ class CompatibleSampleSixViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .error
+        SmartConfig.debugMode = .none
         
         
         let arr = [
             [
-                "string": 5,
+                "string": 11111,
                 "string1": "Smaple five",
                 "sampleFive": [
                     [

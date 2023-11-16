@@ -177,8 +177,8 @@ extension Data {
             userInfo.updateValue(type, forKey: key)
         }
         
-        if let userInfoKey = CodingUserInfoKey.originData {
-            userInfo.updateValue(self, forKey: userInfoKey)
+        if let userInfoKey = CodingUserInfoKey.originData, let jsonObj = serialize() {
+            userInfo.updateValue(jsonObj, forKey: userInfoKey)
         }
         
         if let temp = strategy, let key = CodingUserInfoKey.strategy {
@@ -282,5 +282,12 @@ extension Array {
         } catch {
             return nil
         }
+    }
+}
+
+extension Data {
+    fileprivate func serialize() -> Any? {
+        let value = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
+        return value
     }
 }
