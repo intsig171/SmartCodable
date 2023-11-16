@@ -25,7 +25,7 @@ class CompatibleSampleTwoViewController: BaseCompatibilityViewController {
             "numbers": [0, 1, 2],
             "sampleOne" : [
                 "string": 1,
-                "string1": false,
+                "string1": [1,2, 3],
             ]
         ] as [String: Any]
         

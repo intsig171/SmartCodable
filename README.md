@@ -133,21 +133,13 @@ $ pod install
 guard let feedOne = FeedOne.deserialize(json: json) else { return }
 print("feedOne.name = \(feedOne.name)")
 
-// 2. 通过初始化decoder, 使用keyDecodingStrategy的驼峰命名
-let decoder = JSONDecoder()
-decoder.keyDecodingStrategy = .convertFromSnakeCase
-guard let feedTwo = FeedTwo.deserialize(json: json, decoder: decoder) else { return }
+// 2.  使用keyDecodingStrategy的驼峰命名
+guard let feedTwo = FeedTwo.deserialize(json: json, strategy: .convertFromSnakeCase) else { return }
 print("feedTwo.nickName = \(feedTwo.nickName)")
 
-
-// 3. 通过初始化decoder, 使用keyDecodingStrategy的自定义策略
-let decoder2 = JSONDecoder()
-decoder2.keyDecodingStrategy = .mapper(
-    [["nick_name"]: "name"]
-)
-guard let feedThree = FeedThree.deserialize(json: json, decoder: decoder2) else { return }
+// 3. 使用keyDecodingStrategy的自定义策略
+guard let feedThree = FeedThree.deserialize(json: json, strategy: .custom(["nick_name": "name"])) else { return }
 print("feedThree.name = \(feedThree.name)")
-
 
 struct FeedOne: SmartCodable {
     var name: String = ""
