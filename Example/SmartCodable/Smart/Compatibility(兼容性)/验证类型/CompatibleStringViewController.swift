@@ -29,7 +29,7 @@ class CompatibleStringViewController: BaseCompatibilityViewController {
         print("string1的值为", feed.string1)
         print("string2的值为", feed.string2)
         print("string3的值为", feed.string3)
-        print("string4的值为", feed.string4)
+        print("string4的值为", feed.string4 ?? "")
         
         /**
          string1的值为 123

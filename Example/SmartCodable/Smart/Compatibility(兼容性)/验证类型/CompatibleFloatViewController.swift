@@ -34,7 +34,7 @@ class CompatibleFloatViewController: BaseCompatibilityViewController {
         print(model.floatValue1)
         print(model.floatValue2)
         print(model.floatValue3)
-        print(model.floatValue4)
+        print(model.floatValue4!)
 
         print(model.cgfloatValue)
         print(model.doubleValue)

@@ -28,7 +28,7 @@ class CompatibleIntViewController: BaseCompatibilityViewController {
         print(feed.intValue)
         print(feed.intValue1)
         print(feed.intValue2)
-        print(feed.intValue3)
+        print(feed.intValue3 ?? 0)
         
         /**
          123

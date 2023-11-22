@@ -29,7 +29,7 @@ class CompatibleEmptyObjectViewController: BaseCompatibilityViewController {
         guard let father = Father.deserialize(json: json) else { return }
         
         print(father)
-        print(father.firstSon)
+        print(father.firstSon!)
         print(father.secondson)
         print(father.sons)
         
