@@ -120,6 +120,7 @@ extension ViewController {
             "list": [
                 ["name": "扁平化", "vc": "CaseOneViewController"],
                 ["name": "派生关系", "vc": "CaseTwoViewController"],
+                ["name": "多值映射", "vc": "CaseThreeViewController"],
             ]
         ]
     }

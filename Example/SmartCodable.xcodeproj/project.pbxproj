@@ -56,6 +56,7 @@
 		99AA64752A95DDC800BCA1D9 /* FinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */; };
 		99AA64772A95EB7F00BCA1D9 /* AboutAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64762A95EB7F00BCA1D9 /* AboutAnyViewController.swift */; };
 		99AA64792A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64782A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift */; };
+		99AC4A0F2B0DF0B10086590D /* CaseThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 		99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMappingViewController.swift; sourceTree = "<group>"; };
 		99AA64762A95EB7F00BCA1D9 /* AboutAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAnyViewController.swift; sourceTree = "<group>"; };
 		99AA64782A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableComplex_oneViewController.swift; sourceTree = "<group>"; };
+		99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeViewController.swift; sourceTree = "<group>"; };
 		9CE23A449592BDCA5DC4C9AC /* SmartCodable.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SmartCodable.podspec; path = ../SmartCodable.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A96E6860DA7C40BB7926EF6A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B6E6C68F740EE97E6C69F555 /* Pods_SmartCodable_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartCodable_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,6 +322,7 @@
 			children = (
 				999537D52AB164A700BA6512 /* CaseOneViewController.swift */,
 				99373B312AEBF22C008CB2F5 /* CaseTwoViewController.swift */,
+				99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */,
 			);
 			path = "Case(案例)";
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				99AA64792A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift in Sources */,
 				99AA64752A95DDC800BCA1D9 /* FinishMappingViewController.swift in Sources */,
 				99AA646B2A95B94D00BCA1D9 /* CodableBaseViewController.swift in Sources */,
+				99AC4A0F2B0DF0B10086590D /* CaseThreeViewController.swift in Sources */,
 				99079A872AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift in Sources */,
 				997CB1E12AA86E9800A2077D /* ComplexDataStructureSectionHeader.swift in Sources */,
 				997CB1D42AA72E7C00A2077D /* CompatibleClassViewController.swift in Sources */,
