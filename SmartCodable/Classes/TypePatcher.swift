@@ -9,7 +9,7 @@ import Foundation
 
 /// 类型兼容器，负责尝试兼容类型不匹配，只兼容数据有意义的情况（可以合理的进行类型转换的）。
 struct TypeCumulator<T: Decodable> {
-    static func compatible(context: DecodingError.Context, originValue: Any?) -> T? {
+    static func compatible(originValue: Any?) -> T? {
         if let value = originValue {
             
             switch T.self {

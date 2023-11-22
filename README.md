@@ -173,41 +173,39 @@ struct FeedThree: SmartCodable {
 ```
  /// 类型兼容器，负责尝试兼容类型不匹配，只兼容数据有意义的情况（可以合理的进行类型转换的）。
  struct TypeCumulator<T: Decodable> {
-    static func compatible(context: DecodingError.Context, originDict: [String: Any]) -> T? {
-        if let lastKey = context.codingPath.last?.stringValue {
-            if let value = originDict[lastKey] {
-                 
-                switch T.self {
-                case is Bool.Type:
-                    let smart = compatibleBoolType(value: value)
-                    return smart as? T
- ​
-                case is String.Type:
-                    let smart = compatibleStringType(value: value)
-                    return smart as? T
- ​
-                case is Int.Type:
-                    let smart = compatibleIntType(value: value)
-                    return smart as? T
- ​
-                case is Float.Type:
-                    let smart = compatibleFloatType(value: value)
-                    return smart as? T
-                     
-                case is CGFloat.Type:
-                    let smart = compatibleCGFloatType(value: value)
-                    return smart as? T
- ​
-                case is Double.Type:
-                    let smart = compatibleDoubleType(value: value)
-                    return smart as? T
-                default:
-                    break
-                }
-            }
-        }
-        return nil
-    }
+    static func compatible(originValue: Any?) -> T? {
+        if let value = originValue {
+            
+            switch T.self {
+            case is Bool.Type:
+                let smart = compatibleBoolType(value: value)
+                return smart as? T
+
+            case is String.Type:
+                let smart = compatibleStringType(value: value)
+                return smart as? T
+
+            case is Int.Type:
+                let smart = compatibleIntType(value: value)
+                return smart as? T
+
+            case is Float.Type:
+                let smart = compatibleFloatType(value: value)
+                return smart as? T
+                
+            case is CGFloat.Type:
+                let smart = compatibleCGFloatType(value: value)
+                return smart as? T
+
+            case is Double.Type:
+                let smart = compatibleDoubleType(value: value)
+                return smart as? T
+            default:
+                break
+            }
+        }
+        return nil
+    }
  ​
      
     /// 兼容Bool类型的值，Model中定义为Bool类型，但是数据中是String，Int的情况。

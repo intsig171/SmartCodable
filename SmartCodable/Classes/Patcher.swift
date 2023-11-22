@@ -48,9 +48,9 @@ struct Patcher<T: Decodable> {
         if mode == .none { return nil }
         
         switch decodeError {
-        case .typeMismatch(_, let context):
+        case .typeMismatch(_, _):
             if mode.isTypeMismatch() {
-                if let value = originValue, let value = TypeCumulator<T>.compatible(context: context, originValue: value) {
+                if let value = originValue, let value = TypeCumulator<T>.compatible(originValue: value) {
                     return value
                 }
             }
