@@ -136,10 +136,10 @@ struct HXTradingRecordModel: SmartCodable {
     init() {
     }
     
-    var funVer: String = ""
+//    var funVer: String = ""
     var goodsType: String = ""
     var goodsName: String = ""
-    var totalPrice: String = ""
+    var totalPrice: Int = 0
     var createTime: String = ""
     var isBuySingle: Bool = false
     var type: Int = 0

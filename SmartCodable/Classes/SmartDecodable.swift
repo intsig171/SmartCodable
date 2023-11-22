@@ -199,7 +199,7 @@ extension Data {
             var obj = try _decoder.decode(type, from: self)
             obj.didFinishMapping()
             return obj
-        } catch let error {
+        } catch {
             SmartLog.logError(error, className: "\(type)")
             return nil
         }
@@ -219,7 +219,7 @@ extension Data {
                 finishValue.append(item)
             }
             return finishValue as? [T]
-        } catch let error {
+        } catch {
             SmartLog.logError(error, className: "\(type)")
             return nil
         }

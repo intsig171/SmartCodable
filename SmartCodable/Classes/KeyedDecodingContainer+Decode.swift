@@ -212,6 +212,12 @@ extension KeyedDecodingContainer {
             
             // 抛出异常，不做处理。理论上不会出现这样的情况。
             throw error
+        } catch {  // 非 DecodingError 类型的错误，如：Foundation.JSONError
+            // 尝试进行默认值兼容
+            if let value: T = try? DefaultValuePatcher.makeDefaultValue()  {
+                return didFinishMapping(decodeValue: value)
+            }
+            throw error
         }
     }
 }
@@ -249,9 +255,7 @@ extension KeyedDecodingContainer {
                     if let v = try decodeIfPresent(type, forKey: key) {
                         return v
                     } else {
-                        // 应该不会进来了。
-                        let context = DecodingError.Context.init(codingPath: [key], debugDescription: "在json中未找到 \(key.stringValue) 对应的有效值")
-                        let error = DecodingError.valueNotFound(type, context)
+                        let error = DecodingError.valueNotFound(type, .init(codingPath: [key], debugDescription: "未找到有效值"))
                         throw error
                     }
                 } catch {
@@ -260,6 +264,8 @@ extension KeyedDecodingContainer {
             }
         } catch let error as DecodingError {
             SmartLog.logError(error, className: getModelName())
+            throw error
+        } catch {
             throw error
         }
     }

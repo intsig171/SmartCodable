@@ -81,7 +81,7 @@ fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type) -> T? {
             } else {
                 SmartLog.logDebug("\(json)) is not a valid Type")
             }
-        } catch let error {
+        } catch {
             SmartLog.logError(error, className: "\(type)")
         }
     }
