@@ -8,7 +8,8 @@
 import Foundation
 
 
-public struct SmartCodingKey: CodingKey {
+
+struct SmartCodingKey: CodingKey {
     
     public var stringValue: String
     

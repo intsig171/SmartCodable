@@ -19,7 +19,16 @@ class TestViewController : BaseViewController {
         super.viewDidLoad()
         
        
+        let dict: [String: Any] = [:]
+        
+        
+        let model = Fedd.deserialize(dict: dict)
+        print(model)
     }
 }
 
+
+struct Fedd: SmartCodable {
+    var name: String = ""
+}
 
