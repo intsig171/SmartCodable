@@ -6,11 +6,7 @@ target 'SmartCodable_Example' do
   pod 'SmartCodable', :path => '../'
   pod 'SnapKit'
 
-  target 'SmartCodable_Tests' do
-    inherit! :search_paths
 
-    
-  end
 end
 
 

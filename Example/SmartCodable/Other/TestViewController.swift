@@ -19,11 +19,11 @@ class TestViewController : BaseViewController {
         super.viewDidLoad()
         
        
-        let dict: [String: Any] = [:]
+//        let dict: [String: Any] = [:]
         
         
-        let model = Fedd.deserialize(dict: dict)
-        print(model)
+//        let model = Fedd.deserialize(dict: dict)
+//        print(model)
     }
 }
 
