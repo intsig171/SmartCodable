@@ -87,6 +87,9 @@ extension CompatibleNullViewController {
     }
 }
 
+
+
+
 extension CompatibleNullViewController {
     /// 可选类型
     func optionalType(json: String) {

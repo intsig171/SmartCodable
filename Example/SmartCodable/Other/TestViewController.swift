@@ -19,16 +19,23 @@ class TestViewController : BaseViewController {
         super.viewDidLoad()
         
        
-//        let dict: [String: Any] = [:]
+        let dict: [String: Any] = [
+            "one": NSNull()
+        ]
         
         
-//        let model = Fedd.deserialize(dict: dict)
-//        print(model)
+        let model = Feed.deserialize(dict: dict)
+        print(model?.one as Any)
     }
 }
 
 
-struct Fedd: SmartCodable {
-    var name: String = ""
+struct Feed: SmartCodable {
+    @SmartOptional var one: FeedOne?
 }
 
+
+class FeedOne: SmartCodable {
+    var name: String = ""
+    required init() { }
+}

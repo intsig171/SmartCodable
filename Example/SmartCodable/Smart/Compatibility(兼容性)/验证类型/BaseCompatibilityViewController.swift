@@ -165,3 +165,27 @@ struct OptionalCompatibleTypes: SmartDecodable {
     @SmartOptional var z: CompatibleItem?
 }
 
+var typeMissmatchJson: String {
+           """
+           {
+           "a": [],
+           "b": [],
+           "c": [],
+           "d": [],
+           "e": [],
+           "f": [],
+            "g": [],
+            "h": [],
+            "i": [],
+            "j": [],
+            "k": [],
+            "l": [],
+           
+            "v": 123,
+            "w": 123,
+            "x": 123,
+            "y": 123,
+            "z": 123,
+          }
+         """
+}

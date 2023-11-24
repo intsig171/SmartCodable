@@ -28,6 +28,7 @@ extension SmartDecodable {
 public enum SmartKeyDecodingStrategy {
     case useDefaultKeys
     case convertFromSnakeCase
+    /// key： 数据中的字段名，value：模型中的属性名
     case custom([String: String])
     
     func toSystem() -> JSONDecoder.KeyDecodingStrategy {

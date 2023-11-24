@@ -106,8 +106,6 @@ extension CompatibleBoolViewController {
 struct BoolAdaptive: SmartCodable {
     init() { }
     
-    
-        
     var a: Bool?
     var b: Bool = false
     var c: Bool = false
@@ -128,6 +126,7 @@ struct BoolAdaptive: SmartCodable {
     var p: Bool = false
     var q: Bool = false
     var r: Bool?
-
 }
+
+
 
