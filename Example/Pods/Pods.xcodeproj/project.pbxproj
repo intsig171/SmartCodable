@@ -62,7 +62,7 @@
 		BD47CB74CD9B2B4D2D942C9B65748DFB /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 143498449916D71708A8AF2F96E7320A /* SnapKit-dummy.m */; };
 		C0B42B564F5A6D81A19917B6555C6786 /* SmartDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27C2C1EE0C0875849803CBBF8E10399 /* SmartDecodable.swift */; };
 		C49A7AB5435AD04914D43DB779ECA9B0 /* Pods-SmartCodable_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7964C06C7F291E31E0B7BC60B448A617 /* Pods-SmartCodable_Example-dummy.m */; };
-		CAE4FA4FBEC911F50CADF5BF9F8C9D54 /* DefaultValuePatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E921C5D7B8E3FB2684137E03A0978388 /* DefaultValuePatcher.swift */; };
+		CAE4FA4FBEC911F50CADF5BF9F8C9D54 /* ValuePatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E921C5D7B8E3FB2684137E03A0978388 /* ValuePatcher.swift */; };
 		DDC541F07BC9B5CF89E52C6C8193B5C7 /* SmartCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CAD44DF3A1516C400109A36206EF6E /* SmartCodingKey.swift */; };
 		DDD6EC1B18068CC260ACBDC6AC61F931 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		E98DC8FB2578E76A812E0C94BA10E1B1 /* ConstraintDirectionalInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8DFD8FEE78807F86F0544749C80450 /* ConstraintDirectionalInsets.swift */; };
@@ -108,8 +108,8 @@
 		152EE8343B4F64CFDE73F65CEF14A13F /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Sources/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		177C61288AEB373ED3EEBCE825452BC5 /* Pods-SmartCodable_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SmartCodable_Example-Info.plist"; sourceTree = "<group>"; };
 		1AD658EF0443886CA28A1E227A50A3B4 /* SmartEncodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SmartEncodable.swift; path = SmartCodable/Classes/SmartEncodable.swift; sourceTree = "<group>"; };
-		1CA8BB0F7A4C6FCBA2014ADC381A1A1F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		1DE7FB5985BB5C5BC7F9190A2B108FAB /* SmartCodable.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SmartCodable.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		1CA8BB0F7A4C6FCBA2014ADC381A1A1F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		1DE7FB5985BB5C5BC7F9190A2B108FAB /* SmartCodable.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SmartCodable.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1EBFA9970E82753C309D4FFFBA18A030 /* KeyedDecodingContainer+Decode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "KeyedDecodingContainer+Decode.swift"; path = "SmartCodable/Classes/KeyedDecodingContainer+Decode.swift"; sourceTree = "<group>"; };
 		236E4BD5C4B798ADF3D617BB35048381 /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		237E89564F06C118A48EE0D032CAA9CD /* Pods-SmartCodable_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SmartCodable_Tests-Info.plist"; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 		97DD40DBB56312535E43A4C3FEEC507D /* Pods-SmartCodable_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SmartCodable_Example-umbrella.h"; sourceTree = "<group>"; };
 		9ABCB6638448C5AF4B3F89FED6307EC6 /* JSONValueFinder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONValueFinder.swift; path = SmartCodable/Classes/JSONValueFinder.swift; sourceTree = "<group>"; };
 		9B09A2B4C6AB868E309AFCE329DBF0E2 /* SmartCodable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SmartCodable.release.xcconfig; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F0A527ED8F0A719FF610D743A87DAD3 /* ConstraintMakerPrioritizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPrioritizable.swift; path = Sources/ConstraintMakerPrioritizable.swift; sourceTree = "<group>"; };
 		A05A9D13E62BA7D10C137ED6AD4A4A7B /* Patcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Patcher.swift; path = SmartCodable/Classes/Patcher.swift; sourceTree = "<group>"; };
 		A4CFCEB2A58CA7A3CB15E26DD28CA8D6 /* Pods-SmartCodable_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SmartCodable_Example"; path = Pods_SmartCodable_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,7 +175,7 @@
 		DDFBBDB0D11D15EA3C0D640EF407F700 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Sources/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
 		E04B678C00268C9CF7E410145D6F78AA /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Sources/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
 		E30E74C9EDB065D2E76B3EDCCB6E2153 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Sources/ConstraintRelation.swift; sourceTree = "<group>"; };
-		E921C5D7B8E3FB2684137E03A0978388 /* DefaultValuePatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultValuePatcher.swift; path = SmartCodable/Classes/DefaultValuePatcher.swift; sourceTree = "<group>"; };
+		E921C5D7B8E3FB2684137E03A0978388 /* ValuePatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ValuePatcher.swift; path = SmartCodable/Classes/ValuePatcher.swift; sourceTree = "<group>"; };
 		E9657166FD9D3CFCD69149AEEE60B177 /* SmartCodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SmartCodable.swift; path = SmartCodable/Classes/SmartCodable.swift; sourceTree = "<group>"; };
 		EE53E848503ADFA56A32D97623CBEF9C /* SmartOptional.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SmartOptional.swift; path = SmartCodable/Classes/SmartOptional.swift; sourceTree = "<group>"; };
 		EEE15C12D4B2736CB1D1B07F4838FCA7 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Sources/LayoutConstraintItem.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 		F55D2A11C17BBCE3C9F7F0BA9555B5AE /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Sources/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
 		F57C38722D9F65992CF2200038C8651E /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerEditable.swift; path = Sources/ConstraintMakerEditable.swift; sourceTree = "<group>"; };
 		F8D944E627A5667832BACA3051DD5D42 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
-		FE1E49B1678BD0AAB338EC72360C9A42 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		FE1E49B1678BD0AAB338EC72360C9A42 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FE5693124BFA9269D2085EC1ADFAAD76 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Sources/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -277,20 +277,20 @@
 		5DB038736C4BD3C6890C81321D1623BF /* SmartCodable */ = {
 			isa = PBXGroup;
 			children = (
-				97267E884F3693C875764978809C65EE /* CodingUserInfoKey.swift */,
-				E921C5D7B8E3FB2684137E03A0978388 /* DefaultValuePatcher.swift */,
-				9ABCB6638448C5AF4B3F89FED6307EC6 /* JSONValueFinder.swift */,
-				1EBFA9970E82753C309D4FFFBA18A030 /* KeyedDecodingContainer+Decode.swift */,
-				5A71BE5E728B2E6ACB0C2B8ED61857C2 /* MapKeyable.swift */,
-				A05A9D13E62BA7D10C137ED6AD4A4A7B /* Patcher.swift */,
-				240A67ADE4820E630F3C302C966B46D3 /* SmartCaseDefaultable.swift */,
 				E9657166FD9D3CFCD69149AEEE60B177 /* SmartCodable.swift */,
-				F4CAD44DF3A1516C400109A36206EF6E /* SmartCodingKey.swift */,
 				B27C2C1EE0C0875849803CBBF8E10399 /* SmartDecodable.swift */,
 				1AD658EF0443886CA28A1E227A50A3B4 /* SmartEncodable.swift */,
-				CB6671E7841AC046A278AD245CFAACA0 /* SmartLog.swift */,
+				1EBFA9970E82753C309D4FFFBA18A030 /* KeyedDecodingContainer+Decode.swift */,
 				EE53E848503ADFA56A32D97623CBEF9C /* SmartOptional.swift */,
+				9ABCB6638448C5AF4B3F89FED6307EC6 /* JSONValueFinder.swift */,
+				5A71BE5E728B2E6ACB0C2B8ED61857C2 /* MapKeyable.swift */,
+				240A67ADE4820E630F3C302C966B46D3 /* SmartCaseDefaultable.swift */,
+				97267E884F3693C875764978809C65EE /* CodingUserInfoKey.swift */,
+				F4CAD44DF3A1516C400109A36206EF6E /* SmartCodingKey.swift */,
+				CB6671E7841AC046A278AD245CFAACA0 /* SmartLog.swift */,
+				A05A9D13E62BA7D10C137ED6AD4A4A7B /* Patcher.swift */,
 				B0E426D1940259B59124A57B39D85FE2 /* TypePatcher.swift */,
+				E921C5D7B8E3FB2684137E03A0978388 /* ValuePatcher.swift */,
 				6F428F67637E86DA6B77E29FBB83100D /* Pod */,
 				98D6FA75E782AF8A174ACADA5FF0C306 /* Support Files */,
 			);
@@ -421,7 +421,6 @@
 				152EE8343B4F64CFDE73F65CEF14A13F /* UILayoutSupport+Extensions.swift */,
 				403EB05A3920652EED411213C52E3AC2 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -666,7 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21F4150F4CDE6E5E58DC45C9E3701114 /* CodingUserInfoKey.swift in Sources */,
-				CAE4FA4FBEC911F50CADF5BF9F8C9D54 /* DefaultValuePatcher.swift in Sources */,
+				CAE4FA4FBEC911F50CADF5BF9F8C9D54 /* ValuePatcher.swift in Sources */,
 				207ECF777467393EA781FE9DC6277BA7 /* JSONValueFinder.swift in Sources */,
 				955F85766165AA710BEB2B67EDD8C750 /* KeyedDecodingContainer+Decode.swift in Sources */,
 				5EE3C14EC17F1072A9CDB29D8E0ECBE9 /* MapKeyable.swift in Sources */,
@@ -909,8 +908,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

@@ -1,5 +1,5 @@
 //
-//  DefaultValuePatcher.swift
+//  ValuePatcher.swift
 //  SmartCodable
 //
 //  Created by Mccc on 2023/8/22.
@@ -8,26 +8,19 @@
 import Foundation
 
 
-
-
-
 /// 默认值兼容器
-struct DefaultValuePatcher<T: Decodable> {
+struct ValuePatcher<T: Decodable> {
     
     /// 生产对应类型的默认值
-    static func makeDefaultValue() throws -> T? {
-                
-        
-        if let value =  (T.self as? Defaultable.Type)?.defaultValue as? T {
-            return value
+    static func defaultValue() -> T? {
+            
+        if let value = T.self as? Defaultable.Type {
+            return value.defaultValue as? T
+        } else if let object = T.self as? SmartDecodable.Type {
+            return object.init() as? T
         } else {
-            /// 判断此时的类型是否实现了SmartCodable， 如果是就说明是自定义的结构体或类。
-            if let object = T.self as? SmartDecodable.Type {
-                return object.init() as? T
-            } else {
-                SmartLog.logDebug("\(Self.self)提供默认值失败, 发现未知类型，无法提供默认值。如有遇到请反馈，感谢")
-                return nil
-            }
+            SmartLog.logDebug("\(Self.self)提供默认值失败, 发现未知类型，无法提供默认值。如有遇到请反馈，感谢")
+            return nil
         }
     }
 }

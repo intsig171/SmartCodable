@@ -59,7 +59,7 @@ struct Patcher<T: Decodable> {
         }
         
         if mode.isProvideDefaultValue() {
-            return try? DefaultValuePatcher.makeDefaultValue()
+            return ValuePatcher.defaultValue()
         }
         
         return nil

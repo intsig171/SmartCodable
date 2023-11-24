@@ -206,7 +206,7 @@ extension KeyedDecodingContainer {
             }
             
             // 尝试进行默认值兼容
-            if let value: T = try? DefaultValuePatcher.makeDefaultValue()  {
+            if let value: T = ValuePatcher.defaultValue()  {
                 return didFinishMapping(decodeValue: value)
             }
             
@@ -214,7 +214,7 @@ extension KeyedDecodingContainer {
             throw error
         } catch {  // 非 DecodingError 类型的错误，如：Foundation.JSONError
             // 尝试进行默认值兼容
-            if let value: T = try? DefaultValuePatcher.makeDefaultValue()  {
+            if let value: T = ValuePatcher.defaultValue()  {
                 return didFinishMapping(decodeValue: value)
             }
             throw error
