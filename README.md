@@ -582,7 +582,7 @@ SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到Sm
 
 ##### 如何理解数据节点？
 
-![image-20231124151719264](/Users/qixin/Library/Application Support/typora-user-images/image-20231124151719264.png)
+![image](https://github.com/intsig171/SmartCodable/assets/87351449/26f05336-c453-4769-a830-a20408427381)
 
 右侧的数据是数组类型。注意标红的内容，由外到里对照查看。
 

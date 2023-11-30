@@ -122,6 +122,8 @@ extension ViewController {
                 ["name": "派生关系", "vc": "CaseTwoViewController"],
                 ["name": "多值映射", "vc": "CaseThreeViewController"],
                 ["name": "范型解析", "vc": "CaseFourViewController"],
+                ["name": "范型解析 - signle value", "vc": "CaseFiveViewController"],
+
 
                 
             ]

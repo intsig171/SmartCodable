@@ -18,24 +18,37 @@ class TestViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        let dict: [String: Any] = [
-            "one": NSNull()
-        ]
+
+        let json = """
+        {
+          "date": "2023-01-01 00:00:00"
+        }
+        """
         
         
-        let model = Feed.deserialize(dict: dict)
-        print(model?.one as Any)
+        let model = TestModel.deserialize(json: json) { decoder in
+            decoder.dateDecodingStrategy = .iso8601
+        }
+        
+        print(model)
+        print(Date())
+        
+        
+        let decoder = JSONDecoder()
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        decoder.dateDecodingStrategy = .formatted(formatter)
+        let v = try? decoder.decode(TestModel.self, from: json.data(using: .utf8)!)
+        print(v)
+        
+        
     }
 }
 
 
-struct Feed: SmartCodable {
-    @SmartOptional var one: FeedOne?
-}
 
 
-class FeedOne: SmartCodable {
-    var name: String = ""
-    required init() { }
+struct TestModel: SmartCodable {
+    var date: Date?
 }

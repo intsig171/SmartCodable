@@ -38,6 +38,7 @@
 		997CB2052AAABD2200A2077D /* OptionalPropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997CB2042AAABD2200A2077D /* OptionalPropertyViewController.swift */; };
 		997CB2072AAABE6C00A2077D /* SimpleSmartCodableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997CB2062AAABE6C00A2077D /* SimpleSmartCodableViewController.swift */; };
 		997CB20A2AAB163800A2077D /* InvalidDefaultValueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997CB2092AAB163800A2077D /* InvalidDefaultValueController.swift */; };
+		998104882B18B655001E7A40 /* CaseFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998104872B18B655001E7A40 /* CaseFiveViewController.swift */; };
 		99925F232AA1EA750057934B /* CompatibleEmptyObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F222AA1EA750057934B /* CompatibleEmptyObjectViewController.swift */; };
 		99925F252AA1F4110057934B /* CompatibleNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F242AA1F4110057934B /* CompatibleNullViewController.swift */; };
 		99925F282AA202800057934B /* CompatibleFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F272AA202800057934B /* CompatibleFloatViewController.swift */; };
@@ -101,6 +102,7 @@
 		997CB2042AAABD2200A2077D /* OptionalPropertyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalPropertyViewController.swift; sourceTree = "<group>"; };
 		997CB2062AAABE6C00A2077D /* SimpleSmartCodableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSmartCodableViewController.swift; sourceTree = "<group>"; };
 		997CB2092AAB163800A2077D /* InvalidDefaultValueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidDefaultValueController.swift; sourceTree = "<group>"; };
+		998104872B18B655001E7A40 /* CaseFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFiveViewController.swift; sourceTree = "<group>"; };
 		99925F222AA1EA750057934B /* CompatibleEmptyObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleEmptyObjectViewController.swift; sourceTree = "<group>"; };
 		99925F242AA1F4110057934B /* CompatibleNullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleNullViewController.swift; sourceTree = "<group>"; };
 		99925F272AA202800057934B /* CompatibleFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleFloatViewController.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				99373B312AEBF22C008CB2F5 /* CaseTwoViewController.swift */,
 				99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */,
 				99AC4A102B0E079D0086590D /* CaseFourViewController.swift */,
+				998104872B18B655001E7A40 /* CaseFiveViewController.swift */,
 			);
 			path = "Case(案例)";
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				99AA64752A95DDC800BCA1D9 /* FinishMappingViewController.swift in Sources */,
 				99AA646B2A95B94D00BCA1D9 /* CodableBaseViewController.swift in Sources */,
 				99AC4A0F2B0DF0B10086590D /* CaseThreeViewController.swift in Sources */,
+				998104882B18B655001E7A40 /* CaseFiveViewController.swift in Sources */,
 				99079A872AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift in Sources */,
 				997CB1E12AA86E9800A2077D /* ComplexDataStructureSectionHeader.swift in Sources */,
 				997CB1D42AA72E7C00A2077D /* CompatibleClassViewController.swift in Sources */,
