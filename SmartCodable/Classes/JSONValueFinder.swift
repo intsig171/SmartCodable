@@ -87,11 +87,11 @@ extension CodingKey {
     fileprivate func convertKeyNameToFieldName(decoder: Decoder) -> String {
         let keyName = self.stringValue
         
-        guard let strategyKey = CodingUserInfoKey.strategy, let strategy = decoder.userInfo[strategyKey] else {
+        guard let strategyKey = CodingUserInfoKey.keyDecodingStrategy, let strategy = decoder.userInfo[strategyKey] else {
             return keyName
         }
 
-        if let strategy = strategy as? SmartKeyDecodingStrategy {
+        if let strategy = strategy as? SmartDecodingOption.KeyDecodingStrategy {
             switch strategy {
             case .useDefaultKeys:
                 return keyName

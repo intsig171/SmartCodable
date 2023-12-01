@@ -12,7 +12,6 @@ import SmartCodable
 
 
 
-
 class TestViewController : BaseViewController {
     
     override func viewDidLoad() {
@@ -21,34 +20,22 @@ class TestViewController : BaseViewController {
 
         let json = """
         {
-          "date": "2023-01-01 00:00:00"
+          "date": "2023-01-01 00:00:00",
+          "test": 100.0
         }
         """
-        
-        
-        let model = TestModel.deserialize(json: json) { decoder in
-            decoder.dateDecodingStrategy = .iso8601
-        }
-        
+
+        let formart = DateFormatter()
+        formart.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let dateStrategy: JSONDecoder.DateDecodingStrategy = .formatted(formart)
+        guard let model = TestModel.deserialize(json: json, options: [.dateStrategy(dateStrategy)]) else { return }
         print(model)
-        print(Date())
-        
-        
-        let decoder = JSONDecoder()
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        decoder.dateDecodingStrategy = .formatted(formatter)
-        let v = try? decoder.decode(TestModel.self, from: json.data(using: .utf8)!)
-        print(v)
-        
-        
     }
 }
 
-
-
-
 struct TestModel: SmartCodable {
     var date: Date?
+    var test: Decimal?
 }
+
+

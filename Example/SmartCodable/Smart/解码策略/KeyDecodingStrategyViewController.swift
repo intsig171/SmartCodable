@@ -1,8 +1,8 @@
 //
-//  FieldNameMapViewController.swift
+//  File.swift
 //  SmartCodable_Example
 //
-//  Created by Mccc on 2023/8/8.
+//  Created by qixin on 2023/11/30.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 
@@ -18,7 +18,7 @@ import SmartCodable
  
  */
 
-class FieldNameMapViewController: BaseViewController {
+class KeyDecodingStrategyViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +36,20 @@ class FieldNameMapViewController: BaseViewController {
         print("feedOne.name = \(feedOne.name)")
 
         // 2.  使用keyDecodingStrategy的驼峰命名
-        guard let feedTwo = FeedTwo.deserialize(json: json, strategy: .convertFromSnakeCase) else { return }
+        guard let feedTwo = FeedTwo.deserialize(json: json, options: [.keyStrategy(.convertFromSnakeCase)]) else { return }
         print("feedTwo.nickName = \(feedTwo.nickName)")
         
         
         // 3. 使用keyDecodingStrategy的自定义策略
-        guard let feedThree = FeedThree.deserialize(json: json, strategy: .custom(["nick_name": "name"])) else { return }
+        let option: SmartDecodingOption = .keyStrategy(.custom(["nick_name": "name"]))
+        guard let feedThree = FeedThree.deserialize(json: json, options: [option]) else { return }
         print("feedThree.name = \(feedThree.name)")
     }
 }
 
 
 
-extension FieldNameMapViewController {
+extension KeyDecodingStrategyViewController {
 
     struct FeedOne: SmartCodable {
         var name: String = ""

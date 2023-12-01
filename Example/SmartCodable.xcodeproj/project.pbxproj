@@ -53,12 +53,15 @@
 		99AA646C2A95B94D00BCA1D9 /* CompatibleEnumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64612A95B94D00BCA1D9 /* CompatibleEnumViewController.swift */; };
 		99AA646E2A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64632A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift */; };
 		99AA64702A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64652A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift */; };
-		99AA64722A95B94D00BCA1D9 /* FieldNameMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64672A95B94D00BCA1D9 /* FieldNameMapViewController.swift */; };
 		99AA64752A95DDC800BCA1D9 /* FinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */; };
 		99AA64772A95EB7F00BCA1D9 /* AboutAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64762A95EB7F00BCA1D9 /* AboutAnyViewController.swift */; };
 		99AA64792A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64782A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift */; };
 		99AC4A0F2B0DF0B10086590D /* CaseThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */; };
 		99AC4A112B0E079D0086590D /* CaseFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AC4A102B0E079D0086590D /* CaseFourViewController.swift */; };
+		99D97B092B18C9BF00F55E81 /* KeyDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D97B082B18C9BF00F55E81 /* KeyDecodingStrategyViewController.swift */; };
+		99D97B0B2B18CA6800F55E81 /* DateDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D97B0A2B18CA6800F55E81 /* DateDecodingStrategyViewController.swift */; };
+		99D97B0D2B18CA7500F55E81 /* DataDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D97B0C2B18CA7500F55E81 /* DataDecodingStrategyViewController.swift */; };
+		99D97B0F2B18CA8300F55E81 /* FloatDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D97B0E2B18CA8300F55E81 /* FloatDecodingStrategyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,12 +120,15 @@
 		99AA64612A95B94D00BCA1D9 /* CompatibleEnumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleEnumViewController.swift; sourceTree = "<group>"; };
 		99AA64632A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeErrorPrintViewController.swift; sourceTree = "<group>"; };
 		99AA64652A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureViewController.swift; sourceTree = "<group>"; };
-		99AA64672A95B94D00BCA1D9 /* FieldNameMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldNameMapViewController.swift; sourceTree = "<group>"; };
 		99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMappingViewController.swift; sourceTree = "<group>"; };
 		99AA64762A95EB7F00BCA1D9 /* AboutAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAnyViewController.swift; sourceTree = "<group>"; };
 		99AA64782A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableComplex_oneViewController.swift; sourceTree = "<group>"; };
 		99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeViewController.swift; sourceTree = "<group>"; };
 		99AC4A102B0E079D0086590D /* CaseFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFourViewController.swift; sourceTree = "<group>"; };
+		99D97B082B18C9BF00F55E81 /* KeyDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDecodingStrategyViewController.swift; sourceTree = "<group>"; };
+		99D97B0A2B18CA6800F55E81 /* DateDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDecodingStrategyViewController.swift; sourceTree = "<group>"; };
+		99D97B0C2B18CA7500F55E81 /* DataDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDecodingStrategyViewController.swift; sourceTree = "<group>"; };
+		99D97B0E2B18CA8300F55E81 /* FloatDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		9CE23A449592BDCA5DC4C9AC /* SmartCodable.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SmartCodable.podspec; path = ../SmartCodable.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A96E6860DA7C40BB7926EF6A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B6E6C68F740EE97E6C69F555 /* Pods_SmartCodable_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartCodable_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				99AA64602A95B94D00BCA1D9 /* Introduce(介绍) */,
+				99D97B072B18C9A500F55E81 /* 解码策略 */,
 				9930EFD62AA194BF00F48622 /* Compatibility(兼容性) */,
 				999537D42AB00AE400BA6512 /* Case(案例) */,
 				99925F262AA2013B0057934B /* DebugLog */,
@@ -352,7 +359,6 @@
 				997CB1D52AA82AF100A2077D /* DictionaryAndModelViewController.swift */,
 				997CB1D72AA8316600A2077D /* ArrayAndModelViewController.swift */,
 				99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */,
-				99AA64672A95B94D00BCA1D9 /* FieldNameMapViewController.swift */,
 				997CB2042AAABD2200A2077D /* OptionalPropertyViewController.swift */,
 				997CB1DB2AA8680B00A2077D /* ComplexDataStructure */,
 			);
@@ -379,6 +385,17 @@
 			path = Complex;
 			sourceTree = "<group>";
 		};
+		99D97B072B18C9A500F55E81 /* 解码策略 */ = {
+			isa = PBXGroup;
+			children = (
+				99D97B082B18C9BF00F55E81 /* KeyDecodingStrategyViewController.swift */,
+				99D97B0A2B18CA6800F55E81 /* DateDecodingStrategyViewController.swift */,
+				99D97B0C2B18CA7500F55E81 /* DataDecodingStrategyViewController.swift */,
+				99D97B0E2B18CA8300F55E81 /* FloatDecodingStrategyViewController.swift */,
+			);
+			path = "解码策略";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -397,8 +414,6 @@
 			dependencies = (
 			);
 			name = SmartCodable_Example;
-			packageProductDependencies = (
-			);
 			productName = SmartCodable;
 			productReference = 607FACD01AFB9204008FA782 /* 数据解析.app */;
 			productType = "com.apple.product-type.application";
@@ -428,8 +443,6 @@
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
-			packageReferences = (
-			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -482,11 +495,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SmartCodable/SmartCodable.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmartCodable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -509,6 +524,7 @@
 				9973EC212AD3A6C50085D782 /* NSDictionary+Extension.swift in Sources */,
 				99079A912AEBD732009A1ED3 /* BTPrint.swift in Sources */,
 				997CB2052AAABD2200A2077D /* OptionalPropertyViewController.swift in Sources */,
+				99D97B0B2B18CA6800F55E81 /* DateDecodingStrategyViewController.swift in Sources */,
 				997CB20A2AAB163800A2077D /* InvalidDefaultValueController.swift in Sources */,
 				99AA64792A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift in Sources */,
 				99AA64752A95DDC800BCA1D9 /* FinishMappingViewController.swift in Sources */,
@@ -531,21 +547,23 @@
 				99925F2C2AA203EA0057934B /* CompatibleIntViewController.swift in Sources */,
 				997CB1DD2AA8681C00A2077D /* ComplexDataStructureModel.swift in Sources */,
 				99373B322AEBF22C008CB2F5 /* CaseTwoViewController.swift in Sources */,
+				99D97B0D2B18CA7500F55E81 /* DataDecodingStrategyViewController.swift in Sources */,
 				997CB1DF2AA8682300A2077D /* ComplexDataStructureCell.swift in Sources */,
 				99079A8B2AEBD4E6009A1ED3 /* CompatibleSampleTwoViewController.swift in Sources */,
 				99079A922AEBD732009A1ED3 /* PrintFormat.swift in Sources */,
+				99D97B0F2B18CA8300F55E81 /* FloatDecodingStrategyViewController.swift in Sources */,
 				9973EC232AD3A7210085D782 /* UITableView+Reusable.swift in Sources */,
 				997CB1D82AA8316600A2077D /* ArrayAndModelViewController.swift in Sources */,
 				997CB1D62AA82AF100A2077D /* DictionaryAndModelViewController.swift in Sources */,
 				99AA64772A95EB7F00BCA1D9 /* AboutAnyViewController.swift in Sources */,
 				99AA646C2A95B94D00BCA1D9 /* CompatibleEnumViewController.swift in Sources */,
+				99D97B092B18C9BF00F55E81 /* KeyDecodingStrategyViewController.swift in Sources */,
 				999537D62AB164A800BA6512 /* CaseOneViewController.swift in Sources */,
 				99AA646A2A95B94D00BCA1D9 /* CodableDecodingStrategyViewController.swift in Sources */,
 				99925F2E2AA203F80057934B /* CompatibleStringViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				99AA64682A95B94D00BCA1D9 /* BaseViewController.swift in Sources */,
 				997CB2072AAABE6C00A2077D /* SimpleSmartCodableViewController.swift in Sources */,
-				99AA64722A95B94D00BCA1D9 /* FieldNameMapViewController.swift in Sources */,
 				99AA64702A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift in Sources */,
 				99925F252AA1F4110057934B /* CompatibleNullViewController.swift in Sources */,
 				99079A942AEBE05E009A1ED3 /* CompatibleSampleFiveViewController.swift in Sources */,

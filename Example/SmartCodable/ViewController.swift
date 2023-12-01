@@ -22,6 +22,7 @@ struct Person123: Decodable {
 
 
 
+
 struct ABCTest {
     var name: String
 }
@@ -37,7 +38,16 @@ class ViewController: UIViewController {
         SmartConfig.debugMode = .error
         SmartConfig.openErrorAssert = false
         
-        dataArray = [smart_introduce, smart_compatible, smart_compatible_structure, smart_speciale, smart_case, smart_disadvantage, other]
+        dataArray = [
+            smart_introduce,
+            smart_customDecoding,
+            smart_compatible,
+            smart_compatible_structure,
+            smart_speciale,
+            smart_case,
+            smart_disadvantage,
+            other
+        ]
         
         
         view.addSubview(tableView)
@@ -59,9 +69,21 @@ extension ViewController {
                 ["name": "字典 ⇆ 模型", "vc": "DictionaryAndModelViewController"],
                 ["name": "数组 ⇆ 模型数组", "vc": "ArrayAndModelViewController"],
                 ["name": "解码完成的回调", "vc": "FinishMappingViewController"],
-                ["name": "字段名映射", "vc": "FieldNameMapViewController"],
                 ["name": "可选对象属性", "vc": "OptionalPropertyViewController"],
                 ["name": "复杂数据结构", "vc": "ComplexDataStructureViewController"],
+            ]
+        ]
+    }
+    
+    
+    var smart_customDecoding: [String: Any] {
+        [
+            "title": "Smart的解码策略",
+            "list": [
+                ["name": "key的解码策略", "vc": "KeyDecodingStrategyViewController"],
+                ["name": "Date的解码策略", "vc": "DateDecodingStrategyViewController"],
+                ["name": "Data的解码策略", "vc": "DataDecodingStrategyViewController"],
+                ["name": "浮点数的解码策略", "vc": "FloatDecodingStrategyViewController"],
             ]
         ]
     }

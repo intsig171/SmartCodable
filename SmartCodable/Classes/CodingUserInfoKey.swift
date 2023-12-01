@@ -14,7 +14,7 @@ extension CodingUserInfoKey {
     /// 原始的字典
     static var originData = CodingUserInfoKey.init(rawValue: "Stamrt.originData")
     /// 解码策略
-    static var strategy = CodingUserInfoKey.init(rawValue: "Stamrt.keyDecodingStrategy")
+    static var keyDecodingStrategy = CodingUserInfoKey.init(rawValue: "Stamrt.keyDecodingStrategy")
 }
 
 
