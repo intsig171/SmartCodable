@@ -14,7 +14,19 @@ class DataDecodingStrategyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        let json = """
+        {
+           "address": "aHR0cHM6Ly93d3cucWl4aW4uY29t"
+        }
+        """
+        
+        let option: SmartDecodingOption = .dataStrategy(.base64)
+        guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+        
+        if let data = model.address, let url = String(data: data, encoding: .utf8) {
+            print(url)
+            // https://www.qixin.com
+        }
     }
 }
 
@@ -23,6 +35,6 @@ class DataDecodingStrategyViewController: BaseViewController {
 extension DataDecodingStrategyViewController {
 
     struct FeedOne: SmartCodable {
-        var name: String = ""
+        var address: Data?
     }
 }

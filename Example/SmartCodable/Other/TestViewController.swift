@@ -13,29 +13,60 @@ import SmartCodable
 
 
 class TestViewController : BaseViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        SmartConfig.openErrorAssert = false
         
-
+        
         let json = """
-        {
-          "date": "2023-01-01 00:00:00",
-          "test": 100.0
-        }
-        """
+          {
+            "data": {
+               "testModel": "{\\\"value\\\": \\\"helow\\\",\\\"key\\\": \\\"keyvalue\\\"}"
+            },
+            "statusCode": 200
+          }
 
-        let formart = DateFormatter()
-        formart.dateFormat = "yyyy-MM-dd hh:mm:ss"
-        let dateStrategy: JSONDecoder.DateDecodingStrategy = .formatted(formart)
-        guard let model = TestModel.deserialize(json: json, options: [.dateStrategy(dateStrategy)]) else { return }
-        print(model)
+          """
+        
+        
+        
+        let a = ApiCommon<TestModel>.deserialize(json: json)
+        
+        print(a)
     }
+
+
 }
+
+
+
 
 struct TestModel: SmartCodable {
-    var date: Date?
-    var test: Decimal?
+    var testModel: Test2Model = Test2Model()
+//    var createDateTime: Date?
 }
 
+struct Test2Model: SmartCodable {
+    var value: String?
+    var key: String?
+}
+
+struct ApiCommon <Element: SmartCodable>: SmartCodable {
+    
+    init() {}
+    
+    public var data: Element = Element()
+//    public var statusCode: Int?
+//    public var createDateTime: Int?
+//    public var errorMsg: String?
+    
+//    init(from decoder: Decoder) throws {
+//        let container: KeyedDecodingContainer<ApiCommon<Element>.CodingKeys> = try decoder.container(keyedBy: ApiCommon<Element>.CodingKeys.self)
+////        self.errorMsg = try container.decode(String.self, forKey: ApiCommon<Element>.CodingKeys.errorMsg)
+////        self.statusCode = try container.decode(Int.self, forKey: ApiCommon<Element>.CodingKeys.statusCode)
+//        self.data = try container.decode(Element.self, forKey: .data)
+////        self.data = nil
+//    }
+}
 

@@ -14,19 +14,18 @@ class DateDecodingStrategyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .error
 
         let json = """
         {
-          "float": NaN
+           "birth": "2034-12-01 18:00:00"
         }
         """
+        let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let option: SmartDecodingOption = .dateStrategy(.formatted(dateFormatter))
+        guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+        print(model.birth)
         
-        
-        guard let model = FeedOne.deserialize(json: json, options: []) else {
-            print("123")
-            return }
-        print(model)
         
     }
 }
@@ -36,7 +35,8 @@ class DateDecodingStrategyViewController: BaseViewController {
 extension DateDecodingStrategyViewController {
 
     struct FeedOne: SmartCodable {
-        var float: Float = 0
+        
+        var birth: Date = Date()
     }
 }
 
