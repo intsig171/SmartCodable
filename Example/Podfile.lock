@@ -1,16 +1,13 @@
 PODS:
-  - Kingfisher (6.3.1)
-  - SmartCodable (2.0.3)
+  - SmartCodable (2.1.0)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
-  - Kingfisher
   - SmartCodable (from `../`)
   - SnapKit
 
 SPEC REPOS:
   trunk:
-    - Kingfisher
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -18,10 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
-  SmartCodable: d96802b2ea8745b511c164f9311fa6c90862efe3
+  SmartCodable: 1a71a1f3974d798d6a5864e3a86a1a38e98be9fc
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 0d3b051b36e67947610c92aeff61d5d3cd6e606f
+PODFILE CHECKSUM: 367c8d204ee8282f52ceef6bd6cb9a9e38badbd4
 
 COCOAPODS: 1.11.2
