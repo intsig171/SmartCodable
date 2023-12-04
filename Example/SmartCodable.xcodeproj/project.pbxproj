@@ -46,6 +46,7 @@
 		99925F2C2AA203EA0057934B /* CompatibleIntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F2B2AA203EA0057934B /* CompatibleIntViewController.swift */; };
 		99925F2E2AA203F80057934B /* CompatibleStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F2D2AA203F80057934B /* CompatibleStringViewController.swift */; };
 		999537D62AB164A800BA6512 /* CaseOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999537D52AB164A700BA6512 /* CaseOneViewController.swift */; };
+		99969D8A2B1D7BAE003DE177 /* SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99969D892B1D7BAE003DE177 /* SmartAnyViewController.swift */; };
 		99AA64682A95B94D00BCA1D9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA645B2A95B94D00BCA1D9 /* BaseViewController.swift */; };
 		99AA64692A95B94D00BCA1D9 /* CodableMatchingStructureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA645D2A95B94D00BCA1D9 /* CodableMatchingStructureViewController.swift */; };
 		99AA646A2A95B94D00BCA1D9 /* CodableDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA645E2A95B94D00BCA1D9 /* CodableDecodingStrategyViewController.swift */; };
@@ -54,7 +55,6 @@
 		99AA646E2A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64632A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift */; };
 		99AA64702A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64652A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift */; };
 		99AA64752A95DDC800BCA1D9 /* FinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */; };
-		99AA64772A95EB7F00BCA1D9 /* AboutAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64762A95EB7F00BCA1D9 /* AboutAnyViewController.swift */; };
 		99AA64792A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA64782A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift */; };
 		99AC4A0F2B0DF0B10086590D /* CaseThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */; };
 		99AC4A112B0E079D0086590D /* CaseFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AC4A102B0E079D0086590D /* CaseFourViewController.swift */; };
@@ -113,6 +113,7 @@
 		99925F2B2AA203EA0057934B /* CompatibleIntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleIntViewController.swift; sourceTree = "<group>"; };
 		99925F2D2AA203F80057934B /* CompatibleStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleStringViewController.swift; sourceTree = "<group>"; };
 		999537D52AB164A700BA6512 /* CaseOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOneViewController.swift; sourceTree = "<group>"; };
+		99969D892B1D7BAE003DE177 /* SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAnyViewController.swift; sourceTree = "<group>"; };
 		99AA645B2A95B94D00BCA1D9 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		99AA645D2A95B94D00BCA1D9 /* CodableMatchingStructureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableMatchingStructureViewController.swift; sourceTree = "<group>"; };
 		99AA645E2A95B94D00BCA1D9 /* CodableDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableDecodingStrategyViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 		99AA64632A95B94D00BCA1D9 /* DecodeErrorPrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeErrorPrintViewController.swift; sourceTree = "<group>"; };
 		99AA64652A95B94D00BCA1D9 /* ComplexDataStructureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureViewController.swift; sourceTree = "<group>"; };
 		99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMappingViewController.swift; sourceTree = "<group>"; };
-		99AA64762A95EB7F00BCA1D9 /* AboutAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAnyViewController.swift; sourceTree = "<group>"; };
 		99AA64782A9C7A9500BCA1D9 /* CodableComplex_oneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableComplex_oneViewController.swift; sourceTree = "<group>"; };
 		99AC4A0E2B0DF0B10086590D /* CaseThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeViewController.swift; sourceTree = "<group>"; };
 		99AC4A102B0E079D0086590D /* CaseFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFourViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +284,7 @@
 				99AA64602A95B94D00BCA1D9 /* Introduce(介绍) */,
 				99D97B072B18C9A500F55E81 /* 解码策略 */,
 				9930EFD62AA194BF00F48622 /* Compatibility(兼容性) */,
+				99969D882B1D7B9E003DE177 /* SmartAny */,
 				999537D42AB00AE400BA6512 /* Case(案例) */,
 				99925F262AA2013B0057934B /* DebugLog */,
 				997CB2082AAB15BB00A2077D /* Disadvantage(缺点) */,
@@ -314,7 +315,6 @@
 		997CB2082AAB15BB00A2077D /* Disadvantage(缺点) */ = {
 			isa = PBXGroup;
 			children = (
-				99AA64762A95EB7F00BCA1D9 /* AboutAnyViewController.swift */,
 				997CB2092AAB163800A2077D /* InvalidDefaultValueController.swift */,
 			);
 			path = "Disadvantage(缺点)";
@@ -338,6 +338,14 @@
 				998104872B18B655001E7A40 /* CaseFiveViewController.swift */,
 			);
 			path = "Case(案例)";
+			sourceTree = "<group>";
+		};
+		99969D882B1D7B9E003DE177 /* SmartAny */ = {
+			isa = PBXGroup;
+			children = (
+				99969D892B1D7BAE003DE177 /* SmartAnyViewController.swift */,
+			);
+			path = SmartAny;
 			sourceTree = "<group>";
 		};
 		99AA645C2A95B94D00BCA1D9 /* CodableSmaple */ = {
@@ -544,6 +552,7 @@
 				997CB1D22AA7298800A2077D /* BaseCompatibilityViewController.swift in Sources */,
 				99925F2C2AA203EA0057934B /* CompatibleIntViewController.swift in Sources */,
 				997CB1DD2AA8681C00A2077D /* ComplexDataStructureModel.swift in Sources */,
+				99969D8A2B1D7BAE003DE177 /* SmartAnyViewController.swift in Sources */,
 				99373B322AEBF22C008CB2F5 /* CaseTwoViewController.swift in Sources */,
 				99D97B0D2B18CA7500F55E81 /* DataDecodingStrategyViewController.swift in Sources */,
 				997CB1DF2AA8682300A2077D /* ComplexDataStructureCell.swift in Sources */,
@@ -553,7 +562,6 @@
 				9973EC232AD3A7210085D782 /* UITableView+Reusable.swift in Sources */,
 				997CB1D82AA8316600A2077D /* ArrayAndModelViewController.swift in Sources */,
 				997CB1D62AA82AF100A2077D /* DictionaryAndModelViewController.swift in Sources */,
-				99AA64772A95EB7F00BCA1D9 /* AboutAnyViewController.swift in Sources */,
 				99AA646C2A95B94D00BCA1D9 /* CompatibleEnumViewController.swift in Sources */,
 				99D97B092B18C9BF00F55E81 /* KeyDecodingStrategyViewController.swift in Sources */,
 				999537D62AB164A800BA6512 /* CaseOneViewController.swift in Sources */,

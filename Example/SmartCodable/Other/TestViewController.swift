@@ -19,24 +19,42 @@ class TestViewController : BaseViewController {
         SmartConfig.openErrorAssert = false
         
         
-        let json = """
-          {
-            "data": {
-               "testModel": "{\\\"value\\\": \\\"helow\\\",\\\"key\\\": \\\"keyvalue\\\"}"
-            },
-            "statusCode": 200
-          }
+        
+        let inDict =  ["key1": 1, "key2": "two", "key3": ["key": "1"]] as [String : Any]
+        
+        let arr = [inDict]
+        
+        // [["key3": ["key": "1"], "key2": "two", "key1": 1]]
 
-          """
+        
+        let dict = [
+            "arr": arr
+        ] as [String : Any]
         
         
+        guard let model = AnyModel.deserialize(dict: dict) else { return }
+        print(model.arr.peel)
         
-        let a = ApiCommon<TestModel>.deserialize(json: json)
         
-        print(a)
+//        let dict1 = [
+//            "name": "12",
+//            "dict": ["key1": "one", "key2": "two"]
+//        ] as [String : Any]
+//
+//
+//        guard let model1 = AnyModel.deserialize(dict: dict1) else { return }
+//        print(model1.dict.peel)
+//
+//        let dictt = model1.dict.peel
+//
+//        if let abc = dictt as? [String: String] {
+//            print(abc)
+//        }
     }
-
-
+}
+struct AnyModel: SmartCodable {
+    
+    var arr: [SmartAny] = []
 }
 
 
@@ -70,3 +88,24 @@ struct ApiCommon <Element: SmartCodable>: SmartCodable {
 //    }
 }
 
+
+/**
+ let json = """
+   {
+     "data": {
+        "testModel": "{\\\"value\\\": \\\"helow\\\",\\\"key\\\": \\\"keyvalue\\\"}"
+     },
+     "statusCode": 200
+   }
+
+   """
+
+
+
+
+
+ let a = ApiCommon<TestModel>.deserialize(json: json)
+
+ print(a)
+ 
+ */

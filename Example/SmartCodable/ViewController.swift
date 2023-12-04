@@ -14,18 +14,6 @@ func isTypeDictionary<T: Decodable>(type: T.Type) -> Bool {
     return T.self is Dictionary<String, String>.Type
 }
 
-// 示例用法
-struct Person123: Decodable {
-    let name: String
-    let age: Int
-}
-
-
-
-
-struct ABCTest {
-    var name: String
-}
 
 class ViewController: UIViewController {
     
@@ -43,7 +31,8 @@ class ViewController: UIViewController {
             smart_customDecoding,
             smart_compatible,
             smart_compatible_structure,
-            smart_speciale,
+            smart_Any,
+            smart_debug,
             smart_case,
             smart_disadvantage,
             other
@@ -124,9 +113,20 @@ extension ViewController {
     }
     
     
+    var smart_Any: [String: Any] {
+        [
+            "title": "Codable无法对Any进行解析，SmartCodable提供了三种思路",
+            "list": [
+                ["name": "SmartAny", "vc": "SmartAnyViewController"],
+            ]
+        ]
+    }
     
+
     
-    var smart_speciale: [String: Any] {
+
+    
+    var smart_debug: [String: Any] {
         [
             "title": "Smart调试信息",
             "list": [
@@ -145,19 +145,14 @@ extension ViewController {
                 ["name": "多值映射", "vc": "CaseThreeViewController"],
                 ["name": "范型解析", "vc": "CaseFourViewController"],
                 ["name": "范型解析 - signle value", "vc": "CaseFiveViewController"],
-
-
-                
             ]
         ]
     }
-    
     
     var smart_disadvantage: [String: Any] {
         [
             "title": "Smart缺点（Codable的缺点）",
             "list": [
-                ["name": "Any无法使用", "vc": "AboutAnyViewController"],
                 ["name": "默认值无效", "vc": "InvalidDefaultValueController"],
             ]
         ]
