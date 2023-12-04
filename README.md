@@ -1,17 +1,16 @@
+使用**Codable** 协议 进行 **decode** 时候，遇到以下三种情况就会失败。导致整个解析失败：【类型键不存在】，【类型键不匹配】，【数据值是null】。
+
+**SmartCodable** 在 **Codable**的解析能力上，对解析失败的情况进行兼容，使解析顺利进行下去。所以您可以放心使用，
+
+并且 **SmartCodable**  提供了 **Codable** 无法对Any类型解析的问题。
 
 
-使用**Codable** 协议 进行 **decode** 时候，遇到以下三种情况就会失败。并且只有一个属性解析失败时就抛出异常，导致整个解析失败：
 
-* 类型键不存在
-* 类型键不匹配
-* 数据值是null
+### 如何使用
 
-**SmartCodable** 将这些解析失败分为两种兼容方案：
-
-* 值类型转换： 可以进行值类型转换，并且转换之后的值仍有意义，那么就将转换该值作为解析值。
-* 填充默认值： 当解析失败的时候，使用Model属性对应类型的默认值填充，作为解析值。例如：属性是Bool类型，使用false。
-
-**SmartCodable** 兼容 **Codable** 解码抛出的异常，使解析顺利进行下去。
+```
+pod 'SmartCodable'
+```
 
 
 
@@ -74,11 +73,9 @@ class FinishMappingSingle: SmartDecodable {
     var name: String = ""
     var age: Int = 0
     var desc: String = ""
-    
     required init() { }
     
-    func didFinishMapping() {
-                
+    func didFinishMapping() {    
         if name.isEmpty {
             desc = "\(age)岁的" + "人"
         } else {
@@ -92,36 +89,9 @@ class FinishMappingSingle: SmartDecodable {
 
 
 
-### 字段重命名
+## 二 SmartCodable的解码策略
 
-```
-// 1. CodingKeys 映射
-guard let feedOne = FeedOne.deserialize(json: json) else { return }
-print("feedOne.name = \(feedOne.name)")
-
-struct FeedOne: SmartCodable {
-    var name: String = ""
-    enum CodingKeys: String, CodingKey {
-        case name = "nick_name"
-    }
-}
-
-// 2.  使用keyDecodingStrategy的驼峰命名
-guard let feedTwo = FeedTwo.deserialize(json: json, strategy: .convertFromSnakeCase) else { return }
-print("feedTwo.nickName = \(feedTwo.nickName)")
-
-struct FeedTwo: SmartCodable {
-    var nickName: String = ""
-}
-
-// 3. 使用keyDecodingStrategy的自定义策略
-guard let feedThree = FeedThree.deserialize(json: json, strategy: .custom(["nick_name": "name"])) else { return }
-print("feedThree.name = \(feedThree.name)")
-
-struct FeedThree: SmartCodable {
-    var name: String = ""
-}
-```
+### 1. 解码时字段重命名
 
 提供了三种字段重命名的选择：
 
@@ -138,11 +108,61 @@ public enum SmartKeyDecodingStrategy {
 * convertFromSnakeCase： 转驼峰的命名方式。会将本次解析的字段，全部转成驼峰命名。
 * custom： 自定义的方式。key： 数据中的字段名，value：模型中的属性名。
 
+```
+// 1. CodingKeys 映射
+guard let feedOne = FeedOne.deserialize(json: json) else { return }
+print("feedOne.name = \(feedOne.name)")
+
+// 2.  使用keyDecodingStrategy的驼峰命名
+guard let feedTwo = FeedTwo.deserialize(json: json, options: [.keyStrategy(.convertFromSnakeCase)]) else { return }
+print("feedTwo.nickName = \(feedTwo.nickName)")
+
+
+// 3. 使用keyDecodingStrategy的自定义策略
+let option: SmartDecodingOption = .keyStrategy(.custom(["nick_name": "name"]))
+guard let feedThree = FeedThree.deserialize(json: json, options: [option]) else { return }
+print("feedThree.name = \(feedThree.name)")
+```
 
 
 
+### 2. Date的解码
 
-## 二. SmartCodable的兼容性
+```
+let json = """
+{
+   "birth": "2034-12-01 18:00:00"
+}
+"""
+let dateFormatter = DateFormatter()
+ dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+let option: SmartDecodingOption = .dateStrategy(.formatted(dateFormatter))
+guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+```
+
+
+
+### 3. Data类型
+
+```
+let json = """
+{
+   "address": "aHR0cHM6Ly93d3cucWl4aW4uY29t"
+}
+"""
+
+let option: SmartDecodingOption = .dataStrategy(.base64)
+guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+
+if let data = model.address, let url = String(data: data, encoding: .utf8) {
+    print(url)
+    // https://www.qixin.com
+}
+```
+
+
+
+## 三. SmartCodable对解析错误进行兼容
 
 **smartCodable** 的兼容性是从两方面设计的：
 
@@ -533,11 +553,58 @@ static func compatibleBoolType(value: Any) -> Bool? {
 
 
 
+## 关于Any
+
+**Codable** 无法对 **Any** 类型进行，原因是 **Codable** 无法识别 **Any** 类型是否遵守了 **Codable** 协议。
+
+**SmartCodable** 提供了**SmartAny** 类型，用来代替 **Any**，解决无法解析的问题。
+
+您需要注意的是： 解析完成，**SmartAny** 会对原始数据包装一次，使用的时候，调用 **peel** 获取对应的原始数据。
+
+```
+struct AnyModel: SmartCodable {
+    var name: SmartAny?
+    var age: SmartAny = .int(0)
+    var dict: [String: SmartAny] = [:]
+    var arr: [SmartAny] = []
+}
+
+let inDict = [
+    "key1": 1,
+    "key2": "two",
+    "key3": ["key": "1"],
+    "key4": [1, 2, 3, 4]
+] as [String : Any]
+
+let arr = [inDict]
+
+let dict = [
+    "name": "xiao ming",
+    "age": 20,
+    "dict": inDict,
+    "arr": arr
+] as [String : Any]
+
+
+guard let model = AnyModel.deserialize(dict: dict) else { return }
+print(model.name?.peel ?? 0)
+print(model.age.peel)
+print(model.dict.peel)
+print(model.arr.peel)
+
+/**
+xiao ming
+20.0
+["key4": [1.0, 2.0, 3.0, 4.0], "key1": 1.0, "key2": "two", "key3": ["key": "1"]]
+[["key4": [1.0, 2.0, 3.0, 4.0], "key1": 1.0, "key2": "two", "key3": ["key": "1"]]]
+*/
+```
 
 
 
 
-## 三. 调试日志
+
+## 五. 调试日志
 
 SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 如果出现解析兼容的情况，修改Model中属性的定义，或要求数据方进行修正。为了更方便的定位问题，SmartCodable提供了便捷的解析错误日志。
 
@@ -602,7 +669,7 @@ SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到Sm
 
 
 
-## 四. SamrtCodable的缺点
+## 六. SamrtCodable的缺点
 
 其实算是Codable的缺点。
 
@@ -667,24 +734,7 @@ class FeedOne: SmartCodable {
 
 
 
-### 2. Any无法使用
-
-Any无法实现Codable，所以在使用Codable的时候，一切跟Any有关的均不允许，比如[String：Any]，[Any]。
-
-您可以通过指定类型，比如[Sting: String], 放弃Any得使用。 或者通过范型：
-
-```
-struct AboutAny<T: Codable>: SmartCodable {
-    init() { }
-
-    var dict1: [String: T] = [:]
-    var dict2: [String: T] = [:]
-}
-```
-
-
-
-### 3. 模型中设置的默认值无效
+### 2. 模型中设置的默认值无效
 
 Codable在进行解码的时候，是无法知道这个属性的。所以在decode的时候，如果解析失败，使用默认值进行填充时，拿不到这个默认值。再处理解码兼容时，只能自己生成一个对应类型的默认值填充。
 
@@ -693,6 +743,7 @@ Codable在进行解码的时候，是无法知道这个属性的。所以在deco
 ## 五. 其他
 
 ### 1.进一步了解SmartCoable
+
 如果还想进一步了解，请下载改项目，我们提供了详细的演示用例。
 
 ![演示样例](https://camo.githubusercontent.com/60d43befa03e46e0dc0e6c284f23670bbeb1c91e4977409f488b1abc527d6a8a/68747470733a2f2f70392d6a75656a696e2e62797465696d672e636f6d2f746f732d636e2d692d6b3375316662706663702f66383832663864626530366634343237613365343438623462363930333962627e74706c762d6b3375316662706663702d6a6a2d6d61726b3a303a303a303a303a7137352e696d616765233f773d34343026683d38383826733d31323132363226653d706e6726623d666566656665)
