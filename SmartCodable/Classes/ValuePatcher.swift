@@ -18,6 +18,8 @@ struct ValuePatcher<T: Decodable> {
             return value.defaultValue as? T
         } else if let object = T.self as? SmartDecodable.Type {
             return object.init() as? T
+        } else if let object = T.self as? any SmartCaseDefaultable.Type {  // 枚举解析失败，提供对应的默认值。
+            return object.defaultCase as? T
         } else {
             SmartLog.logDebug("\(Self.self)提供默认值失败, 发现未知类型，无法提供默认值。如有遇到请反馈，感谢")
             return nil

@@ -438,6 +438,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = RA2G5HURUT;
 						LastSwiftMigration = "";
 					};
 				};
@@ -711,6 +712,7 @@
 			baseConfigurationReference = 1555673ADBD4A593CFFCBF4A /* Pods-SmartCodable_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RA2G5HURUT;
 				INFOPLIST_FILE = SmartCodable/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "数据解析库";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -728,6 +730,7 @@
 			baseConfigurationReference = 3C9A3891AAACBD9A371F3F79 /* Pods-SmartCodable_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RA2G5HURUT;
 				INFOPLIST_FILE = SmartCodable/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "数据解析库";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
