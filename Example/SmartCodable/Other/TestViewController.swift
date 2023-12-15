@@ -15,34 +15,10 @@ class TestViewController : BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        SmartConfig.openErrorAssert = false
-        
-
-        let json = """
-        {
-         "type": "11",
-         "name": "xiaoming"
-        }
-        """
-        
-//        let v = FeedTestOne.deserialize(json: json)
-//        print(v)
-        
-    }
-}
-
-
-
-
-
-
-extension TestViewController {
-    func newRequest<T: SmartCodable>(model: T.Type) {
-        
         
         
     }
+    
+   
 }
-
-
 

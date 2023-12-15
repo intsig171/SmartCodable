@@ -278,15 +278,6 @@ extension KeyedDecodingContainer {
             if let temp = value as? T {
                 return temp
             }
-        } else if let value = decodeValue as? [SmartDecodable] {
-            var array: [SmartDecodable] = []
-            for var item in value {
-                item.didFinishMapping()
-                array.append(item)
-            }
-            if let temp = array as? T {
-                return temp
-            }
         }
         
         // 如果使用了SmartOptional修饰，获取被修饰的属性。

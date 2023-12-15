@@ -263,6 +263,16 @@ extension Data {
     }
 }
 
+/// [SmartCodable] 类型的数组支持解析。
+extension Array: SmartDecodable where Element: SmartDecodable {
+    public mutating func didFinishMapping() {
+        // 数组下标的遍历，完成didFinishMapping的调用
+        for index in indices {
+            self[index].didFinishMapping()
+        }
+    }
+}
+
 
 
 // MARK: - 扩展实现

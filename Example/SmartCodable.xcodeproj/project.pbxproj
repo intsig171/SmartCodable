@@ -45,6 +45,8 @@
 		99925F2A2AA203DC0057934B /* CompatibleBoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F292AA203DC0057934B /* CompatibleBoolViewController.swift */; };
 		99925F2C2AA203EA0057934B /* CompatibleIntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F2B2AA203EA0057934B /* CompatibleIntViewController.swift */; };
 		99925F2E2AA203F80057934B /* CompatibleStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99925F2D2AA203F80057934B /* CompatibleStringViewController.swift */; };
+		9992F1EF2B2C2C6800A8E94F /* FinishMappingViewController+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9992F1EE2B2C2C6800A8E94F /* FinishMappingViewController+dict.swift */; };
+		9992F1F22B2C303100A8E94F /* FinishMappingViewController+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9992F1F12B2C303100A8E94F /* FinishMappingViewController+Array.swift */; };
 		999537D62AB164A800BA6512 /* CaseOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999537D52AB164A700BA6512 /* CaseOneViewController.swift */; };
 		99969D8A2B1D7BAE003DE177 /* SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99969D892B1D7BAE003DE177 /* SmartAnyViewController.swift */; };
 		99AA64682A95B94D00BCA1D9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA645B2A95B94D00BCA1D9 /* BaseViewController.swift */; };
@@ -112,6 +114,8 @@
 		99925F292AA203DC0057934B /* CompatibleBoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleBoolViewController.swift; sourceTree = "<group>"; };
 		99925F2B2AA203EA0057934B /* CompatibleIntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleIntViewController.swift; sourceTree = "<group>"; };
 		99925F2D2AA203F80057934B /* CompatibleStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompatibleStringViewController.swift; sourceTree = "<group>"; };
+		9992F1EE2B2C2C6800A8E94F /* FinishMappingViewController+dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FinishMappingViewController+dict.swift"; sourceTree = "<group>"; };
+		9992F1F12B2C303100A8E94F /* FinishMappingViewController+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FinishMappingViewController+Array.swift"; sourceTree = "<group>"; };
 		999537D52AB164A700BA6512 /* CaseOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOneViewController.swift; sourceTree = "<group>"; };
 		99969D892B1D7BAE003DE177 /* SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAnyViewController.swift; sourceTree = "<group>"; };
 		99AA645B2A95B94D00BCA1D9 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -328,6 +332,16 @@
 			path = DebugLog;
 			sourceTree = "<group>";
 		};
+		9992F1F02B2C2C7100A8E94F /* FinishMapping */ = {
+			isa = PBXGroup;
+			children = (
+				99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */,
+				9992F1EE2B2C2C6800A8E94F /* FinishMappingViewController+dict.swift */,
+				9992F1F12B2C303100A8E94F /* FinishMappingViewController+Array.swift */,
+			);
+			path = FinishMapping;
+			sourceTree = "<group>";
+		};
 		999537D42AB00AE400BA6512 /* Case(案例) */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,7 +380,7 @@
 				997CB2062AAABE6C00A2077D /* SimpleSmartCodableViewController.swift */,
 				997CB1D52AA82AF100A2077D /* DictionaryAndModelViewController.swift */,
 				997CB1D72AA8316600A2077D /* ArrayAndModelViewController.swift */,
-				99AA64742A95DDC800BCA1D9 /* FinishMappingViewController.swift */,
+				9992F1F02B2C2C7100A8E94F /* FinishMapping */,
 				997CB2042AAABD2200A2077D /* OptionalPropertyViewController.swift */,
 				997CB1DB2AA8680B00A2077D /* ComplexDataStructure */,
 			);
@@ -539,6 +553,7 @@
 				99AC4A0F2B0DF0B10086590D /* CaseThreeViewController.swift in Sources */,
 				998104882B18B655001E7A40 /* CaseFiveViewController.swift in Sources */,
 				99079A872AEBCC98009A1ED3 /* CompatibleSampleOneViewController.swift in Sources */,
+				9992F1EF2B2C2C6800A8E94F /* FinishMappingViewController+dict.swift in Sources */,
 				997CB1E12AA86E9800A2077D /* ComplexDataStructureSectionHeader.swift in Sources */,
 				997CB1D42AA72E7C00A2077D /* CompatibleClassViewController.swift in Sources */,
 				9930EFD82AA1950800F48622 /* CompatibleKeylessViewController.swift in Sources */,
@@ -560,6 +575,7 @@
 				99079A8B2AEBD4E6009A1ED3 /* CompatibleSampleTwoViewController.swift in Sources */,
 				99079A922AEBD732009A1ED3 /* PrintFormat.swift in Sources */,
 				99D97B0F2B18CA8300F55E81 /* FloatDecodingStrategyViewController.swift in Sources */,
+				9992F1F22B2C303100A8E94F /* FinishMappingViewController+Array.swift in Sources */,
 				9973EC232AD3A7210085D782 /* UITableView+Reusable.swift in Sources */,
 				997CB1D82AA8316600A2077D /* ArrayAndModelViewController.swift in Sources */,
 				997CB1D62AA82AF100A2077D /* DictionaryAndModelViewController.swift in Sources */,
