@@ -1,13 +1,29 @@
 PODS:
+  - CleanJSON (1.0.9)
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - HandyJSON (5.0.0-beta.1)
+  - ObjectMapper (4.2.0)
   - SmartCodable (2.2.2)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - CleanJSON
+  - FBSnapshotTestCase (~> 2.1.4)
+  - HandyJSON (= 5.0.0-beta.1)
+  - ObjectMapper
   - SmartCodable (from `../`)
   - SnapKit
 
 SPEC REPOS:
   trunk:
+    - CleanJSON
+    - FBSnapshotTestCase
+    - HandyJSON
+    - ObjectMapper
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -15,9 +31,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  CleanJSON: 910a36465ce4829e264a902ccf6d1455fdd9f980
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   SmartCodable: b735d43bafbb1a84761c756a4c1e782f48089d84
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 367c8d204ee8282f52ceef6bd6cb9a9e38badbd4
+PODFILE CHECKSUM: f30e7bf742c12a29355af7b32aaf7d6ec139a182
 
 COCOAPODS: 1.11.2

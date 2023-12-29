@@ -1,40 +1,17 @@
-platform :ios, '11.0'
 use_frameworks!
 
+platform :ios, '10.0'
 
 target 'SmartCodable_Example' do
   pod 'SmartCodable', :path => '../'
+  pod 'HandyJSON', '5.0.0-beta.1'
+  pod 'ObjectMapper'
+  pod 'CleanJSON'
   pod 'SnapKit'
 
+  target 'SmartCodable_Tests' do
+    inherit! :search_paths
 
-end
-
-
-post_install do |installer|
-  
-  # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
-#  Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
-  
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      # Needed for building for simulator on M1 Macs
-      config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
-    end
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
   end
-
-  
-  # Xocde 14 + iOS 16 Pod工程中设置CODE_SIGN_IDENTITY为空来避免报错
-  installer.pods_project.build_configurations.each do |config|
-    config.build_settings['CODE_SIGN_IDENTITY'] = ''
-  end
-  
-  installer.generated_projects.each do |project|
-    project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
-      end
-    end
-  end
-
-  
 end

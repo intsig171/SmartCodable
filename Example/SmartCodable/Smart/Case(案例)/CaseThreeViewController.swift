@@ -87,11 +87,11 @@ struct CaseThreeModel: SmartCodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         if let value = try? container.decodeIfPresent(String.self, forKey: .name) {
-            self.name = value
+            self.name = value ?? ""
         } else if let value = try? container.decodeIfPresent(String.self, forKey: .nickName) {
-            self.name = value
+            self.name = value ?? ""
         } else if let value = try? container.decodeIfPresent(String.self, forKey: .realName) {
-            self.name = value
+            self.name = value ?? ""
         } else {
             self.name = ""
         }
@@ -99,7 +99,7 @@ struct CaseThreeModel: SmartCodable {
         
         if let scoresContainer = try? container.nestedContainer(keyedBy: UserinfoCodingKeys.self, forKey: .userinfo) {
             if let value = try? scoresContainer.decodeIfPresent(String.self, forKey: .name) {
-                self.name = value
+                self.name = value ?? ""
             }
         }
         
