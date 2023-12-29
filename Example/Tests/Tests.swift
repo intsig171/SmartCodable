@@ -6,34 +6,26 @@ import HandyJSON
 import CleanJSON
 
 
-let count = 100 // or 1, 10, 100, 1000, 10000
+let count = 10000 // or 1, 10, 100, 1000, 10000
 let data = airportsJSON(count: count)
 
 class Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testSmart() {
-        measure {
-            let json = String(data: data, encoding: .utf8)
-            let objects = [Smart].deserialize(json: json)
-            XCTAssertEqual(objects?.count, count)
-        }
-    }
     
     func testObjectMapper() {
         measure {
             let json = String(data: data, encoding: .utf8)!
             do {
-                let objects = try Mapper<Object>().mapArray(JSONString: json)
+                let objects = try Mapper<ObjectMapperModel>().mapArray(JSONString: json)
                 XCTAssertEqual(objects.count, count)
             } catch {
                 XCTAssertNil(error)
@@ -49,6 +41,30 @@ class Tests: XCTestCase {
         }
     }
     
+    func testCodable() {
+        measure {
+            do {
+                let decoder = JSONDecoder()
+                let objects = try decoder.decode([Airport].self, from: data)
+                XCTAssertEqual(objects.count, count)
+            } catch {
+                XCTAssertNil(error)
+            }
+        }
+    }
+    
+    
+    func testSmart() {
+        measure {
+            let json = String(data: data, encoding: .utf8)
+            guard let objects = [Smart].deserialize(json: json) as? [Smart] else {
+                return
+            }
+            XCTAssertEqual(objects.count, count)
+        }
+    }
+    
+    
     func testCleanJSON() {
         measure {
             let decoder = CleanJSONDecoder()
@@ -60,20 +76,6 @@ class Tests: XCTestCase {
             }
         }
     }
-    
-    func testJSONSerialization() {
-        measure {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
-                let objects = json.map(Airport.init)
-                
-                XCTAssertEqual(objects.count, count)
-            } catch {
-                XCTAssertNil(error)
-            }
-        }
-    }
-    
 }
 
 
@@ -90,106 +92,8 @@ func airportsJSON(count: Int) -> Data {
 
 
 
-// CleanJSON
-struct Airport: Codable {
-    let name: String
-    let iata: String
-    let icao: String
-    let coordinates: [Double]
-    let runways: [Runway]
-
-    struct Runway: Codable {
-        enum Surface: String, Codable {
-            case rigid, flexible, gravel, sealed, unpaved, other
-        }
-        
-        let direction: String
-        let distance: Int
-        let surface: Surface
-    }
-}
-
-// JSONSerialization
-extension Airport {
-    public init(json: [String: Any]) {
-        guard let name = json["name"] as? String,
-            let iata = json["iata"] as? String,
-            let icao = json["icao"] as? String,
-            let coordinates = json["coordinates"] as? [Double],
-            let runways = json["runways"] as? [[String: Any]]
-            else {
-                fatalError("Cannot initialize Airport from JSON")
-        }
-        
-        self.name = name
-        self.iata = iata
-        self.icao = icao
-        self.coordinates = coordinates
-        self.runways = runways.map(Runway.init)
-    }
-}
-
-extension Airport.Runway {
-    public init(json: [String: Any]) {
-        guard let direction = json["direction"] as? String,
-            let distance = json["distance"] as? Int,
-            let surfaceRawValue = json["surface"] as? String,
-            let surface = Surface(rawValue: surfaceRawValue)
-            else {
-                fatalError("Cannot initialize Runway from JSON")
-        }
-        
-        self.direction = direction
-        self.distance = distance
-        self.surface = surface
-    }
-}
-
-
-// SmartCodable
-struct Smart: SmartCodable {
-    
-    var name: String?
-    var iata: String?
-    var icao: String?
-    var coordinates: [Double]?
-    var runways: [Runway]?
-    
-    struct Runway: SmartCodable {
-        enum Surface: String, SmartCaseDefaultable {
-            static var defaultCase: Smart.Runway.Surface = .other
-            
-            case rigid, flexible, gravel, sealed, unpaved, other
-        }
-        
-        var direction: String?
-        var distance: Int?
-        var surface: Surface?
-    }
-}
-
-// HandyJSON
-struct Handy: HandyJSON {
-    
-    var name: String?
-    var iata: String?
-    var icao: String?
-    var coordinates: [Double]?
-    var runways: [Runway]?
-    
-    struct Runway: HandyJSON {
-        enum Surface: String, HandyJSONEnum {
-            case rigid, flexible, gravel, sealed, unpaved, other
-        }
-        
-        var direction: String?
-        var distance: Int?
-        var surface: Surface?
-    }
-}
-
 // ObjectMapper
-struct Object: ImmutableMappable {
+struct ObjectMapperModel: ImmutableMappable {
     
     var name: String
     var iata: String
@@ -236,6 +140,73 @@ struct Object: ImmutableMappable {
     }
 }
 
+
+// HandyJSON
+struct Handy: HandyJSON {
+    
+    var name: String?
+    var iata: String?
+    var icao: String?
+    var coordinates: [Double]?
+    var runways: [Runway]?
+    
+    struct Runway: HandyJSON {
+        enum Surface: String, HandyJSONEnum {
+            case rigid, flexible, gravel, sealed, unpaved, other
+        }
+        
+        var direction: String?
+        var distance: Int?
+        var surface: Surface?
+    }
+}
+
+
+
+
+// Codable & CleanJSON
+struct Airport: Codable {
+    let name: String
+    let iata: String
+    let icao: String
+    let coordinates: [Double]
+    let runways: [Runway]
+
+    struct Runway: Codable {
+        enum Surface: String, Codable {
+            case rigid, flexible, gravel, sealed, unpaved, other
+        }
+        
+        let direction: String
+        let distance: Int
+        let surface: Surface
+    }
+}
+
+
+
+
+// SmartCodable
+struct Smart: SmartCodable {
+    
+    var name: String?
+    var iata: String?
+    var icao: String?
+    var coordinates: [Double]?
+    var runways: [Runway]?
+    
+    struct Runway: SmartCodable {
+        enum Surface: String, SmartCaseDefaultable {
+            static var defaultCase: Smart.Runway.Surface = .other
+            
+            case rigid, flexible, gravel, sealed, unpaved, other
+        }
+        
+        var direction: String?
+        var distance: Int?
+        var surface: Surface?
+    }
+}
 
 
 

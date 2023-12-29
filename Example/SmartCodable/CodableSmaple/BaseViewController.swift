@@ -52,6 +52,21 @@ extension BaseViewController {
 
 
 
+extension Array {
+    public func decode<T: Decodable>(type: [T].Type) -> [T]? {
+        do {
+            guard let jsonStr = self.bt_toJSONString() else { return nil }
+            guard let jsonData = jsonStr.data(using: .utf8) else { return nil }
+            let decoder = JSONDecoder()
+            let obj = try decoder.decode(type, from: jsonData)
+            return obj
+        } catch let error {
+            print(error)
+            return nil
+        }
+    }
+}
+
 
 extension Dictionary {
     public func decode<T: Decodable>(type: T.Type) -> T? {
