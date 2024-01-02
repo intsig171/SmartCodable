@@ -377,7 +377,7 @@ public enum SmartKeyDecodingStrategy {
 }
 ```
 
-* **useDefaultKeys：**使用默认的解析映射方式。
+* **useDefaultKeys：** 使用默认的解析映射方式。
 
 * **convertFromSnakeCase：** 转驼峰的命名方式。会将本次解析的字段，全部转成驼峰命名。
 
