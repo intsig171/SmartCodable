@@ -51,6 +51,21 @@ SmartCodable对于枚举项的解析更加高效。所以在本次数据对比�
 作者使用的是单元测试中的 **measure** 函数进行性能测算。
 
 ```
+struct Smart: SmartCodable {
+    
+    var name: String?
+    var iata: String?
+    var icao: String?
+    var coordinates: [Double]?
+    var runways: [Runway]?
+    
+    struct Runway: SmartCodable {
+        var direction: String?
+        var distance: Int?
+        var surface: Surface?
+    }
+}
+
 func testSmart() {
     measure {
         guard let objects = [Smart].deserialize(data: data)  else {
