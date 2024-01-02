@@ -44,6 +44,10 @@
 ]
 ```
 
+理论上SmartCodable的解析效率是低于Codable的。如果不解析 **runways** ，就是如此。 
+SmartCodable对于枚举项的解析更加高效。所以在本次数据对比中，解析效率最高，甚至高于Codable。
+
+
 作者使用的是单元测试中的 **measure** 函数进行性能测算。
 
 ```
