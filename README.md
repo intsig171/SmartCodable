@@ -196,7 +196,7 @@ struct CompatibleEnum: SmartCodable {
 
 ### 解码Any
 
-Codable是无法解码Any类型的，这样就意味着模型属性类型可以为 **Any**，**[Any]**，**[String: Any]**。  这对解码的便利性造成了一定的困扰。
+Codable是无法解码Any类型的，这样就意味着模型的属性类型可以为 **Any**，**[Any]**，**[String: Any]**。  这对解码的便利性造成了一定的困扰。
 
 #### 官方的解决方案
 
