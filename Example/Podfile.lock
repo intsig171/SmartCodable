@@ -7,7 +7,7 @@ PODS:
     - FBSnapshotTestCase/Core
   - HandyJSON (5.0.0-beta.1)
   - ObjectMapper (4.2.0)
-  - SmartCodable (2.2.2)
+  - SmartCodable (2.2.3)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
@@ -35,7 +35,7 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
-  SmartCodable: b735d43bafbb1a84761c756a4c1e782f48089d84
+  SmartCodable: 130b900bc09f55288b9b17a2534116e0ed9124d2
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
 PODFILE CHECKSUM: f30e7bf742c12a29355af7b32aaf7d6ec139a182

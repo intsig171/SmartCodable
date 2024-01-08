@@ -31,8 +31,9 @@ public struct SmartConfig {
         }
     }
     
-    /// 是否开启断言
-    public static var openErrorAssert: Bool = true
+    /// 是否开启断言（debug模式有效）
+    /// 开启之后，遇到解析失败的地方就会执行断言，更直接的提醒使用者这个地方解析失败了。
+    public static var openErrorAssert: Bool = false
 }
 
 
