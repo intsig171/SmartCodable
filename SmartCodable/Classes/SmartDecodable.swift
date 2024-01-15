@@ -70,16 +70,16 @@ extension SmartDecodable {
     /// - Returns: 模型
     public static func deserialize(dict: [AnyHashable: Any]?, options: [SmartDecodingOption]? = nil) -> Self? {
         guard let _dict = dict else {
-            SmartLog.logDebug("\(Self.self)中，提供的字典为nil")
+            SmartLog.logDebug("要解析的字典为nil", className: "\(self)")
             return nil
         }
         
         guard let _json = _dict.toJSONString() else {
-            SmartLog.logDebug("\(self)转json字符串失败")
+            SmartLog.logDebug("要解析的字典转json失败", className: "\(self)")
             return nil
         }
         guard let _jsonData = _json.data(using: .utf8) else {
-            SmartLog.logDebug("\(self) 转data失败")
+            SmartLog.logDebug("要解析的字典转data失败", className: "\(self)")
             return nil
         }
         
@@ -92,12 +92,12 @@ extension SmartDecodable {
     /// - Returns: 模型
     public static func deserialize(json: String?, options: [SmartDecodingOption]? = nil) -> Self? {
         guard let _json = json else {
-            SmartLog.logDebug("\(Self.self)中，提供的json为nil")
+            SmartLog.logDebug("要解析的json字符串为nil", className: "\(self)")
             return nil
         }
     
         guard let jsonData = _json.data(using: .utf8) else {
-            SmartLog.logDebug("\(self) 转data失败")
+            SmartLog.logDebug("要解析的json字符串转data失败", className: "\(self)")
             return nil
         }
         
@@ -107,7 +107,7 @@ extension SmartDecodable {
     
     public static func deserialize(data: Data?, options: [SmartDecodingOption]? = nil) -> Self? {
         guard let _data = data else {
-            SmartLog.logDebug("\(Self.self)中，提供的data为nil")
+            SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
             return nil
         }
         
@@ -131,17 +131,17 @@ extension Array where Element: SmartDecodable {
     public static func deserialize(array: [Any]?, options: [SmartDecodingOption]? = nil) -> [Element?]? {
 
         guard let _arr = array else {
-            SmartLog.logDebug("\(Self.self)提供的反序列化的数组为空")
+            SmartLog.logDebug("要解析的数组为nil", className: "\(self)")
             return nil
         }
         
         guard let _json = _arr.toJSONString() else {
-            SmartLog.logDebug("\(self)转json字符串失败")
+            SmartLog.logDebug("要解析的数组转json字符串失败", className: "\(self)")
             return nil
         }
         
         guard let _jsonData = _json.data(using: .utf8) else {
-            SmartLog.logDebug("\(self) 转data失败")
+            SmartLog.logDebug("要解析的数组转data失败", className: "\(self)")
             return nil
         }
         return deserialize(data: _jsonData, options: options)
@@ -154,13 +154,13 @@ extension Array where Element: SmartDecodable {
     /// - Returns: 模型数组
     public static func deserialize(json: String?, options: [SmartDecodingOption]? = nil) -> [Element?]? {
         guard let _json = json else {
-            SmartLog.logDebug("提供的json为nil")
+            SmartLog.logDebug("要解析的json为nil", className: "\(self)")
             return nil
         }
         
         
         guard let _jsonData = _json.data(using: .utf8) else {
-            SmartLog.logDebug("\(self) 转data失败")
+            SmartLog.logDebug("要解析的json转data失败", className: "\(self)")
             return nil
         }
         
@@ -170,7 +170,7 @@ extension Array where Element: SmartDecodable {
     
     public static func deserialize(data: Data?, options: [SmartDecodingOption]? = nil) -> [Element?]? {
         guard let _data = data else {
-            SmartLog.logDebug("\(Self.self)中，提供的data为nil")
+            SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
             return nil
         }
         

@@ -40,24 +40,56 @@ public struct SmartConfig {
 struct SmartLog {
     /// 发生错误的时候，比如do catch，  正常预期之外的值。
     static func logError(_ error: Error, className: String? = nil) {
-        if SmartConfig.debugMode.rawValue <= SmartConfig.DebugMode.error.rawValue {
-            guard let info = resolveError(error, className: className) else { return }
+        logIfNeeded(level: .error) {
+            guard let info = resolveError(error, className: className) else { return nil }
             if SmartConfig.openErrorAssert {
                 assert(false, info.message)
             }
-            print(info.message)
+            return info.message
+        }
+    }
+
+    
+    static func logDebug(_ item: String, className: String? = nil) {
+        logIfNeeded(level: .debug) {
+            let info = ErrorInfo(location: className, reason: item)
+            return info.message
         }
     }
     
-    static func logDebug(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        if SmartConfig.debugMode.rawValue <= SmartConfig.DebugMode.debug.rawValue {
-            print(items, separator: separator, terminator: terminator)
+    static func logVerbose(_ item: String, className: String? = nil) {
+        logIfNeeded(level: .verbose) {
+            let info = ErrorInfo(location: className, reason: item)
+            return info.message
         }
     }
     
-    static func logVerbose(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-        if SmartConfig.debugMode.rawValue <= SmartConfig.DebugMode.verbose.rawValue {
-            print(items, separator: separator, terminator: terminator)
+    private static func logIfNeeded(level: SmartConfig.DebugMode, message: () -> String?) {
+        
+        func getHeader(level: SmartConfig.DebugMode) -> String {
+            switch level {
+            case .debug:
+                return "\n============= 💚 [SmartLog Debug] 💚 =============\n"
+            case .verbose:
+                return "\n============= 💜 [SmartLog Verbose] 💜 =============\n"
+            case .error:
+                return "\n============= 💔 [SmartLog Error] 💔 =============\n"
+            default:
+                return ""
+            }
+        }
+        
+        func getFooter() -> String {
+            return "==================================================\n"
+        }
+        
+        
+        if SmartConfig.debugMode.rawValue <= level.rawValue {
+            if let output = message() {
+                let header = getHeader(level: level)
+                let footer = getFooter()
+                print("\(header)\(output)\(footer)")
+            }
         }
     }
 }
@@ -141,7 +173,7 @@ struct SmartError: Error {
 
 fileprivate struct ErrorInfo {
     /// 错误类型
-    private var type: String
+    private var type: String?
     /// 所在模型
     private var location: String?
     /// 字段名称
@@ -153,7 +185,7 @@ fileprivate struct ErrorInfo {
     /// 错误原因
     private var reason: String?
     
-    init(type: String,
+    init(type: String? = nil,
          location: String? = nil,
          fieldName: String? = nil,
          fieldType: String? = nil,
@@ -171,12 +203,12 @@ fileprivate struct ErrorInfo {
         
         var all: String = ""
         
+        if let temp = type, temp.count > 0 {
+            let two = "错误类型: '\(temp)' \n"
+            all += two
+        }
 
-        let one = "\n================ [SmartLog Error] ================\n"
-        all += one
-        
-        let two = "错误类型: '\(type)' \n"
-        all += two
+
         
         
         // 模型名称
@@ -225,9 +257,6 @@ fileprivate struct ErrorInfo {
             let string = "错误原因: \(temp)\n"
             all += string
         }
-        
-        let six = "==================================================\n"
-        all += six
         
         return all
     }

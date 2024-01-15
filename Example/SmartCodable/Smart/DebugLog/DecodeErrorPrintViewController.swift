@@ -33,7 +33,8 @@ class DecodeErrorPrintViewController: BaseViewController {
         
         
         
-        SmartConfig.debugMode = .error
+        SmartConfig.debugMode = .debug
+        let value1 = DecodeErrorPrint.deserialize(dict: nil) 
 
         guard let value = DecodeErrorPrint.deserialize(dict: getDecodeErrorPrint()) else { return }
         print(value.a)
