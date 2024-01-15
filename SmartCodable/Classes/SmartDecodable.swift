@@ -9,7 +9,6 @@ import Foundation
 
 
 public protocol SmartDecodable: Decodable {
-    
     /// 映射完成的完成的回调
     mutating func didFinishMapping()
     

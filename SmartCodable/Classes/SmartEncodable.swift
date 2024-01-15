@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 public protocol SmartEncodable: Encodable { }
 
 
@@ -23,6 +24,12 @@ extension SmartEncodable {
     /// - Parameter prettyPrint: 是否格式化打印（json中会添加换行符号）
     /// - Returns: Json字符串
     public func toJSONString(prettyPrint: Bool = false) -> String? {
+        
+        // 首先尝试将 self 直接转换为 [String: Any] 类型的字典
+        if let jsonObject = self as? [String: Any] {
+            return _transformToJsonString(object: jsonObject, prettyPrint: prettyPrint, type: Self.self)
+        }
+        
         if let anyObject = toDictionary() {
             return _transformToJsonString(object: anyObject, prettyPrint: prettyPrint, type: Self.self)
         }

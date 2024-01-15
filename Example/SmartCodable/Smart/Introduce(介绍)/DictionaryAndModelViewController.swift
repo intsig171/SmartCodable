@@ -19,6 +19,8 @@ class DictionaryAndModelViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SmartConfig.debugMode = .verbose
+        
         
         let dict = [
             "name": "xiaoming",
@@ -32,6 +34,7 @@ class DictionaryAndModelViewController: BaseViewController {
         // 字典转json字符串
         guard let json = dict.bt_toJSONString() else { return }
         print(json)
+        print("\n")
         /**
          {"love":[{"time":"7 years","name":"basketball"},{"time":"3 years","name":"football"}],"detail":{"detail":"my name is xiaoming"},"className":"35 class","name":"xiaoming"}
          */
@@ -41,6 +44,7 @@ class DictionaryAndModelViewController: BaseViewController {
         // 字典转模型
         guard let xiaoMing = JsonToModel.deserialize(dict: dict) else { return }
         print(xiaoMing)
+        print("\n")
         /**
          JsonToModel(name: "xiaoming", className: "35 class", detail: SmartCodable_Example.JsonToModelDetail(detail: "my name is xiaoming"), love: [["time": "7 years", "name": "basketball"], ["time": "3 years", "name": "football"]])
          */
@@ -49,6 +53,7 @@ class DictionaryAndModelViewController: BaseViewController {
         // 模型转字典
         let studentDict = xiaoMing.toDictionary() ?? [:]
         print(studentDict)
+        print("\n")
         /**
          ["detail": {
              detail = "my name is xiaoming";
@@ -70,6 +75,7 @@ class DictionaryAndModelViewController: BaseViewController {
         // 模型转json字符串
         let json1 = xiaoMing.toJSONString(prettyPrint: true) ?? ""
         print(json1)
+        print("\n")
         /**
          {
            "name" : "xiaoming",
@@ -95,6 +101,7 @@ class DictionaryAndModelViewController: BaseViewController {
         // json字符串转模型
         guard let xiaoMing2 = JsonToModel.deserialize(json: json1) else { return }
         print(xiaoMing2)
+        print("\n")
         /**
          JsonToModel(name: "xiaoming", className: "35 class", detail: SmartCodable_Example.JsonToModelDetail(detail: "my name is xiaoming"), love: [["name": "basketball", "time": "7 years"], ["name": "football", "time": "3 years"]])
          */
@@ -111,16 +118,19 @@ class DictionaryAndModelViewController: BaseViewController {
         let arr = [dict, dict]
         guard let models = [JsonToModel].deserialize(array: arr) as? [JsonToModel] else { return }
         print(models)
+        print("\n")
 
         let arrTranform = models.toArray() ?? []
         print(arrTranform)
+        print("\n")
 
         let arrJson = models.toJSONString() ?? ""
         print(arrJson)
+        print("\n")
 
         guard let models2 = [JsonToModel].deserialize(json: arrJson) else { return }
         print(models2)
-
+        print("\n")
         
     }
 }
