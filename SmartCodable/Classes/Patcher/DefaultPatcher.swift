@@ -9,10 +9,10 @@ import Foundation
 
 
 /// 默认值兼容器
-struct ValuePatcher<T: Decodable> {
+struct DefaultPatcher<T: Decodable> {
     
-    /// 生产对应类型的默认值
-    static func defaultValue() -> T? {
+    /// 提供默认值
+    static func `defalut`() -> T? {
             
         if let value = T.self as? Defaultable.Type {
             return value.defaultValue as? T
@@ -27,7 +27,7 @@ struct ValuePatcher<T: Decodable> {
     }
 }
 
-protocol Defaultable {
+fileprivate protocol Defaultable {
     static var defaultValue: Self { get }
 }
 
