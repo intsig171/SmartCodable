@@ -10,29 +10,6 @@ import Foundation
 /** SmartAny:  任意Smart类型
  * Codable不支持对Any类型解析，那么对应的Any类型，字典类型（[String: Any]），数组类型[Any] 都无法解析。
  * 通过SmartAny包裹一层，达到可以对Any解析的目的。
- *
- * SamrtAny包含以下类型：
- * Bool
- * String
- 
- * Double
- * cgfloat
- * float
- *
- * Int
- * Int8
- * Int16
- * Int32
- * Int64
- *
- * UInt
- * UInt8
- * UInt16
- * UInt32
- * UInt64
- *
- * dict
- * array
  */
 public enum SmartAny {
     
@@ -64,23 +41,15 @@ public enum SmartAny {
 extension Dictionary where Key == String, Value == SmartAny {
     /// 解析完成会被SmartAny包裹，使用该属性去壳。
     public var peel: [String: Any] {
-        var temp: [String: Any] = [:]
-        for (key, value) in self {
-            temp.updateValue(value.peel, forKey: key)
-        }
-        return temp
+        // mapValues 是 Swift 标准库中 Dictionary 类型的一个方法，它用于对字典中的所有值进行转换，同时保持键不变。
+        mapValues { $0.peel }
     }
 }
 
 extension Array where Element == SmartAny {
     /// 解析完成会被SmartAny包裹，使用该属性去壳。
     public var peel: [Any] {
-        var temp: [Any] = []
-        
-        temp = self.map({
-            $0.peel
-        })
-        return temp
+        map { $0.peel }
     }
 }
 
