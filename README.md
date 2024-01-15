@@ -22,8 +22,7 @@
 
 ### 解析效率
 
-![解析效率](https://github.com/intsig171/SmartCodable/assets/87351449/abc31831-565b-47a5-817e-ecd002739f5e)
-
+#### 常规数据结构，不同数量级别解析性能对比
 
 使用这样的数组，数组的元素项分别设置为： 100个，1000个，10000个。分别对这五种解析方案进行解析耗时的统计。
 
@@ -45,39 +44,16 @@
 ]
 ```
 
+![解析效率](https://github.com/intsig171/SmartCodable/assets/87351449/abc31831-565b-47a5-817e-ecd002739f5e)
+
 理论上SmartCodable的解析效率是低于Codable的。如果不解析 **runways** ，就是如此。 
 SmartCodable对于枚举项的解析更加高效。所以在本次数据对比中，解析效率最高，甚至高于Codable。
 
-
-作者使用的是单元测试中的 **measure** 函数进行性能测算。
-
-```
-struct Smart: SmartCodable {
-    
-    var name: String?
-    var iata: String?
-    var icao: String?
-    var coordinates: [Double]?
-    var runways: [Runway]?
-    
-    struct Runway: SmartCodable {
-        var direction: String?
-        var distance: Int?
-        var surface: Surface?
-    }
-}
-
-func testSmart() {
-    measure {
-        guard let objects = [Smart].deserialize(data: data)  else {
-            return
-        }
-        XCTAssertEqual(objects.count, count)
-    }
-}
-```
-
 Demo工程中提供了测试用例，请自行下载工程代码，访问 **Tests.swift** 文件。
+
+#### 省市区大数据解析性能对比
+![省市区数据对比](https://github.com/intsig171/SmartCodable/assets/87351449/b70aa863-bf3b-436e-a64b-d0ca7c81d6a3)
+
 
 
 
