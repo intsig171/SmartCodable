@@ -55,6 +55,7 @@ Demo工程中提供了测试用例，请自行下载工程代码，访问 **Test
 ![省市区数据对比](https://github.com/intsig171/SmartCodable/assets/87351449/b70aa863-bf3b-436e-a64b-d0ca7c81d6a3)
 
 
+Demo工程中提供了测试用例，请自行下载工程代码，访问 **AreaTests.swift** 文件。
 
 
 #### HandyJSON vs Codable
