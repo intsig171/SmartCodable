@@ -228,7 +228,7 @@ extension KeyedDecodingContainer {
 extension KeyedDecodingContainer {
     
     // 底层的解码方法，核心功能是：拦截抛出的异常，抛给调用放处理。
-    private func smartDecode<T: Decodable>(_ type: T.Type, forKey key: Key, isOptional: Bool = false) throws -> T {
+    private func smartDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         
         /** 解码兼容逻辑
          * 1. try decodeNil(forKey: key)
