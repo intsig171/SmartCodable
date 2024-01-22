@@ -36,6 +36,9 @@ public enum SmartAny {
     
     case dict([String: SmartAny])
     case array([SmartAny])
+    
+    
+    case null(NSNull)
 }
 
 extension Dictionary where Key == String, Value == SmartAny {
@@ -97,6 +100,9 @@ extension SmartAny {
             return v.peel
         case .array(let v):
             return v.peel
+            
+        case .null:
+            return NSNull()
             
         }
     }
@@ -161,17 +167,24 @@ extension SmartAny: Codable {
         }
         
         else {
-            throw DecodingError.typeMismatch(
-                SmartAny.self,
-                DecodingError.Context(codingPath: decoder.codingPath,
-                                      debugDescription: "不支持的类型")
-            )
+            
+            if container.decodeNil() {
+                self = .null(NSNull())
+            } else {
+                throw DecodingError.typeMismatch(
+                    SmartAny.self,
+                    DecodingError.Context(codingPath: decoder.codingPath,
+                                          debugDescription: "不支持的类型")
+                )
+            }
         }
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
+        case .null:
+            try container.encodeNil()
             
         case .bool(let value):
             try container.encode(value)
