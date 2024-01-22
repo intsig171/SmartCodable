@@ -16,6 +16,8 @@
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
 		99328D992B5138210074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
 		99328D9A2B513A300074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
+		993822D22B5E5242007D3268 /* ExplainOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993822D12B5E5242007D3268 /* ExplainOneViewController.swift */; };
+		993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */; };
 		99675FD02B3EC750006C83EC /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99675FD12B3EC822006C83EC /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
 		99675FD22B3EC851006C83EC /* airports100.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8E2B3EC02E00B474E5 /* airports100.json */; };
@@ -106,6 +108,8 @@
 		8860B9435A4082D17ABC8167 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
 		99328D982B5138210074036A /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
+		993822D12B5E5242007D3268 /* ExplainOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainOneViewController.swift; sourceTree = "<group>"; };
+		993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTwoViewController.swift; sourceTree = "<group>"; };
 		99675FD62B3EC930006C83EC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+Extension.swift"; sourceTree = "<group>"; };
 		99675FDA2B3EC930006C83EC /* BTPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTPrint.swift; sourceTree = "<group>"; };
@@ -287,6 +291,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		993822D02B5E5218007D3268 /* 说明 */ = {
+			isa = PBXGroup;
+			children = (
+				993822D12B5E5242007D3268 /* ExplainOneViewController.swift */,
+			);
+			path = "说明";
+			sourceTree = "<group>";
+		};
 		99675FD72B3EC930006C83EC /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +323,7 @@
 		99675FDF2B3EC930006C83EC /* Smart */ = {
 			isa = PBXGroup;
 			children = (
+				993822D02B5E5218007D3268 /* 说明 */,
 				99675FE02B3EC930006C83EC /* DebugLog */,
 				99675FE22B3EC930006C83EC /* Compatibility(兼容性) */,
 				99675FF62B3EC930006C83EC /* SmartAny */,
@@ -447,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				996760152B3EC930006C83EC /* BaseViewController.swift */,
+				993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */,
 				996760162B3EC930006C83EC /* Complex */,
 				996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */,
 				996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */,
@@ -719,6 +733,7 @@
 				996760442B3EC930006C83EC /* FinishMappingViewController+Array.swift in Sources */,
 				996760422B3EC930006C83EC /* FinishMappingViewController+dict.swift in Sources */,
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
+				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
 				996760232B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
@@ -729,6 +744,7 @@
 				996760322B3EC930006C83EC /* CompatibleSampleFiveViewController.swift in Sources */,
 				9967602F2B3EC930006C83EC /* CompatibleSampleSixViewController.swift in Sources */,
 				996760342B3EC930006C83EC /* SmartAnyViewController.swift in Sources */,
+				993822D22B5E5242007D3268 /* ExplainOneViewController.swift in Sources */,
 				996760332B3EC930006C83EC /* CompatibleSampleTwoViewController.swift in Sources */,
 				9967601E2B3EC930006C83EC /* PrintFormat.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,

@@ -35,6 +35,7 @@ class ViewController: UIViewController {
             smart_debug,
             smart_case,
             smart_disadvantage,
+            explain,
             other
         ]
         
@@ -158,6 +159,15 @@ extension ViewController {
         ]
     }
     
+    
+    var explain: [String: Any] {
+        [
+            "title": "Smart说明",
+            "list": [
+                ["name": "为什么要在Model中实现init方法？", "vc": "ExplainOneViewController"],
+            ]
+        ]
+    }
     
     var other: [String: Any] {
         [
