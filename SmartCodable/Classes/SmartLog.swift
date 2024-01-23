@@ -48,7 +48,7 @@ struct SmartLog {
             return info.message
         }
     }
-
+    
     
     static func logDebug(_ item: String, className: String? = nil) {
         logIfNeeded(level: .debug) {
@@ -80,7 +80,7 @@ struct SmartLog {
         }
         
         func getFooter() -> String {
-            return "==================================================\n"
+            return "\n==================================================\n"
         }
         
         
@@ -201,64 +201,35 @@ fileprivate struct ErrorInfo {
     
     var message: String {
         
-        var all: String = ""
+        var parts: [String] = []
         
-        if let temp = type, temp.count > 0 {
-            let two = "错误类型: '\(temp)' \n"
-            all += two
-        }
-
-
-        
-        
-        // 模型名称
-        if let temp = location, temp.count > 0 {
-            let string = "模型名称：\(temp) \n"
-            all += string
+        if let type = type, !type.isEmpty {
+            parts.append("错误类型: '\(type)'")
         }
         
+        if let location = location, !location.isEmpty {
+            parts.append("模型名称：\(location)")
+        }
         
-        // 数据节点
         if let paths = codingPath, !paths.isEmpty {
-            var pathInfo: String = ""
-            for (index, path) in paths.enumerated() {
-                pathInfo += path.stringValue
+            let pathInfo = paths.map { $0.stringValue }.joined(separator: " → ")
+            parts.append("数据节点：" + pathInfo)
+        } else if let fieldName = fieldName {
+            parts.append("数据节点：" + fieldName)
+        }
+        
+        if let fieldName = fieldName {
+            var fieldInfo = fieldName
+            if let fieldType = fieldType, !fieldType.isEmpty {
+                fieldInfo += " | 类型\(fieldType)"
+            }
+            parts.append("属性信息：\(fieldInfo)")
+        }
+        
+        if let reason = reason, !reason.isEmpty {
+            parts.append("错误原因: \(reason)")
+        }
                 
-                if index < (paths.count-1) {
-                    pathInfo += " → "
-                }
-            }
-            all += "数据节点：" + pathInfo + "\n"
-        } else {
-            if let temp = fieldName {
-                all += "数据节点：" + temp + "\n"
-            }
-        }
-        
-
-
-        // 属性信息
-        if let temp = fieldName {
-            var fieldInfo: String = ""
-
-            if let temp = fieldType {
-                let string = "（类型）\(temp) "
-                fieldInfo += string
-            }
-            
-            let string = "（名称）\(temp)"
-            fieldInfo += string
-            all += "属性信息：" + fieldInfo + "\n"
-
-        }
-
-        
-        if let temp = reason {
-            let string = "错误原因: \(temp)\n"
-            all += string
-        }
-        
-        return all
+        return parts.joined(separator: "\n")
     }
-    
 }

@@ -92,7 +92,7 @@ extension ComplexDataStructureViewController {
         
         var endArr: [Any] = []
         
-        for _ in 0...100 {
+        for _ in 0...10 {
             
             for item in arr {
                 endArr.append(item)

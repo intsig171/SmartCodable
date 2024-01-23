@@ -97,12 +97,13 @@ extension CodingKey {
                 return keyName
             case .convertFromSnakeCase:
                 return keyName.convertCamelCaseToSnakeCase()
-            case .globalMap(let t):
-                for (key, value) in t {
-                    if keyName == value {
-                        return key
+            case .globalMap(let maps):
+                for map in maps {
+                    if keyName == map.to {
+                        return map.from
                     }
                 }
+                
             case .exactMap(let maps):
                 for map in maps {
                     if keyName == map.to {

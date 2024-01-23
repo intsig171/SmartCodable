@@ -22,7 +22,7 @@ class TestViewController : BaseViewController {
         
         
         let dict: [String : Any] = [
-            "name": "Mccc",
+            "nickName": "Mccc",
             "subs": [[
                 "nickName": "Mccc",
                 "subSex": [
@@ -36,15 +36,17 @@ class TestViewController : BaseViewController {
             SmartExactMap(path: "subs", from: "nickName", to: "age"),
             SmartExactMap(path: "subs.subSex", from: "sexName", to: "sex")
         ]
+        let options1 = [
+            SmartGlobalMap(from: "nickName", to: "age"),
+            SmartGlobalMap(from: "sexName", to: "sex")
+        ]
+        
 
-        if let model = MapModel.deserialize(dict: dict, keyStrategy: .exactMap(options)) {
+        if let model = MapModel.deserialize(dict: dict, keyStrategy: .globalMap(options1)) {
             print(model)
         }
     }
 }
-
-
-
 
 struct MapModel :SmartCodable {
    
@@ -57,7 +59,6 @@ struct MapSubModel :SmartCodable {
     var subSex: MapSubSexModel = MapSubSexModel()
     public init() {}
 }
-
 
 struct MapSubSexModel :SmartCodable {
     public var sex: String = ""

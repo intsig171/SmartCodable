@@ -39,8 +39,6 @@ extension JSONDecoder {
 
 
 
-
-
 extension SmartDecodable {
     
     /// 反序列化成模型
@@ -166,6 +164,7 @@ extension Data {
 
     fileprivate func createDecoder<T>(type: T.Type, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> JSONDecoder {
         let _decoder = JSONDecoder()
+        
         var userInfo = _decoder.userInfo
 
         // 设置userInfo
@@ -176,7 +175,6 @@ extension Data {
         if let userInfoKey = CodingUserInfoKey.originData, let jsonObj = serialize() {
             userInfo.updateValue(jsonObj, forKey: userInfoKey)
         }
-        
         
         if let _options = options {
             for _option in _options {
@@ -193,8 +191,6 @@ extension Data {
             }
         }
         
-        
-
         if let strategy = keyStrategy {
             _decoder.keyDecodingStrategy = strategy.toSystem()
             if let key = CodingUserInfoKey.keyDecodingStrategy {
@@ -202,7 +198,6 @@ extension Data {
             }
         }
         
-
         _decoder.userInfo = userInfo
         
         return _decoder
