@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         SmartConfig.openErrorAssert = false
         
         dataArray = [
+            other,
             smart_introduce,
             smart_customDecoding,
             smart_compatible,
@@ -36,7 +37,6 @@ class ViewController: UIViewController {
             smart_case,
             smart_disadvantage,
             explain,
-            other
         ]
         
         

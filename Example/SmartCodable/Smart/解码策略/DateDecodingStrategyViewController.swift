@@ -17,14 +17,16 @@ class DateDecodingStrategyViewController: BaseViewController {
 
         let json = """
         {
-           "birth": "2034-12-01 18:00:00"
+           "birth": "2034-12-01 18:00:00",
+           "birth1": "2024-12-01 18:00:00"
+
         }
         """
         let dateFormatter = DateFormatter()
          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let option: SmartDecodingOption = .dateStrategy(.formatted(dateFormatter))
+        let option: JSONDecoder.SmartOption = .dateStrategy(.formatted(dateFormatter))
         guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
-        print(model.birth)
+        print(model)
         
         
     }
@@ -37,6 +39,7 @@ extension DateDecodingStrategyViewController {
     struct FeedOne: SmartCodable {
         
         var birth: Date = Date()
+        var birth1: String = ""
     }
 }
 

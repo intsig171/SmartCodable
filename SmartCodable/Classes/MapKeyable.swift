@@ -14,6 +14,59 @@ import Foundation
 // ])
 
 
+extension JSONDecoder {
+    public enum SmartDecodingKey {
+        /// 使用默认key
+        case useDefaultKeys
+        
+        /// 蛇形命名转换成驼峰命名
+        case convertFromSnakeCase
+        
+        /// 自定义映射关系，会覆盖本次所有解析。
+        case globalMap([String: String])
+        
+        /// 自定义映射关系，值覆盖path路径对应的解析。
+        case exactMap([SmartExactMap])
+        
+        func toSystem() -> JSONDecoder.KeyDecodingStrategy {
+            switch self {
+            case .useDefaultKeys:
+                return JSONDecoder.KeyDecodingStrategy.useDefaultKeys
+            case .convertFromSnakeCase:
+                return JSONDecoder.KeyDecodingStrategy.convertFromSnakeCase
+            case .globalMap(let t):
+                return JSONDecoder.KeyDecodingStrategy.mapper( t )
+            case .exactMap(let maps):
+                return JSONDecoder.KeyDecodingStrategy.mapperExact( maps )
+            }
+        }
+    }
+}
+
+
+//public struct SmartMap {
+//    var from: String
+//    var to: String
+//
+//    public init(from: String, to: String) {
+//        self.from = from
+//        self.to = to
+//    }
+//}
+
+public struct SmartExactMap {
+    var path: String
+    var from: String
+    var to: String
+    
+    public init(path: String, from: String, to: String) {
+        self.path = path
+        self.from = from
+        self.to = to
+    }
+}
+
+
 
 public extension JSONDecoder.KeyDecodingStrategy {
     
@@ -27,6 +80,14 @@ public extension JSONDecoder.KeyDecodingStrategy {
             CodingKeysConverter(container)($0)
         }
     }
+    
+    
+    static func mapperExact(_ container: [SmartExactMap]) -> JSONDecoder.KeyDecodingStrategy {
+        return .custom {
+            CodingKeysExactConverter(container)($0)
+        }
+    }
+
 }
 
 struct CodingKeysConverter {
@@ -76,6 +137,106 @@ struct CodingKeysConverter {
 
     }
 }
+
+
+
+
+
+
+
+
+struct CodingKeysExactConverter {
+    let container: [SmartExactMap]
+    
+    init(_ container: [SmartExactMap]) {
+        self.container = container
+    }
+
+    // 在 Swift 中，callAsFunction 是一个特殊的方法，它允许你将一个类型实例当作函数来调用。通过在类型中实现 callAsFunction 方法，你可以像调用函数一样使用该类型的实例。
+    func callAsFunction(_ codingPath: [CodingKey]) -> CodingKey {
+        
+        /** 各个值的理解
+         *
+         * codingPath: JSONKey结构，对应的是json中的字段名称
+         * container: 传入的映射字典，[SmartMappingKeys: String]
+         * stringKeys: 获取的json中的字段名称数组
+         *
+         */
+        
+        
+        /** 映射值的取值逻辑 （倒推法）
+         * 1. SmartJSONKey(stringValue: value, intValue: nil) 接收的值是，模型中对应的字段名。
+         * 2. 该字段名是container的value。
+         * 3. 所以要先确认container的value对应的key。
+         * 4. 遍历container.keys，如果包含stringKeys，此时的key就是我们的目标。
+         */
+
+        
+        guard let lastCoding = codingPath.last else { return SmartCodingKey.super }
+
+        let targetPath = codingPath.toPathString()
+
+        for map in container {
+            let path = map.path + "." + map.from
+
+            if path == targetPath {
+                if map.from == lastCoding.stringValue {
+                    return SmartCodingKey(stringValue: map.to, intValue: nil)
+                }
+            }
+        }
+        return lastCoding
+    }
+}
+
+
+
+
+
+
+extension Array where Element == CodingKey {
+    func toPathString() -> String {
+        self.filter { !$0.stringValue.starts(with: "super") && !$0.stringValue.starts(with: "Index ") }
+            .map { $0.stringValue }
+            .joined(separator: ".")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 extension Sequence where Element: Hashable {
     fileprivate func _contains(_ elements: [Element]) -> Bool {

@@ -91,16 +91,22 @@ extension CodingKey {
             return keyName
         }
 
-        if let strategy = strategy as? SmartDecodingOption.KeyDecodingStrategy {
+        if let strategy = strategy as? JSONDecoder.SmartDecodingKey {
             switch strategy {
             case .useDefaultKeys:
                 return keyName
             case .convertFromSnakeCase:
                 return keyName.convertCamelCaseToSnakeCase()
-            case .custom(let t):
+            case .globalMap(let t):
                 for (key, value) in t {
                     if keyName == value {
                         return key
+                    }
+                }
+            case .exactMap(let maps):
+                for map in maps {
+                    if keyName == map.to {
+                        return map.from
                     }
                 }
             }

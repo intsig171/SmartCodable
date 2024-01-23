@@ -33,19 +33,19 @@ class CaseThreeViewController: BaseViewController {
             "age1": "20"
 
         ]
-        let option1 = SmartDecodingOption.keyStrategy(.custom(["nickName": "name", "age1": "age"]))
-        guard let model1 = CaseThreeModel.deserialize(dict: dict1, options: [option1]) else { return }
-        print(model1)
-
-
-        let dict2 = [
-            "realName": "小黄",
-            "age2": "30"
-
-        ]
-        let option2 = SmartDecodingOption.keyStrategy(.custom(["realName": "name", "age2": "age"]))
-        guard let model2 = CaseThreeModel.deserialize(dict: dict2, options: [option2]) else { return }
-        print(model2)
+//        let option1 = SmartDecodingOption.keyStrategy(.globalMatch(["nickName": "name", "age1": "age"]))
+//        guard let model1 = CaseThreeModel.deserialize(dict: dict1, options: [option1]) else { return }
+//        print(model1)
+//
+//
+//        let dict2 = [
+//            "realName": "小黄",
+//            "age2": "30"
+//
+//        ]
+//        let option2 = SmartDecodingOption.keyStrategy(.globalMatch(["realName": "name", "age2": "age"]))
+//        guard let model2 = CaseThreeModel.deserialize(dict: dict2, options: [option2]) else { return }
+//        print(model2)
     }
 }
 

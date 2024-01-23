@@ -36,14 +36,14 @@ class KeyDecodingStrategyViewController: BaseViewController {
         print("feedOne.name = \(feedOne.name)")
 
         // 2.  使用keyDecodingStrategy的驼峰命名
-        guard let feedTwo = FeedTwo.deserialize(json: json, options: [.keyStrategy(.convertFromSnakeCase)]) else { return }
-        print("feedTwo.nickName = \(feedTwo.nickName)")
+//        guard let feedTwo = FeedTwo.deserialize(json: json, options: [.keyStrategy(.convertFromSnakeCase)]) else { return }
+//        print("feedTwo.nickName = \(feedTwo.nickName)")
         
         
         // 3. 使用keyDecodingStrategy的自定义策略
-        let option: SmartDecodingOption = .keyStrategy(.custom(["nick_name": "name"]))
-        guard let feedThree = FeedThree.deserialize(json: json, options: [option]) else { return }
-        print("feedThree.name = \(feedThree.name)")
+//        let option: SmartDecodingOption = .keyStrategy(.globalMatch(["nick_name": "name"]))
+//        guard let feedThree = FeedThree.deserialize(json: json, options: [option]) else { return }
+//        print("feedThree.name = \(feedThree.name)")
     }
 }
 
