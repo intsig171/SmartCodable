@@ -80,7 +80,10 @@ extension JSONDecoder.KeyDecodingStrategy {
     }
 
     public static func mapperExact(_ container: [SmartExactMap]) -> JSONDecoder.KeyDecodingStrategy {
-        let mapping = Dictionary(container.map { ($0.path + "." + $0.from, $0.to) }, uniquingKeysWith: { first, _ in first })
+        let mapping = Dictionary(container.map { map in
+            let fullPath = map.path.isEmpty ? map.from : "\(map.path).\(map.from)"
+            return (fullPath, map.to)
+        }, uniquingKeysWith: { first, _ in first })
         return .custom { CodingKeysExactConverter(mapping: mapping)($0) }
     }
 }

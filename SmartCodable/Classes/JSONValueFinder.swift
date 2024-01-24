@@ -18,10 +18,8 @@ struct JSONValueFinder {
     
     /// 获取当前要解析的json
     static func getJsonObject(decoder: Decoder) -> Any? {
-        
-        guard let userKey = CodingUserInfoKey.originData else { return nil }
-        // 存入的时候是data类型
-        guard let value = decoder.userInfo[userKey] else { return nil }
+        guard let userKey = CodingUserInfoKey.originData,
+              let value = decoder.userInfo[userKey] else { return nil }
         return value
     }
 }
@@ -35,13 +33,11 @@ extension JSONValueFinder {
     /// - Returns: json中对应的值
     static func findValue(decoder: Decoder?, key: CodingKey) -> Any? {
         
-        guard let decoder = decoder else { return nil}
-   
-        guard var lastJsonObject = getJsonObject(decoder: decoder) else { return nil }
-
+        guard let decoder = decoder,
+              var lastJsonObject = getJsonObject(decoder: decoder) else { return nil }
+        
         // 拼接成完整的当前解析的codingPath
-        var codingKeys = decoder.codingPath
-        codingKeys.append(key)
+        let codingKeys = decoder.codingPath + [key]
         
         var wantValue: Any? = nil
         
@@ -83,58 +79,37 @@ extension JSONValueFinder {
 
 
 extension CodingKey {
-    // 将codingKey的命名转成字段名，以便获取对应的字段值。
+    
+    /// 将codingKey的命名转成字段名，以便获取对应的字段值。
     fileprivate func convertKeyNameToFieldName(decoder: Decoder) -> String {
         let keyName = self.stringValue
-        
-        guard let strategyKey = CodingUserInfoKey.keyDecodingStrategy, let strategy = decoder.userInfo[strategyKey] else {
+        guard let strategyKey = CodingUserInfoKey.keyDecodingStrategy,
+              let strategy = decoder.userInfo[strategyKey] as? JSONDecoder.SmartDecodingKey else {
             return keyName
         }
-
-        if let strategy = strategy as? JSONDecoder.SmartDecodingKey {
-            switch strategy {
-            case .useDefaultKeys:
-                return keyName
-            case .convertFromSnakeCase:
-                return keyName.convertCamelCaseToSnakeCase()
-            case .globalMap(let maps):
-                for map in maps {
-                    if keyName == map.to {
-                        return map.from
-                    }
-                }
-                
-            case .exactMap(let maps):
-                for map in maps {
-                    if keyName == map.to {
-                        return map.from
-                    }
-                }
-            }
+        switch strategy {
+        case .useDefaultKeys:
+            return keyName
+        case .convertFromSnakeCase:
+            return keyName.convertCamelCaseToSnakeCase()
+        case .globalMap(let maps):
+            return maps.first(where: { $0.to == keyName })?.from ?? keyName
+        case .exactMap(let maps):
+            return maps.first(where: { $0.to == keyName })?.from ?? keyName
         }
-        return keyName
     }
 }
 
 
 extension String {
-    // 转成下划线命名
+    /// 驼峰转蛇形
     fileprivate func convertCamelCaseToSnakeCase() -> String {
-        let stringKey = self
-        guard !stringKey.isEmpty else { return stringKey }
-        
-        var newString = ""
-        let scalarValues = stringKey.unicodeScalars.map { $0 }
-        
-        for (index, scalar) in scalarValues.enumerated() {
+        return unicodeScalars.reduce("") { (result, scalar) in
             if CharacterSet.uppercaseLetters.contains(scalar) {
-                if index != 0 { newString += "_" }
-                newString += String(Character(scalar)).lowercased()
+                return result + (result.isEmpty ? "" : "_") + String(Character(scalar)).lowercased()
             } else {
-                newString += String(Character(scalar))
+                return result + String(Character(scalar))
             }
         }
-        return newString
     }
 }
-

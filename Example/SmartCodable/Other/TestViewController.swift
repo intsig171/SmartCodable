@@ -18,6 +18,15 @@ class TestViewController : BaseViewController {
         super.viewDidLoad()
         
         
+        let abc = "123Aa_bcc"
+        
+        let a = abc.convertCamelCaseToSnakeCase()
+        print(a)
+        
+        
+        return
+        
+        
         SmartConfig.debugMode = .none
         
         
@@ -63,4 +72,17 @@ struct MapSubModel :SmartCodable {
 struct MapSubSexModel :SmartCodable {
     public var sex: String = ""
     public init() {}
+}
+
+
+extension String {
+    fileprivate func convertCamelCaseToSnakeCase() -> String {
+        return unicodeScalars.reduce("") { (result, scalar) in
+            if CharacterSet.uppercaseLetters.contains(scalar) {
+                return result + (result.isEmpty ? "" : "_") + String(Character(scalar)).lowercased()
+            } else {
+                return result + String(Character(scalar))
+            }
+        }
+    }
 }
