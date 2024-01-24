@@ -27,7 +27,7 @@ public enum SmartAny {
     case int32(Int32)
     case int64(Int64)
     
-    case uInt(Int)
+    case uInt(UInt)
     case uInt8(UInt8)
     case uInt16(UInt16)
     case uInt32(UInt32)
@@ -126,14 +126,6 @@ extension SmartAny: Codable {
             self = .string(value)
         }
         
-        else if let value = try? container.decode(Double.self) {
-            self = .double(value)
-        } else if let value = try? container.decode(CGFloat.self) {
-            self = .cgFloat(value)
-        } else if let value = try? container.decode(Float.self) {
-            self = .float(value)
-        }
-        
         else if let value = try? container.decode(Int.self) {
             self = .int(value)
         } else if let value = try? container.decode(Int8.self) {
@@ -146,8 +138,8 @@ extension SmartAny: Codable {
             self = .int64(value)
         }
         
-        else if let value = try? container.decode(Int.self) {
-            self = .int(value)
+        else if let value = try? container.decode(UInt.self) {
+            self = .uInt(value)
         } else if let value = try? container.decode(UInt8.self) {
             self = .uInt8(value)
         } else if let value = try? container.decode(UInt16.self) {
@@ -156,6 +148,15 @@ extension SmartAny: Codable {
             self = .uInt32(value)
         } else if let value = try? container.decode(UInt64.self) {
             self = .uInt64(value)
+        }
+        
+        
+        else if let value = try? container.decode(Double.self) {
+            self = .double(value)
+        } else if let value = try? container.decode(CGFloat.self) {
+            self = .cgFloat(value)
+        } else if let value = try? container.decode(Float.self) {
+            self = .float(value)
         }
         
         else if let value = try? container.decode([String: SmartAny].self) {
