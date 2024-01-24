@@ -37,10 +37,10 @@ class TestViewController : BaseViewController {
             SmartExactMap(path: "subs", from: "nickName", to: "age"),
             SmartExactMap(path: "subs.subSex", from: "sexName", to: "sex")
         ]
-        let options1 = [
-            SmartGlobalMap(from: "nickName", to: "age"),
-            SmartGlobalMap(from: "sexName", to: "sex")
-        ]
+//        let options1 = [
+//            SmartGlobalMap(from: "nickName", to: "age"),
+//            SmartGlobalMap(from: "sexName", to: "sex")
+//        ]
         
 
         if let model = MapModel.deserialize(dict: dict, keyStrategy: .exactMap(options)) {
