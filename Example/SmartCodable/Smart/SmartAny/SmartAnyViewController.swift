@@ -54,7 +54,7 @@ class SmartAnyViewController: BaseViewController {
         
         
         guard let model = AnyModel.deserialize(dict: dict) else { return }
-        print(model.name?.peel ?? 0)
+        print(model.name?.peel)
         print(model.age.peel)
         print(model.dict.peel)
         print(model.arr.peel)
@@ -100,4 +100,5 @@ extension SmartAnyViewController {
     }
 
 }
+
 
