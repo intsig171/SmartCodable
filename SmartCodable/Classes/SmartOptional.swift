@@ -8,11 +8,12 @@
 import Foundation
 
 
-/** SmartOptional(解码的属性包装器) 使用的前提。设置这些障碍的目的是避免使用。
- * 并且必须是可选值类型（必须是class，不能是struct）
- * 必须是可选属性
- * 必须遵循了SmartDecodable协议
- */
+/// Smart属性包装器，用于修饰可选的模型属性。
+///
+/// 使用要求：
+/// - 并且必须是可选值类型（必须是class，不能是struct）
+/// - 必须是可选属性
+/// - 必须遵循了SmartDecodable协议
 public typealias SmartOptional<T: SmartDecodable & AnyObject> = DefalutDecodeWrapper<OptionalDecodeFailStrategy<T>>
 
 /// 可选类型解码失败提供的默认值为nil

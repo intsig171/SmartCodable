@@ -8,7 +8,9 @@
 import Foundation
 
 
-/// 全局（本次解析）的KeyDecodingStrategy映射关系。
+/// KeyDecodingStrategy映射关系。
+///
+/// 影响范围：本次所有的解析（包含嵌套的Model解析）。
 public struct SmartGlobalMap {
     var from: String
     var to: String
@@ -20,15 +22,16 @@ public struct SmartGlobalMap {
 }
 
 /// 指定路径的KeyDecodingStrategy映射关系。
-/// let dict: [String : Any] = [
-/// "name": "Mccc",
-/// "subs": [[
-///    "nickName": "Mccc",
-///    "subSex": [
+///
+///   let dict: [String : Any] = [
+///   "name": "Mccc",
+///   "subs": [[
+///      "nickName": "Mccc",
+///      "subSex": [
 ///        "sexName": "男"
-///    ]
-///  ]]
-/// ]
+///      ]
+///    ]]
+///   ]
 ///
 /// 如果想要将sexName映射为"sex": SmartExactMap(path: "subs.subSex", from: "sexName", to: "sex")
 public struct SmartExactMap {
@@ -45,6 +48,7 @@ public struct SmartExactMap {
 
 
 extension JSONDecoder {
+    /// 解码Key的映射策略
     public enum SmartDecodingKey {
         /// 使用默认key
         case useDefaultKeys

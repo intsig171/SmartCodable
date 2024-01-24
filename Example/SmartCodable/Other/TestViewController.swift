@@ -23,7 +23,6 @@ class TestViewController : BaseViewController {
         let a = abc.convertCamelCaseToSnakeCase()
         print(a)
         
-        
         return
         
         
@@ -40,7 +39,8 @@ class TestViewController : BaseViewController {
             ]]
         ]
         
-  
+
+        
         let options = [
             SmartExactMap(path: "subs", from: "nickName", to: "age"),
             SmartExactMap(path: "subs.subSex", from: "sexName", to: "sex")

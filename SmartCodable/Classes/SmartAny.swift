@@ -7,10 +7,17 @@
 
 import Foundation
 
-/** SmartAny:  任意Smart类型
+/** SmartAny:
  * Codable不支持对Any类型解析，那么对应的Any类型，字典类型（[String: Any]），数组类型[Any] 都无法解析。
- * 通过SmartAny包裹一层，达到可以对Any解析的目的。
+ *
  */
+
+/// 任意Smart类型，可以简单的理解为Any。
+///
+/// Codable不支持对Any类型解析，那么对应的Any类型，字典类型（[String: Any]），数组类型[Any] 都无法解析。
+/// 通过SmartAny包裹一层，达到可以对Any解析的目的。
+///
+/// 获取的原始的值需要调用 '.peel' 进行去壳。
 public enum SmartAny {
     
     case bool(Bool)

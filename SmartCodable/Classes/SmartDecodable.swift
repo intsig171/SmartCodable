@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+/// Smart的解码协议
 public protocol SmartDecodable: Decodable {
     /// 映射完成的完成的回调
     mutating func didFinishMapping()
@@ -22,7 +22,7 @@ extension SmartDecodable {
 
 
 extension JSONDecoder {
-    /// SmartCodable的解析选项
+    /// SmartCodable解析的选项
     public enum SmartOption {
         
         /// 用于解码 “Date” 值的策略

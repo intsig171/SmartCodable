@@ -8,6 +8,7 @@
 import Foundation
 
 
+/// Smart的编码协议
 public protocol SmartEncodable: Encodable { }
 
 

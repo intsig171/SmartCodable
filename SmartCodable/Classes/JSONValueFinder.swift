@@ -9,7 +9,7 @@ import Foundation
 
 
 
-/// json值 获取器
+/// json值获取器
 struct JSONValueFinder {
     
     /// 存储信息，当前的解析器对应的要解析的json数据
