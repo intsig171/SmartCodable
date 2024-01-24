@@ -1,4 +1,3 @@
-
 ✨✨✨看起来还不错？给个star✨吧，急需支持✨✨✨
 
 # SmartCodable - Swift数据解析的智能解决方案
@@ -52,6 +51,7 @@ SmartCodable对于枚举项的解析更加高效。所以在本次数据对比�
 Demo工程中提供了测试用例，请自行下载工程代码，访问 **Tests.swift** 文件。
 
 #### 省市区大数据解析性能对比
+
 ![省市区数据对比](https://github.com/intsig171/SmartCodable/assets/87351449/b70aa863-bf3b-436e-a64b-d0ca7c81d6a3)
 
 
@@ -97,7 +97,7 @@ end
 
 
 
-### 字典类型的解码
+### 字典的解码
 
 ```
 import SmartCodable
@@ -112,7 +112,7 @@ guard let model = Model.deserialize(dict: dict) else { return }
 
 
 
-### 数组类型解码
+### 数组的解码
 
 ```
 import SmartCodable
@@ -193,7 +193,7 @@ struct CompatibleEnum: SmartCodable {
 
 ### 解码Any
 
-Codable是无法解码Any类型的，这样就意味着模型的属性类型可以为 **Any**，**[Any]**，**[String: Any]**。  这对解码的便利性造成了一定的困扰。
+Codable是无法解码Any类型的，这样就意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型， 这对解码造成了一定的困扰。
 
 #### 官方的解决方案
 
@@ -212,18 +212,18 @@ struct Block: Codable {
 改为： 
 
 ```
-struct Transaction: Codable {
-    let amount: Int
-    let recipient: String
-    let sender: String
-}
- 
 struct Block: Codable {
     let message: String
     let index: Int
     let transactions: [Transaction]
     let proof: String
     let previous_hash: String
+}
+
+struct Transaction: Codable {
+    let amount: Int
+    let recipient: String
+    let sender: String
 }
 ```
 
@@ -245,111 +245,86 @@ guard let one = AboutAny<String>.deserialize(dict: dict) else { return }
 
 #### 使用 SmartAny
 
-**SmartAny** 是**SmartCodable** 提供了一种方案。SmartAny是枚举类型。
+**SmartAny** 是**SmartCodable** 提供的解决Any的一个类型。可以直接像使用 **Any** 一样使用它。 
 
 ```
-public enum SmartAny {
-    case bool(Bool)
-    case string(String)
-    case double(Double)
-    case cgFloat(CGFloat)
-    case float(Float)
-    case int(Int)
-    case int8(Int8)
-    case int16(Int16)
-    case int32(Int32)
-    case int64(Int64)
-    case uInt(Int)
-    case uInt8(UInt8)
-    case uInt16(UInt16)
-    case uInt32(UInt32)
-    case uInt64(UInt64)    
-    case dict([String: SmartAny])
-    case array([SmartAny])
-}
-
-```
-
-重写了`public init(from decoder: Decoder) throws`方法，将解析完成的数据包裹进SmartAny内。
-
-```
-extension SmartAny: Codable {
-    // 实现 Codable
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        
-        
-        if let value = try? container.decode(Bool.self) {
-            self = .bool(value)
-        } else if let value = try? container.decode(String.self) {
-            self = .string(value)
-        }
-        其他代码
-        ......
-    }
+struct AnyModel: SmartCodable {
+    var name: SmartAny?
+    var age: SmartAny = .int(0)
+    var dict: [String: SmartAny] = [:]
+    var arr: [SmartAny] = []
 }
 ```
 
-如果你要获取原始的数据，可以使用 **peel** 方法去壳。
+
 
 ```
-extension Dictionary where Key == String, Value == SmartAny {
-    /// 解析完成会被SmartAny包裹，使用该属性去壳。
-    public var peel: [String: Any] {
-        var temp: [String: Any] = [:]
-        for (key, value) in self {
-            temp.updateValue(value.peel, forKey: key)
-        }
-        return temp
-    }
-}
+let inDict = [
+    "key1": 1,
+    "key2": "two",
+    "key3": ["key": "1"],
+    "key4": [1, 2.2]
+] as [String : Any]
 
-extension Array where Element == SmartAny {
-    /// 解析完成会被SmartAny包裹，使用该属性去壳。
-    public var peel: [Any] {
-        var temp: [Any] = []
-        
-        temp = self.map({
-            $0.peel
-        })
-        return temp
-    }
-}
+let arr = [inDict]
 
-extension SmartAny {
-    /// 获取原本的值
-    public var peel: Any {
-        switch self {
-        case .bool(let v):
-            return v
-            
-        case .string(let v):
-            return v
-        
-        // 其他代码
-        ......
-        }
-    }
-}
+let dict = [
+    "name": "xiao ming",
+    "age": 20,
+    "dict": inDict,
+    "arr": arr
+] as [String : Any]
+
+guard let model = AnyModel.deserialize(dict: dict) else { return }
+
+print(model.name)
+// print: Optional(SmartAny.string("xiao ming"))
+
+print(model.age)
+// print: SmartAny.int(20)
+
+print(model.dict)
+// print:
+[
+    "key1": SmartAny.int(1),
+    "key2": SmartAny.string("two"),
+    "key3": SmartAny.dict(["key": SmartAny.string("1")]),
+    "key4": SmartAny.array([SmartAny.int(1), SmartAny.double(2.2)])
+]
+
+print(model.arr)
+// print: 
+[
+    SmartAny.dict([
+        "key1": SmartAny.int(1),
+        "key2": SmartAny.string("two")
+        "key3": SmartAny.dict(["key": SmartAny.string("1")]),
+        "key4": SmartAny.array([SmartAny.int(1), SmartAny.double(2.2)]),
+    ])
+]
 ```
 
-更多实现细节可以访问**SmartAny.swift** 文件。
-
-
-
-
-
-## 解码策略 - SmartDecodingOption
+可以看到打印的数据被SmartAny包裹住了，需要使用 `.peel` 去壳。
 
 ```
-public static func deserialize(json: String?, options: [SmartDecodingOption]? = nil) -> Self? 
+print(model.name?.peel)
+print(model.age.peel)
+print(model.dict.peel)
+print(model.arr.peel)
 ```
 
-options提供了四种解码选项，分别为：
+
+
+
+
+
+
+## 解析选项 - JSONDecoder.SmartOption
+
+JSONDecoder.SmartOption提供了三种解码选项，分别为：
 
 ```
-    /// 用于在解码之前自动更改密钥值的策略
-    case keyStrategy(KeyDecodingStrategy)
+public enum SmartOption {
     
     /// 用于解码 “Date” 值的策略
     case dateStrategy(JSONDecoder.DateDecodingStrategy)
@@ -359,85 +334,171 @@ options提供了四种解码选项，分别为：
     
     /// 用于不符合json的浮点值(IEEE 754无穷大和NaN)的策略
     case floatStrategy(JSONDecoder.NonConformingFloatDecodingStrategy)
+}
+```
+
+### Date
+
+```
+let dateFormatter = DateFormatter()
+ dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+let option: JSONDecoder.SmartOption = .dateStrategy(.formatted(dateFormatter))
+guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+```
+
+### Data
+
+```
+let option: JSONDecoder.SmartOption = .dataStrategy(.base64)
+guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+gurad let data = model.address, let url = String(data: data, encoding: .utf8) { else }
+```
+
+### Float
+
+```
+let option: JSONDecoder.SmartOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
+guard let model1 = FeedOne.deserialize(json: json, options: [option]) else {  return }
 ```
 
 
 
-### SmartKeyDecodingStrategy
+
+
+## 字段映射
+
+如果您需要将这样的数据结构
 
 ```
-/// key解码策略
-public enum SmartKeyDecodingStrategy {
+let dict: [String: Any] = [
+    "nick_name": "Mccc1",
+    "two": [
+        "realName": "Mccc2",
+        "three": [
+            ["nickName": "Mccc3"]
+        ]
+    ]
+]
+```
+
+解析到下面定义的Model中
+
+```
+struct FeedTwo: SmartCodable {
+    var nickName: String = ""     
+    var two: Two = Two()
+}
+
+struct Two: SmartCodable {
+    var nickName: String = ""
+    var three: [Three] = []
+}
+
+struct Three: SmartCodable {
+    var nickName: String = ""
+}
+```
+
+此时数据中字段名和Model中的属性名不一致，推荐您使用 **CodingKeys**。
+
+### 重写CodingKeys
+
+```
+struct FeedTwo: SmartCodable {
+    var nickName: String = ""
+    var two: Two = Two()
+    
+    enum CodingKeys: String, CodingKey {
+        case nickName = "nick_name"
+        case two
+    }
+}
+
+struct Two: SmartCodable {
+    var nickName: String = ""
+    var three: [Three] = []
+    
+    enum CodingKeys: String, CodingKey {
+        case nickName = "realName"
+        case three
+    }
+}
+
+struct Three: SmartCodable {
+    var nickName: String = ""
+    enum CodingKeys: String, CodingKey {
+        case nickName = "nick_name"
+    }
+}
+
+```
+
+
+
+### JSONDecoder.SmartDecodingKey
+
+如果您有更复杂的需求，比如 **多字段映射**，重写CodingKeys无法满足。您可以使用提供的SmartDecodingKey来解决问题。
+
+```
+public enum SmartDecodingKey {
+    /// 使用默认key
     case useDefaultKeys
+    
+    /// 蛇形命名转换成驼峰命名
     case convertFromSnakeCase
-    case custom([String: String])
+    
+    /// 自定义映射关系，会覆盖本次所有映射。
+    case globalMap([SmartGlobalMap])
+    
+    /// 自定义映射关系，仅作用于path路径对应的映射。
+    case exactMap([SmartExactMap])
 }
 ```
 
 * **useDefaultKeys：** 使用默认的解析映射方式。
 
-* **convertFromSnakeCase：** 转驼峰的命名方式。会将本次解析的字段，全部转成驼峰命名。
+* **convertFromSnakeCase：** 蛇形命名转驼峰，覆盖本次解析。
 
-* **custom：** 自定义的方式。key是数据中的字段名，value是模型中的属性名。
+* **globalMap**：自定义解析映射，覆盖本次解析。
 
-```
-// 1. CodingKeys 映射
-guard let feedOne = FeedOne.deserialize(json: json) else { return }
+* **exactMap**:  自定义解析映射，只影响提供路径下的解析映射。
 
-// 2.  使用keyDecodingStrategy的驼峰命名
-guard let feedTwo = FeedTwo.deserialize(json: json, options: [.keyStrategy(.convertFromSnakeCase)]) else { return }
-
-
-
-// 3. 使用keyDecodingStrategy的自定义策略
-let option: SmartDecodingOption = .keyStrategy(.custom(["nick_name": "name"]))
-guard let feedThree = FeedThree.deserialize(json: json, options: [option]) else { return }
-```
-
-
-
-### Date格式的解码
+### globalMap
 
 ```
-let json = """
-{
-   "birth": "2034-12-01 18:00:00"
-}
-"""
-let dateFormatter = DateFormatter()
- dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-let option: SmartDecodingOption = .dateStrategy(.formatted(dateFormatter))
-
-guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+let keys = [
+    SmartGlobalMap(from: "nick_name", to: "nickName"),
+    SmartGlobalMap(from: "realName", to: "nickName"),
+]
+guard let feedTwo = FeedTwo.deserialize(dict: dict, keyStrategy: .globalMap(keys)) else { return }
 ```
 
+将数据中的 **nick_name** 字段映射到 模型的**nickName** 属性上。
 
+需要注意的是：这个映射关系也会作用到嵌套的数据结构上。
 
-### Data类型的解码
+### exactMap
+
+如果你想避免上面的影响，可以使用 **精准映射** 。
 
 ```
-let json = """
-{
-   "address": "aHR0cHM6Ly93d3cucWl4aW4uY29t"
-}
-"""
-
-let option: SmartDecodingOption = .dataStrategy(.base64)
-guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
-
-if let data = model.address, let url = String(data: data, encoding: .utf8) {
-    print(url)
-    // https://www.qixin.com
-}
+let keys2 = [
+    SmartExactMap(path: "", from: "nick_name", to: "nickName"),
+    SmartExactMap(path: "two", from: "realName", to: "nickName"),
+    SmartExactMap(path: "two.three", from: "nick_name", to: "nickName"),
+]
+guard let feedThree = FeedTwo.deserialize(dict: dict, keyStrategy: .exactMap(keys2)) else { return }
 ```
+
+您需要理解的是： 如何填写 **path**？ 
+
+path表示您要映射的字段所在的层级。如果本身就在最顶层，path填写为 `path: ""`。
 
 
 
 ## SmartCodable的兼容性
 
 在使用系统的 **Codable** 解码的时候，遇到 **无键**，**值为null**， **值类型错误** 抛出异常导致解析失败。**SmartCodable** 底层默认对这三种解析错误进行了兼容。 
-
-具体的实现逻辑可以查看 **Patcher.swift** 文件。
 
 ### 无键 & 值为null
 
@@ -799,6 +860,7 @@ Codable在进行解码的时候，是无法知道这个属性的。所以在deco
 
 
 ### 联系我们
+
 ![QQ](https://github.com/intsig171/SmartCodable/assets/87351449/a90560b0-7d4f-4529-a523-0d8d5b51ebe7)
 
 
@@ -807,8 +869,3 @@ Codable在进行解码的时候，是无法知道这个属性的。所以在deco
 ## 加入我们
 
 **SmartCodable** 是一个开源项目，我们欢迎所有对提高数据解析性能和健壮性感兴趣的开发者加入。无论是使用反馈、功能建议还是代码贡献，你的参与都将极大地推动 **SmartCodable** 项目的发展。
-
-
-
-
-

@@ -17,16 +17,7 @@ class TestViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let abc = "123Aa_bcc"
-        
-        let a = abc.convertCamelCaseToSnakeCase()
-        print(a)
-        
-        return
-        
-        
-        SmartConfig.debugMode = .none
+//        SmartConfig.debugMode = .none
         
         
         let dict: [String : Any] = [
@@ -34,7 +25,7 @@ class TestViewController : BaseViewController {
             "subs": [[
                 "nickName": "Mccc",
                 "subSex": [
-                    "sexName": 123
+                    "sexName": NSNull()
                 ]
             ]]
         ]
@@ -42,6 +33,7 @@ class TestViewController : BaseViewController {
 
         
         let options = [
+            SmartExactMap(path: "", from: "nickName", to: "name"),
             SmartExactMap(path: "subs", from: "nickName", to: "age"),
             SmartExactMap(path: "subs.subSex", from: "sexName", to: "sex")
         ]
@@ -51,7 +43,7 @@ class TestViewController : BaseViewController {
         ]
         
 
-        if let model = MapModel.deserialize(dict: dict, keyStrategy: .globalMap(options1)) {
+        if let model = MapModel.deserialize(dict: dict, keyStrategy: .exactMap(options)) {
             print(model)
         }
     }
@@ -74,15 +66,3 @@ struct MapSubSexModel :SmartCodable {
     public init() {}
 }
 
-
-extension String {
-    fileprivate func convertCamelCaseToSnakeCase() -> String {
-        return unicodeScalars.reduce("") { (result, scalar) in
-            if CharacterSet.uppercaseLetters.contains(scalar) {
-                return result + (result.isEmpty ? "" : "_") + String(Character(scalar)).lowercased()
-            } else {
-                return result + String(Character(scalar))
-            }
-        }
-    }
-}

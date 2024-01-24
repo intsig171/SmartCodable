@@ -30,7 +30,7 @@ class KeyDecodingStrategyViewController: BaseViewController {
             "two": [
                 "realName": "Mccc2",
                 "three": [
-                    ["nickName": "Mccc3"]
+                    ["nick_name": "Mccc3"]
                 ]
             ]
         ]
@@ -67,6 +67,7 @@ class KeyDecodingStrategyViewController: BaseViewController {
         let keys2 = [
             SmartExactMap(path: "", from: "nick_name", to: "nickName"),
             SmartExactMap(path: "two", from: "realName", to: "nickName"),
+            SmartExactMap(path: "two.three", from: "nick_name", to: "nickName"),
         ]
         guard let feedThree = FeedTwo.deserialize(dict: dict, keyStrategy: .exactMap(keys2)) else { return }
         print("feedThree = \(feedThree)")
@@ -100,6 +101,9 @@ extension KeyDecodingStrategyViewController {
             
             struct Three: SmartCodable {
                 var nickName: String = ""
+                enum CodingKeys: String, CodingKey {
+                    case nickName = "nick_name"
+                }
             }
         }
     }
@@ -123,4 +127,6 @@ extension KeyDecodingStrategyViewController {
         }
     }
 }
+
+
 
