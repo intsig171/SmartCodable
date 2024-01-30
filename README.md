@@ -1,29 +1,37 @@
-✨✨✨看起来还不错？给个star✨吧，急需支持✨✨✨
+✨✨✨ Looks good? Give a star✨, urgently need support✨✨✨
 
-# SmartCodable - Swift数据解析的智能解决方案
-
-**SmartCodable** 是一个基于Swift的**Codable**协议的数据解析库，旨在提供更为强大和灵活的解析能力。通过优化和扩展**Codable**的标准功能，**SmartCodable** 有效地解决了传统解析过程中的常见问题，并提高了解析的容错性和灵活性。
+# SmartCodable - An Intelligent Solution for Swift Data Parsing
 
 
 
-### 为何选择SmartCodable?
-
-在使用标准的**Codable**进行数据解析时，开发者常常会遇到诸如键不存在、类型不匹配或值为null等问题，这些问题往往会导致整个解析过程的失败，并抛出异常。**SmartCodable** 针对这些挑战提供了智能化的解决方案，确保解析过程的健壮性和流畅性。
-
-### 主要特性
-
-- **增强的错误处理**：当遇到键不存在、类型不匹配或值为null等问题时，不会立即中断解析，而是提供了更为灵活的处理选项。
-- **值类型转换**：如果目标类型与实际类型不符但可以进行有意义的转换，**SmartCodable** 会自动转换值类型，确保数据的正确解析。
-- **默认值填充**：当某个属性无法解析时，**SmartCodable** 允许自动填充该属性类型的默认值，例如将Bool类型的字段默认设为`false`，从而避免了整个解析过程的失败。
-- **兼容性和灵活性**：**SmartCodable** 完全兼容标准的**Codable**协议，并在此基础上提供更多的定制化选项，适应更复杂和多变的数据解析需求。
+[中国同胞🇨🇳请访问中文版](https://github.com/intsig171/SmartCodable/blob/main/README-CN.md)
 
 
 
-### 解析效率
+**SmartCodable** is a data parsing library based on the Swift **Codable** protocol, designed to offer more powerful and flexible parsing capabilities. By optimizing and extending the standard functions of **Codable**, **SmartCodable** effectively addresses common issues in traditional parsing processes and enhances the error tolerance and flexibility of parsing.
 
-#### 常规数据结构，不同数量级别解析性能对比
 
-使用这样的数组，数组的元素项分别设置为： 100个，1000个，10000个。分别对这五种解析方案进行解析耗时的统计。
+
+### Why Choose SmartCodable?
+
+When using the standard **Codable** for data parsing, developers often encounter issues such as missing keys, type mismatches, or null values, which can lead to the failure of the entire parsing process and throw exceptions. **SmartCodable** offers intelligent solutions to these challenges, ensuring the robustness and smoothness of the parsing process.
+
+
+
+### Main Features
+
+- **Enhanced Error Handling**: Instead of immediately interrupting the parsing process when encountering issues such as missing keys, type mismatches, or null values, SmartCodable provides more flexible handling options.
+- **Value Type Conversion**: If the target type does not match the actual type but can be meaningfully converted, SmartCodable automatically converts the value type to ensure correct data parsing.
+- **Default Value Filling**: When a property cannot be parsed, SmartCodable allows for the automatic filling of default values for that property type, such as setting a Boolean field to `false` by default, thereby avoiding the failure of the entire parsing process.
+- **Compatibility and Flexibility**: SmartCodable is fully compatible with the standard Codable protocol and offers additional customization options on this basis, adapting to more complex and varied data parsing needs.
+
+
+
+### Parsing Efficiency
+
+#### Comparative Analysis of Parsing Performance on Conventional Data Structures at Different Scales
+
+For this comparison, consider arrays with element counts set at different magnitudes: 100, 1,000, and 10,000 items. The parsing time for each of these scenarios will be statistically analyzed across five different parsing solutions.
 
 ```
 [
@@ -45,45 +53,42 @@
 
 ![解析效率](https://github.com/intsig171/SmartCodable/assets/87351449/abc31831-565b-47a5-817e-ecd002739f5e)
 
-理论上SmartCodable的解析效率是低于Codable的。如果不解析 **runways** ，就是如此。 
-SmartCodable对于枚举项的解析更加高效。所以在本次数据对比中，解析效率最高，甚至高于Codable。
+In theory, the parsing efficiency of SmartCodable is lower than that of Codable due to the additional error handling and data transformation features it provides. However, this difference might not be significant if **runways** are not parsed.
 
-Demo工程中提供了测试用例，请自行下载工程代码，访问 **Tests.swift** 文件。
+SmartCodable is more efficient in parsing enumeration items. Therefore, in this data comparison, the parsing efficiency of SmartCodable could be the highest, even surpassing that of standard Codable.
 
-#### 省市区大数据解析性能对比
+Specific performance data and test results can be found in the demo project. Please download the project code and access the **Tests.swift** file for more detailed information and actual performance test results.
+
+#### Comparison of big data analysis performance between provinces and cities
 
 ![省市区数据对比](https://github.com/intsig171/SmartCodable/assets/87351449/b70aa863-bf3b-436e-a64b-d0ca7c81d6a3)
 
 
 Demo工程中提供了测试用例，请自行下载工程代码，访问 **AreaTests.swift** 文件。
 
-
 #### HandyJSON vs Codable
 
-`Codable`和`HandyJSON`是两种常用的方法。
+`Codable` and `HandyJSON` are two commonly used methods.
 
-* **HandyJSON** 使用Swift的反射特性来实现数据的序列化和反序列化。**该机制是非法的，不安全的**， 更多的细节，可以访问 **[HandyJSON 的466号issue](https://github.com/alibaba/HandyJSON/issues/466)**.
+- **HandyJSON** utilizes Swift's reflection features to implement data serialization and deserialization. **This mechanism is unofficial and unsafe**, and more details can be found in **[HandyJSON issue #466](https://github.com/alibaba/HandyJSON/issues/466)**.
+- **Codable** is part of the Swift standard library, offering a declarative way to handle serialization and deserialization, making it more versatile.
 
-* **Codable** 是Swift标准库的一部分，提供了一种声明式的方式来进行序列化和反序列化，它更为通用。
+Comparing these two in terms of performance requires considering different data types and scenarios. Generally, `Codable` may have lower parsing latency than `HandyJSON` in the following cases:
 
-比较这两者在性能方面的差异需要考虑不同的数据类型和场景。一般而言，`Codable`在以下情况下可能具有比`HandyJSON`更低的解析耗时：
+1. **Standard JSON Structures:** When parsing standard and well-formatted JSON data, `Codable` often shows better performance. This is because `Codable` is part of the Swift standard library and benefits from compiler optimizations.
+2. **Complex Data Models:** For JSON with multiple layers of nesting and complex structures, `Codable` can be more effective than `HandyJSON`, especially in terms of type safety and compile-time checks.
+3. **High Type Safety Scenarios:** `Codable` offers stronger type safety, which helps catch errors at compile time. This type checking can bring performance benefits when dealing with data that strictly adheres to specific models.
+4. **Integration with Swift Features:** `Codable` integrates more closely with other Swift features (like type inference, generics, etc.), which might improve parsing efficiency in certain scenarios.
 
-1. **标准的JSON结构：** 当解析标准且格式良好的JSON数据时，`Codable`通常表现出较好的性能。这是因为`Codable`是Swift标准库的一部分，得到了编译器的优化。
-2. **复杂数据模型：** 对于包含多层嵌套和复杂数据结构的JSON，`Codable`可能比`HandyJSON`更有效，特别是在类型安全和编译时检查方面。
-3. **类型安全性高的场景：** `Codable`提供了更强的类型安全性，这有助于在编译时捕捉错误。在处理严格遵循特定模型的数据时，这种类型检查可能带来性能优势。
-4. **与Swift特性集成：** `Codable`与Swift的其他特性（如类型推断、泛型等）集成得更紧密，这可能在某些情况下提高解析效率。
-
-然而，这些差异并不是绝对的。`HandyJSON`在某些情况下（如处理动态或非结构化的JSON数据）可能表现得更好。性能也会受到JSON数据的大小和复杂性、应用的具体实现方式以及运行时环境等因素的影响。实际应用中，选择`Codable`或`HandyJSON`应基于具体的项目需求和上下文。
-
+However, these differences are not absolute. `HandyJSON` might perform better in some cases (like dealing with dynamic or unstructured JSON data). Performance can also be affected by the size and complexity of the JSON data, the specific implementation of the application, and the runtime environment. In practice, choosing between `Codable` and `HandyJSON` should be based on the specific project requirements and context.
 
 
 
+## How to Use SmartCodable?
 
-## 如何使用SmartCodable?
+Using **SmartCodable** is similar to using the standard **Codable**, but it provides you with additional error handling capabilities and more flexible parsing options. You simply need to make your data models conform to the **SmartCodable** protocol to start enjoying a more intelligent data parsing experience.
 
-使用**SmartCodable**与使用标准的**Codable**类似，但你会获得额外的错误处理能力和更加灵活的解析选项。只需将你的数据模型遵循**SmartCodable**协议，即可开始享受更加智能的数据解析体验。
-
-### cocopods集成
+### CocoaPods 
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
@@ -97,7 +102,7 @@ end
 
 
 
-### 字典的解码
+### Decoding of a dictionary
 
 ```
 import SmartCodable
@@ -112,7 +117,7 @@ guard let model = Model.deserialize(dict: dict) else { return }
 
 
 
-### 数组的解码
+### Decoding of an array
 
 ```
 import SmartCodable
@@ -128,7 +133,7 @@ guard let models = [Model].deserialize(array: arr) else { return }
 
 
 
-###  序列化与反序列化
+###  Serialization and Deserialization
 
 ```
 // 字典转模型
@@ -146,7 +151,7 @@ guard let xiaoMing2 = JsonToModel.deserialize(json: json1) else { return }
 
 
 
-### 解析完成的回调
+### Callback for Completed Parsing
 
 ```
 class Model: SmartDecodable {
@@ -169,7 +174,7 @@ class Model: SmartDecodable {
 
 
 
-### 枚举的解码
+### Decoding of an enum
 
 ```
 struct CompatibleEnum: SmartCodable {
@@ -187,17 +192,15 @@ struct CompatibleEnum: SmartCodable {
 }
 ```
 
-让你的枚举遵守 **SmartCaseDefaultable** 协议，如果枚举解析失败，将使用defaultCase作为默认值。
+Make your enum conform to the **SmartCaseDefaultable** protocol, so if enum parsing fails, the `defaultCase` will be used as a fallback value.
 
+### Decoding of Any
 
+Codable cannot decode the `Any` type, meaning that model properties cannot be of types like **Any**, **[Any]**, or **[String: Any]**. This creates certain complications for decoding.
 
-### 解码Any
+#### The official solution
 
-Codable是无法解码Any类型的，这样就意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型， 这对解码造成了一定的困扰。
-
-#### 官方的解决方案
-
-对非原生类型字段，给它再生成一个struct，用原生类型来表述属性就行。
+For non-native type fields, create another struct for it and use native types to represent the properties.
 
 ```
 struct Block: Codable {
@@ -209,7 +212,7 @@ struct Block: Codable {
 }
 ```
 
-改为： 
+to： 
 
 ```
 struct Block: Codable {
@@ -227,9 +230,9 @@ struct Transaction: Codable {
 }
 ```
 
-#### 使用泛型
+#### Use generics
 
-如果情况允许，可以使用泛型来代替。
+If possible, use generics instead.
 
 ```
 struct AboutAny<T: Codable>: SmartCodable {
@@ -243,9 +246,9 @@ guard let one = AboutAny<String>.deserialize(dict: dict) else { return }
 
 
 
-#### 使用 SmartAny
+#### Use SmartAny
 
-**SmartAny** 是**SmartCodable** 提供的解决Any的一个类型。可以直接像使用 **Any** 一样使用它。 
+**SmartAny** is a type provided by **SmartCodable** to address the `Any` issue. It can be used just like you would use `Any`.
 
 ```
 struct AnyModel: SmartCodable {
@@ -304,7 +307,7 @@ print(model.arr)
 ]
 ```
 
-可以看到打印的数据被SmartAny包裹住了，需要使用 `.peel` 去壳。
+You can see that the printed data is wrapped in SmartAny and needs to be shelled using `.peel `.
 
 ```
 print(model.name?.peel)
@@ -319,9 +322,9 @@ print(model.arr.peel)
 
 
 
-## 解析选项 - JSONDecoder.SmartOption
+## Parsing option - JSONDecoder.SmartOption
 
-JSONDecoder.SmartOption提供了三种解码选项，分别为：
+Three decoding options are provided, namely:
 
 ```
 public enum SmartOption {
@@ -365,9 +368,9 @@ guard let model1 = FeedOne.deserialize(json: json, options: [option]) else {  re
 
 
 
-## 字段映射
+## Field mapping
 
-如果您需要将这样的数据结构
+If you need to put such a data structure
 
 ```
 let dict: [String: Any] = [
@@ -381,7 +384,7 @@ let dict: [String: Any] = [
 ]
 ```
 
-解析到下面定义的Model中
+Parse into the Model defined below
 
 ```
 struct FeedTwo: SmartCodable {
@@ -399,9 +402,9 @@ struct Three: SmartCodable {
 }
 ```
 
-此时数据中字段名和Model中的属性名不一致，推荐您使用 **CodingKeys**。
+When the field names in the data and the property names in the Model are inconsistent, it is recommended to use **CodingKeys**.
 
-### 重写CodingKeys
+### Override CodingKeys
 
 ```
 struct FeedTwo: SmartCodable {
@@ -437,7 +440,7 @@ struct Three: SmartCodable {
 
 ### JSONDecoder.SmartDecodingKey
 
-如果您有更复杂的需求，比如 **多字段映射**，重写CodingKeys无法满足。您可以使用提供的SmartDecodingKey来解决问题。
+If you have more complex requirements, such as **multi-field mapping**, overriding CodingKeys may not suffice. You can use the provided SmartDecodingKey to solve the problem.
 
 ```
 public enum SmartDecodingKey {
@@ -455,13 +458,11 @@ public enum SmartDecodingKey {
 }
 ```
 
-* **useDefaultKeys：** 使用默认的解析映射方式。
+* **useDefaultKeys:** Use the default parsing mapping method.
 
-* **convertFromSnakeCase：** 蛇形命名转驼峰，覆盖本次解析。
-
-* **globalMap**：自定义解析映射，覆盖本次解析。
-
-* **exactMap**:  自定义解析映射，只影响提供路径下的解析映射。
+* **convertFromSnakeCase:** Convert snake case to camel case, overriding this parsing instance.
+* **globalMap:** Customize parsing mapping, overriding this parsing instance.
+* **exactMap:** Customize parsing mapping, affecting only the provided path's parsing mapping.
 
 ### globalMap
 
@@ -473,13 +474,13 @@ let keys = [
 guard let feedTwo = FeedTwo.deserialize(dict: dict, keyStrategy: .globalMap(keys)) else { return }
 ```
 
-将数据中的 **nick_name** 字段映射到 模型的**nickName** 属性上。
+Map the **nick_name** field in the data to the **nickName** property in the model.
 
-需要注意的是：这个映射关系也会作用到嵌套的数据结构上。
+It should be noted that this mapping relationship will also apply to nested data structures.
 
 ### exactMap
 
-如果你想避免上面的影响，可以使用 **精准映射** 。
+If you want to avoid the above influence, you can use **exact mapping**.
 
 ```
 let keys2 = [
@@ -490,23 +491,21 @@ let keys2 = [
 guard let feedThree = FeedTwo.deserialize(dict: dict, keyStrategy: .exactMap(keys2)) else { return }
 ```
 
-您需要理解的是： 如何填写 **path**？ 
+You need to understand: How to fill in the **path**?
 
-path表示您要映射的字段所在的层级。如果本身就在最顶层，path填写为 `path: ""`。
+The path represents the level where the field you want to map is located. If it's already at the top level, fill in the path as `path: ""`.
 
+## Compatibility of SmartCodable
 
+When using the system's **Codable** for decoding, encountering issues like **missing keys**, **null values**, or **incorrect value types** can throw exceptions and cause parsing failures. **SmartCodable** by default is designed to be compatible with these three types of parsing errors.
 
-## SmartCodable的兼容性
+### Missing Keys & Null Values
 
-在使用系统的 **Codable** 解码的时候，遇到 **无键**，**值为null**， **值类型错误** 抛出异常导致解析失败。**SmartCodable** 底层默认对这三种解析错误进行了兼容。 
+These two scenarios are referred to as **irredeemable data**, which cannot be salvaged.
 
-### 无键 & 值为null
+When encountering **missing keys & null values**, SmartCodable will provide a default value of the field's type for parsing and filling (if it's an optional type, it provides nil), allowing the parsing to proceed smoothly.
 
-这两种情况的数据，我称之为**摆烂数据**，这种数据无法拯救。
-
-解析到 **无键 & 值为null** 的时候，SmartCodable会提供该字段类型的默认值进行解析填充（如果是可选类型，提供nil）。使解析顺利进行。
-
-对这两份数据，解析到 **CompatibleTypes** 模型中
+For these two types of data, when parsing into the **CompatibleTypes** model.
 
 ```
 var json: String {
@@ -584,7 +583,7 @@ class CompatibleItem: SmartDecodable {
 }
 ```
 
-解析完成后，将使用该属性对应的数据类型的默认值进行填充。
+Once the parsing is complete, it is populated with the default value of the data type corresponding to the property.
 
 ```
 guard let person = CompatibleTypes.deserialize(json: json) else { return }
@@ -616,13 +615,13 @@ guard let person = CompatibleTypes.deserialize(json: json) else { return }
 
 
 
-### 值类型错误
+### Incorrect Value Type
 
-这种情况的数据，我称之为**可拯救的数据**。例如： Model中定义的Bool类型，数据中返回的是Int类型的0或1，String类型的True/true/Yes/No等。
+I refer to this kind of data as **salvageable data**. For instance, a Bool type defined in the Model, but the data returns an Int type of 0 or 1, or a String type like True/true/Yes/No, etc.
 
-解析到 **值类型错误** 的时候，SmartCodable会尝试对数据值进行类型转换，如果转换成功，将使用该值。如果转换失败，将使用该属性对应的数据类型的默认值进行填充。
+When encountering an **incorrect value type**, SmartCodable will attempt to convert the data value to the appropriate type. If the conversion is successful, that value will be used. If the conversion fails, the default value for the corresponding data type of the property will be used to fill in.
 
-#### Bool类型的转换
+#### Conversion for Bool Type
 
 ```
 /// 兼容Bool类型的值，Model中定义为Bool类型，但是数据中是String，Int的情况。
@@ -653,7 +652,7 @@ static func compatibleBoolType(value: Any) -> Bool? {
 
 
 
-#### String类型的转换
+#### The String type is converted
 
 ```
 /// 兼容String类型的值
@@ -677,23 +676,23 @@ static func compatibleStringType(value: Any) -> String? {
 
 
 
-#### 其他更多类型
+#### Other Types
 
-请查看 **TypePatcher.swift** 了解更多。
+Please refer to **TypePatcher.swift** for more information.
 
 
 
-## 调试日志
+## Debugging Logs
 
-SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 如果出现解析兼容的情况，修改Model中属性的定义，或要求数据方进行修正。为了更方便的定位问题，SmartCodable提供了便捷的解析错误日志。
+SmartCodable encourages solving parsing issues fundamentally, which means: not needing to rely on SmartCodable's compatibility logic. If a parsing compatibility issue arises, modify the property definitions in the Model or request the data provider to make corrections. To more conveniently pinpoint issues, SmartCodable provides convenient parsing error logs.
 
-调试日志，将提供辅助信息，帮助定位问题：
+The debugging logs will provide auxiliary information to help locate the problem:
 
-* 错误类型:  错误的类型信息
-* 模型名称：发生错误的模型名出
-* 数据节点：发生错误时，数据的解码路径。
-* 属性信息：发生错误的字段名。
-* 错误原因:  错误的具体原因。
+* 错误类型:  The incorrect type information.
+* 模型名称：The name of the model where the error occurred.
+* 数据节点：The decoding path of the data at the time of the error.
+* 属性信息：The name of the field where the error occurred.
+* 错误原因:   The specific reason for the error.
 
 ```
 ================ [SmartLog Error] ================
@@ -722,36 +721,29 @@ SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到Sm
 ==================================================
 ```
 
-你可以通过SmartConfig 调整日志的相关设置。
+You can adjust the log Settings using SmartConfig.
 
 
 
-##### 如何理解数据节点？
+##### How to understand data nodes?
 
 ![数据节点](https://github.com/intsig171/SmartCodable/assets/87351449/255b8244-d121-48f2-9f35-7d28c9286921)
 
+The data on the right is of an array type. Pay attention to the content highlighted in red, and check it from the outside to the inside.
 
-右侧的数据是数组类型。注意标红的内容，由外到里对照查看。
-
-* Index 0:  数组的下标为0的元素。
-
-* sampleFive： 下标为0的元素对应的是字典，即字典key为sampleFive对应的值（是一个数组）。
-
-* Index 1：数组的下标为1的元素.
-
-* sampleOne：字典中key为sampleOne对应的值。
-
-* string：字典中key为sring对应的值。
-
-  
+- Index 0: The element at index 0 of the array.
+- sampleFive: The element at index 0 corresponds to a dictionary, i.e., the value corresponding to the dictionary key 'sampleFive' (which is an array).
+- Index 1: The element at index 1 of the array.
+- sampleOne: The value corresponding to the key 'sampleOne' in the dictionary.
+- string: The value corresponding to the key 'string' in the dictionary.
 
 
 
 
 
-## 四. SamrtCodable的缺点
+## Disadvantages of SmartCodable
 
-### 1. 可选模型属性
+### 1. Optional Model Properties
 
 ```
 struct Feed: SmartCodable {
@@ -762,12 +754,12 @@ struct FeedOne: SmartCodable {
 }
 ```
 
-如有模型中的属性是嵌套的模型属性，遇到类型不匹配的情况，Codable无法解析抛出异常，这种情况的异常，SmartCodale将无法兼容。
+If a property in the model is a nested model property and encounters a type mismatch, Codable will fail to parse and throw an exception. In such cases, SmartCodable will not be able to handle the exception.
 
-此时您有两种选择：
+In this scenario, you have two options:
 
-* 将Feed中one这个属性设置为非可选的。 SmartCodable 将正常工作。
-* 将该属性使用 **@SmartOptional** 属性包装器修饰。
+- Set the `one` property in the Feed as non-optional. SmartCodable will then work normally.
+- Decorate the property with the **@SmartOptional** property wrapper.
 
 ```
 struct Feed: SmartCodable {
@@ -780,11 +772,11 @@ class FeedOne: SmartCodable {
 }
 ```
 
-**这是一个不得已的实现方案**:
+**This is a last resort implementation**:
 
-为了做解码失败的兼容，我们重写了 **KeyedEncodingContainer** 的  **decode** 和 **decodeIfPresent** 方法。
+In order to accommodate decoding failures, we have overridden the **decode** and **decodeIfPresent** methods in **KeyedEncodingContainer**.
 
-需要注意的是：decodeIfPresent底层的实现仍是使用的 **decode**。
+It is important to note that the underlying implementation of **decodeIfPresent** still uses **decode**.
 
 ```
 // 系统Codable源码实现
@@ -798,52 +790,44 @@ public extension KeyedDecodingContainerProtocol {
 }
 ```
 
-KeyedEncodingContainer容器是用结构体实现的。 重写了结构体的方法之后，没办法再调用父方法。
+The KeyedEncodingContainer container is implemented using a structure. After overriding the methods of the structure, it's not possible to call the parent methods.
 
-1. 这种情况下，如果再重写 `public func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T?` 方法，就会导致方法的循环调用。
-2. 使用SmartOptional属性包装器修饰可选属性，被修饰后会产生一个新的类型，对此类型解码就不会走decodeIfPresent，而是会走decode方法。
+1. In this case, if you override the `public func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T?` method, it would lead to recursive calls of the method.
+2. When decorating an optional property with the SmartOptional property wrapper, it generates a new type. Decoding this new type will not go through `decodeIfPresent`, but rather through the `decode` method.
 
-#### 使用SmartOptional的三个限制条件
+#### Three Limitations of Using SmartOptional
 
-* 必须遵循SmartDecodable协议
+- Must conform to the SmartDecodable protocol.
 
-* 必须是可选属性
+- Must be an optional property.
 
-  如果不是可选属性，就没必要使用SmartOptional。
+  If it's not an optional property, there's no need to use SmartOptional.
 
-* 必须是class类型
+- Must be a class type.
 
-  如果模型是Struct，是值类型。在执行 **didFinishMapping** 的时候，无法初始化被属性包装器修饰的属性，进而无法有效的执行解码完成之后的值修改。
+  If the model is a Struct, which is a value type, it's not possible to initialize properties decorated with property wrappers during the execution of **didFinishMapping**. Consequently, this makes it ineffective to modify values after decoding is complete.
 
-  
-
-**如果你有更好的方案，可以提issue。**
+**If you have a better solution, you can propose it in an issue.**
 
 
 
 
 
-### 2. 模型中设置的默认值无效
+### 2. Default Values Set in the Model Are Ineffective
 
-Codable在进行解码的时候，是无法知道这个属性的。所以在decode的时候，如果解析失败，使用默认值进行填充时，拿不到这个默认值。再处理解码兼容时，只能自己生成一个对应类型的默认值填充。
+When Codable performs decoding, it cannot be aware of a property's default value. Therefore, during decoding, if parsing fails and it attempts to fill in with a default value, it cannot access this default value. In handling decoding compatibility, one can only generate a default value for the corresponding type to fill in.
 
-**如果你有更好的方案，可以提issue。**
+**If you have a better solution, you can propose it in an issue.**
 
+## Further Learning
 
-
-
-
-## 进一步了解
-
-我们提供了详细的示例工程，可以下载工程代码查看。
-![示例](https://github.com/intsig171/SmartCodable/assets/87351449/876c5538-65a7-4b56-ac25-44800ad19bd3)
+We provide detailed example projects, which you can download and view the project code for more understanding.![示例](https://github.com/intsig171/SmartCodable/assets/87351449/876c5538-65a7-4b56-ac25-44800ad19bd3)
 
 
 
+### Learn More About Codable & SmartCodable
 
-### 了解更多关于Codable & SmartCodable
-
-这是Swift数据解析方案的系列文章：
+This is a series of articles on Swift data parsing solutions:
 
 [Swift数据解析(第一篇) - 技术选型](https://juejin.cn/post/7288517000581070902)
 
@@ -859,13 +843,12 @@ Codable在进行解码的时候，是无法知道这个属性的。所以在deco
 
 
 
-### 联系我们
+### Contact Us
 
 ![QQ](https://github.com/intsig171/SmartCodable/assets/87351449/a90560b0-7d4f-4529-a523-0d8d5b51ebe7)
 
 
 
+## Join Us
 
-## 加入我们
-
-**SmartCodable** 是一个开源项目，我们欢迎所有对提高数据解析性能和健壮性感兴趣的开发者加入。无论是使用反馈、功能建议还是代码贡献，你的参与都将极大地推动 **SmartCodable** 项目的发展。
+**SmartCodable** is an open-source project, and we welcome developers who are interested in improving data parsing performance and robustness to join us. Whether it's user feedback, feature suggestions, or code contributions, your participation will greatly advance the development of the **SmartCodable** project.
