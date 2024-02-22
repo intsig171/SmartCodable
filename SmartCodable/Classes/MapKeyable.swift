@@ -98,9 +98,8 @@ struct CodingKeysConverter {
 
     func callAsFunction(_ codingPath: [CodingKey]) -> CodingKey {
         guard let lastCoding = codingPath.last else { return SmartCodingKey.super }
-        let stringKeys = codingPath.map { $0.stringValue }
         for (key, value) in mapping {
-            if stringKeys.contains(key) {
+            if lastCoding.stringValue == key {
                 return SmartCodingKey(stringValue: value, intValue: nil)
             }
         }
