@@ -27,7 +27,7 @@ struct DefaultPatcher<T: Decodable> {
     }
 }
 
-//fileprivate protocol Defaultable {
+//protocol Defaultable {
 //    static var defaultValue: Self { get }
 //}
 //
