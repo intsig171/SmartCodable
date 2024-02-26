@@ -3,7 +3,7 @@ import SmartCodable
 import HandyJSON
 import ObjectMapper
 import HandyJSON
-import CleanJSON
+//import CleanJSON
 
 
 let count = 1000 // or 1, 10, 100, 1000, 10000

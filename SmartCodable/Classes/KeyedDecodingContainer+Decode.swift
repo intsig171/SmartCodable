@@ -1,176 +1,176 @@
+////
+////  KeyedDecodingContainer+Decode.swift
+////  SmartCodable
+////
+////  Created by qixin on 2023/9/4.
+////
 //
-//  KeyedDecodingContainer+Decode.swift
-//  SmartCodable
+//import Foundation
 //
-//  Created by qixin on 2023/9/4.
 //
-
-import Foundation
-
-
-// MARK: - KeyedDecodingContainer decode
-extension KeyedDecodingContainer {
-    public func decode<T>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> T where T : Decodable {
-        return try explicitDecode(type, forKey: key)
-    }
-    
-    public func decode(_ type: String.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> String {
-        return try explicitDecode(type, forKey: key)
-    }
-    
-    public func decode(_ type: Bool.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Bool {
-        return try explicitDecode(type, forKey: key)
-    }
-
-    public func decode(_ type: Double.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Double {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: Float.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Float {
-        return try explicitDecode(type, forKey: key)
-    }
-
-    public func decode(_ type: Int.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: Int8.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int8 {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: Int16.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int16 {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: Int32.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int32 {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: Int64.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int64 {
-        return try explicitDecode(type, forKey: key)
-    }
-    
-    public func decode(_ type: UInt.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt {
-        return try explicitDecode(type, forKey: key)
-    }
-
-    public func decode(_ type: UInt8.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt8 {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: UInt16.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt16 {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: UInt32.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt32 {
-        return try explicitDecode(type, forKey: key)
-    }
-
-
-    public func decode(_ type: UInt64.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt64 {
-        return try explicitDecode(type, forKey: key)
-    }
-}
-
-
-
-// MARK: - KeyedDecodingContainer decodeIfPresent
-extension KeyedDecodingContainer {
-    // 会导致循环引用
-//    public func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
-//        try smartDecode(type, forKey: key)
+//// MARK: - KeyedDecodingContainer decode
+//extension KeyedDecodingContainer {
+//    public func decode<T>(_ type: T.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> T where T : Decodable {
+//        return try explicitDecode(type, forKey: key)
 //    }
-    
-    
-    public func decodeIfPresent<T>(_ type: [String: T].Type, forKey key: K) throws -> [String: T]? where T : Decodable {
-        return optionalDecode(type, forKey: key)
-    }
-    
-    public func decodeIfPresent<T>(_ type: [T].Type, forKey key: K) throws -> [T]? where T : Decodable {
-        return optionalDecode(type, forKey: key)
-    }
-    
-    public func decodeIfPresent(_ type: Date.Type, forKey key: K) throws -> Date? {
-        return optionalDecode(type, forKey: key)
-    }
-    
-    public func decodeIfPresent(_ type: Data.Type, forKey key: K) throws -> Data? {
-        return optionalDecode(type, forKey: key)
-    }
-    
-    public func decodeIfPresent(_ type: CGFloat.Type, forKey key: K) throws -> CGFloat? {
-        return optionalDecode(type, forKey: key)
-    }
-    
-    public func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: Int8.Type, forKey key: K) throws -> Int8? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: Int16.Type, forKey key: K) throws -> Int16? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: Int32.Type, forKey key: K) throws -> Int32? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: Int64.Type, forKey key: K) throws -> Int64? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: UInt16.Type, forKey key: K) throws -> UInt16? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: UInt32.Type, forKey key: K) throws -> UInt32? {
-        return optionalDecode(type, forKey: key)
-    }
-
-    public func decodeIfPresent(_ type: UInt64.Type, forKey key: K) throws -> UInt64? {
-        return optionalDecode(type, forKey: key)
-    }
-}
-
-
-
+//
+//    public func decode(_ type: String.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> String {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//    public func decode(_ type: Bool.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Bool {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//    public func decode(_ type: Double.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Double {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: Float.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Float {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//    public func decode(_ type: Int.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: Int8.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int8 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: Int16.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int16 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: Int32.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int32 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: Int64.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> Int64 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//    public func decode(_ type: UInt.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//    public func decode(_ type: UInt8.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt8 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: UInt16.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt16 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: UInt32.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt32 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//
+//
+//    public func decode(_ type: UInt64.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> UInt64 {
+//        return try explicitDecode(type, forKey: key)
+//    }
+//}
+//
+//
+//
+//// MARK: - KeyedDecodingContainer decodeIfPresent
+//extension KeyedDecodingContainer {
+//    // 会导致循环引用
+////    public func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T : Decodable {
+////        try smartDecode(type, forKey: key)
+////    }
+//
+//
+//    public func decodeIfPresent<T>(_ type: [String: T].Type, forKey key: K) throws -> [String: T]? where T : Decodable {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent<T>(_ type: [T].Type, forKey key: K) throws -> [T]? where T : Decodable {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Date.Type, forKey key: K) throws -> Date? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Data.Type, forKey key: K) throws -> Data? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: CGFloat.Type, forKey key: K) throws -> CGFloat? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Int8.Type, forKey key: K) throws -> Int8? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Int16.Type, forKey key: K) throws -> Int16? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Int32.Type, forKey key: K) throws -> Int32? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: Int64.Type, forKey key: K) throws -> Int64? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: UInt16.Type, forKey key: K) throws -> UInt16? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: UInt32.Type, forKey key: K) throws -> UInt32? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//
+//    public func decodeIfPresent(_ type: UInt64.Type, forKey key: K) throws -> UInt64? {
+//        return optionalDecode(type, forKey: key)
+//    }
+//}
+//
+//
+//
 // MARK: - KeyedDecodingContainer 兼容
 extension KeyedDecodingContainer {
-    
+
     /// 可选解码的兼容处理
     /// 尝试兼容类型不匹配的情况。如果兼容失败，直接返回nil。
     func optionalDecode<T: Decodable>(_ type: T.Type, forKey key: Key) -> T? {
@@ -189,7 +189,7 @@ extension KeyedDecodingContainer {
             return nil
         }
     }
-    
+
     /// 完全的的兼容处理
     /// 尝试兼容类型不匹配的情况。如果兼容失败，尝试使用默认值填充，如果填充失败，抛出异常。
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
@@ -204,12 +204,12 @@ extension KeyedDecodingContainer {
                     return didFinishMapping(decodeValue: value)
                 }
             }
-            
+
             // 尝试进行默认值兼容
             if let value: T = DefaultPatcher.defalut()  {
                 return didFinishMapping(decodeValue: value)
             }
-            
+
             // 抛出异常，不做处理。理论上不会出现这样的情况。
             throw error
         } catch {  // 非 DecodingError 类型的错误，如：Foundation.JSONError
@@ -226,10 +226,10 @@ extension KeyedDecodingContainer {
 
 // MARK: - KeyedDecodingContainer support
 extension KeyedDecodingContainer {
-    
+
     // 底层的解码方法，核心功能是：拦截抛出的异常，抛给调用放处理。
     private func smartDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
-        
+
         /** 解码兼容逻辑
          * 1. try decodeNil(forKey: key)
          *   - 抛出异常说明无此字段
@@ -269,8 +269,8 @@ extension KeyedDecodingContainer {
             throw error
         }
     }
-    
-    
+
+
     /// 当完成decode的时候，接纳didFinishMapping方法内的改变。
     fileprivate func didFinishMapping<T: Decodable>(decodeValue: T) -> T {
         if var value = decodeValue as? SmartDecodable {
@@ -279,15 +279,15 @@ extension KeyedDecodingContainer {
                 return temp
             }
         }
-        
+
         // 如果使用了SmartOptional修饰，获取被修饰的属性。
         if var v = PropertyWrapperValue.getSmartObject(decodeValue: decodeValue) {
             v.didFinishMapping()
         }
-        
+
         return decodeValue
     }
-    
+
 
     /// 获取当前模型的名称
     fileprivate func getModelName() -> String? {

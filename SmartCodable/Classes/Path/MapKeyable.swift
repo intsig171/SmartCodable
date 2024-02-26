@@ -80,7 +80,7 @@ extension JSONDecoder {
 extension JSONDecoder.KeyDecodingStrategy {
     public static func mapper(_ container: [SmartGlobalMap]) -> JSONDecoder.KeyDecodingStrategy {
         let mapping = Dictionary(container.map { ($0.from, $0.to) }, uniquingKeysWith: { first, _ in first })
-        return .custom { CodingKeysConverter(mapping: mapping)($0) }
+        return .custom { SmartCodingKeysConverter(mapping: mapping)($0) }
     }
 
     public static func mapperExact(_ container: [SmartExactMap]) -> JSONDecoder.KeyDecodingStrategy {
@@ -93,7 +93,7 @@ extension JSONDecoder.KeyDecodingStrategy {
 }
 
 // 定义转换器
-struct CodingKeysConverter {
+struct SmartCodingKeysConverter {
     let mapping: [String: String]
 
     func callAsFunction(_ codingPath: [CodingKey]) -> CodingKey {

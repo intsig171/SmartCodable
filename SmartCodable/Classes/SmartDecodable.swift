@@ -163,7 +163,7 @@ extension Array where Element: SmartDecodable {
 extension Data {
 
     fileprivate func createDecoder<T>(type: T.Type, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> JSONDecoder {
-        let _decoder = JSONDecoder()
+        let _decoder = CleanJSONDecoder()
         
         var userInfo = _decoder.userInfo
 
