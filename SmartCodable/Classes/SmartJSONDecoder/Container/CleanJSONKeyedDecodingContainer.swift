@@ -392,6 +392,9 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     
     @inline(__always)
     public func decode(_ type: String.Type, forKey key: Key) throws -> String {
+        
+        print("在CleanJSONKeyedDecodingContainer中的decode方法中\ntype = \(type), key = \(key)\n")
+        
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
         }
@@ -566,6 +569,9 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     }
 }
 
+
+
+// ⚠️： decodeIfPresent相关的处理，使用系统的处理方式，不再单独处理。
 extension CleanJSONKeyedDecodingContainer {
     
     @inline(__always)

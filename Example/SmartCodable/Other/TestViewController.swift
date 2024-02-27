@@ -20,30 +20,25 @@ class TestViewController : BaseViewController {
 //        SmartConfig.debugMode = .none
         
         
-        let dict: [String : Any] = [
-            "nickName": "Mccc",
-            "subs": [[
-                "nickName": "Mccc",
-                "subSex": [
-                    "sexName": NSNull()
-                ]
-            ]]
-        ]
-        
-
-        
-        let options = [
-            SmartExactMap(path: "", from: "nickName", to: "name"),
-            SmartExactMap(path: "subs", from: "nickName", to: "age"),
-            SmartExactMap(path: "subs.subSex", from: "sexName", to: "sex")
-        ]
-//        let options1 = [
-//            SmartGlobalMap(from: "nickName", to: "age"),
-//            SmartGlobalMap(from: "sexName", to: "sex")
+//        let dict: [String : Any] = [
+//            "nickName": "Mccc",
+//            "subs": [[
+//                "nickName": "Mccc",
+//                "subSex": [
+//                    "sexName": NSNull()
+//                ]
+//            ]]
 //        ]
+  
+        
+        let json = """
+        {
+          "name": 123
+        }
+        """
         
 
-        if let model = MapModel.deserialize(dict: dict, keyStrategy: .exactMap(options)) {
+        if let model = MapModel.deserialize(json: json) {
             print(model)
         }
     }
@@ -52,17 +47,17 @@ class TestViewController : BaseViewController {
 struct MapModel :SmartCodable {
    
     public var name: String = ""
-    var subs: [MapSubModel] = []
+//    var subs: [MapSubModel] = []
     public init() {}
 }
-struct MapSubModel :SmartCodable {
-    public var age: String = ""
-    var subSex: MapSubSexModel = MapSubSexModel()
-    public init() {}
-}
-
-struct MapSubSexModel :SmartCodable {
-    public var sex: String = ""
-    public init() {}
-}
+//struct MapSubModel :SmartCodable {
+//    public var age: String = ""
+//    var subSex: MapSubSexModel = MapSubSexModel()
+//    public init() {}
+//}
+//
+//struct MapSubSexModel :SmartCodable {
+//    public var sex: String = ""
+//    public init() {}
+//}
 

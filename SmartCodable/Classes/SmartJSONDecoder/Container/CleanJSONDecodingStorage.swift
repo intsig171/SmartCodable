@@ -30,6 +30,7 @@ struct CleanJSONDecodingStorage {
         return self.containers.last!
     }
     
+    /// 存放的是json数据
     mutating func push(container: Any) {
         self.containers.append(container)
     }
