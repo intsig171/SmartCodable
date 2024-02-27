@@ -44,7 +44,7 @@ open class CleanJSONDecoder: JSONDecoder {
     open var keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy = .useDefaultValue
     
     /// The strategy to use for decoding when value not found. Defaults to `.custom`.
-    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .custom(Adapter())
+    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .useDefaultValue
     
     /// The strategy to use for decoding nested container.
     open var nestedContainerDecodingStrategy: NestedContainerDecodingStrategy = .init()

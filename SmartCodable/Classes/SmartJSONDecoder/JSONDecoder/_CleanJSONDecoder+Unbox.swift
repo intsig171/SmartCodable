@@ -432,7 +432,25 @@ extension _CleanJSONDecoder {
             defer { storage.popContainer() }
             
             print("_CleanJSONDecoder中的unbox_方法\ntype = \(type), value = \(value)\n")
-            return try type.init(from: self)
+            
+            
+            /**
+             在 Swift 的 Codable 框架中，Decodable 协议是用于解析数据的关键部分。当你看到这样的代码 decoded = try T(from: self)，它实际上是在进行数据解码的核心步骤。下面解释一下这段代码的含义和作用：
+
+             泛型和类型判断：首先，unbox<T : Decodable> 方法是一个泛型方法，用于处理任何遵守 Decodable 协议的类型 T。在这个方法内部，首先通过一系列的类型判断和处理，对于一些特定的类型（如 Date、Data、URL、Decimal 等），它们拥有特定的解码方式。
+
+             处理标准 Decodable 类型：在处理了这些特殊类型后，如果 T 不是这些特殊类型之一，那么代码就会执行到 decoded = try T(from: self) 这一行。这里的 T(from: self) 是 Decodable 协议的初始化方法，意味着对于那些遵循 Decodable 协议的类型，它们需要实现一个能够从一个解码器（decoder）初始化自身的方法。
+
+             解码过程：在 decoded = try T(from: self) 这一行，实际上是在调用这个类型的解码器，将数据（例如 JSON、XML 等）解析成为 Swift 中的对象。self 在这里指的是当前的解码器实例，它持有待解码的数据以及其他解码过程中需要的上下文信息。
+
+             错误处理：由于解码可能失败（比如数据格式不正确、缺失必要的字段等），所以这个调用是一个 try 表达式，表示这个过程可能会抛出错误。这也是为什么整个 unbox 方法是一个可以抛出错误的方法（通过 throws 关键字标示）。
+
+             总之，decoded = try T(from: self) 这行代码的目的是为了创建一个新的 T 类型的实例，这个实例是通过解码当前解码器 self 中的数据得到的。这是 Swift Codable 框架灵活处理各种类型数据解码的关键所在。
+             */
+            
+            let v = try type.init(from: self)
+            print(self.topContainer)
+            return v
         }
     }
 }

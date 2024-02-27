@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class _CleanJSONDecoder: CleanDecoder {
+final class _CleanJSONDecoder: SmartDecoder {
     
     /// The decoder's storage.
     var storage: CleanJSONDecodingStorage

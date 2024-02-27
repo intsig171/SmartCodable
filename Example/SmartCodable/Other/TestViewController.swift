@@ -46,7 +46,7 @@ class TestViewController : BaseViewController {
 
 struct MapModel :SmartCodable {
    
-    public var name: String = ""
+    public var name: String?
 //    var subs: [MapSubModel] = []
     public init() {}
 }

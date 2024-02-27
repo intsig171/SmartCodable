@@ -49,8 +49,8 @@ extension _CleanJSONDecoder {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Date.defaultValue(for: options.dateDecodingStrategy)
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -62,8 +62,8 @@ extension _CleanJSONDecoder {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Data.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -75,8 +75,8 @@ extension _CleanJSONDecoder {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Decimal.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
 }
@@ -95,10 +95,10 @@ extension _CleanJSONDecoder {
             throw DecodingError.Keyed.keyNotFound(key, codingPath: codingPath)
         case .useDefaultValue:
             return nil
-        case .custom(let adapter):
-            storage.push(container: value)
-            defer { storage.popContainer() }
-            return try adapter.adaptIfPresent(self)
+//        case .custom(let adapter):
+//            storage.push(container: value)
+//            defer { storage.popContainer() }
+//            return try adapter.adaptIfPresent(self)
         }
     }
     
@@ -114,10 +114,10 @@ extension _CleanJSONDecoder {
             throw DecodingError.Keyed.keyNotFound(key, codingPath: codingPath)
         case .useDefaultValue:
             return nil
-        case .custom(let adapter):
-            storage.push(container: value)
-            defer { storage.popContainer() }
-            return try adapter.adaptIfPresent(self)
+//        case .custom(let adapter):
+//            storage.push(container: value)
+//            defer { storage.popContainer() }
+//            return try adapter.adaptIfPresent(self)
         }
     }
     
@@ -133,10 +133,10 @@ extension _CleanJSONDecoder {
             throw DecodingError.Keyed.keyNotFound(key, codingPath: codingPath)
         case .useDefaultValue:
             return nil
-        case .custom(let adapter):
-            storage.push(container: value)
-            defer { storage.popContainer() }
-            return try adapter.adaptIfPresent(self)
+//        case .custom(let adapter):
+//            storage.push(container: value)
+//            defer { storage.popContainer() }
+//            return try adapter.adaptIfPresent(self)
         }
     }
     
@@ -152,10 +152,10 @@ extension _CleanJSONDecoder {
             throw DecodingError.Keyed.keyNotFound(key, codingPath: codingPath)
         case .useDefaultValue:
             return nil
-        case .custom(let adapter):
-            storage.push(container: value)
-            defer { storage.popContainer() }
-            return try adapter.adaptIfPresent(self)
+//        case .custom(let adapter):
+//            storage.push(container: value)
+//            defer { storage.popContainer() }
+//            return try adapter.adaptIfPresent(self)
         }
     }
 }

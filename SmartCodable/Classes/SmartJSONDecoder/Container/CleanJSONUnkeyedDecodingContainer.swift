@@ -90,9 +90,9 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         case .useDefaultValue:
             self.currentIndex += 1
             return Bool.defaultValue
-        case .custom(let adapter):
-            self.currentIndex += 1
-            return try adapter.adapt(decoder)
+//        case .custom(let adapter):
+//            self.currentIndex += 1
+//            return try adapter.adapt(decoder)
         }
     }
     
@@ -124,9 +124,9 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         case .useDefaultValue:
             self.currentIndex += 1
             return Int.defaultValue
-        case .custom(let adapter):
-            self.currentIndex += 1
-            return try adapter.adapt(decoder)
+//        case .custom(let adapter):
+//            self.currentIndex += 1
+//            return try adapter.adapt(decoder)
         }
     }
     
@@ -222,9 +222,9 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         case .useDefaultValue:
             self.currentIndex += 1
             return UInt.defaultValue
-        case .custom(let adapter):
-            self.currentIndex += 1
-            return try adapter.adapt(decoder)
+//        case .custom(let adapter):
+//            self.currentIndex += 1
+//            return try adapter.adapt(decoder)
         }
     }
     
@@ -320,9 +320,9 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         case .useDefaultValue:
             self.currentIndex += 1
             return Float.defaultValue
-        case .custom(let adapter):
-            self.currentIndex += 1
-            return try adapter.adapt(decoder)
+//        case .custom(let adapter):
+//            self.currentIndex += 1
+//            return try adapter.adapt(decoder)
         }
     }
     
@@ -354,9 +354,9 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         case .useDefaultValue:
             self.currentIndex += 1
             return Double.defaultValue
-        case .custom(let adapter):
-            self.currentIndex += 1
-            return try adapter.adapt(decoder)
+//        case .custom(let adapter):
+//            self.currentIndex += 1
+//            return try adapter.adapt(decoder)
         }
     }
     
@@ -388,9 +388,9 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         case .useDefaultValue:
             self.currentIndex += 1
             return String.defaultValue
-        case .custom(let adapter):
-            self.currentIndex += 1
-            return try adapter.adapt(decoder)
+//        case .custom(let adapter):
+//            self.currentIndex += 1
+//            return try adapter.adapt(decoder)
         }
     }
     

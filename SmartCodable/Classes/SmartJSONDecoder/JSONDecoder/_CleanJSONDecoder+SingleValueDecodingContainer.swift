@@ -23,8 +23,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Bool.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -36,8 +36,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Int.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -49,8 +49,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Int8.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -62,8 +62,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Int16.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -75,8 +75,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Int32.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -88,8 +88,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Int64.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -101,8 +101,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return UInt.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -114,8 +114,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return UInt8.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -127,8 +127,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return UInt16.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -140,8 +140,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return UInt32.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -153,8 +153,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return UInt64.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -166,8 +166,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Float.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -179,8 +179,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return Double.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -192,8 +192,8 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
         case .useDefaultValue:
             return String.defaultValue
-        case .custom(let adapter):
-            return try adapter.adapt(self)
+//        case .custom(let adapter):
+//            return try adapter.adapt(self)
         }
     }
     
@@ -211,7 +211,7 @@ extension _CleanJSONDecoder : SingleValueDecodingContainer {
         switch options.valueNotFoundDecodingStrategy {
         case .throw:
             throw DecodingError.Keyed.valueNotFound(type, codingPath: codingPath)
-        case .useDefaultValue, .custom:
+        case .useDefaultValue:
             return try decodeAsDefaultValue()
         }
     }
