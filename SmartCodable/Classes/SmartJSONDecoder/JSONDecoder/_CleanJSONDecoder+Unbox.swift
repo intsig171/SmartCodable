@@ -449,7 +449,6 @@ extension _CleanJSONDecoder {
              */
             
             let v = try type.init(from: self)
-            print(self.topContainer)
             return v
         }
     }

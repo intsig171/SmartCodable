@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension CleanJSONDecoder {
+extension SmartJSONDecoder {
     
     public enum KeyNotFoundDecodingStrategy {
         case `throw`
@@ -27,7 +27,7 @@ extension CleanJSONDecoder {
     }
 }
 
-extension CleanJSONDecoder {
+extension SmartJSONDecoder {
     
     public struct NestedContainerDecodingStrategy {
         

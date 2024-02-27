@@ -10,7 +10,7 @@ import Foundation
 
 
 
-open class CleanJSONDecoder: JSONDecoder {
+open class SmartJSONDecoder: JSONDecoder {
     
     /// Options set on the top-level encoder to pass down the decoding hierarchy.
     struct Options {
@@ -82,7 +82,7 @@ open class CleanJSONDecoder: JSONDecoder {
     }
 }
 
-private extension CleanJSONDecoder {
+private extension SmartJSONDecoder {
     
     func _decode<T : Decodable>(_ type: T.Type, from container: Any) throws -> T {
         let decoder = _CleanJSONDecoder(referencing: container, options: self.options)

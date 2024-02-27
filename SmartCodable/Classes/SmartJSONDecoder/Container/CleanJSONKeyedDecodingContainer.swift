@@ -35,7 +35,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             // Convert the snake case keys in the container to camel case.
             // If we hit a duplicate key after conversion, then we'll use the first one we saw. Effectively an undefined behavior with JSON dictionaries.
             self.container = Dictionary(container.map {
-                dict in (CleanJSONDecoder.KeyDecodingStrategy._convertFromSnakeCase(dict.key), dict.value)
+                dict in (SmartJSONDecoder.KeyDecodingStrategy._convertFromSnakeCase(dict.key), dict.value)
             }, uniquingKeysWith: { (first, _) in first })
         case .custom(let converter):
             self.container = Dictionary(container.map {
@@ -923,7 +923,7 @@ extension CleanJSONKeyedDecodingContainer {
     }
 }
 
-private extension CleanJSONDecoder.KeyDecodingStrategy {
+private extension SmartJSONDecoder.KeyDecodingStrategy {
     
     static func _convertFromSnakeCase(_ stringKey: String) -> String {
         guard !stringKey.isEmpty else { return stringKey }

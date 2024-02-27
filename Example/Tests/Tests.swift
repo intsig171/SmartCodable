@@ -66,7 +66,7 @@ class Tests: XCTestCase {
     
     func testCleanJSON() {
         measure {
-            let decoder = CleanJSONDecoder()
+            let decoder = SmartJSONDecoder()
             do {
                 let objects = try decoder.decode([Airport].self, from: data)
                 XCTAssertEqual(objects.count, count)
