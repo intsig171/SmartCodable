@@ -18,10 +18,6 @@ open class SmartJSONDecoder: JSONDecoder {
         let dataDecodingStrategy: DataDecodingStrategy
         let nonConformingFloatDecodingStrategy: NonConformingFloatDecodingStrategy
         let keyDecodingStrategy: KeyDecodingStrategy
-        let keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy
-        let valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy
-        let nestedContainerDecodingStrategy: NestedContainerDecodingStrategy
-        let jsonStringDecodingStrategy: JSONStringDecodingStrategy
         let userInfo: [CodingUserInfoKey : Any]
     }
     
@@ -32,25 +28,13 @@ open class SmartJSONDecoder: JSONDecoder {
             dataDecodingStrategy: dataDecodingStrategy,
             nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
             keyDecodingStrategy: keyDecodingStrategy,
-            keyNotFoundDecodingStrategy: keyNotFoundDecodingStrategy,
-            valueNotFoundDecodingStrategy: valueNotFoundDecodingStrategy,
-            nestedContainerDecodingStrategy: nestedContainerDecodingStrategy,
-            jsonStringDecodingStrategy: jsonStringDecodingStrategy,
             userInfo: userInfo
         )
     }
     
-    /// The strategy to use for decoding when key not found. Defaults to `.useDefaultValue`.
-    open var keyNotFoundDecodingStrategy: KeyNotFoundDecodingStrategy = .useDefaultValue
     
-    /// The strategy to use for decoding when value not found. Defaults to `.custom`.
-    open var valueNotFoundDecodingStrategy: ValueNotFoundDecodingStrategy = .useDefaultValue
     
-    /// The strategy to use for decoding nested container.
-    open var nestedContainerDecodingStrategy: NestedContainerDecodingStrategy = .init()
-    
-    /// The strategy to use for decoding JSON string.
-    open var jsonStringDecodingStrategy: JSONStringDecodingStrategy = .containsKeys([])
+
     
     // MARK: - Decoding Values
 
