@@ -37,38 +37,39 @@ final class _CleanJSONDecoder: SmartDecoder {
     // MARK: - Decoder Methods
     
     public func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> {
+        
+        
+        
         guard !(self.storage.topContainer is NSNull) else {
-            switch options.nestedContainerDecodingStrategy.valueNotFound {
-            case .throw:
-                throw DecodingError.Nested.valueNotFound(
-                    KeyedDecodingContainer<Key>.self,
-                    codingPath: codingPath,
-                    debugDescription: "Cannot get keyed decoding container -- found null value instead."
-                )
-            case .useEmptyContainer:
-                let container = CleanJSONKeyedDecodingContainer<Key>(
-                    referencing: self,
-                    wrapping: [:]
-                )
-                return KeyedDecodingContainer(container)
-            }
+            // ⚠️： 日志输出，进行了兼容了
+//            throw DecodingError.Nested.valueNotFound(
+//                KeyedDecodingContainer<Key>.self,
+//                codingPath: codingPath,
+//                debugDescription: "Cannot get keyed decoding container -- found null value instead."
+//            )
+            
+            
+            let container = CleanJSONKeyedDecodingContainer<Key>(
+                referencing: self,
+                wrapping: [:]
+            )
+            return KeyedDecodingContainer(container)
+
         }
         
         guard let topContainer = self.storage.topContainer as? [String : Any] else {
-            switch options.nestedContainerDecodingStrategy.typeMismatch {
-            case .throw:
-                throw DecodingError._typeMismatch(
-                    at: codingPath,
-                    expectation: [String : Any].self,
-                    reality: storage.topContainer
-                )
-            case .useEmptyContainer:
-                let container = CleanJSONKeyedDecodingContainer<Key>(
-                    referencing: self,
-                    wrapping: [:]
-                )
-                return KeyedDecodingContainer(container)
-            }
+            // ⚠️： 日志输出，进行了兼容了
+//            throw DecodingError._typeMismatch(
+//                at: codingPath,
+//                expectation: [String : Any].self,
+//                reality: storage.topContainer
+//            )
+            
+            let container = CleanJSONKeyedDecodingContainer<Key>(
+                referencing: self,
+                wrapping: [:]
+            )
+            return KeyedDecodingContainer(container)
         }
         
         let container = CleanJSONKeyedDecodingContainer<Key>(
@@ -79,30 +80,25 @@ final class _CleanJSONDecoder: SmartDecoder {
     }
     
     public func unkeyedContainer() throws -> UnkeyedDecodingContainer {
+        
         guard !(self.storage.topContainer is NSNull) else {
-            switch options.nestedContainerDecodingStrategy.valueNotFound {
-            case .throw:
-                throw DecodingError.Nested.valueNotFound(
-                    UnkeyedDecodingContainer.self,
-                    codingPath: codingPath,
-                    debugDescription: "Cannot get unkeyed decoding container -- found null value instead."
-                )
-            case .useEmptyContainer:
-                return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
-            }
+            // ⚠️： 日志输出，进行了兼容了
+//            throw DecodingError.Nested.valueNotFound(
+//                UnkeyedDecodingContainer.self,
+//                codingPath: codingPath,
+//                debugDescription: "Cannot get unkeyed decoding container -- found null value instead."
+//            )
+            return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
         }
         
         guard let topContainer = self.storage.topContainer as? [Any] else {
-            switch options.nestedContainerDecodingStrategy.typeMismatch {
-            case .throw:
-                throw DecodingError._typeMismatch(
-                    at: codingPath,
-                    expectation: [Any].self,
-                    reality: storage.topContainer
-                )
-            case .useEmptyContainer:
-                return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
-            }
+            // ⚠️： 日志输出，进行了兼容了
+//            throw DecodingError._typeMismatch(
+//                at: codingPath,
+//                expectation: [Any].self,
+//                reality: storage.topContainer
+//            )
+            return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
         }
         
         return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: topContainer)

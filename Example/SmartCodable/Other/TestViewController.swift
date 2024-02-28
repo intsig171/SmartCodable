@@ -10,12 +10,21 @@ import Foundation
 import UIKit
 import SmartCodable
 
-
+struct BaseFeed123: Codable {
+    var name: String = ""
+//    var age: Int = 0
+//    var sex: Bool = false
+}
 
 class TestViewController : BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        
+        
         
 //        SmartConfig.debugMode = .none
         
@@ -33,7 +42,7 @@ class TestViewController : BaseViewController {
         
         let json = """
         {
-          "name": 123
+          "subs": 123
         }
         """
         
@@ -50,14 +59,14 @@ struct MapModel :SmartCodable {
 //    var subs: [MapSubModel] = []
     public init() {}
 }
-//struct MapSubModel :SmartCodable {
-//    public var age: String = ""
-//    var subSex: MapSubSexModel = MapSubSexModel()
-//    public init() {}
-//}
-//
-//struct MapSubSexModel :SmartCodable {
-//    public var sex: String = ""
-//    public init() {}
-//}
+struct MapSubModel :SmartCodable {
+    public var age: String = ""
+    var subSex: MapSubSexModel = MapSubSexModel()
+    public init() {}
+}
+
+struct MapSubSexModel :SmartCodable {
+    public var sex: String = ""
+    public init() {}
+}
 

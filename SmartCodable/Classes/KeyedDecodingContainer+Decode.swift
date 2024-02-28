@@ -180,7 +180,7 @@ extension KeyedDecodingContainer {
         } catch let error as DecodingError {
             // 尝试进行类型兼容
             if let jsonValue = JSONValueFinder.findValue(decoder: try? superDecoder(), key: key) {
-                if let value: T = Patcher.tryPatch(.onlyTypeMismatch, decodeError: error, originValue: jsonValue) {
+                if let value: T = Patcher<T>.tryPatch(.onlyTypeMismatch, decodeError: error, originValue: jsonValue) {
                     return didFinishMapping(decodeValue: value)
                 }
             }
@@ -200,7 +200,7 @@ extension KeyedDecodingContainer {
         } catch let error as DecodingError {
             // 尝试进行类型兼容
             if let jsonValue = JSONValueFinder.findValue(decoder: try? superDecoder(), key: key) {
-                if let value: T = Patcher.tryPatch(.all, decodeError: error, originValue: jsonValue) {
+                if let value: T = Patcher<T>.tryPatch(.all, decodeError: error, originValue: jsonValue) {
                     return didFinishMapping(decodeValue: value)
                 }
             }
