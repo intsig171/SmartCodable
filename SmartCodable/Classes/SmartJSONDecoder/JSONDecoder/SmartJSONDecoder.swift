@@ -32,10 +32,6 @@ open class SmartJSONDecoder: JSONDecoder {
         )
     }
     
-    
-    
-
-    
     // MARK: - Decoding Values
 
     /// Decodes a top-level value of the given type from the given JSON representation.
@@ -66,18 +62,13 @@ open class SmartJSONDecoder: JSONDecoder {
     }
 }
 
-private extension SmartJSONDecoder {
+extension SmartJSONDecoder {
     
-    func _decode<T : Decodable>(_ type: T.Type, from container: Any) throws -> T {
+    private func _decode<T : Decodable>(_ type: T.Type, from container: Any) throws -> T {
         let decoder = _CleanJSONDecoder(referencing: container, options: self.options)
-        
-        print("CleanJSONDecoder中的_decode方法\ntype = \(type),container = \(container)")
-        
         guard let value = try decoder.unbox(container, as: type) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON."))
         }
-        print("CleanJSONDecoder中的_decode方法\ntvalue = \(value)")
-
         return value
     }
 }

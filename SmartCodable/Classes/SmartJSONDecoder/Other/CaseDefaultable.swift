@@ -30,11 +30,7 @@ public extension CaseDefaultable where Self: Decodable, Self.RawValue: Decodable
 
 private extension _CleanJSONDecoder {
     
-    func decodeCase<T>(_ type: T.Type) throws -> T
-        where T: CaseDefaultable,
-        T: Decodable,
-        T.RawValue: Decodable
-    {
+    func decodeCase<T>(_ type: T.Type) throws -> T where T: CaseDefaultable, T: Decodable, T.RawValue: Decodable {
         guard !decodeNil(), !storage.containers.isEmpty, storage.topContainer is T.RawValue else {
             return T.defaultCase
         }
