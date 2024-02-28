@@ -37,12 +37,20 @@ extension CleanJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        if let value = try self.decoder.unbox(entry, as: type) { return didFinishMapping( value ) }
         
-        if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) { return didFinishMapping( value ) }
+        var decoded: T?
         
-        /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
-        throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Expected \(type) value but found null instead."))
+        if let value = try? self.decoder.unbox(entry, as: type) {
+            decoded = value
+        } else if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) {
+            decoded = value
+        }
+        
+        guard let decoded = decoded else {
+            /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Expected \(type) value but found null instead."))
+        }
+        return decoded
     }
 }
 

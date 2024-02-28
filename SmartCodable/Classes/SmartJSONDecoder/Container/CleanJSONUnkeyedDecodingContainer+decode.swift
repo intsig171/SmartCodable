@@ -27,7 +27,6 @@ extension CleanJSONUnkeyedDecodingContainer {
     
     
     fileprivate mutating func explicitDecode<T: Decodable>(_ type: T.Type) throws -> T {
-        
         guard !self.isAtEnd else { return try decodeIfAtEnd(type: type) }
         
         self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
@@ -36,16 +35,18 @@ extension CleanJSONUnkeyedDecodingContainer {
         let entry = self.container[self.currentIndex]
         
         var decoded: T?
-        if let value = try self.decoder.unbox(entry, as: type) { decoded = value }
-                
-        if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) { decoded = value }
-        
+        if let value = try? self.decoder.unbox(entry, as: type) {
+            decoded = value
+        } else if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) {
+            decoded = value
+        }
         
         guard let decoded = decoded else {
             /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
             throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
         }
         self.currentIndex += 1
+
         return didFinishMapping(decoded)
     }
     

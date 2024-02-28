@@ -413,7 +413,6 @@ extension _CleanJSONDecoder {
     
     func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? {
         
-        
         // 判断type的类型，针对不同的类型，调用不同的方法。
         
         let decoded: T
@@ -444,7 +443,6 @@ extension _CleanJSONDecoder {
             
             self.storage.popContainer()
         }
-        
         return decoded
     }
 }
