@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         
         dataArray = [
             other,
+            smart_test,
             smart_introduce,
             smart_customDecoding,
             smart_compatible,
@@ -50,6 +51,17 @@ class ViewController: UIViewController {
 
 
 extension ViewController {
+    
+    var smart_test: [String: Any] {
+        [
+            "title": "Smart的测试用例",
+            "list": [
+                ["name": "简单的字典", "vc": "Test_1_1ViewController"],
+                ["name": "简单的数组", "vc": "Test_1_2ViewController"],
+            ]
+        ]
+    }
+    
     
     var smart_introduce: [String: Any] {
         [

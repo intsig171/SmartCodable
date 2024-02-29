@@ -1,0 +1,203 @@
+//
+//  CleanJSONKeyedDecodingContainer+decode+decodeIfPresent.swift
+//  SmartCodable
+//
+//  Created by qixin on 2024/2/29.
+//
+
+import Foundation
+
+
+
+
+
+
+extension CleanJSONKeyedDecodingContainer {
+    
+    
+    fileprivate func optionalDecode<T: Decodable>(_ type: T.Type, entry: Any) -> T? {
+        if let value = Patcher<T>.convertToType(from: entry) { return value }
+        return nil
+    }
+
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Bool.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Int.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Int8.Type, forKey key: K) throws -> Int8? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Int8.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Int16.Type, forKey key: K) throws -> Int16? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Int16.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Int32.Type, forKey key: K) throws -> Int32? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Int32.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Int64.Type, forKey key: K) throws -> Int64? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Int64.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: UInt.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: UInt8.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: UInt16.Type, forKey key: K) throws -> UInt16? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: UInt16.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: UInt32.Type, forKey key: K) throws -> UInt32? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: UInt32.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: UInt64.Type, forKey key: K) throws -> UInt64? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: UInt64.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Float.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: Double.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: String.self) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+    
+    @inline(__always)
+    func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T: Decodable {
+        guard contains(key), let entry = container[key.stringValue] else { return nil }
+        
+        decoder.codingPath.append(key)
+        defer { decoder.codingPath.removeLast() }
+        
+        if let value = try? decoder.unbox(entry, as: type) { return value }
+        
+        return optionalDecode(type, entry: entry)
+    }
+}

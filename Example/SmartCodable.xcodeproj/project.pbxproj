@@ -76,6 +76,7 @@
 		9967604C2B3EC930006C83EC /* CodableMatchingStructureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */; };
 		9967604D2B3EC930006C83EC /* CodableDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */; };
 		9967604E2B3EC930006C83EC /* CodableBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */; };
+		99A494E72B90293E00393193 /* Test_1_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A494E62B90293E00393193 /* Test_1_1ViewController.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
@@ -162,6 +163,7 @@
 		996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableMatchingStructureViewController.swift; sourceTree = "<group>"; };
 		996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableBaseViewController.swift; sourceTree = "<group>"; };
+		99A494E62B90293E00393193 /* Test_1_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_1_1ViewController.swift; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		99AE7D8D2B3EC02E00B474E5 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 		607FACD21AFB9204008FA782 /* Example for SmartCodable */ = {
 			isa = PBXGroup;
 			children = (
+				99A494E42B9028D900393193 /* Test */,
 				996760142B3EC930006C83EC /* CodableSmaple */,
 				99675FD72B3EC930006C83EC /* Other */,
 				99675FDF2B3EC930006C83EC /* Smart */,
@@ -477,6 +480,22 @@
 			path = Complex;
 			sourceTree = "<group>";
 		};
+		99A494E42B9028D900393193 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				99A494E52B9028EB00393193 /* 1.简单的数据 */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		99A494E52B9028EB00393193 /* 1.简单的数据 */ = {
+			isa = PBXGroup;
+			children = (
+				99A494E62B90293E00393193 /* Test_1_1ViewController.swift */,
+			);
+			path = "1.简单的数据";
+			sourceTree = "<group>";
+		};
 		99AE7D892B3EC02E00B474E5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -656,6 +675,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BTPrint/BTPrint.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SmartCodable/SmartCodable.framework",
@@ -663,6 +683,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BTPrint.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmartCodable.framework",
@@ -713,6 +734,7 @@
 				996760472B3EC930006C83EC /* FloatDecodingStrategyViewController.swift in Sources */,
 				9967603B2B3EC930006C83EC /* ComplexDataStructureCell.swift in Sources */,
 				9967603D2B3EC930006C83EC /* ComplexDataStructureViewController.swift in Sources */,
+				99A494E72B90293E00393193 /* Test_1_1ViewController.swift in Sources */,
 				996760482B3EC930006C83EC /* DateDecodingStrategyViewController.swift in Sources */,
 				9967604B2B3EC930006C83EC /* CodableComplex_oneViewController.swift in Sources */,
 				996760212B3EC930006C83EC /* ArraySafe.swift in Sources */,

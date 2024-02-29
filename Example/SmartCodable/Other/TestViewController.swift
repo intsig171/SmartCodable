@@ -29,34 +29,40 @@ class TestViewController : BaseViewController {
 //        SmartConfig.debugMode = .none
         
         
-//        let dict: [String : Any] = [
-//            "nickName": "Mccc",
-//            "subs": [[
-//                "nickName": "Mccc",
-//                "subSex": [
-//                    "sexName": NSNull()
-//                ]
-//            ]]
-//        ]
-  
-        
-        let json = """
-        {
-          "subs": 123
-        }
-        """
-        
+        let dict: [String : Any] = [
+            "name": "Mccc",
+            "subs": [
+                [
+                    "nickName": "Mccc",
+                    "subSex": [
+                        "sexName": NSNull()
+                    ]
+                ],
+                [
+                    "nickName": "Mccc",
+                    "age": "123",
+                    "subSex": [
+                        "sex": "男"
+                    ]
+                ]
+            ]
+        ]
 
-        if let model = MapModel.deserialize(json: json) {
+        if let model = MapModel.deserialize(dict: dict) {
             print(model)
         }
+        
+//        let arr = dict["subs"] as? [Any] ?? []
+//        if let models = [MapSubModel].deserialize(array: arr) as? [MapSubModel] {
+//            print(models)
+//        }
     }
 }
 
 struct MapModel :SmartCodable {
    
     public var name: String?
-//    var subs: [MapSubModel] = []
+    var subs: [MapSubModel]?
     public init() {}
 }
 struct MapSubModel :SmartCodable {
