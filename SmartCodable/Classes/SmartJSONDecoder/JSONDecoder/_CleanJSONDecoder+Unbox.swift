@@ -312,15 +312,11 @@ extension _CleanJSONDecoder {
         
         switch self.options.dateDecodingStrategy {
         case .deferredToDate:
-            
-            /**
-             因为.deferredToDate解码策略会延迟解码日期，它会将value推入名为self.storage的栈中，然后调用Date(from: self)来解码日期。
-             解码完成后，它使用self.storage.popContainer()从栈中弹出容器。
-             */
             self.storage.push(container: value)
-            let date = try Date(from: self)
-            self.storage.popContainer()
-            return date
+            defer { self.storage.popContainer() }
+            guard let double = try self.unbox(value, as: Double.self) else { return nil }
+            
+            return Date(timeIntervalSinceReferenceDate: double)
             
         case .secondsSince1970:
             
