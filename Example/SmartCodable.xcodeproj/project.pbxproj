@@ -37,12 +37,12 @@
 		996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */; };
 		996760262B3EC930006C83EC /* CompatibleClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE72B3EC930006C83EC /* CompatibleClassViewController.swift */; };
 		996760272B3EC930006C83EC /* CompatibleFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE82B3EC930006C83EC /* CompatibleFloatViewController.swift */; };
-		996760282B3EC930006C83EC /* CompatibleNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE92B3EC930006C83EC /* CompatibleNullViewController.swift */; };
+		996760282B3EC930006C83EC /* CaseOne_NullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE92B3EC930006C83EC /* CaseOne_NullViewController.swift */; };
 		996760292B3EC930006C83EC /* CompatibleStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEA2B3EC930006C83EC /* CompatibleStringViewController.swift */; };
 		9967602A2B3EC930006C83EC /* CompatibleIntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEB2B3EC930006C83EC /* CompatibleIntViewController.swift */; };
 		9967602B2B3EC930006C83EC /* CompatibleEnumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEC2B3EC930006C83EC /* CompatibleEnumViewController.swift */; };
-		9967602C2B3EC930006C83EC /* CompatibleKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FED2B3EC930006C83EC /* CompatibleKeylessViewController.swift */; };
-		9967602D2B3EC930006C83EC /* CompatibleTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEE2B3EC930006C83EC /* CompatibleTypeMismatchViewController.swift */; };
+		9967602C2B3EC930006C83EC /* CaseOne_KeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FED2B3EC930006C83EC /* CaseOne_KeylessViewController.swift */; };
+		9967602D2B3EC930006C83EC /* CaseOne_TypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEE2B3EC930006C83EC /* CaseOne_TypeMismatchViewController.swift */; };
 		9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF02B3EC930006C83EC /* CompatibleSampleOneViewController.swift */; };
 		9967602F2B3EC930006C83EC /* CompatibleSampleSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF12B3EC930006C83EC /* CompatibleSampleSixViewController.swift */; };
 		996760302B3EC930006C83EC /* CompatibleSampleThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF22B3EC930006C83EC /* CompatibleSampleThreeViewController.swift */; };
@@ -76,11 +76,11 @@
 		9967604C2B3EC930006C83EC /* CodableMatchingStructureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */; };
 		9967604D2B3EC930006C83EC /* CodableDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */; };
 		9967604E2B3EC930006C83EC /* CodableBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */; };
-		99A494E72B90293E00393193 /* Test_1_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A494E62B90293E00393193 /* Test_1_1ViewController.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
 		99AE7D952B3EC02E00B474E5 /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
+		99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA282B906A640070DED0 /* TestCaseViewController.swift */; };
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,12 +124,12 @@
 		99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCompatibilityViewController.swift; sourceTree = "<group>"; };
 		99675FE72B3EC930006C83EC /* CompatibleClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleClassViewController.swift; sourceTree = "<group>"; };
 		99675FE82B3EC930006C83EC /* CompatibleFloatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleFloatViewController.swift; sourceTree = "<group>"; };
-		99675FE92B3EC930006C83EC /* CompatibleNullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleNullViewController.swift; sourceTree = "<group>"; };
+		99675FE92B3EC930006C83EC /* CaseOne_NullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_NullViewController.swift; sourceTree = "<group>"; };
 		99675FEA2B3EC930006C83EC /* CompatibleStringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleStringViewController.swift; sourceTree = "<group>"; };
 		99675FEB2B3EC930006C83EC /* CompatibleIntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleIntViewController.swift; sourceTree = "<group>"; };
 		99675FEC2B3EC930006C83EC /* CompatibleEnumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleEnumViewController.swift; sourceTree = "<group>"; };
-		99675FED2B3EC930006C83EC /* CompatibleKeylessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleKeylessViewController.swift; sourceTree = "<group>"; };
-		99675FEE2B3EC930006C83EC /* CompatibleTypeMismatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleTypeMismatchViewController.swift; sourceTree = "<group>"; };
+		99675FED2B3EC930006C83EC /* CaseOne_KeylessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_KeylessViewController.swift; sourceTree = "<group>"; };
+		99675FEE2B3EC930006C83EC /* CaseOne_TypeMismatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_TypeMismatchViewController.swift; sourceTree = "<group>"; };
 		99675FF02B3EC930006C83EC /* CompatibleSampleOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleSampleOneViewController.swift; sourceTree = "<group>"; };
 		99675FF12B3EC930006C83EC /* CompatibleSampleSixViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleSampleSixViewController.swift; sourceTree = "<group>"; };
 		99675FF22B3EC930006C83EC /* CompatibleSampleThreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleSampleThreeViewController.swift; sourceTree = "<group>"; };
@@ -163,12 +163,12 @@
 		996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableMatchingStructureViewController.swift; sourceTree = "<group>"; };
 		996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableBaseViewController.swift; sourceTree = "<group>"; };
-		99A494E62B90293E00393193 /* Test_1_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_1_1ViewController.swift; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		99AE7D8D2B3EC02E00B474E5 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
 		99AE7D8E2B3EC02E00B474E5 /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
 		99AE7D8F2B3EC02E00B474E5 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
+		99CABA282B906A640070DED0 /* TestCaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCaseViewController.swift; sourceTree = "<group>"; };
 		AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 		607FACD21AFB9204008FA782 /* Example for SmartCodable */ = {
 			isa = PBXGroup;
 			children = (
-				99A494E42B9028D900393193 /* Test */,
+				99A494E42B9028D900393193 /* 测试用例 */,
 				996760142B3EC930006C83EC /* CodableSmaple */,
 				99675FD72B3EC930006C83EC /* Other */,
 				99675FDF2B3EC930006C83EC /* Smart */,
@@ -363,12 +363,9 @@
 				99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */,
 				99675FE72B3EC930006C83EC /* CompatibleClassViewController.swift */,
 				99675FE82B3EC930006C83EC /* CompatibleFloatViewController.swift */,
-				99675FE92B3EC930006C83EC /* CompatibleNullViewController.swift */,
 				99675FEA2B3EC930006C83EC /* CompatibleStringViewController.swift */,
 				99675FEB2B3EC930006C83EC /* CompatibleIntViewController.swift */,
 				99675FEC2B3EC930006C83EC /* CompatibleEnumViewController.swift */,
-				99675FED2B3EC930006C83EC /* CompatibleKeylessViewController.swift */,
-				99675FEE2B3EC930006C83EC /* CompatibleTypeMismatchViewController.swift */,
 			);
 			path = "验证类型";
 			sourceTree = "<group>";
@@ -480,20 +477,23 @@
 			path = Complex;
 			sourceTree = "<group>";
 		};
-		99A494E42B9028D900393193 /* Test */ = {
+		99A494E42B9028D900393193 /* 测试用例 */ = {
 			isa = PBXGroup;
 			children = (
-				99A494E52B9028EB00393193 /* 1.简单的数据 */,
+				99CABA282B906A640070DED0 /* TestCaseViewController.swift */,
+				99A494E52B9028EB00393193 /* 基础测试 */,
 			);
-			path = Test;
+			path = "测试用例";
 			sourceTree = "<group>";
 		};
-		99A494E52B9028EB00393193 /* 1.简单的数据 */ = {
+		99A494E52B9028EB00393193 /* 基础测试 */ = {
 			isa = PBXGroup;
 			children = (
-				99A494E62B90293E00393193 /* Test_1_1ViewController.swift */,
+				99675FED2B3EC930006C83EC /* CaseOne_KeylessViewController.swift */,
+				99675FE92B3EC930006C83EC /* CaseOne_NullViewController.swift */,
+				99675FEE2B3EC930006C83EC /* CaseOne_TypeMismatchViewController.swift */,
 			);
-			path = "1.简单的数据";
+			path = "基础测试";
 			sourceTree = "<group>";
 		};
 		99AE7D892B3EC02E00B474E5 /* Resource */ = {
@@ -728,13 +728,12 @@
 				996760262B3EC930006C83EC /* CompatibleClassViewController.swift in Sources */,
 				9967604E2B3EC930006C83EC /* CodableBaseViewController.swift in Sources */,
 				9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */,
-				9967602C2B3EC930006C83EC /* CompatibleKeylessViewController.swift in Sources */,
+				9967602C2B3EC930006C83EC /* CaseOne_KeylessViewController.swift in Sources */,
 				996760272B3EC930006C83EC /* CompatibleFloatViewController.swift in Sources */,
 				996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */,
 				996760472B3EC930006C83EC /* FloatDecodingStrategyViewController.swift in Sources */,
 				9967603B2B3EC930006C83EC /* ComplexDataStructureCell.swift in Sources */,
 				9967603D2B3EC930006C83EC /* ComplexDataStructureViewController.swift in Sources */,
-				99A494E72B90293E00393193 /* Test_1_1ViewController.swift in Sources */,
 				996760482B3EC930006C83EC /* DateDecodingStrategyViewController.swift in Sources */,
 				9967604B2B3EC930006C83EC /* CodableComplex_oneViewController.swift in Sources */,
 				996760212B3EC930006C83EC /* ArraySafe.swift in Sources */,
@@ -756,11 +755,12 @@
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
 				996760232B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
+				99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				9967603A2B3EC930006C83EC /* DictionaryAndModelViewController.swift in Sources */,
 				9967604C2B3EC930006C83EC /* CodableMatchingStructureViewController.swift in Sources */,
-				9967602D2B3EC930006C83EC /* CompatibleTypeMismatchViewController.swift in Sources */,
-				996760282B3EC930006C83EC /* CompatibleNullViewController.swift in Sources */,
+				9967602D2B3EC930006C83EC /* CaseOne_TypeMismatchViewController.swift in Sources */,
+				996760282B3EC930006C83EC /* CaseOne_NullViewController.swift in Sources */,
 				996760322B3EC930006C83EC /* CompatibleSampleFiveViewController.swift in Sources */,
 				9967602F2B3EC930006C83EC /* CompatibleSampleSixViewController.swift in Sources */,
 				996760342B3EC930006C83EC /* SmartAnyViewController.swift in Sources */,

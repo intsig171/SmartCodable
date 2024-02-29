@@ -10,6 +10,10 @@ import Foundation
 
 
 
+/** 说明： 为什么不能用optionalDecode方法实现？
+ * 因为：decoder.unbox(entry, as: Bool.self)必须明确制定类型，如果Bool.self, Int.self.
+ * 原因：被optionalDecode包裹之后，type类型就回变成decodable（类型擦除）。被擦出之后，调用的都是func unbox<T : Decodable>(_ value: Any, as type: T.Type) 方法，而不是对应的方法。
+ */
 
 
 extension CleanJSONKeyedDecodingContainer {

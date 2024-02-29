@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "SmartCodable"
+        
         SmartConfig.debugMode = .error
         SmartConfig.openErrorAssert = false
         
@@ -56,8 +58,7 @@ extension ViewController {
         [
             "title": "Smart的测试用例",
             "list": [
-                ["name": "简单的字典", "vc": "Test_1_1ViewController"],
-                ["name": "简单的数组", "vc": "Test_1_2ViewController"],
+                ["name": "丰富的测试用例 >>>", "vc": "TestCaseViewController"],
             ]
         ]
     }
@@ -244,7 +245,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let vc = createViewControllerObject(form: vcStr) else { return }
         vc.contentText = name
         
-        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+//        present(vc, animated: true)
     }
     
 }

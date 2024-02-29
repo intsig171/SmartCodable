@@ -1,5 +1,5 @@
 //
-//  CompatibleKeylessViewController.swift
+//  CompatibleNullViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -9,16 +9,14 @@
 import UIKit
 import SmartCodable
 
-
-/// 键缺失的兼容，使用默认值填充
-class CompatibleKeylessViewController: BaseCompatibilityViewController {
+/// null值的兼容，使用默认值填充。
+class CaseOne_NullViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
 
-        let json = keylssJson
+        let json = nullJson
         
         explicitType(json: json)
         
@@ -31,7 +29,7 @@ class CompatibleKeylessViewController: BaseCompatibilityViewController {
 
 
 
-extension CompatibleKeylessViewController {
+extension CaseOne_NullViewController {
     /// 明确类型
     func explicitType(json: String) {
         guard let person = CompatibleTypes.deserialize(json: json) else { return }
@@ -92,9 +90,7 @@ extension CompatibleKeylessViewController {
 
 
 
-
-
-extension CompatibleKeylessViewController {
+extension CaseOne_NullViewController {
     /// 可选类型
     func optionalType(json: String) {
         guard let person = OptionalCompatibleTypes.deserialize(json: json) else { return }
@@ -117,6 +113,8 @@ extension CompatibleKeylessViewController {
         printValueType(key: "o", value: person.o)
         printValueType(key: "p", value: person.p)
         printValueType(key: "q", value: person.q)
+
+
 
         printValueType(key: "v", value: person.v)
         printValueType(key: "w", value: person.w)
@@ -150,5 +148,3 @@ extension CompatibleKeylessViewController {
          */
     }
 }
-
-

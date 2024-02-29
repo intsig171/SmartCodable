@@ -1,5 +1,5 @@
 //
-//  CompatibleNullViewController.swift
+//  CaseOne_TypeMismatchViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -9,14 +9,15 @@
 import UIKit
 import SmartCodable
 
-/// null值的兼容，使用默认值填充。
-class CompatibleNullViewController: BaseCompatibilityViewController {
+
+/// 类型错误的兼容， 尝试值对值的类型转换，如果失败，使用默认值填充。
+class CaseOne_TypeMismatchViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        let json = nullJson
+        let json = typeMissmatchJson
         
         explicitType(json: json)
         
@@ -29,7 +30,7 @@ class CompatibleNullViewController: BaseCompatibilityViewController {
 
 
 
-extension CompatibleNullViewController {
+extension CaseOne_TypeMismatchViewController {
     /// 明确类型
     func explicitType(json: String) {
         guard let person = CompatibleTypes.deserialize(json: json) else { return }
@@ -87,10 +88,7 @@ extension CompatibleNullViewController {
     }
 }
 
-
-
-
-extension CompatibleNullViewController {
+extension CaseOne_TypeMismatchViewController {
     /// 可选类型
     func optionalType(json: String) {
         guard let person = OptionalCompatibleTypes.deserialize(json: json) else { return }
@@ -148,3 +146,4 @@ extension CompatibleNullViewController {
          */
     }
 }
+
