@@ -41,6 +41,8 @@ extension _CleanJSONDecoder {
     }
     
     func unbox(_ value: Any, as type: Int.Type) throws -> Int? {
+      
+        
         guard !(value is NSNull) else { return nil }
         
         
@@ -66,6 +68,7 @@ extension _CleanJSONDecoder {
     }
     
     func unbox(_ value: Any, as type: Int8.Type) throws -> Int8? {
+      
         guard !(value is NSNull) else { return nil }
         
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
@@ -248,6 +251,17 @@ extension _CleanJSONDecoder {
         throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
     
+    
+    /// CGFloat的处理当Double的处理
+    func unbox(_ value: Any, as type: CGFloat.Type) throws -> CGFloat? {
+        if let double = try unbox(value, as: Double.self) {
+            return CGFloat(double)
+        }
+        return nil
+    }
+    
+    
+    
     func unbox(_ value: Any, as type: Double.Type) throws -> Double? {
         guard !(value is NSNull) else { return nil }
         
@@ -393,35 +407,17 @@ extension _CleanJSONDecoder {
         }
     }
     
-    func unbox<T>(_ value: Any, as type: _JSONStringDictionaryDecodableMarker.Type) throws -> T? {
-        guard !(value is NSNull) else { return nil }
-        
-        guard let dict = value as? NSDictionary else { return nil }
-        
-        var result = [String: Any]()
-        let elementType = type.elementType
-        for (key, value) in dict {
-            let key = key as! String
-            self.codingPath.append(CleanJSONKey(stringValue: key, intValue: nil))
-            defer { self.codingPath.removeLast() }
-            
-            result[key] = try unbox(value, as: elementType)
-        }
-        
-        return result as? T
-    }
-    
     func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? {
-        
+            
         // 判断type的类型，针对不同的类型，调用不同的方法。
         
-        let decoded: T
+        let decoded: T?
         if T.self == Date.self || T.self == NSDate.self {
             guard let date = try self.unbox(value, as: Date.self) else { return nil }
-            decoded = date as! T
+            decoded = date as? T
         } else if T.self == Data.self || T.self == NSData.self {
             guard let data = try self.unbox(value, as: Data.self) else { return nil }
-            decoded = data as! T
+            decoded = data as? T
         } else if T.self == URL.self || T.self == NSURL.self {
             guard let urlString = try self.unbox(value, as: String.self) else {
                 return nil
@@ -435,10 +431,25 @@ extension _CleanJSONDecoder {
             decoded = (url as! T)
         } else if T.self == Decimal.self || T.self == NSDecimalNumber.self {
             guard let decimal = try self.unbox(value, as: Decimal.self) else { return nil }
-            decoded = decimal as! T
+            decoded = decimal as? T
+        } else if T.self == CGFloat.self { // 支持CGFloat的可选解码的兼容。
+            guard let float = try self.unbox(value, as: CGFloat.self) else { return nil }
+            decoded = float as? T
         } else {
             
-            self.storage.push(container: value)
+            /** 这段代码的目的：
+             * 避免在可选属性是数组或字典的时候，通过 `try T(from: self)` 创建一个新的值。
+             * 为什么基础数据类型（例如：Int，String）不需要这么处理？
+             *  - 因为这些基本类型有对应的unbox方法。字典和数组涉及到范型的处理，没法这么设计。
+             */
+            if let _ = [] as? T {
+                // 如果T是数组类型，但value不是数组，则直接返回nil
+                guard value is [Any] else { return nil }
+            } else if let _ = [:] as? T {
+                // 如果T是字典类型，但value不是字典，则直接返回nil
+                guard value is [String: Any] else { return nil }
+            }
+            
             
             /** decoded = try T(from: self)。这行代码是Swift中Codable解析的关键部分。
              * 目的：将外部数据源获取的原始数据转换为Swift中具体的类型。
@@ -447,8 +458,8 @@ extension _CleanJSONDecoder {
              * - 如果T是一个模型或模型数组：会nestedContainer 或 nestedUnkeyedContainer 创建一个容器。在容器中持有了_CleanJSONDecoder，解析属性。
              * - 如果是属性，会根据是否可选，调用decode或decodeIfPresent方法完成解析。
              */
+            self.storage.push(container: value)
             decoded = try T(from: self)
-            
             self.storage.popContainer()
         }
         return decoded
@@ -461,11 +472,3 @@ fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
     formatter.formatOptions = .withInternetDateTime
     return formatter
 }()
-
-protocol _JSONStringDictionaryDecodableMarker {
-    static var elementType: Decodable.Type { get }
-}
-
-extension Dictionary: _JSONStringDictionaryDecodableMarker where Key == String, Value: Decodable {
-    static var elementType: Decodable.Type { return Value.self }
-}

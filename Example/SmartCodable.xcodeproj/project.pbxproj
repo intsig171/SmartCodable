@@ -230,6 +230,7 @@
 		607FACD21AFB9204008FA782 /* Example for SmartCodable */ = {
 			isa = PBXGroup;
 			children = (
+				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				99A494E42B9028D900393193 /* 测试用例 */,
 				996760142B3EC930006C83EC /* CodableSmaple */,
 				99675FD72B3EC930006C83EC /* Other */,
@@ -307,7 +308,6 @@
 			children = (
 				99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */,
 				99675FD92B3EC930006C83EC /* Print */,
-				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */,
 				99675FDE2B3EC930006C83EC /* ArraySafe.swift */,
 			);

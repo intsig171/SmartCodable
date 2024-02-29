@@ -34,14 +34,25 @@ extension BaseCompatibilityViewController {
                  "b": [],
                  "c": [],
                  "d": [],
+               
                  "e": [],
                  "f": [],
                  "g": [],
+               
                  "h": [],
                  "i": [],
                  "j": [],
                  "k": [],
                  "l": [],
+
+                 "m": [],
+                 "n": [],
+                 "o": [],
+                 "p": [],
+                 "q": [],
+                
+                 "r": [],
+               
                
                  "v": 123,
                  "w": 123,
@@ -68,6 +79,15 @@ extension BaseCompatibilityViewController {
                  "j": null,
                  "k": null,
                  "l": null,
+               
+               
+                 "m": null,
+                 "n": null,
+                 "o": null,
+                 "p": null,
+                 "q": null,
+                
+                 "r": null,
                
                  "v": null,
                  "w": null,
@@ -116,6 +136,10 @@ struct CompatibleTypes: SmartDecodable {
     var o: UInt16 = 0
     var p: UInt32 = 0
     var q: UInt64 = 0
+    
+    // URL无法提供默认值
+//    var r: URL = URL(string: "www.baidu.com")!
+    
 
     var v: [String] = []
     var w: [String: [String: Int]] = [:]
@@ -156,6 +180,8 @@ struct OptionalCompatibleTypes: SmartDecodable {
     var o: UInt16?
     var p: UInt32?
     var q: UInt64?
+    
+    var r: URL?
 
     var v: [String]?
     var w: [String: [String: Int]]?

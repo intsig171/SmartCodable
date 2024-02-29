@@ -21,4 +21,6 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  * 3. 属性包装器的时候，可以不强制要求是class么？（涉及到didfinishMapping的值改变）
  *   - 目前没法解决泛型属性包装器初始化的问题，所以目前还是需要使用class。
  *
+ * 4. 如果value是json字符串，但type不是string，则尝试对字符串jsonObject化，再尝试解析。
+ *
  */

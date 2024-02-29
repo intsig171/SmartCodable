@@ -197,6 +197,8 @@ extension CleanJSONKeyedDecodingContainer {
     func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T: Decodable {
         guard contains(key), let entry = container[key.stringValue] else { return nil }
         
+        /// 如果值为null，直接返回nil
+        if try decodeNil(forKey: key) { return nil }
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         

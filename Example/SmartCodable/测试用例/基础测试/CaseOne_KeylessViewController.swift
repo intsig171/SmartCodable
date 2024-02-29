@@ -35,6 +35,7 @@ extension CaseOne_KeylessViewController {
     /// 明确类型
     func explicitType(json: String) {
         guard let person = CompatibleTypes.deserialize(json: json) else { return }
+        print("非可选属性")
         printValueType(key: "a", value: person.a)
         printValueType(key: "b", value: person.b)
         printValueType(key: "c", value: person.c)
@@ -54,7 +55,7 @@ extension CaseOne_KeylessViewController {
         printValueType(key: "o", value: person.o)
         printValueType(key: "p", value: person.p)
         printValueType(key: "q", value: person.q)
-
+        
         printValueType(key: "v", value: person.v)
         printValueType(key: "w", value: person.w)
         printValueType(key: "x", value: person.x)
@@ -98,6 +99,8 @@ extension CaseOne_KeylessViewController {
     /// 可选类型
     func optionalType(json: String) {
         guard let person = OptionalCompatibleTypes.deserialize(json: json) else { return }
+        
+        print("可选属性")
         printValueType(key: "a", value: person.a)
         printValueType(key: "b", value: person.b)
         printValueType(key: "c", value: person.c)
