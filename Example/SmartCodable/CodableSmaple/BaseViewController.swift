@@ -74,6 +74,7 @@ extension Dictionary {
             guard let jsonStr = self.toJSONString() else { return nil }
             guard let jsonData = jsonStr.data(using: .utf8) else { return nil }
             let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .deferredToDate
             let obj = try decoder.decode(type, from: jsonData)
             return obj
         } catch let error {
@@ -113,6 +114,34 @@ extension String {
             print(error)
             return nil
         }
+    }
+    
+    public func toDictionary() -> [String: Any]? {
+        if let jsonData = data(using: .utf8) {
+            do {
+                // 尝试反序列化JSON数据到字典
+                if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+                    return dictionary
+                }
+            } catch {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    public func toArray() -> [[String: Any]]? {
+        if let jsonData = data(using: .utf8) {
+            do {
+                // 尝试反序列化JSON数据到数组
+                if let array = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [[String: Any]] {
+                    return array
+                }
+            } catch {
+                return nil
+            }
+        }
+        return nil
     }
 }
 

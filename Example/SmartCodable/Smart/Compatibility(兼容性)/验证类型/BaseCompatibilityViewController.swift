@@ -188,7 +188,7 @@ struct OptionalCompatibleTypes: SmartDecodable {
     var x: [String: String]?
     var y: [String: Int]?
 
-    @SmartOptional var z: CompatibleItem?
+    var z: CompatibleItem?
 }
 
 var typeMissmatchJson: String {

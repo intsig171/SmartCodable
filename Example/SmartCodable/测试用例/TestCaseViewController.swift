@@ -42,9 +42,13 @@ extension TestCaseViewController {
         [
             "title": "基础测试",
             "list": [
-                ["name": "键缺失", "vc": "CaseOne_KeylessViewController"],
-                ["name": "值为null", "vc": "CaseOne_NullViewController"],
-                ["name": "值类型错误", "vc": "CaseOne_TypeMismatchViewController"],
+                ["name": "字典 - 键缺失", "vc": "CaseOne_KeylessViewController"],
+                ["name": "字典 - 值为null", "vc": "CaseOne_NullViewController"],
+                ["name": "字典 - 值类型错误", "vc": "CaseOne_TypeMismatchViewController"],
+                
+                ["name": "数组 - 键缺失", "vc": "CaseTwo_KeylessViewController"],
+                ["name": "数组 - 值为null", "vc": "CaseTwo_NullViewController"],
+                ["name": "数组 - 值类型错误", "vc": "CaseTwo_TypeMismatchViewController"],
             ]
         ]
     }

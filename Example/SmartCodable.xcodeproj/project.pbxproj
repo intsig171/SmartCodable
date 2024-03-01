@@ -81,6 +81,9 @@
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
 		99AE7D952B3EC02E00B474E5 /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
 		99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA282B906A640070DED0 /* TestCaseViewController.swift */; };
+		99CABA2D2B916E720070DED0 /* CaseTwo_KeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2C2B916E720070DED0 /* CaseTwo_KeylessViewController.swift */; };
+		99CABA2F2B916E8A0070DED0 /* CaseTwo_NullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2E2B916E8A0070DED0 /* CaseTwo_NullViewController.swift */; };
+		99CABA312B916E970070DED0 /* CaseTwo_TypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA302B916E970070DED0 /* CaseTwo_TypeMismatchViewController.swift */; };
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +172,9 @@
 		99AE7D8E2B3EC02E00B474E5 /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
 		99AE7D8F2B3EC02E00B474E5 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
 		99CABA282B906A640070DED0 /* TestCaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCaseViewController.swift; sourceTree = "<group>"; };
+		99CABA2C2B916E720070DED0 /* CaseTwo_KeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTwo_KeylessViewController.swift; sourceTree = "<group>"; };
+		99CABA2E2B916E8A0070DED0 /* CaseTwo_NullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTwo_NullViewController.swift; sourceTree = "<group>"; };
+		99CABA302B916E970070DED0 /* CaseTwo_TypeMismatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTwo_TypeMismatchViewController.swift; sourceTree = "<group>"; };
 		AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -489,9 +495,8 @@
 		99A494E52B9028EB00393193 /* 基础测试 */ = {
 			isa = PBXGroup;
 			children = (
-				99675FED2B3EC930006C83EC /* CaseOne_KeylessViewController.swift */,
-				99675FE92B3EC930006C83EC /* CaseOne_NullViewController.swift */,
-				99675FEE2B3EC930006C83EC /* CaseOne_TypeMismatchViewController.swift */,
+				99CABA2B2B916DE40070DED0 /* CaseTwo */,
+				99CABA2A2B916DD30070DED0 /* CaseOne */,
 			);
 			path = "基础测试";
 			sourceTree = "<group>";
@@ -506,6 +511,26 @@
 				99AE7D8C2B3EC02E00B474E5 /* airports10000.json */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		99CABA2A2B916DD30070DED0 /* CaseOne */ = {
+			isa = PBXGroup;
+			children = (
+				99675FED2B3EC930006C83EC /* CaseOne_KeylessViewController.swift */,
+				99675FE92B3EC930006C83EC /* CaseOne_NullViewController.swift */,
+				99675FEE2B3EC930006C83EC /* CaseOne_TypeMismatchViewController.swift */,
+			);
+			path = CaseOne;
+			sourceTree = "<group>";
+		};
+		99CABA2B2B916DE40070DED0 /* CaseTwo */ = {
+			isa = PBXGroup;
+			children = (
+				99CABA2C2B916E720070DED0 /* CaseTwo_KeylessViewController.swift */,
+				99CABA2E2B916E8A0070DED0 /* CaseTwo_NullViewController.swift */,
+				99CABA302B916E970070DED0 /* CaseTwo_TypeMismatchViewController.swift */,
+			);
+			path = CaseTwo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -729,6 +754,7 @@
 				9967604E2B3EC930006C83EC /* CodableBaseViewController.swift in Sources */,
 				9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */,
 				9967602C2B3EC930006C83EC /* CaseOne_KeylessViewController.swift in Sources */,
+				99CABA312B916E970070DED0 /* CaseTwo_TypeMismatchViewController.swift in Sources */,
 				996760272B3EC930006C83EC /* CompatibleFloatViewController.swift in Sources */,
 				996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */,
 				996760472B3EC930006C83EC /* FloatDecodingStrategyViewController.swift in Sources */,
@@ -749,6 +775,7 @@
 				9967603C2B3EC930006C83EC /* ComplexDataStructureModel.swift in Sources */,
 				996760452B3EC930006C83EC /* KeyDecodingStrategyViewController.swift in Sources */,
 				996760462B3EC930006C83EC /* DataDecodingStrategyViewController.swift in Sources */,
+				99CABA2F2B916E8A0070DED0 /* CaseTwo_NullViewController.swift in Sources */,
 				996760442B3EC930006C83EC /* FinishMappingViewController+Array.swift in Sources */,
 				996760422B3EC930006C83EC /* FinishMappingViewController+dict.swift in Sources */,
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
@@ -773,6 +800,7 @@
 				9967604D2B3EC930006C83EC /* CodableDecodingStrategyViewController.swift in Sources */,
 				9967602A2B3EC930006C83EC /* CompatibleIntViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
+				99CABA2D2B916E720070DED0 /* CaseTwo_KeylessViewController.swift in Sources */,
 				996760242B3EC930006C83EC /* CompatibleBoolViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
 			);

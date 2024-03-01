@@ -171,29 +171,3 @@ extension ComplexDataStructureViewController: UITableViewDataSource, UITableView
     }
 }
 
-
-
-
-extension String {
-    /// JSONString转换为字典
-    fileprivate func toDictionary() -> Dictionary<String, Any>? {
-        guard let jsonData:Data = data(using: .utf8) else { return nil }
-        if let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) {
-            if let temp = dict as? Dictionary<String, Any> {
-                return temp
-            }
-        }
-        return nil
-    }
-
-    /// JSONString转换为数组
-    fileprivate func toArray() -> Array<Any>? {
-        guard let jsonData:Data = data(using: .utf8) else { return nil }
-        if let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) {
-            if let temp = array as? Array<Any> {
-                return temp
-            }
-        }
-        return nil
-    }
-}

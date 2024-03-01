@@ -34,11 +34,11 @@ class TestViewController : BaseViewController {
         ]
         
         if let model = Test1_1DictModel.deserialize(dict: dict1) {
-//            print(model.r)
             print(model)
         }
 
-        
+//        let v = dict1.decode(type: Test1_1DictModel.self)
+//        print(v)
 
     }
 }
@@ -47,12 +47,15 @@ struct Test1_1DictModel: SmartCodable {
     
 //    var arr1: [Int] = []
 //    var arr2: [Int] = []
-//    var arr3: [Int] = []
+//    var arr3: Int = 0
 //    var arr4: [Int] = []
 //
 //    var arr5: [Int]?
-    var arr6: [Int]?
+    var arr6: Test2?
 //    var arr7: [Int]?
 //    var arr8: [Int]?
 }
 
+struct Test2: SmartCodable {
+    var name: String = ""
+}
