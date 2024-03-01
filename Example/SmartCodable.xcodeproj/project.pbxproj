@@ -26,8 +26,6 @@
 		99675FD52B3EC866006C83EC /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		9967601B2B3EC930006C83EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FD62B3EC930006C83EC /* ViewController.swift */; };
 		9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */; };
-		9967601D2B3EC930006C83EC /* BTPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDA2B3EC930006C83EC /* BTPrint.swift */; };
-		9967601E2B3EC930006C83EC /* PrintFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDB2B3EC930006C83EC /* PrintFormat.swift */; };
 		9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDC2B3EC930006C83EC /* TestViewController.swift */; };
 		996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */; };
 		996760212B3EC930006C83EC /* ArraySafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDE2B3EC930006C83EC /* ArraySafe.swift */; };
@@ -120,8 +118,6 @@
 		993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTwoViewController.swift; sourceTree = "<group>"; };
 		99675FD62B3EC930006C83EC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+Extension.swift"; sourceTree = "<group>"; };
-		99675FDA2B3EC930006C83EC /* BTPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTPrint.swift; sourceTree = "<group>"; };
-		99675FDB2B3EC930006C83EC /* PrintFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintFormat.swift; sourceTree = "<group>"; };
 		99675FDC2B3EC930006C83EC /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		99675FDE2B3EC930006C83EC /* ArraySafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySafe.swift; sourceTree = "<group>"; };
@@ -321,20 +317,10 @@
 			isa = PBXGroup;
 			children = (
 				99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */,
-				99675FD92B3EC930006C83EC /* Print */,
 				99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */,
 				99675FDE2B3EC930006C83EC /* ArraySafe.swift */,
 			);
 			path = Other;
-			sourceTree = "<group>";
-		};
-		99675FD92B3EC930006C83EC /* Print */ = {
-			isa = PBXGroup;
-			children = (
-				99675FDA2B3EC930006C83EC /* BTPrint.swift */,
-				99675FDB2B3EC930006C83EC /* PrintFormat.swift */,
-			);
-			path = Print;
 			sourceTree = "<group>";
 		};
 		99675FDF2B3EC930006C83EC /* Smart */ = {
@@ -809,10 +795,8 @@
 				996760342B3EC930006C83EC /* SmartAnyViewController.swift in Sources */,
 				993822D22B5E5242007D3268 /* ExplainOneViewController.swift in Sources */,
 				996760332B3EC930006C83EC /* CompatibleSampleTwoViewController.swift in Sources */,
-				9967601E2B3EC930006C83EC /* PrintFormat.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,
 				996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */,
-				9967601D2B3EC930006C83EC /* BTPrint.swift in Sources */,
 				9967604D2B3EC930006C83EC /* CodableDecodingStrategyViewController.swift in Sources */,
 				9967602A2B3EC930006C83EC /* CompatibleIntViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,

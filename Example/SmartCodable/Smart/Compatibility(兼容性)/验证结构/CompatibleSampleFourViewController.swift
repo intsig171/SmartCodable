@@ -9,7 +9,7 @@
 import Foundation
 import Foundation
 import SmartCodable
-
+import BTPrint
 /// 兼容性 - 验证单字典容器结构下的兼容性
 class CompatibleSampleFourViewController: BaseCompatibilityViewController {
     
@@ -46,7 +46,7 @@ class CompatibleSampleFourViewController: BaseCompatibilityViewController {
         
         guard let feed = CompatibleSampleFour.deserialize(dict: dict) else { return }
         
-        BTLog.print(feed)
+        BTPrint.print(feed)
         
     }
     
