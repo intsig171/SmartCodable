@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SmartCodable
 
 class CaseTwo_ArrayNestArrayViewController: BaseCompatibilityViewController {
 
@@ -14,18 +15,45 @@ class CaseTwo_ArrayNestArrayViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
         
 
-        guard let dict = nullJson.toDictionary() else { return }
+        let arr: [Any] = [
+            [
+            ],
+            NSNull(),
+            [
+                "loves": [
+                    [
+                        "name": "love 1",
+                        "time": "4",
+                    ],
+                    [
+                        "name": NSNull(),
+                        "time": "足球"
+                    ]
+                ]
+            ]
+        ]
         
         
-        let nullArr: [Any] = [dict]
-        
-//        if let models = [CompatibleTypes].deserialize(array: nullArr) as? [CompatibleTypes] {
-//            print(models)
-//        }
-        
-        if let models = [OptionalCompatibleTypes].deserialize(array: nullArr) as? [OptionalCompatibleTypes] {
+        if let models = [PersonModel].deserialize(array: arr) as? [PersonModel] {
             print(models)
         }
     }
 
+}
+extension CaseTwo_ArrayNestArrayViewController {
+    struct PersonModel: SmartCodable {
+        var loves: [Love]?
+        var sons: [SonModel]?
+    }
+
+    struct SonModel: SmartCodable {
+        var name: String?
+        var age: Int?
+        var love: Love?
+    }
+
+    struct Love: SmartCodable {
+        var name: String = ""
+        var time: CGFloat = 0.0
+    }
 }
