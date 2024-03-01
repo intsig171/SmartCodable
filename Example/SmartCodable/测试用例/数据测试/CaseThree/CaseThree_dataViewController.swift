@@ -7,24 +7,104 @@
 //
 
 import UIKit
+import SmartCodable
 
 class CaseThree_dataViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        test1()
+    }
 
-        // Do any additional setup after loading the view.
+    
+    func test1() {
+        let decoder = SmartJSONDecoder()
+
+//        let strategy: JSONDecoder.DataDecodingStrategy = .base64
+        
+        let strategy: JSONDecoder.DataDecodingStrategy = .custom({ decoder -> Data in
+            let container = try decoder.singleValueContainer()
+            let string = try container.decode(String.self)
+            guard let data = string.data(using: .utf8) else {
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "无法转换为Data类型")
+            }
+            return data
+        })
+        decoder.dataDecodingStrategy = strategy
+
+        let dict = getDictData(mode: .normal, strategy: strategy)
+        if let model1 = try? decoder.decode(DataModel.self, from: dict) {
+            print(model1)
+            print(model1.aData.toString() ?? "")
+        }
+    }
+}
+
+
+extension CaseThree_dataViewController {
+    enum Mode {
+        /// 缺少键
+        case keyless
+        /// 值为null
+        case null
+        /// 值类型错误
+        case typeMismatch
+        /// 正常数据
+        case normal
     }
     
+    
+    func getDictData(
+        mode: Mode,
+        strategy: JSONDecoder.DataDecodingStrategy) -> [String: Any] {
+            switch mode {
+            case .keyless:
+                return [:]
+            case .null:
+                return [
+                    "aData": NSNull(),
+                    "bData": NSNull(),
+                ]
+            case .typeMismatch:
+                return [
+                    "aData": [],
+                    "bData": [ : ]
+                ]
+            case .normal:
+                break
+            }
+            
+            
+           
+            
+            switch strategy {
+                // 由于 JSON 标准本身不支持直接的二进制数据表示，我们通常不会在实践中看到 deferredToData 的直接应用。
+            case .deferredToData:
+                return [
+                    :
+                ]
+                
+            case .base64:
+                return [
+                    "aData": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
+                    "bData": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
+                ]
+            case .custom(_):
+                return [
+                    "aData": "Hello, world!",
+                    "bData": "Hello, world!",
+                ]
+            }
+            
+        }
+}
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+
+extension CaseThree_dataViewController {
+    struct DataModel: SmartCodable {
+        var aData: Data = Data()
+        var bData: Data?
     }
-    */
-
 }

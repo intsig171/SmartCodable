@@ -14,12 +14,24 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+    }
+    
+    func smart() {
+        
+    }
+    
+    
+    func testDecoder() {
         let decoder = SmartJSONDecoder()
         
-        
+        // 5种情况，逐个测试。
 //        let strategy: JSONDecoder.DateDecodingStrategy = .deferredToDate
+        
 //        let strategy: JSONDecoder.DateDecodingStrategy = .secondsSince1970
+        
 //        let strategy: JSONDecoder.DateDecodingStrategy = .millisecondsSince1970
+        
 //        let strategy: JSONDecoder.DateDecodingStrategy = .iso8601
         
 //        let formatter = DateFormatter()

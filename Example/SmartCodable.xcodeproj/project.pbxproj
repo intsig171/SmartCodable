@@ -74,6 +74,7 @@
 		9967604C2B3EC930006C83EC /* CodableMatchingStructureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */; };
 		9967604D2B3EC930006C83EC /* CodableDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */; };
 		9967604E2B3EC930006C83EC /* CodableBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */; };
+		9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6912B91DF3D0089CA68 /* Data+Extension.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
@@ -169,6 +170,7 @@
 		996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableMatchingStructureViewController.swift; sourceTree = "<group>"; };
 		996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableBaseViewController.swift; sourceTree = "<group>"; };
+		9993D6912B91DF3D0089CA68 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		99AE7D8D2B3EC02E00B474E5 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */,
 				996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */,
 				9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */,
+				9993D6912B91DF3D0089CA68 /* Data+Extension.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -803,6 +806,7 @@
 				996760322B3EC930006C83EC /* CompatibleSampleFiveViewController.swift in Sources */,
 				9967602F2B3EC930006C83EC /* CompatibleSampleSixViewController.swift in Sources */,
 				996760342B3EC930006C83EC /* SmartAnyViewController.swift in Sources */,
+				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
 				993822D22B5E5242007D3268 /* ExplainOneViewController.swift in Sources */,
 				996760332B3EC930006C83EC /* CompatibleSampleTwoViewController.swift in Sources */,
 				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
