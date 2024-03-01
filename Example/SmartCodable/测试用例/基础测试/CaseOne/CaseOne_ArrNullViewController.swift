@@ -1,5 +1,5 @@
 //
-//  CaseOne_KeylessViewController.swift
+//  CaseOne_ArrNullViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -9,16 +9,14 @@
 import UIKit
 import SmartCodable
 
-
-/// 键缺失的兼容，使用默认值填充
-class CaseOne_KeylessViewController: BaseCompatibilityViewController {
+/// null值的兼容，使用默认值填充。
+class CaseOne_ArrNullViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
 
-        let json = keylssJson
+        let json = nullJson
         
         explicitType(json: json)
         
@@ -31,36 +29,18 @@ class CaseOne_KeylessViewController: BaseCompatibilityViewController {
 
 
 
-extension CaseOne_KeylessViewController {
+extension CaseOne_ArrNullViewController {
     /// 明确类型
     func explicitType(json: String) {
         guard let person = CompatibleTypes.deserialize(json: json) else { return }
+        
         print("非可选属性")
-        printValueType(key: "a", value: person.a)
-        printValueType(key: "b", value: person.b)
-        printValueType(key: "c", value: person.c)
-        printValueType(key: "d", value: person.d)
-        printValueType(key: "e", value: person.e)
-        printValueType(key: "f", value: person.f)
-        printValueType(key: "g", value: person.g)
-
-        printValueType(key: "h", value: person.h)
-        printValueType(key: "i", value: person.i)
-        printValueType(key: "j", value: person.j)
-        printValueType(key: "k", value: person.k)
-        printValueType(key: "l", value: person.l)
+        let mirr = Mirror(reflecting: person)
+        for (key, value) in mirr.children {
+            printValueType(key: key!, value: value)
+        }
         
-        printValueType(key: "m", value: person.m)
-        printValueType(key: "n", value: person.n)
-        printValueType(key: "o", value: person.o)
-        printValueType(key: "p", value: person.p)
-        printValueType(key: "q", value: person.q)
         
-        printValueType(key: "v", value: person.v)
-        printValueType(key: "w", value: person.w)
-        printValueType(key: "x", value: person.x)
-        printValueType(key: "y", value: person.y)
-        printValueType(key: "z", value: person.z)
 
         
         /**
@@ -93,39 +73,42 @@ extension CaseOne_KeylessViewController {
 
 
 
-
-
-extension CaseOne_KeylessViewController {
+extension CaseOne_ArrNullViewController {
     /// 可选类型
     func optionalType(json: String) {
         guard let person = OptionalCompatibleTypes.deserialize(json: json) else { return }
-        
         print("可选属性")
-        printValueType(key: "a", value: person.a)
-        printValueType(key: "b", value: person.b)
-        printValueType(key: "c", value: person.c)
-        printValueType(key: "d", value: person.d)
-        printValueType(key: "e", value: person.e)
-        printValueType(key: "f", value: person.f)
-        printValueType(key: "g", value: person.g)
-
-        printValueType(key: "h", value: person.h)
-        printValueType(key: "i", value: person.i)
-        printValueType(key: "j", value: person.j)
-        printValueType(key: "k", value: person.k)
-        printValueType(key: "l", value: person.l)
-        
-        printValueType(key: "m", value: person.m)
-        printValueType(key: "n", value: person.n)
-        printValueType(key: "o", value: person.o)
-        printValueType(key: "p", value: person.p)
-        printValueType(key: "q", value: person.q)
-
-        printValueType(key: "v", value: person.v)
-        printValueType(key: "w", value: person.w)
-        printValueType(key: "x", value: person.x)
-        printValueType(key: "y", value: person.y)
-        printValueType(key: "z", value: person.z)
+        let mirr = Mirror(reflecting: person)
+        for (key, value) in mirr.children {
+            printValueType(key: key!, value: value)
+        }
+//        printValueType(key: "a", value: person.a)
+//        printValueType(key: "b", value: person.b)
+//        printValueType(key: "c", value: person.c)
+//        printValueType(key: "d", value: person.d)
+//        printValueType(key: "e", value: person.e)
+//        printValueType(key: "f", value: person.f)
+//        printValueType(key: "g", value: person.g)
+//
+//        printValueType(key: "h", value: person.h)
+//        printValueType(key: "i", value: person.i)
+//        printValueType(key: "j", value: person.j)
+//        printValueType(key: "k", value: person.k)
+//        printValueType(key: "l", value: person.l)
+//
+//        printValueType(key: "m", value: person.m)
+//        printValueType(key: "n", value: person.n)
+//        printValueType(key: "o", value: person.o)
+//        printValueType(key: "p", value: person.p)
+//        printValueType(key: "q", value: person.q)
+//
+//
+//
+//        printValueType(key: "v", value: person.v)
+//        printValueType(key: "w", value: person.w)
+//        printValueType(key: "x", value: person.x)
+//        printValueType(key: "y", value: person.y)
+//        printValueType(key: "z", value: person.z)
         
         /**
          "属性：a 的值为nil"
@@ -153,5 +136,3 @@ extension CaseOne_KeylessViewController {
          */
     }
 }
-
-

@@ -40,15 +40,15 @@ extension TestCaseViewController {
     
     var testCaseOne: [String: Any] {
         [
-            "title": "基础测试",
+            "title": "CaseOne - 基础数据测试",
             "list": [
-                ["name": "字典 - 键缺失", "vc": "CaseOne_KeylessViewController"],
-                ["name": "字典 - 值为null", "vc": "CaseOne_NullViewController"],
-                ["name": "字典 - 值类型错误", "vc": "CaseOne_TypeMismatchViewController"],
+                ["name": "字典 - 键缺失",    "vc": "CaseOne_DictKeylessViewController"],
+                ["name": "字典 - 值为null",  "vc": "CaseOne_DictNullViewController"],
+                ["name": "字典 - 值类型错误", "vc": "CaseOne_DictTypeMismatchViewController"],
                 
-                ["name": "数组 - 键缺失", "vc": "CaseTwo_KeylessViewController"],
-                ["name": "数组 - 值为null", "vc": "CaseTwo_NullViewController"],
-                ["name": "数组 - 值类型错误", "vc": "CaseTwo_TypeMismatchViewController"],
+                ["name": "数组 - 键缺失",    "vc": "CaseTwo_ArrKeylessViewController"],
+                ["name": "数组 - 值为null",  "vc": "CaseTwo_ArrNullViewController"],
+                ["name": "数组 - 值类型错误", "vc": "CaseTwo_ArrTypeMismatchViewController"],
             ]
         ]
     }

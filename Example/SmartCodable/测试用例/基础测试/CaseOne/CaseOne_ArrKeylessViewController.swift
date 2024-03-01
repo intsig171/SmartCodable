@@ -1,5 +1,5 @@
 //
-//  CaseOne_TypeMismatchViewController.swift
+//  CaseOne_KeylessViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -10,14 +10,15 @@ import UIKit
 import SmartCodable
 
 
-/// 类型错误的兼容， 尝试值对值的类型转换，如果失败，使用默认值填充。
-class CaseOne_TypeMismatchViewController: BaseCompatibilityViewController {
+/// 键缺失的兼容，使用默认值填充
+class CaseOne_ArrKeylessViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SmartConfig.debugMode = .none
 
-        let json = typeMissmatchJson
+        let json = keylssJson
         
         explicitType(json: json)
         
@@ -30,10 +31,11 @@ class CaseOne_TypeMismatchViewController: BaseCompatibilityViewController {
 
 
 
-extension CaseOne_TypeMismatchViewController {
+extension CaseOne_ArrKeylessViewController {
     /// 明确类型
     func explicitType(json: String) {
         guard let person = CompatibleTypes.deserialize(json: json) else { return }
+        print("非可选属性")
         printValueType(key: "a", value: person.a)
         printValueType(key: "b", value: person.b)
         printValueType(key: "c", value: person.c)
@@ -53,7 +55,7 @@ extension CaseOne_TypeMismatchViewController {
         printValueType(key: "o", value: person.o)
         printValueType(key: "p", value: person.p)
         printValueType(key: "q", value: person.q)
-
+        
         printValueType(key: "v", value: person.v)
         printValueType(key: "w", value: person.w)
         printValueType(key: "x", value: person.x)
@@ -88,10 +90,17 @@ extension CaseOne_TypeMismatchViewController {
     }
 }
 
-extension CaseOne_TypeMismatchViewController {
+
+
+
+
+
+extension CaseOne_ArrKeylessViewController {
     /// 可选类型
     func optionalType(json: String) {
         guard let person = OptionalCompatibleTypes.deserialize(json: json) else { return }
+        
+        print("可选属性")
         printValueType(key: "a", value: person.a)
         printValueType(key: "b", value: person.b)
         printValueType(key: "c", value: person.c)
@@ -111,8 +120,6 @@ extension CaseOne_TypeMismatchViewController {
         printValueType(key: "o", value: person.o)
         printValueType(key: "p", value: person.p)
         printValueType(key: "q", value: person.q)
-
-
 
         printValueType(key: "v", value: person.v)
         printValueType(key: "w", value: person.w)
@@ -146,4 +153,5 @@ extension CaseOne_TypeMismatchViewController {
          */
     }
 }
+
 

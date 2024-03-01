@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CaseTwo_TypeMismatchViewController: BaseViewController {
+class CaseTwo_DictTypeMismatchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

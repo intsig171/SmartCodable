@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseTwo_KeylessViewController: BaseCompatibilityViewController {
+class CaseTwo_DictKeylessViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,5 +1,5 @@
 //
-//  CaseTwo_NullViewController.swift
+//  CaseTwo_DictNullViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CaseTwo_NullViewController: BaseCompatibilityViewController {
+class CaseTwo_DictNullViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
