@@ -81,9 +81,13 @@
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
 		99AE7D952B3EC02E00B474E5 /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
 		99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA282B906A640070DED0 /* TestCaseViewController.swift */; };
-		99CABA2D2B916E720070DED0 /* CaseTwo_DictKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2C2B916E720070DED0 /* CaseTwo_DictKeylessViewController.swift */; };
-		99CABA2F2B916E8A0070DED0 /* CaseTwo_DictNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2E2B916E8A0070DED0 /* CaseTwo_DictNullViewController.swift */; };
-		99CABA312B916E970070DED0 /* CaseTwo_DictTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA302B916E970070DED0 /* CaseTwo_DictTypeMismatchViewController.swift */; };
+		99CABA2D2B916E720070DED0 /* CaseOne_DictKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2C2B916E720070DED0 /* CaseOne_DictKeylessViewController.swift */; };
+		99CABA2F2B916E8A0070DED0 /* CaseOne_DictNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2E2B916E8A0070DED0 /* CaseOne_DictNullViewController.swift */; };
+		99CABA312B916E970070DED0 /* CaseOne_DictTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA302B916E970070DED0 /* CaseOne_DictTypeMismatchViewController.swift */; };
+		99D945842B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945802B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift */; };
+		99D945852B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */; };
+		99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945822B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift */; };
+		99D945872B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945832B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift */; };
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -172,9 +176,13 @@
 		99AE7D8E2B3EC02E00B474E5 /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
 		99AE7D8F2B3EC02E00B474E5 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
 		99CABA282B906A640070DED0 /* TestCaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCaseViewController.swift; sourceTree = "<group>"; };
-		99CABA2C2B916E720070DED0 /* CaseTwo_DictKeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictKeylessViewController.swift; sourceTree = "<group>"; };
-		99CABA2E2B916E8A0070DED0 /* CaseTwo_DictNullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNullViewController.swift; sourceTree = "<group>"; };
-		99CABA302B916E970070DED0 /* CaseTwo_DictTypeMismatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictTypeMismatchViewController.swift; sourceTree = "<group>"; };
+		99CABA2C2B916E720070DED0 /* CaseOne_DictKeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_DictKeylessViewController.swift; sourceTree = "<group>"; };
+		99CABA2E2B916E8A0070DED0 /* CaseOne_DictNullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_DictNullViewController.swift; sourceTree = "<group>"; };
+		99CABA302B916E970070DED0 /* CaseOne_DictTypeMismatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_DictTypeMismatchViewController.swift; sourceTree = "<group>"; };
+		99D945802B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_ArrayNestDictViewController.swift; sourceTree = "<group>"; };
+		99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNestDictViewController.swift; sourceTree = "<group>"; };
+		99D945822B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNestArrayViewController.swift; sourceTree = "<group>"; };
+		99D945832B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_ArrayNestArrayViewController.swift; sourceTree = "<group>"; };
 		AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -495,8 +503,8 @@
 		99A494E52B9028EB00393193 /* 基础测试 */ = {
 			isa = PBXGroup;
 			children = (
-				99CABA2B2B916DE40070DED0 /* CaseTwo */,
 				99CABA2A2B916DD30070DED0 /* CaseOne */,
+				99CABA2B2B916DE40070DED0 /* CaseTwo */,
 			);
 			path = "基础测试";
 			sourceTree = "<group>";
@@ -519,9 +527,9 @@
 				99675FED2B3EC930006C83EC /* CaseOne_ArrKeylessViewController.swift */,
 				99675FE92B3EC930006C83EC /* CaseOne_ArrNullViewController.swift */,
 				99675FEE2B3EC930006C83EC /* CaseOne_ArrTypeMismatchViewController.swift */,
-				99CABA2C2B916E720070DED0 /* CaseTwo_DictKeylessViewController.swift */,
-				99CABA2E2B916E8A0070DED0 /* CaseTwo_DictNullViewController.swift */,
-				99CABA302B916E970070DED0 /* CaseTwo_DictTypeMismatchViewController.swift */,
+				99CABA2C2B916E720070DED0 /* CaseOne_DictKeylessViewController.swift */,
+				99CABA2E2B916E8A0070DED0 /* CaseOne_DictNullViewController.swift */,
+				99CABA302B916E970070DED0 /* CaseOne_DictTypeMismatchViewController.swift */,
 			);
 			path = CaseOne;
 			sourceTree = "<group>";
@@ -529,6 +537,10 @@
 		99CABA2B2B916DE40070DED0 /* CaseTwo */ = {
 			isa = PBXGroup;
 			children = (
+				99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */,
+				99D945822B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift */,
+				99D945802B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift */,
+				99D945832B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift */,
 			);
 			path = CaseTwo;
 			sourceTree = "<group>";
@@ -754,13 +766,16 @@
 				9967604E2B3EC930006C83EC /* CodableBaseViewController.swift in Sources */,
 				9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */,
 				9967602C2B3EC930006C83EC /* CaseOne_ArrKeylessViewController.swift in Sources */,
-				99CABA312B916E970070DED0 /* CaseTwo_DictTypeMismatchViewController.swift in Sources */,
+				99CABA312B916E970070DED0 /* CaseOne_DictTypeMismatchViewController.swift in Sources */,
+				99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */,
 				996760272B3EC930006C83EC /* CompatibleFloatViewController.swift in Sources */,
 				996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */,
 				996760472B3EC930006C83EC /* FloatDecodingStrategyViewController.swift in Sources */,
 				9967603B2B3EC930006C83EC /* ComplexDataStructureCell.swift in Sources */,
 				9967603D2B3EC930006C83EC /* ComplexDataStructureViewController.swift in Sources */,
 				996760482B3EC930006C83EC /* DateDecodingStrategyViewController.swift in Sources */,
+				99D945842B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift in Sources */,
+				99D945852B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift in Sources */,
 				9967604B2B3EC930006C83EC /* CodableComplex_oneViewController.swift in Sources */,
 				996760212B3EC930006C83EC /* ArraySafe.swift in Sources */,
 				996760312B3EC930006C83EC /* CompatibleSampleFourViewController.swift in Sources */,
@@ -774,8 +789,9 @@
 				996760382B3EC930006C83EC /* CaseTwoViewController.swift in Sources */,
 				9967603C2B3EC930006C83EC /* ComplexDataStructureModel.swift in Sources */,
 				996760452B3EC930006C83EC /* KeyDecodingStrategyViewController.swift in Sources */,
+				99D945872B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift in Sources */,
 				996760462B3EC930006C83EC /* DataDecodingStrategyViewController.swift in Sources */,
-				99CABA2F2B916E8A0070DED0 /* CaseTwo_DictNullViewController.swift in Sources */,
+				99CABA2F2B916E8A0070DED0 /* CaseOne_DictNullViewController.swift in Sources */,
 				996760442B3EC930006C83EC /* FinishMappingViewController+Array.swift in Sources */,
 				996760422B3EC930006C83EC /* FinishMappingViewController+dict.swift in Sources */,
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
@@ -800,7 +816,7 @@
 				9967604D2B3EC930006C83EC /* CodableDecodingStrategyViewController.swift in Sources */,
 				9967602A2B3EC930006C83EC /* CompatibleIntViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
-				99CABA2D2B916E720070DED0 /* CaseTwo_DictKeylessViewController.swift in Sources */,
+				99CABA2D2B916E720070DED0 /* CaseOne_DictKeylessViewController.swift in Sources */,
 				996760242B3EC930006C83EC /* CompatibleBoolViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
 			);

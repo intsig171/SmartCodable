@@ -74,7 +74,14 @@ extension Int: TypePatchable {
     static func tryPatch(from value: Any) -> Int? {
         if let v = value as? String, let intValue = Int(v) {
             return intValue
-        }
+        } else if let floatValue = value as? Float {
+            return Int(floatValue)
+        } else if let doubleValue = value as? Double {
+            return Int(doubleValue)
+        } else if let cgFloatValue = value as? CGFloat {
+            return Int(cgFloatValue)
+        }        
+        
         return nil
     }
 }

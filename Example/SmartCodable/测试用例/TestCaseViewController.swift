@@ -21,6 +21,7 @@ class TestCaseViewController: BaseViewController {
         
         dataArray = [
             testCaseOne,
+            testCaseTwo,
         ]
         
         
@@ -46,9 +47,23 @@ extension TestCaseViewController {
                 ["name": "字典 - 值为null",  "vc": "CaseOne_DictNullViewController"],
                 ["name": "字典 - 值类型错误", "vc": "CaseOne_DictTypeMismatchViewController"],
                 
-                ["name": "数组 - 键缺失",    "vc": "CaseTwo_ArrKeylessViewController"],
-                ["name": "数组 - 值为null",  "vc": "CaseTwo_ArrNullViewController"],
-                ["name": "数组 - 值类型错误", "vc": "CaseTwo_ArrTypeMismatchViewController"],
+                ["name": "数组 - 键缺失",    "vc": "CaseOne_ArrKeylessViewController"],
+                ["name": "数组 - 值为null",  "vc": "CaseOne_ArrNullViewController"],
+                ["name": "数组 - 值类型错误", "vc": "CaseOne_ArrTypeMismatchViewController"],
+            ]
+        ]
+    }
+    
+    
+    var testCaseTwo: [String: Any] {
+        [
+            "title": "CaseTwo - 嵌套数据测试",
+            "list": [
+                ["name": "字典 - 嵌套字典", "vc": "CaseTwo_DictNestDictViewController"],
+                ["name": "字典 - 嵌套数组", "vc": "CaseTwo_DictNestArrayViewController"],
+                
+                ["name": "数组 - 嵌套字典", "vc": "CaseTwo_ArrayNestDictViewController"],
+                ["name": "数组 - 嵌套数组", "vc": "CaseTwo_ArrayNestArrayViewController"],
             ]
         ]
     }
