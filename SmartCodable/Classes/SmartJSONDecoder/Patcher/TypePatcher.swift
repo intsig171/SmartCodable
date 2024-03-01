@@ -117,40 +117,34 @@ extension CGFloat: TypePatchable {
 
 
 extension String {
+    /** 注意 inf
+     * String类型的 “inf”，可以直接转成Double类型，代表无穷大和无穷小。
+     * Swift 能够识别 "inf", "+inf", "-inf", "Infinity", "+Infinity", 和 "-Infinity" 这些表示形式，将它们转换为相应的无穷大或无穷小的 Double 值。
+     *
+     * 注意 nan
+     * String类型的 “nan”，可以直接转成Double类型，代表不是一个数（Not a Number）的特殊值。
+     * Swift 能够识别 "NaN", "Nan", "nan" 这些表示形式,并将其转换为表示不是一个数的 Double 值.
+     */
+    
     fileprivate func toCGFloat() -> CGFloat? {
-        switch self {
-        case "nan", "NaN", "Nan":
-            return 0
-        default:
-            if let doubleValue = Double(self) {
-                return CGFloat(doubleValue)
-            }
-            return nil
+        if let doubleValue = Double(self) {
+            return CGFloat(doubleValue)
         }
+        return nil
     }
     
     fileprivate func toFloat() -> Float? {
-        switch self {
-        case "nan", "NaN", "Nan":
-            return 0
-        default:
-            if let value = Float(self) {
-                return value
-            }
-            return nil
+        if let value = Float(self) {
+            return value
         }
+        return nil
     }
     
     fileprivate func toDouble() -> Double? {
-        switch self {
-        case "nan", "NaN", "Nan":
-            return 0
-        default:
-            if let value = Double(self) {
-                return value
-            }
-            return nil
+        if let value = Double(self) {
+            return value
         }
+        return nil
     }
 }
 

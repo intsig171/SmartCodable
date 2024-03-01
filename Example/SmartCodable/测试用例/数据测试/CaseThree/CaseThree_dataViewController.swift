@@ -14,14 +14,12 @@ class CaseThree_dataViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
+        test()
         test1()
     }
 
-    
-    func test1() {
-        let decoder = SmartJSONDecoder()
-
-//        let strategy: JSONDecoder.DataDecodingStrategy = .base64
+    func getStrategy() -> JSONDecoder.DataDecodingStrategy {
+        //        let strategy: JSONDecoder.DataDecodingStrategy = .base64
         
         let strategy: JSONDecoder.DataDecodingStrategy = .custom({ decoder -> Data in
             let container = try decoder.singleValueContainer()
@@ -31,12 +29,30 @@ class CaseThree_dataViewController: BaseCompatibilityViewController {
             }
             return data
         })
+        return strategy
+    }
+    
+    func test() {
+        let strategy = getStrategy()
+        let dict = getDictData(mode: .normal, strategy: strategy)
+        
+        if let model = DataModel.deserialize(dict: dict, options: [.dataStrategy(strategy)]) {
+            print(model)
+            print(model.aData.toString() ?? "")
+        }
+    }
+    
+    func test1() {
+        let decoder = SmartJSONDecoder()
+
+        let strategy = getStrategy()
+
         decoder.dataDecodingStrategy = strategy
 
         let dict = getDictData(mode: .normal, strategy: strategy)
-        if let model1 = try? decoder.decode(DataModel.self, from: dict) {
-            print(model1)
-            print(model1.aData.toString() ?? "")
+        if let model = try? decoder.decode(DataModel.self, from: dict) {
+            print(model)
+            print(model.aData.toString() ?? "")
         }
     }
 }

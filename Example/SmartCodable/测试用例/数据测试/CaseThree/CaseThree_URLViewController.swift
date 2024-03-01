@@ -1,15 +1,15 @@
 //
-//  CaseThree_FloatViewController.swift
+//  CaseThree_URLViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SmartCodable
 
-class CaseThree_FloatViewController: BaseCompatibilityViewController {
+class CaseThree_URLViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,29 +23,27 @@ class CaseThree_FloatViewController: BaseCompatibilityViewController {
             "b": "Mccc",
             "c": [],
             "d": NSNull(),
-            "inf": "inf",
-            "nan": "NaN",
-            "inf1": "inf",
-            "nan1": "NaN",
+            "e": "www.baidu.com",
         ]
   
-
         
-        if let model = FloatModel.deserialize(dict: dict) {
+        if let url = URL(string: "0") {
+            print(url.absoluteString)
+        }
+        
+        
+        if let model = URLModel.deserialize(dict: dict) {
             print(model)
-            print(model.nan1)
+        
         }
         
     }
     
-    struct FloatModel: SmartCodable {
-        var a: Double?
-        var b: Double?
-        var c: Double?
-        var d: Double?
-        var inf: Float?
-        var nan: Float?
-        var inf1: CGFloat = 0
-        var nan1: CGFloat = 0
+    struct URLModel: SmartCodable {
+        var a: URL?
+        var b: URL?
+        var c: URL?
+        var d: URL?
+        var e: URL?
     }
 }

@@ -72,11 +72,12 @@ extension TestCaseViewController {
     
     var testCaseThree: [String: Any] {
         [
-            "title": "CaseTwo - 特殊数据测试",
+            "title": "CaseTwo - 特殊格式数据测试",
             "list": [
-                ["name": "特殊 - Date",  "vc": "CaseThree_dateViewController"],
-                ["name": "特殊 - Data",  "vc": "CaseThree_dataViewController"],
-                ["name": "特殊 - Float", "vc": "CaseThree_FloatViewController"],
+                ["name": "特殊格式 - Date",  "vc": "CaseThree_dateViewController"],
+                ["name": "特殊格式 - Data",  "vc": "CaseThree_dataViewController"],
+                ["name": "特殊格式 - Float", "vc": "CaseThree_FloatViewController"],
+                ["name": "特殊格式 - URL", "vc": "CaseThree_URLViewController"],
             ]
         ]
     }

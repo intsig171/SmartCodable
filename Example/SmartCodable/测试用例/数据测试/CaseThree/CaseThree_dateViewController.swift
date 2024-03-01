@@ -15,29 +15,25 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
         
         
-    }
-    
-    func smart() {
+        test()
+        test1()
         
     }
     
-    
-    func testDecoder() {
-        let decoder = SmartJSONDecoder()
-        
+    func getStrategy() -> JSONDecoder.DateDecodingStrategy {
         // 5种情况，逐个测试。
 //        let strategy: JSONDecoder.DateDecodingStrategy = .deferredToDate
         
 //        let strategy: JSONDecoder.DateDecodingStrategy = .secondsSince1970
         
 //        let strategy: JSONDecoder.DateDecodingStrategy = .millisecondsSince1970
-        
+//
 //        let strategy: JSONDecoder.DateDecodingStrategy = .iso8601
-        
+//
 //        let formatter = DateFormatter()
 //        formatter.dateFormat = "yyyy年MM月dd号 hh点mm分"
 //        let strategy: JSONDecoder.DateDecodingStrategy = .formatted(formatter)
-
+//
         let strategy: JSONDecoder.DateDecodingStrategy = .custom { decoder in
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
@@ -48,11 +44,30 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
             }
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string")
         }
-
-
         
+        return strategy
+    }
+    
+    func test() {
+                
+        let strategy = getStrategy()
+        let dict = getDictDate(mode: .normal, strategy: strategy)
+        
+        if let model = DateModel.deserialize(dict: dict, options: [.dateStrategy(strategy)]) {
+            print(model)
+        }
+    }
+    
+    
+    func test1() {
+        let decoder = SmartJSONDecoder()
+        
+
+
+
+        let strategy = getStrategy()
         decoder.dateDecodingStrategy = strategy
-        let dict = getDictData(mode: .normal, strategy: strategy)
+        let dict = getDictDate(mode: .normal, strategy: strategy)
         
         if let model = try? decoder.decode(DateModel.self, from: dict) {
             print(model)
@@ -75,7 +90,7 @@ extension CaseThree_dateViewController {
     }
     
     
-    func getDictData(
+    func getDictDate(
         mode: Mode,
         strategy: JSONDecoder.DateDecodingStrategy) -> [String: Any] {
             
