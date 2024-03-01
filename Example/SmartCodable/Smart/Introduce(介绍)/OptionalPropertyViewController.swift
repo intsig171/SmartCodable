@@ -65,7 +65,7 @@ struct OptionalPropertyModel: SmartCodable {
     // Generic struct 'DefalutDecodeWrapper' requires that 'OptionalPropertyItemModel' be a class type
     // Property type 'OptionalPropertyItemModel' does not match 'wrappedValue' type 'OptionalPropertyItemModel?'
     // Generic struct 'DefalutDecodeWrapper' requires that 'OptionalPropertyItemModel' conform to 'SmartDecodable'
-    @SmartOptional var item: OptionalPropertyItemModel?
+    var item: OptionalPropertyItemModel?
     
 
     var items: [OptionalPropertyItemModel]?

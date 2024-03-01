@@ -12,17 +12,21 @@ import Foundation
 struct DefaultPatcher<T: Decodable> {
     
     /// 提供默认值
-    static func `defalut`() -> T? {
+    static func `defalut`() throws -> T {
             
         if let value = T.self as? Defaultable.Type {
-            return value.defaultValue as? T
+            return value.defaultValue as! T
         } else if let object = T.self as? SmartDecodable.Type {
-            return object.init() as? T
+            return object.init() as! T
         } else if let object = T.self as? any SmartCaseDefaultable.Type {  // 枚举解析失败，提供对应的默认值。
-            return object.defaultCase as? T
+            return object.defaultCase as! T
         } else {
-            SmartLog.logDebug("\(Self.self)提供默认值失败, 发现未知类型，无法提供默认值。如有遇到请反馈，感谢")
-            return nil
+            throw DecodingError.valueNotFound(
+                Self.self,
+                DecodingError.Context(
+                    codingPath: [],
+                    debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"
+                ))
         }
     }
 }

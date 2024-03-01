@@ -66,7 +66,7 @@ extension FinishMappingViewController {
         var age: Int = 0
         
         var one = CompositeOne()
-        @SmartOptional var two: CompositeOne?
+        var two: CompositeOne?
 
         mutating func didFinishMapping() {
             name = "我是 \(name), 我\(age)岁了"

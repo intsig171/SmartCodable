@@ -17,8 +17,8 @@ extension Patcher {
 extension Patcher {
     
     /// 提供当前类型的默认值
-    static func defaultForType() -> T? {
-        return DefaultPatcher<T>.defalut()
+    static func defaultForType() throws -> T {
+        return try DefaultPatcher<T>.defalut()
     }
     
     static func convertToType(from value: Any?) -> T? {
@@ -29,7 +29,7 @@ extension Patcher {
     static func patchWithConvertOrDefault(value: Any?) -> T? {
         guard let value = value else { return nil }
         if let v = convertToType(from: value) { return v }
-        if let v = defaultForType() { return v }
+        if let v = try? defaultForType() { return v }
         return nil
     }
 }
@@ -52,9 +52,8 @@ extension Patcher {
         }
         
         if mode.supportDefaultValue {
-            if let defaultValue = DefaultPatcher<T>.defalut() {
-                return defaultValue
-            }
+            return try DefaultPatcher<T>.defalut()
+
         }
         
         
@@ -84,7 +83,11 @@ struct Patcher<T: Decodable> {
                 return value
             }
         } else if mode.supportDefaultValue {
-            return DefaultPatcher.defalut()
+            do {
+                return try Patcher<T>.defaultForType()
+            } catch {
+                return nil
+            }
         }
         
         return nil
@@ -97,18 +100,22 @@ extension CleanJSONKeyedDecodingContainer {
     
     /// key不存在，提供默认值，并输出日志。
     func decodeIfKeyNotFound<T>(_ key: Key, codingPath: [CodingKey] = []) throws -> T where T: Decodable {
-        guard let value: T = Patcher.defaultForType() else {
+        
+        do {
+            return try Patcher.defaultForType()
+        } catch {
             throw DecodingError.keyNotFound(key, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "No value associated with key \(key) (\"\(key.stringValue)\")."))
         }
-        return value
     }
 
     /// 值为null
     func decodeIfValueNotFound<T>(_ key: Key, codingPath: [CodingKey]) throws -> T where T: Decodable, T: Defaultable {
-        guard let value: T = DefaultPatcher.defalut() else {
+        
+        do {
+            return try Patcher.defaultForType()
+        } catch {
             throw DecodingError.Keyed.valueNotFound(CleanJSONKeyedDecodingContainer<Key>.self, codingPath: codingPath)
         }
-        return value
     }
     
 //    /// 值类型错误

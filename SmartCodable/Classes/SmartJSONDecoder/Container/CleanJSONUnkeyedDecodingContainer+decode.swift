@@ -18,9 +18,9 @@ extension CleanJSONUnkeyedDecodingContainer {
         }
 
         // 如果使用了SmartOptional修饰，获取被修饰的属性。
-        if var v = PropertyWrapperValue.getSmartObject(decodeValue: decodeValue) {
-            v.didFinishMapping()
-        }
+//        if var v = PropertyWrapperValue.getSmartObject(decodeValue: decodeValue) {
+//            v.didFinishMapping()
+//        }
 
         return decodeValue
     }
@@ -51,13 +51,15 @@ extension CleanJSONUnkeyedDecodingContainer {
     }
     
     private mutating func decodeIfAtEnd<T: Decodable>(type: T.Type) throws -> T {
-        if let v = Patcher<T>.defaultForType() {
+        
+        do {
+            let value = try Patcher<T>.defaultForType()
             self.currentIndex += 1
-            return v
+            return value
+        } catch {
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
         }
-        throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
     }
-    
 }
 
 extension CleanJSONUnkeyedDecodingContainer {

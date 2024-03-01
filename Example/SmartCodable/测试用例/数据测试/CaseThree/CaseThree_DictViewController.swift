@@ -15,7 +15,7 @@ class CaseThree_DictViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "a": "0",
+            "a": NSNull(),
             "b": "Mccc",
             "c": [],
             "d": NSNull(),
@@ -39,7 +39,7 @@ class CaseThree_DictViewController: BaseCompatibilityViewController {
 
 extension CaseThree_DictViewController {
     struct DictModel: SmartCodable {
-        var a: [String: SmartAny]?
+        var a: Bool?
         var b: [String: SmartAny]?
         var c: [String: SmartAny]?
         var d: [String: SmartAny]?

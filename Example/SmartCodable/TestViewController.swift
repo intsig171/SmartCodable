@@ -17,9 +17,21 @@ struct BaseFeed123: Codable {
 }
 
 class TestViewController : BaseViewController {
+    
+    
+//    func todo() throws -> Int {
+//        throw DecodingError.keyNotFound(CodingKey.init(intValue: 1)!, DecodingError.Context.init(codingPath: [], debugDescription: ""))
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        if let value = try todo() {
+//            print(value)
+//        } else {
+//            print("未执行")
+//        }
+        
         
 
         
