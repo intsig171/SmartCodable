@@ -15,11 +15,16 @@ public protocol SmartCaseDefaultable: RawRepresentable, Codable {
     static var defaultCase: Self { get }
 }
 
-public extension SmartCaseDefaultable where Self.RawValue: Decodable {
+public extension SmartCaseDefaultable where Self: Decodable, Self.RawValue: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let rawValue = try container.decode(RawValue.self)
-        self = Self.init(rawValue: rawValue) ?? Self.defaultCase
+        let decoded = try container.decode(RawValue.self)
+        if let v = Self.init(rawValue: decoded) {
+            self = v
+        } else {
+            // 解码失败抛出异常，让上层container选择性处理，如果是可选就返回nil，如果是非可选就返回defaultCase。
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Cannot initialize \(Self.self) from invalid \(RawValue.self) value \(decoded)"))
+        }
     }
 }
 

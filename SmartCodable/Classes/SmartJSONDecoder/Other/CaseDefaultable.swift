@@ -48,3 +48,4 @@ private extension _CleanJSONDecoder {
         return T.init(rawValue: rawValue) ?? T.defaultCase
     }
 }
+

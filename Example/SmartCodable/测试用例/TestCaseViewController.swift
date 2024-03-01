@@ -78,6 +78,7 @@ extension TestCaseViewController {
                 ["name": "特殊格式 - Data",  "vc": "CaseThree_dataViewController"],
                 ["name": "特殊格式 - Float", "vc": "CaseThree_FloatViewController"],
                 ["name": "特殊格式 - URL", "vc": "CaseThree_URLViewController"],
+                ["name": "特殊格式 - Enum", "vc": "CaseThree_EnumViewController"],
                 ["name": "特殊格式 - 字典", "vc": "CaseThree_DictViewController"],
                 ["name": "特殊格式 - 数组", "vc": "CaseThree_ArrViewController"],
 
