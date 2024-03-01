@@ -242,8 +242,7 @@
 			children = (
 				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				99A494E42B9028D900393193 /* 测试用例 */,
-				996760142B3EC930006C83EC /* CodableSmaple */,
-				99675FD72B3EC930006C83EC /* Other */,
+				996760142B3EC930006C83EC /* Base */,
 				99675FDF2B3EC930006C83EC /* Smart */,
 				99675FD62B3EC930006C83EC /* ViewController.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
@@ -311,16 +310,6 @@
 				993822D12B5E5242007D3268 /* ExplainOneViewController.swift */,
 			);
 			path = "说明";
-			sourceTree = "<group>";
-		};
-		99675FD72B3EC930006C83EC /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */,
-				99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */,
-				99675FDE2B3EC930006C83EC /* ArraySafe.swift */,
-			);
-			path = Other;
 			sourceTree = "<group>";
 		};
 		99675FDF2B3EC930006C83EC /* Smart */ = {
@@ -456,9 +445,12 @@
 			path = "Disadvantage(缺点)";
 			sourceTree = "<group>";
 		};
-		996760142B3EC930006C83EC /* CodableSmaple */ = {
+		996760142B3EC930006C83EC /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */,
+				99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */,
+				99675FDE2B3EC930006C83EC /* ArraySafe.swift */,
 				996760152B3EC930006C83EC /* BaseViewController.swift */,
 				993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */,
 				996760162B3EC930006C83EC /* Complex */,
@@ -466,7 +458,7 @@
 				996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */,
 				9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */,
 			);
-			path = CodableSmaple;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		996760162B3EC930006C83EC /* Complex */ = {
@@ -481,18 +473,18 @@
 			isa = PBXGroup;
 			children = (
 				99CABA282B906A640070DED0 /* TestCaseViewController.swift */,
-				99A494E52B9028EB00393193 /* 基础测试 */,
+				99A494E52B9028EB00393193 /* 数据测试 */,
 			);
 			path = "测试用例";
 			sourceTree = "<group>";
 		};
-		99A494E52B9028EB00393193 /* 基础测试 */ = {
+		99A494E52B9028EB00393193 /* 数据测试 */ = {
 			isa = PBXGroup;
 			children = (
 				99CABA2A2B916DD30070DED0 /* CaseOne */,
 				99CABA2B2B916DE40070DED0 /* CaseTwo */,
 			);
-			path = "基础测试";
+			path = "数据测试";
 			sourceTree = "<group>";
 		};
 		99AE7D892B3EC02E00B474E5 /* Resource */ = {
