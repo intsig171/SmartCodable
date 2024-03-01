@@ -49,9 +49,9 @@ extension TestCaseViewController {
                 ["name": "字典 - 值为null",  "vc": "CaseOne_DictNullViewController"],
                 ["name": "字典 - 值类型错误", "vc": "CaseOne_DictTypeMismatchViewController"],
                 
-                ["name": "数组 - 键缺失",    "vc": "CaseOne_ArrKeylessViewController"],
-                ["name": "数组 - 值为null",  "vc": "CaseOne_ArrNullViewController"],
-                ["name": "数组 - 值类型错误", "vc": "CaseOne_ArrTypeMismatchViewController"],
+                ["name": "数组 - 键缺失",    "vc": "CaseOne_ArrayKeylessViewController"],
+                ["name": "数组 - 值为null",  "vc": "CaseOne_ArrayNullViewController"],
+                ["name": "数组 - 值类型错误", "vc": "CaseOne_ArrayTypeMismatchViewController"],
             ]
         ]
     }
@@ -78,6 +78,9 @@ extension TestCaseViewController {
                 ["name": "特殊格式 - Data",  "vc": "CaseThree_dataViewController"],
                 ["name": "特殊格式 - Float", "vc": "CaseThree_FloatViewController"],
                 ["name": "特殊格式 - URL", "vc": "CaseThree_URLViewController"],
+                ["name": "特殊格式 - 字典", "vc": "CaseThree_DictViewController"],
+                ["name": "特殊格式 - 数组", "vc": "CaseThree_ArrViewController"],
+
             ]
         ]
     }
