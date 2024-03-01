@@ -22,6 +22,8 @@ class TestCaseViewController: BaseViewController {
         dataArray = [
             testCaseOne,
             testCaseTwo,
+            testCaseThree,
+
         ]
         
         
@@ -64,6 +66,17 @@ extension TestCaseViewController {
                 
                 ["name": "数组 - 嵌套字典", "vc": "CaseTwo_ArrayNestDictViewController"],
                 ["name": "数组 - 嵌套数组", "vc": "CaseTwo_ArrayNestArrayViewController"],
+            ]
+        ]
+    }
+    
+    var testCaseThree: [String: Any] {
+        [
+            "title": "CaseTwo - 特殊数据测试",
+            "list": [
+                ["name": "特殊 - Date",  "vc": "CaseThree_dateViewController"],
+                ["name": "特殊 - Data",  "vc": "CaseThree_dataViewController"],
+                ["name": "特殊 - Float", "vc": "CaseThree_FloatViewController"],
             ]
         ]
     }

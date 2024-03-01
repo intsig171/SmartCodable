@@ -312,10 +312,14 @@ extension _CleanJSONDecoder {
         
         switch self.options.dateDecodingStrategy {
         case .deferredToDate:
-            self.storage.push(container: value)
-            defer { self.storage.popContainer() }
-            guard let double = try self.unbox(value, as: Double.self) else { return nil }
-            
+
+            var double: Double?
+            if let temp = try? self.unbox(value, as: Double.self) {
+                double = temp
+            } else if let temp = try? self.unbox(value, as: String.self) {
+                double = Double(temp)
+            }
+            guard let double = double else { return nil }
             return Date(timeIntervalSinceReferenceDate: double)
             
         case .secondsSince1970:
@@ -323,29 +327,32 @@ extension _CleanJSONDecoder {
             /**
              接将值解包为Double，然后使用适当的时间间隔自1970年以来创建Date。在这些情况下，不需要将容器推入栈中，因为值已经解包并准备好使用。
              */
-            let double = try self.unbox(value, as: Double.self)!
+            guard let double = try self.unbox(value, as: Double.self) else { return nil }
             return Date(timeIntervalSince1970: double)
             
         case .millisecondsSince1970:
-            let double = try self.unbox(value, as: Double.self)!
+            guard let double = try self.unbox(value, as: Double.self) else { return nil }
             return Date(timeIntervalSince1970: double / 1000.0)
             
         case .iso8601:
             if #available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
-                let string = try self.unbox(value, as: String.self)!
+                guard let string = try self.unbox(value, as: String.self) else { return nil }
                 guard let date = _iso8601Formatter.date(from: string) else {
-                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
+                    return nil
+//                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
                 }
                 
                 return date
             } else {
-                fatalError("ISO8601DateFormatter is unavailable on this platform.")
+                return nil
+//                fatalError("ISO8601DateFormatter is unavailable on this platform.")
             }
             
         case .formatted(let formatter):
-            let string = try self.unbox(value, as: String.self)!
+            guard let string = try self.unbox(value, as: String.self) else { return nil }
             guard let date = formatter.date(from: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
+                return nil
+//                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
             }
             
             return date

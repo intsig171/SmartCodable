@@ -86,6 +86,9 @@
 		99D945852B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */; };
 		99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945822B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift */; };
 		99D945872B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945832B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift */; };
+		99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */; };
+		99D9458C2B91C80300CC6470 /* CaseThree_dataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */; };
+		99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */; };
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +182,9 @@
 		99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNestDictViewController.swift; sourceTree = "<group>"; };
 		99D945822B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNestArrayViewController.swift; sourceTree = "<group>"; };
 		99D945832B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_ArrayNestArrayViewController.swift; sourceTree = "<group>"; };
+		99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_dateViewController.swift; sourceTree = "<group>"; };
+		99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_dataViewController.swift; sourceTree = "<group>"; };
+		99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_FloatViewController.swift; sourceTree = "<group>"; };
 		AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -483,6 +489,7 @@
 			children = (
 				99CABA2A2B916DD30070DED0 /* CaseOne */,
 				99CABA2B2B916DE40070DED0 /* CaseTwo */,
+				99D945882B91C4D500CC6470 /* CaseThree */,
 			);
 			path = "数据测试";
 			sourceTree = "<group>";
@@ -521,6 +528,16 @@
 				99D945832B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift */,
 			);
 			path = CaseTwo;
+			sourceTree = "<group>";
+		};
+		99D945882B91C4D500CC6470 /* CaseThree */ = {
+			isa = PBXGroup;
+			children = (
+				99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */,
+				99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */,
+				99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */,
+			);
+			path = CaseThree;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -775,6 +792,7 @@
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
 				996760232B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift in Sources */,
+				99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
 				99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
@@ -787,10 +805,12 @@
 				996760342B3EC930006C83EC /* SmartAnyViewController.swift in Sources */,
 				993822D22B5E5242007D3268 /* ExplainOneViewController.swift in Sources */,
 				996760332B3EC930006C83EC /* CompatibleSampleTwoViewController.swift in Sources */,
+				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,
 				996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */,
 				9967604D2B3EC930006C83EC /* CodableDecodingStrategyViewController.swift in Sources */,
 				9967602A2B3EC930006C83EC /* CompatibleIntViewController.swift in Sources */,
+				99D9458C2B91C80300CC6470 /* CaseThree_dataViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
 				99CABA2D2B916E720070DED0 /* CaseOne_DictKeylessViewController.swift in Sources */,
 				996760242B3EC930006C83EC /* CompatibleBoolViewController.swift in Sources */,
