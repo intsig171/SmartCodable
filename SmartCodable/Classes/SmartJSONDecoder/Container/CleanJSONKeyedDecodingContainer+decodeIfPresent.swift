@@ -1,5 +1,5 @@
 //
-//  CleanJSONKeyedDecodingContainer+decode+decodeIfPresent.swift
+//  CleanJSONKeyedDecodingContainer+decodeIfPresent.swift
 //  SmartCodable
 //
 //  Created by qixin on 2024/2/29.
@@ -18,10 +18,36 @@ import Foundation
 
 extension CleanJSONKeyedDecodingContainer {
     
-    
     fileprivate func optionalDecode<T: Decodable>(_ type: T.Type, entry: Any) -> T? {
         if let value = Patcher<T>.convertToType(from: entry) { return value }
         return nil
+        
+        
+//        guard let entry = self.container[key.stringValue] else {
+//            return nil
+//        }
+//
+//        self.decoder.codingPath.append(key)
+//        defer { self.decoder.codingPath.removeLast() }
+//
+//
+//        // json数据解析到对象上
+//        if let _ = T.self as? SmartDecodable.Type, let string = entry as? String {
+//            if let jsonObject = string.toJSONObject() {
+//                decoder.storage.push(container: jsonObject)
+//                defer { decoder.storage.popContainer() }
+//                if let value = try? self.decoder.unbox(jsonObject, as: type) {
+//                   return value
+//                }
+//            }
+//        } else if let value = try? self.decoder.unbox(entry, as: type) {
+//            return value
+//        } else if let value = Patcher<T>.convertToType(from: entry) {
+//            return value
+//        }
+//
+//
+//        return nil
     }
 
     

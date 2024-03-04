@@ -39,9 +39,6 @@ public typealias CodingPath = [String]
 public extension JSONDecoder.KeyDecodingStrategy {
     
     static func mapper(_ container: [CodingPath: String]) -> JSONDecoder.KeyDecodingStrategy {
-        
-        print(container)
-        
         return .custom { CodingKeysConverter(container)($0) }
     }
 }

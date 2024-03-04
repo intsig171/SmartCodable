@@ -29,10 +29,6 @@ extension CleanJSONKeyedDecodingContainer {
     
     
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
-        
-        
-        print(self.container)
-        print(key)
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
         }
