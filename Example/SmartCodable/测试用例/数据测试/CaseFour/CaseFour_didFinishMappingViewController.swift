@@ -16,8 +16,8 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
      
 
 //        单层字典的测试()
-        多层字典的测试()
-        字典中嵌套数组的测试()
+//        多层字典的测试()
+//        字典中嵌套数组的测试()
         数组嵌套字典的测试()
     }
     
@@ -33,11 +33,11 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
         ]
         
         if let model = HobbyModel.deserialize(dict: dict) {
-            print(model)
+            smartPrint(value: model)
         }
         
         if let model = HobbyClassModel.deserialize(dict: dict) {
-            print(model)
+            smartPrint(value: model)
         }
     }
     
@@ -53,21 +53,74 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
         ]
         
         if let model = PersonModel.deserialize(dict: dict) {
-            print(model)
+            smartPrint(value: model)
         }
         
-//        if let model = PersonClassModel.deserialize(dict: dict) {
-//            print(model)
-//        }
+        if let model = PersonClassModel.deserialize(dict: dict) {
+            smartPrint(value: model)
+        }
     }
     
     func 字典中嵌套数组的测试() {
+        let dict: [String: Any] = [
+            "hobbys": [
+                [
+                    "name": "睡觉1"
+                ]
+            ],
+            "optionalHobbys": [
+                [
+                    "name": "睡觉1"
+                ],
+                [
+                    "name": "睡觉2"
+                ]
+            ]
+        ]
         
+        if let model = HobbysModel.deserialize(dict: dict) {
+            smartPrint(value: model)
+        }
+        
+//        if let model = HobbysClassModel.deserialize(dict: dict) {
+//            smartPrint(value: model)
+//        }
     }
     
     func 数组嵌套字典的测试() {
+        let arr = [
+            [
+                "hobbys": [
+                    [
+                        "name": "睡觉1",
+                    ],
+                    [
+                        "name": "睡觉2",
+                    ]
+                ],
+            ]
+        ]
         
+        guard let models = [HobbysModel].deserialize(array: arr) as? [HobbysModel] else { return }
+        smartPrint(value: models)
     }
+}
+
+
+extension CaseFour_didFinishMappingViewController {
+    struct HobbysModel: SmartCodable {
+        var hobbys: [HobbyModel] = []
+//        var optionalHobbys: [HobbyModel]?
+    }
+    
+//    class HobbysClassModel: SmartCodable {
+//        var hobbys: [HobbyClassModel] = []
+//        var optionalHobbys: [HobbyClassModel]?
+//
+//        required init() { }
+//
+//
+//    }
 }
 
 extension CaseFour_didFinishMappingViewController {
@@ -82,14 +135,16 @@ extension CaseFour_didFinishMappingViewController {
         }
     }
     
-    struct PersonClassModel: SmartCodable {
+    class PersonClassModel: SmartCodable {
         var name: String?
         var hobby = HobbyModel()
         var optionalHobby: HobbyModel?
 
-        mutating func didFinishMapping() {
+        func didFinishMapping() {
             name = "我是" + (name ?? "无名者")
         }
+        
+        required init() { }
     }
 }
 
@@ -102,10 +157,13 @@ extension CaseFour_didFinishMappingViewController {
         }
     }
     
-    struct HobbyClassModel: SmartCodable {
+    class HobbyClassModel: SmartCodable {
         var name: String = ""
         
-        mutating func didFinishMapping() {
+        required init() { }
+        
+        
+        func didFinishMapping() {
             name = "我的爱好是" + name
         }
     }

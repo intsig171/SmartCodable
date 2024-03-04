@@ -10,49 +10,38 @@ import Foundation
 
 extension CleanJSONKeyedDecodingContainer {
     
-    /// 当完成decode的时候，接纳didFinishMapping方法内的改变。
-    fileprivate func didFinishMapping<T: Decodable>(_ decodeValue: T) -> T {
-        if var value = decodeValue as? SmartDecodable {
-            value.didFinishMapping()
-            if let temp = value as? T {
-                return temp
-            }
-        }
-
-        // 如果使用了SmartOptional修饰，获取被修饰的属性。
-//        if var v = PropertyWrapperValue.getSmartObject(decodeValue: decodeValue) {
-//            v.didFinishMapping()
-//        }
-
-        return decodeValue
-    }
-    
     
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         guard let entry = self.container[key.stringValue] else {
-            return try decodeIfKeyNotFound(key)
+            let value = try Patcher<T>.defaultForType()
+            return didFinishMapping(value)
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
 
-        
+        var decoded: T?
         if let _ = T.self as? SmartDecodable.Type, let string = entry as? String {
             if let jsonObject = string.toJSONObject() {
                 decoder.storage.push(container: jsonObject)
                 defer { decoder.storage.popContainer() }
                 if let value = try? self.decoder.unbox(jsonObject, as: type) {
-                   return value
+                    decoded = value
                 }
             }
         } else if let value = try? self.decoder.unbox(entry, as: type) {
-            return value
+            decoded = value
         } else if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) {
-            return value
+            decoded = value
         }
-        /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
-        throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Expected \(type) value but found null instead."))
+        
+        guard let decoded = decoded else {
+            /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Expected \(type) value but found null instead."))
+        }
+        
+        return didFinishMapping(decoded)
     }
 }
 

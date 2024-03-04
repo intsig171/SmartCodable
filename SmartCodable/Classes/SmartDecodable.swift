@@ -226,12 +226,14 @@ extension Data {
             let _decoder = createDecoder(type: type, keyStrategy: keyStrategy, options: options)
                         
             let decodeValue = try _decoder.decode(type, from: self)
-            var finishValue: [SmartDecodable] = []
-            for var item in decodeValue {
-                item.didFinishMapping()
-                finishValue.append(item)
-            }
-            return finishValue as? [T]
+            return decodeValue
+            // didFinishMapping 内部解码的时候已经实现了 废弃。
+//            var finishValue: [SmartDecodable] = []
+//            for var item in decodeValue {
+//                item.didFinishMapping()
+//                finishValue.append(item)
+//            }
+//            return finishValue as? [T]
         } catch {
             SmartLog.logError(error, className: "\(type)")
             return nil
@@ -239,15 +241,15 @@ extension Data {
     }
 }
 
-/// [SmartCodable] 类型的数组支持解析。
-extension Array: SmartDecodable where Element: SmartDecodable {
-    public mutating func didFinishMapping() {
-        // 数组下标的遍历，完成didFinishMapping的调用
-        for index in indices {
-            self[index].didFinishMapping()
-        }
-    }
-}
+/// [SmartCodable] 类型的数组支持解析。 内部已经实现，废弃。
+//extension Array: SmartDecodable where Element: SmartDecodable {
+//    public mutating func didFinishMapping() {
+//        // 数组下标的遍历，完成didFinishMapping的调用
+//        for index in indices {
+//            self[index].didFinishMapping()
+//        }
+//    }
+//}
 
 extension CodingUserInfoKey {
     /// 类型的名称

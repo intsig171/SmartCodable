@@ -154,3 +154,11 @@ extension CleanJSONKeyedDecodingContainer {
         return _CleanJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
     }
 }
+
+
+extension CleanJSONKeyedDecodingContainer {
+    func didFinishMapping<T: Decodable>(_ decodeValue: T) -> T {
+        return DecodingProcessCoordinator.didFinishMapping(decodeValue)
+    }
+
+}

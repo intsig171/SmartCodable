@@ -48,6 +48,19 @@ extension BaseViewController {
             debugPrint("属性：\(key) 的值为nil")
         }
     }
+    
+    func smartPrint(value: Any?) {
+        
+        guard let value = value else { return }
+        debugPrint("\(type(of: value))的属性打印信息：")
+        let mirr = Mirror(reflecting: value)
+        for (key, value) in mirr.children {
+            printValueType(key: key ?? "", value: value)
+        }
+        
+        print("\n")
+    }
+
 }
 
 

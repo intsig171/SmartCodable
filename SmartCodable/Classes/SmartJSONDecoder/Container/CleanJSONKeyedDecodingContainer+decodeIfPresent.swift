@@ -18,36 +18,12 @@ import Foundation
 
 extension CleanJSONKeyedDecodingContainer {
     
+    /// 可选解析不能使用统一方法，如果decoder.unbox不明确指定类型，全都走到func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? 中， 会走到decoded = try T(from: self)方法，进而初始化一个默认值。
     fileprivate func optionalDecode<T: Decodable>(_ type: T.Type, entry: Any) -> T? {
-        if let value = Patcher<T>.convertToType(from: entry) { return value }
+        if let value = Patcher<T>.convertToType(from: entry) {
+            return didFinishMapping(value)
+        }
         return nil
-        
-        
-//        guard let entry = self.container[key.stringValue] else {
-//            return nil
-//        }
-//
-//        self.decoder.codingPath.append(key)
-//        defer { self.decoder.codingPath.removeLast() }
-//
-//
-//        // json数据解析到对象上
-//        if let _ = T.self as? SmartDecodable.Type, let string = entry as? String {
-//            if let jsonObject = string.toJSONObject() {
-//                decoder.storage.push(container: jsonObject)
-//                defer { decoder.storage.popContainer() }
-//                if let value = try? self.decoder.unbox(jsonObject, as: type) {
-//                   return value
-//                }
-//            }
-//        } else if let value = try? self.decoder.unbox(entry, as: type) {
-//            return value
-//        } else if let value = Patcher<T>.convertToType(from: entry) {
-//            return value
-//        }
-//
-//
-//        return nil
     }
 
     
@@ -58,7 +34,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Bool.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Bool.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -70,7 +46,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Int.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Int.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -82,7 +58,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Int8.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Int8.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -94,7 +70,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Int16.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Int16.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -106,7 +82,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Int32.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Int32.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -118,7 +94,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Int64.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Int64.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -130,7 +106,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: UInt.self) { return value }
+        if let value = try? decoder.unbox(entry, as: UInt.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -142,7 +118,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: UInt8.self) { return value }
+        if let value = try? decoder.unbox(entry, as: UInt8.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -154,7 +130,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: UInt16.self) { return value }
+        if let value = try? decoder.unbox(entry, as: UInt16.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -166,7 +142,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: UInt32.self) { return value }
+        if let value = try? decoder.unbox(entry, as: UInt32.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -178,7 +154,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: UInt64.self) { return value }
+        if let value = try? decoder.unbox(entry, as: UInt64.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -190,7 +166,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Float.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Float.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -202,7 +178,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: Double.self) { return value }
+        if let value = try? decoder.unbox(entry, as: Double.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -214,7 +190,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let value = try? decoder.unbox(entry, as: String.self) { return value }
+        if let value = try? decoder.unbox(entry, as: String.self) { return didFinishMapping(value) }
         
         return optionalDecode(type, entry: entry)
     }
@@ -234,11 +210,11 @@ extension CleanJSONKeyedDecodingContainer {
                 decoder.storage.push(container: jsonObject)
                 defer { decoder.storage.popContainer() }
                 if let value = try? self.decoder.unbox(jsonObject, as: type) {
-                   return value
+                    return didFinishMapping(value)
                 }
             }
         } else if let value = try? decoder.unbox(entry, as: type) {
-            return value
+            return didFinishMapping(value)
         }
         
         return optionalDecode(type, entry: entry)
