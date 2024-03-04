@@ -20,6 +20,7 @@ class TestCaseViewController: BaseViewController {
        
         
         dataArray = [
+            testCaseFour,
             testCaseOne,
             testCaseTwo,
             testCaseThree,
@@ -72,7 +73,7 @@ extension TestCaseViewController {
     
     var testCaseThree: [String: Any] {
         [
-            "title": "CaseTwo - 特殊格式数据测试",
+            "title": "CaseThree - 特殊格式数据测试",
             "list": [
                 ["name": "特殊格式 - Date",  "vc": "CaseThree_dateViewController"],
                 ["name": "特殊格式 - Data",  "vc": "CaseThree_dataViewController"],
@@ -81,7 +82,19 @@ extension TestCaseViewController {
                 ["name": "特殊格式 - Enum", "vc": "CaseThree_EnumViewController"],
                 ["name": "特殊格式 - 字典", "vc": "CaseThree_DictViewController"],
                 ["name": "特殊格式 - 数组", "vc": "CaseThree_ArrViewController"],
+                ["name": "特殊格式 - json数据", "vc": "CaseThreeJSONStringViewController"],
 
+            ]
+        ]
+    }
+    
+    var testCaseFour: [String: Any] {
+        [
+            "title": "CaseFour - 功能性测试",
+            "list": [
+                ["name": "功能性 - Key解码策略",    "vc": "CaseFour_KeyStrategyViewController"],
+                ["name": "功能性 - 解码完成的回调",  "vc": "CaseFour_didFinishMappingViewController"],
+                ["name": "功能性 - 可选Model属性",  "vc": "CaseFour_OptionalModelViewController"],
             ]
         ]
     }

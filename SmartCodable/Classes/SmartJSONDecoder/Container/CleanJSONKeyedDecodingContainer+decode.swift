@@ -30,6 +30,9 @@ extension CleanJSONKeyedDecodingContainer {
     
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         
+        
+        print(self.container)
+        print(key)
         guard let entry = self.container[key.stringValue] else {
             return try decodeIfKeyNotFound(key)
         }
@@ -37,20 +40,23 @@ extension CleanJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
+
         
-        var decoded: T?
-        
-        if let value = try? self.decoder.unbox(entry, as: type) {
-            decoded = value
+        if let _ = T.self as? SmartDecodable.Type, let string = entry as? String {
+            if let jsonObject = string.toJSONObject() {
+                decoder.storage.push(container: jsonObject)
+                defer { decoder.storage.popContainer() }
+                if let value = try? self.decoder.unbox(jsonObject, as: type) {
+                   return value
+                }
+            }
+        } else if let value = try? self.decoder.unbox(entry, as: type) {
+            return value
         } else if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) {
-            decoded = value
+            return value
         }
-        
-        guard let decoded = decoded else {
-            /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Expected \(type) value but found null instead."))
-        }
-        return decoded
+        /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
+        throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Expected \(type) value but found null instead."))
     }
 }
 

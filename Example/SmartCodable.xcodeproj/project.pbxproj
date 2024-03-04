@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
 		99328D992B5138210074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
 		99328D9A2B513A300074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
@@ -79,6 +80,9 @@
 		9993D6962B91EEED0089CA68 /* CaseThree_DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6952B91EEED0089CA68 /* CaseThree_DictViewController.swift */; };
 		9993D6982B91EEF80089CA68 /* CaseThree_ArrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6972B91EEF80089CA68 /* CaseThree_ArrViewController.swift */; };
 		9993D69A2B9208020089CA68 /* CaseThree_EnumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6992B9208020089CA68 /* CaseThree_EnumViewController.swift */; };
+		9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */; };
+		9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */; };
+		9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
@@ -120,6 +124,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		8860B9435A4082D17ABC8167 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
 		99328D982B5138210074036A /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
 		993822D12B5E5242007D3268 /* ExplainOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainOneViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +184,9 @@
 		9993D6952B91EEED0089CA68 /* CaseThree_DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_DictViewController.swift; sourceTree = "<group>"; };
 		9993D6972B91EEF80089CA68 /* CaseThree_ArrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_ArrViewController.swift; sourceTree = "<group>"; };
 		9993D6992B9208020089CA68 /* CaseThree_EnumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_EnumViewController.swift; sourceTree = "<group>"; };
+		9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_didFinishMappingViewController.swift; sourceTree = "<group>"; };
+		9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_OptionalModelViewController.swift; sourceTree = "<group>"; };
+		9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_KeyStrategyViewController.swift; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		99AE7D8D2B3EC02E00B474E5 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
@@ -464,6 +472,7 @@
 		996760142B3EC930006C83EC /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				9993D6912B91DF3D0089CA68 /* Data+Extension.swift */,
 				99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */,
 				99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */,
 				99675FDE2B3EC930006C83EC /* ArraySafe.swift */,
@@ -473,7 +482,6 @@
 				996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */,
 				996760192B3EC930006C83EC /* CodableDecodingStrategyViewController.swift */,
 				9967601A2B3EC930006C83EC /* CodableBaseViewController.swift */,
-				9993D6912B91DF3D0089CA68 /* Data+Extension.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -484,6 +492,16 @@
 				996760172B3EC930006C83EC /* CodableComplex_oneViewController.swift */,
 			);
 			path = Complex;
+			sourceTree = "<group>";
+		};
+		9993D69B2B9215A40089CA68 /* CaseFour */ = {
+			isa = PBXGroup;
+			children = (
+				9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */,
+				9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */,
+				9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */,
+			);
+			path = CaseFour;
 			sourceTree = "<group>";
 		};
 		99A494E42B9028D900393193 /* 测试用例 */ = {
@@ -498,6 +516,7 @@
 		99A494E52B9028EB00393193 /* 数据测试 */ = {
 			isa = PBXGroup;
 			children = (
+				9993D69B2B9215A40089CA68 /* CaseFour */,
 				99CABA2A2B916DD30070DED0 /* CaseOne */,
 				99CABA2B2B916DE40070DED0 /* CaseTwo */,
 				99D945882B91C4D500CC6470 /* CaseThree */,
@@ -551,6 +570,7 @@
 				9993D6992B9208020089CA68 /* CaseThree_EnumViewController.swift */,
 				9993D6952B91EEED0089CA68 /* CaseThree_DictViewController.swift */,
 				9993D6972B91EEF80089CA68 /* CaseThree_ArrViewController.swift */,
+				990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */,
 			);
 			path = CaseThree;
 			sourceTree = "<group>";
@@ -766,12 +786,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */,
 				996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */,
 				996760412B3EC930006C83EC /* OptionalPropertyViewController.swift in Sources */,
 				996760222B3EC930006C83EC /* DecodeErrorPrintViewController.swift in Sources */,
 				996760302B3EC930006C83EC /* CompatibleSampleThreeViewController.swift in Sources */,
+				9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */,
 				996760432B3EC930006C83EC /* FinishMappingViewController.swift in Sources */,
 				9967603E2B3EC930006C83EC /* ComplexDataStructureSectionHeader.swift in Sources */,
+				990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */,
 				996760262B3EC930006C83EC /* CompatibleClassViewController.swift in Sources */,
 				9967604E2B3EC930006C83EC /* CodableBaseViewController.swift in Sources */,
 				9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */,
@@ -788,6 +811,7 @@
 				99D945852B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift in Sources */,
 				9967604B2B3EC930006C83EC /* CodableComplex_oneViewController.swift in Sources */,
 				996760212B3EC930006C83EC /* ArraySafe.swift in Sources */,
+				9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */,
 				996760312B3EC930006C83EC /* CompatibleSampleFourViewController.swift in Sources */,
 				996760292B3EC930006C83EC /* CompatibleStringViewController.swift in Sources */,
 				996760402B3EC930006C83EC /* ArrayAndModelViewController.swift in Sources */,

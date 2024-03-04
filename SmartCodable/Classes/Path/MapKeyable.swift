@@ -62,7 +62,7 @@ extension JSONDecoder {
         /// 自定义映射关系，仅作用于path路径对应的映射。
         case exactMap([SmartExactMap])
         
-        func toSystem() -> JSONDecoder.KeyDecodingStrategy {
+        public func toSystem() -> JSONDecoder.KeyDecodingStrategy {
             switch self {
             case .useDefaultKeys:
                 return JSONDecoder.KeyDecodingStrategy.useDefaultKeys

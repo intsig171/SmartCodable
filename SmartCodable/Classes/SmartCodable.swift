@@ -24,3 +24,4 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  * 4. 如果value是json字符串，但type不是string，则尝试对字符串jsonObject化，再尝试解析。
  *
  */
+
