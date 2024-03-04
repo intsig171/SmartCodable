@@ -473,7 +473,38 @@ extension _CleanJSONDecoder {
              * - 如果T是一个模型或模型数组：会nestedContainer 或 nestedUnkeyedContainer 创建一个容器。在容器中持有了_CleanJSONDecoder，解析属性。
              * - 如果是属性，会根据是否可选，调用decode或decodeIfPresent方法完成解析。
              */
-            self.storage.push(container: value)
+            
+            
+            // 如果是解析的是Model
+            if let t = T.self as? SmartDecodable.Type {
+                // 处理key的映射
+                func mapping(dict: [String: Any]) {
+                    var dict = dict
+                    let arr = t.mapping() ?? []
+                    for item in arr {
+                        let old = item.0
+                        let new = item.1.stringValue
+                        // dict是原始值
+                        dict.updateKeyName(oldKey: old, newKey: new)
+                    }
+                    self.storage.push(container: dict)
+                }
+                
+                if let string = value as? String, let jsonObject = string.toJSONObject() { // 可以对象化的json数据
+                    if let d = jsonObject as? [String: Any] {
+                        mapping(dict: d)
+                    } else {
+                        storage.push(container: jsonObject)
+                    }
+                } else if let dict = value as? [String: Any] {
+                   mapping(dict: dict)
+                } else {
+                    storage.push(container: value)
+                }
+            } else {
+                self.storage.push(container: value)
+            }
+            
             decoded = try T(from: self)
             self.storage.popContainer()
         }
@@ -487,3 +518,18 @@ fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
     formatter.formatOptions = .withInternetDateTime
     return formatter
 }()
+
+
+extension Dictionary where Key == String {
+    mutating func updateKeyName(oldKey: String, newKey: String) {
+        
+        
+        if let oldValue = self[oldKey] {
+            self[newKey] = oldValue
+            // 然后删除旧键
+            self.removeValue(forKey: oldKey)
+        } else {
+            
+        }
+    }
+}

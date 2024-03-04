@@ -22,15 +22,7 @@ extension CleanJSONKeyedDecodingContainer {
         
 
         var decoded: T?
-        if let _ = T.self as? SmartDecodable.Type, let string = entry as? String {
-            if let jsonObject = string.toJSONObject() {
-                decoder.storage.push(container: jsonObject)
-                defer { decoder.storage.popContainer() }
-                if let value = try? self.decoder.unbox(jsonObject, as: type) {
-                    decoded = value
-                }
-            }
-        } else if let value = try? self.decoder.unbox(entry, as: type) {
+       if let value = try? self.decoder.unbox(entry, as: type) {
             decoded = value
         } else if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) {
             decoded = value

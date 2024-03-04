@@ -205,15 +205,7 @@ extension CleanJSONKeyedDecodingContainer {
         decoder.codingPath.append(key)
         defer { decoder.codingPath.removeLast() }
         
-        if let _ = T.self as? SmartDecodable.Type, let string = entry as? String {
-            if let jsonObject = string.toJSONObject() {
-                decoder.storage.push(container: jsonObject)
-                defer { decoder.storage.popContainer() }
-                if let value = try? self.decoder.unbox(jsonObject, as: type) {
-                    return didFinishMapping(value)
-                }
-            }
-        } else if let value = try? decoder.unbox(entry, as: type) {
+        if let value = try? decoder.unbox(entry, as: type) {
             return didFinishMapping(value)
         }
         

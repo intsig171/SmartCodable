@@ -9,65 +9,73 @@
 import Foundation
 import UIKit
 import SmartCodable
+import HandyJSON
 
-struct BaseFeed123: Codable {
-    var name: String = ""
-//    var age: Int = 0
-//    var sex: Bool = false
-}
+
 
 class TestViewController : BaseViewController {
-    
-    
-//    func todo() throws -> Int {
-//        throw DecodingError.keyNotFound(CodingKey.init(intValue: 1)!, DecodingError.Context.init(codingPath: [], debugDescription: ""))
-//    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if let value = try todo() {
-//            print(value)
-//        } else {
-//            print("未执行")
-//        }
-        
-        
 
-        
-        let dict1: [String: Any] = [
-//            "arr2": NSNull(),
-//            "arr3": 1,
-//            "arr4": [2],
-            
-            "arr6": 123,
-//            "arr7": 1,
-//            "arr8": [2],
+        let dict: [String: Any] = [
+            "nickname": "Mccc",
+            "age": [
+                "ageHH": 10
+            ]
         ]
-        
-        if let model = Test1_1DictModel.deserialize(dict: dict1) {
+
+        if let model = Model.deserialize(dict: dict) {
             print(model)
         }
-
-//        let v = dict1.decode(type: Test1_1DictModel.self)
-//        print(v)
-
+        
+//        if let model = HandyModel.deserialize(from: dict) {
+//            print(model)
+//        }
     }
 }
 
-struct Test1_1DictModel: SmartCodable {
+
+extension TestViewController {
+    struct Model: SmartCodable {
+        var name: String = ""
+        var sub: SubModel = SubModel()
+        
+        
+        static func mapping() -> [SmartMapping]? {
+            return [
+                ("nickname", CodingKeys.name),
+                ("age", CodingKeys.sub)
+
+            ]
+            
+            /** 期望是这样的格式
+             * "nickname" -> CodingKeys.name
+             * ["nickname", "nickName"] -> CodingKeys.name
+             */
+        }
+        
+        struct SubModel: SmartCodable {
+            var age: Int = 0
+            
+            static func mapping() -> [SmartMapping]? {
+                return [
+                    ("ageHH", CodingKeys.age)
+                ]
+            }
+        }
+    }
     
-//    var arr1: [Int] = []
-//    var arr2: [Int] = []
-//    var arr3: Int = 0
-//    var arr4: [Int] = []
-//
-//    var arr5: [Int]?
-    var arr6: Test2?
-//    var arr7: [Int]?
-//    var arr8: [Int]?
+    struct HandyModel: HandyJSON {
+        var name: String = ""
+
+        mutating func mapping(mapper: HelpingMapper) {
+            mapper <<<
+                self.name <-- "nickname"
+        }
+    }
 }
 
-struct Test2: SmartCodable {
-    var name: String = ""
-}
+

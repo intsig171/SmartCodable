@@ -7,10 +7,16 @@
 
 import Foundation
 
+
+public typealias SmartMapping = (from: String, to: CodingKey)
+
+
 /// Smart的解码协议
 public protocol SmartDecodable: Decodable {
     /// 映射完成的完成的回调
     mutating func didFinishMapping()
+  
+    static func mapping() -> [SmartMapping]?
     
     init()
 }
@@ -18,6 +24,7 @@ public protocol SmartDecodable: Decodable {
 
 extension SmartDecodable {
     public mutating func didFinishMapping() { }
+    public static func mapping() -> [SmartMapping]? { return nil }
 }
 
 
