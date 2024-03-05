@@ -8,7 +8,6 @@
 import Foundation
 
 
-public typealias SmartMapping = (from: String, to: CodingKey)
 
 
 /// Smart的解码协议

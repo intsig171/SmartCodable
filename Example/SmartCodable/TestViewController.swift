@@ -22,7 +22,8 @@ class TestViewController : BaseViewController {
 
         let dict: [String: Any] = [
             "nickname": "Mccc",
-            "age": [
+            "realname": "xiao ming",
+            "sub": [
                 "ageHH": 10
             ]
         ]
@@ -31,9 +32,9 @@ class TestViewController : BaseViewController {
             print(model)
         }
         
-//        if let model = HandyModel.deserialize(from: dict) {
-//            print(model)
-//        }
+        if let model = HandyModel.deserialize(from: dict) {
+            print(model)
+        }
     }
 }
 
@@ -41,28 +42,22 @@ class TestViewController : BaseViewController {
 extension TestViewController {
     struct Model: SmartCodable {
         var name: String = ""
-        var sub: SubModel = SubModel()
+        var age: SubModel = SubModel()
         
         
         static func mapping() -> [SmartMapping]? {
-            return [
-                ("nickname", CodingKeys.name),
-                ("age", CodingKeys.sub)
-
+            [
+                "sub"                    --> CodingKeys.age,
+                ["nickname", "realname"] --> CodingKeys.name,
             ]
-            
-            /** 期望是这样的格式
-             * "nickname" -> CodingKeys.name
-             * ["nickname", "nickName"] -> CodingKeys.name
-             */
         }
         
         struct SubModel: SmartCodable {
             var age: Int = 0
             
             static func mapping() -> [SmartMapping]? {
-                return [
-                    ("ageHH", CodingKeys.age)
+                [
+                    "ageHH" --> CodingKeys.age
                 ]
             }
         }
@@ -73,7 +68,7 @@ extension TestViewController {
 
         mutating func mapping(mapper: HelpingMapper) {
             mapper <<<
-                self.name <-- "nickname"
+                self.name <-- ["nickname", "realname"]
         }
     }
 }

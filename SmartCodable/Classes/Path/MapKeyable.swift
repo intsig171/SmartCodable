@@ -49,6 +49,7 @@ public struct SmartExactMap {
 
 extension JSONDecoder {
     /// 解码Key的映射策略
+    @available(*, deprecated, message: "将在下个版本中删除。请在Model中实现mapping方法代替。")
     public enum SmartDecodingKey {
         /// 使用默认key
         case useDefaultKeys

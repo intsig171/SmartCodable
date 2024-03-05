@@ -475,35 +475,44 @@ extension _CleanJSONDecoder {
              */
             
             
-            // 如果是解析的是Model
-            if let t = T.self as? SmartDecodable.Type {
-                // 处理key的映射
-                func mapping(dict: [String: Any]) {
-                    var dict = dict
-                    let arr = t.mapping() ?? []
-                    for item in arr {
-                        let old = item.0
-                        let new = item.1.stringValue
-                        // dict是原始值
-                        dict.updateKeyName(oldKey: old, newKey: new)
-                    }
-                    self.storage.push(container: dict)
-                }
-                
-                if let string = value as? String, let jsonObject = string.toJSONObject() { // 可以对象化的json数据
-                    if let d = jsonObject as? [String: Any] {
-                        mapping(dict: d)
-                    } else {
-                        storage.push(container: jsonObject)
-                    }
-                } else if let dict = value as? [String: Any] {
-                   mapping(dict: dict)
-                } else {
-                    storage.push(container: value)
-                }
-            } else {
-                self.storage.push(container: value)
-            }
+//            // 如果是解析的是Model
+//            if let t = T.self as? SmartDecodable.Type {
+//                // 处理key的映射
+//                func mapping(dict: [String: Any]) {
+//                    var dict = dict
+//                    let arr = t.mapping() ?? []
+//                    for item in arr {
+//
+//                        for old in item.olds {
+//                            if dict.keys.contains(old) {
+//                                let old = item.0.first!
+//                                let new = item.1.stringValue
+//                                // dict是原始值
+//                                dict.updateKeyName(oldKey: old, newKey: new)
+//                                break
+//                            }
+//                        }
+//                    }
+//                    self.storage.push(container: dict)
+//                }
+//
+//                if let string = value as? String, let jsonObject = string.toJSONObject() { // 可以对象化的json数据
+//                    if let d = jsonObject as? [String: Any] {
+//                        mapping(dict: d)
+//                    } else {
+//                        storage.push(container: jsonObject)
+//                    }
+//                } else if let dict = value as? [String: Any] {
+//                   mapping(dict: dict)
+//                } else {
+//                    storage.push(container: value)
+//                }
+//            } else {
+//                self.storage.push(container: value)
+//            }
+            
+            let v = SmartHelpingMapper<T>.mapping(value: value)
+            self.storage.push(container: v)
             
             decoded = try T(from: self)
             self.storage.popContainer()
