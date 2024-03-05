@@ -64,7 +64,7 @@ open class SmartJSONDecoder: JSONDecoder {
 extension SmartJSONDecoder {
     
     private func _decode<T : Decodable>(_ type: T.Type, from container: Any) throws -> T {
-        let decoder = _CleanJSONDecoder(referencing: container, options: self.options)
+        let decoder = _SmartJSONDecoder(referencing: container, options: self.options)
         guard let value = try decoder.unbox(container, as: type) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON."))
         }

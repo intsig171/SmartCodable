@@ -12,7 +12,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     // MARK: Properties
     
     /// A reference to the decoder we're reading from.
-    let decoder: _CleanJSONDecoder
+    let decoder: _SmartJSONDecoder
     
     /// A reference to the container we're reading from.
     let container: [Any]
@@ -26,7 +26,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     // MARK: - Initialization
     
     /// Initializes `self` by referencing the given decoder and container.
-    init(referencing decoder: _CleanJSONDecoder, wrapping container: [Any]) {
+    init(referencing decoder: _SmartJSONDecoder, wrapping container: [Any]) {
         self.decoder = decoder
         self.container = container
         self.codingPath = decoder.codingPath
@@ -144,6 +144,6 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         
         let value = self.container[self.currentIndex]
         self.currentIndex += 1
-        return _CleanJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
+        return _SmartJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
     }
 }

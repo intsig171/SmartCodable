@@ -10,7 +10,7 @@ import Foundation
 
 
 
-extension _CleanJSONDecoder {
+extension _SmartJSONDecoder {
     fileprivate func smartDecode<T: Decodable>(_ type: T.Type) throws -> T {
         let entry = storage.topContainer
         if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) { return value }
@@ -19,7 +19,7 @@ extension _CleanJSONDecoder {
 }
 
 /// 让解析器实现SingleValueDecodingContainer协议
-extension _CleanJSONDecoder : SingleValueDecodingContainer {
+extension _SmartJSONDecoder : SingleValueDecodingContainer {
     // MARK: SingleValueDecodingContainer Methods
     
     // 此时是重写的SingleValueDecodingContainer的协议方法， 代表着此时是单容器就只有一个值。

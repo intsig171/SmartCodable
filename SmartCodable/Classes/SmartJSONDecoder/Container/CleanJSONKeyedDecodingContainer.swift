@@ -15,7 +15,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     // MARK: Properties
     
     /// A reference to the decoder we're reading from.
-    let decoder: _CleanJSONDecoder
+    let decoder: _SmartJSONDecoder
     
     /// A reference to the container we're reading from.
     let container: [String : Any]
@@ -26,7 +26,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     // MARK: - Initialization
     
     /// Initializes `self` by referencing the given decoder and container.
-    init(referencing decoder: _CleanJSONDecoder, wrapping container: [String : Any]) {
+    init(referencing decoder: _SmartJSONDecoder, wrapping container: [String : Any]) {
         self.decoder = decoder
         self.codingPath = decoder.codingPath
         self.container = container
@@ -134,7 +134,7 @@ extension CleanJSONKeyedDecodingContainer {
         defer { self.decoder.codingPath.removeLast() }
         
         let value: Any = self.container[key.stringValue] ?? NSNull()
-        return _CleanJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
+        return _SmartJSONDecoder(referencing: value, at: self.decoder.codingPath, options: self.decoder.options)
     }
 }
 

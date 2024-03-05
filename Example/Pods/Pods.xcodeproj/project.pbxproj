@@ -162,7 +162,7 @@
 		580FE14211553843A3CDF2B13DC97E6C /* SQLite-Bridging.h in Headers */ = {isa = PBXBuildFile; fileRef = 9548EAD8735CF13B03E1335794133375 /* SQLite-Bridging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		599A4EA710D33BB9D940F534BFD58EE6 /* TableInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB08B8A0D94A191F8F14C27FF867A7B /* TableInterface.swift */; };
 		59C0CE0F609F6A0C6E5A2A66CCE9B154 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A28960C5BCBE94B95B393033BAB899F /* Atomic.swift */; };
-		5BB9DC54E199BCBA9FFB31AFA542D004 /* _CleanJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF4FDDAAF9ED42DCF295D288C4AEA3 /* _CleanJSONDecoder.swift */; };
+		5BB9DC54E199BCBA9FFB31AFA542D004 /* _SmartJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF4FDDAAF9ED42DCF295D288C4AEA3 /* _SmartJSONDecoder.swift */; };
 		5BE525FF6FA14B999ED2CCC0AA4FA0CF /* FBSnapshotTestCase-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A866E61135AAC0AD4095C66CFBF4221D /* FBSnapshotTestCase-dummy.m */; };
 		5C63732124ED1F24A428F1D45FAA13BB /* bitvec.c in Sources */ = {isa = PBXBuildFile; fileRef = A1086033D75165CC8D16F40FCC382974 /* bitvec.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5C7AFC97D9A192F1B5B48DDBF5FEBF81 /* status.c in Sources */ = {isa = PBXBuildFile; fileRef = C7BE9730D72FD633600EA33D131E44E5 /* status.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -222,7 +222,7 @@
 		7C67CBD15D9B5D0B7769B2F469478332 /* FBSnapshotTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = FBB47334FA6AB477610B8CD2FF6B74CC /* FBSnapshotTestCase.m */; };
 		7D9031DCB898CD9DE37C4BD4F3FC550D /* DateFormatterTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D391134BCD244137C4C24FC9F3D435E /* DateFormatterTransform.swift */; };
 		7FAE82FEBFF1937F91D41B56C04C85E4 /* whereInt.h in Headers */ = {isa = PBXBuildFile; fileRef = 46FFDF62F5D9962EB28C1155B379203B /* whereInt.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		802DCBBD1DA2729051AB6C6773BFF890 /* _CleanJSONDecoder+Unbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10A3453BD492FF9CADFB75F71183060 /* _CleanJSONDecoder+Unbox.swift */; };
+		802DCBBD1DA2729051AB6C6773BFF890 /* _SmartJSONDecoder+Unbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10A3453BD492FF9CADFB75F71183060 /* _SmartJSONDecoder+Unbox.swift */; };
 		813AFFFBCBD0388DE6FF1673AAE267DB /* ColumnTypeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE46C340E4B91EC7FA722531BE6D4B5 /* ColumnTypeDecoder.swift */; };
 		83DE5F7D7906E07A88368BE671C9E54A /* rtree.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CF6138D7C6A8E731DA13BD2D66C2519 /* rtree.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		846C97A8C420EFD9B8C4B77ADBB1E8F5 /* TransformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A9160772EBA3EBDBA44852430ACB9B /* TransformType.swift */; };
@@ -772,7 +772,7 @@
 		73FC343C342BE4196C71A9A0F78B3524 /* UIApplication+StrictKeyWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+StrictKeyWindow.m"; path = "FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.m"; sourceTree = "<group>"; };
 		74C1E970933C2A4BADC63D83A12DB296 /* SmartJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartJSONDecoder.swift; sourceTree = "<group>"; };
 		74F1D2C207B214E0053A68F989269027 /* JoinClause.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JoinClause.swift; path = swift/source/abstract/JoinClause.swift; sourceTree = "<group>"; };
-		75BF4FDDAAF9ED42DCF295D288C4AEA3 /* _CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = _CleanJSONDecoder.swift; sourceTree = "<group>"; };
+		75BF4FDDAAF9ED42DCF295D288C4AEA3 /* _SmartJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = _SmartJSONDecoder.swift; sourceTree = "<group>"; };
 		767825513CDDC33C98AB0A7A3C9681D4 /* Pods-SmartCodable_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SmartCodable_Example-frameworks.sh"; sourceTree = "<group>"; };
 		77558DEBC53ABA99E8D4E2D6CC9BC667 /* WCDB.swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WCDB.swift-prefix.pch"; sourceTree = "<group>"; };
 		7805671FD4FDF970FB7F98A2D1C21AF1 /* ColumnResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ColumnResult.swift; path = swift/source/abstract/ColumnResult.swift; sourceTree = "<group>"; };
@@ -969,7 +969,7 @@
 		E053FCC7B9AAD9F6006F39155B54A8D0 /* SQLiteRepairKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SQLiteRepairKit.debug.xcconfig; sourceTree = "<group>"; };
 		E096F8860515067B6F0CD8D7AB11E58F /* BTPrint.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BTPrint.modulemap; sourceTree = "<group>"; };
 		E0C06B206B974A59BB1909BE61D788CA /* FBSnapshotTestCasePlatform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCasePlatform.m; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.m; sourceTree = "<group>"; };
-		E10A3453BD492FF9CADFB75F71183060 /* _CleanJSONDecoder+Unbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "_CleanJSONDecoder+Unbox.swift"; sourceTree = "<group>"; };
+		E10A3453BD492FF9CADFB75F71183060 /* _SmartJSONDecoder+Unbox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "_SmartJSONDecoder+Unbox.swift"; sourceTree = "<group>"; };
 		E1687BCA2D5089035366568970461716 /* Pods-SmartCodable_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SmartCodable_Tests-Info.plist"; sourceTree = "<group>"; };
 		E24CEFCF82CA66D759EAEAE86BF77664 /* icu.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = icu.c; path = ext/icu/icu.c; sourceTree = "<group>"; };
 		E280608AE74BFF0DE8C0C23EB33EDE23 /* StatementDelete.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StatementDelete.swift; path = swift/source/abstract/StatementDelete.swift; sourceTree = "<group>"; };
@@ -1171,8 +1171,8 @@
 		15083A45A03DD48950E9E62DB174EB1C /* Decoder */ = {
 			isa = PBXGroup;
 			children = (
-				75BF4FDDAAF9ED42DCF295D288C4AEA3 /* _CleanJSONDecoder.swift */,
-				E10A3453BD492FF9CADFB75F71183060 /* _CleanJSONDecoder+Unbox.swift */,
+				75BF4FDDAAF9ED42DCF295D288C4AEA3 /* _SmartJSONDecoder.swift */,
+				E10A3453BD492FF9CADFB75F71183060 /* _SmartJSONDecoder+Unbox.swift */,
 				74C1E970933C2A4BADC63D83A12DB296 /* SmartJSONDecoder.swift */,
 				4B35C4DE6B0D30A33973B623D646BF8A /* ModelKeyMapper.swift */,
 			);
@@ -2535,9 +2535,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BB9DC54E199BCBA9FFB31AFA542D004 /* _CleanJSONDecoder.swift in Sources */,
+				5BB9DC54E199BCBA9FFB31AFA542D004 /* _SmartJSONDecoder.swift in Sources */,
 				19845F20DD1EBC69B033B40F41860E2C /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */,
-				802DCBBD1DA2729051AB6C6773BFF890 /* _CleanJSONDecoder+Unbox.swift in Sources */,
+				802DCBBD1DA2729051AB6C6773BFF890 /* _SmartJSONDecoder+Unbox.swift in Sources */,
 				EE63ABAA68DE16EC806E2B6506BDA2E1 /* CleanJSONDecodingStorage.swift in Sources */,
 				73B09D0AD81FA0810930E3C62E9253D6 /* SmartCodingKey.swift in Sources */,
 				CCD087A6C0F0629AAE445BB532ED625B /* CleanJSONKeyedDecodingContainer.swift in Sources */,
