@@ -16,7 +16,7 @@ extension CleanJSONUnkeyedDecodingContainer {
     fileprivate mutating func explicitDecode<T: Decodable>(_ type: T.Type) throws -> T {
         guard !self.isAtEnd else { return try decodeIfAtEnd(type: type) }
         
-        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(SmartCodingKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
 
         let entry = self.container[self.currentIndex]
@@ -30,7 +30,7 @@ extension CleanJSONUnkeyedDecodingContainer {
         
         guard let decoded = decoded else {
             /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [SmartCodingKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
         }
         self.currentIndex += 1
 
@@ -44,7 +44,7 @@ extension CleanJSONUnkeyedDecodingContainer {
             self.currentIndex += 1
             return value
         } catch {
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
+            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [SmartCodingKey(index: self.currentIndex)], debugDescription: "Unkeyed container is at end."))
         }
     }
 }

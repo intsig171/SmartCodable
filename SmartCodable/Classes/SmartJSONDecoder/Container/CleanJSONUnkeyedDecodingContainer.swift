@@ -48,7 +48,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
             throw DecodingError.valueNotFound(
                 Any?.self,
                 DecodingError.Context(
-                    codingPath: self.decoder.codingPath + [CleanJSONKey(index: self.currentIndex)],
+                    codingPath: self.decoder.codingPath + [SmartCodingKey(index: self.currentIndex)],
                     debugDescription: "Unkeyed container is at end."
                 )
             )
@@ -71,7 +71,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
    
     
     public mutating func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> {
-        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(SmartCodingKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {
@@ -100,7 +100,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     }
     
     public mutating func nestedUnkeyedContainer() throws -> UnkeyedDecodingContainer {
-        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(SmartCodingKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {
@@ -133,7 +133,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     }
     
     public mutating func superDecoder() throws -> Decoder {
-        self.decoder.codingPath.append(CleanJSONKey(index: self.currentIndex))
+        self.decoder.codingPath.append(SmartCodingKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
         
         guard !self.isAtEnd else {

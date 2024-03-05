@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CleanJSONKey : CodingKey {
+struct SmartCodingKey : CodingKey {
     
     public var stringValue: String
     
@@ -34,5 +34,5 @@ struct CleanJSONKey : CodingKey {
         self.intValue = index
     }
     
-    static let `super` = CleanJSONKey(stringValue: "super")!
+    static let `super` = SmartCodingKey(stringValue: "super")!
 }

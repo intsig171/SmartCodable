@@ -120,7 +120,7 @@ extension CleanJSONKeyedDecodingContainer {
     
     @inline(__always)
     public func superDecoder() throws -> Decoder {
-        return try _superDecoder(forKey: CleanJSONKey.super)
+        return try _superDecoder(forKey: SmartCodingKey.super)
     }
     
     @inline(__always)

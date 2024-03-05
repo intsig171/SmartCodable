@@ -16,13 +16,6 @@ struct DecodingProcessCoordinator {
                 return temp
             }
         }
-
-        // 如果使用了SmartOptional修饰，获取被修饰的属性。
-//        if var v = PropertyWrapperValue.getSmartObject(decodeValue: decodeValue) {
-//            v.didFinishMapping()
-//        }
-
         return decodeValue
     }
-
 }
