@@ -467,12 +467,12 @@ extension _SmartJSONDecoder {
             let v = ModelKeyMapper<T>.convertToMappedFormat(value)
             self.storage.push(container: v)
 
-            defalutStorage.push(type: type, codingPath: codingPath)
+            defalutsStorage.recordAttributeValues(for: type, codingPath: codingPath)
             
             // 请看 说明1⃣️
             decoded = try T(from: self)
-            self.storage.popContainer()
-            self.defalutStorage.clean(type: type)
+            storage.popContainer()
+            defalutsStorage.resetRecords(for: type)
         }
         return decoded
     }

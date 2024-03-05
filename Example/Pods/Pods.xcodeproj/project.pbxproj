@@ -88,7 +88,7 @@
 		2F53741EC84A0BE1806E28F79E3F331D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523CBAB8CAF34468B5402904E418B901 /* Foundation.framework */; };
 		309C54EC9536180B960B9CB8EBD412E3 /* CustomDateFormatTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856DD5BCD7A93ADEB118136F70DA9EF0 /* CustomDateFormatTransform.swift */; };
 		30D475DF57C0C682A723231E7BCA0D14 /* FBSnapshotTestCasePlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C06B206B974A59BB1909BE61D788CA /* FBSnapshotTestCasePlatform.m */; };
-		33AB2B978448F44E5260350CE0643392 /* DefaultValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D862D1834440DB989C0637C2709CC0A /* DefaultValueStorage.swift */; };
+		33AB2B978448F44E5260350CE0643392 /* DecodingDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D862D1834440DB989C0637C2709CC0A /* DecodingDefaults.swift */; };
 		33BC540DE351661FAAA24950E165D4F1 /* MangledName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10DC7E20A001F5C3C3A156D1B8DC003 /* MangledName.swift */; };
 		3445686F7723331D145C57CDAE710E9C /* mem1.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A4DB29AAE87DB71D49CA1BAC3929E9F /* mem1.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		361EA7ABBDD80F154DDC208D9CE920DD /* Deserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C6E603ADA9CC6EF199ADAF500F85B /* Deserializer.swift */; };
@@ -400,7 +400,7 @@
 		ED71E932B7F30AD7CFD2A04968A2B5CC /* CBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9107C9841A3D2F291ABDD504795D166E /* CBridge.swift */; };
 		EE2BB691783FC80CB731681FBA144382 /* SmartAny.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A2BCD7E1C619D588E67F1C5AE2883D /* SmartAny.swift */; };
 		EE5A7F67C3AF881D4BD1DA0BB4AFEA9E /* os_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 181548F6671E72DA65A9565EDD148F21 /* os_unix.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		EE63ABAA68DE16EC806E2B6506BDA2E1 /* CleanJSONDecodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E7A4859A73703BD3431CBE3D297EEF /* CleanJSONDecodingStorage.swift */; };
+		EE63ABAA68DE16EC806E2B6506BDA2E1 /* SmartJSONDecodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E7A4859A73703BD3431CBE3D297EEF /* SmartJSONDecodingStorage.swift */; };
 		EEFF0A57765CB734CF01868904F56DA7 /* HandyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 626CDE9962A00F36924E943B4877C88E /* HandyJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF21586EC3DFF6097A58EEC87376A0C1 /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9202DC5C4E2C31CA52D890224E1FA72 /* ConstraintLayoutGuideDSL.swift */; };
 		EF4BADD0F50CEE863B5D1907093B97C6 /* vdbe.h in Headers */ = {isa = PBXBuildFile; fileRef = E69C54DC498DD5B9923A7CE274498A7D /* vdbe.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -814,7 +814,7 @@
 		8C3C9A41393214A7BD359B6837F616EB /* Interface.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Interface.swift; path = swift/source/core/interface/Interface.swift; sourceTree = "<group>"; };
 		8D5759910F92246C0179F928BFBC709D /* pager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pager.h; path = src/pager.h; sourceTree = "<group>"; };
 		8D7CE0DCEC6771D15333A074620A4D27 /* rowset.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = rowset.c; path = src/rowset.c; sourceTree = "<group>"; };
-		8D862D1834440DB989C0637C2709CC0A /* DefaultValueStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultValueStorage.swift; sourceTree = "<group>"; };
+		8D862D1834440DB989C0637C2709CC0A /* DecodingDefaults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DecodingDefaults.swift; sourceTree = "<group>"; };
 		8F6B38C0788E38EE520CD1CA8377F835 /* Handle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Handle.swift; path = swift/source/abstract/Handle.swift; sourceTree = "<group>"; };
 		8F9F36020A554C524B2A60CEA9AB17F7 /* DateFormatterTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateFormatterTransform.swift; path = Sources/DateFormatterTransform.swift; sourceTree = "<group>"; };
 		8FF9169528D9DB0CB889BD3F3673D0F0 /* FBSnapshotTestCase-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FBSnapshotTestCase-Info.plist"; sourceTree = "<group>"; };
@@ -944,7 +944,7 @@
 		D17B77A3EA1666412A99F1B1B5DC3B83 /* sqliterk_os.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = sqliterk_os.c; path = repair/sqliterk_os.c; sourceTree = "<group>"; };
 		D1A2BCD7E1C619D588E67F1C5AE2883D /* SmartAny.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartAny.swift; sourceTree = "<group>"; };
 		D1BD5E33F0E447CE0C9D47369E1C4780 /* mutex_noop.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mutex_noop.c; path = src/mutex_noop.c; sourceTree = "<group>"; };
-		D1E7A4859A73703BD3431CBE3D297EEF /* CleanJSONDecodingStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CleanJSONDecodingStorage.swift; sourceTree = "<group>"; };
+		D1E7A4859A73703BD3431CBE3D297EEF /* SmartJSONDecodingStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartJSONDecodingStorage.swift; sourceTree = "<group>"; };
 		D2413BE996C222FF31C5C9AFFE2B3C8C /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Sources/LayoutConstraintItem.swift; sourceTree = "<group>"; };
 		D246300E72A9AA9AAFFFE396840F3213 /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
 		D2510C3F50AF84E123C3D2BCF0ECA344 /* queue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = queue.h; path = src/queue.h; sourceTree = "<group>"; };
@@ -1175,6 +1175,8 @@
 				E10A3453BD492FF9CADFB75F71183060 /* _SmartJSONDecoder+Unbox.swift */,
 				74C1E970933C2A4BADC63D83A12DB296 /* SmartJSONDecoder.swift */,
 				4B35C4DE6B0D30A33973B623D646BF8A /* ModelKeyMapper.swift */,
+				D1E7A4859A73703BD3431CBE3D297EEF /* SmartJSONDecodingStorage.swift */,
+				8D862D1834440DB989C0637C2709CC0A /* DecodingDefaults.swift */,
 			);
 			name = Decoder;
 			path = SmartCodable/Classes/SmartJSONDecoder/Decoder;
@@ -1187,17 +1189,6 @@
 				FE9C729707A5477C1EF6D1BFC9BB59FA /* Pods-SmartCodable_Tests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		272FB6F8758B954E210034544AA858B2 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				D1E7A4859A73703BD3431CBE3D297EEF /* CleanJSONDecodingStorage.swift */,
-				AC5818E2B9AAEE85EF26DE3172C18AE3 /* SmartCodingKey.swift */,
-				8D862D1834440DB989C0637C2709CC0A /* DefaultValueStorage.swift */,
-			);
-			name = Other;
-			path = SmartCodable/Classes/SmartJSONDecoder/Other;
 			sourceTree = "<group>";
 		};
 		37221CE9C98D97D60E75BAAE718ACD22 /* SmartCodable */ = {
@@ -1222,6 +1213,7 @@
 				99D1300EA073BA172A082480BD53D457 /* CleanJSONUnkeyedDecodingContainer.swift */,
 				7D3BA62A845F880EF1CE11DB2B39FFE1 /* CleanJSONUnkeyedDecodingContainer+decode.swift */,
 				DF7A24334CA297E9804FE45825750A45 /* DecodingProcessCoordinator.swift */,
+				AC5818E2B9AAEE85EF26DE3172C18AE3 /* SmartCodingKey.swift */,
 			);
 			name = Container;
 			path = SmartCodable/Classes/SmartJSONDecoder/Container;
@@ -1362,7 +1354,6 @@
 			children = (
 				3CF2D19137672C4CA4C51F04F2A6D32E /* Container */,
 				15083A45A03DD48950E9E62DB174EB1C /* Decoder */,
-				272FB6F8758B954E210034544AA858B2 /* Other */,
 				7FE1BC221A67AA2B8903258EDA36A6D2 /* Patcher */,
 			);
 			name = JSONDecoder;
@@ -2538,7 +2529,7 @@
 				5BB9DC54E199BCBA9FFB31AFA542D004 /* _SmartJSONDecoder.swift in Sources */,
 				19845F20DD1EBC69B033B40F41860E2C /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */,
 				802DCBBD1DA2729051AB6C6773BFF890 /* _SmartJSONDecoder+Unbox.swift in Sources */,
-				EE63ABAA68DE16EC806E2B6506BDA2E1 /* CleanJSONDecodingStorage.swift in Sources */,
+				EE63ABAA68DE16EC806E2B6506BDA2E1 /* SmartJSONDecodingStorage.swift in Sources */,
 				73B09D0AD81FA0810930E3C62E9253D6 /* SmartCodingKey.swift in Sources */,
 				CCD087A6C0F0629AAE445BB532ED625B /* CleanJSONKeyedDecodingContainer.swift in Sources */,
 				D4799E5B68418356C5EC96821D1D3AD1 /* CleanJSONKeyedDecodingContainer+decode.swift in Sources */,
@@ -2548,7 +2539,7 @@
 				3B828202FA8904C04D670892C9D23ABD /* DecodingError+Extension.swift in Sources */,
 				903653C022197EB44B1B7339A05404CC /* DecodingProcessCoordinator.swift in Sources */,
 				399A102C332369391C05D1D7669D9749 /* DefaultPatcher.swift in Sources */,
-				33AB2B978448F44E5260350CE0643392 /* DefaultValueStorage.swift in Sources */,
+				33AB2B978448F44E5260350CE0643392 /* DecodingDefaults.swift in Sources */,
 				0C4DFEC60CBFE98F54FC7360282FC9D2 /* Patcher.swift in Sources */,
 				EE2BB691783FC80CB731681FBA144382 /* SmartAny.swift in Sources */,
 				7722013D7EF49917B45EB1F7948B354A /* SmartCaseDefaultable.swift in Sources */,

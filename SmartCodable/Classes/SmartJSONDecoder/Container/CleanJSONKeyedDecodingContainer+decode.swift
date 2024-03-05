@@ -14,7 +14,7 @@ extension CleanJSONKeyedDecodingContainer {
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
         guard let entry = self.container[key.stringValue] else {
 
-            if let v: T = self.decoder.defalutStorage.getValue(key: key, at: codingPath) {
+            if let v: T = self.decoder.defalutsStorage.getValue(forKey: key, atPath: codingPath) {
                 return didFinishMapping(v)
             } else {
                 let value = try Patcher<T>.defaultForType()

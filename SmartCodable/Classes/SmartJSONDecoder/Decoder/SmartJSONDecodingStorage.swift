@@ -1,14 +1,13 @@
 // 
-//  CleanJSONDecodingStorage.swift
-//  CleanJSON
+//  SmartJSONDecodingStorage.swift
+//  SmartCodable
 //
-//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
-//  Copyright © 2018 Pircate. All rights reserved.
+//  Created by Mccc on 2024/3/4.
 //
 
 import Foundation
 
-struct CleanJSONDecodingStorage {
+struct SmartJSONDecodingStorage {
     
     /// The container stack.
     /// Elements may be any one of the JSON types (NSNull, NSNumber, String, Array, [String : Any]).

@@ -10,9 +10,9 @@ import Foundation
 final class _SmartJSONDecoder: Decoder {
     
     /// The decoder's storage.
-    var storage: CleanJSONDecodingStorage
+    var storage: SmartJSONDecodingStorage
     
-    var defalutStorage: DefaultValueStorage
+    var defalutsStorage: DecodingDefaults
     
     /// Options set on the top-level decoder.
     let options: SmartJSONDecoder.Options
@@ -29,11 +29,11 @@ final class _SmartJSONDecoder: Decoder {
     
     /// Initializes `self` with the given top-level container and options.
     init(referencing container: Any, at codingPath: [CodingKey] = [], options: SmartJSONDecoder.Options) {
-        self.storage = CleanJSONDecodingStorage()
+        self.storage = SmartJSONDecodingStorage()
         self.storage.push(container: container)
         self.codingPath = codingPath
         self.options = options
-        self.defalutStorage = DefaultValueStorage()
+        self.defalutsStorage = DecodingDefaults()
     }
     
     // MARK: - Decoder Methods
