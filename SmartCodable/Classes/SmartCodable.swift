@@ -11,19 +11,19 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
 
-/** 待思考的地方
- * 1. 是否可以支持解析失败，使用Model中设置的默认值。
+/** 待完成的需求
+ * 1. ❌ 是否可以支持解析失败，使用Model中设置的默认值。
  *   - 目前只能等待官方的更新。
  *
- * 2. 模型属性的可选解析，可以不使用属性包装器么？
- *   - 目前没办法解决循环引用的问题。
+ * 2. ✅ 模型属性的可选解析，可以不使用属性包装器么？
+ *   - 不再重写JSONKeyedDecodingContainer的协议方法。
  *
- * 3. 属性包装器的时候，可以不强制要求是class么？（涉及到didfinishMapping的值改变）
- *   - 目前没法解决泛型属性包装器初始化的问题，所以目前还是需要使用class。
+ * 3. ✅ 属性包装器的时候，可以不强制要求是class么？（涉及到didfinishMapping的值改变）
+ *   - 不再重写JSONKeyedDecodingContainer的协议方法。
  *
- * 4. 【完成】如果value是json字符串，但type不是string，则尝试对字符串jsonObject化，再尝试解析。
+ * 4. ✅ 如果value是json字符串，但type不是string，则尝试对字符串jsonObject化，再尝试解析。
  *
- * 5. key的解析，建议每个Model中设置，当解码到Model的时候，获取解析策略，进行解析。
+ * 5. ✅ key的解析，建议每个Model中设置，当解码到Model的时候，获取解析策略，进行解析。
  *
  */
 

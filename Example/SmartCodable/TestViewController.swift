@@ -21,19 +21,12 @@ class TestViewController : BaseViewController {
         
 
         let dict: [String: Any] = [
-            "nickname": "Mccc",
-            "realname": "xiao ming",
-            "sub": [
-                "ageHH": 10
-            ]
+            "name": "Mccc",
         ]
 
         if let model = Model.deserialize(dict: dict) {
             print(model)
-        }
-        
-        if let model = HandyModel.deserialize(from: dict) {
-            print(model)
+            print(model.name)
         }
     }
 }
@@ -41,36 +34,9 @@ class TestViewController : BaseViewController {
 
 extension TestViewController {
     struct Model: SmartCodable {
-        var name: String = ""
-        var age: SubModel = SubModel()
-        
-        
-        static func mapping() -> [SmartMapping]? {
-            [
-                "sub"                    --> CodingKeys.age,
-                ["nickname", "realname"] --> CodingKeys.name,
-            ]
-        }
-        
-        struct SubModel: SmartCodable {
-            var age: Int = 0
-            
-            static func mapping() -> [SmartMapping]? {
-                [
-                    "ageHH" --> CodingKeys.age
-                ]
-            }
-        }
+        var name: String?
     }
-    
-    struct HandyModel: HandyJSON {
-        var name: String = ""
 
-        mutating func mapping(mapper: HelpingMapper) {
-            mapper <<<
-                self.name <-- ["nickname", "realname"]
-        }
-    }
 }
 
 
