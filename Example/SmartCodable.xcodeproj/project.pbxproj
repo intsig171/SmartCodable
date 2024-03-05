@@ -516,10 +516,10 @@
 		99A494E52B9028EB00393193 /* 数据测试 */ = {
 			isa = PBXGroup;
 			children = (
-				9993D69B2B9215A40089CA68 /* CaseFour */,
 				99CABA2A2B916DD30070DED0 /* CaseOne */,
 				99CABA2B2B916DE40070DED0 /* CaseTwo */,
 				99D945882B91C4D500CC6470 /* CaseThree */,
+				9993D69B2B9215A40089CA68 /* CaseFour */,
 			);
 			path = "数据测试";
 			sourceTree = "<group>";

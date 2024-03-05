@@ -12,31 +12,35 @@ import SmartCodable
 import HandyJSON
 
 
-
 class TestViewController : BaseViewController {
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
         let dict: [String: Any] = [
-            "name": "Mccc",
+            "name123": "Mccc",
         ]
 
+
         if let model = Model.deserialize(dict: dict) {
-            print(model)
-            print(model.name)
+            print("model = \(model)")
         }
     }
-}
-
-
-extension TestViewController {
+    
     struct Model: SmartCodable {
-        var name: String?
-    }
+        
 
+        var name: String = "abc"
+        var age: Int = 10
+        
+        var sub = SubModel()
+    }
+    
+    struct SubModel: SmartCodable {
+        var name11: String = "xiaoming"
+    }
 }
 
 

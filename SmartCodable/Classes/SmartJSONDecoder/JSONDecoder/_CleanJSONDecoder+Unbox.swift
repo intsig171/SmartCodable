@@ -465,21 +465,16 @@ extension _CleanJSONDecoder {
                 guard value is [String: Any] else { return nil }
             }
             
-            
-            /** decoded = try T(from: self)。这行代码是Swift中Codable解析的关键部分。
-             * 目的：将外部数据源获取的原始数据转换为Swift中具体的类型。
-             * 含义：“尝试使用当前的解码器（self）作为数据源来创建一个类型为 T 的新实例。”这一过程可能会抛出错误，因为数据可能与 T 类型不匹配，或者数据本身就是不完整或不正确的，所以这个调用是一个 try 表达式，需要被 catch 语句捕获错误或者使用 try? 或 try! 来处理。（这里的 T 指的是遵守 Decodable 协议的任意类型。该代码尝试通过调用类型 T 的 init(from:) 初始化器来创建该类型的实例，这个初始化器是 Decodable 协议的一部分。self 在这里指的是解码器本身，通常是一个 Decoder实例，它持有或者可以访问要解码的数据。）
-             * 解析：
-             * - 如果T是一个模型或模型数组：会nestedContainer 或 nestedUnkeyedContainer 创建一个容器。在容器中持有了_CleanJSONDecoder，解析属性。
-             * - 如果是属性，会根据是否可选，调用decode或decodeIfPresent方法完成解析。
-             */
-            
-            
+
             let v = SmartHelpingMapper<T>.mapping(value: value)
             self.storage.push(container: v)
+
+            defalutStorage.push(type: type, codingPath: codingPath)
             
+            // 请看 说明1⃣️
             decoded = try T(from: self)
             self.storage.popContainer()
+            self.defalutStorage.clean(type: type)
         }
         return decoded
     }
@@ -506,3 +501,13 @@ extension Dictionary where Key == String {
         }
     }
 }
+
+
+/** 说明1⃣️
+ * decoded = try T(from: self)。这行代码是Swift中Codable解析的关键部分。
+ * 目的：将外部数据源获取的原始数据转换为Swift中具体的类型。
+ * 含义：“尝试使用当前的解码器（self）作为数据源来创建一个类型为 T 的新实例。”这一过程可能会抛出错误，因为数据可能与 T 类型不匹配，或者数据本身就是不完整或不正确的，所以这个调用是一个 try 表达式，需要被 catch 语句捕获错误或者使用 try? 或 try! 来处理。（这里的 T 指的是遵守 Decodable 协议的任意类型。该代码尝试通过调用类型 T 的 init(from:) 初始化器来创建该类型的实例，这个初始化器是 Decodable 协议的一部分。self 在这里指的是解码器本身，通常是一个 Decoder实例，它持有或者可以访问要解码的数据。）
+ * 解析：
+ * - 如果T是一个模型或模型数组：会nestedContainer 或 nestedUnkeyedContainer 创建一个容器。在容器中持有了_CleanJSONDecoder，解析属性。
+ * - 如果是属性，会根据是否可选，调用decode或decodeIfPresent方法完成解析。
+ */

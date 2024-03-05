@@ -29,6 +29,9 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     init(referencing decoder: _CleanJSONDecoder, wrapping container: [String : Any]) {
         self.decoder = decoder
         self.codingPath = decoder.codingPath
+        
+        
+        
 
         // 先对json数据格式化
         switch decoder.options.keyDecodingStrategy {

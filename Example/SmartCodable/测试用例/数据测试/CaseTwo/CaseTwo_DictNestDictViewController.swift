@@ -15,20 +15,20 @@ class CaseTwo_DictNestDictViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
        
         let dict: [String: Any] = [
-            "name": "father",
+//            "name": "father",
             "age": 30,
-            "love": [
-                "name": "basketball",
-                "time": 10
-            ],
-            "son": [
-                "name": "son",
-                "age": 4,
-                "love": [
-                    "name": "sleep",
-                    "time": 4
-                ],
-            ]
+//            "love": [
+//                "name": "basketball",
+//                "time": 10
+//            ],
+//            "son": [
+//                "name": "son",
+//                "age": 4,
+//                "love": [
+//                    "name": "sleep",
+//                    "time": 4
+//                ],
+//            ]
         ]
 
        
@@ -42,8 +42,8 @@ class CaseTwo_DictNestDictViewController: BaseCompatibilityViewController {
 
 extension CaseTwo_DictNestDictViewController {
     struct FatherModel: SmartCodable {
-        var name: String = ""
-        var age: Int = 0
+        var name: String = "father"
+        var age: Int = 100
         var love: Love = Love()
         var son: SonModel = SonModel()
     }
@@ -55,7 +55,7 @@ extension CaseTwo_DictNestDictViewController {
     }
     
     struct Love: SmartCodable {
-        var name: String = ""
-        var time: CGFloat = 0.0
+        var name: String = "足球"
+        var time: CGFloat = 5.5
     }
 }

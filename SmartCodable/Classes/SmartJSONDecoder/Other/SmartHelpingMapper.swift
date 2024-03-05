@@ -9,14 +9,14 @@ import Foundation
 
 public typealias SmartMapping = (olds: [String], new: CodingKey)
 
-infix operator -->
+infix operator <--
 
-public func -->(left: String, right: CodingKey) -> SmartMapping {
-    [left] --> right
+public func <--(left: CodingKey, right: String) -> SmartMapping {
+    left <-- [right]
 }
 
-public func -->(left: [String], right: CodingKey) -> SmartMapping {
-    (left, right)
+public func <--(left: CodingKey, right: [String]) -> SmartMapping {
+    (right, left)
 }
 
 
