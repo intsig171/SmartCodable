@@ -62,3 +62,18 @@ struct SmartHelpingMapper<T> {
         return dict
     }
 }
+extension String {
+    
+    fileprivate func toJSONObject() -> Any? {
+        // 过滤掉非 JSON 格式字符串
+        guard hasPrefix("{") || hasPrefix("[") else { return nil }
+        
+        guard let data = data(using: .utf8),
+              let jsonObject = try? JSONSerialization.jsonObject(with: data) else {
+            return nil
+        }
+        
+        return jsonObject
+    }
+}
+

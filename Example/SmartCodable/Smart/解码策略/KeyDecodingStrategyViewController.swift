@@ -51,28 +51,28 @@ class KeyDecodingStrategyViewController: BaseViewController {
         // "Mccc2" 没能解析成功，因为字段未匹配上。
 
         
-        // 3. 使用SmartGlobalMap，本次解析全部替换。
-        let keys = [
-            SmartGlobalMap(from: "nick_name", to: "nickName"),
-            SmartGlobalMap(from: "realName", to: "nickName"),
-        ]
-        guard let feedTwo = FeedTwo.deserialize(dict: dict, keyStrategy: .globalMap(keys)) else { return }
-        print("feedTwo = \(feedTwo)")
-        print("\n")
-        // feedTwo = FeedTwo(nickName: "Mccc1", two: Two(nickName: "Mccc2", three: [Three(nickName: "Mccc3")]))
-
-
-
-        // 4. 使用SmartGlobalMap，本次解析全部替换。
-        let keys2 = [
-            SmartExactMap(path: "", from: "nick_name", to: "nickName"),
-            SmartExactMap(path: "two", from: "realName", to: "nickName"),
-            SmartExactMap(path: "two.three", from: "nick_name", to: "nickName"),
-        ]
-        guard let feedThree = FeedTwo.deserialize(dict: dict, keyStrategy: .exactMap(keys2)) else { return }
-        print("feedThree = \(feedThree)")
-        print("\n")
-        // feedThree = FeedTwo(nickName: "Mccc1", two: Two(nickName: "Mccc2", three: [Three(nickName: "Mccc3")]))
+//        // 3. 使用SmartGlobalMap，本次解析全部替换。
+//        let keys = [
+//            SmartGlobalMap(from: "nick_name", to: "nickName"),
+//            SmartGlobalMap(from: "realName", to: "nickName"),
+//        ]
+//        guard let feedTwo = FeedTwo.deserialize(dict: dict, keyStrategy: .globalMap(keys)) else { return }
+//        print("feedTwo = \(feedTwo)")
+//        print("\n")
+//        // feedTwo = FeedTwo(nickName: "Mccc1", two: Two(nickName: "Mccc2", three: [Three(nickName: "Mccc3")]))
+//
+//
+//
+//        // 4. 使用SmartGlobalMap，本次解析全部替换。
+//        let keys2 = [
+//            SmartExactMap(path: "", from: "nick_name", to: "nickName"),
+//            SmartExactMap(path: "two", from: "realName", to: "nickName"),
+//            SmartExactMap(path: "two.three", from: "nick_name", to: "nickName"),
+//        ]
+//        guard let feedThree = FeedTwo.deserialize(dict: dict, keyStrategy: .exactMap(keys2)) else { return }
+//        print("feedThree = \(feedThree)")
+//        print("\n")
+//        // feedThree = FeedTwo(nickName: "Mccc1", two: Two(nickName: "Mccc2", three: [Three(nickName: "Mccc3")]))
 
     }
 }
