@@ -9,7 +9,7 @@ target 'SmartCodable_Example' do
 #  pod 'CleanJSON'
   pod 'SnapKit'
   pod 'BTPrint'
-  
+  pod 'WCDB.swift'
 
   target 'SmartCodable_Tests' do
     inherit! :search_paths

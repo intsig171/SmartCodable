@@ -20,10 +20,11 @@ class TestCaseViewController: BaseViewController {
        
         
         dataArray = [
-            testCaseFour,
             testCaseOne,
             testCaseTwo,
             testCaseThree,
+            testCaseFour,
+            testCaseFive
 
         ]
         
@@ -95,6 +96,17 @@ extension TestCaseViewController {
                 ["name": "功能性 - Key解码策略",    "vc": "CaseFour_KeyStrategyViewController"],
                 ["name": "功能性 - 解码完成的回调",  "vc": "CaseFour_didFinishMappingViewController"],
                 ["name": "功能性 - 可选Model属性",  "vc": "CaseFour_OptionalModelViewController"],
+            ]
+        ]
+    }
+    
+    
+    var testCaseFive: [String: Any] {
+        [
+            "title": "CaseFive - 杂项测试",
+            "list": [
+                ["name": "杂项测试 - 兼容WCDB",    "vc": "CaseFive_wcdbViewController"],
+
             ]
         ]
     }
