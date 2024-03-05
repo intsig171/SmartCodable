@@ -68,7 +68,7 @@
 		21B71CBFE18C8A24D9198B694A6BE31E /* sqliterk_pager.h in Headers */ = {isa = PBXBuildFile; fileRef = 16FD68B874A011B86E45F603758E7DBA /* sqliterk_pager.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		220D6AC9B1B1EC8EFFB204F9C1EAC842 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE47F7A7E2B1CFFBB905C0AAEC936C9 /* ConstraintMakerEditable.swift */; };
 		226966243B0E8593A9883E7DE7C24546 /* CleanJSONUnkeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D1300EA073BA172A082480BD53D457 /* CleanJSONUnkeyedDecodingContainer.swift */; };
-		2285F42E1DD2F180DD6EBED52343C75A /* SmartHelpingMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B35C4DE6B0D30A33973B623D646BF8A /* SmartHelpingMapper.swift */; };
+		2285F42E1DD2F180DD6EBED52343C75A /* ModelKeyMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B35C4DE6B0D30A33973B623D646BF8A /* ModelKeyMapper.swift */; };
 		2307EFF154B93A7CF3BBD066F9D2479E /* Pods-SmartCodable_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FA84A6FC991F1497F1DC0F7EA5CAD8 /* Pods-SmartCodable_Tests-dummy.m */; };
 		245DA35A0C392F8A369661C0B1B73653 /* LiteralValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00A65D5564CEEF50BBD61D8F2FD2632 /* LiteralValue.swift */; };
 		24658CFD39BCB4586D56C427F8EA751D /* BuiltInBasicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F969262DCA2D6487B0D4D16C2D27A66 /* BuiltInBasicType.swift */; };
@@ -693,7 +693,7 @@
 		4A4EA2EB865D2DE7B06F9A5DE63434FD /* pager.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = pager.c; path = src/pager.c; sourceTree = "<group>"; };
 		4AC3B1A4A0F63CA9CDB13F6874D3B2A2 /* Convertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Convertible.swift; path = swift/source/abstract/Convertible.swift; sourceTree = "<group>"; };
 		4AF22340AD569C44778FA1440AD43BDE /* TransformOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = Source/TransformOf.swift; sourceTree = "<group>"; };
-		4B35C4DE6B0D30A33973B623D646BF8A /* SmartHelpingMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartHelpingMapper.swift; sourceTree = "<group>"; };
+		4B35C4DE6B0D30A33973B623D646BF8A /* ModelKeyMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ModelKeyMapper.swift; sourceTree = "<group>"; };
 		4B5EE7514E483D9FE43C59C7ECF92C5A /* ReflectionHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReflectionHelper.swift; path = Source/ReflectionHelper.swift; sourceTree = "<group>"; };
 		4B63ED289B5580F645DA3225F58A9A55 /* ThreadLocal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThreadLocal.swift; path = swift/source/util/ThreadLocal.swift; sourceTree = "<group>"; };
 		4B882D619BB4F3DBCA3958CF51481D0F /* Pods-SmartCodable_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SmartCodable_Example.modulemap"; sourceTree = "<group>"; };
@@ -1177,6 +1177,7 @@
 				E10A3453BD492FF9CADFB75F71183060 /* _CleanJSONDecoder+Unbox.swift */,
 				B7242973B54EC189006F360E660E2FBD /* SmartDecoder.swift */,
 				74C1E970933C2A4BADC63D83A12DB296 /* SmartJSONDecoder.swift */,
+				4B35C4DE6B0D30A33973B623D646BF8A /* ModelKeyMapper.swift */,
 			);
 			name = Decoder;
 			path = SmartCodable/Classes/SmartJSONDecoder/Decoder;
@@ -1197,7 +1198,6 @@
 				D1E7A4859A73703BD3431CBE3D297EEF /* CleanJSONDecodingStorage.swift */,
 				AC5818E2B9AAEE85EF26DE3172C18AE3 /* SmartCodingKey.swift */,
 				8D862D1834440DB989C0637C2709CC0A /* DefaultValueStorage.swift */,
-				4B35C4DE6B0D30A33973B623D646BF8A /* SmartHelpingMapper.swift */,
 			);
 			name = Other;
 			path = SmartCodable/Classes/SmartJSONDecoder/Other;
@@ -2560,7 +2560,7 @@
 				060CB61430A86F8D012CC7709E2D15FD /* SmartDecodable.swift in Sources */,
 				E08CBB9B29D5769220782321904582AD /* SmartDecoder.swift in Sources */,
 				9D944B8838DB0FF983A54696169BDA9B /* SmartEncodable.swift in Sources */,
-				2285F42E1DD2F180DD6EBED52343C75A /* SmartHelpingMapper.swift in Sources */,
+				2285F42E1DD2F180DD6EBED52343C75A /* ModelKeyMapper.swift in Sources */,
 				1D96724BF9B674056350E68B812A8A43 /* SmartJSONDecoder.swift in Sources */,
 				99E5C9DDB0FB53DACF617B025CED9F9D /* SmartLog.swift in Sources */,
 				CAD37290541D8EF7DFA8E20743CA23E5 /* TypePatcher.swift in Sources */,

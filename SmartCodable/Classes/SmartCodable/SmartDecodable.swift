@@ -15,7 +15,7 @@ public protocol SmartDecodable: Decodable {
     /// 映射完成的完成的回调
     mutating func didFinishMapping()
   
-    static func mapping() -> [SmartMapping]?
+    static func mapping() -> [MappingRelationship]?
     
     init()
 }
@@ -23,7 +23,7 @@ public protocol SmartDecodable: Decodable {
 
 extension SmartDecodable {
     public mutating func didFinishMapping() { }
-    public static func mapping() -> [SmartMapping]? { return nil }
+    public static func mapping() -> [MappingRelationship]? { return nil }
 }
 
 
@@ -177,7 +177,7 @@ extension Data {
 //        if let key = CodingUserInfoKey.typeName {
 //            userInfo.updateValue(type, forKey: key)
 //        }
-//        
+//
 //        if let userInfoKey = CodingUserInfoKey.originData, let jsonObj = serialize() {
 //            userInfo.updateValue(jsonObj, forKey: userInfoKey)
 //        }

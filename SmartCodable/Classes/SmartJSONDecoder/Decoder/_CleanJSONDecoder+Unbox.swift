@@ -466,7 +466,7 @@ extension _CleanJSONDecoder {
             }
             
 
-            let v = SmartHelpingMapper<T>.mapping(value: value)
+            let v = ModelKeyMapper<T>.convertToMappedFormat(value)
             self.storage.push(container: v)
 
             defalutStorage.push(type: type, codingPath: codingPath)
