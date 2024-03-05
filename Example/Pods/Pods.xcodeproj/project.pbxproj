@@ -376,7 +376,6 @@
 		DEDE79F24C29684E5F3AB33DDC0EF63F /* Subquery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD369A76BDB1E48501955006E71FD7F /* Subquery.swift */; };
 		DF24CE81C8CA841B807B63E1FED38259 /* TransformOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CB6705476D382E214C05652327D9B9 /* TransformOf.swift */; };
 		E02E8C0E9E953C1F548002EBEE3A3E58 /* delete.c in Sources */ = {isa = PBXBuildFile; fileRef = F77EF5CEE1C93702AC486EBF01815D64 /* delete.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		E08CBB9B29D5769220782321904582AD /* SmartDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7242973B54EC189006F360E660E2FBD /* SmartDecoder.swift */; };
 		E0D595792CD84F104894E16543C642F0 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0C043C5BEE1B3F9AE90DAC415564D2 /* Lock.swift */; };
 		E1B62B71CCAF33520555C4F21EDAE5C5 /* WCDBOptimizedSQLCipher-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ADCC07E1352466C5B7FAEBC9B8D0B77 /* WCDBOptimizedSQLCipher-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E1DA5BC429E61EEFFD7BA0B6F97E6928 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523CBAB8CAF34468B5402904E418B901 /* Foundation.framework */; };
@@ -899,7 +898,6 @@
 		B3CF92365D6AE0F35C3602CF6C0872AE /* WCDBOptimizedSQLCipher */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = WCDBOptimizedSQLCipher; path = sqlcipher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44DF2334DD2E4F2D5D511616F4057E5 /* keywordhash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = keywordhash.h; sourceTree = "<group>"; };
 		B5C0181F0EB5709678412856D997E268 /* FBSnapshotTestCase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FBSnapshotTestCase.debug.xcconfig; sourceTree = "<group>"; };
-		B7242973B54EC189006F360E660E2FBD /* SmartDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartDecoder.swift; sourceTree = "<group>"; };
 		B834BADD7EE941CFE34F69C94A440B02 /* os_wcdb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = os_wcdb.h; path = src/os_wcdb.h; sourceTree = "<group>"; };
 		B846C7E3CBA589BE8CD1837BEDB56B23 /* StatementReindex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StatementReindex.swift; path = swift/source/abstract/StatementReindex.swift; sourceTree = "<group>"; };
 		B8806F755BE113A550706BFA831470A4 /* SQLiteRepairKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SQLiteRepairKit.h; path = repair/SQLiteRepairKit.h; sourceTree = "<group>"; };
@@ -1175,7 +1173,6 @@
 			children = (
 				75BF4FDDAAF9ED42DCF295D288C4AEA3 /* _CleanJSONDecoder.swift */,
 				E10A3453BD492FF9CADFB75F71183060 /* _CleanJSONDecoder+Unbox.swift */,
-				B7242973B54EC189006F360E660E2FBD /* SmartDecoder.swift */,
 				74C1E970933C2A4BADC63D83A12DB296 /* SmartJSONDecoder.swift */,
 				4B35C4DE6B0D30A33973B623D646BF8A /* ModelKeyMapper.swift */,
 			);
@@ -2558,7 +2555,6 @@
 				1A389F0663109A1526B199F3D1FF1AF5 /* SmartCodable.swift in Sources */,
 				F7229673804D6A06F696CE01F01C65EB /* SmartCodable-dummy.m in Sources */,
 				060CB61430A86F8D012CC7709E2D15FD /* SmartDecodable.swift in Sources */,
-				E08CBB9B29D5769220782321904582AD /* SmartDecoder.swift in Sources */,
 				9D944B8838DB0FF983A54696169BDA9B /* SmartEncodable.swift in Sources */,
 				2285F42E1DD2F180DD6EBED52343C75A /* ModelKeyMapper.swift in Sources */,
 				1D96724BF9B674056350E68B812A8A43 /* SmartJSONDecoder.swift in Sources */,
