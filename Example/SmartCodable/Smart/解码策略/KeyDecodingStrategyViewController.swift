@@ -44,7 +44,7 @@ class KeyDecodingStrategyViewController: BaseViewController {
         
         
         // 2. 蛇形命名转驼峰命名
-        guard let feedTwo = FeedTwo.deserialize(dict: dict, keyStrategy: .convertFromSnakeCase) else { return }
+        guard let feedTwo = FeedTwo.deserialize(dict: dict) else { return }
         print("feedTwo = \(feedTwo)")
         print("\n")
         // feedTwo = FeedTwo(nickName: "Mccc1", two: Two(nickName: "", three: [Three(nickName: "Mccc3")]))

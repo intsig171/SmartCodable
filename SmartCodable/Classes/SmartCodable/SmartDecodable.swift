@@ -51,7 +51,7 @@ extension SmartDecodable {
     /// - Parameter dict: 字典
     /// - Parameter options: 解码策略
     /// - Returns: 模型
-    public static func deserialize(dict: [AnyHashable: Any]?, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
+    public static func deserialize(dict: [AnyHashable: Any]?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
         guard let _dict = dict else {
             SmartLog.logDebug("要解析的字典为nil", className: "\(self)")
             return nil
@@ -66,14 +66,14 @@ extension SmartDecodable {
             return nil
         }
         
-        return deserialize(data: _jsonData, keyStrategy: keyStrategy, options: options)
+        return deserialize(data: _jsonData, options: options)
     }
     
     /// 反序列化成模型
     /// - Parameter json: json字符串
     /// - Parameter options: 解码策略
     /// - Returns: 模型
-    public static func deserialize(json: String?, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
+    public static func deserialize(json: String?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
         guard let _json = json else {
             SmartLog.logDebug("要解析的json字符串为nil", className: "\(self)")
             return nil
@@ -84,18 +84,18 @@ extension SmartDecodable {
             return nil
         }
         
-        return deserialize(data: jsonData, keyStrategy: keyStrategy, options: options)
+        return deserialize(data: jsonData, options: options)
     }
     
     
-    public static func deserialize(data: Data?, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
+    public static func deserialize(data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
         guard let _data = data else {
             SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
             return nil
         }
         
         do {
-            return try _data._deserializeDict(type: Self.self, keyStrategy: keyStrategy, options: options)
+            return try _data._deserializeDict(type: Self.self, options: options)
         } catch  {
             return nil
         }
@@ -111,7 +111,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter array: 数组
     /// - Parameter options: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(array: [Any]?, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
+    public static func deserialize(array: [Any]?, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
 
         guard let _arr = array else {
             SmartLog.logDebug("要解析的数组为nil", className: "\(self)")
@@ -127,7 +127,7 @@ extension Array where Element: SmartDecodable {
             SmartLog.logDebug("要解析的数组转data失败", className: "\(self)")
             return nil
         }
-        return deserialize(data: _jsonData, keyStrategy: keyStrategy, options: options)
+        return deserialize(data: _jsonData, options: options)
     }
     
     
@@ -135,7 +135,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter json: json字符串
     /// - Parameter options: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(json: String?, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
+    public static func deserialize(json: String?, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
         guard let _json = json else {
             SmartLog.logDebug("要解析的json为nil", className: "\(self)")
             return nil
@@ -147,18 +147,18 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        return deserialize(data: _jsonData, keyStrategy: keyStrategy, options: options)
+        return deserialize(data: _jsonData, options: options)
     }
     
     
-    public static func deserialize(data: Data?, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
+    public static func deserialize(data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
         guard let _data = data else {
             SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
             return nil
         }
         
         do {
-            return try _data._deserializeArray(type: Self.self, keyStrategy: keyStrategy, options: options)
+            return try _data._deserializeArray(type: Self.self, options: options)
         } catch  {
             return nil
         }
@@ -168,19 +168,19 @@ extension Array where Element: SmartDecodable {
 
 extension Data {
 
-    fileprivate func createDecoder<T>(type: T.Type, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) -> JSONDecoder {
+    fileprivate func createDecoder<T>(type: T.Type, options: [JSONDecoder.SmartOption]? = nil) -> JSONDecoder {
         let _decoder = SmartJSONDecoder()
         
         var userInfo = _decoder.userInfo
 
-        // 设置userInfo
-        if let key = CodingUserInfoKey.typeName {
-            userInfo.updateValue(type, forKey: key)
-        }
-        
-        if let userInfoKey = CodingUserInfoKey.originData, let jsonObj = serialize() {
-            userInfo.updateValue(jsonObj, forKey: userInfoKey)
-        }
+//        // 设置userInfo
+//        if let key = CodingUserInfoKey.typeName {
+//            userInfo.updateValue(type, forKey: key)
+//        }
+//        
+//        if let userInfoKey = CodingUserInfoKey.originData, let jsonObj = serialize() {
+//            userInfo.updateValue(jsonObj, forKey: userInfoKey)
+//        }
         
         if let _options = options {
             for _option in _options {
@@ -197,12 +197,6 @@ extension Data {
             }
         }
         
-        if let strategy = keyStrategy {
-            _decoder.keyDecodingStrategy = strategy.toSystem()
-            if let key = CodingUserInfoKey.keyDecodingStrategy {
-                userInfo.updateValue(strategy, forKey: key)
-            }
-        }
         
         _decoder.userInfo = userInfo
         
@@ -211,10 +205,10 @@ extension Data {
     
     
     /// 字典
-    fileprivate func _deserializeDict<T>(type: T.Type, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) throws -> T? where T: SmartDecodable {
+    fileprivate func _deserializeDict<T>(type: T.Type, options: [JSONDecoder.SmartOption]? = nil) throws -> T? where T: SmartDecodable {
 
         do {
-            let _decoder = createDecoder(type: type, keyStrategy: keyStrategy, options: options)
+            let _decoder = createDecoder(type: type, options: options)
             var obj = try _decoder.decode(type, from: self)
             obj.didFinishMapping()
             return obj
@@ -226,20 +220,13 @@ extension Data {
     
     
     /// 数组
-    fileprivate func _deserializeArray<T>(type: [T].Type, keyStrategy: JSONDecoder.SmartDecodingKey? = nil, options: [JSONDecoder.SmartOption]? = nil) throws -> [T]? where T: SmartDecodable {
+    fileprivate func _deserializeArray<T>(type: [T].Type, options: [JSONDecoder.SmartOption]? = nil) throws -> [T]? where T: SmartDecodable {
 
         do {
-            let _decoder = createDecoder(type: type, keyStrategy: keyStrategy, options: options)
+            let _decoder = createDecoder(type: type, options: options)
                         
             let decodeValue = try _decoder.decode(type, from: self)
             return decodeValue
-            // didFinishMapping 内部解码的时候已经实现了 废弃。
-//            var finishValue: [SmartDecodable] = []
-//            for var item in decodeValue {
-//                item.didFinishMapping()
-//                finishValue.append(item)
-//            }
-//            return finishValue as? [T]
         } catch {
             SmartLog.logError(error, className: "\(type)")
             return nil
@@ -247,24 +234,15 @@ extension Data {
     }
 }
 
-/// [SmartCodable] 类型的数组支持解析。 内部已经实现，废弃。
-//extension Array: SmartDecodable where Element: SmartDecodable {
-//    public mutating func didFinishMapping() {
-//        // 数组下标的遍历，完成didFinishMapping的调用
-//        for index in indices {
-//            self[index].didFinishMapping()
-//        }
-//    }
-//}
 
-extension CodingUserInfoKey {
-    /// 类型的名称
-    static var typeName = CodingUserInfoKey.init(rawValue: "Stamrt.typeName")
-    /// 原始的字典
-    static var originData = CodingUserInfoKey.init(rawValue: "Stamrt.originData")
-    /// 解码策略
-    static var keyDecodingStrategy = CodingUserInfoKey.init(rawValue: "Stamrt.keyDecodingStrategy")
-}
+//extension CodingUserInfoKey {
+//    /// 类型的名称
+//    static var typeName = CodingUserInfoKey.init(rawValue: "Stamrt.typeName")
+//    /// 原始的字典
+//    static var originData = CodingUserInfoKey.init(rawValue: "Stamrt.originData")
+//    /// 解码策略
+//    static var keyDecodingStrategy = CodingUserInfoKey.init(rawValue: "Stamrt.keyDecodingStrategy")
+//}
 
 
 // MARK: - 扩展实现

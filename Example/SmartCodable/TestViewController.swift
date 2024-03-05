@@ -23,6 +23,7 @@ class TestViewController : BaseViewController {
             "name123": "Mccc",
         ]
 
+        
 
         if let model = Model.deserialize(dict: dict) {
             print("model = \(model)")
