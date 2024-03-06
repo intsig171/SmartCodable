@@ -20,8 +20,11 @@ class TestViewController : BaseViewController {
         
 
         let dict: [String: Any] = [
-            "age": NSNull(),
+            "age1": "mccc",
+            "sub": "Mccc"
         ]
+        
+//        valueNotFound(Swift.Int, Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "age", intValue: nil)], debugDescription: "Expected Int value but found null instead.", underlyingError: nil))
 
     
 //        if let model = dict.decode(type: Model.self) {
@@ -36,11 +39,11 @@ class TestViewController : BaseViewController {
     
     struct Model: SmartCodable {
         
-
+//
 //        var name: String = "abc"
-        var age: Int = 10
+//        var age: Int = 10
         
-//        var sub = SubModel()
+        var sub = SubModel()
     }
     
     struct SubModel: SmartCodable {

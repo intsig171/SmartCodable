@@ -31,6 +31,7 @@ public struct SmartConfig {
         }
     }
     
+    
     /// 是否开启断言（debug模式有效）
     /// 开启之后，遇到解析失败的地方就会执行断言，更直接的提醒使用者这个地方解析失败了。
     public static var openErrorAssert: Bool = false
@@ -205,24 +206,24 @@ fileprivate struct ErrorInfo {
         var parts: [String] = []
         
         if let type = type, !type.isEmpty {
-            parts.append("错误类型: '\(type)'")
+            parts.append("错误类型: \(type)")
         }
         
         if let location = location, !location.isEmpty {
             parts.append("模型名称：\(location)")
         }
-        
-        if let paths = codingPath, paths.count > 1 {
-            let pathInfo = paths.map { $0.stringValue }.joined(separator: " → ")
-            parts.append("解析路径：" + pathInfo)
-        }
-        
+                
         if let fieldName = fieldName {
             var fieldInfo = fieldName
             if let fieldType = fieldType, !fieldType.isEmpty {
                 fieldInfo += " | 类型\(fieldType)"
             }
             parts.append("属性信息：\(fieldInfo)")
+        }
+        
+        if let paths = codingPath, paths.count > 1 {
+            let pathInfo = paths.map { $0.stringValue }.joined(separator: " → ")
+            parts.append("解析路径：" + pathInfo)
         }
         
         if let reason = reason, !reason.isEmpty {

@@ -11,35 +11,42 @@ import Foundation
 extension SmartJSONKeyedDecodingContainer {
     
     
-    fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
+    fileprivate func getJsonValue(type: Any.Type, forKey key: CodingKey) -> Any? {
+        if let entry = self.container[key.stringValue], !(entry is NSNull) {
+            return entry
+        }
+        return nil
+    }
+    
+    /// 解析失败的非可选兼容
+    fileprivate func smartDecode<T: Decodable>(forKey key: Key, entry: Any? = nil) throws -> T {
         
-        func defaultValue() throws -> T {
-            if let v: T = self.decoder.defalutsStorage.getValue(forKey: key, atPath: codingPath) {
-                return v
+        func logInfo() {
+            let className = decoder.defalutsStorage.typeName
+            let path = decoder.codingPath
+            if let entry = entry {
+                if entry is NSNull {
+                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+                    SmartLog.logError(error, className: className)
+                } else {
+                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
+                    SmartLog.logError(error, className: className)
+                }
             } else {
-                let v = try Patcher<T>.defaultForType()
-                return v
+                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+                SmartLog.logError(error, className: className)
             }
         }
         
-        // keyless
-        guard let entry = self.container[key.stringValue] else {
-            let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: codingPath)
-            SmartLog.logError(error, className: self.decoder.defalutsStorage.typeName)
-            return didFinishMapping(try defaultValue())
-        }
+        logInfo()
         
-        self.decoder.codingPath.append(key)
-        defer { self.decoder.codingPath.removeLast() }
-        
-
         var decoded: T
-        if let value = try? self.decoder.unbox(entry, as: type) { // 正常解析
+        if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
             decoded = value
-        } else if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
+        } else if let value: T = decoder.defalutsStorage.getValue(forKey: key, atPath: codingPath) {
             decoded = value
-        } else { // 使用默认值
-            decoded = try defaultValue()
+        } else {
+            decoded = try Patcher<T>.defaultForType()
         }
         return didFinishMapping(decoded)
     }
@@ -49,77 +56,227 @@ extension SmartJSONKeyedDecodingContainer {
 extension SmartJSONKeyedDecodingContainer {
     @inline(__always)
     public func decode(_ type: Bool.Type, forKey key: Key) throws -> Bool {
-        return try explicitDecode(Bool.self, forKey: key)
+        
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: Bool.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: Int.Type, forKey key: Key) throws -> Int {
-        return try explicitDecode(Int.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+            
+        guard let value = try? self.decoder.unbox(entry, as: Int.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: Int8.Type, forKey key: Key) throws -> Int8 {
-        return try explicitDecode(Int8.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: Int8.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: Int16.Type, forKey key: Key) throws -> Int16 {
-        return try explicitDecode(Int16.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: Int16.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: Int32.Type, forKey key: Key) throws -> Int32 {
-        return try explicitDecode(Int32.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: Int32.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: Int64.Type, forKey key: Key) throws -> Int64 {
-        return try explicitDecode(Int64.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: Int64.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: UInt.Type, forKey key: Key) throws -> UInt {
-        return try explicitDecode(UInt.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: UInt.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: UInt8.Type, forKey key: Key) throws -> UInt8 {
-        return try explicitDecode(UInt8.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: UInt8.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: UInt16.Type, forKey key: Key) throws -> UInt16 {
-        return try explicitDecode(UInt16.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: UInt16.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: UInt32.Type, forKey key: Key) throws -> UInt32 {
-        return try explicitDecode(UInt32.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: UInt32.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: UInt64.Type, forKey key: Key) throws -> UInt64 {
-        return try explicitDecode(UInt64.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: UInt64.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: Float.Type, forKey key: Key) throws -> Float {
-        return try explicitDecode(Float.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: Float.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: Double.Type, forKey key: Key) throws -> Double {
-        return try explicitDecode(Double.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: Double.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode(_ type: String.Type, forKey key: Key) throws -> String {
-        return try explicitDecode(String.self, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: String.self) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
     
     @inline(__always)
     public func decode<T : Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
-        return try explicitDecode(type, forKey: key)
+        self.decoder.codingPath.append(key)
+        defer { self.decoder.codingPath.removeLast() }
+        
+        guard let entry = getJsonValue(type: type, forKey: key) else {
+            return try smartDecode(forKey: key)
+        }
+        
+        guard let value = try? self.decoder.unbox(entry, as: type) else {
+            return try smartDecode(forKey: key, entry: entry)
+        }
+        return value
     }
-    
 }
