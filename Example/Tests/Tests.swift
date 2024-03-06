@@ -4,7 +4,7 @@ import HandyJSON
 import CleanJSON
 
 
-let count = 1000 // or 1, 10, 100, 1000, 10000
+let count = 10000 // or 1, 10, 100, 1000, 10000
 let data = airportsJSON(count: count)
 
 class Tests: XCTestCase {
@@ -69,7 +69,7 @@ class Tests: XCTestCase {
     // 0.045
     func testSmartCodable() {
         measure {
-            guard let objects = [Smart].deserialize(data: data) as? [Smart] else {
+            guard let objects = [Smart].deserialize(data: data) else {
                 return
             }
             XCTAssertEqual(objects.count, count)

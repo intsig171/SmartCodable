@@ -112,7 +112,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter array: 数组
     /// - Parameter options: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(array: [Any]?, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
+    public static func deserialize(array: [Any]?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
 
         guard let _arr = array else {
             SmartLog.logDebug("要解析的数组为nil", className: "\(self)")
@@ -136,7 +136,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter json: json字符串
     /// - Parameter options: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(json: String?, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
+    public static func deserialize(json: String?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
         guard let _json = json else {
             SmartLog.logDebug("要解析的json为nil", className: "\(self)")
             return nil
@@ -152,7 +152,7 @@ extension Array where Element: SmartDecodable {
     }
     
     
-    public static func deserialize(data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> [Element?]? {
+    public static func deserialize(data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
         guard let _data = data else {
             SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
             return nil
@@ -212,7 +212,6 @@ extension Data {
 
         do {
             let _decoder = createDecoder(type: type, options: options)
-                        
             let decodeValue = try _decoder.decode(type, from: self)
             return decodeValue
         } catch {
@@ -221,16 +220,6 @@ extension Data {
         }
     }
 }
-
-
-//extension CodingUserInfoKey {
-//    /// 类型的名称
-//    static var typeName = CodingUserInfoKey.init(rawValue: "Stamrt.typeName")
-//    /// 原始的字典
-//    static var originData = CodingUserInfoKey.init(rawValue: "Stamrt.originData")
-//    /// 解码策略
-//    static var keyDecodingStrategy = CodingUserInfoKey.init(rawValue: "Stamrt.keyDecodingStrategy")
-//}
 
 
 // MARK: - 扩展实现
