@@ -24,13 +24,7 @@ class TestViewController : BaseViewController {
             "sub": "Mccc"
         ]
         
-//        valueNotFound(Swift.Int, Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "age", intValue: nil)], debugDescription: "Expected Int value but found null instead.", underlyingError: nil))
 
-    
-//        if let model = dict.decode(type: Model.self) {
-//            print(model)
-//        }
-        
         
         if let model = Model.deserialize(dict: dict) {
             print("model = \(model)")

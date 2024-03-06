@@ -23,6 +23,21 @@ extension DecodingError {
     struct UnKeyed {
         
     }
+    
+    struct Nested {
+        static func keyNotFound<Key: CodingKey>(_ key: Key, codingPath: [CodingKey], isUnkeyed: Bool = false) -> DecodingError {
+            let debugDescription = isUnkeyed
+                ? "Cannot get UnkeyedDecodingContainer -- no value found for key \("\(key) (\"\(key.stringValue)\")")"
+                : "Cannot get \(KeyedDecodingContainer<Key>.self) -- no value found for key \("\(key) (\"\(key.stringValue)\")")"
+            return DecodingError.keyNotFound(
+                key,
+                DecodingError.Context(
+                    codingPath: codingPath,
+                    debugDescription: debugDescription
+                )
+            )
+        }
+    }
 }
 
 

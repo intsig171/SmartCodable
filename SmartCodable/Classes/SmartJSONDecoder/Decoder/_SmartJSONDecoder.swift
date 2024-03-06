@@ -40,66 +40,27 @@ final class _SmartJSONDecoder: Decoder {
     
     public func container<Key>(keyedBy type: Key.Type) throws -> KeyedDecodingContainer<Key> {
         
-        
-        
         guard !(self.storage.topContainer is NSNull) else {
-            // ⚠️： 日志输出，进行了兼容了
-//            throw DecodingError.Nested.valueNotFound(
-//                KeyedDecodingContainer<Key>.self,
-//                codingPath: codingPath,
-//                debugDescription: "Cannot get keyed decoding container -- found null value instead."
-//            )
-            
-            
-            let container = SmartJSONKeyedDecodingContainer<Key>(
-                referencing: self,
-                wrapping: [:]
-            )
+            let container = SmartJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
             return KeyedDecodingContainer(container)
-
         }
         
         guard let topContainer = self.storage.topContainer as? [String : Any] else {
-            // ⚠️： 日志输出，进行了兼容了
-//            throw DecodingError._typeMismatch(
-//                at: codingPath,
-//                expectation: [String : Any].self,
-//                reality: storage.topContainer
-//            )
-            
-            let container = SmartJSONKeyedDecodingContainer<Key>(
-                referencing: self,
-                wrapping: [:]
-            )
+            let container = SmartJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: [:])
             return KeyedDecodingContainer(container)
         }
         
-        let container = SmartJSONKeyedDecodingContainer<Key>(
-            referencing: self,
-            wrapping: topContainer
-        )
+        let container = SmartJSONKeyedDecodingContainer<Key>(referencing: self, wrapping: topContainer)
         return KeyedDecodingContainer(container)
     }
     
     public func unkeyedContainer() throws -> UnkeyedDecodingContainer {
         
         guard !(self.storage.topContainer is NSNull) else {
-            // ⚠️： 日志输出，进行了兼容了
-//            throw DecodingError.Nested.valueNotFound(
-//                UnkeyedDecodingContainer.self,
-//                codingPath: codingPath,
-//                debugDescription: "Cannot get unkeyed decoding container -- found null value instead."
-//            )
             return SmartSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
         }
         
         guard let topContainer = self.storage.topContainer as? [Any] else {
-            // ⚠️： 日志输出，进行了兼容了
-//            throw DecodingError._typeMismatch(
-//                at: codingPath,
-//                expectation: [Any].self,
-//                reality: storage.topContainer
-//            )
             return SmartSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
         }
         
