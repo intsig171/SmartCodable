@@ -90,7 +90,7 @@ final class _SmartJSONDecoder: Decoder {
 //                codingPath: codingPath,
 //                debugDescription: "Cannot get unkeyed decoding container -- found null value instead."
 //            )
-            return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
+            return SmartSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
         }
         
         guard let topContainer = self.storage.topContainer as? [Any] else {
@@ -100,10 +100,10 @@ final class _SmartJSONDecoder: Decoder {
 //                expectation: [Any].self,
 //                reality: storage.topContainer
 //            )
-            return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
+            return SmartSONUnkeyedDecodingContainer(referencing: self, wrapping: [])
         }
         
-        return CleanJSONUnkeyedDecodingContainer(referencing: self, wrapping: topContainer)
+        return SmartSONUnkeyedDecodingContainer(referencing: self, wrapping: topContainer)
     }
     
     public func singleValueContainer() throws -> SingleValueDecodingContainer {

@@ -1,5 +1,5 @@
 //
-//  CleanJSONUnkeyedDecodingContainer+decode.swift
+//  SmartSONUnkeyedDecodingContainer+decode.swift
 //  SmartCodable
 //
 //  Created by qixin on 2024/2/28.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension CleanJSONUnkeyedDecodingContainer {
+extension SmartSONUnkeyedDecodingContainer {
     fileprivate func didFinishMapping<T: Decodable>(_ decodeValue: T) -> T {
         return DecodingProcessCoordinator.didFinishMapping(decodeValue)
     }
@@ -45,7 +45,7 @@ extension CleanJSONUnkeyedDecodingContainer {
     }
 }
 
-extension CleanJSONUnkeyedDecodingContainer {
+extension SmartSONUnkeyedDecodingContainer {
     public mutating func decode(_ type: Bool.Type) throws -> Bool {
         return try explicitDecode(Bool.self)
     }

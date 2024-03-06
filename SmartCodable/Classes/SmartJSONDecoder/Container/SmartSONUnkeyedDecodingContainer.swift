@@ -1,14 +1,12 @@
-// 
-//  CleanJSONUnkeyedDecodingContainer.swift
-//  CleanJSON
 //
-//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/11
-//  Copyright © 2018 Pircate. All rights reserved.
+//  SmartSONUnkeyedDecodingContainer+decode.swift
+//  SmartCodable
 //
-
+//  Created by qixin on 2024/2/28.
+//
 import Foundation
 
-struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
+struct SmartSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     // MARK: Properties
     
     /// A reference to the decoder we're reading from.
@@ -123,7 +121,7 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
 //                                              DecodingError.Context(codingPath: self.codingPath,
 //                                                                    debugDescription: "Cannot get keyed decoding container -- found null value instead."))
             self.currentIndex += 1
-            return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+            return SmartSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
         }
         
         guard let array = value as? [Any] else {
@@ -131,11 +129,11 @@ struct CleanJSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
 //            throw DecodingError._typeMismatch(at: self.codingPath, expectation: [Any].self, reality: value)
 
             self.currentIndex += 1
-            return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
+            return SmartSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
         }
         
         self.currentIndex += 1
-        return CleanJSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
+        return SmartSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
     }
     
     public mutating func superDecoder() throws -> Decoder {
