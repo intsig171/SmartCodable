@@ -11,23 +11,49 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
 
-/** 待完成的需求 【❌未完成   ✅已完成】
- * 1. ✅ 是否可以支持解析失败，使用Model中设置的默认值。
- *   - 重写解码器
+/** 【V 3.0.0】待完成的需求 【❌未完成   ✅已完成】
+ * 1. ✅ 默认值支持
+ *   - 说明：解码失败并且类型兼容失败，使用Model属性设置的默认值填充。
+ *   - 结论：重写解码器，解码Model类型的时候，初始化该类型，通过Mirror方式获取并记录属性名以及对应的值。
  *
- * 2. ✅ 模型属性的可选解析，可以不使用属性包装器么？
- *   - 不再重写JSONKeyedDecodingContainer的协议方法。
+ * 2. ✅ 删除SmartOptional
+ *   - 说明：不使用属性包装器解决模型属性的可选解析
+ *   - 结论：放弃重写系统的JSONKeyedDecodingContainer的协议方法，该用重写整改解码器，自然就不会导致循环调用。
  *
- * 3. ✅ 属性包装器的时候，可以不强制要求是class么？（涉及到didfinishMapping的值改变）
- *   - 不再重写JSONKeyedDecodingContainer的协议方法。
+ * 3. ✅ 属性包装器支持修饰struct
+ *   - 说明：考虑到didfinishMapping的使用，属性包装器只能修饰class。
+ *   - 结论：同2
  *
- * 4. ✅ 如果value是json字符串，但type不是string，则尝试对字符串jsonObject化，再尝试解析。
+ * 4. ✅ 支持内置json字符串的对象化解析
+ *   - 说明：字典中的值是可对象的json字符串（可以转字典或数组），目前不支持转义为对象解析。
+ *   - 结论：内部判断类型，如果属性类型继承了SmartCodable，并且数据值是可对象的json字符串，就转义处理。
  *
- * 5. ✅ key的解析，建议每个Model中设置，当解码到Model的时候，获取解析策略，进行解析。
+ * 5. ✅ 解析key的映射支持Model内处理
+ *   - 说明：像HandyJSON的mapping方法一样，支持Model内进行key的映射。
+ *   - 结论：当前解码类型继承了SmartCodable，对当前codingPath路径下的key对应关系进行映射处理，
+ *          即：ModelKeyMapper的功能。
  *
- * 6. ❌ 日志捕获
+ * 6. ✅ 日志捕获优化
+ *   - 说明：当解析失败，需要兼容时候，期望抛出相关日志，引起开发者警觉，做相应的优化处理（优化数据/优化属性声明）。
+ *   - 结论：已经完成。
  *
- * 7. ❌ 性能测试
+ * 7. ❌ 性能优化
+ *   - 说明：理论上SmartCodable的解析性能是劣于Codable，强于HandyJSON的。
+ *          希望通过优化算法/逻辑实现/减少类型判断和转换，提升解析性能。
+ *   - 结论：
  *
+ * 8. ❌ 整体测试
+ *   - 说明：穷尽测试场景，包含但不限于：
+ *        数据测试：
+ *          * 支持的所有类型的可选属性的测试（keyless / null / typeMismatch）
+ *          * 支持的所有类型的非选属性的测试（keyless / null / typeMismatch）
+ *          * 特殊类型（Date / Data / URL 等）
+ *          * 多层级的嵌套结构
+ *        功能测试：
+ *          * key的映射
+ *          * 解码完成的回调
+ *          * WCDB的兼容性
+ *
+ * 9. ❌ 更新使用文档
  */
 
