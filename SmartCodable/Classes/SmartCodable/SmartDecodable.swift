@@ -172,18 +172,7 @@ extension Data {
     fileprivate func createDecoder<T>(type: T.Type, options: [JSONDecoder.SmartOption]? = nil) -> JSONDecoder {
         let _decoder = SmartJSONDecoder()
         
-        let userInfo = _decoder.userInfo
-        _decoder.userInfo = userInfo
 
-//        // 设置userInfo
-//        if let key = CodingUserInfoKey.typeName {
-//            userInfo.updateValue(type, forKey: key)
-//        }
-//
-//        if let userInfoKey = CodingUserInfoKey.originData, let jsonObj = serialize() {
-//            userInfo.updateValue(jsonObj, forKey: userInfoKey)
-//        }
-        
         if let _options = options {
             for _option in _options {
                 switch _option {
@@ -198,8 +187,6 @@ extension Data {
                 }
             }
         }
-        
-        
         
         return _decoder
     }

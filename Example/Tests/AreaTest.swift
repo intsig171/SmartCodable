@@ -9,8 +9,8 @@
 import XCTest
 import SmartCodable
 import HandyJSON
-import ObjectMapper
 import HandyJSON
+import CleanJSON
 
 
 let areaCount = 31
@@ -29,7 +29,7 @@ class AreaTest: XCTestCase {
         super.tearDown()
     }
     
-    
+    // 0.048
     func testAreaHandyJSON() {
         measure {
             let json = String(data: areaData, encoding: .utf8)
@@ -38,6 +38,7 @@ class AreaTest: XCTestCase {
         }
     }
     
+    // 0.013
     func testAreaCodable() {
         measure {
             do {
@@ -49,8 +50,34 @@ class AreaTest: XCTestCase {
             }
         }
     }
+    
+    // 0.021
+    func testCleanCodable() {
+        measure {
+            do {
+                let decoder = CleanJSONDecoder()
+                let objects = try decoder.decode([AreaCodable].self, from: areaData)
+                XCTAssertEqual(objects.count, areaCount)
+            } catch {
+                XCTAssertNil(error)
+            }
+        }
+    }
 
+    // 0.024
+    func testAreaSmartJSONDecoder() {
+        measure {
+            do {
+                let decoder = SmartJSONDecoder()
+                let objects = try decoder.decode([AreaCodable].self, from: areaData)
+                XCTAssertEqual(objects.count, areaCount)
+            } catch {
+                XCTAssertNil(error)
+            }
+        }
+    }
 
+    // 0.035
     func testAreaSmart() {
         measure {
             guard let objects = [AreaSmart].deserialize(data: areaData) as? [AreaSmart] else {
