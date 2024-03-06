@@ -15,7 +15,6 @@ class CaseOne_DictNullViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         let json = nullJson
         
         explicitType(json: json)

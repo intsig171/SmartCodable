@@ -13,7 +13,6 @@ class BaseCompatibilityViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
     }
 }
 

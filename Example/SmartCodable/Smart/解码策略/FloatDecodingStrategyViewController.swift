@@ -15,7 +15,6 @@ class FloatDecodingStrategyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .error
 
         let json = """
         {

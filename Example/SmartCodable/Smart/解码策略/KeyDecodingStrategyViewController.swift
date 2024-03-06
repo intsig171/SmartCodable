@@ -23,7 +23,6 @@ class KeyDecodingStrategyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
 
         let dict: [String: Any] = [
             "nick_name": "Mccc1",

@@ -18,7 +18,6 @@ class CompatibleSampleFiveViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        SmartConfig.debugMode = .error
 
   
         let arr = [

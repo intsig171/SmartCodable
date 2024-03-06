@@ -31,7 +31,6 @@ class FinishMappingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
         
         
         // 1⃣️ 单容器验证

@@ -15,6 +15,7 @@ public protocol SmartDecodable: Decodable {
     /// 映射完成的完成的回调
     mutating func didFinishMapping()
   
+    /// 映射关系
     static func mapping() -> [MappingRelationship]?
     
     init()
@@ -171,7 +172,8 @@ extension Data {
     fileprivate func createDecoder<T>(type: T.Type, options: [JSONDecoder.SmartOption]? = nil) -> JSONDecoder {
         let _decoder = SmartJSONDecoder()
         
-        var userInfo = _decoder.userInfo
+        let userInfo = _decoder.userInfo
+        _decoder.userInfo = userInfo
 
 //        // 设置userInfo
 //        if let key = CodingUserInfoKey.typeName {
@@ -198,7 +200,6 @@ extension Data {
         }
         
         
-        _decoder.userInfo = userInfo
         
         return _decoder
     }
@@ -288,10 +289,7 @@ extension String {
 extension Array {
     /// 数组转json字符串
     fileprivate func toJSONString() -> String? {
-        if (!JSONSerialization.isValidJSONObject(self)) {
-            return nil
-        }
-        
+        guard JSONSerialization.isValidJSONObject(self) else { return nil }
         do {
             let data = try JSONSerialization.data(withJSONObject: self, options: [])
             let json = String(data: data, encoding: String.Encoding.utf8)
@@ -302,9 +300,9 @@ extension Array {
     }
 }
 
-extension Data {
-    fileprivate func serialize() -> Any? {
-        let value = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
-        return value
-    }
-}
+//extension Data {
+//    fileprivate func serialize() -> Any? {
+//        let value = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
+//        return value
+//    }
+//}

@@ -19,7 +19,6 @@ class DictionaryAndModelViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SmartConfig.debugMode = .verbose
         
         
         let dict = [

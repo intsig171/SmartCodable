@@ -15,7 +15,6 @@ class CompatibleSampleSixViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
         
         
         let arr = [

@@ -7,15 +7,6 @@
 
 import Foundation
 
-
-
-extension _SmartJSONDecoder {
-    fileprivate func smartDecode<T: Decodable>(_ type: T.Type) throws -> T {
-        let entry = storage.topContainer
-        return try Patcher<T>.patchWithConvertOrDefault(value: entry)
-    }
-}
-
 /// 让解析器实现SingleValueDecodingContainer协议
 extension _SmartJSONDecoder : SingleValueDecodingContainer {
     // MARK: SingleValueDecodingContainer Methods
@@ -34,7 +25,7 @@ extension _SmartJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Bool.Type) throws -> Bool {
-        // 判断是否为null， 如果是null抛出异常。
+        // 判断是否为null， 如果是null抛出异常, 交给上层keyedContainer兼容。
         try expectNonNull(Bool.self)
         if let value = try self.unbox(storage.topContainer, as: Bool.self) {
             return value

@@ -180,7 +180,7 @@ extension SmartAny: Codable {
                 self = .null(NSNull())
             } else {
                 throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
-                    codingPath: decoder.codingPath, debugDescription: "不支持的类型")
+                    codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
                 )
             }
         }

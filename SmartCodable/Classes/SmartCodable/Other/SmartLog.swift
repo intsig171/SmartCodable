@@ -49,7 +49,7 @@ struct SmartLog {
         }
     }
     
-    
+    /// 调试日志
     static func logDebug(_ item: String, className: String? = nil) {
         logIfNeeded(level: .debug) {
             let info = ErrorInfo(location: className, reason: item)
@@ -57,6 +57,7 @@ struct SmartLog {
         }
     }
     
+    /// 详细的日志
     static func logVerbose(_ item: String, className: String? = nil) {
         logIfNeeded(level: .verbose) {
             let info = ErrorInfo(location: className, reason: item)
@@ -211,11 +212,9 @@ fileprivate struct ErrorInfo {
             parts.append("模型名称：\(location)")
         }
         
-        if let paths = codingPath, !paths.isEmpty {
+        if let paths = codingPath, paths.count > 1 {
             let pathInfo = paths.map { $0.stringValue }.joined(separator: " → ")
-            parts.append("数据节点：" + pathInfo)
-        } else if let fieldName = fieldName {
-            parts.append("数据节点：" + fieldName)
+            parts.append("解析路径：" + pathInfo)
         }
         
         if let fieldName = fieldName {

@@ -17,7 +17,6 @@ class CompatibleSampleTwoViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        SmartConfig.debugMode = .error
 
   
         let dict = [

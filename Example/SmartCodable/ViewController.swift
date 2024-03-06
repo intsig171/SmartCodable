@@ -25,7 +25,6 @@ class ViewController: UIViewController {
         
         title = "SmartCodable"
         
-        SmartConfig.debugMode = .error
         SmartConfig.openErrorAssert = false
         
         dataArray = [

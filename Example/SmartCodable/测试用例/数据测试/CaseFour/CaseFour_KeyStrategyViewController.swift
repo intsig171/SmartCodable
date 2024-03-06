@@ -25,7 +25,6 @@ class CaseFour_KeyStrategyViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
         
         使用CodingKeys进行值映射()
 

@@ -20,11 +20,15 @@ class TestViewController : BaseViewController {
         
 
         let dict: [String: Any] = [
-            "name123": "Mccc",
+            "age": NSNull(),
         ]
 
+    
+//        if let model = dict.decode(type: Model.self) {
+//            print(model)
+//        }
         
-
+        
         if let model = Model.deserialize(dict: dict) {
             print("model = \(model)")
         }
@@ -33,10 +37,10 @@ class TestViewController : BaseViewController {
     struct Model: SmartCodable {
         
 
-        var name: String = "abc"
+//        var name: String = "abc"
         var age: Int = 10
         
-        var sub = SubModel()
+//        var sub = SubModel()
     }
     
     struct SubModel: SmartCodable {

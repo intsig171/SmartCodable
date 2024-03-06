@@ -15,7 +15,6 @@ class CaseThreeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode  = .none
         
         let dict = [
             "name": "小明",

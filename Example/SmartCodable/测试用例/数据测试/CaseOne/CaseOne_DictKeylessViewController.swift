@@ -16,7 +16,6 @@ class CaseOne_DictKeylessViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .none
 
         let json = keylssJson
         

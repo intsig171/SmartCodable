@@ -24,6 +24,8 @@ extension SmartJSONKeyedDecodingContainer {
         
         // keyless
         guard let entry = self.container[key.stringValue] else {
+            let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: codingPath)
+            SmartLog.logError(error, className: self.decoder.defalutsStorage.typeName)
             return didFinishMapping(try defaultValue())
         }
         
