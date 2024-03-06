@@ -9,9 +9,11 @@
 public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
+//MARK: - =========== 版本更新记录 ===========
+// 【❌未完成   ✅已完成】
 
-
-/** 【V 3.0.0】待完成的需求 【❌未完成   ✅已完成】
+// MARK: V3.0.0
+/**
  * 1. ✅ 默认值支持
  *   - 说明：解码失败并且类型兼容失败，使用Model属性设置的默认值填充。
  *   - 结论：重写解码器，解码Model类型的时候，初始化该类型，通过Mirror方式获取并记录属性名以及对应的值。
