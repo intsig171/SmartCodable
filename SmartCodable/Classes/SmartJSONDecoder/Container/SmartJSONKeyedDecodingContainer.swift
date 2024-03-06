@@ -40,19 +40,12 @@ struct SmartJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     public func contains(_ key: Key) -> Bool {
         return self.container[key.stringValue] != nil
     }
-    
-    
 }
-
 
 
 extension SmartJSONKeyedDecodingContainer {
     public func decodeNil(forKey key: Key) throws -> Bool {
-        
         guard let entry = self.container[key.stringValue] else {
-
-            // ⚠️： 输出日志信息
-//            throw DecodingError.keyNotFound(key, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "No value associated with key \(key) (\"\(key.stringValue)\")."))
             return true
         }
         return entry is NSNull
@@ -64,25 +57,13 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        /// ⚠️： 如果不存在key时，创建一个空的字典容器返回，即提供一个空字典作为默认值。是否合理？
         guard let value = self.container[key.stringValue] else {
-            
-            /// ⚠️日志信息： 抛出这样的日志，方便排查问题。
-//            throw DecodingError.keyNotFound(key,
-//                                            DecodingError.Context(codingPath: self.codingPath,
-//                                                                  debugDescription: "Cannot get \(KeyedDecodingContainer<NestedKey>.self) -- no value found for key \"\(key.stringValue)\""))
-            
             return nestedContainer(wrapping: [:])
         }
         
-        /// ⚠️： 如果value不是字典类型，创建一个空的字典容器返回。
         guard let dictionary = value as? [String : Any] else {
-            /// ⚠️日志信息： 抛出这样的日志，方便排查问题。
-//            throw DecodingError._typeMismatch(at: self.codingPath, expectation: [String : Any].self, reality: value)
-
             return nestedContainer(wrapping: [:])
         }
-        
         return nestedContainer(wrapping: dictionary)
     }
     
@@ -98,17 +79,10 @@ extension SmartJSONKeyedDecodingContainer {
         defer { self.decoder.codingPath.removeLast() }
         
         guard let value = self.container[key.stringValue] else {
-            /// ⚠️日志信息： 抛出这样的日志，方便排查问题。
-//            throw DecodingError.keyNotFound(key,
-//                                            DecodingError.Context(codingPath: self.codingPath, debugDescription: "Cannot get UnkeyedDecodingContainer -- no value found for key \"\(key.stringValue)\""))
-  
             return SmartSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
         }
         
         guard let array = value as? [Any] else {
-            /// ⚠️日志信息： 抛出这样的日志，方便排查问题。
-//            throw DecodingError._typeMismatch(at: self.codingPath, expectation: [Any].self, reality: value)
-
             return SmartSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: [])
         }
         
