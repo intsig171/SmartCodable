@@ -20,11 +20,11 @@ struct Patcher<T: Decodable> {
     }
     
     
-    static func patchWithConvertOrDefault(value: Any?) -> T? {
-        guard let value = value else { return nil }
-        if let v = convertToType(from: value) { return v }
-        if let v = try? defaultForType() { return v }
-        return nil
+    static func patchWithConvertOrDefault(value: Any?) throws -> T {
+        if let value = value, let v = convertToType(from: value) {
+            return v
+        }
+        return try defaultForType()
     }
     
     static func getType(v: Any) -> String {

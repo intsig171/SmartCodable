@@ -21,17 +21,13 @@ extension CleanJSONUnkeyedDecodingContainer {
 
         let entry = self.container[self.currentIndex]
         
-        var decoded: T?
+        var decoded: T
         if let value = try? self.decoder.unbox(entry, as: type) {
             decoded = value
-        } else if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) {
-            decoded = value
+        } else {
+            decoded = try Patcher<T>.patchWithConvertOrDefault(value: entry)
         }
         
-        guard let decoded = decoded else {
-            /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath + [SmartCodingKey(index: self.currentIndex)], debugDescription: "Expected \(type) but found null instead."))
-        }
         self.currentIndex += 1
 
         return didFinishMapping(decoded)

@@ -21,12 +21,9 @@ extension Patcher {
             } else if let object = T.self as? any SmartCaseDefaultable.Type {  // 枚举解析失败，提供对应的默认值。
                 return object.defaultCase as! T
             } else {
-                throw DecodingError.valueNotFound(
-                    Self.self,
-                    DecodingError.Context(
-                        codingPath: [],
-                        debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"
-                    ))
+                                
+                throw DecodingError.valueNotFound(Self.self, DecodingError.Context(
+                        codingPath: [], debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
             }
         }
     }

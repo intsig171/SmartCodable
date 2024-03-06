@@ -179,10 +179,8 @@ extension SmartAny: Codable {
             if container.decodeNil() {
                 self = .null(NSNull())
             } else {
-                throw DecodingError.typeMismatch(
-                    SmartAny.self,
-                    DecodingError.Context(codingPath: decoder.codingPath,
-                                          debugDescription: "不支持的类型")
+                throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
+                    codingPath: decoder.codingPath, debugDescription: "不支持的类型")
                 )
             }
         }

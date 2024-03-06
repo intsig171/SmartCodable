@@ -13,8 +13,7 @@ import Foundation
 extension _SmartJSONDecoder {
     fileprivate func smartDecode<T: Decodable>(_ type: T.Type) throws -> T {
         let entry = storage.topContainer
-        if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) { return value }
-        throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected \(type) but found null value instead."))
+        return try Patcher<T>.patchWithConvertOrDefault(value: entry)
     }
 }
 

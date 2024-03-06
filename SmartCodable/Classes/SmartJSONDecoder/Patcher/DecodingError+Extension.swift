@@ -10,43 +10,6 @@ import Foundation
 
 
 extension DecodingError {
-    
-    struct Keyed {
-        
-        static func keyNotFound(_ key: CodingKey, codingPath: [CodingKey]) -> DecodingError {
-            return .keyNotFound(
-                key,
-                DecodingError.Context(
-                    codingPath: codingPath,
-                    debugDescription: "No value associated with key \("\(key) (\"\(key.stringValue)\")")."
-                )
-            )
-        }
-        
-        static func valueNotFound(_ type: Any.Type, codingPath: [CodingKey]) -> DecodingError {
-            return DecodingError.valueNotFound(
-                type,
-                DecodingError.Context(
-                    codingPath: codingPath,
-                    debugDescription: "Expected \(type) value but found null instead."
-                )
-            )
-        }
-        
-        static func typeMismatch(_ type: Any.Type, codingPath: [CodingKey]) -> DecodingError {            
-            return DecodingError.typeMismatch(
-                type,
-                DecodingError.Context(codingPath: codingPath,
-                                      debugDescription: "值类型不匹配")
-            )
-        }
-        
-        
-    }
-}
-
-
-extension DecodingError {
     /// Returns a `.typeMismatch` error describing the expected type.
     ///
     /// - parameter path: The path of `CodingKey`s taken to decode a value of this type.

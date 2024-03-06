@@ -12,32 +12,33 @@ extension CleanJSONKeyedDecodingContainer {
     
     
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
-        guard let entry = self.container[key.stringValue] else {
-
+        
+        func defaultValue() throws -> T {
             if let v: T = self.decoder.defalutsStorage.getValue(forKey: key, atPath: codingPath) {
-                return didFinishMapping(v)
+                return v
             } else {
-                let value = try Patcher<T>.defaultForType()
-                return didFinishMapping(value)
+                let v = try Patcher<T>.defaultForType()
+                return v
             }
+        }
+        
+        // keyless
+        guard let entry = self.container[key.stringValue] else {
+            return didFinishMapping(try defaultValue())
         }
         
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
 
-        var decoded: T?
-       if let value = try? self.decoder.unbox(entry, as: type) {
+        var decoded: T
+        if let value = try? self.decoder.unbox(entry, as: type) { // 正常解析
             decoded = value
-        } else if let value = Patcher<T>.patchWithConvertOrDefault(value: entry) {
+        } else if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
             decoded = value
+        } else { // 使用默认值
+            decoded = try defaultValue()
         }
-        
-        guard let decoded = decoded else {
-            /// ⚠️： 抛出的异常信息内容是否正确？ Expected \(type) value but found null instead.
-            throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Expected \(type) value but found null instead."))
-        }
-        
         return didFinishMapping(decoded)
     }
 }

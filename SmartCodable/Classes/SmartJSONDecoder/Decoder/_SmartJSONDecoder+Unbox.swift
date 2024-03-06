@@ -348,21 +348,19 @@ extension _SmartJSONDecoder {
             if #available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
                 guard let string = try self.unbox(value, as: String.self) else { return nil }
                 guard let date = _iso8601Formatter.date(from: string) else {
-                    return nil
-//                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
+                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
                 }
                 
                 return date
             } else {
                 return nil
-//                fatalError("ISO8601DateFormatter is unavailable on this platform.")
+                fatalError("ISO8601DateFormatter is unavailable on this platform.")
             }
             
         case .formatted(let formatter):
             guard let string = try self.unbox(value, as: String.self) else { return nil }
             guard let date = formatter.date(from: string) else {
-                return nil
-//                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
             }
             
             return date
