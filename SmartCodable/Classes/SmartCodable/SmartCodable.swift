@@ -12,6 +12,7 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
 //MARK: - =========== 版本更新记录 ===========
 // 【❌未完成   ✅已完成】
 
+//MARK: - ～> V3 版本
 // MARK: V3.0.0
 /**
  * 1. ✅ 默认值支持
