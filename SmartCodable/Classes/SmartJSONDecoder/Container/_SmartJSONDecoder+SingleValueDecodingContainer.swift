@@ -1,9 +1,8 @@
 // 
-//  CleanJSONSingleValueDecodingContainer.swift
-//  CleanJSON
+//  _SmartJSONDecoder+SingleValueDecodingContainer.swift
+//  SmartCodable
 //
-//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/11
-//  Copyright © 2018 Pircate. All rights reserved.
+//  Created by Mccc on 2024/3/4.
 //
 
 import Foundation

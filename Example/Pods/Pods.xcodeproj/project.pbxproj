@@ -49,7 +49,7 @@
 		171087EAEF2F515323D793C279D98109 /* Tracer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A86696DB173151B35D9C059247DC42B /* Tracer.swift */; };
 		17E9283ADA107CC34D25395AB5F67212 /* ToJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7355250361A0201CAC7757CB3CCAA9 /* ToJSON.swift */; };
 		183D8B3E057B885EA7DF9A8CDCCE9029 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC7CACD1743371345C5467C620AD06D /* ConstraintMakerRelatable.swift */; };
-		19845F20DD1EBC69B033B40F41860E2C /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1F251F65A74FD45D0A70F745571B44 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */; };
+		19845F20DD1EBC69B033B40F41860E2C /* _SmartJSONDecoder+SingleValueDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1F251F65A74FD45D0A70F745571B44 /* _SmartJSONDecoder+SingleValueDecodingContainer.swift */; };
 		19BB09AF94BD545E40C2766045BDDD77 /* ExtendCustomBasicType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4568BD2666AE1E963222852F40CFB8CF /* ExtendCustomBasicType.swift */; };
 		1A389F0663109A1526B199F3D1FF1AF5 /* SmartCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1CB079B01EDFD3E67AFB5CF8862D41 /* SmartCodable.swift */; };
 		1A78E1104DB6D444ECAF63AB362C8115 /* Pods-SmartCodable_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F09186EE217FC9713BA39404EB7B24 /* Pods-SmartCodable_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -717,7 +717,7 @@
 		562C4F9088A670ED2AE87821CAE01CEC /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Sources/ConstraintDescription.swift; sourceTree = "<group>"; };
 		586E5D92EFDB320F794DEEDD622BECC7 /* SmartCodable-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SmartCodable-Info.plist"; sourceTree = "<group>"; };
 		58819ECEFB4709142A69C3EE34259504 /* Measuable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Measuable.swift; path = Source/Measuable.swift; sourceTree = "<group>"; };
-		5B1F251F65A74FD45D0A70F745571B44 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "_CleanJSONDecoder+SingleValueDecodingContainer.swift"; sourceTree = "<group>"; };
+		5B1F251F65A74FD45D0A70F745571B44 /* _SmartJSONDecoder+SingleValueDecodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "_SmartJSONDecoder+SingleValueDecodingContainer.swift"; sourceTree = "<group>"; };
 		5B2CB33261154F49F1A6DB4128CFE4B0 /* BTPrint-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BTPrint-umbrella.h"; sourceTree = "<group>"; };
 		5BE47F7A7E2B1CFFBB905C0AAEC936C9 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerEditable.swift; path = Sources/ConstraintMakerEditable.swift; sourceTree = "<group>"; };
 		5C4F31330DFA99D699E4BDC8C3573D73 /* FBSnapshotTestCase */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FBSnapshotTestCase; path = FBSnapshotTestCase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1206,7 +1206,7 @@
 		3CF2D19137672C4CA4C51F04F2A6D32E /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				5B1F251F65A74FD45D0A70F745571B44 /* _CleanJSONDecoder+SingleValueDecodingContainer.swift */,
+				5B1F251F65A74FD45D0A70F745571B44 /* _SmartJSONDecoder+SingleValueDecodingContainer.swift */,
 				3D3D88533F7D5489DCD39196560AC589 /* CleanJSONKeyedDecodingContainer.swift */,
 				441DD8E4BA74EF2D5313714646CCF0AA /* CleanJSONKeyedDecodingContainer+decode.swift */,
 				5307D259E2A180861461C453BDA08C16 /* CleanJSONKeyedDecodingContainer+decodeIfPresent.swift */,
@@ -2527,7 +2527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BB9DC54E199BCBA9FFB31AFA542D004 /* _SmartJSONDecoder.swift in Sources */,
-				19845F20DD1EBC69B033B40F41860E2C /* _CleanJSONDecoder+SingleValueDecodingContainer.swift in Sources */,
+				19845F20DD1EBC69B033B40F41860E2C /* _SmartJSONDecoder+SingleValueDecodingContainer.swift in Sources */,
 				802DCBBD1DA2729051AB6C6773BFF890 /* _SmartJSONDecoder+Unbox.swift in Sources */,
 				EE63ABAA68DE16EC806E2B6506BDA2E1 /* SmartJSONDecodingStorage.swift in Sources */,
 				73B09D0AD81FA0810930E3C62E9253D6 /* SmartCodingKey.swift in Sources */,
