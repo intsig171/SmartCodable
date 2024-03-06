@@ -19,7 +19,6 @@ class Tests: XCTestCase {
     }
     
     
-    // 0.059
     func testHandyJSON() {
         measure {
             let json = String(data: data, encoding: .utf8)
@@ -28,7 +27,6 @@ class Tests: XCTestCase {
         }
     }
     
-    // 0.019
     func testCodable() {
         measure {
             do {
@@ -53,7 +51,6 @@ class Tests: XCTestCase {
         }
     }
     
-    // 0.031
     func testSmartJsonDecoder() {
         measure {
             do {
@@ -66,7 +63,6 @@ class Tests: XCTestCase {
         }
     }
     
-    // 0.045
     func testSmartCodable() {
         measure {
             guard let objects = [Smart].deserialize(data: data) else {
@@ -76,7 +72,6 @@ class Tests: XCTestCase {
         }
     }
     
-    // 0.032
     func testCleanJSON() {
         measure {
             let decoder = SmartJSONDecoder()
