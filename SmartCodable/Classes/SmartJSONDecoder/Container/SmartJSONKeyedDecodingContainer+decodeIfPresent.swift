@@ -1,5 +1,5 @@
 //
-//  CleanJSONKeyedDecodingContainer+decodeIfPresent.swift
+//  SmartJSONKeyedDecodingContainer+decodeIfPresent.swift
 //  SmartCodable
 //
 //  Created by qixin on 2024/2/29.
@@ -16,7 +16,7 @@ import Foundation
  */
 
 
-extension CleanJSONKeyedDecodingContainer {
+extension SmartJSONKeyedDecodingContainer {
     
     /// 可选解析不能使用统一方法，如果decoder.unbox不明确指定类型，全都走到func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? 中， 会走到decoded = try T(from: self)方法，进而初始化一个默认值。
     fileprivate func optionalDecode<T: Decodable>(_ type: T.Type, entry: Any) -> T? {

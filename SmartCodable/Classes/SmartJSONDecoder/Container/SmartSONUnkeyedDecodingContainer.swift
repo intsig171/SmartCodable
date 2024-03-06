@@ -99,7 +99,7 @@ struct SmartSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     }
     
     private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any] = [:]) -> KeyedDecodingContainer<NestedKey> {
-        let container = CleanJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
+        let container = SmartJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
         return KeyedDecodingContainer(container)
     }
     

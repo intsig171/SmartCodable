@@ -1,14 +1,13 @@
 //
-//  CleanJSONKeyedDecodingContainer.swift
-//  CleanJSON
+//  SmartJSONKeyedDecodingContainer.swift
+//  SmartCodable
 //
-//  Created by Pircate(swifter.dev@gmail.com) on 2018/10/10
-//  Copyright © 2018 Pircate. All rights reserved.
+//  Created by Mccc on 2024/3/4.
 //
 
 import Foundation
 
-struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerProtocol {
+struct SmartJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerProtocol {
     
     typealias Key = K
     
@@ -47,7 +46,7 @@ struct CleanJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
 
 
 
-extension CleanJSONKeyedDecodingContainer {
+extension SmartJSONKeyedDecodingContainer {
     public func decodeNil(forKey key: Key) throws -> Bool {
         
         guard let entry = self.container[key.stringValue] else {
@@ -89,7 +88,7 @@ extension CleanJSONKeyedDecodingContainer {
     
     @inline(__always)
     private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any]) -> KeyedDecodingContainer<NestedKey> {
-        let container = CleanJSONKeyedDecodingContainer<NestedKey>(referencing: decoder, wrapping: dictionary)
+        let container = SmartJSONKeyedDecodingContainer<NestedKey>(referencing: decoder, wrapping: dictionary)
         return KeyedDecodingContainer(container)
     }
     
@@ -139,7 +138,7 @@ extension CleanJSONKeyedDecodingContainer {
 }
 
 
-extension CleanJSONKeyedDecodingContainer {
+extension SmartJSONKeyedDecodingContainer {
     func didFinishMapping<T: Decodable>(_ decodeValue: T) -> T {
         return DecodingProcessCoordinator.didFinishMapping(decodeValue)
     }

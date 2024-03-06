@@ -51,7 +51,7 @@ final class _SmartJSONDecoder: Decoder {
 //            )
             
             
-            let container = CleanJSONKeyedDecodingContainer<Key>(
+            let container = SmartJSONKeyedDecodingContainer<Key>(
                 referencing: self,
                 wrapping: [:]
             )
@@ -67,14 +67,14 @@ final class _SmartJSONDecoder: Decoder {
 //                reality: storage.topContainer
 //            )
             
-            let container = CleanJSONKeyedDecodingContainer<Key>(
+            let container = SmartJSONKeyedDecodingContainer<Key>(
                 referencing: self,
                 wrapping: [:]
             )
             return KeyedDecodingContainer(container)
         }
         
-        let container = CleanJSONKeyedDecodingContainer<Key>(
+        let container = SmartJSONKeyedDecodingContainer<Key>(
             referencing: self,
             wrapping: topContainer
         )

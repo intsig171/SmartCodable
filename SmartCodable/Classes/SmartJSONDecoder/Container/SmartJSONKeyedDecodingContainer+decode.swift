@@ -1,14 +1,14 @@
 //
-//  CleanJSONKeyedDecodingContainer+decode.swift
+//  SmartJSONKeyedDecodingContainer.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/2/28.
+//  Created by Mccc on 2024/3/4.
 //
 
 import Foundation
 
 
-extension CleanJSONKeyedDecodingContainer {
+extension SmartJSONKeyedDecodingContainer {
     
     
     fileprivate func explicitDecode<T: Decodable>(_ type: T.Type, forKey key: Key) throws -> T {
@@ -44,7 +44,7 @@ extension CleanJSONKeyedDecodingContainer {
 }
 
 
-extension CleanJSONKeyedDecodingContainer {
+extension SmartJSONKeyedDecodingContainer {
     @inline(__always)
     public func decode(_ type: Bool.Type, forKey key: Key) throws -> Bool {
         return try explicitDecode(Bool.self, forKey: key)
