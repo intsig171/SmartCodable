@@ -10,6 +10,7 @@ import Foundation
 import SmartCodable
 
 
+/// 属性对象参与解析
 class Introduce_4ViewController: BaseViewController {
     
     override func viewDidLoad() {

@@ -9,7 +9,7 @@
 import Foundation
 import SmartCodable
 
-
+/// 不同的数据类型转Model/Models
 class Introduce_1ViewController: BaseViewController {
     
     override func viewDidLoad() {

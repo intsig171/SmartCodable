@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 
+
 class BaseViewController: UIViewController {
     
     var contentText: String = "" {
@@ -22,10 +23,10 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
+        
         contentLabel.frame = view.bounds
         contentLabel.frame.size.height = 200
         view.addSubview(contentLabel)
-
     }
     
     

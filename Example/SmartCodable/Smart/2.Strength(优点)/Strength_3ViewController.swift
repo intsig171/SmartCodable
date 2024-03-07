@@ -1,5 +1,5 @@
 //
-//  Introduce_6ViewController.swift
+//  Strength_3ViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/7.
@@ -10,10 +10,10 @@ import Foundation
 import SmartCodable
 
 
-/** Key的映射关系说明
+/** Key的映射关系
  * 1. 多个有效字段映射到同一个属性上，优先使用第一个。
  */
-class Introduce_6ViewController: BaseViewController {
+class Strength_3ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,7 @@ class Introduce_6ViewController: BaseViewController {
 
 
 
-
-extension Introduce_6ViewController {
+extension Strength_3ViewController {
     
     struct Model: SmartCodable {
         var name: String = ""

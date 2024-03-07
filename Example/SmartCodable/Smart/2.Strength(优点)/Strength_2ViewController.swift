@@ -1,5 +1,5 @@
 //
-//  Introduce_5ViewController.swift
+//  Strength_2ViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/7.
@@ -10,7 +10,8 @@ import Foundation
 import SmartCodable
 
 
-class Introduce_5ViewController: BaseViewController {
+/// 解码完成时回调
+class Strength_2ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class Introduce_5ViewController: BaseViewController {
 
 
 
-extension Introduce_5ViewController {
+extension Strength_2ViewController {
     
     struct Model: SmartCodable {
         var name: String = ""

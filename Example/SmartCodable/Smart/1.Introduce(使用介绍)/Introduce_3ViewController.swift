@@ -11,7 +11,7 @@ import Foundation
 import SmartCodable
 
 
-/** 模型和json之间互相转化
+/** 模型数组和json之间互相转化
  * 1. 验证 字典转模型， 此时的模型转字典。
  * 2. 验证json字符串转模型，模型转json字符串
  * 3. 验证数组字典转模型数组，数组模型转数组字典，字典数组转json字符串，json字符串转模型数组。

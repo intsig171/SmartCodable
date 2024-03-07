@@ -31,10 +31,10 @@ class ViewController: UIViewController {
             other,
             smart_test,
             smart_introduce,
+            smart_Strength,
             smart_customDecoding,
             smart_compatible,
             smart_compatible_structure,
-            smart_Any,
             smart_debug,
             smart_case,
             smart_disadvantage,
@@ -65,16 +65,27 @@ extension ViewController {
     
     var smart_introduce: [String: Any] {
         [
-            "title": "Smart介绍",
+            "title": "Smart使用介绍",
             "list": [
                 ["name": "简单使用",       "vc": "Introduce_1ViewController"],
                 ["name": "字典 ⇆ 模型",    "vc": "Introduce_2ViewController"],
                 ["name": "数组 ⇆ 模型数组", "vc": "Introduce_3ViewController"],
                 ["name": "属性对象的解析",  "vc": "Introduce_4ViewController"],
-                ["name": "解码完成的回调",  "vc": "Introduce_5ViewController"],
-                ["name": "解码时Key的映射",  "vc": "Introduce_6ViewController"],
-
-                ["name": "复杂数据结构",    "vc": "ComplexDataStructureViewController"],
+            ]
+        ]
+    }
+    
+    
+    
+    var smart_Strength: [String: Any] {
+        [
+            "title": "Smart的强大之处",
+            "list": [
+                ["name": "支持Any解析",             "vc": "Strength_1ViewController"],
+                ["name": "支持解码完成的回调",        "vc": "Strength_2ViewController"],
+                ["name": "支持解码时Key的映射",       "vc": "Strength_3ViewController"],
+                ["name": "支持默认值填充",            "vc": "Strength_4ViewController"],
+                ["name": "支持json字段值的对象化解析", "vc": "Strength_5ViewController"],
             ]
         ]
     }
@@ -127,15 +138,7 @@ extension ViewController {
        ]
     }
     
-    
-    var smart_Any: [String: Any] {
-        [
-            "title": "Codable无法对Any进行解析，SmartCodable提供了三种思路",
-            "list": [
-                ["name": "SmartAny", "vc": "SmartAnyViewController"],
-            ]
-        ]
-    }
+
     
 
     
@@ -210,13 +213,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let dict = dataArray[section~] {
-            let title = dict["title"] as? String
-            return title
-        }
-        return ""
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+//        label.backgroundColor = UIColor.red.withAlphaComponent(0.01)
+        
+        if let dict = dataArray[section~] {
+            let title = dict["title"] as? String ?? ""
+            label.text = "    " + title
+        }
+        
+        return label
+    }
+
     
     
     
@@ -246,7 +259,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         vc.contentText = name
         
         navigationController?.pushViewController(vc, animated: true)
-//        present(vc, animated: true)
     }
     
 }

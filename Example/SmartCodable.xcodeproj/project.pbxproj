@@ -48,7 +48,7 @@
 		996760312B3EC930006C83EC /* CompatibleSampleFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF32B3EC930006C83EC /* CompatibleSampleFourViewController.swift */; };
 		996760322B3EC930006C83EC /* CompatibleSampleFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF42B3EC930006C83EC /* CompatibleSampleFiveViewController.swift */; };
 		996760332B3EC930006C83EC /* CompatibleSampleTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF52B3EC930006C83EC /* CompatibleSampleTwoViewController.swift */; };
-		996760342B3EC930006C83EC /* SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF72B3EC930006C83EC /* SmartAnyViewController.swift */; };
+		996760342B3EC930006C83EC /* Strength_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF72B3EC930006C83EC /* Strength_1ViewController.swift */; };
 		996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF92B3EC930006C83EC /* CaseThreeViewController.swift */; };
 		996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFA2B3EC930006C83EC /* CaseFiveViewController.swift */; };
 		996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFB2B3EC930006C83EC /* CaseOneViewController.swift */; };
@@ -62,9 +62,6 @@
 		9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760052B3EC930006C83EC /* Introduce_1ViewController.swift */; };
 		996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760062B3EC930006C83EC /* Introduce_3ViewController.swift */; };
 		996760412B3EC930006C83EC /* Introduce_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760072B3EC930006C83EC /* Introduce_4ViewController.swift */; };
-		996760422B3EC930006C83EC /* FinishMappingViewController+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760092B3EC930006C83EC /* FinishMappingViewController+dict.swift */; };
-		996760432B3EC930006C83EC /* FinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967600A2B3EC930006C83EC /* FinishMappingViewController.swift */; };
-		996760442B3EC930006C83EC /* FinishMappingViewController+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967600B2B3EC930006C83EC /* FinishMappingViewController+Array.swift */; };
 		996760452B3EC930006C83EC /* KeyDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967600E2B3EC930006C83EC /* KeyDecodingStrategyViewController.swift */; };
 		996760462B3EC930006C83EC /* DataDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967600F2B3EC930006C83EC /* DataDecodingStrategyViewController.swift */; };
 		996760472B3EC930006C83EC /* FloatDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760102B3EC930006C83EC /* FloatDecodingStrategyViewController.swift */; };
@@ -80,13 +77,15 @@
 		9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */; };
 		9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */; };
 		9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */; };
-		999FA2412B99B86100A2952F /* Introduce_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2402B99B86100A2952F /* Introduce_5ViewController.swift */; };
-		999FA2432B99B86A00A2952F /* Introduce_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2422B99B86A00A2952F /* Introduce_6ViewController.swift */; };
+		999FA2412B99B86100A2952F /* Strength_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2402B99B86100A2952F /* Strength_2ViewController.swift */; };
+		999FA2432B99B86A00A2952F /* Strength_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
 		99AE7D952B3EC02E00B474E5 /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
 		99C1E70D2B99A55E0090E8FD /* 使用说明 in Resources */ = {isa = PBXBuildFile; fileRef = 99C1E70C2B99A55E0090E8FD /* 使用说明 */; };
+		99C313332B99C32A0065FC45 /* Strength_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313312B99C3290065FC45 /* Strength_4ViewController.swift */; };
+		99C313342B99C32A0065FC45 /* Strength_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313322B99C3290065FC45 /* Strength_5ViewController.swift */; };
 		99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA282B906A640070DED0 /* TestCaseViewController.swift */; };
 		99CABA2D2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2C2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift */; };
 		99CABA2F2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2E2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift */; };
@@ -152,7 +151,7 @@
 		99675FF32B3EC930006C83EC /* CompatibleSampleFourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleSampleFourViewController.swift; sourceTree = "<group>"; };
 		99675FF42B3EC930006C83EC /* CompatibleSampleFiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleSampleFiveViewController.swift; sourceTree = "<group>"; };
 		99675FF52B3EC930006C83EC /* CompatibleSampleTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleSampleTwoViewController.swift; sourceTree = "<group>"; };
-		99675FF72B3EC930006C83EC /* SmartAnyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAnyViewController.swift; sourceTree = "<group>"; };
+		99675FF72B3EC930006C83EC /* Strength_1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_1ViewController.swift; sourceTree = "<group>"; };
 		99675FF92B3EC930006C83EC /* CaseThreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseThreeViewController.swift; sourceTree = "<group>"; };
 		99675FFA2B3EC930006C83EC /* CaseFiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseFiveViewController.swift; sourceTree = "<group>"; };
 		99675FFB2B3EC930006C83EC /* CaseOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOneViewController.swift; sourceTree = "<group>"; };
@@ -166,9 +165,6 @@
 		996760052B3EC930006C83EC /* Introduce_1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_1ViewController.swift; sourceTree = "<group>"; };
 		996760062B3EC930006C83EC /* Introduce_3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_3ViewController.swift; sourceTree = "<group>"; };
 		996760072B3EC930006C83EC /* Introduce_4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_4ViewController.swift; sourceTree = "<group>"; };
-		996760092B3EC930006C83EC /* FinishMappingViewController+dict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FinishMappingViewController+dict.swift"; sourceTree = "<group>"; };
-		9967600A2B3EC930006C83EC /* FinishMappingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishMappingViewController.swift; sourceTree = "<group>"; };
-		9967600B2B3EC930006C83EC /* FinishMappingViewController+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FinishMappingViewController+Array.swift"; sourceTree = "<group>"; };
 		9967600E2B3EC930006C83EC /* KeyDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		9967600F2B3EC930006C83EC /* DataDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		996760102B3EC930006C83EC /* FloatDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatDecodingStrategyViewController.swift; sourceTree = "<group>"; };
@@ -184,14 +180,16 @@
 		9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_didFinishMappingViewController.swift; sourceTree = "<group>"; };
 		9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_OptionalModelViewController.swift; sourceTree = "<group>"; };
 		9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_KeyStrategyViewController.swift; sourceTree = "<group>"; };
-		999FA2402B99B86100A2952F /* Introduce_5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_5ViewController.swift; sourceTree = "<group>"; };
-		999FA2422B99B86A00A2952F /* Introduce_6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_6ViewController.swift; sourceTree = "<group>"; };
+		999FA2402B99B86100A2952F /* Strength_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_2ViewController.swift; sourceTree = "<group>"; };
+		999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_3ViewController.swift; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		99AE7D8D2B3EC02E00B474E5 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
 		99AE7D8E2B3EC02E00B474E5 /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
 		99AE7D8F2B3EC02E00B474E5 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
 		99C1E70C2B99A55E0090E8FD /* 使用说明 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "使用说明"; sourceTree = "<group>"; };
+		99C313312B99C3290065FC45 /* Strength_4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_4ViewController.swift; sourceTree = "<group>"; };
+		99C313322B99C3290065FC45 /* Strength_5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_5ViewController.swift; sourceTree = "<group>"; };
 		99CABA282B906A640070DED0 /* TestCaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCaseViewController.swift; sourceTree = "<group>"; };
 		99CABA2C2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayKeylessViewController.swift; sourceTree = "<group>"; };
 		99CABA2E2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayNullViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +264,7 @@
 			children = (
 				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */,
+				996760002B3EC930006C83EC /* ComplexDataStructure */,
 				99C1E70C2B99A55E0090E8FD /* 使用说明 */,
 				99A494E42B9028D900393193 /* 测试用例 */,
 				996760142B3EC930006C83EC /* Base */,
@@ -341,11 +340,11 @@
 		99675FDF2B3EC930006C83EC /* Smart */ = {
 			isa = PBXGroup;
 			children = (
+				99675FFE2B3EC930006C83EC /* 1.Introduce(使用介绍) */,
+				99675FF62B3EC930006C83EC /* 2.Strength(优点) */,
 				99675FE02B3EC930006C83EC /* 调试日志 */,
 				99675FE22B3EC930006C83EC /* Compatibility(兼容性) */,
-				99675FF62B3EC930006C83EC /* SmartAny */,
 				99675FF82B3EC930006C83EC /* Case(案例) */,
-				99675FFE2B3EC930006C83EC /* Introduce(介绍) */,
 				9967600D2B3EC930006C83EC /* 解码策略 */,
 				996760122B3EC930006C83EC /* Disadvantage(缺点) */,
 			);
@@ -397,12 +396,16 @@
 			path = "验证结构";
 			sourceTree = "<group>";
 		};
-		99675FF62B3EC930006C83EC /* SmartAny */ = {
+		99675FF62B3EC930006C83EC /* 2.Strength(优点) */ = {
 			isa = PBXGroup;
 			children = (
-				99675FF72B3EC930006C83EC /* SmartAnyViewController.swift */,
+				99675FF72B3EC930006C83EC /* Strength_1ViewController.swift */,
+				999FA2402B99B86100A2952F /* Strength_2ViewController.swift */,
+				999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */,
+				99C313312B99C3290065FC45 /* Strength_4ViewController.swift */,
+				99C313322B99C3290065FC45 /* Strength_5ViewController.swift */,
 			);
-			path = SmartAny;
+			path = "2.Strength(优点)";
 			sourceTree = "<group>";
 		};
 		99675FF82B3EC930006C83EC /* Case(案例) */ = {
@@ -417,19 +420,15 @@
 			path = "Case(案例)";
 			sourceTree = "<group>";
 		};
-		99675FFE2B3EC930006C83EC /* Introduce(介绍) */ = {
+		99675FFE2B3EC930006C83EC /* 1.Introduce(使用介绍) */ = {
 			isa = PBXGroup;
 			children = (
 				996760052B3EC930006C83EC /* Introduce_1ViewController.swift */,
 				99675FFF2B3EC930006C83EC /* Introduce_2ViewController.swift */,
-				996760002B3EC930006C83EC /* ComplexDataStructure */,
 				996760062B3EC930006C83EC /* Introduce_3ViewController.swift */,
 				996760072B3EC930006C83EC /* Introduce_4ViewController.swift */,
-				999FA2402B99B86100A2952F /* Introduce_5ViewController.swift */,
-				999FA2422B99B86A00A2952F /* Introduce_6ViewController.swift */,
-				996760082B3EC930006C83EC /* FinishMapping */,
 			);
-			path = "Introduce(介绍)";
+			path = "1.Introduce(使用介绍)";
 			sourceTree = "<group>";
 		};
 		996760002B3EC930006C83EC /* ComplexDataStructure */ = {
@@ -441,16 +440,6 @@
 				996760042B3EC930006C83EC /* ComplexDataStructureSectionHeader.swift */,
 			);
 			path = ComplexDataStructure;
-			sourceTree = "<group>";
-		};
-		996760082B3EC930006C83EC /* FinishMapping */ = {
-			isa = PBXGroup;
-			children = (
-				996760092B3EC930006C83EC /* FinishMappingViewController+dict.swift */,
-				9967600A2B3EC930006C83EC /* FinishMappingViewController.swift */,
-				9967600B2B3EC930006C83EC /* FinishMappingViewController+Array.swift */,
-			);
-			path = FinishMapping;
 			sourceTree = "<group>";
 		};
 		9967600D2B3EC930006C83EC /* 解码策略 */ = {
@@ -791,12 +780,11 @@
 				996760222B3EC930006C83EC /* DecodingLogViewController.swift in Sources */,
 				996760302B3EC930006C83EC /* CompatibleSampleThreeViewController.swift in Sources */,
 				9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */,
-				996760432B3EC930006C83EC /* FinishMappingViewController.swift in Sources */,
 				9967603E2B3EC930006C83EC /* ComplexDataStructureSectionHeader.swift in Sources */,
 				990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */,
 				996760262B3EC930006C83EC /* CompatibleClassViewController.swift in Sources */,
 				9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */,
-				999FA2432B99B86A00A2952F /* Introduce_6ViewController.swift in Sources */,
+				999FA2432B99B86A00A2952F /* Strength_3ViewController.swift in Sources */,
 				9967602C2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift in Sources */,
 				99CABA312B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift in Sources */,
 				99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */,
@@ -816,23 +804,23 @@
 				996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */,
 				9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */,
 				996760492B3EC930006C83EC /* InvalidDefaultValueController.swift in Sources */,
-				999FA2412B99B86100A2952F /* Introduce_5ViewController.swift in Sources */,
+				999FA2412B99B86100A2952F /* Strength_2ViewController.swift in Sources */,
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
 				9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */,
 				9967602B2B3EC930006C83EC /* CompatibleEnumViewController.swift in Sources */,
+				99C313342B99C32A0065FC45 /* Strength_5ViewController.swift in Sources */,
 				996760382B3EC930006C83EC /* CaseTwoViewController.swift in Sources */,
 				9967603C2B3EC930006C83EC /* ComplexDataStructureModel.swift in Sources */,
 				996760452B3EC930006C83EC /* KeyDecodingStrategyViewController.swift in Sources */,
 				99D945872B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift in Sources */,
 				996760462B3EC930006C83EC /* DataDecodingStrategyViewController.swift in Sources */,
 				99CABA2F2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift in Sources */,
-				996760442B3EC930006C83EC /* FinishMappingViewController+Array.swift in Sources */,
-				996760422B3EC930006C83EC /* FinishMappingViewController+dict.swift in Sources */,
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
 				996760232B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift in Sources */,
 				99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
+				99C313332B99C32A0065FC45 /* Strength_4ViewController.swift in Sources */,
 				99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				9967603A2B3EC930006C83EC /* Introduce_2ViewController.swift in Sources */,
@@ -841,7 +829,7 @@
 				996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */,
 				996760322B3EC930006C83EC /* CompatibleSampleFiveViewController.swift in Sources */,
 				9967602F2B3EC930006C83EC /* CompatibleSampleSixViewController.swift in Sources */,
-				996760342B3EC930006C83EC /* SmartAnyViewController.swift in Sources */,
+				996760342B3EC930006C83EC /* Strength_1ViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
 				996760332B3EC930006C83EC /* CompatibleSampleTwoViewController.swift in Sources */,
 				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
