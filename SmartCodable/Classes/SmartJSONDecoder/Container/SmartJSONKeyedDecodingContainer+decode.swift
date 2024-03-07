@@ -219,7 +219,7 @@ extension SmartJSONKeyedDecodingContainer {
         guard let value = try? self.decoder.unbox(entry, as: type) else {
             return try smartDecode(forKey: key, entry: entry)
         }
-        return value
+        return didFinishMapping(value)
     }
 }
 
@@ -227,7 +227,7 @@ extension SmartJSONKeyedDecodingContainer {
 extension SmartJSONKeyedDecodingContainer {
     
     fileprivate func getJsonValue(type: Any.Type, forKey key: CodingKey) -> Any? {
-        if let entry = self.container[key.stringValue], !(entry is NSNull) {
+        if let entry = self.container[key.stringValue] {
             return entry
         }
         return nil

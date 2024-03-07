@@ -7,13 +7,6 @@
 
 import Foundation
 
-/// 映射关系
-/// 将from对应的数据字段映射到to对应的模型属性上
-public typealias MappingRelationship = (from: [String], to: CodingKey)
-
-infix operator <--
-public func <--(after: CodingKey, before: String) -> MappingRelationship { after <-- [before] }
-public func <--(after: CodingKey, before: [String]) -> MappingRelationship { (before, after) }
 
 
 
@@ -42,10 +35,11 @@ struct ModelKeyMapper<T> {
     private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any] {
         var newDict = dict
         type.mapping()?.forEach { mapping in
-            mapping.from.forEach { oldKey in
-                if let _ = newDict[oldKey] {
+            for oldKey in mapping.from {
+                if let value = newDict[oldKey], !(value is NSNull) { // 如果存在有效值(存在并不是null)
                     let newKey = mapping.to.stringValue
                     newDict[newKey] = newDict.removeValue(forKey: oldKey)
+                    break
                 }
             }
         }

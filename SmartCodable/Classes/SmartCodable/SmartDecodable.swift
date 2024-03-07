@@ -7,6 +7,13 @@
 
 import Foundation
 
+/// 映射关系
+/// 将from对应的数据字段映射到to对应的模型属性上
+public typealias MappingRelationship = (from: [String], to: CodingKey)
+
+infix operator <--
+public func <--(after: CodingKey, before: String) -> MappingRelationship { after <-- [before] }
+public func <--(after: CodingKey, before: [String]) -> MappingRelationship { (before, after) }
 
 
 
