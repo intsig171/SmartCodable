@@ -11,7 +11,7 @@ import UIKit
 import SmartCodable
 
 /// 兼容类String型，只兼容String类型的int值。
-class CaseOne_StringViewController: BaseCompatibilityViewController {
+class CaseOne_StringViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

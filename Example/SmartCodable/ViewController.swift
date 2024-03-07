@@ -33,12 +33,8 @@ class ViewController: UIViewController {
             smart_introduce,
             smart_Strength,
             smart_customDecoding,
-            smart_compatible,
-            smart_compatible_structure,
             smart_debug,
             smart_case,
-            smart_disadvantage,
-            explain,
         ]
         
         
@@ -103,51 +99,14 @@ extension ViewController {
             ]
         ]
     }
-    
-    
-    var smart_compatible: [String: Any] {
-        [
-            "title": "Smart兼容性 - 验证类型兼容",
-            "list": [
-                ["name": "空对象", "vc": "CompatibleEmptyObjectViewController"],
-                ["name": "null", "vc": "CompatibleNullViewController"],
-                ["name": "enum", "vc": "CompatibleEnumViewController"],
-                ["name": "浮点数", "vc": "CompatibleFloatViewController"],
-                ["name": "Bool", "vc": "CompatibleBoolViewController"],
-                ["name": "String", "vc": "CompatibleStringViewController"],
-                ["name": "Int", "vc": "CompatibleIntViewController"],
-                ["name": "模型Model", "vc": "CompatibleClassViewController"],
-            ]
-        ]
-    }
-    
-    // 兼容性 - 不同结构下的
-    var smart_compatible_structure: [String: Any] {
-       [
-        "title": "Smart兼容性 - 验证不同数据结构",
-        "list": [
-            ["name": "字典 -> String", "vc": "CompatibleSampleOneViewController"],
-            ["name": "字典 -> 字典 -> String", "vc": "CompatibleSampleTwoViewController"],
-            ["name": "字典 -> 数组 -> 字典 -> String", "vc": "CompatibleSampleThreeViewController"],
-            ["name": "字典 -> 数组 -> 字典 -> 字典 -> String", "vc": "CompatibleSampleFourViewController"],
 
-            ["name": "数组 -> 字典 -> String", "vc": "CompatibleSampleFiveViewController"],
-            ["name": "数组 -> 字典 -> 数组 -> 字典 -> String", "vc": "CompatibleSampleSixViewController"],
-        ]
-       ]
-    }
-    
-
-    
-
-    
 
     
     var smart_debug: [String: Any] {
         [
             "title": "Smart调试信息",
             "list": [
-                ["name": "日志等级 与 日志信息", "vc": "DecodingLogViewController"],
+                ["name": "日志等级 & 日志信息", "vc": "DecodingLogViewController"],
             ]
         ]
     }
@@ -157,7 +116,7 @@ extension ViewController {
             "title": "Smart案例",
             "list": [
                 ["name": "扁平化", "vc": "CaseOneViewController"],
-                ["name": "派生关系", "vc": "CaseTwoViewController"],
+                ["name": "Model继承", "vc": "CaseTwoViewController"],
                 ["name": "多值映射", "vc": "CaseThreeViewController"],
                 ["name": "范型解析", "vc": "CaseFourViewController"],
                 ["name": "范型解析 - signle value", "vc": "CaseFiveViewController"],
@@ -165,24 +124,6 @@ extension ViewController {
         ]
     }
     
-    var smart_disadvantage: [String: Any] {
-        [
-            "title": "Smart缺点（Codable的缺点）",
-            "list": [
-                ["name": "默认值无效", "vc": "InvalidDefaultValueController"],
-            ]
-        ]
-    }
-    
-    
-    var explain: [String: Any] {
-        [
-            "title": "Smart说明",
-            "list": [
-                ["name": "为什么要在Model中实现init方法？", "vc": "ExplainOneViewController"],
-            ]
-        ]
-    }
     
     var other: [String: Any] {
         [
