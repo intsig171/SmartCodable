@@ -30,7 +30,7 @@
 		9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDC2B3EC930006C83EC /* TestViewController.swift */; };
 		996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */; };
 		996760212B3EC930006C83EC /* ArraySafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDE2B3EC930006C83EC /* ArraySafe.swift */; };
-		996760222B3EC930006C83EC /* DecodeErrorPrintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE12B3EC930006C83EC /* DecodeErrorPrintViewController.swift */; };
+		996760222B3EC930006C83EC /* DecodingLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE12B3EC930006C83EC /* DecodingLogViewController.swift */; };
 		996760232B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE42B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift */; };
 		996760242B3EC930006C83EC /* CompatibleBoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE52B3EC930006C83EC /* CompatibleBoolViewController.swift */; };
 		996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */; };
@@ -54,14 +54,14 @@
 		996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFB2B3EC930006C83EC /* CaseOneViewController.swift */; };
 		996760382B3EC930006C83EC /* CaseTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFC2B3EC930006C83EC /* CaseTwoViewController.swift */; };
 		996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFD2B3EC930006C83EC /* CaseFourViewController.swift */; };
-		9967603A2B3EC930006C83EC /* DictionaryAndModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFF2B3EC930006C83EC /* DictionaryAndModelViewController.swift */; };
+		9967603A2B3EC930006C83EC /* Introduce_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFF2B3EC930006C83EC /* Introduce_2ViewController.swift */; };
 		9967603B2B3EC930006C83EC /* ComplexDataStructureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760012B3EC930006C83EC /* ComplexDataStructureCell.swift */; };
 		9967603C2B3EC930006C83EC /* ComplexDataStructureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760022B3EC930006C83EC /* ComplexDataStructureModel.swift */; };
 		9967603D2B3EC930006C83EC /* ComplexDataStructureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760032B3EC930006C83EC /* ComplexDataStructureViewController.swift */; };
 		9967603E2B3EC930006C83EC /* ComplexDataStructureSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760042B3EC930006C83EC /* ComplexDataStructureSectionHeader.swift */; };
-		9967603F2B3EC930006C83EC /* SimpleSmartCodableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760052B3EC930006C83EC /* SimpleSmartCodableViewController.swift */; };
-		996760402B3EC930006C83EC /* ArrayAndModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760062B3EC930006C83EC /* ArrayAndModelViewController.swift */; };
-		996760412B3EC930006C83EC /* OptionalPropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760072B3EC930006C83EC /* OptionalPropertyViewController.swift */; };
+		9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760052B3EC930006C83EC /* Introduce_1ViewController.swift */; };
+		996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760062B3EC930006C83EC /* Introduce_3ViewController.swift */; };
+		996760412B3EC930006C83EC /* Introduce_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760072B3EC930006C83EC /* Introduce_4ViewController.swift */; };
 		996760422B3EC930006C83EC /* FinishMappingViewController+dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760092B3EC930006C83EC /* FinishMappingViewController+dict.swift */; };
 		996760432B3EC930006C83EC /* FinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967600A2B3EC930006C83EC /* FinishMappingViewController.swift */; };
 		996760442B3EC930006C83EC /* FinishMappingViewController+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9967600B2B3EC930006C83EC /* FinishMappingViewController+Array.swift */; };
@@ -80,6 +80,8 @@
 		9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */; };
 		9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */; };
 		9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */; };
+		999FA2412B99B86100A2952F /* Introduce_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2402B99B86100A2952F /* Introduce_5ViewController.swift */; };
+		999FA2432B99B86A00A2952F /* Introduce_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2422B99B86A00A2952F /* Introduce_6ViewController.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
@@ -132,7 +134,7 @@
 		99675FDC2B3EC930006C83EC /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		99675FDE2B3EC930006C83EC /* ArraySafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySafe.swift; sourceTree = "<group>"; };
-		99675FE12B3EC930006C83EC /* DecodeErrorPrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeErrorPrintViewController.swift; sourceTree = "<group>"; };
+		99675FE12B3EC930006C83EC /* DecodingLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodingLogViewController.swift; sourceTree = "<group>"; };
 		99675FE42B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleEmptyObjectViewController.swift; sourceTree = "<group>"; };
 		99675FE52B3EC930006C83EC /* CompatibleBoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleBoolViewController.swift; sourceTree = "<group>"; };
 		99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCompatibilityViewController.swift; sourceTree = "<group>"; };
@@ -156,14 +158,14 @@
 		99675FFB2B3EC930006C83EC /* CaseOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOneViewController.swift; sourceTree = "<group>"; };
 		99675FFC2B3EC930006C83EC /* CaseTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwoViewController.swift; sourceTree = "<group>"; };
 		99675FFD2B3EC930006C83EC /* CaseFourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseFourViewController.swift; sourceTree = "<group>"; };
-		99675FFF2B3EC930006C83EC /* DictionaryAndModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryAndModelViewController.swift; sourceTree = "<group>"; };
+		99675FFF2B3EC930006C83EC /* Introduce_2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_2ViewController.swift; sourceTree = "<group>"; };
 		996760012B3EC930006C83EC /* ComplexDataStructureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureCell.swift; sourceTree = "<group>"; };
 		996760022B3EC930006C83EC /* ComplexDataStructureModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureModel.swift; sourceTree = "<group>"; };
 		996760032B3EC930006C83EC /* ComplexDataStructureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureViewController.swift; sourceTree = "<group>"; };
 		996760042B3EC930006C83EC /* ComplexDataStructureSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureSectionHeader.swift; sourceTree = "<group>"; };
-		996760052B3EC930006C83EC /* SimpleSmartCodableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSmartCodableViewController.swift; sourceTree = "<group>"; };
-		996760062B3EC930006C83EC /* ArrayAndModelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayAndModelViewController.swift; sourceTree = "<group>"; };
-		996760072B3EC930006C83EC /* OptionalPropertyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalPropertyViewController.swift; sourceTree = "<group>"; };
+		996760052B3EC930006C83EC /* Introduce_1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_1ViewController.swift; sourceTree = "<group>"; };
+		996760062B3EC930006C83EC /* Introduce_3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_3ViewController.swift; sourceTree = "<group>"; };
+		996760072B3EC930006C83EC /* Introduce_4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_4ViewController.swift; sourceTree = "<group>"; };
 		996760092B3EC930006C83EC /* FinishMappingViewController+dict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FinishMappingViewController+dict.swift"; sourceTree = "<group>"; };
 		9967600A2B3EC930006C83EC /* FinishMappingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishMappingViewController.swift; sourceTree = "<group>"; };
 		9967600B2B3EC930006C83EC /* FinishMappingViewController+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FinishMappingViewController+Array.swift"; sourceTree = "<group>"; };
@@ -182,6 +184,8 @@
 		9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_didFinishMappingViewController.swift; sourceTree = "<group>"; };
 		9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_OptionalModelViewController.swift; sourceTree = "<group>"; };
 		9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_KeyStrategyViewController.swift; sourceTree = "<group>"; };
+		999FA2402B99B86100A2952F /* Introduce_5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_5ViewController.swift; sourceTree = "<group>"; };
+		999FA2422B99B86A00A2952F /* Introduce_6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_6ViewController.swift; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
 		99AE7D8D2B3EC02E00B474E5 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
@@ -337,7 +341,7 @@
 		99675FDF2B3EC930006C83EC /* Smart */ = {
 			isa = PBXGroup;
 			children = (
-				99675FE02B3EC930006C83EC /* DebugLog */,
+				99675FE02B3EC930006C83EC /* 调试日志 */,
 				99675FE22B3EC930006C83EC /* Compatibility(兼容性) */,
 				99675FF62B3EC930006C83EC /* SmartAny */,
 				99675FF82B3EC930006C83EC /* Case(案例) */,
@@ -348,12 +352,12 @@
 			path = Smart;
 			sourceTree = "<group>";
 		};
-		99675FE02B3EC930006C83EC /* DebugLog */ = {
+		99675FE02B3EC930006C83EC /* 调试日志 */ = {
 			isa = PBXGroup;
 			children = (
-				99675FE12B3EC930006C83EC /* DecodeErrorPrintViewController.swift */,
+				99675FE12B3EC930006C83EC /* DecodingLogViewController.swift */,
 			);
-			path = DebugLog;
+			path = "调试日志";
 			sourceTree = "<group>";
 		};
 		99675FE22B3EC930006C83EC /* Compatibility(兼容性) */ = {
@@ -416,11 +420,13 @@
 		99675FFE2B3EC930006C83EC /* Introduce(介绍) */ = {
 			isa = PBXGroup;
 			children = (
-				99675FFF2B3EC930006C83EC /* DictionaryAndModelViewController.swift */,
+				996760052B3EC930006C83EC /* Introduce_1ViewController.swift */,
+				99675FFF2B3EC930006C83EC /* Introduce_2ViewController.swift */,
 				996760002B3EC930006C83EC /* ComplexDataStructure */,
-				996760052B3EC930006C83EC /* SimpleSmartCodableViewController.swift */,
-				996760062B3EC930006C83EC /* ArrayAndModelViewController.swift */,
-				996760072B3EC930006C83EC /* OptionalPropertyViewController.swift */,
+				996760062B3EC930006C83EC /* Introduce_3ViewController.swift */,
+				996760072B3EC930006C83EC /* Introduce_4ViewController.swift */,
+				999FA2402B99B86100A2952F /* Introduce_5ViewController.swift */,
+				999FA2422B99B86A00A2952F /* Introduce_6ViewController.swift */,
 				996760082B3EC930006C83EC /* FinishMapping */,
 			);
 			path = "Introduce(介绍)";
@@ -781,8 +787,8 @@
 			files = (
 				9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */,
 				996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */,
-				996760412B3EC930006C83EC /* OptionalPropertyViewController.swift in Sources */,
-				996760222B3EC930006C83EC /* DecodeErrorPrintViewController.swift in Sources */,
+				996760412B3EC930006C83EC /* Introduce_4ViewController.swift in Sources */,
+				996760222B3EC930006C83EC /* DecodingLogViewController.swift in Sources */,
 				996760302B3EC930006C83EC /* CompatibleSampleThreeViewController.swift in Sources */,
 				9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */,
 				996760432B3EC930006C83EC /* FinishMappingViewController.swift in Sources */,
@@ -790,6 +796,7 @@
 				990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */,
 				996760262B3EC930006C83EC /* CompatibleClassViewController.swift in Sources */,
 				9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */,
+				999FA2432B99B86A00A2952F /* Introduce_6ViewController.swift in Sources */,
 				9967602C2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift in Sources */,
 				99CABA312B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift in Sources */,
 				99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */,
@@ -806,11 +813,12 @@
 				9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */,
 				996760312B3EC930006C83EC /* CompatibleSampleFourViewController.swift in Sources */,
 				996760292B3EC930006C83EC /* CompatibleStringViewController.swift in Sources */,
-				996760402B3EC930006C83EC /* ArrayAndModelViewController.swift in Sources */,
+				996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */,
 				9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */,
 				996760492B3EC930006C83EC /* InvalidDefaultValueController.swift in Sources */,
+				999FA2412B99B86100A2952F /* Introduce_5ViewController.swift in Sources */,
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
-				9967603F2B3EC930006C83EC /* SimpleSmartCodableViewController.swift in Sources */,
+				9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */,
 				9967602B2B3EC930006C83EC /* CompatibleEnumViewController.swift in Sources */,
 				996760382B3EC930006C83EC /* CaseTwoViewController.swift in Sources */,
 				9967603C2B3EC930006C83EC /* ComplexDataStructureModel.swift in Sources */,
@@ -827,7 +835,7 @@
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
 				99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				9967603A2B3EC930006C83EC /* DictionaryAndModelViewController.swift in Sources */,
+				9967603A2B3EC930006C83EC /* Introduce_2ViewController.swift in Sources */,
 				9967604C2B3EC930006C83EC /* CodableMatchingStructureViewController.swift in Sources */,
 				9967602D2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift in Sources */,
 				996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */,

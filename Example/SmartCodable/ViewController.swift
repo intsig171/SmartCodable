@@ -67,12 +67,14 @@ extension ViewController {
         [
             "title": "Smart介绍",
             "list": [
-                ["name": "简单实用", "vc": "SimpleSmartCodableViewController"],
-                ["name": "字典 ⇆ 模型", "vc": "DictionaryAndModelViewController"],
-                ["name": "数组 ⇆ 模型数组", "vc": "ArrayAndModelViewController"],
-                ["name": "解码完成的回调", "vc": "FinishMappingViewController"],
-                ["name": "可选对象属性", "vc": "OptionalPropertyViewController"],
-                ["name": "复杂数据结构", "vc": "ComplexDataStructureViewController"],
+                ["name": "简单使用",       "vc": "Introduce_1ViewController"],
+                ["name": "字典 ⇆ 模型",    "vc": "Introduce_2ViewController"],
+                ["name": "数组 ⇆ 模型数组", "vc": "Introduce_3ViewController"],
+                ["name": "属性对象的解析",  "vc": "Introduce_4ViewController"],
+                ["name": "解码完成的回调",  "vc": "Introduce_5ViewController"],
+                ["name": "解码时Key的映射",  "vc": "Introduce_6ViewController"],
+
+                ["name": "复杂数据结构",    "vc": "ComplexDataStructureViewController"],
             ]
         ]
     }
@@ -143,8 +145,7 @@ extension ViewController {
         [
             "title": "Smart调试信息",
             "list": [
-                ["name": "日志等级", "vc": "DecodeErrorPrintViewController"],
-                ["name": "解码错误信息", "vc": "DecodeErrorPrintViewController"],
+                ["name": "日志等级 与 日志信息", "vc": "DecodingLogViewController"],
             ]
         ]
     }

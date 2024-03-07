@@ -1,5 +1,5 @@
 //
-//  DictionaryAndModelViewController.swift
+//  Introduce_2ViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/6.
@@ -15,7 +15,7 @@ import SmartCodable
  * 2. 验证json字符串转模型，模型转json字符串
  * 3. 验证数组字典转模型数组，数组模型转数组字典，字典数组转json字符串，json字符串转模型数组。
  */
-class DictionaryAndModelViewController: BaseViewController {
+class Introduce_2ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +29,6 @@ class DictionaryAndModelViewController: BaseViewController {
         ] as [String : Any]
         
        
-
-        // 字典转json字符串
-        guard let json = dict.bt_toJSONString() else { return }
-        print(json)
-        print("\n")
-        /**
-         {"love":[{"time":"7 years","name":"basketball"},{"time":"3 years","name":"football"}],"detail":{"detail":"my name is xiaoming"},"className":"35 class","name":"xiaoming"}
-         */
-        
-        
-        
         // 字典转模型
         guard let xiaoMing = JsonToModel.deserialize(dict: dict) else { return }
         print(xiaoMing)
@@ -96,15 +85,6 @@ class DictionaryAndModelViewController: BaseViewController {
          */
 
         
-        
-        // json字符串转模型
-        guard let xiaoMing2 = JsonToModel.deserialize(json: json1) else { return }
-        print(xiaoMing2)
-        print("\n")
-        /**
-         JsonToModel(name: "xiaoming", className: "35 class", detail: SmartCodable_Example.JsonToModelDetail(detail: "my name is xiaoming"), love: [["name": "basketball", "time": "7 years"], ["name": "football", "time": "3 years"]])
-         */
-        
 
         
         
@@ -115,7 +95,7 @@ class DictionaryAndModelViewController: BaseViewController {
          * 4. json字符串转模型数组
          */
         let arr = [dict, dict]
-        guard let models = [JsonToModel].deserialize(array: arr) as? [JsonToModel] else { return }
+        guard let models = [JsonToModel].deserialize(array: arr) else { return }
         print(models)
         print("\n")
 
@@ -126,31 +106,28 @@ class DictionaryAndModelViewController: BaseViewController {
         let arrJson = models.toJSONString() ?? ""
         print(arrJson)
         print("\n")
-
-        guard let models2 = [JsonToModel].deserialize(json: arrJson) else { return }
-        print(models2)
-        print("\n")
-        
     }
 }
 
+extension Introduce_2ViewController {
+    struct JsonToModel: SmartCodable {
+        var name: String = ""
+        var className: String = ""
+        var detail: JsonToModelDetail = JsonToModelDetail()
+        var love: [[String: String]] = []
+        
+        init() { }
+    }
 
+    struct JsonToModelDetail: SmartCodable {
+        var detail: String = ""
+        
+        init() { }
+    }
 
-
-struct JsonToModel: SmartCodable {
-    var name: String = ""
-    var className: String = ""
-    var detail: JsonToModelDetail = JsonToModelDetail()
-    var love: [[String: String]] = []
-    
-    init() { }
 }
 
-struct JsonToModelDetail: SmartCodable {
-    var detail: String = ""
-    
-    init() { }
-}
+
 
 
 

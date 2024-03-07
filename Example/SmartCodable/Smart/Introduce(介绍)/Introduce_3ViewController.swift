@@ -1,5 +1,5 @@
 //
-//  ArrayAndModelViewController.swift
+//  Introduce_3ViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/6.
@@ -16,7 +16,7 @@ import SmartCodable
  * 2. 验证json字符串转模型，模型转json字符串
  * 3. 验证数组字典转模型数组，数组模型转数组字典，字典数组转json字符串，json字符串转模型数组。
  */
-class ArrayAndModelViewController: BaseViewController {
+class Introduce_3ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +32,6 @@ class ArrayAndModelViewController: BaseViewController {
 
 
         
-        
-        
         /** 验证数组
          * 1. 字典类型的数组，转模型数组
          * 2. 模型数组转字典数组
@@ -42,7 +40,7 @@ class ArrayAndModelViewController: BaseViewController {
          */
         
         // 数组转模型数组
-        guard let models = [ArrayAndModels].deserialize(array: arr) as? [ArrayAndModels] else { return }
+        guard let models = [ArrayAndModels].deserialize(array: arr) else { return }
         print(models)
         /**
          [returnArrayAndModels(name: "xiaoming", className: "35 class", detail: returnArrayAndModelsDetail(detail: "my name is xiaoming"), love: [["name": "basketball", "time": "7 years"], ["name": "football", "time": "3 years"]]), returnArrayAndModels(name: "xiaoming", className: "35 class", detail: returnArrayAndModelsDetail(detail: "my name is xiaoming"), love: [["time": "7 years", "name": "basketball"], ["name": "football", "time": "3 years"]])]
@@ -96,33 +94,25 @@ class ArrayAndModelViewController: BaseViewController {
         /**
          [{"className":"35 class","detail":{"detail":"my name is xiaoming"},"name":"xiaoming","love":[{"name":"basketball","time":"7 years"},{"name":"football","time":"3 years"}]},{"className":"35 class","detail":{"detail":"my name is xiaoming"},"name":"xiaoming","love":[{"name":"basketball","time":"7 years"},{"name":"football","time":"3 years"}]}]
          */
-
-        
-        // json字符串转数组模型
-        guard let models2 = [ArrayAndModels].deserialize(json: arrJson) as? [ArrayAndModels] else { return }
-        print(models2)
-        /**
-         [ArrayAndModels(name: "xiaoming", className: "35 class", detail: returnArrayAndModelsDetail(detail: "my name is xiaoming"), love: [["time": "7 years", "name": "basketball"], ["name": "football", "time": "3 years"]]), returnArrayAndModels(name: "xiaoming", className: "35 class", detail: returnArrayAndModelsDetail(detail: "my name is xiaoming"), love: [["name": "basketball", "time": "7 years"], ["name": "football", "time": "3 years"]])]
-         */
-
-        
     }
 }
 
 
+extension Introduce_3ViewController {
+    struct ArrayAndModels: SmartCodable {
+        var name: String = ""
+        var className: String = ""
+        var detail = ArrayAndModelsDetail()
+        var love: [[String: String]] = []
+        
+        init() { }
+    }
 
+    struct ArrayAndModelsDetail: SmartCodable {
+        var detail: String = ""
+        
+        init() { }
+    }
 
-struct ArrayAndModels: SmartCodable {
-    var name: String = ""
-    var className: String = ""
-    var detail = ArrayAndModelsDetail()
-    var love: [[String: String]] = []
-    
-    init() { }
 }
 
-struct ArrayAndModelsDetail: SmartCodable {
-    var detail: String = ""
-    
-    init() { }
-}

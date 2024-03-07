@@ -9,6 +9,7 @@ import Foundation
 
 /// 映射关系
 /// 将from对应的数据字段映射到to对应的模型属性上
+/// 多个有效字段映射到同一个属性上优先使用第一个。
 public typealias MappingRelationship = (from: [String], to: CodingKey)
 
 infix operator <--
