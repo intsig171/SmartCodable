@@ -95,7 +95,6 @@ extension ViewController {
         [
             "title": "Smart的解码策略",
             "list": [
-                ["name": "key的解码策略", "vc": "KeyDecodingStrategyViewController"],
                 ["name": "Date的解码策略", "vc": "DateDecodingStrategyViewController"],
                 ["name": "Data的解码策略", "vc": "DataDecodingStrategyViewController"],
                 ["name": "浮点数的解码策略", "vc": "FloatDecodingStrategyViewController"],
