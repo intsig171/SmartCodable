@@ -48,7 +48,10 @@ extension TestCaseViewController {
             "title": "CaseOne - 基础数据测试",
             "list": [
                 
-                ["name": "Bool - 类型兼容", "vc": "CaseOne_BoolViewController"],
+                ["name": "类型兼容 - Bool",   "vc": "CaseOne_BoolViewController"],
+                ["name": "类型兼容 - Int",    "vc": "CaseOne_IntViewController"],
+                ["name": "类型兼容 - String", "vc": "CaseOne_StringViewController"],
+                ["name": "类型兼容 - Float",  "vc": "CaseOne_FloatViewController"],
 
                 
                 ["name": "字典 - 键缺失",    "vc": "CaseOne_DictKeylessViewController"],

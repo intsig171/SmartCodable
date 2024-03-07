@@ -13,7 +13,7 @@ import SmartCodable
 /// 对Bool类型进行兼容
 /// int类型：   0会被转义为false， 1会被转义为true，其他值会被抛弃
 /// sting类型： true / false / no / yes 以及对应的大小的情况，转义成Bool值。
-class CaseOne_BoolViewController: BaseCompatibilityViewController {
+class CaseOne_BoolViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

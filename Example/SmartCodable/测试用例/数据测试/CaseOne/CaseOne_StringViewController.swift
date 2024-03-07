@@ -1,5 +1,5 @@
 //
-//  CompatibleStringViewController.swift
+//  CaseOne_StringViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -11,7 +11,7 @@ import UIKit
 import SmartCodable
 
 /// 兼容类String型，只兼容String类型的int值。
-class CompatibleStringViewController: BaseCompatibilityViewController {
+class CaseOne_StringViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +38,16 @@ class CompatibleStringViewController: BaseCompatibilityViewController {
          string4的值为 nil
          */
     }
-
+    struct CompatibleString: SmartCodable {
+        var string1: String = ""
+        var string2: String = ""
+        var string3: String = ""
+        var string4: String?
+        init() { }
+    }
 }
 
-struct CompatibleString: SmartCodable {
-    var string1: String = ""
-    var string2: String = ""
-    var string3: String = ""
-    var string4: String?
-    init() { }
-}
+
 
 
 

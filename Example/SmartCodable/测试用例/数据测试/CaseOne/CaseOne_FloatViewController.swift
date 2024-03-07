@@ -1,5 +1,5 @@
 //
-//  CompatibleFloatViewController.swift
+//  CaseOne_FloatViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -13,7 +13,7 @@ import SmartCodable
 // 使用属性包装器，提供一个默认配置？？ 看看是否可以实现， 提供NaN， nan
 
 /// 针对浮点数进行nan兼容，只支持“nan”判断。 如果返回"NaN"等，会解析失败。
-class CompatibleFloatViewController: BaseCompatibilityViewController {
+class CaseOne_FloatViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,21 +48,23 @@ class CompatibleFloatViewController: BaseCompatibilityViewController {
          0.0
          */
     }
+    
+    struct CompatibleFloat: SmartCodable {
+        var floatValue: Float = 0
+        var floatValue1: Float = 0
+        var floatValue2: Float = 0
+        var floatValue3: Float = 0
+        var floatValue4: Float?
+
+
+        var cgfloatValue: CGFloat = 0
+        var doubleValue: Double = 0
+        init() { }
+    }
 }
 
 
-struct CompatibleFloat: SmartCodable {
-    var floatValue: Float = 0
-    var floatValue1: Float = 0
-    var floatValue2: Float = 0
-    var floatValue3: Float = 0
-    var floatValue4: Float?
 
-
-    var cgfloatValue: CGFloat = 0
-    var doubleValue: Double = 0
-    init() { }
-}
 
 
 

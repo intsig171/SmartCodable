@@ -1,5 +1,5 @@
 //
-//  CompatibleIntViewController.swift
+//  CaseOne_IntViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -10,7 +10,7 @@ import UIKit
 import SmartCodable
 
 /// 兼容Int类型，只兼容String类型的int值。
-class CompatibleIntViewController: BaseCompatibilityViewController {
+class CaseOne_IntViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
