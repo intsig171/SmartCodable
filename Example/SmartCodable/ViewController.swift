@@ -86,6 +86,8 @@ extension ViewController {
                 ["name": "支持解码时Key的映射",       "vc": "Strength_3ViewController"],
                 ["name": "支持默认值填充",            "vc": "Strength_4ViewController"],
                 ["name": "支持json字段值的对象化解析", "vc": "Strength_5ViewController"],
+                ["name": "支持枚举项的解析兼容",       "vc": "Strength_6ViewController"],
+
             ]
         ]
     }
@@ -107,8 +109,6 @@ extension ViewController {
         [
             "title": "Smart兼容性 - 验证类型兼容",
             "list": [
-                ["name": "无键的情况", "vc": "CompatibleKeylessViewController"],
-                ["name": "值类型不匹配", "vc": "CompatibleTypeMismatchViewController"],
                 ["name": "空对象", "vc": "CompatibleEmptyObjectViewController"],
                 ["name": "null", "vc": "CompatibleNullViewController"],
                 ["name": "enum", "vc": "CompatibleEnumViewController"],

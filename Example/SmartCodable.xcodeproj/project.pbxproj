@@ -31,15 +31,14 @@
 		996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */; };
 		996760212B3EC930006C83EC /* ArraySafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDE2B3EC930006C83EC /* ArraySafe.swift */; };
 		996760222B3EC930006C83EC /* DecodingLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE12B3EC930006C83EC /* DecodingLogViewController.swift */; };
-		996760232B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE42B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift */; };
-		996760242B3EC930006C83EC /* CompatibleBoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE52B3EC930006C83EC /* CompatibleBoolViewController.swift */; };
+		996760242B3EC930006C83EC /* CaseOne_BoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */; };
 		996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */; };
 		996760262B3EC930006C83EC /* CompatibleClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE72B3EC930006C83EC /* CompatibleClassViewController.swift */; };
 		996760272B3EC930006C83EC /* CompatibleFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE82B3EC930006C83EC /* CompatibleFloatViewController.swift */; };
 		996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */; };
 		996760292B3EC930006C83EC /* CompatibleStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEA2B3EC930006C83EC /* CompatibleStringViewController.swift */; };
 		9967602A2B3EC930006C83EC /* CompatibleIntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEB2B3EC930006C83EC /* CompatibleIntViewController.swift */; };
-		9967602B2B3EC930006C83EC /* CompatibleEnumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEC2B3EC930006C83EC /* CompatibleEnumViewController.swift */; };
+		9967602B2B3EC930006C83EC /* Strength_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEC2B3EC930006C83EC /* Strength_6ViewController.swift */; };
 		9967602C2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */; };
 		9967602D2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEE2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift */; };
 		9967602E2B3EC930006C83EC /* CompatibleSampleOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF02B3EC930006C83EC /* CompatibleSampleOneViewController.swift */; };
@@ -133,15 +132,14 @@
 		99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		99675FDE2B3EC930006C83EC /* ArraySafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySafe.swift; sourceTree = "<group>"; };
 		99675FE12B3EC930006C83EC /* DecodingLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodingLogViewController.swift; sourceTree = "<group>"; };
-		99675FE42B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleEmptyObjectViewController.swift; sourceTree = "<group>"; };
-		99675FE52B3EC930006C83EC /* CompatibleBoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleBoolViewController.swift; sourceTree = "<group>"; };
+		99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_BoolViewController.swift; sourceTree = "<group>"; };
 		99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCompatibilityViewController.swift; sourceTree = "<group>"; };
 		99675FE72B3EC930006C83EC /* CompatibleClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleClassViewController.swift; sourceTree = "<group>"; };
 		99675FE82B3EC930006C83EC /* CompatibleFloatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleFloatViewController.swift; sourceTree = "<group>"; };
 		99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_DictNullViewController.swift; sourceTree = "<group>"; };
 		99675FEA2B3EC930006C83EC /* CompatibleStringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleStringViewController.swift; sourceTree = "<group>"; };
 		99675FEB2B3EC930006C83EC /* CompatibleIntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleIntViewController.swift; sourceTree = "<group>"; };
-		99675FEC2B3EC930006C83EC /* CompatibleEnumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleEnumViewController.swift; sourceTree = "<group>"; };
+		99675FEC2B3EC930006C83EC /* Strength_6ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_6ViewController.swift; sourceTree = "<group>"; };
 		99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_DictKeylessViewController.swift; sourceTree = "<group>"; };
 		99675FEE2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_DictTypeMismatchViewController.swift; sourceTree = "<group>"; };
 		99675FF02B3EC930006C83EC /* CompatibleSampleOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibleSampleOneViewController.swift; sourceTree = "<group>"; };
@@ -369,14 +367,11 @@
 		99675FE32B3EC930006C83EC /* 验证类型 */ = {
 			isa = PBXGroup;
 			children = (
-				99675FE42B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift */,
-				99675FE52B3EC930006C83EC /* CompatibleBoolViewController.swift */,
 				99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */,
 				99675FE72B3EC930006C83EC /* CompatibleClassViewController.swift */,
 				99675FE82B3EC930006C83EC /* CompatibleFloatViewController.swift */,
 				99675FEA2B3EC930006C83EC /* CompatibleStringViewController.swift */,
 				99675FEB2B3EC930006C83EC /* CompatibleIntViewController.swift */,
-				99675FEC2B3EC930006C83EC /* CompatibleEnumViewController.swift */,
 			);
 			path = "验证类型";
 			sourceTree = "<group>";
@@ -402,6 +397,7 @@
 				999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */,
 				99C313312B99C3290065FC45 /* Strength_4ViewController.swift */,
 				99C313322B99C3290065FC45 /* Strength_5ViewController.swift */,
+				99675FEC2B3EC930006C83EC /* Strength_6ViewController.swift */,
 			);
 			path = "2.Strength(优点)";
 			sourceTree = "<group>";
@@ -517,6 +513,7 @@
 		99CABA2A2B916DD30070DED0 /* CaseOne */ = {
 			isa = PBXGroup;
 			children = (
+				99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */,
 				99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */,
 				99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */,
 				99675FEE2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift */,
@@ -804,7 +801,7 @@
 				999FA2412B99B86100A2952F /* Strength_2ViewController.swift in Sources */,
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
 				9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */,
-				9967602B2B3EC930006C83EC /* CompatibleEnumViewController.swift in Sources */,
+				9967602B2B3EC930006C83EC /* Strength_6ViewController.swift in Sources */,
 				99C313342B99C32A0065FC45 /* Strength_5ViewController.swift in Sources */,
 				996760382B3EC930006C83EC /* CaseTwoViewController.swift in Sources */,
 				9967603C2B3EC930006C83EC /* ComplexDataStructureModel.swift in Sources */,
@@ -813,7 +810,6 @@
 				99CABA2F2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift in Sources */,
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
-				996760232B3EC930006C83EC /* CompatibleEmptyObjectViewController.swift in Sources */,
 				99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
 				99C313332B99C32A0065FC45 /* Strength_4ViewController.swift in Sources */,
@@ -839,7 +835,7 @@
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
 				99CABA2D2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift in Sources */,
 				9993D6982B91EEF80089CA68 /* CaseThree_ArrViewController.swift in Sources */,
-				996760242B3EC930006C83EC /* CompatibleBoolViewController.swift in Sources */,
+				996760242B3EC930006C83EC /* CaseOne_BoolViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  CompatibleBoolViewController.swift
+//  CaseOne_BoolViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -10,8 +10,10 @@ import UIKit
 import SmartCodable
 
 
-/// 对Bool类型进行兼容，我们认为是Bool的Int/String类型的值
-class CompatibleBoolViewController: BaseCompatibilityViewController {
+/// 对Bool类型进行兼容
+/// int类型：   0会被转义为false， 1会被转义为true，其他值会被抛弃
+/// sting类型： true / false / no / yes 以及对应的大小的情况，转义成Bool值。
+class CaseOne_BoolViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,29 +21,7 @@ class CompatibleBoolViewController: BaseCompatibilityViewController {
 
         guard let adaptive = BoolAdaptive.deserialize(dict: getBoolAdaptiveData()) else { return }
         
-        printValueType(key: "a", value: adaptive.a)
-        printValueType(key: "b", value: adaptive.b)
-        printValueType(key: "c", value: adaptive.c)
-        printValueType(key: "d", value: adaptive.d)
-        print("\n")
-
-        printValueType(key: "e", value: adaptive.e)
-        printValueType(key: "f", value: adaptive.f)
-        printValueType(key: "g", value: adaptive.g)
-        printValueType(key: "h", value: adaptive.h)
-        printValueType(key: "i", value: adaptive.i)
-        printValueType(key: "j", value: adaptive.j)
-        print("\n")
-
-
-        printValueType(key: "k", value: adaptive.k)
-        printValueType(key: "l", value: adaptive.l)
-        printValueType(key: "m", value: adaptive.m)
-        printValueType(key: "n", value: adaptive.n)
-        printValueType(key: "o", value: adaptive.o)
-        printValueType(key: "p", value: adaptive.p)
-        printValueType(key: "q", value: adaptive.q)
-        printValueType(key: "r", value: adaptive.r)
+        smartPrint(value: adaptive)
 
         
         /**
@@ -72,7 +52,7 @@ class CompatibleBoolViewController: BaseCompatibilityViewController {
 }
 
 
-extension CompatibleBoolViewController {
+extension CaseOne_BoolViewController {
     func getBoolAdaptiveData() -> [String: Any] {
         let dict = [
             "a": 0,
@@ -99,34 +79,33 @@ extension CompatibleBoolViewController {
         
         return dict
     }
-}
-
-
-
-struct BoolAdaptive: SmartCodable {
-    init() { }
     
-    var a: Bool?
-    var b: Bool = false
-    var c: Bool = false
-    var d: Bool = false
+    struct BoolAdaptive: SmartCodable {
+        init() { }
+        
+        var a: Bool?
+        var b: Bool = false
+        var c: Bool = false
+        var d: Bool = false
 
-    var e: Bool = false
-    var f: Bool = false
-    var g: Bool = false
+        var e: Bool = false
+        var f: Bool = false
+        var g: Bool = false
 
-    var h: Bool = false
-    var i: Bool = false
-    var j: Bool = false
-    var k: Bool = false
-    var l: Bool = false
-    var m: Bool = false
-    var n: Bool = false
-    var o: Bool = false
-    var p: Bool = false
-    var q: Bool = false
-    var r: Bool?
+        var h: Bool = false
+        var i: Bool = false
+        var j: Bool = false
+        var k: Bool = false
+        var l: Bool = false
+        var m: Bool = false
+        var n: Bool = false
+        var o: Bool = false
+        var p: Bool = false
+        var q: Bool = false
+        var r: Bool?
+    }
 }
+
 
 
 
