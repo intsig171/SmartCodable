@@ -275,10 +275,3 @@ extension Array {
         }
     }
 }
-
-//extension Data {
-//    fileprivate func serialize() -> Any? {
-//        let value = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
-//        return value
-//    }
-//}
