@@ -44,6 +44,7 @@ struct SmartJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
 
 
 extension SmartJSONKeyedDecodingContainer {
+    
     public func decodeNil(forKey key: Key) throws -> Bool {
         guard let entry = self.container[key.stringValue] else {
             return true
@@ -51,8 +52,6 @@ extension SmartJSONKeyedDecodingContainer {
         return entry is NSNull
     }
     
-   
-    @inline(__always)
     public func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws -> KeyedDecodingContainer<NestedKey> {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
@@ -67,13 +66,11 @@ extension SmartJSONKeyedDecodingContainer {
         return nestedContainer(wrapping: dictionary)
     }
     
-    @inline(__always)
     private func nestedContainer<NestedKey>(wrapping dictionary: [String: Any]) -> KeyedDecodingContainer<NestedKey> {
         let container = SmartJSONKeyedDecodingContainer<NestedKey>(referencing: decoder, wrapping: dictionary)
         return KeyedDecodingContainer(container)
     }
     
-    @inline(__always)
     public func nestedUnkeyedContainer(forKey key: Key) throws -> UnkeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
@@ -89,19 +86,14 @@ extension SmartJSONKeyedDecodingContainer {
         return SmartSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
     }
     
-    
-    
-    @inline(__always)
     public func superDecoder() throws -> Decoder {
         return try _superDecoder(forKey: SmartCodingKey.super)
     }
     
-    @inline(__always)
     public func superDecoder(forKey key: Key) throws -> Decoder {
         return try _superDecoder(forKey: key)
     }
     
-    @inline(__always)
     private func _superDecoder(forKey key: CodingKey) throws -> Decoder {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
@@ -116,5 +108,4 @@ extension SmartJSONKeyedDecodingContainer {
     func didFinishMapping<T: Decodable>(_ decodeValue: T) -> T {
         return DecodingProcessCoordinator.didFinishMapping(decodeValue)
     }
-
 }

@@ -40,7 +40,7 @@ struct SmartSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
     public var isAtEnd: Bool {
         return self.currentIndex >= self.count!
     }
-    
+    @inlinable
     public mutating func decodeNil() throws -> Bool {
         guard !self.isAtEnd else {
             throw DecodingError.valueNotFound(
@@ -65,8 +65,7 @@ struct SmartSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         }
     }
     
-   
-    
+    @inlinable
     public mutating func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> {
         self.decoder.codingPath.append(SmartCodingKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
@@ -95,7 +94,7 @@ struct SmartSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         let container = SmartJSONKeyedDecodingContainer<NestedKey>(referencing: self.decoder, wrapping: dictionary)
         return KeyedDecodingContainer(container)
     }
-    
+    @inlinable
     public mutating func nestedUnkeyedContainer() throws -> UnkeyedDecodingContainer {
         self.decoder.codingPath.append(SmartCodingKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }
@@ -121,7 +120,7 @@ struct SmartSONUnkeyedDecodingContainer : UnkeyedDecodingContainer {
         self.currentIndex += 1
         return SmartSONUnkeyedDecodingContainer(referencing: self.decoder, wrapping: array)
     }
-    
+    @inlinable
     public mutating func superDecoder() throws -> Decoder {
         self.decoder.codingPath.append(SmartCodingKey(index: self.currentIndex))
         defer { self.decoder.codingPath.removeLast() }

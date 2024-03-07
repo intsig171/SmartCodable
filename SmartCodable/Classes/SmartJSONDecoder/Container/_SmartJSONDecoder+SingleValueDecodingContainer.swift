@@ -14,6 +14,7 @@ extension _SmartJSONDecoder : SingleValueDecodingContainer {
     // 此时是重写的SingleValueDecodingContainer的协议方法， 代表着此时是单容器就只有一个值。
     
     // 期望是非空值。
+    
     private func expectNonNull<T>(_ type: T.Type) throws {
         guard !self.decodeNil() else {
             throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected \(type) but found null value instead."))

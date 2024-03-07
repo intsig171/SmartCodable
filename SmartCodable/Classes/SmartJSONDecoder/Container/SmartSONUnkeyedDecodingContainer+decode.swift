@@ -8,6 +8,7 @@
 import Foundation
 
 extension SmartSONUnkeyedDecodingContainer {
+    
     fileprivate func didFinishMapping<T: Decodable>(_ decodeValue: T) -> T {
         return DecodingProcessCoordinator.didFinishMapping(decodeValue)
     }
@@ -46,10 +47,11 @@ extension SmartSONUnkeyedDecodingContainer {
 }
 
 extension SmartSONUnkeyedDecodingContainer {
+    
     public mutating func decode(_ type: Bool.Type) throws -> Bool {
         return try explicitDecode(Bool.self)
     }
-
+    
     public mutating func decode(_ type: Int.Type) throws -> Int {
         return try explicitDecode(Int.self)
     }
