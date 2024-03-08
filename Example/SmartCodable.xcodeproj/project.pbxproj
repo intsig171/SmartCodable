@@ -73,7 +73,7 @@
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
 		99AE7D952B3EC02E00B474E5 /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
-		99C1E70D2B99A55E0090E8FD /* 使用说明 in Resources */ = {isa = PBXBuildFile; fileRef = 99C1E70C2B99A55E0090E8FD /* 使用说明 */; };
+		99C1E70D2B99A55E0090E8FD /* 说明信息 in Resources */ = {isa = PBXBuildFile; fileRef = 99C1E70C2B99A55E0090E8FD /* 说明信息 */; };
 		99C313332B99C32A0065FC45 /* Strength_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313312B99C3290065FC45 /* Strength_4ViewController.swift */; };
 		99C313342B99C32A0065FC45 /* Strength_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313322B99C3290065FC45 /* Strength_5ViewController.swift */; };
 		99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA282B906A640070DED0 /* TestCaseViewController.swift */; };
@@ -167,7 +167,7 @@
 		99AE7D8D2B3EC02E00B474E5 /* airports10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10.json; sourceTree = "<group>"; };
 		99AE7D8E2B3EC02E00B474E5 /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
 		99AE7D8F2B3EC02E00B474E5 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
-		99C1E70C2B99A55E0090E8FD /* 使用说明 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "使用说明"; sourceTree = "<group>"; };
+		99C1E70C2B99A55E0090E8FD /* 说明信息 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "说明信息"; sourceTree = "<group>"; };
 		99C313312B99C3290065FC45 /* Strength_4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_4ViewController.swift; sourceTree = "<group>"; };
 		99C313322B99C3290065FC45 /* Strength_5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_5ViewController.swift; sourceTree = "<group>"; };
 		99CABA282B906A640070DED0 /* TestCaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCaseViewController.swift; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				996760182B3EC930006C83EC /* CodableMatchingStructureViewController.swift */,
 				996760002B3EC930006C83EC /* ComplexDataStructure */,
-				99C1E70C2B99A55E0090E8FD /* 使用说明 */,
+				99C1E70C2B99A55E0090E8FD /* 说明信息 */,
 				99A494E42B9028D900393193 /* 测试用例 */,
 				996760142B3EC930006C83EC /* Base */,
 				99675FDF2B3EC930006C83EC /* Smart */,
@@ -430,11 +430,11 @@
 		99A494E52B9028EB00393193 /* 数据测试 */ = {
 			isa = PBXGroup;
 			children = (
-				9908EE122B972AF00026E357 /* CaseFive */,
 				99CABA2A2B916DD30070DED0 /* CaseOne */,
 				99CABA2B2B916DE40070DED0 /* CaseTwo */,
 				99D945882B91C4D500CC6470 /* CaseThree */,
 				9993D69B2B9215A40089CA68 /* CaseFour */,
+				9908EE122B972AF00026E357 /* CaseFive */,
 			);
 			path = "数据测试";
 			sourceTree = "<group>";
@@ -583,7 +583,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99675FD12B3EC822006C83EC /* airports1000.json in Resources */,
-				99C1E70D2B99A55E0090E8FD /* 使用说明 in Resources */,
+				99C1E70D2B99A55E0090E8FD /* 说明信息 in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				99675FD52B3EC866006C83EC /* airports1.json in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,

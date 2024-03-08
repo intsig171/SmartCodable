@@ -32,25 +32,29 @@ class CaseThreeViewController: BaseViewController {
             "age1": "20"
 
         ]
-//        let option1 = SmartDecodingOption.keyStrategy(.globalMatch(["nickName": "name", "age1": "age"]))
-//        guard let model1 = CaseThreeModel.deserialize(dict: dict1, options: [option1]) else { return }
-//        print(model1)
-//
-//
-//        let dict2 = [
-//            "realName": "小黄",
-//            "age2": "30"
-//
-//        ]
-//        let option2 = SmartDecodingOption.keyStrategy(.globalMatch(["realName": "name", "age2": "age"]))
-//        guard let model2 = CaseThreeModel.deserialize(dict: dict2, options: [option2]) else { return }
-//        print(model2)
+        guard let model1 = CaseThreeModel.deserialize(dict: dict1) else { return }
+        print(model1)
+
+
+        let dict2 = [
+            "realName": "小黄",
+            "age2": "30"
+
+        ]
+        guard let model2 = CaseThreeModel.deserialize(dict: dict2) else { return }
+        print(model2)
     }
 }
 
 struct CaseThreeModel: SmartCodable {
-    init() { }
     
     var name: String = ""
     var age: String = ""
+    
+    static func mapping() -> [MappingRelationship]? {
+        [
+            CodingKeys.name <-- ["nickName", "realName"],
+            CodingKeys.age <-- ["age", "age1", "age2"]
+        ]
+    }
 }

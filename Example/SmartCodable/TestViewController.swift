@@ -10,39 +10,77 @@ import Foundation
 import UIKit
 import SmartCodable
 import HandyJSON
+import CleanJSON
 
-
-class TestViewController : BaseViewController {
-    
+class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
+        // 这三个模型都有共同的字段（name 和 age）
         let dict: [String: Any] = [
-            "age1": "mccc",
-            "sub": "Mccc"
+            "name": "Mccc",
+            "age": 20,
+            "firstSon": [
+                "hobby": "sleep",
+                "name": "QiQi",
+                "age": 3,
+            ],
+            "secondSon": [
+                "height": 95.3,
+                "name": "LinLin",
+                "age": 3,
+            ]
         ]
-        
 
+        guard let model = BigModel.deserialize(from: dict) else { return }
+        print(model.name)
+        print(model.age)
         
-        if let model = Model.deserialize(dict: dict) {
-            print("model = \(model)")
-        }
-    }
-    
-    struct Model: SmartCodable {
+        print("\n")
         
-//
-//        var name: String = "abc"
-//        var age: Int = 10
+        print(model.firstSon?.name ?? "")
+        print(model.firstSon?.age ?? 0)
+        print(model.firstSon?.hobby ?? "")
         
-        var sub = SubModel()
-    }
-    
-    struct SubModel: SmartCodable {
-        var name11: String = "xiaoming"
+        print("\n")
+        
+        print(model.secondSon?.name ?? "")
+        print(model.secondSon?.age ?? 0)
+        print(model.secondSon?.height ?? 0)
+        
+        print("\n")
     }
 }
 
+extension TestViewController {
+    class BaseModel: HandyJSON {
+        var name: String = ""
+        var age: Int = 0
+        
+        
+        
+        required init() { }
+    }
+    
+    class BigModel: BaseModel {
+        var firstSon: FirstModel?
+        var secondSon: SecondModel?
+        
+        
+        required init() {
+        }
+    }
+    
+    class FirstModel: BaseModel {
+        var hobby: String = ""
+       
+        
+    }
+    
+    class SecondModel: BaseModel {
+        var height: Double = 0
+    }
+}
 
