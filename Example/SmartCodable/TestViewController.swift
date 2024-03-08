@@ -20,7 +20,8 @@ class TestViewController: BaseViewController {
         
         // 这三个模型都有共同的字段（name 和 age）
         let dict: [String: Any] = [
-            "name": false,
+            "hobby": "sleep",
+            "name": "Mccc"
 //            "age": 20,
 //            "hobby": "sleep",
 //            "sub": [
@@ -40,25 +41,9 @@ class TestViewController: BaseViewController {
         ]
 
         guard let model = BigModel.deserialize(dict: dict) else { return }
-        print("hobby = \(model.name)")
-//        print(model.sub?.name)
-//        print("name = \(model.name)")
-//        print("age = \(model.age)")
-
+        print(model.hobby)
+        print(model.name)
         
-//        print("\n")
-//
-//        print(model.firstSon?.name ?? "")
-//        print(model.firstSon?.age ?? 0)
-//        print(model.firstSon?.hobby ?? "")
-//
-//        print("\n")
-//
-//        print(model.secondSon?.name ?? "")
-//        print(model.secondSon?.age ?? 0)
-//        print(model.secondSon?.height ?? 0)
-//
-//        print("\n")
     }
 }
 
@@ -70,12 +55,16 @@ extension TestViewController {
         required init() { }
     }
     
-    class BigModel: SmartCodable {
-        var name: String = ""
+    class BigModel: BaseModel {
+        var hobby: String = ""
         
+        enum CodingKeys: CodingKey {
+//            case name
+            case hobby
+//            case age
+        }
 //        var sub: SubModel?
         
-        required init() { }
     }
     
     
