@@ -353,7 +353,6 @@ extension _SmartJSONDecoder {
                 
                 return date
             } else {
-                return nil
                 fatalError("ISO8601DateFormatter is unavailable on this platform.")
             }
             
