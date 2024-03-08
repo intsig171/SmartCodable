@@ -40,12 +40,16 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  *   - 说明：当解析失败，需要兼容时候，期望抛出相关日志，引起开发者警觉，做相应的优化处理（优化数据/优化属性声明）。
  *   - 结论：已经完成。
  *
- * 7. ❌ 性能优化
+ * 7. ❌ 继承Model的解码支持
+ *   - 说明：model继承时，编译器只给`ClassModel`添加了`init(from decoder: Decoder)`，`ClassSubModel`则没有。
+ *   - 结论：在解码时，判断当前是否ClassSubModel，如果是的话，执行 `try super.init(from: decoder)`。
+ *
+ * 8. ❌ 性能优化
  *   - 说明：理论上SmartCodable的解析性能是劣于Codable，强于HandyJSON的。
  *          希望通过优化算法/逻辑实现/减少类型判断和转换，提升解析性能。
  *   - 结论：
  *
- * 8. ❌ 整体测试
+ * 9. ❌ 整体测试
  *   - 说明：穷尽测试场景，包含但不限于：
  *        数据测试：
  *          * 支持的所有类型的可选属性的测试（keyless / null / typeMismatch）
@@ -57,6 +61,6 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  *          * 解码完成的回调
  *          * WCDB的兼容性
  *
- * 9. ❌ 更新使用文档
+ * 10. ❌ 更新Readme
  */
 
