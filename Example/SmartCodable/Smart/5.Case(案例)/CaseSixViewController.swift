@@ -1,5 +1,5 @@
 //
-//  CodableMatchingStructureViewController.swift
+//  CaseSixViewController.swift
 //  SmartCodable_Example
 //
 //  Created by Mccc on 2023/8/14.
@@ -11,7 +11,7 @@ import SmartCodable
 
 
 /// 数据结构不同的处理
-class CodableMatchingStructureViewController: BaseViewController {
+class CaseSixViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

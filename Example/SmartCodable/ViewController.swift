@@ -120,6 +120,7 @@ extension ViewController {
                 ["name": "多值映射", "vc": "CaseThreeViewController"],
                 ["name": "范型解析", "vc": "CaseFourViewController"],
                 ["name": "范型解析 - signle value", "vc": "CaseFiveViewController"],
+                ["name": "复杂场景的解析", "vc": "CaseSixViewController"],
             ]
         ]
     }
