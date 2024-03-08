@@ -46,6 +46,10 @@ extension Bool: ValueTransformable {
 
 extension String: ValueTransformable {
     static func transformValue(from value: Any) -> String? {
+        
+        // bool类型的值也可以转成int。要过滤掉。
+        if value is Bool { return nil }
+        
         switch value {
         case let intValue as Int:
             return String(intValue)

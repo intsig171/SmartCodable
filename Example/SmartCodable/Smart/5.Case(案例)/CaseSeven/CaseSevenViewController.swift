@@ -1,5 +1,5 @@
 //
-//  lobality.swift
+//  CaseSevenViewController.swift
 //  SmartCodable_Example
 //
 //  Created by Mccc on 2023/8/8.
@@ -18,7 +18,7 @@ import SmartCodable
  * 4. 演示数据类型与定义类型不一致的情况
  */
 
-class ComplexDataStructureViewController: BaseViewController {
+class CaseSevenViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class ComplexDataStructureViewController: BaseViewController {
     lazy var tableView = UITableView.make(registerCells: [ComplexDataStructureDetailCell.self], registerHeaders: [ComplexDataStructureSectionHeader.self], registerFooters: [ComplexDataStructureSectionHeader.self], delegate: self, style: .grouped)
 }
 
-extension ComplexDataStructureViewController {
+extension CaseSevenViewController {
     func reauestData() {
         
         let classArrayJson = """
@@ -92,7 +92,7 @@ extension ComplexDataStructureViewController {
         
         var endArr: [Any] = []
         
-        for _ in 0...10 {
+        for _ in 0...0 {
             
             for item in arr {
                 endArr.append(item)
@@ -102,13 +102,13 @@ extension ComplexDataStructureViewController {
         
         
         
-        guard let models = [Class].deserialize(array: endArr) as? [Class] else { return }
+        guard let models = [Class].deserialize(array: endArr) else { return }
         dataArray = models
         tableView.reloadData()
     }
 }
 
-extension ComplexDataStructureViewController {
+extension CaseSevenViewController {
     func initUI() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
@@ -121,7 +121,7 @@ extension ComplexDataStructureViewController {
 
 
 
-extension ComplexDataStructureViewController: UITableViewDataSource, UITableViewDelegate {
+extension CaseSevenViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataArray.count
@@ -170,4 +170,6 @@ extension ComplexDataStructureViewController: UITableViewDataSource, UITableView
         return cell
     }
 }
+
+
 

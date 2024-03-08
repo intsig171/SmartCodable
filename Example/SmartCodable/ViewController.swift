@@ -121,6 +121,8 @@ extension ViewController {
                 ["name": "范型解析", "vc": "CaseFourViewController"],
                 ["name": "范型解析 - signle value", "vc": "CaseFiveViewController"],
                 ["name": "复杂场景的解析", "vc": "CaseSixViewController"],
+                ["name": "复杂场景的解析2", "vc": "CaseSevenViewController"],
+
             ]
         ]
     }

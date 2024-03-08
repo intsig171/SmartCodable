@@ -22,7 +22,7 @@ public extension SmartCaseDefaultable where Self: Decodable, Self.RawValue: Deco
         if let v = Self.init(rawValue: decoded) {
             self = v
         } else {
-            let des = "Cannot initialize \(Self.self) from invalid \(RawValue.self) value \(decoded)"
+            let des = "Cannot initialize \(Self.self) from invalid \(RawValue.self) value `\(decoded)`"
             SmartLog.logDebug(des, className: "\(Self.self)")
             // 解码失败抛出异常，让上层container选择性处理，如果是可选就返回nil，如果是非可选就返回defaultCase。
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: des))
