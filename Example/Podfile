@@ -1,13 +1,18 @@
 use_frameworks!
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'SmartCodable_Example' do
   pod 'SmartCodable', :path => '../'
-  pod 'HandyJSON', '5.0.0-beta.1'
-  pod 'ObjectMapper'
-  pod 'CleanJSON'
+  
   pod 'SnapKit'
+  pod 'BTPrint'
+  pod 'WCDB.swift'
+ 
+  #对比组
+  pod 'HandyJSON', '5.0.0-beta.1'
+  pod 'CleanJSON'
+  
 
   target 'SmartCodable_Tests' do
     inherit! :search_paths
@@ -15,3 +20,4 @@ target 'SmartCodable_Example' do
     pod 'FBSnapshotTestCase' , '~> 2.1.4'
   end
 end
+

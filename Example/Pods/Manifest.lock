@@ -1,4 +1,5 @@
 PODS:
+  - BTPrint (2.0.0)
   - CleanJSON (1.0.9)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
@@ -6,38 +7,55 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - HandyJSON (5.0.0-beta.1)
-  - ObjectMapper (4.2.0)
-  - SmartCodable (2.3.1)
+  - SmartCodable (2.3.2):
+    - SmartCodable/Codable (= 2.3.2)
+    - SmartCodable/JSONDecoder (= 2.3.2)
+  - SmartCodable/Codable (2.3.2):
+    - SmartCodable/JSONDecoder
+  - SmartCodable/JSONDecoder (2.3.2)
   - SnapKit (5.6.0)
+  - SQLiteRepairKit (1.3.0):
+    - WCDBOptimizedSQLCipher (~> 1.3.0)
+  - WCDB.swift (1.1.0):
+    - SQLiteRepairKit (~> 1.3.0)
+    - WCDBOptimizedSQLCipher (~> 1.3.0)
+  - WCDBOptimizedSQLCipher (1.3.0)
 
 DEPENDENCIES:
+  - BTPrint
   - CleanJSON
   - FBSnapshotTestCase (~> 2.1.4)
   - HandyJSON (= 5.0.0-beta.1)
-  - ObjectMapper
   - SmartCodable (from `../`)
   - SnapKit
+  - WCDB.swift
 
 SPEC REPOS:
   trunk:
+    - BTPrint
     - CleanJSON
     - FBSnapshotTestCase
     - HandyJSON
-    - ObjectMapper
     - SnapKit
+    - SQLiteRepairKit
+    - WCDB.swift
+    - WCDBOptimizedSQLCipher
 
 EXTERNAL SOURCES:
   SmartCodable:
     :path: "../"
 
 SPEC CHECKSUMS:
+  BTPrint: 10badf738e56f84fc842fbfe69a9b90faf5e247c
   CleanJSON: 910a36465ce4829e264a902ccf6d1455fdd9f980
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
-  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
-  SmartCodable: d309b506d52a120505b60aab83927b9333a4caa9
+  SmartCodable: 0851e3ffa805b06fc44836e2ce304a3a1fde9c1a
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SQLiteRepairKit: a66145aadae91886c800f75e16f5cc6476af1a93
+  WCDB.swift: 39e28fe29b5a3bf2927d9fb9218978f19bd49ff0
+  WCDBOptimizedSQLCipher: fc5d49fe6761e54aad29e88da01b6fc1283e5759
 
-PODFILE CHECKSUM: f30e7bf742c12a29355af7b32aaf7d6ec139a182
+PODFILE CHECKSUM: a5dc1261dfc420bf3f7e5a42ccc615dd6bd18239
 
 COCOAPODS: 1.11.2

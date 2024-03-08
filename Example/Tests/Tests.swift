@@ -1,12 +1,10 @@
 import XCTest
 import SmartCodable
 import HandyJSON
-import ObjectMapper
-import HandyJSON
 import CleanJSON
 
 
-let count = 1000 // or 1, 10, 100, 1000, 10000
+let count = 10000 // or 1, 10, 100, 1000, 10000
 let data = airportsJSON(count: count)
 
 class Tests: XCTestCase {
@@ -20,18 +18,6 @@ class Tests: XCTestCase {
         super.tearDown()
     }
     
-    
-    func testObjectMapper() {
-        measure {
-            let json = String(data: data, encoding: .utf8)!
-            do {
-                let objects = try Mapper<ObjectMapperModel>().mapArray(JSONString: json)
-                XCTAssertEqual(objects.count, count)
-            } catch {
-                XCTAssertNil(error)
-            }
-        }
-    }
     
     func testHandyJSON() {
         measure {
@@ -53,20 +39,42 @@ class Tests: XCTestCase {
         }
     }
     
-    
-    func testSmart() {
+    func testCleanJsonDecoder() {
         measure {
-            guard let objects = [Smart].deserialize(data: data) as? [Smart] else {
+            do {
+                let decoder = CleanJSONDecoder()
+                let objects = try decoder.decode([Airport].self, from: data)
+                XCTAssertEqual(objects.count, count)
+            } catch {
+                XCTAssertNil(error)
+            }
+        }
+    }
+    
+    func testSmartJsonDecoder() {
+        measure {
+            do {
+                let decoder = SmartJSONDecoder()
+                let objects = try decoder.decode([Airport].self, from: data)
+                XCTAssertEqual(objects.count, count)
+            } catch {
+                XCTAssertNil(error)
+            }
+        }
+    }
+    
+    func testSmartCodable() {
+        measure {
+            guard let objects = [Smart].deserialize(data: data) else {
                 return
             }
             XCTAssertEqual(objects.count, count)
         }
     }
     
-    
     func testCleanJSON() {
         measure {
-            let decoder = CleanJSONDecoder()
+            let decoder = SmartJSONDecoder()
             do {
                 let objects = try decoder.decode([Airport].self, from: data)
                 XCTAssertEqual(objects.count, count)
@@ -91,53 +99,6 @@ func airportsJSON(count: Int) -> Data {
 
 
 
-// ObjectMapper
-struct ObjectMapperModel: ImmutableMappable {
-    
-    var name: String
-    var iata: String
-    var icao: String
-    var coordinates: [Double]
-    var runways: [Runway]
-    
-    init(map: Map) throws {
-        name = try map.value("name")
-        iata = try map.value("iata")
-        icao = try map.value("icao")
-        coordinates = try map.value("coordinates")
-        runways = try map.value("runways")
-    }
-    
-    mutating func mapping(map: Map) {
-        name <- map["name"]
-        iata <- map["iata"]
-        icao <- map["icao"]
-        coordinates <- map["coordinates"]
-        runways <- map["runways"]
-    }
-    
-    struct Runway: ImmutableMappable {
-        enum Surface: String {
-            case rigid, flexible, gravel, sealed, unpaved, other
-        }
-        
-        var direction: String
-        var distance: Int
-        var surface: Surface
-        
-        init(map: Map) throws {
-            direction = try map.value("direction")
-            distance = try map.value("distance")
-            surface = try map.value("surface")
-        }
-        
-        mutating func mapping(map: Map) {
-            direction <- map["direction"]
-            distance <- map["distance"]
-            surface <- map["surface"]
-        }
-    }
-}
 
 
 // HandyJSON
