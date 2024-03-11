@@ -16,7 +16,6 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
         
         
         test()
-        test1()
         
     }
     
@@ -54,22 +53,6 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
         let dict = getDictDate(mode: .normal, strategy: strategy)
         
         if let model = DateModel.deserialize(dict: dict, options: [.dateStrategy(strategy)]) {
-            print(model)
-        }
-    }
-    
-    
-    func test1() {
-        let decoder = SmartJSONDecoder()
-        
-
-
-
-        let strategy = getStrategy()
-        decoder.dateDecodingStrategy = strategy
-        let dict = getDictDate(mode: .normal, strategy: strategy)
-        
-        if let model = try? decoder.decode(DateModel.self, from: dict) {
             print(model)
         }
     }

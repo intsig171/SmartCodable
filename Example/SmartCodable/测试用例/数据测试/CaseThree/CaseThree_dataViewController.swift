@@ -15,7 +15,6 @@ class CaseThree_dataViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
      
         test()
-        test1()
     }
 
     func getStrategy() -> JSONDecoder.DataDecodingStrategy {
@@ -37,20 +36,6 @@ class CaseThree_dataViewController: BaseCompatibilityViewController {
         let dict = getDictData(mode: .normal, strategy: strategy)
         
         if let model = DataModel.deserialize(dict: dict, options: [.dataStrategy(strategy)]) {
-            print(model)
-            print(model.aData.toString() ?? "")
-        }
-    }
-    
-    func test1() {
-        let decoder = SmartJSONDecoder()
-
-        let strategy = getStrategy()
-
-        decoder.dataDecodingStrategy = strategy
-
-        let dict = getDictData(mode: .normal, strategy: strategy)
-        if let model = try? decoder.decode(DataModel.self, from: dict) {
             print(model)
             print(model.aData.toString() ?? "")
         }

@@ -43,30 +43,14 @@ open class SmartJSONDecoder: JSONDecoder {
     open override func decode<T : Decodable>(_ type: T.Type, from data: Data) throws -> T {
         let topLevel: Any
         do {
-            topLevel = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+            topLevel = try JSONSerialization.jsonObject(with: data)
         } catch {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: error))
         }
-        return try _decode(type, from: topLevel)
-    }
-    
-    
-    open func decode<T : Decodable>(_ type: T.Type, from dict: [String: Any]) throws -> T {
-        return try _decode(type, from: dict)
-    }
-    
-    
-    open func decode<T : Decodable>(_ type: T.Type, from array: [Any]) throws -> T {
-        return try _decode(type, from: array)
-    }
-}
-
-extension SmartJSONDecoder {
-    
-    private func _decode<T : Decodable>(_ type: T.Type, from container: Any) throws -> T {
-        let decoder = _SmartJSONDecoder(referencing: container, options: self.options)
-        guard let value = try decoder.unbox(container, as: type) else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON."))
+        
+        let decoder = _SmartJSONDecoder(referencing: topLevel, options: self.options)
+        guard let value = try decoder.unbox(topLevel, as: T.self) else {
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data did not contain a top-level value."))
         }
         return value
     }
