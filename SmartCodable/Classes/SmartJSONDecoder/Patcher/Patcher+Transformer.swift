@@ -21,7 +21,7 @@ extension Patcher {
 }
 
 
-protocol ValueTransformable {
+fileprivate protocol ValueTransformable {
     static func transformValue(from value: Any) -> Self?
 }
 

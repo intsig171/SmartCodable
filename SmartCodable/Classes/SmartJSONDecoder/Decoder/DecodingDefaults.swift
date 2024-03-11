@@ -23,9 +23,7 @@ struct DecodingDefaults {
     mutating func recordAttributeValues<T: Decodable>(for type: T.Type, codingPath: [CodingKey]) {
         // 直接使用反射初始化对象，如果T符合SmartDecodable协议
         if let object = type as? SmartDecodable.Type {
-            
-            let instance = object.init()
-            
+            let instance = object.init()            
             // 使用反射获取属性名称和值
             let mirror = Mirror(reflecting: instance)
             mirror.children.forEach { child in

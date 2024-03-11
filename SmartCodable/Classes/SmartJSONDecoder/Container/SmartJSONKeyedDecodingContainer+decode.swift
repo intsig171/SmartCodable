@@ -16,7 +16,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -30,7 +30,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
             
@@ -44,7 +44,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -58,7 +58,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -72,7 +72,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -86,7 +86,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -100,7 +100,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -114,7 +114,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -128,7 +128,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -142,7 +142,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -156,7 +156,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -170,7 +170,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -184,7 +184,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -198,7 +198,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -212,7 +212,7 @@ extension SmartJSONKeyedDecodingContainer {
         self.decoder.codingPath.append(key)
         defer { self.decoder.codingPath.removeLast() }
         
-        guard let entry = getJsonValue(type: type, forKey: key) else {
+        guard let entry = getJsonValue(forKey: key) else {
             return try smartDecode(forKey: key)
         }
         
@@ -226,7 +226,7 @@ extension SmartJSONKeyedDecodingContainer {
 
 extension SmartJSONKeyedDecodingContainer {
     
-    fileprivate func getJsonValue(type: Any.Type, forKey key: CodingKey) -> Any? {
+    fileprivate func getJsonValue(forKey key: CodingKey) -> Any? {
         if let entry = self.container[key.stringValue] {
             return entry
         }
