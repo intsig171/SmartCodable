@@ -272,7 +272,6 @@
 				99AE7D892B3EC02E00B474E5 /* Resource */,
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				99328D962B5138170074036A /* AreaTest.swift */,
-				99328D982B5138210074036A /* area.json */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -431,6 +430,7 @@
 		99AE7D892B3EC02E00B474E5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				99328D982B5138210074036A /* area.json */,
 				99AE7D8A2B3EC02E00B474E5 /* airports1.json */,
 				99AE7D8D2B3EC02E00B474E5 /* airports10.json */,
 				99AE7D8E2B3EC02E00B474E5 /* airports100.json */,

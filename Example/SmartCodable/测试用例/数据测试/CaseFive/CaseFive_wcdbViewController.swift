@@ -23,10 +23,7 @@ class CaseFive_wcdbViewController: BaseViewController {
         object.description = "sample_insert"
         //Insert
         try? database.insert(objects: object, intoTable: "sampleTable")
-
     }
-    
-
 }
 
 

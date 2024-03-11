@@ -483,20 +483,6 @@ fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
 }()
 
 
-extension Dictionary where Key == String {
-    mutating func updateKeyName(oldKey: String, newKey: String) {
-        
-        
-        if let oldValue = self[oldKey] {
-            self[newKey] = oldValue
-            // 然后删除旧键
-            self.removeValue(forKey: oldKey)
-        } else {
-            
-        }
-    }
-}
-
 
 /** 说明1⃣️
  * decoded = try T(from: self)。这行代码是Swift中Codable解析的关键部分。
