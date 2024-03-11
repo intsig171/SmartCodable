@@ -80,6 +80,7 @@
 		99CABA2D2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2C2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift */; };
 		99CABA2F2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2E2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift */; };
 		99CABA312B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA302B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift */; };
+		99D17BBA2B9F0CF9008ADAAB /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D17BB82B9F0CF9008ADAAB /* PerformanceTest.swift */; };
 		99D945842B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945802B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift */; };
 		99D945852B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */; };
 		99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945822B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift */; };
@@ -174,6 +175,7 @@
 		99CABA2C2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayKeylessViewController.swift; sourceTree = "<group>"; };
 		99CABA2E2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayNullViewController.swift; sourceTree = "<group>"; };
 		99CABA302B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayTypeMismatchViewController.swift; sourceTree = "<group>"; };
+		99D17BB82B9F0CF9008ADAAB /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceTest.swift; path = Tests/PerformanceTest.swift; sourceTree = SOURCE_ROOT; };
 		99D945802B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_ArrayNestDictViewController.swift; sourceTree = "<group>"; };
 		99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNestDictViewController.swift; sourceTree = "<group>"; };
 		99D945822B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNestArrayViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				99D17BB82B9F0CF9008ADAAB /* PerformanceTest.swift */,
 				99AE7D892B3EC02E00B474E5 /* Resource */,
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				99328D962B5138170074036A /* AreaTest.swift */,
@@ -782,6 +785,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99D17BBA2B9F0CF9008ADAAB /* PerformanceTest.swift in Sources */,
 				99328D972B5138170074036A /* AreaTest.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 			);
