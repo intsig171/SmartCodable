@@ -4,7 +4,7 @@ import HandyJSON
 import CleanJSON
 
 
-let count = 10000 // or 1, 10, 100, 1000, 10000
+let count = 1000 // or 1, 10, 100, 1000, 10000
 let data = airportsJSON(count: count)
 
 class Tests: XCTestCase {
@@ -69,18 +69,6 @@ class Tests: XCTestCase {
                 return
             }
             XCTAssertEqual(objects.count, count)
-        }
-    }
-    
-    func testCleanJSON() {
-        measure {
-            let decoder = SmartJSONDecoder()
-            do {
-                let objects = try decoder.decode([Airport].self, from: data)
-                XCTAssertEqual(objects.count, count)
-            } catch {
-                XCTAssertNil(error)
-            }
         }
     }
 }

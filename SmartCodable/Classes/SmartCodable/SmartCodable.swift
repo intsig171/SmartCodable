@@ -47,7 +47,7 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  * 8. ❌ 性能优化
  *   - 说明：理论上SmartCodable的解析性能是劣于Codable，强于HandyJSON的。
  *          希望通过优化算法/逻辑实现/减少类型判断和转换，提升解析性能。
- *   - 结论：
+ *   - 结论：todo
  *
  * 9. ❌ 整体测试
  *   - 说明：穷尽测试场景，包含但不限于：

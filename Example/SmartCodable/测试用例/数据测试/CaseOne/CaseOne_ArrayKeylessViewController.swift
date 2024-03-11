@@ -18,7 +18,7 @@ class CaseOne_ArrayKeylessViewController: BaseCompatibilityViewController {
 
         let keylessArr: [Any] = [dict]
         
-        if let models = [CompatibleTypes].deserialize(array: keylessArr) as? [CompatibleTypes] {
+        if let models = [CompatibleTypes].deserialize(array: keylessArr) {
             let mirr = Mirror(reflecting: models.first!)
             for (key, value) in mirr.children {
                 printValueType(key: key ?? "", value: value)
@@ -26,7 +26,7 @@ class CaseOne_ArrayKeylessViewController: BaseCompatibilityViewController {
         }
         
         
-        if let models = [OptionalCompatibleTypes].deserialize(array: keylessArr) as? [OptionalCompatibleTypes] {
+        if let models = [OptionalCompatibleTypes].deserialize(array: keylessArr) {
             let mirr = Mirror(reflecting: models.first!)
             for (key, value) in mirr.children {
                 printValueType(key: key!, value: value)
