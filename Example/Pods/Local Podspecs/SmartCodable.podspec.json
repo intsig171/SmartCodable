@@ -1,6 +1,6 @@
 {
   "name": "SmartCodable",
-  "version": "2.3.2",
+  "version": "3.0.0-beta",
   "summary": "数据解析库",
   "homepage": "https://github.com/intsig171",
   "license": {
@@ -12,27 +12,12 @@
   },
   "source": {
     "git": "https://github.com/intsig171/SmartCodable.git",
-    "tag": "2.3.2"
+    "tag": "3.0.0-beta"
   },
   "platforms": {
     "ios": "11.0"
   },
   "swift_versions": "5.0",
-  "source_files": "BTBubble/Classes/*.swift",
-  "subspecs": [
-    {
-      "name": "JSONDecoder",
-      "source_files": "SmartCodable/Classes/SmartJSONDecoder/**/*"
-    },
-    {
-      "name": "Codable",
-      "dependencies": {
-        "SmartCodable/JSONDecoder": [
-
-        ]
-      },
-      "source_files": "SmartCodable/Classes/SmartCodable/**/*"
-    }
-  ],
+  "source_files": "SmartCodable/Classes/**/*",
   "swift_version": "5.0"
 }
