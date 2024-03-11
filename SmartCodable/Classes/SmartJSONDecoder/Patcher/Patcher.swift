@@ -26,9 +26,5 @@ struct Patcher<T: Decodable> {
         }
         return try defaultForType()
     }
-    
-    static func getType(v: Any) -> String {
-        return String(describing: type(of: v))
-    }
 }
 

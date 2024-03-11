@@ -1437,6 +1437,7 @@
 		83C86616CAFD1E023B18F9B387018CB0 /* Container */ = {
 			isa = PBXGroup;
 			children = (
+				E10DBF1CE0E5F48E13A80D3E06DC9948 /* DecodingError+Extension.swift */,
 				AF8DA1CFBEED0511303AE95947010661 /* _SmartJSONDecoder+SingleValueDecodingContainer.swift */,
 				38779E77A546628C3D9AD63D74896353 /* DecodingProcessCoordinator.swift */,
 				4DF00923930A067EDD530D4C8267C914 /* SmartCodingKey.swift */,
@@ -1793,7 +1794,6 @@
 		C8A1FB14BE931D2ED9FE8BC764D3A88E /* Patcher */ = {
 			isa = PBXGroup;
 			children = (
-				E10DBF1CE0E5F48E13A80D3E06DC9948 /* DecodingError+Extension.swift */,
 				73156A898CBB99FACC912F0520847F63 /* Patcher.swift */,
 				A6C7CED58DE3604293A9A198F773BCFB /* Patcher+Provider.swift */,
 				17F5871860CB1C2F201A9785F67C75E9 /* Patcher+Transformer.swift */,
