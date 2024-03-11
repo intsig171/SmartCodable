@@ -176,6 +176,7 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/BTBubble/BTBubble.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BTPrint/BTPrint.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CleanJSON/CleanJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"
@@ -186,6 +187,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/BTBubble/BTBubble.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BTPrint/BTPrint.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CleanJSON/CleanJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework"

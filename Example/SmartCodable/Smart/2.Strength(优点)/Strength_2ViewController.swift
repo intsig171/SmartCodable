@@ -38,3 +38,4 @@ extension Strength_2ViewController {
         }
     }
 }
+

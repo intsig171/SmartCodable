@@ -37,3 +37,4 @@ extension Strength_5ViewController {
         var name: String = ""
     }
 }
+

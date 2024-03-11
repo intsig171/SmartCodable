@@ -47,6 +47,8 @@ class TestViewController: BaseViewController {
     }
 }
 
+extension String: SmartCodable { }
+
 extension TestViewController {
     
     class BaseModel: SmartCodable {
