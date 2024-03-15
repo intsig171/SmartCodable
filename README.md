@@ -3,6 +3,8 @@
 # SmartCodable - An Intelligent Solution for Swift Data Parsing
 
 
+大家可以体验develop分支上的 V3.0.1-beta版本。 使用体验上几乎和handyJSON一致。 预计3月20号前结束公测，合并到master。
+
 
 [中国同胞🇨🇳请访问中文版](https://github.com/intsig171/SmartCodable/blob/main/README-CN.md)
 
