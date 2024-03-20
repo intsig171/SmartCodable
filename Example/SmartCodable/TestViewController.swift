@@ -60,8 +60,8 @@ struct Model: SmartCodable {
     
     static func mapping() -> [MappingRelationship]? {
         [
-            CodingKeys.name <-- ["realName", "nickName"],
-            CodingKeys.age <-- "person_age"
+            CodingKeys.name <--- ["realName", "nickName"],
+            CodingKeys.age <--- "person_age"
         ]
     }
 }

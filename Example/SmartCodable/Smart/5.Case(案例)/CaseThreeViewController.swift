@@ -53,8 +53,8 @@ struct CaseThreeModel: SmartCodable {
     
     static func mapping() -> [MappingRelationship]? {
         [
-            CodingKeys.name <-- ["nickName", "realName"],
-            CodingKeys.age <-- ["age", "age1", "age2"]
+            CodingKeys.name <--- ["nickName", "realName"],
+            CodingKeys.age <--- ["age", "age1", "age2"]
         ]
     }
 }

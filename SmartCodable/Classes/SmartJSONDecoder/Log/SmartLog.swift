@@ -71,11 +71,11 @@ struct SmartLog {
         func getHeader(level: SmartConfig.DebugMode) -> String {
             switch level {
             case .debug:
-                return "\n============= 💚 [SmartLog Debug] 💚 =============\n"
+                return "\n============= 💚 [SmartLog Debug日志] 💚 =============\n"
             case .verbose:
-                return "\n============= 💜 [SmartLog Verbose] 💜 =============\n"
+                return "\n============= 💜 [SmartLog Verbose日志] 💜 =============\n"
             case .error:
-                return "\n============= 💔 [SmartLog Error] 💔 =============\n"
+                return "\n============= 💔 [SmartLog Error日志] 💔 =============\n"
             default:
                 return ""
             }
@@ -116,7 +116,7 @@ extension SmartLog {
                 // 表示找不到键的错误。当解码器期望在JSON中找到某个键，但在给定的数据中找不到该键时，会引发此错误。
                 // 通常发生在解码器试图从JSON中提取指定的键值对但未成功时
             case .keyNotFound(let key, let context):
-                return ErrorInfo(type: "找不到键的错误",
+                return ErrorInfo(type: "找不到键",
                                  location: className,
                                  fieldName: key.stringValue,
                                  codingPath: context.codingPath,
@@ -125,7 +125,7 @@ extension SmartLog {
                 // 表示找不到值的错误。当解码器期望从JSON中提取某个值，但该值不存在时，会引发此错误。
                 // 通常发生在解码器试图从JSON中提取一个可选值，但实际上得到了一个null值。
             case .valueNotFound(let type, let context):
-                return ErrorInfo(type: "找不到值的错误",
+                return ErrorInfo(type: "值为null",
                                  location: className,
                                  fieldName: context.codingPath.last?.stringValue ?? "",
                                  fieldType: "\(type)",
@@ -135,7 +135,7 @@ extension SmartLog {
                 // 表示类型不匹配的错误。当解码器期望将JSON值解码为特定类型，但实际值的类型与期望的类型不匹配时，会引发此错误。
                 // 例如，解码器期望一个整数，但实际上得到了一个字符串
             case .typeMismatch(let type, let context):
-                return ErrorInfo(type: "值类型不匹配的错误",
+                return ErrorInfo(type: "值类型不匹配",
                                  location: className,
                                  fieldName: context.codingPath.last?.stringValue ?? "",
                                  fieldType: "\(type)",
@@ -145,7 +145,7 @@ extension SmartLog {
                 // 表示数据损坏的错误。当解码器无法从给定的数据中提取所需的值时，会引发此错误。
                 // 通常发生在数据类型不匹配或数据结构不正确的情况下。
             case .dataCorrupted(let context):
-                return ErrorInfo(type: "数据损坏的错误",
+                return ErrorInfo(type: "数据损坏",
                                  location: className,
                                  fieldName: context.codingPath.last?.stringValue ?? "",
                                  codingPath: context.codingPath,
