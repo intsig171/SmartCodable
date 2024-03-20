@@ -1,6 +1,6 @@
 ✨✨✨看起来还不错？给个star✨吧，急需支持✨✨✨
 
-# SmartCodable - Swift数据解析的智能解决方案
+# SmartCodable - Swift数据解析
 
 **SmartCodable** 是一个基于Swift的**Codable**协议的数据解析库，旨在提供更为强大和灵活的解析能力。通过优化和重写**Codable**的标准功能，**SmartCodable** 有效地解决了传统解析过程中的常见问题，并提高了解析的容错性和灵活性。
 
