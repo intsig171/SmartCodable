@@ -6,7 +6,7 @@
 
 ## English ReadMe 
 
-🌐 [Please visit English README](https://github.com/intsig171/SmartCodable/blob/main/README-EN.md)
+🌐 If you need,please visit [English README](https://github.com/intsig171/SmartCodable/blob/main/README-EN.md)
 
 
 ## HandyJSON vs Codable
