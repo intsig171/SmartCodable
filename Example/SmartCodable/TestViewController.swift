@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import SmartCodable
-import HandyJSON
+//import HandyJSON
 import CleanJSON
 
 class TestViewController: BaseViewController {
@@ -17,61 +17,51 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // 这三个模型都有共同的字段（name 和 age）
-        let dict: [String: Any] = [
-            "hobby": "sleep",
-            "name": "Mccc"
-//            "age": 20,
-//            "hobby": "sleep",
-//            "sub": [
-//                "name": "Mcc1111c",
-//                "age": 20,
-//            ]
-//            "firstSon": [
-//                "hobby": "sleep",
-//                "name": "QiQi",
-//                "age": 3,
-//            ],
-//            "secondSon": [
-//                "height": 95.3,
-//                "name": "LinLin",
-//                "age": 3,
-//            ]
-        ]
+        let dict = [
+            "nickName": "小花",
+            "realName": "小明",
+            "person_age": 10
+        ] as [String : Any]
 
-        guard let model = BigModel.deserialize(dict: dict) else { return }
-        print(model.hobby)
+        guard let model = Model.deserialize(dict: dict) else { return }
+        print(model.age)
         print(model.name)
-        
+
+
+//        let dict1 = [
+//            "nickName": NSNull(),
+//            "realName": "小花",
+//            "age": 10,
+//            "person_age": 20,
+//        ] as [String : Any]
+//
+//        guard let model = Model.deserialize(dict: dict1) else { return }
+
+
     }
 }
 
-extension String: SmartCodable { }
 
 extension TestViewController {
-    
-    class BaseModel: SmartCodable {
-        var name: String = ""
-        var age: Int = 0
-        required init() { }
-    }
-    
-    class BigModel: BaseModel {
-        var hobby: String = ""
-        
-        enum CodingKeys: CodingKey {
-//            case name
-            case hobby
-//            case age
-        }
-//        var sub: SubModel?
-        
-    }
-    
-    
-//    class SubModel: BaseModel {
-//        var hobby: String = ""
-//    }
+
 }
 
+
+
+struct Model: SmartCodable {
+    var name: String = ""
+    var age: Int = 0
+    var ignoreKey: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "todo"
+        case age
+    }
+    
+    static func mapping() -> [MappingRelationship]? {
+        [
+            CodingKeys.name <-- ["realName", "nickName"],
+            CodingKeys.age <-- "person_age"
+        ]
+    }
+}
