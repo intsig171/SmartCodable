@@ -9,23 +9,25 @@
 import Foundation
 import UIKit
 import SmartCodable
-//import HandyJSON
+import HandyJSON
 import CleanJSON
 
 class TestViewController: BaseViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let dict = [
-            "nickName": "小花",
-            "realName": "小明",
-            "person_age": 10
+            "name": "小明",
+            "age": 10
         ] as [String : Any]
 
         guard let model = Model.deserialize(dict: dict) else { return }
         print(model.age)
         print(model.name)
+
+        let dict1 = model.encode() ?? [:]
+        print(dict1)
 
 
 //        let dict1 = [
@@ -42,26 +44,63 @@ class TestViewController: BaseViewController {
 }
 
 
-extension TestViewController {
-
-}
-
-
-
-struct Model: SmartCodable {
+class BaseModel: Codable {
     var name: String = ""
-    var age: Int = 0
-    var ignoreKey: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case name = "todo"
-        case age
-    }
-    
-    static func mapping() -> [MappingRelationship]? {
-        [
-            CodingKeys.name <--- ["realName", "nickName"],
-            CodingKeys.age <--- "person_age"
-        ]
-    }
+    required init() { }
 }
+
+class Model: BaseModel {
+    var age: Int = 0
+}
+
+通过SIL查看中间代码
+
+class BaseModel : Decodable & Encodable {
+
+ @_hasStorage @_hasInitialValue var name: String { get set }
+
+ required init()
+
+ enum CodingKeys : CodingKey {
+
+  case name
+
+  @_implements(Equatable, ==(_:_:)) static func __derived_enum_equals(_ a: BaseModel.CodingKeys, _ b: BaseModel.CodingKeys) -> Bool
+
+  func hash(into hasher: inout Hasher)
+
+  init?(stringValue: String)
+
+  init?(intValue: Int)
+
+  var hashValue: Int { get }
+
+  var intValue: Int? { get }
+
+  var stringValue: String { get }
+
+ }
+
+ @objc deinit
+
+ func encode(to encoder: Encoder) throws
+
+ required init(from decoder: Decoder) throws
+
+}
+
+
+
+@_inheritsConvenienceInitializers class Model : BaseModel {
+
+ @_hasStorage @_hasInitialValue var age: Int { get set }
+
+ required init()
+
+ required init(from decoder: Decoder) throws
+
+ @objc deinit
+
+}
+
+为什么 Model 中，有 required init(from decoder: Decoder) throws 方法的实现，解析的时候 age 不会解析？
