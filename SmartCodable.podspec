@@ -12,7 +12,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
-  s.version          = '2.3.1'
+  s.version          = '3.0.1-beta'
   s.summary          = '数据解析库'
   
   s.homepage         = 'https://github.com/intsig171'
@@ -25,11 +25,17 @@ Pod::Spec.new do |s|
   s.swift_version         = '5.0'
   
   
-  
   s.source_files = 'SmartCodable/Classes/**/*'
   
+#  s.subspec 'JSONDecoder' do |ss|
+#      ss.source_files = "SmartCodable/Classes/SmartJSONDecoder/**/*"
+#  end
+#
+#  s.subspec 'Codable' do |ss|
+#      ss.dependency 'SmartCodable/JSONDecoder'
+#      ss.source_files = "SmartCodable/Classes/SmartCodable/**/*"
+#  end
   
-
 end
 
 

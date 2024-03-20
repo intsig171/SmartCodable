@@ -1,0 +1,6 @@
+framework module sqliterk {
+  umbrella header "SQLiteRepairKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

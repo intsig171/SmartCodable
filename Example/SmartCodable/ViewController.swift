@@ -23,20 +23,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .error
+        title = "SmartCodable"
+        
         SmartConfig.openErrorAssert = false
         
         dataArray = [
             other,
+            smart_test,
             smart_introduce,
+            smart_Strength,
             smart_customDecoding,
-            smart_compatible,
-            smart_compatible_structure,
-            smart_Any,
             smart_debug,
             smart_case,
-            smart_disadvantage,
-            explain,
         ]
         
         
@@ -51,16 +49,41 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
+    var smart_test: [String: Any] {
+        [
+            "title": "Smart的测试用例",
+            "list": [
+                ["name": "丰富的测试用例 >>>", "vc": "TestCaseViewController"],
+            ]
+        ]
+    }
+    
+    
     var smart_introduce: [String: Any] {
         [
-            "title": "Smart介绍",
+            "title": "Smart使用介绍",
             "list": [
-                ["name": "简单实用", "vc": "SimpleSmartCodableViewController"],
-                ["name": "字典 ⇆ 模型", "vc": "DictionaryAndModelViewController"],
-                ["name": "数组 ⇆ 模型数组", "vc": "ArrayAndModelViewController"],
-                ["name": "解码完成的回调", "vc": "FinishMappingViewController"],
-                ["name": "可选对象属性", "vc": "OptionalPropertyViewController"],
-                ["name": "复杂数据结构", "vc": "ComplexDataStructureViewController"],
+                ["name": "简单使用",       "vc": "Introduce_1ViewController"],
+                ["name": "字典 ⇆ 模型",    "vc": "Introduce_2ViewController"],
+                ["name": "数组 ⇆ 模型数组", "vc": "Introduce_3ViewController"],
+                ["name": "属性对象的解析",  "vc": "Introduce_4ViewController"],
+            ]
+        ]
+    }
+    
+    
+    
+    var smart_Strength: [String: Any] {
+        [
+            "title": "Smart的强大之处",
+            "list": [
+                ["name": "支持Any解析",             "vc": "Strength_1ViewController"],
+                ["name": "支持解码完成的回调",        "vc": "Strength_2ViewController"],
+                ["name": "支持解码时Key的映射",       "vc": "Strength_3ViewController"],
+                ["name": "支持默认值填充",            "vc": "Strength_4ViewController"],
+                ["name": "支持json字段值的对象化解析", "vc": "Strength_5ViewController"],
+                ["name": "支持枚举项的解析兼容",       "vc": "Strength_6ViewController"],
+
             ]
         ]
     }
@@ -70,69 +93,20 @@ extension ViewController {
         [
             "title": "Smart的解码策略",
             "list": [
-                ["name": "key的解码策略", "vc": "KeyDecodingStrategyViewController"],
                 ["name": "Date的解码策略", "vc": "DateDecodingStrategyViewController"],
                 ["name": "Data的解码策略", "vc": "DataDecodingStrategyViewController"],
                 ["name": "浮点数的解码策略", "vc": "FloatDecodingStrategyViewController"],
             ]
         ]
     }
-    
-    
-    var smart_compatible: [String: Any] {
-        [
-            "title": "Smart兼容性 - 验证类型兼容",
-            "list": [
-                ["name": "无键的情况", "vc": "CompatibleKeylessViewController"],
-                ["name": "值类型不匹配", "vc": "CompatibleTypeMismatchViewController"],
-                ["name": "空对象", "vc": "CompatibleEmptyObjectViewController"],
-                ["name": "null", "vc": "CompatibleNullViewController"],
-                ["name": "enum", "vc": "CompatibleEnumViewController"],
-                ["name": "浮点数", "vc": "CompatibleFloatViewController"],
-                ["name": "Bool", "vc": "CompatibleBoolViewController"],
-                ["name": "String", "vc": "CompatibleStringViewController"],
-                ["name": "Int", "vc": "CompatibleIntViewController"],
-                ["name": "模型Model", "vc": "CompatibleClassViewController"],
-            ]
-        ]
-    }
-    
-    // 兼容性 - 不同结构下的
-    var smart_compatible_structure: [String: Any] {
-       [
-        "title": "Smart兼容性 - 验证不同数据结构",
-        "list": [
-            ["name": "字典 -> String", "vc": "CompatibleSampleOneViewController"],
-            ["name": "字典 -> 字典 -> String", "vc": "CompatibleSampleTwoViewController"],
-            ["name": "字典 -> 数组 -> 字典 -> String", "vc": "CompatibleSampleThreeViewController"],
-            ["name": "字典 -> 数组 -> 字典 -> 字典 -> String", "vc": "CompatibleSampleFourViewController"],
 
-            ["name": "数组 -> 字典 -> String", "vc": "CompatibleSampleFiveViewController"],
-            ["name": "数组 -> 字典 -> 数组 -> 字典 -> String", "vc": "CompatibleSampleSixViewController"],
-        ]
-       ]
-    }
-    
-    
-    var smart_Any: [String: Any] {
-        [
-            "title": "Codable无法对Any进行解析，SmartCodable提供了三种思路",
-            "list": [
-                ["name": "SmartAny", "vc": "SmartAnyViewController"],
-            ]
-        ]
-    }
-    
-
-    
 
     
     var smart_debug: [String: Any] {
         [
             "title": "Smart调试信息",
             "list": [
-                ["name": "日志等级", "vc": "DecodeErrorPrintViewController"],
-                ["name": "解码错误信息", "vc": "DecodeErrorPrintViewController"],
+                ["name": "日志等级 & 日志信息", "vc": "DecodingLogViewController"],
             ]
         ]
     }
@@ -142,32 +116,17 @@ extension ViewController {
             "title": "Smart案例",
             "list": [
                 ["name": "扁平化", "vc": "CaseOneViewController"],
-                ["name": "派生关系", "vc": "CaseTwoViewController"],
+                ["name": "Model继承", "vc": "CaseTwoViewController"],
                 ["name": "多值映射", "vc": "CaseThreeViewController"],
                 ["name": "范型解析", "vc": "CaseFourViewController"],
                 ["name": "范型解析 - signle value", "vc": "CaseFiveViewController"],
+                ["name": "复杂场景的解析", "vc": "CaseSixViewController"],
+                ["name": "复杂场景的解析2", "vc": "CaseSevenViewController"],
+
             ]
         ]
     }
     
-    var smart_disadvantage: [String: Any] {
-        [
-            "title": "Smart缺点（Codable的缺点）",
-            "list": [
-                ["name": "默认值无效", "vc": "InvalidDefaultValueController"],
-            ]
-        ]
-    }
-    
-    
-    var explain: [String: Any] {
-        [
-            "title": "Smart说明",
-            "list": [
-                ["name": "为什么要在Model中实现init方法？", "vc": "ExplainOneViewController"],
-            ]
-        ]
-    }
     
     var other: [String: Any] {
         [
@@ -197,13 +156,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let dict = dataArray[section~] {
-            let title = dict["title"] as? String
-            return title
-        }
-        return ""
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+//        label.backgroundColor = UIColor.red.withAlphaComponent(0.01)
+        
+        if let dict = dataArray[section~] {
+            let title = dict["title"] as? String ?? ""
+            label.text = "    " + title
+        }
+        
+        return label
+    }
+
     
     
     
@@ -232,7 +201,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let vc = createViewControllerObject(form: vcStr) else { return }
         vc.contentText = name
         
-        present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

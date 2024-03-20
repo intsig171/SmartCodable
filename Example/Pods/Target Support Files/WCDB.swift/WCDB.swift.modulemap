@@ -1,0 +1,6 @@
+framework module WCDBSwift {
+  umbrella header "WCDB.swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
