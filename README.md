@@ -5,7 +5,8 @@
 **SmartCodable** 是一个基于Swift的**Codable**协议的数据解析库，旨在提供更为强大和灵活的解析能力。通过优化和重写**Codable**的标准功能，**SmartCodable** 有效地解决了传统解析过程中的常见问题，并提高了解析的容错性和灵活性。
 
 ## English ReadMe 
-![yingyu1-01](https://github.com/intsig171/SmartCodable/assets/87351449/42eff9c2-2173-4a1d-a420-b7a0ee52a7ec) [Please visit English README](https://github.com/intsig171/SmartCodable/blob/main/README-EN.md)
+
+🌐 [Please visit English README](https://github.com/intsig171/SmartCodable/blob/main/README-EN.md)
 
 
 ## HandyJSON vs Codable
