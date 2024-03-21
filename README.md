@@ -49,8 +49,8 @@
 | 💡 建议列表                                         | 是否采纳 | 理由                                                         |
 | -------------------------------------------------- | -------- | ------------------------------------------------------------ |
 | ① **#suggest 1 在mapping方法中支持解析忽略**       | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%201%20在mapping方法中支持解析忽略.md) |
-| ② **#suggest 2 像HandyJSON一样支持继承关系的解析** | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%202%20像HandyJSON一样支持继承关系的解析.md)                                                           |
-
+| ② **#suggest 2 像HandyJSON一样支持继承关系的解析** | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%202%20像HandyJSON一样支持继承关系的解析.md)  |
+| ③ **#suggest 3 支持初始值填充** | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%203%20支持属性初始化值填充.md)  |
 
 
 ## 集成 SmartCodable
