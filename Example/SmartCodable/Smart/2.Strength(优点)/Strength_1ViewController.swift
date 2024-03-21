@@ -26,13 +26,15 @@ class Strength_1ViewController: BaseViewController {
         let inDict = [
             "key1": 1,
             "key2": "two",
-            "key3": ["key": "1"],
+            "key3": ["key": "one"],
             "key4": [1, 2, 3, 4]
         ] as [String : Any]
         
         let arr = [inDict]
         
         let dict = [
+            "sex": true,
+            "height": 184.3,
             "name": "xiao ming",
             "age": 20,
             "dict": inDict,
@@ -41,15 +43,37 @@ class Strength_1ViewController: BaseViewController {
         
         
         guard let model = AnyModel.deserialize(dict: dict) else { return }
+        print(model.sex?.peel ?? false)
+        print(model.height)
         print(model.name.peel )
         print(model.age?.peel ?? 0)
         print(model.dict.peel)
         print(model.arr.peel)
+        
+        print("\n")
+        print("\n")
+
+        let encoded = model.toDictionary()
+        
+        let encodeDict = encoded ?? [:]
+        print(encodeDict)
+        print("\n")
+        print("\n")
+
+        guard let model1 = AnyModel.deserialize(dict: encodeDict) else { return }
+        print(model1.sex?.peel ?? false)
+        print(model1.height)
+        print(model1.name.peel )
+        print(model1.age?.peel ?? 0)
+        print(model1.dict.peel)
+        print(model1.arr.peel)
     }
 }
 
 extension Strength_1ViewController {
     struct AnyModel: SmartCodable {
+        var sex: SmartAny?
+        var height: SmartAny?
         var name: SmartAny = .string("")
         var age: SmartAny?
         var dict: [String: SmartAny] = [:]
