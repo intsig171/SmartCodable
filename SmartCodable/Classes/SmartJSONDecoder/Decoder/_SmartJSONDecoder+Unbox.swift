@@ -5,7 +5,11 @@
 //  Created by Mccc on 2024/3/4.
 //
 import Foundation
-import UIKit
+#if canImport(UIKit)
+    import UIKit
+#else
+    import AppKit
+#endif
 
 //这边的实现，还是要像系统的实现意义，抛出异常，让三个container实现的时候各自处理。 为nil的情况，异常的情况。
 
