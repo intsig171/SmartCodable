@@ -13,6 +13,10 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		9902B4D02BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4CF2BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift */; };
+		9902B4D22BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D12BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift */; };
+		9902B4D42BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D32BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift */; };
+		9902B4D62BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D52BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift */; };
 		9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */; };
 		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
@@ -114,6 +118,10 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		8860B9435A4082D17ABC8167 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		9902B4CF2BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_1ViewController.swift; sourceTree = "<group>"; };
+		9902B4D12BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_2ViewController.swift; sourceTree = "<group>"; };
+		9902B4D32BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_3ViewController.swift; sourceTree = "<group>"; };
+		9902B4D52BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSONViewController.swift; sourceTree = "<group>"; };
 		9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFive_wcdbViewController.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
@@ -246,6 +254,7 @@
 			children = (
 				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				99C1E70C2B99A55E0090E8FD /* 说明信息 */,
+				9902B4CE2BB2F32D00310E69 /* 平替HandyJSON */,
 				99A494E42B9028D900393193 /* 测试用例 */,
 				996760142B3EC930006C83EC /* Base */,
 				99675FDF2B3EC930006C83EC /* Smart */,
@@ -307,6 +316,17 @@
 				AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9902B4CE2BB2F32D00310E69 /* 平替HandyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				9902B4CF2BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift */,
+				9902B4D12BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift */,
+				9902B4D32BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift */,
+				9902B4D52BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift */,
+			);
+			path = "平替HandyJSON";
 			sourceTree = "<group>";
 		};
 		9908EE122B972AF00026E357 /* CaseFive */ = {
@@ -759,8 +779,10 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				9967603A2B3EC930006C83EC /* Introduce_2ViewController.swift in Sources */,
 				9967604C2B3EC930006C83EC /* CaseSixViewController.swift in Sources */,
+				9902B4D22BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift in Sources */,
 				9967602D2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift in Sources */,
 				996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */,
+				9902B4D02BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift in Sources */,
 				996760342B3EC930006C83EC /* Strength_1ViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
 				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
@@ -775,7 +797,9 @@
 				99D9458C2B91C80300CC6470 /* CaseThree_dataViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
 				99CABA2D2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift in Sources */,
+				9902B4D42BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift in Sources */,
 				9993D6982B91EEF80089CA68 /* CaseThree_ArrViewController.swift in Sources */,
+				9902B4D62BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift in Sources */,
 				996760242B3EC930006C83EC /* CaseOne_BoolViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
 			);

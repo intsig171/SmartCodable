@@ -1,18 +1,17 @@
 //
-//  TestViewController.swift
+//  ReplaceHandyJSON_1ViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/9/1.
-//  Copyright © 2023 CocoaPods. All rights reserved.
+//  Created by qixin on 2024/3/26.
+//  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import SmartCodable
 import HandyJSON
-import CleanJSON
 
-class TestViewController: BaseViewController {
+class ReplaceHandyJSON_1ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +31,16 @@ class TestViewController: BaseViewController {
         
         
         guard let handyModels = [HandyModel].deserialize(from: [dict]) as? [HandyModel] else { return }
-        print(handyModels)
         let toArr = handyModels.toJSON()
         let toArrStr = handyModels.toJSONString()
         
         guard let smartModels = [SmartModel].deserialize(from: [dict]) else { return }
-        print(smartModels)
         let toArr1 = smartModels.toArray()
         let toArrStr1 = smartModels.toJSONString()
     }
 }
 
-extension TestViewController {
+extension ReplaceHandyJSON_1ViewController {
     class HandyModel: HandyJSON {
         var name: String = ""
         required init() { }
@@ -54,7 +51,6 @@ extension TestViewController {
         required init() { }
     }
 }
-class HandyModel: HandyJSON {
-    var name: String = ""
-    required init() { }
-}
+
+
+

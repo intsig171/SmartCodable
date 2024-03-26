@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         dataArray = [
             other,
             smart_test,
+            replace_HandyJSON,
             smart_introduce,
             smart_Strength,
             smart_customDecoding,
@@ -54,6 +55,16 @@ extension ViewController {
             "title": "Smart的测试用例",
             "list": [
                 ["name": "丰富的测试用例 >>>", "vc": "TestCaseViewController"],
+            ]
+        ]
+    }
+    
+    
+    var replace_HandyJSON: [String: Any] {
+        [
+            "title": "替换HandyJSON",
+            "list": [
+                ["name": "替换HandyJSON的工作量 >>>", "vc": "ReplaceHandyJSONViewController"],
             ]
         ]
     }
