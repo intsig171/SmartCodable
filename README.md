@@ -51,6 +51,23 @@
 | ① **#suggest 1 在mapping方法中支持解析忽略**       | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%201%20在mapping方法中支持解析忽略.md) |
 | ② **#suggest 2 像HandyJSON一样支持继承关系的解析** | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%202%20像HandyJSON一样支持继承关系的解析.md)  |
 | ③ **#suggest 3 支持初始值填充** | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%203%20支持属性初始化值填充.md)  |
+| ④ **#suggest 4 提供HandyJSON的替换指导** | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md)  |
+
+
+## 使用SmartCodable 平替 HandyJSON
+
+| 内容项          | 内容项说明                                    | 使用场景 | 替换难度 | 评判理由                                               |
+| --------------- | --------------------------------------------- | -------- | -------- | ------------------------------------------------------ |
+| ①声明Model      | 声明Model                                     | ★★★★★    | ★☆☆☆☆    | 全局将 HandyJSON 替换为 SmartCodable即可。             |
+| ②反序列化       | 数据的模型化（数据转Model）                   | ★★★★★    | ☆☆☆☆☆    | 完全一样的调用方式，无需处理。                         |
+| ③序列化         | 模型的数据化（Model转数据）                   | ★☆☆☆☆    | ★☆☆☆☆    | 将 `toJSON()` 替换为 `toDictionary()` 或 `toArray()`。 |
+| ④解码完成的回调 | 解析完成进一步处理数据                        | ★★☆☆☆    | ☆☆☆☆☆    | 完全一样的调用方式，无需处理。                         |
+| ⑤自定义解析Key  | 忽略key的解析 & 自定义Key的映射关系           | ★★☆☆☆    | ★★★★★    | 需要更改调用方式。                                     |
+| ⑥解析Any        | 解析Any类型的数据。Any，[String: Any]， [Any] | ★☆☆☆☆    | ★☆☆☆☆    | 将Any替换为SmartAny                                    |
+| ⑦处理继承关系   | 解析存在的继承关系的Model                     | ★☆☆☆☆    | ★★★★★    | 建议使用协议实现。                                     |
+| ⑧枚举的解析     | 解析枚举属性                                  | ★☆☆☆☆    | ★☆☆☆☆    | 多实现一个 defaultCase                                 |
+
+
 
 
 ## 集成 SmartCodable
