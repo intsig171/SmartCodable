@@ -36,7 +36,12 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
 //MARK: - ～> V3 版本
-
+// MARK: V3.1.0
+/**
+ * 1. ✅ 平替HandyJSON
+ *   - 说明：尽量减少替换HandyJSON的工作量。
+ *   - 结论：将deserialize(dict:) deserialize(json:) deserialize(data:) 优化为 deserialize(from:)。与HandyJSON的调用一致。
+ */
 
 
 // MARK: V3.0.5
