@@ -62,7 +62,7 @@ extension CaseFour_KeyStrategyViewController {
                 """#.data(using: .utf8)!
         
         
-        if let model = CodingKeysModel.deserialize(data: data) {
+        if let model = CodingKeysModel.deserialize(from: data) {
             print(model)
         }
         
@@ -114,7 +114,7 @@ extension CaseFour_KeyStrategyViewController {
             ]
         ]
         // 2. 使用mapping
-        guard let feedTwo = FeedTwo.deserialize(dict: dict) else { return }
+        guard let feedTwo = FeedTwo.deserialize(from: dict) else { return }
         print("feedTwo = \(feedTwo)")
         print("\n")
         // feedTwo = FeedTwo(nickName: "Mccc1", two: Two(nickName: "", three: [Three(nickName: "Mccc3")]))
@@ -137,7 +137,7 @@ extension CaseFour_KeyStrategyViewController {
         ]
         
         // 1. CodingKeys 映射
-        guard let feedOne = FeedOne.deserialize(dict: dict) else { return }
+        guard let feedOne = FeedOne.deserialize(from: dict) else { return }
         print("feedOne = \(feedOne)")
         print("\n")
         // feedOne = FeedOne(name: "Mccc1", two: FeedOne.Two(name: "Mccc2", three: [Three(name: "Mccc3")]))

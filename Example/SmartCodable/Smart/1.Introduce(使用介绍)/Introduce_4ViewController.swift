@@ -37,7 +37,7 @@ class Introduce_4ViewController: BaseViewController {
         ] as [String : Any]
 
         
-        guard let model = BigModel.deserialize(dict: dict) else { return }
+        guard let model = BigModel.deserialize(from: dict) else { return }
         print(model)
         
     }

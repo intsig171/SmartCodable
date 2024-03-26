@@ -27,7 +27,7 @@ class CaseFourViewController : BaseViewController {
             ]
         ] as [String : Any]
  
-        let model = ApiCommon<SomeDataModel>.deserialize(dict: dict)
+        let model = ApiCommon<SomeDataModel>.deserialize(from: dict)
         print(model?.data?.name ?? "")
     }
 }

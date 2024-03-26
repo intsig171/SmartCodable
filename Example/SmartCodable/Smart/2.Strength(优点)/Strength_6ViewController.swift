@@ -24,7 +24,7 @@ class Strength_6ViewController: BaseCompatibilityViewController {
             "enumTest": ""
         ]
         
-        guard let model = CompatibleEnum.deserialize(dict: dict) else { return }
+        guard let model = CompatibleEnum.deserialize(from: dict) else { return }
         print(model.enum1)
         print(model.enum2)
 

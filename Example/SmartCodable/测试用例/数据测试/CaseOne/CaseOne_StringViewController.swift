@@ -25,7 +25,7 @@ class CaseOne_StringViewController: BaseViewController {
             "string4": NSNull()
         ] as [String : Any]
         
-        guard let feed = CompatibleString.deserialize(dict: dict) else { return }
+        guard let feed = CompatibleString.deserialize(from: dict) else { return }
         print("string1的值为", feed.string1)
         print("string2的值为", feed.string2)
         print("string3的值为", feed.string3)

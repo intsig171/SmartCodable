@@ -23,7 +23,7 @@ class CaseThreeViewController: BaseViewController {
         
         
 
-        guard let model = CaseThreeModel.deserialize(dict: dict) else { return }
+        guard let model = CaseThreeModel.deserialize(from: dict) else { return }
         print(model)
 
 
@@ -32,7 +32,7 @@ class CaseThreeViewController: BaseViewController {
             "age1": "20"
 
         ]
-        guard let model1 = CaseThreeModel.deserialize(dict: dict1) else { return }
+        guard let model1 = CaseThreeModel.deserialize(from: dict1) else { return }
         print(model1)
 
 
@@ -41,7 +41,7 @@ class CaseThreeViewController: BaseViewController {
             "age2": "30"
 
         ]
-        guard let model2 = CaseThreeModel.deserialize(dict: dict2) else { return }
+        guard let model2 = CaseThreeModel.deserialize(from: dict2) else { return }
         print(model2)
     }
 }

@@ -20,11 +20,11 @@ class CaseOne_ArrayTypeMismatchViewController: BaseViewController {
         
         let typeMismatchArr: [Any] = [dict]
         
-        if let models = [CompatibleTypes].deserialize(array: typeMismatchArr) as? [CompatibleTypes] {
+        if let models = [CompatibleTypes].deserialize(from: typeMismatchArr) as? [CompatibleTypes] {
             print(models)
         }
         
-        if let models = [OptionalCompatibleTypes].deserialize(array: typeMismatchArr) as? [OptionalCompatibleTypes] {
+        if let models = [OptionalCompatibleTypes].deserialize(from: typeMismatchArr) as? [OptionalCompatibleTypes] {
             print(models)
         }
     }

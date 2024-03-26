@@ -24,7 +24,7 @@ class CaseOne_IntViewController: BaseViewController {
         }
         """
         
-        guard let feed = CompatibleInt.deserialize(json: json) else { return }
+        guard let feed = CompatibleInt.deserialize(from: json) else { return }
         print(feed.intValue)
         print(feed.intValue1)
         print(feed.intValue2)

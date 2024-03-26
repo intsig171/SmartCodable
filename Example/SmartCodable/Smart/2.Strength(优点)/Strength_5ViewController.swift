@@ -19,7 +19,7 @@ class Strength_5ViewController: BaseViewController {
             "hobby": "{\"name\":\"sleep\"}",
         ]
         
-        guard let model = Model.deserialize(dict: dict) else { return }
+        guard let model = Model.deserialize(from: dict) else { return }
         print(model)
     }
 }

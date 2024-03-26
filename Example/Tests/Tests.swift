@@ -65,7 +65,7 @@ class Tests: XCTestCase {
     
     func testSmartCodable() {
         measure {
-            guard let objects = [Smart].deserialize(data: data) else {
+            guard let objects = [Smart].deserialize(from: data) else {
                 return
             }
             XCTAssertEqual(objects.count, count)

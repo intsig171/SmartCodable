@@ -49,7 +49,7 @@ class DecodingLogViewController: BaseViewController {
     
         SmartConfig.debugMode = .error
         
-        guard let value = DecodeErrorPrint.deserialize(dict: getDecodeErrorPrint()) else { return }
+        guard let value = DecodeErrorPrint.deserialize(from: getDecodeErrorPrint()) else { return }
         print(value.a)
         print(value.name)
         print(value.c)

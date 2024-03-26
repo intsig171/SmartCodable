@@ -33,7 +33,7 @@ class CaseOne_DictKeylessViewController: BaseCompatibilityViewController {
 extension CaseOne_DictKeylessViewController {
     /// 明确类型
     func explicitType(json: String) {
-        guard let person = CompatibleTypes.deserialize(json: json) else { return }
+        guard let person = CompatibleTypes.deserialize(from: json) else { return }
         print("非可选属性")
         let mirr = Mirror(reflecting: person)
         for (key, value) in mirr.children {
@@ -73,7 +73,7 @@ extension CaseOne_DictKeylessViewController {
 extension CaseOne_DictKeylessViewController {
     /// 可选类型
     func optionalType(json: String) {
-        guard let person = OptionalCompatibleTypes.deserialize(json: json) else { return }
+        guard let person = OptionalCompatibleTypes.deserialize(from: json) else { return }
         
         print("可选属性")
         let mirr = Mirror(reflecting: person)

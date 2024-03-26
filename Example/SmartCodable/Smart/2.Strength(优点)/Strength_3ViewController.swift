@@ -24,7 +24,7 @@ class Strength_3ViewController: BaseViewController {
         ] as [String : Any]
 
 
-        guard let model = Model.deserialize(dict: dict) else { return }
+        guard let model = Model.deserialize(from: dict) else { return }
         print(model)
 
         
@@ -37,7 +37,7 @@ class Strength_3ViewController: BaseViewController {
         ] as [String : Any]
 
         
-        guard let model = Model.deserialize(dict: dict1) else { return }
+        guard let model = Model.deserialize(from: dict1) else { return }
         print(model)
     }
 }

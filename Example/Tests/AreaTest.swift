@@ -80,7 +80,7 @@ class AreaTest: XCTestCase {
     // 0.035
     func testAreaSmart() {
         measure {
-            guard let objects = [AreaSmart].deserialize(data: areaData) else {
+            guard let objects = [AreaSmart].deserialize(from: areaData) else {
                 return
             }
             

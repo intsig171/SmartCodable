@@ -19,11 +19,11 @@ class CaseOne_ArrayNullViewController: BaseCompatibilityViewController {
         
         let nullArr: [Any] = [dict]
         
-        if let models = [CompatibleTypes].deserialize(array: nullArr) as? [CompatibleTypes] {
+        if let models = [CompatibleTypes].deserialize(from: nullArr) as? [CompatibleTypes] {
             print(models)
         }
         
-        if let models = [OptionalCompatibleTypes].deserialize(array: nullArr) as? [OptionalCompatibleTypes] {
+        if let models = [OptionalCompatibleTypes].deserialize(from: nullArr) as? [OptionalCompatibleTypes] {
             print(models)
         }
     }

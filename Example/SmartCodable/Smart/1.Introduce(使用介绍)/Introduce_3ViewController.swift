@@ -40,7 +40,7 @@ class Introduce_3ViewController: BaseViewController {
          */
         
         // 数组转模型数组
-        guard let models = [ArrayAndModels].deserialize(array: arr) else { return }
+        guard let models = [ArrayAndModels].deserialize(from: arr) else { return }
         print(models)
         /**
          [returnArrayAndModels(name: "xiaoming", className: "35 class", detail: returnArrayAndModelsDetail(detail: "my name is xiaoming"), love: [["name": "basketball", "time": "7 years"], ["name": "football", "time": "3 years"]]), returnArrayAndModels(name: "xiaoming", className: "35 class", detail: returnArrayAndModelsDetail(detail: "my name is xiaoming"), love: [["time": "7 years", "name": "basketball"], ["name": "football", "time": "3 years"]])]

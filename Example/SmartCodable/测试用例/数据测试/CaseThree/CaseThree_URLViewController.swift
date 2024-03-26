@@ -32,7 +32,7 @@ class CaseThree_URLViewController: BaseCompatibilityViewController {
         }
         
         
-        if let model = URLModel.deserialize(dict: dict) {
+        if let model = URLModel.deserialize(from: dict) {
             print(model)
         
         }

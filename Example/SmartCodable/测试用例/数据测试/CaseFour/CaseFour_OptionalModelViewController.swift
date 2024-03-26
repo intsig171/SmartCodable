@@ -29,7 +29,7 @@ class CaseFour_OptionalModelViewController: BaseViewController {
             ],
         ]
         
-        if let model = BigModel.deserialize(dict: dict) {
+        if let model = BigModel.deserialize(from: dict) {
             print(model.classModel.name ?? "")
             print(model.optionalClassModel?.name ?? "")
 

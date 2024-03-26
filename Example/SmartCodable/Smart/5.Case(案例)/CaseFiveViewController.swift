@@ -28,7 +28,7 @@ class CaseFiveViewController : BaseViewController {
         """
 
         // 此时的data是一个字符串，不是字典类型。
-        guard let model = ApiConmon<StringModel>.deserialize(json: json) else { return }
+        guard let model = ApiConmon<StringModel>.deserialize(from: json) else { return }
         print(model)
         
         
@@ -44,7 +44,7 @@ class CaseFiveViewController : BaseViewController {
         """
 
         
-        guard let model1 = ApiConmon<DataModel>.deserialize(json: json1) else { return }
+        guard let model1 = ApiConmon<DataModel>.deserialize(from: json1) else { return }
         print(model1)
     }
 }

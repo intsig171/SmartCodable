@@ -21,7 +21,7 @@ class Strength_2ViewController: BaseViewController {
         ] as [String : Any]
 
         
-        guard let model = Model.deserialize(dict: dict) else { return }
+        guard let model = Model.deserialize(from: dict) else { return }
         print(model)
     }
 }

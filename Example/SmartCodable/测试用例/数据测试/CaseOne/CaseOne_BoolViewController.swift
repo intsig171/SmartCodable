@@ -19,7 +19,7 @@ class CaseOne_BoolViewController: BaseViewController {
         super.viewDidLoad()
                 
 
-        guard let adaptive = BoolAdaptive.deserialize(dict: getBoolAdaptiveData()) else { return }
+        guard let adaptive = BoolAdaptive.deserialize(from: getBoolAdaptiveData()) else { return }
         
         smartPrint(value: adaptive)
 

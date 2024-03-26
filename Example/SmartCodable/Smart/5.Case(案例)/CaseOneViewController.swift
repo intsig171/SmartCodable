@@ -42,13 +42,13 @@ class CaseOneViewController: BaseViewController {
         }
         """
         
-        guard let model = Player.deserialize(json: json) else { return }
+        guard let model = Player.deserialize(from: json) else { return }
         print(model)
 
         guard let dictJson = model.toJSONString(prettyPrint: true) else { return }
         print(dictJson)
         
-        guard let model1 = Player.deserialize(json: dictJson) else { return }
+        guard let model1 = Player.deserialize(from: dictJson) else { return }
         print(model1)
     }
 }

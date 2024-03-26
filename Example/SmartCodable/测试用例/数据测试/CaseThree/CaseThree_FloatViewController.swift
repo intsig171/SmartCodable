@@ -31,7 +31,7 @@ class CaseThree_FloatViewController: BaseCompatibilityViewController {
   
 
         
-        if let model = FloatModel.deserialize(dict: dict) {
+        if let model = FloatModel.deserialize(from: dict) {
             print(model)
             print(model.nan1)
         }

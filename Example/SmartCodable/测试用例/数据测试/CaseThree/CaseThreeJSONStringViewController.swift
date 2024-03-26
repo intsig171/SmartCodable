@@ -26,7 +26,7 @@ class CaseThreeJSONStringViewController: BaseCompatibilityViewController {
 
         
         
-        if let model = JSONStringModel.deserialize(dict: dict) {
+        if let model = JSONStringModel.deserialize(from: dict) {
             print(model)
         }
     }

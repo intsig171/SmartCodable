@@ -20,13 +20,13 @@ class Introduce_1ViewController: BaseViewController {
         let json = dict.bt_toJSONString() ?? ""
         let data = json.data(using: .utf8)!
         
-        guard let model1 = Model.deserialize(dict: dict) else { return }
+        guard let model1 = Model.deserialize(from: dict) else { return }
         print("model1 = \(model1)")
 
-        guard let model2 = Model.deserialize(json: json) else { return }
+        guard let model2 = Model.deserialize(from: json) else { return }
         print("model2 = \(model2)")
         
-        guard let model3 = Model.deserialize(data: data) else { return }
+        guard let model3 = Model.deserialize(from: data) else { return }
         print("model3 = \(model3)")
         
         print("\n\n")
@@ -36,13 +36,13 @@ class Introduce_1ViewController: BaseViewController {
         let arr = [dict, dict]
         let arrJson = arr.bt_toJSONString() ?? ""
         let arrData = arrJson.data(using: .utf8)!
-        guard let models1 = [Model].deserialize(array: arr) else { return }
+        guard let models1 = [Model].deserialize(from: arr) else { return }
         print("models1 = \(models1)")
         
-        guard let models2 = [Model].deserialize(json: arrJson) else { return }
+        guard let models2 = [Model].deserialize(from: arrJson) else { return }
         print("models2 = \(models2)")
         
-        guard let models3 = [Model].deserialize(data: arrData) else { return }
+        guard let models3 = [Model].deserialize(from: arrData) else { return }
         print("models3 = \(models3)")
     }
 }

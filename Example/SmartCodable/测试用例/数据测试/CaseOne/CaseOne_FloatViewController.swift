@@ -29,7 +29,7 @@ class CaseOne_FloatViewController: BaseViewController {
           "doubleValue": "nan",
         }
         """
-        guard let model = CompatibleFloat.deserialize(json: json) else { return }
+        guard let model = CompatibleFloat.deserialize(from: json) else { return }
         print(model.floatValue)
         print(model.floatValue1)
         print(model.floatValue2)

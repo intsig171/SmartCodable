@@ -85,7 +85,7 @@ struct Model: SmartCodable {
 }
 
 let dict: [String: String] = ["name": "xiaoming"]
-guard let model = Model.deserialize(dict: dict) else { return }
+guard let model = Model.deserialize(from: dict) else { return }
 ```
 
 
@@ -101,7 +101,7 @@ struct Model: SmartCodable {
 
 let dict: [String: String] = ["name": "xiaoming"]
 let arr = [dict, dict]
-guard let models = [Model].deserialize(array: arr) else { return }
+guard let models = [Model].deserialize(from: arr) else { return }
 ```
 
 
@@ -110,7 +110,7 @@ guard let models = [Model].deserialize(array: arr) else { return }
 
 ```
 // 字典转模型
-guard let xiaoMing = JsonToModel.deserialize(dict: dict) else { return }
+guard let xiaoMing = JsonToModel.deserialize(from: dict) else { return }
 
 // 模型转字典
 let studentDict = xiaoMing.toDictionary() ?? [:]
@@ -119,7 +119,7 @@ let studentDict = xiaoMing.toDictionary() ?? [:]
 let json1 = xiaoMing.toJSONString(prettyPrint: true) ?? ""
 
 // json字符串转模型
-guard let xiaoMing2 = JsonToModel.deserialize(json: json1) else { return }
+guard let xiaoMing2 = JsonToModel.deserialize(from: json1) else { return }
 ```
 
 
@@ -294,8 +294,8 @@ let dict = [
     "arr": arr
 ] as [String : Any]
 
-guard let model = AnyModel.deserialize(dict: dict) else { return }
-guard let model = AnyModel.deserialize(dict: dict) else { return }
+guard let model = AnyModel.deserialize(from: dict) else { return }
+guard let model = AnyModel.deserialize(from: dict) else { return }
 print(model.name.peel )
 print(model.age?.peel ?? 0)
 print(model.dict.peel)
@@ -332,14 +332,14 @@ public enum SmartOption {
 let dateFormatter = DateFormatter()
  dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 let option: JSONDecoder.SmartOption = .dateStrategy(.formatted(dateFormatter))
-guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
 ```
 
 ### Data
 
 ```
 let option: JSONDecoder.SmartOption = .dataStrategy(.base64)
-guard let model = FeedOne.deserialize(json: json, options: [option]) else { return }
+guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
 gurad let data = model.address, let url = String(data: data, encoding: .utf8) { else }
 ```
 
@@ -347,7 +347,7 @@ gurad let data = model.address, let url = String(data: data, encoding: .utf8) { 
 
 ```
 let option: JSONDecoder.SmartOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
-guard let model1 = FeedOne.deserialize(json: json, options: [option]) else {  return }
+guard let model1 = FeedOne.deserialize(from: json, options: [option]) else {  return }
 ```
 
 

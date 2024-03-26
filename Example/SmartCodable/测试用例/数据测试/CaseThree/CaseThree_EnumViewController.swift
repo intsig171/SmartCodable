@@ -28,7 +28,7 @@ class CaseThree_EnumViewController: BaseCompatibilityViewController {
             "e": "two"
         ]
 
-        if let model = EnumModel.deserialize(dict: dict) {
+        if let model = EnumModel.deserialize(from: dict) {
             print(model)
         
         }

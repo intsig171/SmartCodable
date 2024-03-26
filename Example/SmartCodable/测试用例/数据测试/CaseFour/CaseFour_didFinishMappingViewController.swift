@@ -32,11 +32,11 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
             "name": "睡觉"
         ]
         
-        if let model = HobbyModel.deserialize(dict: dict) {
+        if let model = HobbyModel.deserialize(from: dict) {
             smartPrint(value: model)
         }
         
-        if let model = HobbyClassModel.deserialize(dict: dict) {
+        if let model = HobbyClassModel.deserialize(from: dict) {
             smartPrint(value: model)
         }
     }
@@ -52,11 +52,11 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
             ]
         ]
         
-        if let model = PersonModel.deserialize(dict: dict) {
+        if let model = PersonModel.deserialize(from: dict) {
             smartPrint(value: model)
         }
         
-        if let model = PersonClassModel.deserialize(dict: dict) {
+        if let model = PersonClassModel.deserialize(from: dict) {
             smartPrint(value: model)
         }
     }
@@ -78,11 +78,11 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
             ]
         ]
         
-        if let model = HobbysModel.deserialize(dict: dict) {
+        if let model = HobbysModel.deserialize(from: dict) {
             smartPrint(value: model)
         }
         
-//        if let model = HobbysClassModel.deserialize(dict: dict) {
+//        if let model = HobbysClassModel.deserialize(from: dict) {
 //            smartPrint(value: model)
 //        }
     }
@@ -101,7 +101,7 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
             ]
         ]
         
-        guard let models = [HobbysModel].deserialize(array: arr) as? [HobbysModel] else { return }
+        guard let models = [HobbysModel].deserialize(from: arr) as? [HobbysModel] else { return }
         smartPrint(value: models)
     }
 }

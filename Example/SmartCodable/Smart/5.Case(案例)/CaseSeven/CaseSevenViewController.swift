@@ -102,7 +102,7 @@ extension CaseSevenViewController {
         
         
         
-        guard let models = [Class].deserialize(array: endArr) else { return }
+        guard let models = [Class].deserialize(from: endArr) else { return }
         dataArray = models
         tableView.reloadData()
     }

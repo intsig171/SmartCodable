@@ -60,7 +60,7 @@ extension SmartDecodable {
     /// - Parameter dict: 字典
     /// - Parameter options: 解码策略
     /// - Returns: 模型
-    public static func deserialize(dict: [AnyHashable: Any]?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
+    public static func deserialize(from dict: [AnyHashable: Any]?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
         guard let _dict = dict else {
             SmartLog.logDebug("要解析的字典为nil", className: "\(self)")
             return nil
@@ -75,14 +75,14 @@ extension SmartDecodable {
             return nil
         }
         
-        return deserialize(data: _jsonData, options: options)
+        return deserialize(from: _jsonData, options: options)
     }
     
     /// 反序列化成模型
     /// - Parameter json: json字符串
     /// - Parameter options: 解码策略
     /// - Returns: 模型
-    public static func deserialize(json: String?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
+    public static func deserialize(from json: String?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
         guard let _json = json else {
             SmartLog.logDebug("要解析的json字符串为nil", className: "\(self)")
             return nil
@@ -93,11 +93,11 @@ extension SmartDecodable {
             return nil
         }
         
-        return deserialize(data: jsonData, options: options)
+        return deserialize(from: jsonData, options: options)
     }
     
     
-    public static func deserialize(data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
+    public static func deserialize(from data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> Self? {
         guard let _data = data else {
             SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
             return nil
@@ -120,7 +120,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter array: 数组
     /// - Parameter options: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(array: [Any]?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
+    public static func deserialize(from array: [Any]?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
 
         guard let _arr = array else {
             SmartLog.logDebug("要解析的数组为nil", className: "\(self)")
@@ -136,7 +136,7 @@ extension Array where Element: SmartDecodable {
             SmartLog.logDebug("要解析的数组转data失败", className: "\(self)")
             return nil
         }
-        return deserialize(data: _jsonData, options: options)
+        return deserialize(from: _jsonData, options: options)
     }
     
     
@@ -144,7 +144,7 @@ extension Array where Element: SmartDecodable {
     /// - Parameter json: json字符串
     /// - Parameter options: 解码策略
     /// - Returns: 模型数组
-    public static func deserialize(json: String?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
+    public static func deserialize(from json: String?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
         guard let _json = json else {
             SmartLog.logDebug("要解析的json为nil", className: "\(self)")
             return nil
@@ -156,11 +156,11 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        return deserialize(data: _jsonData, options: options)
+        return deserialize(from: _jsonData, options: options)
     }
     
     
-    public static func deserialize(data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
+    public static func deserialize(from data: Data?, options: [JSONDecoder.SmartOption]? = nil) -> [Element]? {
         guard let _data = data else {
             SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
             return nil

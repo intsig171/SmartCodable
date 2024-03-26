@@ -29,7 +29,7 @@ class CaseThree_DictViewController: BaseCompatibilityViewController {
 //            print(model)
 //        }
         
-        if let model = DictModel.deserialize(dict: dict) {
+        if let model = DictModel.deserialize(from: dict) {
             print(model)
             print(model.f.peel)
         }

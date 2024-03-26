@@ -29,7 +29,7 @@ class CaseThree_ArrViewController: BaseCompatibilityViewController {
 
         
         
-        if let model = ArrayModel.deserialize(dict: dict) {
+        if let model = ArrayModel.deserialize(from: dict) {
             print(model)
             print(model.f.peel)
         }

@@ -33,7 +33,7 @@ class CaseOne_DictTypeMismatchViewController: BaseCompatibilityViewController {
 extension CaseOne_DictTypeMismatchViewController {
     /// 明确类型
     func explicitType(json: String) {
-        guard let person = CompatibleTypes.deserialize(json: json) else { return }
+        guard let person = CompatibleTypes.deserialize(from: json) else { return }
         let mirr = Mirror(reflecting: person)
         for (key, value) in mirr.children {
             printValueType(key: key!, value: value)
@@ -70,7 +70,7 @@ extension CaseOne_DictTypeMismatchViewController {
 extension CaseOne_DictTypeMismatchViewController {
     /// 可选类型
     func optionalType(json: String) {
-        guard let person = OptionalCompatibleTypes.deserialize(json: json) else { return }
+        guard let person = OptionalCompatibleTypes.deserialize(from: json) else { return }
         let mirr = Mirror(reflecting: person)
         for (key, value) in mirr.children {
             printValueType(key: key!, value: value)

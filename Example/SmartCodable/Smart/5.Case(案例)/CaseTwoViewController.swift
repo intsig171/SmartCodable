@@ -32,7 +32,7 @@ class CaseTwoViewController: BaseViewController {
             ]
         ]
 
-        guard let model = BigModel.deserialize(dict: dict) else { return }
+        guard let model = BigModel.deserialize(from: dict) else { return }
         print(model.name)
         print(model.age)
         

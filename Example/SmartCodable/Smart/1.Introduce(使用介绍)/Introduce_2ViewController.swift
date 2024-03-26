@@ -30,7 +30,7 @@ class Introduce_2ViewController: BaseViewController {
         
        
         // 字典转模型
-        guard let xiaoMing = JsonToModel.deserialize(dict: dict) else { return }
+        guard let xiaoMing = JsonToModel.deserialize(from: dict) else { return }
         print(xiaoMing)
         print("\n")
         /**
@@ -95,7 +95,7 @@ class Introduce_2ViewController: BaseViewController {
          * 4. json字符串转模型数组
          */
         let arr = [dict, dict]
-        guard let models = [JsonToModel].deserialize(array: arr) else { return }
+        guard let models = [JsonToModel].deserialize(from: arr) else { return }
         print(models)
         print("\n")
 

@@ -32,7 +32,7 @@ class CaseTwo_DictNestDictViewController: BaseCompatibilityViewController {
         ]
 
        
-        if let model = FatherModel.deserialize(dict: dict) {
+        if let model = FatherModel.deserialize(from: dict) {
             print(model)
         }
     }
