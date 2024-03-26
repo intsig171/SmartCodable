@@ -9,10 +9,50 @@
 public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
+//MARK: - =========== 版本Todo List ===========
+
+// MARK: 继承Model的解码支持
+/**
+ * 1. ❌ 继承Model的解码支持
+ *   - 说明：model继承时，编译器只给`ClassModel`添加了`init(from decoder: Decoder)`，`ClassSubModel`则没有。
+ *   - 结论：在解码时，判断当前是否ClassSubModel，如果是的话，执行 `try super.init(from: decoder)`。
+ */
+
+// MARK: 性能优化
+/**
+ * 2. ❌ 性能优化
+ *   - 说明：理论上SmartCodable的解析性能是劣于Codable，强于HandyJSON的。
+ *          希望通过优化算法/逻辑实现/减少类型判断和转换，提升解析性能。
+ *   - 结论：todo
+ */
+
+
+
 //MARK: - =========== 版本更新记录 ===========
 // 【❌未完成   ✅已完成】
 
+//MARK: - ～> V4 版本
+
+
+
 //MARK: - ～> V3 版本
+
+
+
+// MARK: V3.0.5
+/**
+ * 1. ✅ 修复SmartAny解析失败问题
+ *   - 说明：SmartAny是为了处理Any类型解析新引入的解析类型，未能正确在decoder的unbox方法中进行处理。
+ *   - 结论：新增了SmartAny类型的unbox方法。
+ */
+
+
+// MARK: V3.0.4
+/**
+ * 1. ✅ 支持macOS
+ */
+
+
 // MARK: V3.0.0
 /**
  * 1. ✅ 默认值支持
@@ -40,16 +80,7 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  *   - 说明：当解析失败，需要兼容时候，期望抛出相关日志，引起开发者警觉，做相应的优化处理（优化数据/优化属性声明）。
  *   - 结论：已经完成。
  *
- * 7. ❌ 继承Model的解码支持
- *   - 说明：model继承时，编译器只给`ClassModel`添加了`init(from decoder: Decoder)`，`ClassSubModel`则没有。
- *   - 结论：在解码时，判断当前是否ClassSubModel，如果是的话，执行 `try super.init(from: decoder)`。
- *
- * 8. ❌ 性能优化
- *   - 说明：理论上SmartCodable的解析性能是劣于Codable，强于HandyJSON的。
- *          希望通过优化算法/逻辑实现/减少类型判断和转换，提升解析性能。
- *   - 结论：todo
- *
- * 9. ❌ 整体测试
+ * 7. ✅ 整体测试
  *   - 说明：穷尽测试场景，包含但不限于：
  *        数据测试：
  *          * 支持的所有类型的可选属性的测试（keyless / null / typeMismatch）
@@ -61,6 +92,6 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  *          * 解码完成的回调
  *          * WCDB的兼容性
  *
- * 10. ❌ 更新Readme
+ * 8. ✅ 更新Readme
  */
 

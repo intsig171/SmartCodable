@@ -40,14 +40,14 @@ extension CaseFour_KeyStrategyViewController {
         var jsonString: JSONString?
         
         static func mapping() -> [MappingRelationship]? {
-            [ CodingKeys.jsonString <-- "json" ]
+            [ CodingKeys.jsonString <--- "json" ]
         }
     }
     
     struct JSONString: SmartCodable {
         var jsonKey: String?
         static func mapping() -> [MappingRelationship]? {
-            [ CodingKeys.jsonKey <-- "json_key" ]
+            [ CodingKeys.jsonKey <--- "json_key" ]
         }
 
     }
@@ -80,7 +80,7 @@ extension CaseFour_KeyStrategyViewController {
         var two: Two = Two()
         
         static func mapping() -> [MappingRelationship]? {
-            [ CodingKeys.nickName <-- "nick_name" ]
+            [ CodingKeys.nickName <--- "nick_name" ]
 
         }
         
@@ -89,14 +89,14 @@ extension CaseFour_KeyStrategyViewController {
             
             var three: [Three] = []
             static func mapping() -> [MappingRelationship]? {
-                [ CodingKeys.nickName <-- "realName" ]
+                [ CodingKeys.nickName <--- "realName" ]
             }
             
             
             struct Three: SmartCodable {
                 var nickName: String = ""
                 static func mapping() -> [MappingRelationship]? {
-                    [ CodingKeys.nickName <-- "name" ]
+                    [ CodingKeys.nickName <--- "name" ]
                 }
             }
         }

@@ -1,6 +1,6 @@
 {
   "name": "SmartCodable",
-  "version": "3.0.1-beta",
+  "version": "3.0.5",
   "summary": "数据解析库",
   "homepage": "https://github.com/intsig171",
   "license": {
@@ -12,10 +12,11 @@
   },
   "source": {
     "git": "https://github.com/intsig171/SmartCodable.git",
-    "tag": "3.0.1-beta"
+    "tag": "3.0.5"
   },
   "platforms": {
-    "ios": "11.0"
+    "ios": "11.0",
+    "osx": "10.13"
   },
   "swift_versions": "5.0",
   "source_files": "SmartCodable/Classes/**/*",

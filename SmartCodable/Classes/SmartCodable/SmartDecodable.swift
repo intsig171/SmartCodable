@@ -12,9 +12,9 @@ import Foundation
 /// 多个有效字段映射到同一个属性上优先使用第一个。
 public typealias MappingRelationship = (from: [String], to: CodingKey)
 
-infix operator <--
-public func <--(after: CodingKey, before: String) -> MappingRelationship { after <-- [before] }
-public func <--(after: CodingKey, before: [String]) -> MappingRelationship { (before, after) }
+infix operator <---
+public func <---(after: CodingKey, before: String) -> MappingRelationship { after <--- [before] }
+public func <---(after: CodingKey, before: [String]) -> MappingRelationship { (before, after) }
 
 
 

@@ -51,10 +51,12 @@ extension Strength_3ViewController {
         var age: Int?
         static func mapping() -> [MappingRelationship]? {
             [
-                CodingKeys.name <-- ["nickName", "realName"],
-                CodingKeys.age <-- "person_age"
+                CodingKeys.name <--- ["nickName", "realName"],
+                CodingKeys.age <--- "person_age"
             ]
         }
     }
 }
+
+
 

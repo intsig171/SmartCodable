@@ -125,64 +125,28 @@ extension SmartAny: Codable {
         let container = try decoder.singleValueContainer()
         
         
-        if let value = try? container.decode(Bool.self) {
-            self = .bool(value)
+        
+        guard let decoder = decoder as? _SmartJSONDecoder else {
+            throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
+                codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
+            )
         }
         
-        else if let value = try? container.decode(String.self) {
-            self = .string(value)
+        if container.decodeNil() {
+            self = .null(NSNull())
         }
-        
-        else if let value = try? container.decode(Int.self) {
-            self = .int(value)
-        } else if let value = try? container.decode(Int8.self) {
-            self = .int8(value)
-        } else if let value = try? container.decode(Int16.self) {
-            self = .int16(value)
-        } else if let value = try? container.decode(Int32.self) {
-            self = .int32(value)
-        } else if let value = try? container.decode(Int64.self) {
-            self = .int64(value)
-        }
-        
-        else if let value = try? container.decode(UInt.self) {
-            self = .uInt(value)
-        } else if let value = try? container.decode(UInt8.self) {
-            self = .uInt8(value)
-        } else if let value = try? container.decode(UInt16.self) {
-            self = .uInt16(value)
-        } else if let value = try? container.decode(UInt32.self) {
-            self = .uInt32(value)
-        } else if let value = try? container.decode(UInt64.self) {
-            self = .uInt64(value)
-        }
-        
-        
-        else if let value = try? container.decode(Double.self) {
-            self = .double(value)
-        } else if let value = try? container.decode(CGFloat.self) {
-            self = .cgFloat(value)
-        } else if let value = try? container.decode(Float.self) {
-            self = .float(value)
-        }
-        
-        else if let value = try? container.decode([String: SmartAny].self) {
+        if let value = try? decoder.unbox(decoder.storage.topContainer, as: SmartAny.self) {
+            self = value
+        } else if let value = try? decoder.unbox(decoder.storage.topContainer, as: [String: SmartAny].self) {
             self = .dict(value)
-        }
-        
-        else if let value = try? container.decode([SmartAny].self) {
+        } else if let value = try? decoder.unbox(decoder.storage.topContainer, as: [SmartAny].self) {
             self = .array(value)
         }
         
         else {
-            
-            if container.decodeNil() {
-                self = .null(NSNull())
-            } else {
-                throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
-                    codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
-                )
-            }
+            throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
+                codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
+            )
         }
     }
     
