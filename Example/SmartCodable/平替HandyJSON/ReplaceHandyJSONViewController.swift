@@ -44,14 +44,21 @@ extension ReplaceHandyJSONViewController {
             "title": "平替HandyJSON",
             "list": [
                 
-                ["name": "声明Model",   "vc": "ReplaceHandyJSON_1ViewController"],
-                ["name": "反序列化",    "vc": "ReplaceHandyJSON_1ViewController"],
-                ["name": "序列化", "vc": "ReplaceHandyJSON_1ViewController"],
-                ["name": "解码完成时回调",  "vc": "ReplaceHandyJSON_2ViewController"],
+                ["name": "1.1声明Model",     "vc": "ReplaceHandyJSON_1ViewController"],
+                ["name": "1.2反序列化",       "vc": "ReplaceHandyJSON_1ViewController"],
+                ["name": "1.3序列化", "vc":   "ReplaceHandyJSON_1ViewController"],
+                
+                ["name": "2.解码完成时回调",  "vc": "ReplaceHandyJSON_2ViewController"],
               
-                ["name": "忽略Key的解析",    "vc": "ReplaceHandyJSON_3ViewController"],
-                ["name": "自定义解析Key",    "vc": "ReplaceHandyJSON_3ViewController"],
-            
+                ["name": "3.1忽略Key的解析",    "vc": "ReplaceHandyJSON_3ViewController"],
+                ["name": "3.2自定义解析Key",    "vc": "ReplaceHandyJSON_3ViewController"],
+
+                ["name": "4.解析Any",    "vc": "ReplaceHandyJSON_4ViewController"],
+
+                ["name": "5.处理继承关系",    "vc": "ReplaceHandyJSON_5ViewController"],
+
+                ["name": "6.枚举的解析",    "vc": "ReplaceHandyJSON_6ViewController"],
+
             ]
         ]
     }

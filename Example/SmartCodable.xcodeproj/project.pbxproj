@@ -17,6 +17,9 @@
 		9902B4D22BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D12BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift */; };
 		9902B4D42BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D32BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift */; };
 		9902B4D62BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D52BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift */; };
+		9902B4D82BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D72BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift */; };
+		9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D92BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift */; };
+		9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */; };
 		9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */; };
 		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
@@ -122,6 +125,9 @@
 		9902B4D12BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_2ViewController.swift; sourceTree = "<group>"; };
 		9902B4D32BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_3ViewController.swift; sourceTree = "<group>"; };
 		9902B4D52BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSONViewController.swift; sourceTree = "<group>"; };
+		9902B4D72BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_4ViewController.swift; sourceTree = "<group>"; };
+		9902B4D92BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_5ViewController.swift; sourceTree = "<group>"; };
+		9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_6ViewController.swift; sourceTree = "<group>"; };
 		9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFive_wcdbViewController.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
@@ -324,6 +330,9 @@
 				9902B4CF2BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift */,
 				9902B4D12BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift */,
 				9902B4D32BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift */,
+				9902B4D72BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift */,
+				9902B4D92BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift */,
+				9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */,
 				9902B4D52BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift */,
 			);
 			path = "平替HandyJSON";
@@ -784,10 +793,12 @@
 				996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */,
 				9902B4D02BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift in Sources */,
 				996760342B3EC930006C83EC /* Strength_1ViewController.swift in Sources */,
+				9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
 				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
 				99C3138D2B9B38910065FC45 /* ComplexDataStructureModel.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,
+				9902B4D82BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift in Sources */,
 				9993D69A2B9208020089CA68 /* CaseThree_EnumViewController.swift in Sources */,
 				9993D6942B91ED9B0089CA68 /* CaseThree_URLViewController.swift in Sources */,
 				99C3138F2B9B38910065FC45 /* ComplexDataStructureSectionHeader.swift in Sources */,
@@ -802,6 +813,7 @@
 				9902B4D62BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift in Sources */,
 				996760242B3EC930006C83EC /* CaseOne_BoolViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
+				9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

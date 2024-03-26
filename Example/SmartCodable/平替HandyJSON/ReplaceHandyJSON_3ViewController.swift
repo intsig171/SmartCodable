@@ -17,8 +17,9 @@ class ReplaceHandyJSON_3ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict = [
-            "nick_name": "Mccc"
-        ]
+            "nick_name": "Mccc",
+            "self_age": 10
+        ] as [String : Any]
         
         guard let handyModel = HandyModel.deserialize(from: dict) else { return }
         print(handyModel)
@@ -30,11 +31,14 @@ class ReplaceHandyJSON_3ViewController: BaseViewController {
 extension ReplaceHandyJSON_3ViewController {
     struct HandyModel: HandyJSON {
         var name: String = ""
+        var age: Int?
         var ignoreKey: String = "忽略的key"
         
         mutating func mapping(mapper: HelpingMapper) {
             mapper <<<
-                self.name <-- "nick_name"
+                self.name <-- ["nick_name", "realName"]
+            mapper <<<
+                self.age <-- "self_age"
             mapper >>>
                 self.ignoreKey
                               
@@ -43,18 +47,23 @@ extension ReplaceHandyJSON_3ViewController {
     
     struct SmartModel: SmartCodable {
         var name: String = ""
+        var age: Int?
         var ignoreKey: String = "忽略的key"
         
         enum CodingKeys: CodingKey {
             case name
+            case age
 //            case ignoreKey
         }
 
         static func mapping() -> [MappingRelationship]? {
             [
-                CodingKeys.name <--- "nick_name"
+                CodingKeys.name <--- ["nick_name", "realName"],
+                CodingKeys.age <--- "self_age"
             ]
         }
     }
 }
+
+
 
