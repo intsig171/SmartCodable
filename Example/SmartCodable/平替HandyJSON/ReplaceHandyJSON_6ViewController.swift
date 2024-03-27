@@ -44,14 +44,14 @@ extension ReplaceHandyJSON_6ViewController {
 
 extension ReplaceHandyJSON_6ViewController {
     
-    enum SamrtSex: String, SmartCaseDefaultable {
-        static var defaultCase: SamrtSex = .man
+    enum SmartSex: String, SmartCaseDefaultable {
+        static var defaultCase: SmartSex = .man
         case man
         case women
     }
     
     struct SmartModel: SmartCodable {
-        var sex: SamrtSex = .man
+        var sex: SmartSex = .man
     }
 }
 
