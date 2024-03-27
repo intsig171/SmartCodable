@@ -42,9 +42,13 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  *   - 说明：可以像HandyJSON一样，跨路径解析。例如 "nameDict.name" 将nameDict字典里的name自动解析到name属性上。
  *   - 结论：在数据层做文章，将路径对应的value获取到，添加到当前的字典中（判断字典是否有这个key）。
  *
- *  * 2. ❌ 支持全局的key映射
+ * 2. ✅ 支持全局的key映射
  *   - 说明：蛇形转驼峰，首字母大写转小写
- *   - 结论：todo
+ *   - 结论：SmartOption中新增keyStrategy，支持全局key的解码策略。
+ *
+ * 3. ✅ 支持手动加壳
+ *   - 说明：Any -> SmartAny, [Any] -> [SmartAny], [String: Any] -> [String: SmartAny]
+ *   - 结论：新增cover方法。
  */
 
 
