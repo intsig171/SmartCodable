@@ -40,12 +40,50 @@ struct ModelKeyMapper<T> {
                     let newKey = mapping.to.stringValue
                     newDict[newKey] = newDict.removeValue(forKey: oldKey)
                     break
+                } else { // 处理自定义解析路径的情况。
+                    if let pathValue = newDict.getValue(forKeyPath: oldKey) {
+                        newDict.updateValue(pathValue, forKey: mapping.to.stringValue)
+                    }
                 }
             }
         }
         return newDict
     }
 }
+
+
+extension Dictionary {
+    /// 在字典中，获取路径对应的值。
+    ///  let dict = [
+    ///      "inDict": [
+    ///         "name": "Mccc"
+    ///      ]
+    ///  ]
+    ///
+    ///  keyPath 为 “inDict.name”
+    ///
+    ///  输出： Mccc
+    ///
+    fileprivate func getValue(forKeyPath keyPath: String) -> Any? {
+        guard keyPath.contains(".") else { return nil }
+        let keys = keyPath.components(separatedBy: ".")
+        var currentAny: Any = self
+        for key in keys {
+            if let currentDict = currentAny as? [String: Any] {
+                if let value = currentDict[key] {
+                    currentAny = value
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+        return currentAny
+    }
+}
+
+
 
 extension String {
     fileprivate func toJSONObject() -> Any? {
