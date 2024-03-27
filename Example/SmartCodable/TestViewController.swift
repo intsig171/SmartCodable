@@ -17,44 +17,38 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let dict: [String: Any] = [
-            "name": "Mccc"
+            "nick_name": "Mccc",
+            "Age": 10,
+            "sub": [
+                "Name": "小明",
+                "Age": 20
+            ]
         ]
+        
+        let option: JSONDecoder.SmartOption = .KeyStrategy(.convertFirstLetterToLowercase)
+        let option1: JSONDecoder.SmartOption = .KeyStrategy(.convertFromSnakeCase)
 
-        guard let handyModel = HandyModel.deserialize(from: dict) else { return }
-        let toDict = handyModel.toJSON()
-        let toJsonStr = handyModel.toJSONString()
-        
-        guard let smartModel = SmartModel.deserialize(from: dict) else { return }
-        let toDict1 = smartModel.toDictionary()
-        let toJsonStr1 = smartModel.toJSONString()
-        
-        
-        guard let handyModels = [HandyModel].deserialize(from: [dict]) as? [HandyModel] else { return }
-        print(handyModels)
-        let toArr = handyModels.toJSON()
-        let toArrStr = handyModels.toJSONString()
-        
-        guard let smartModels = [SmartModel].deserialize(from: [dict]) else { return }
-        print(smartModels)
-        let toArr1 = smartModels.toArray()
-        let toArrStr1 = smartModels.toJSONString()
+        guard let model = SmartModel.deserialize(from: dict, options: [option1, option]) else { return }
+        print(model)
     }
 }
 
 extension TestViewController {
-    class HandyModel: HandyJSON {
+    
+    struct HandyModel: HandyJSON {
         var name: String = ""
-        required init() { }
     }
     
-    class SmartModel: SmartCodable {
-        var name: String = ""
-        required init() { }
+    
+    struct SmartModel: SmartCodable {
+        var nickName: String = ""
+        var age: Int = 0
+        var sub: SmartSubModel?
     }
-}
-class HandyModel: HandyJSON {
-    var name: String = ""
-    required init() { }
+    
+    struct SmartSubModel: SmartCodable {
+        var name: String = ""
+        var age: Int = 0
+    }
 }

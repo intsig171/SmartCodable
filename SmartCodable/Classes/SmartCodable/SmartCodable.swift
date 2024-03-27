@@ -36,6 +36,18 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
 //MARK: - ～> V3 版本
+// MARK: V3.2.0
+/**
+ * 1. ✅ 支持自定义解析路径
+ *   - 说明：可以像HandyJSON一样，跨路径解析。例如 "nameDict.name" 将nameDict字典里的name自动解析到name属性上。
+ *   - 结论：在数据层做文章，将路径对应的value获取到，添加到当前的字典中（判断字典是否有这个key）。
+ *
+ *  * 2. ❌ 支持全局的key映射
+ *   - 说明：蛇形转驼峰，首字母大写转小写
+ *   - 结论：todo
+ */
+
+
 // MARK: V3.1.0
 /**
  * 1. ✅ 平替HandyJSON

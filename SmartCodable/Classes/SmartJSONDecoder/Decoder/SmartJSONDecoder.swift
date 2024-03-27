@@ -16,7 +16,7 @@ open class SmartJSONDecoder: JSONDecoder {
         let dateDecodingStrategy: DateDecodingStrategy
         let dataDecodingStrategy: DataDecodingStrategy
         let nonConformingFloatDecodingStrategy: NonConformingFloatDecodingStrategy
-        let keyDecodingStrategy: KeyDecodingStrategy
+        let keyDecodingStrategy: SmartKeyDecodingStrategy
         let userInfo: [CodingUserInfoKey : Any]
     }
     
@@ -26,10 +26,13 @@ open class SmartJSONDecoder: JSONDecoder {
             dateDecodingStrategy: dateDecodingStrategy,
             dataDecodingStrategy: dataDecodingStrategy,
             nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
-            keyDecodingStrategy: keyDecodingStrategy,
+            keyDecodingStrategy: smartKeyDecodingStrategy,
             userInfo: userInfo
         )
     }
+    
+    open var smartKeyDecodingStrategy: SmartKeyDecodingStrategy = .useDefaultKeys
+
     
     // MARK: - Decoding Values
 
@@ -55,3 +58,5 @@ open class SmartJSONDecoder: JSONDecoder {
         return value
     }
 }
+
+

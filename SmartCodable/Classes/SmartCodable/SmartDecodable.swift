@@ -48,8 +48,11 @@ extension JSONDecoder {
         
         /// 用于不符合json的浮点值(IEEE 754无穷大和NaN)的策略
         case floatStrategy(JSONDecoder.NonConformingFloatDecodingStrategy)
+        
+        case KeyStrategy(JSONDecoder.SmartKeyDecodingStrategy)
     }
 }
+
 
 
 
@@ -192,6 +195,8 @@ extension Data {
                     
                 case .floatStrategy(let strategy):
                     _decoder.nonConformingFloatDecodingStrategy = strategy
+                case .KeyStrategy(let strategy):
+                    _decoder.smartKeyDecodingStrategy = strategy
                 }
             }
         }

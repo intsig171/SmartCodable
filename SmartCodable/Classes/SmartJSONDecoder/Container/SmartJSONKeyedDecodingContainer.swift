@@ -28,7 +28,21 @@ struct SmartJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
     init(referencing decoder: _SmartJSONDecoder, wrapping container: [String : Any]) {
         self.decoder = decoder
         self.codingPath = decoder.codingPath
-        self.container = container
+        
+        switch decoder.options.keyDecodingStrategy {
+        case .useDefaultKeys:
+            self.container = container
+        case .convertFromSnakeCase:
+            // Convert the snake case keys in the container to camel case.
+            // If we hit a duplicate key after conversion, then we'll use the first one we saw. Effectively an undefined behavior with JSON dictionaries.
+            self.container = Dictionary(container.map {
+                dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFromSnakeCase(dict.key), dict.value)
+            }, uniquingKeysWith: { (first, _) in first })
+        case .convertFirstLetterToLowercase:
+            self.container = Dictionary(container.map {
+                dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToLowercase(dict.key), dict.value)
+            }, uniquingKeysWith: { (first, _) in first })
+        }
     }
     
     // MARK: - KeyedDecodingContainerProtocol Methods
