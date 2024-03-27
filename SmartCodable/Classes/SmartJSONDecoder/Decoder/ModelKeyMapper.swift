@@ -36,13 +36,13 @@ struct ModelKeyMapper<T> {
         var newDict = dict
         type.mapping()?.forEach { mapping in
             for oldKey in mapping.from {
+                let newKey = mapping.to.stringValue
                 if let value = newDict[oldKey], !(value is NSNull) { // 如果存在有效值(存在并不是null)
-                    let newKey = mapping.to.stringValue
                     newDict[newKey] = newDict.removeValue(forKey: oldKey)
                     break
                 } else { // 处理自定义解析路径的情况。
-                    if let pathValue = newDict.getValue(forKeyPath: oldKey) {
-                        newDict.updateValue(pathValue, forKey: mapping.to.stringValue)
+                    if newDict[newKey] == nil, let pathValue = newDict.getValue(forKeyPath: oldKey) {
+                            newDict.updateValue(pathValue, forKey: newKey)
                     }
                 }
             }
@@ -53,6 +53,14 @@ struct ModelKeyMapper<T> {
 
 
 extension Dictionary {
+    
+    // 添加或更新键值对，仅当键不存在时
+    fileprivate mutating func updateIfAbsent(key: Key, value: Value) {
+        guard self[key] == nil else { return }
+        self[key] = value
+    }
+    
+    
     /// 在字典中，获取路径对应的值。
     ///  let dict = [
     ///      "inDict": [
