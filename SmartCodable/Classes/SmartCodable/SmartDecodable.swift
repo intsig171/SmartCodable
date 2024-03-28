@@ -40,39 +40,39 @@ extension SmartDecodable {
 public enum SmartDecodingOption: Hashable {
     
     /// 用于解码 “Date” 值的策略
-    case dateStrategy(JSONDecoder.DateDecodingStrategy)
+    case date(JSONDecoder.DateDecodingStrategy)
     
     /// 用于解码 “Data” 值的策略
-    case dataStrategy(JSONDecoder.DataDecodingStrategy)
+    case data(JSONDecoder.DataDecodingStrategy)
     
     /// 用于不符合json的浮点值(IEEE 754无穷大和NaN)的策略
-    case floatStrategy(JSONDecoder.NonConformingFloatDecodingStrategy)
+    case float(JSONDecoder.NonConformingFloatDecodingStrategy)
     
-    case keyStrategy(JSONDecoder.SmartKeyDecodingStrategy)
+    case key(JSONDecoder.SmartKeyDecodingStrategy)
     
     /// 处理哈希值，忽略关联值的影响。
     public func hash(into hasher: inout Hasher) {
         switch self {
-        case .dateStrategy:
+        case .date:
             hasher.combine(0)
-        case .dataStrategy:
+        case .data:
             hasher.combine(1)
-        case .floatStrategy:
+        case .float:
             hasher.combine(2)
-        case .keyStrategy:
+        case .key:
             hasher.combine(3)
         }
     }
     
     public static func == (lhs: SmartDecodingOption, rhs: SmartDecodingOption) -> Bool {
         switch (lhs, rhs) {
-        case (.dateStrategy, .dateStrategy):
+        case (.date, .date):
             return true
-        case (.dataStrategy, .dataStrategy):
+        case (.data, .data):
             return true
-        case (.floatStrategy, .floatStrategy):
+        case (.float, .float):
             return true
-        case (.keyStrategy, .keyStrategy):
+        case (.key, .key):
             return true
         default:
             return false
@@ -224,15 +224,15 @@ extension Data {
         if let _options = options {
             for _option in _options {
                 switch _option {
-                case .dataStrategy(let strategy):
+                case .data(let strategy):
                     _decoder.dataDecodingStrategy = strategy
                     
-                case .dateStrategy(let strategy):
+                case .date(let strategy):
                     _decoder.dateDecodingStrategy = strategy
                     
-                case .floatStrategy(let strategy):
+                case .float(let strategy):
                     _decoder.nonConformingFloatDecodingStrategy = strategy
-                case .keyStrategy(let strategy):
+                case .key(let strategy):
                     _decoder.smartKeyDecodingStrategy = strategy
                 }
             }

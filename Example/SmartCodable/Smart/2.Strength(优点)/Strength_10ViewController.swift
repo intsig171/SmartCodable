@@ -30,7 +30,7 @@ class Strength_10ViewController: BaseViewController {
         ] as [String : Any]
 
 
-        let option: SmartDecodingOption = .keyStrategy(.fromSnakeCase)
+        let option: SmartDecodingOption = .key(.fromSnakeCase)
         guard let model = Model.deserialize(from: dict, options: [option]) else { return }
         print(model)
     }

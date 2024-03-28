@@ -35,7 +35,7 @@ class CaseThree_dataViewController: BaseCompatibilityViewController {
         let strategy = getStrategy()
         let dict = getDictData(mode: .normal, strategy: strategy)
         
-        if let model = DataModel.deserialize(from: dict, options: [.dataStrategy(strategy)]) {
+        if let model = DataModel.deserialize(from: dict, options: [.data(strategy)]) {
             print(model)
             print(model.aData.toString() ?? "")
         }

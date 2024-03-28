@@ -27,7 +27,7 @@ class Strength_8ViewController: BaseCompatibilityViewController {
             ]
         ]
 
-        let option: SmartDecodingOption = .keyStrategy(.firstLetterLower)
+        let option: SmartDecodingOption = .key(.firstLetterLower)
         guard let model = Model.deserialize(from: dict, options: [option]) else { return }
         print(model)
 
@@ -42,7 +42,7 @@ class Strength_8ViewController: BaseCompatibilityViewController {
             ]
         ]
         
-        let option1: SmartDecodingOption = .keyStrategy(.fromSnakeCase)
+        let option1: SmartDecodingOption = .key(.fromSnakeCase)
         guard let model1 = TwoModel.deserialize(from: dict1, options: [option1]) else { return }
         print(model1)
     }

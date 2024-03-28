@@ -52,7 +52,7 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
         let strategy = getStrategy()
         let dict = getDictDate(mode: .normal, strategy: strategy)
         
-        if let model = DateModel.deserialize(from: dict, options: [.dateStrategy(strategy)]) {
+        if let model = DateModel.deserialize(from: dict, options: [.date(strategy)]) {
             print(model)
         }
     }
