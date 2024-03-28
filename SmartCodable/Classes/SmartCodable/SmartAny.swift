@@ -168,7 +168,7 @@ extension SmartAny {
         case let v as [String: Any]: return .dict(v.mapValues { convertToSmartAny($0) })
         case let v as [Any]:         return .array(v.map { convertToSmartAny($0) })
         case is NSNull:              return .null(NSNull())
-        default:                      return .null(NSNull()) // 对于不支持的类型，返回 null
+        default:                     return .null(NSNull()) // 对于不支持的类型，返回 null
         }
     }
 }

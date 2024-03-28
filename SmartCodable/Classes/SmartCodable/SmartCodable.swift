@@ -36,6 +36,17 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
 //MARK: - ～> V3 版本
+
+// MARK: V3.2.1
+/**
+ * 1. ✅ 删除SmartCaseDefaultable的defaultCase
+ *   - 说明：删除SmartCaseDefaultable的默认defaultCase实现。
+ *   - 结论：本来defaultCase是为了解析枚举异常的填充值，现在解析失败会使用初始化值进行填充。
+ */
+
+
+
+
 // MARK: V3.2.0
 /**
  * 1. ✅ 支持自定义解析路径

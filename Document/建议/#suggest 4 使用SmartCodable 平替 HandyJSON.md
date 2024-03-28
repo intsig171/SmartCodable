@@ -9,7 +9,7 @@
 | ⑤自定义解析Key  | 忽略key的解析 & 自定义Key的映射关系           | ★★★☆☆    | ★★★★★    | 需要更改调用方式。                                     |
 | ⑥解析Any        | 解析Any类型的数据。Any，[String: Any]， [Any] | ★☆☆☆☆    | ★☆☆☆☆    | 将Any替换为SmartAny                                    |
 | ⑦处理继承关系   | 解析存在的继承关系的Model                     | ★☆☆☆☆    | ★★★★★    | 建议使用协议实现。                                     |
-| ⑧枚举的解析     | 解析枚举属性                                  | ★☆☆☆☆    | ★☆☆☆☆    | 多实现一个 defaultCase                                 |
+| ⑧枚举的解析     | 解析枚举属性                                  | ★☆☆☆☆    | ★☆☆☆☆    | 替换为SmartCaseDefaultable                             |
 
 
 
@@ -369,11 +369,8 @@ struct HandyModel: HandyJSON {
 
 ### SmartCodable
 
-需要实现`defaultCase`，当解析失败时候
-
 ```
 enum SmartSex: String, SmartCaseDefaultable {
-    static var defaultCase: SmartSex = .man
     case man
     case women
 }

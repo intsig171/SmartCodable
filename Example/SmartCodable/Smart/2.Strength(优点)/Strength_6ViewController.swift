@@ -49,7 +49,6 @@ extension Strength_6ViewController {
 
         enum TestEnum: String, SmartCaseDefaultable {
             static var defaultCase: TestEnum = .a
-
             case a
             case b
             case hello = "c"

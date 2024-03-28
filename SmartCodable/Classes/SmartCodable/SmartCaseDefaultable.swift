@@ -10,10 +10,7 @@
 import Foundation
 
 /// 枚举解码失败的默认值
-public protocol SmartCaseDefaultable: RawRepresentable, Codable {
-    /// 使用接收到的数据，无法用枚举类型中的任何值表示而导致解析失败，使用此默认值。
-    static var defaultCase: Self { get }
-}
+public protocol SmartCaseDefaultable: RawRepresentable, Codable { }
 
 public extension SmartCaseDefaultable where Self: Decodable, Self.RawValue: Decodable {
     init(from decoder: Decoder) throws {
