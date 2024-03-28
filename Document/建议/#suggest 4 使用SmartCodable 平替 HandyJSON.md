@@ -372,14 +372,14 @@ struct HandyModel: HandyJSON {
 需要实现`defaultCase`，当解析失败时候
 
 ```
-enum SamrtSex: String, SmartCaseDefaultable {
-    static var defaultCase: SamrtSex = .man
+enum SmartSex: String, SmartCaseDefaultable {
+    static var defaultCase: SmartSex = .man
     case man
     case women
 }
 
 struct SmartModel: SmartCodable {
-    var sex: SamrtSex = .man
+    var sex: SmartSex = .man
 }
 ```
 
