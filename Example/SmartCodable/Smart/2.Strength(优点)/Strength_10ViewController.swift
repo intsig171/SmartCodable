@@ -14,7 +14,7 @@ class Strength_10ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let dict = [
+        let dict: [String : Any] = [
             "real_name": "张小华",
             "nick_name": "小花",
 
@@ -27,7 +27,7 @@ class Strength_10ViewController: BaseViewController {
                 "real_name": "张小小小华",
                 "nick_name": "小小",
             ]
-        ] as [String : Any]
+        ]
 
 
         let option: SmartDecodingOption = .key(.fromSnakeCase)
@@ -65,3 +65,4 @@ extension Strength_10ViewController {
         var nickName: String = ""
     }
 }
+

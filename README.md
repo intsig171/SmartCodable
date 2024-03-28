@@ -24,8 +24,8 @@
 | ⑦ **枚举的解析**          | 当枚举解析失败时，支持兼容。                                 | ✅            | ✅         |
 | ⑧ **自定义解析** - 重命名 | 自定义解码key（对解码的Model属性重命名）                     | ✅            | ✅         |
 | ⑨ **自定义解析** - 忽略   | 忽略某个Model属性的解码                                      | ⚠️            | ✅         |
-| ⑩ **Model的继承**         | 在model的继承关系下，Codable的支持力度较弱，使用不便（可以支持） | ⚠️            | ✅         |
-| ⑪ **自定义解析路径**      | 指定从json的层级开始解析                                     | ❌            | ✅         |
+| ⑩ **Model的继承**         | 在model的继承关系下，Codable的支持力度较弱，使用不便（可以支持） | ❌          | ✅         |
+| ⑪ **自定义解析路径**      | 指定从json的层级开始解析                                     | ✅           | ✅         |
 | ⑫ **超复杂的数据解码**    | 解码过程中，多数据做进一步的整合/处理。如： 数据的扁平化处理 | ✅            | ⚠️         |
 | ⑬ **解码性能**            | 在解码性能上，SmartCodable 平均强 30%                        | ✅            | ⚠️         |
 | ⑭ **异常解码日志**        | 当解码异常进行了兼容处理时，提供排查日志                     | ✅            | ❌         |
@@ -49,9 +49,10 @@
 | 💡 建议列表                                         | 是否采纳 | 理由                                                         |
 | -------------------------------------------------- | -------- | ------------------------------------------------------------ |
 | ① **#suggest 1 在mapping方法中支持解析忽略**       | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%201%20在mapping方法中支持解析忽略.md) |
-| ② **#suggest 2 像HandyJSON一样支持继承关系的解析** | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%202%20像HandyJSON一样支持继承关系的解析.md)  |
-| ③ **#suggest 3 支持初始值填充** | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%203%20支持属性初始化值填充.md)  |
-| ④ **#suggest 4 提供HandyJSON的替换指导** | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md)  |
+| ② **#suggest 2 像HandyJSON一样支持继承关系的解析** | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%202%20像HandyJSON一样支持继承关系的解析.md) |
+| ③ **#suggest 3 支持初始值填充**                    | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%203%20支持属性初始化值填充.md) |
+| ④ **#suggest 4 提供HandyJSON的替换指导**           | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md) |
+| ⑤ **#suggest 5 提供全局的Key映射策略**             | ✅        |                                                              |
 
 
 ## 使用SmartCodable 平替 HandyJSON
@@ -165,6 +166,102 @@ class Model: SmartDecodable {
 
 
 
+### 自定义解析路径
+
+跨层解析。将sub里面的name字段，解析到 Model的name属性上。
+
+```
+let dict = [
+    "age": 10,
+    "sub": [
+        "name": "Mccc"
+    ]
+]
+```
+
+```
+struct Model: SmartCodable {
+    var age: Int = 0
+    var name: String = ""
+    static func mapping() -> [MappingRelationship]? {
+        [ CodingKeys.name <--- "sub.name" ]
+    }
+}
+```
+
+
+
+### 自定义全局的解析策略
+
+全局代表当前本次解析。 目前支持两种策略：
+
+* 蛇形命名转驼峰命名
+* 首字母大写转小写
+
+#### 蛇形命名转驼峰命名
+
+```
+let dict1: [String: Any] = [
+    "nick_name": "Mccc",
+    "self_age": 10,
+    "sub_info": [
+        "real_name": "小李"
+    ]
+]
+```
+
+```
+struct TwoModel: SmartCodable {
+    var nickName: String = ""
+    var selfAge: Int = 0
+    var subInfo: SubTwoModel?
+}
+
+struct SubTwoModel: SmartCodable {
+    var realName: String = ""
+}
+```
+
+设置一个key的解析选项，影响本次解析。
+
+```
+let option1: SmartDecodingOption = .key(.fromSnakeCase)
+guard let model1 = TwoModel.deserialize(from: dict1, options: [option1]) else { return }
+```
+
+#### 首字母大写转小写
+
+```
+let dict: [String: Any] = [
+    "Name": "Mccc",
+    "Age": 10,
+    "Sex": "男",
+    "sub": [
+        "Name": "小李"
+    ]
+]
+```
+
+```
+struct Model: SmartCodable {
+    var name: String = ""
+    var age: Int = 0
+    var sex: String = ""
+    var sub: SubModel?
+}
+
+struct SubModel: SmartCodable {
+    var name: String = ""
+}
+```
+
+设置一个key的解析选项，影响本次解析。
+
+```
+let option: SmartDecodingOption = .key(.firstLetterLower)
+guard let model = Model.deserialize(from: dict, options: [option]) else { return }
+```
+
 
 
 ### 自定义解析规则
@@ -173,8 +270,6 @@ class Model: SmartDecodable {
 
 * 忽略某些解码的key
 * 将解码的key重命名
-
-
 
 将这个字典dict
 
@@ -324,6 +419,18 @@ print(model.arr.peel)
 
 
 
+同时也提供了反向转换的方法：
+
+* Any ➡️ SmartAny
+* [Any] ➡️ [SmartAny]
+* [String: Any] ➡️ [String: SmartAny]
+
+```
+let name = SmartAny(from: "新名字")
+let dict1 = ["key2": "value2"].cover
+let arr1 = [ ["key3": "value3"] ].cover
+```
+
 
 
 ## 解析选项 - SmartDecodingOption
@@ -372,7 +479,9 @@ guard let model1 = FeedOne.deserialize(from: json, options: [option]) else {  re
 
 ## 调试日志
 
-SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 如果出现解析兼容的情况，修改Model中属性的定义，或要求数据方进行修正。为了更方便的定位问题，SmartCodable提供了便捷的解析错误日志。
+出现 **SmartLog Error** 日志代表着 **SmartCodable** 遇到了解析问题，走进了兼容。 并不代表着本次解析失败。
+
+SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 如果出现解析兼容的情况，修改Model中属性的定义，或要求数据方进行修正。为了更方便的定位问题。
 
 调试日志，将提供辅助信息，帮助定位问题：
 
@@ -390,49 +499,9 @@ SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到Sm
 属性信息：（名称）more
 错误原因: No value associated with key CodingKeys(stringValue: "more", intValue: nil) ("more").
 ==================================================
-
-================ [SmartLog Error] ================
-错误类型: '值类型不匹配的错误' 
-模型名称：DecodeErrorPrint 
-数据节点：a
-属性信息：（类型）Bool （名称）a
-错误原因: Expected to decode Bool but found a string/data instead.
-==================================================
-
-
-================ [SmartLog Error] ================
-错误类型: '找不到值的错误' 
-模型名称：DecodeErrorPrint 
-数据节点：c
-属性信息：（类型）Bool （名称）c
-错误原因:  c 在json中对应的值是null
-==================================================
 ```
 
 你可以通过SmartConfig 调整日志的相关设置。
-
-
-
-##### 如何理解数据节点？
-
-![数据节点](https://github.com/intsig171/SmartCodable/assets/87351449/255b8244-d121-48f2-9f35-7d28c9286921)
-
-
-右侧的数据是数组类型。注意标红的内容，由外到里对照查看。
-
-* Index 0:  数组的下标为0的元素。
-
-* sampleFive： 下标为0的元素对应的是字典，即字典key为sampleFive对应的值（是一个数组）。
-
-* Index 1：数组的下标为1的元素.
-
-* sampleOne：字典中key为sampleOne对应的值。
-
-* string：字典中key为sring对应的值。
-
-  
-
-
 
 
 
