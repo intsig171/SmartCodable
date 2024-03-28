@@ -24,7 +24,7 @@ class DateDecodingStrategyViewController: BaseViewController {
         """
         let dateFormatter = DateFormatter()
          dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let option: JSONDecoder.SmartOption = .dateStrategy(.formatted(dateFormatter))
+        let option: SmartDecodingOption = .dateStrategy(.formatted(dateFormatter))
         guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
         print(model)
         

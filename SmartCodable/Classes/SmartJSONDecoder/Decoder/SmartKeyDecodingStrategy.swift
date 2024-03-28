@@ -11,9 +11,13 @@ import Foundation
 extension JSONDecoder {
     public enum SmartKeyDecodingStrategy : Sendable {
 
+        /// 默认的解析策略
+        /// 
         /// Use the keys specified by each type. This is the default strategy.
         case useDefaultKeys
 
+        /// 蛇形命名转驼峰命名
+        ///
         /// Convert from "snake_case_keys" to "camelCaseKeys" before attempting to match a key with the one specified by each type.
         ///
         /// The conversion to upper case uses `Locale.system`, also known as the ICU "root" locale. This means the result is consistent regardless of the current user's locale and language preferences.
@@ -25,18 +29,15 @@ extension JSONDecoder {
         /// For example, `one_two_three` becomes `oneTwoThree`. `_one_two_three_` becomes `_oneTwoThree_`.
         ///
         /// - Note: Using a key decoding strategy has a nominal performance cost, as each string key has to be inspected for the `_` character.
-        case convertFromSnakeCase
+        case fromSnakeCase
         
-        /// Convert the first letter of the key to lower case before attempting to match a key with the one specified by each type.
+        /// 首字母大写转小写
         ///
-        /// This operation is performed by:
-        /// 1. Checking if the first character is uppercase.
-        /// 2. Converting the first character to lowercase.
-        /// 3. Keeping the rest of the string unchanged.
+        /// Convert the first letter of the key to lower case before attempting to match a key with the one specified by each type.
         /// For example, `OneTwoThree` becomes `oneTwoThree`.
         ///
         /// - Note: This strategy should be used with caution, especially if the key's first letter is intended to be uppercase for distinguishing purposes. It also incurs a nominal performance cost, as the first character of each key needs to be inspected and possibly modified.
-        case convertFirstLetterToLowercase
+        case firstLetterLower
     }
 }
 

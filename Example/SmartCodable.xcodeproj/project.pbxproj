@@ -22,6 +22,9 @@
 		9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */; };
 		9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */; };
 		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
+		991452A82BB5074000970575 /* Strength_7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A72BB5074000970575 /* Strength_7ViewController.swift */; };
+		991452AA2BB50B2A00970575 /* Strength_8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A92BB50B2A00970575 /* Strength_8ViewController.swift */; };
+		991452AC2BB50DBC00970575 /* Strength_9ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452AB2BB50DBC00970575 /* Strength_9ViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
 		99328D992B5138210074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
 		99328D9A2B513A300074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
@@ -95,6 +98,7 @@
 		99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */; };
 		99D9458C2B91C80300CC6470 /* CaseThree_dataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */; };
 		99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */; };
+		99F9E8A62BB5139900D68037 /* Strength_10ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F9E8A52BB5139900D68037 /* Strength_10ViewController.swift */; };
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +134,9 @@
 		9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_6ViewController.swift; sourceTree = "<group>"; };
 		9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFive_wcdbViewController.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
+		991452A72BB5074000970575 /* Strength_7ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_7ViewController.swift; sourceTree = "<group>"; };
+		991452A92BB50B2A00970575 /* Strength_8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_8ViewController.swift; sourceTree = "<group>"; };
+		991452AB2BB50DBC00970575 /* Strength_9ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_9ViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
 		99328D982B5138210074036A /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
 		993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTwoViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +204,7 @@
 		99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_dateViewController.swift; sourceTree = "<group>"; };
 		99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_dataViewController.swift; sourceTree = "<group>"; };
 		99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_FloatViewController.swift; sourceTree = "<group>"; };
+		99F9E8A52BB5139900D68037 /* Strength_10ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_10ViewController.swift; sourceTree = "<group>"; };
 		AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.debug.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -375,6 +383,10 @@
 				99C313312B99C3290065FC45 /* Strength_4ViewController.swift */,
 				99C313322B99C3290065FC45 /* Strength_5ViewController.swift */,
 				99675FEC2B3EC930006C83EC /* Strength_6ViewController.swift */,
+				991452A72BB5074000970575 /* Strength_7ViewController.swift */,
+				991452A92BB50B2A00970575 /* Strength_8ViewController.swift */,
+				991452AB2BB50DBC00970575 /* Strength_9ViewController.swift */,
+				99F9E8A52BB5139900D68037 /* Strength_10ViewController.swift */,
 			);
 			path = "2.Strength(优点)";
 			sourceTree = "<group>";
@@ -756,6 +768,7 @@
 				9967602C2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift in Sources */,
 				99CABA312B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift in Sources */,
 				99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */,
+				991452AC2BB50DBC00970575 /* Strength_9ViewController.swift in Sources */,
 				996760272B3EC930006C83EC /* CaseOne_FloatViewController.swift in Sources */,
 				996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */,
 				996760472B3EC930006C83EC /* FloatDecodingStrategyViewController.swift in Sources */,
@@ -772,6 +785,7 @@
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
 				9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */,
 				9967602B2B3EC930006C83EC /* Strength_6ViewController.swift in Sources */,
+				991452AA2BB50B2A00970575 /* Strength_8ViewController.swift in Sources */,
 				99C313342B99C32A0065FC45 /* Strength_5ViewController.swift in Sources */,
 				99C3138C2B9B38910065FC45 /* ComplexDataStructureCell.swift in Sources */,
 				996760382B3EC930006C83EC /* CaseTwoViewController.swift in Sources */,
@@ -792,11 +806,13 @@
 				9967602D2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift in Sources */,
 				996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */,
 				9902B4D02BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift in Sources */,
+				99F9E8A62BB5139900D68037 /* Strength_10ViewController.swift in Sources */,
 				996760342B3EC930006C83EC /* Strength_1ViewController.swift in Sources */,
 				9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
 				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
 				99C3138D2B9B38910065FC45 /* ComplexDataStructureModel.swift in Sources */,
+				991452A82BB5074000970575 /* Strength_7ViewController.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,
 				9902B4D82BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift in Sources */,
 				9993D69A2B9208020089CA68 /* CaseThree_EnumViewController.swift in Sources */,

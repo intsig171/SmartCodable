@@ -326,12 +326,12 @@ print(model.arr.peel)
 
 
 
-## 解析选项 - JSONDecoder.SmartOption
+## 解析选项 - SmartDecodingOption
 
-JSONDecoder.SmartOption提供了三种解码选项，分别为：
+SmartDecodingOption提供了三种解码选项，分别为：
 
 ```
-public enum SmartOption {
+public enum SmartDecodingOption {
     
     /// 用于解码 “Date” 值的策略
     case dateStrategy(JSONDecoder.DateDecodingStrategy)
@@ -349,14 +349,14 @@ public enum SmartOption {
 ```
 let dateFormatter = DateFormatter()
  dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-let option: JSONDecoder.SmartOption = .dateStrategy(.formatted(dateFormatter))
+let option: JSONDecoder.SmartDecodingOption = .dateStrategy(.formatted(dateFormatter))
 guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
 ```
 
 ### Data
 
 ```
-let option: JSONDecoder.SmartOption = .dataStrategy(.base64)
+let option: JSONDecoder.SmartDecodingOption = .dataStrategy(.base64)
 guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
 gurad let data = model.address, let url = String(data: data, encoding: .utf8) { else }
 ```
@@ -364,7 +364,7 @@ gurad let data = model.address, let url = String(data: data, encoding: .utf8) { 
 ### Float
 
 ```
-let option: JSONDecoder.SmartOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
+let option: JSONDecoder.SmartDecodingOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
 guard let model1 = FeedOne.deserialize(from: json, options: [option]) else {  return }
 ```
 

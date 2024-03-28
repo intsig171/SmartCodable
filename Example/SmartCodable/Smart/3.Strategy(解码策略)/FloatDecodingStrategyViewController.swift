@@ -32,7 +32,7 @@ class FloatDecodingStrategyViewController: BaseViewController {
 
 
         
-        let option: JSONDecoder.SmartOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
+        let option: SmartDecodingOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
         guard let model1 = FeedOne.deserialize(from: json, options: [option]) else {  return }
         
         print(model1)

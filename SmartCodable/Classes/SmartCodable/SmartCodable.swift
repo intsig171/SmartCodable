@@ -44,7 +44,7 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  *
  * 2. ✅ 支持全局的key映射
  *   - 说明：蛇形转驼峰，首字母大写转小写
- *   - 结论：SmartOption中新增keyStrategy，支持全局key的解码策略。
+ *   - 结论：SmartDecodingOption中新增keyStrategy，支持全局key的解码策略。
  *
  * 3. ✅ 支持手动加壳
  *   - 说明：Any -> SmartAny, [Any] -> [SmartAny], [String: Any] -> [String: SmartAny]
@@ -80,7 +80,7 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
  *   - 说明：解码失败并且类型兼容失败，使用Model属性设置的默认值填充。
  *   - 结论：重写解码器，解码Model类型的时候，初始化该类型，通过Mirror方式获取并记录属性名以及对应的值。
  *
- * 2. ✅ 删除SmartOptional
+ * 2. ✅ 删除SmartDecodingOptional
  *   - 说明：不使用属性包装器解决模型属性的可选解析
  *   - 结论：放弃重写系统的JSONKeyedDecodingContainer的协议方法，该用重写整改解码器，自然就不会导致循环调用。
  *

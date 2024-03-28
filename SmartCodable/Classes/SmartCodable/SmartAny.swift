@@ -35,14 +35,14 @@ public enum SmartAny {
     }
 }
 
-extension Dictionary where Key == String, Value == Any {
+extension Dictionary where Key == String {
     /// 从 [String: Any] 类型转换为 [String: SmartAny]
     public var cover: [String: SmartAny] {
         mapValues { SmartAny(from: $0) }
     }
 }
 
-extension Array where Element == Any {
+extension Array {
     /// 从 [Any] 类型转换为 [SmartAny]
     public var cover: [ SmartAny] {
         map { SmartAny(from: $0) }

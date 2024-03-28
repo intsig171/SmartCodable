@@ -263,12 +263,12 @@ use **peel** unbox data。
 
 
 
-## Parsing Options - JSONDecoder.SmartOption
+## Parsing Options - SmartDecodingOption
 
-JSONDecoder.SmartOption provides three decoding options:
+SmartDecodingOption provides three decoding options:
 
 ```
-public enum SmartOption {
+public enum SmartDecodingOption {
     
     /// Strategy for decoding "Date" values
     case dateStrategy(JSONDecoder.DateDecodingStrategy)
@@ -286,14 +286,14 @@ public enum SmartOption {
 ```
 let dateFormatter = DateFormatter()
 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-let option: JSONDecoder.SmartOption = .dateStrategy(.formatted(dateFormatter))
+let option: SmartDecodingOption = .dateStrategy(.formatted(dateFormatter))
 guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
 ```
 
 ### Data
 
 ```
-let option: JSONDecoder.SmartOption = .dataStrategy(.base64)
+let option: JSONDecoder.SmartDecodingOption = .dataStrategy(.base64)
 guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
 guard let data = model.address, let url = String(data: data, encoding: .utf8) else { return }
 ```
@@ -301,7 +301,7 @@ guard let data = model.address, let url = String(data: data, encoding: .utf8) el
 ### Float
 
 ```
-let option: JSONDecoder.SmartOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
+let option: SmartDecodingOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
 guard let model1 = FeedOne.deserialize(from: json, options: [option]) else { return }
 ```
 

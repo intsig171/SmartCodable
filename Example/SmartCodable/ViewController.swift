@@ -89,11 +89,15 @@ extension ViewController {
             "title": "Smart的强大之处",
             "list": [
                 ["name": "支持Any解析",             "vc": "Strength_1ViewController"],
-                ["name": "支持解码完成的回调",        "vc": "Strength_2ViewController"],
-                ["name": "支持解码时Key的映射",       "vc": "Strength_3ViewController"],
+                ["name": "给Any加壳",               "vc": "Strength_2ViewController"],
+                ["name": "解码完成时回调",           "vc": "Strength_3ViewController"],
                 ["name": "支持默认值填充",            "vc": "Strength_4ViewController"],
                 ["name": "支持json字段值的对象化解析", "vc": "Strength_5ViewController"],
                 ["name": "支持枚举项的解析兼容",       "vc": "Strength_6ViewController"],
+                ["name": "支持自定义key的映射路径",    "vc": "Strength_7ViewController"],
+                ["name": "支持全局自定义key的映射规则", "vc": "Strength_8ViewController"],
+                ["name": "支持自定义单个key的映射规则", "vc": "Strength_9ViewController"],
+                ["name": "key的 映射路径+全局映射+局部映射 混用", "vc": "Strength_10ViewController"],
 
             ]
         ]
