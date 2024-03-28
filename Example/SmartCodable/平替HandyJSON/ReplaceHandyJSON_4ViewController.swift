@@ -26,11 +26,11 @@ class ReplaceHandyJSON_4ViewController: BaseViewController {
         ] as [String : Any]
         
         guard let handyModel = HandyModel.deserialize(from: dict) else { return }
-        print(handyModel.name)
+        print(handyModel.name ?? "")
         print(handyModel.dict)
         
         guard let smartModel = SmartModel.deserialize(from: dict) else { return }
-        print(smartModel.name?.peel)
+        print(smartModel.name?.peel ?? "")
         print(smartModel.dict.peel)
     }
 }

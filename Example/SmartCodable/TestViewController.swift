@@ -47,7 +47,7 @@ class TestViewController: BaseViewController {
         
         
         
-        guard var model = HandyModel.deserialize(from: dict) else { return }
+        guard let model = HandyModel.deserialize(from: dict) else { return }
         print(model)
         
 

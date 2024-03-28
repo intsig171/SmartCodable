@@ -44,7 +44,7 @@ class Strength_1ViewController: BaseViewController {
         
         guard let model = AnyModel.deserialize(from: dict) else { return }
         print(model.sex?.peel ?? false)
-        print(model.height)
+        print(model.height?.peel ?? 0)
         print(model.name.peel )
         print(model.age?.peel ?? 0)
         print(model.dict.peel)
@@ -62,7 +62,7 @@ class Strength_1ViewController: BaseViewController {
 
         guard let model1 = AnyModel.deserialize(from: encodeDict) else { return }
         print(model1.sex?.peel ?? false)
-        print(model1.height)
+        print(model.height?.peel ?? 0)
         print(model1.name.peel )
         print(model1.age?.peel ?? 0)
         print(model1.dict.peel)
