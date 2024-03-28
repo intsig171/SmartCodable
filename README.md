@@ -52,7 +52,7 @@
 | ② **#suggest 2 像HandyJSON一样支持继承关系的解析** | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%202%20像HandyJSON一样支持继承关系的解析.md) |
 | ③ **#suggest 3 支持初始值填充**                    | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%203%20支持属性初始化值填充.md) |
 | ④ **#suggest 4 提供HandyJSON的替换指导**           | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md) |
-| ⑤ **#suggest 5 提供全局的Key映射策略**             | ✅        |                                                              |
+| ⑤ **#suggest 5 提供全局的Key映射策略**             | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%205%20提供全局的Key映射策略.md) |
 
 
 ## 使用SmartCodable 平替 HandyJSON
