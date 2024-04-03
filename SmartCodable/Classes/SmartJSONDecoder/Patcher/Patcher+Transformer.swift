@@ -46,9 +46,13 @@ extension Bool: ValueTransformable {
 
 extension String: ValueTransformable {
     static func transformValue(from value: Any) -> String? {
-        
-        // bool类型的值也可以转成int。要过滤掉。
-        if value is Bool { return nil }
+        // 检查NSNumber实例是否代表Bool类型
+        if let number = value as? NSNumber {
+            // 检查是否为布尔值，NSNumber表示布尔值时objCType返回的是"c"
+            if String(cString: number.objCType) == "c" {
+                return nil
+            }
+        }
         
         switch value {
         case let intValue as Int:
