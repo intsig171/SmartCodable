@@ -19,11 +19,13 @@ struct DecodingDefaults {
     /// 记录模型属性的默认值
     private var containers: [String: Any] = [:]
     
+    private(set) var tranforms: [String: any Transformer] = [:]
+    
     /// 记录type类型的属性初始化的值
     mutating func recordAttributeValues<T: Decodable>(for type: T.Type, codingPath: [CodingKey]) {
         // 直接使用反射初始化对象，如果T符合SmartDecodable协议
         if let object = type as? SmartDecodable.Type {
-            let instance = object.init()            
+            let instance = object.init()
             // 使用反射获取属性名称和值
             let mirror = Mirror(reflecting: instance)
             mirror.children.forEach { child in
@@ -33,6 +35,14 @@ struct DecodingDefaults {
             }
             self.typeName = "\(type)"
             self.codingPath = codingPath
+
+            // 记录tranform
+//            object.mapping()
+            tranforms = [
+                "date1": CustomDateFormatTransform(formatString: "yyyy-MM-dd"),
+                "date2": CustomDateFormatTransform(formatString: "yyyy-MM-dd"),
+            ]
+            
         }
     }
     
@@ -52,6 +62,7 @@ struct DecodingDefaults {
             self.typeName = ""
             self.codingPath = []
             self.containers.removeAll()
+            self.tranforms.removeAll()
         }
     }
     

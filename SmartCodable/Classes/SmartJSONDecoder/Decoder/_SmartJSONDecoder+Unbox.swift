@@ -324,6 +324,16 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Date.Type) throws -> Date? {
         guard !(value is NSNull) else { return nil }
         
+        todo： 从当前的defalutsStorage中获取
+        todo：需要想想，对外的api如何处理。
+        let tranformer = defalutsStorage.tranforms["date1"]
+        if let t = tranformer  as? DateFormatterTransform {
+            return t.transformFromJSON(value)
+        }
+        
+        
+        
+        
         switch self.options.dateDecodingStrategy {
         case .deferredToDate:
 
@@ -497,11 +507,7 @@ extension _SmartJSONDecoder {
             decoded = float as? T
         } else {
             
-            /** 这段代码的目的：
-             * 避免可选属性是数组或字典的时候，通过 `try T(from: self)` 创建一个新的值。
-             * 为什么基础数据类型（例如：Int，String）不需要这么处理？
-             *  - 因为这些基本类型有对应的unbox方法。字典和数组涉及到范型的处理，没法这么设计。
-             */
+            // 请看 说明1⃣️
             if let _ = [] as? T {
                 // 如果T是数组类型，但value不是数组，则直接返回nil
                 guard value is [Any] else { return nil }
@@ -516,7 +522,7 @@ extension _SmartJSONDecoder {
 
             defalutsStorage.recordAttributeValues(for: type, codingPath: codingPath)
             
-            // 请看 说明1⃣️
+            // 请看 说明2⃣️
             decoded = try T(from: self)
             storage.popContainer()
             defalutsStorage.resetRecords(for: type)
@@ -534,7 +540,15 @@ fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
 
 
 
+
 /** 说明1⃣️
+ * 避免可选属性是数组或字典的时候，通过 `try T(from: self)` 创建一个新的值。
+ * 为什么基础数据类型（例如：Int，String）不需要这么处理？
+ *  - 因为这些基本类型有对应的unbox方法。字典和数组涉及到范型的处理，没法这么设计。
+ */
+
+
+/** 说明2⃣️
  * decoded = try T(from: self)。这行代码是Swift中Codable解析的关键部分。
  * 目的：将外部数据源获取的原始数据转换为Swift中具体的类型。
  * 含义：“尝试使用当前的解码器（self）作为数据源来创建一个类型为 T 的新实例。”这一过程可能会抛出错误，因为数据可能与 T 类型不匹配，或者数据本身就是不完整或不正确的，所以这个调用是一个 try 表达式，需要被 catch 语句捕获错误或者使用 try? 或 try! 来处理。（这里的 T 指的是遵守 Decodable 协议的任意类型。该代码尝试通过调用类型 T 的 init(from:) 初始化器来创建该类型的实例，这个初始化器是 Decodable 协议的一部分。self 在这里指的是解码器本身，通常是一个 Decoder实例，它持有或者可以访问要解码的数据。）

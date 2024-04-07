@@ -33,10 +33,20 @@ class TestViewController: BaseViewController {
         
         
         
-        guard let model = HandyModel.deserialize(from: dict) else { return }
-        print(model)
+//        
+//        guard let model = HandyModel.deserialize(from: dict) else { return }
+//        print(model)
         
 
+        let dict1: [String: Any] = [
+            "date1": "2024-04-07",
+            "sub": [
+                "date2": "2025-04-07",
+            ]
+        ]
+        
+        guard let model1 = SmartModel.deserialize(from: dict1) else { return }
+        print(model1)
 
     }
 }
@@ -44,22 +54,25 @@ class TestViewController: BaseViewController {
 extension TestViewController {
     
     struct SmartModel: SmartCodable {
-        var name: String = ""
-        var age: Int = 0
-        var sub: [String: SmartAny]?
+//        var name: String = ""
+//        var age: Int = 0
+        var date1: Date?
+        var sub: SmartSubModel?
+
+//        var sub: [String: SmartAny]?
         
-        static func mapping() -> [MappingRelationship]? {
-            [ CodingKeys.name <--- "sub1.Name" ]
-        }
+//        static func mapping() -> [MappingRelationship]? {
+//            [ CodingKeys.name <--- "sub1.Name" ]
+//        }
     }
     
     struct SmartSubModel: SmartCodable {
-        var realMame: String = ""
-        var age: Int = 0
-        
-        static func mapping() -> [MappingRelationship]? {
-            [ CodingKeys.realMame <--- "Name" ]
-        }
+//        var realMame: String = ""
+//        var age: Int = 0
+        var date2: Date?
+//        static func mapping() -> [MappingRelationship]? {
+//            [ CodingKeys.realMame <--- "Name" ]
+//        }
     }
 }
 extension TestViewController {
