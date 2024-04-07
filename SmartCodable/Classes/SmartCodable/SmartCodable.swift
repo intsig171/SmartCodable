@@ -9,6 +9,9 @@
 public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
+extension Array: SmartCodable where Element: SmartCodable { }
+
+
 //MARK: - =========== 版本Todo List ===========
 
 // MARK: 继承Model的解码支持

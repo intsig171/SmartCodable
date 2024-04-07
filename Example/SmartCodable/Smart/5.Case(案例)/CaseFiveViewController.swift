@@ -42,10 +42,28 @@ class CaseFiveViewController : BaseViewController {
           "message": "200"
         }
         """
-
-        
         guard let model1 = ApiConmon<DataModel>.deserialize(from: json1) else { return }
         print(model1)
+        
+        
+        let json2 = """
+        {
+          "data": [
+             {
+               "name": "Mcccc",
+               "age": 30
+             },
+             {
+               "name": "小明",
+               "age": 100
+             }
+          ],
+          "message": "200"
+        }
+        """
+        guard let model2 = ApiConmon<[DataModel]>.deserialize(from: json2) else { return }
+        print(model2)
+        
     }
 }
 
