@@ -10,6 +10,7 @@ public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
 extension Array: SmartCodable where Element: SmartCodable { }
+extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 
 
 //MARK: - =========== 版本Todo List ===========
