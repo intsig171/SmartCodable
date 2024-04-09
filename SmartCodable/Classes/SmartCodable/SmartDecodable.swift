@@ -7,14 +7,26 @@
 
 import Foundation
 
-/// 映射关系
-/// 将from对应的数据字段映射到to对应的模型属性上
-/// 多个有效字段映射到同一个属性上优先使用第一个。
-public typealias MappingRelationship = (from: [String], to: CodingKey)
+/** mapping 的功能支持以及扩展性的考量
+ * 1. 支持字段的重命名。
+ * 2. ❓支持字段的解析忽略。【是否有技术手段】
+ * 3. 支持自定义解析策略。（URL， Date， Data，Color...）
+ 
+ 
 
-infix operator <---
-public func <---(after: CodingKey, before: String) -> MappingRelationship { after <--- [before] }
-public func <---(after: CodingKey, before: [String]) -> MappingRelationship { (before, after) }
+ * 如何考量后续的扩展性？
+ * 使用一个基础协议。通过协议的继承的方式。
+ 
+ */
+
+
+
+/**
+ 前： key的映射， nickname -> name
+ 中： 内部的数据解析完的转义，时间戳转Date。
+ 后： 内部解码完成的回调, 就是：didFinishMapping
+ */
+
 
 
 
@@ -24,7 +36,9 @@ public protocol SmartDecodable: Decodable {
     mutating func didFinishMapping()
   
     /// 映射关系
-    static func mapping() -> [MappingRelationship]?
+    static func mapping() -> [KeyTransformer]?
+    
+    static func mappingForValue() -> [any Transformable]?
     
     init()
 }
@@ -32,7 +46,8 @@ public protocol SmartDecodable: Decodable {
 
 extension SmartDecodable {
     public mutating func didFinishMapping() { }
-    public static func mapping() -> [MappingRelationship]? { return nil }
+    public static func mapping() -> [KeyTransformer]? { return nil }
+    public static func mappingForValue() -> [any Transformable]? { return nil }
 }
 
 

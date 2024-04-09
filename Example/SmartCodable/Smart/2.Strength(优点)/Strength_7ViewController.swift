@@ -35,7 +35,7 @@ class Strength_7ViewController: BaseCompatibilityViewController {
 extension Strength_7ViewController {
     struct Model: SmartCodable {
         var name: String = ""
-        static func mapping() -> [MappingRelationship]? {
+        static func mapping() -> [KeyTransformer]? {
             [ CodingKeys.name <--- "sub.name" ]
         }
     }

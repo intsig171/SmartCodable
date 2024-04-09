@@ -15,19 +15,19 @@ extension Patcher {
     struct Transformer {
         static func typeTransform(from jsonValue: Any?) -> T? {
             guard let value = jsonValue else { return nil }
-            return (T.self as? ValueTransformable.Type)?.transformValue(from: value) as? T
+            return (T.self as? TypeTransformable.Type)?.transformValue(from: value) as? T
         }
     }
 }
 
 
-fileprivate protocol ValueTransformable {
+fileprivate protocol TypeTransformable {
     static func transformValue(from value: Any) -> Self?
 }
 
 
 /// 兼容Bool类型的值，Model中定义为Bool类型，但是数据中是String，Int的情况。
-extension Bool: ValueTransformable {
+extension Bool: TypeTransformable {
     static func transformValue(from value: Any) -> Bool? {
         switch value {
         case let temp as Int:
@@ -44,7 +44,7 @@ extension Bool: ValueTransformable {
 }
 
 
-extension String: ValueTransformable {
+extension String: TypeTransformable {
     static func transformValue(from value: Any) -> String? {
         // 检查NSNumber实例是否代表Bool类型
         if let number = value as? NSNumber {
@@ -68,7 +68,7 @@ extension String: ValueTransformable {
 }
 
 
-extension Int: ValueTransformable {
+extension Int: TypeTransformable {
     static func transformValue(from value: Any) -> Int? {
         switch value {
         case let temp as String:
@@ -86,7 +86,7 @@ extension Int: ValueTransformable {
 }
 
 
-extension Float: ValueTransformable {
+extension Float: TypeTransformable {
     static func transformValue(from value: Any) -> Float? {
         if let stringValue = value as? String {
             return Float(stringValue)
@@ -96,7 +96,7 @@ extension Float: ValueTransformable {
 }
 
 
-extension Double: ValueTransformable {
+extension Double: TypeTransformable {
     static func transformValue(from value: Any) -> Double? {
         if let temp = value as? String {
             return Double(temp)
@@ -106,7 +106,7 @@ extension Double: ValueTransformable {
 }
 
 
-extension CGFloat: ValueTransformable {
+extension CGFloat: TypeTransformable {
     static func transformValue(from value: Any) -> CGFloat? {
         if let temp = value as? String, let doubleValue = Double(temp) {
             return CGFloat(doubleValue)

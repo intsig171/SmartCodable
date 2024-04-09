@@ -324,12 +324,17 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Date.Type) throws -> Date? {
         guard !(value is NSNull) else { return nil }
         
-        todo： 从当前的defalutsStorage中获取
-        todo：需要想想，对外的api如何处理。
-        let tranformer = defalutsStorage.tranforms["date1"]
-        if let t = tranformer  as? DateFormatterTransform {
-            return t.transformFromJSON(value)
-        }
+//        todo： 从当前的defalutsStorage中获取
+//        todo：需要想想，对外的api如何处理。
+//        let tranformer = defalutsStorage.tranforms["date1"]
+//        if let t = tranformer  as? DateFormatterTransform, let va = t.transformFromJSON(value) {
+//            return va
+//        }
+//
+//        let tranformer1 = defalutsStorage.tranforms["date2"]
+//        if let t = tranformer1  as? DateTransform, let va = t.transformFromJSON(value) {
+//            return va
+//        }
         
         
         

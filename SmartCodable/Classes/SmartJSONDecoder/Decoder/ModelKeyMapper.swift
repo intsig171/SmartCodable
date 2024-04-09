@@ -42,7 +42,7 @@ struct ModelKeyMapper<T> {
                     break
                 } else { // 处理自定义解析路径的情况。
                     if newDict[newKey] == nil, let pathValue = newDict.getValue(forKeyPath: oldKey) {
-                            newDict.updateValue(pathValue, forKey: newKey)
+                        newDict.updateValue(pathValue, forKey: newKey)
                     }
                 }
             }

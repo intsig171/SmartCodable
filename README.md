@@ -183,7 +183,7 @@ let dict = [
 struct Model: SmartCodable {
     var age: Int = 0
     var name: String = ""
-    static func mapping() -> [MappingRelationship]? {
+    static func mapping() -> [KeyTransformer]? {
         [ CodingKeys.name <--- "sub.name" ]
     }
 }
@@ -333,7 +333,7 @@ struct Model: SmartCodable {
         case age
     }
     
-    static func mapping() -> [MappingRelationship]? {
+    static func mapping() -> [KeyTransformer]? {
         [
             CodingKeys.name <--- ["nickName", "realName"],
             CodingKeys.age <--- "person_age"

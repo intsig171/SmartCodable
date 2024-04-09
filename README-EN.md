@@ -186,7 +186,7 @@ struct Model: SmartCodable {
         case age
     }
     
-    static func mapping() -> [MappingRelationship]? {
+    static func mapping() -> [KeyTransformer]? {
         [
             CodingKeys.name <--- ["nickName", "realName"],
             CodingKeys.age <--- "person_age"

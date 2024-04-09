@@ -28,11 +28,10 @@
 
 
 
-public protocol Transformer { }
 
-public protocol TransformType: Transformer {
-	associatedtype Object
-	associatedtype JSON
+public protocol ValueTransformable: Transformable {
+	associatedtype Object = To
+	associatedtype JSON = From
 
 	func transformFromJSON(_ value: Any?) -> Object?
 	func transformToJSON(_ value: Object?) -> JSON?

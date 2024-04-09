@@ -56,7 +56,7 @@ extension ReplaceHandyJSON_3ViewController {
 //            case ignoreKey
         }
 
-        static func mapping() -> [MappingRelationship]? {
+        static func mapping() -> [KeyTransformer]? {
             [
                 CodingKeys.name <--- ["nick_name", "realName"],
                 CodingKeys.age <--- "self_age"
