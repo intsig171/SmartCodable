@@ -36,7 +36,7 @@ public protocol SmartDecodable: Decodable {
     mutating func didFinishMapping()
   
     /// 映射关系
-    static func mapping() -> [SmartKeyTransformer]?
+    static func mappingForKey() -> [SmartKeyTransformer]?
     
     static func mappingForValue() -> [SmartValueTransformer]?
     
@@ -46,7 +46,7 @@ public protocol SmartDecodable: Decodable {
 
 extension SmartDecodable {
     public mutating func didFinishMapping() { }
-    public static func mapping() -> [SmartKeyTransformer]? { return nil }
+    public static func mappingForKey() -> [SmartKeyTransformer]? { return nil }
     public static func mappingForValue() -> [SmartValueTransformer]? { return nil }
 }
 

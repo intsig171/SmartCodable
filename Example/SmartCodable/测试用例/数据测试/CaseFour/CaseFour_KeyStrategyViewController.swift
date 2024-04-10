@@ -39,14 +39,14 @@ extension CaseFour_KeyStrategyViewController {
     struct CodingKeysModel: SmartCodable {
         var jsonString: JSONString?
         
-        static func mapping() -> [SmartKeyTransformer]? {
+        static func mappingForKey() -> [SmartKeyTransformer]? {
             [ CodingKeys.jsonString <--- "json" ]
         }
     }
     
     struct JSONString: SmartCodable {
         var jsonKey: String?
-        static func mapping() -> [SmartKeyTransformer]? {
+        static func mappingForKey() -> [SmartKeyTransformer]? {
             [ CodingKeys.jsonKey <--- "json_key" ]
         }
 
@@ -79,7 +79,7 @@ extension CaseFour_KeyStrategyViewController {
                 
         var two: Two = Two()
         
-        static func mapping() -> [SmartKeyTransformer]? {
+        static func mappingForKey() -> [SmartKeyTransformer]? {
             [ CodingKeys.nickName <--- "nick_name" ]
 
         }
@@ -88,14 +88,14 @@ extension CaseFour_KeyStrategyViewController {
             var nickName: String = ""
             
             var three: [Three] = []
-            static func mapping() -> [SmartKeyTransformer]? {
+            static func mappingForKey() -> [SmartKeyTransformer]? {
                 [ CodingKeys.nickName <--- "realName" ]
             }
             
             
             struct Three: SmartCodable {
                 var nickName: String = ""
-                static func mapping() -> [SmartKeyTransformer]? {
+                static func mappingForKey() -> [SmartKeyTransformer]? {
                     [ CodingKeys.nickName <--- "name" ]
                 }
             }

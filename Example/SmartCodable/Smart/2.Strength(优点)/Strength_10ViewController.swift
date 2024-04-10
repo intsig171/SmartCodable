@@ -52,7 +52,7 @@ extension Strength_10ViewController {
         var sex: Sex?
         
         var son: SubModel?
-        static func mapping() -> [SmartKeyTransformer]? {
+        static func mappingForKey() -> [SmartKeyTransformer]? {
             [
                 CodingKeys.age <--- "selfAge",
                 CodingKeys.sex <--- "sexInfo.sex",

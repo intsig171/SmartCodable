@@ -44,7 +44,7 @@ extension TestViewController {
         var date1: Date?
         var date2: Date?
         
-        static func mapping() -> [SmartKeyTransformer]? {
+        static func mappingForKey() -> [SmartKeyTransformer]? {
             [
                 CodingKeys.date1 <--- "date"
             ]
@@ -64,7 +64,7 @@ extension TestViewController {
 
         var date2: Date?
         
-        static func mapping() -> [SmartKeyTransformer]? {
+        static func mappingForKey() -> [SmartKeyTransformer]? {
             [
                 CodingKeys.date2 <--- "date2"
             ]

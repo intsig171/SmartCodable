@@ -34,7 +34,7 @@ struct ModelKeyMapper<T> {
     
     private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any] {
         var newDict = dict
-        type.mapping()?.forEach { mapping in
+        type.mappingForKey()?.forEach { mapping in
             for oldKey in mapping.from {
                 let newKey = mapping.to.stringValue
                 if let value = newDict[oldKey], !(value is NSNull) { // 如果存在有效值(存在并不是null)
