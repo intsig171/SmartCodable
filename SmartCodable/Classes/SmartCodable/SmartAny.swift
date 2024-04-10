@@ -104,9 +104,7 @@ extension SmartAny: Codable {
         
         if container.decodeNil() {
             self = .null(NSNull())
-        }
-        
-        if let value = try? decoder.unbox(decoder.storage.topContainer, as: SmartAny.self) {
+        } else if let value = try? decoder.unbox(decoder.storage.topContainer, as: SmartAny.self) {
             self = value
         } else if let value = try? decoder.unbox(decoder.storage.topContainer, as: [String: SmartAny].self) {
             self = .dict(value)
