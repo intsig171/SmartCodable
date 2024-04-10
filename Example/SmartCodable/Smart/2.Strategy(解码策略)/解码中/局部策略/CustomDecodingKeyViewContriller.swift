@@ -54,10 +54,19 @@ extension CustomDecodingKeyViewContriller {
         var name: String = ""
         var age: Int?
         var sex: String?
+        
+        
+        /// ⚠️： 你也可以通过重写CodingKeys实现key的重命名
+        enum CodingKeys: String, CodingKey {
+            case name
+            case age = "person_age"
+            case sex
+        }
+        
         static func mappingForKey() -> [SmartKeyTransformer]? {
             [
                 CodingKeys.name <--- ["nickName", "realName"],
-                CodingKeys.age <--- "person_age",
+//                CodingKeys.age <--- "person_age",
                 // 如果当前数据结构中有 sex，就不做映射。
                 CodingKeys.sex <--- "sexDict.sex"
             ]
