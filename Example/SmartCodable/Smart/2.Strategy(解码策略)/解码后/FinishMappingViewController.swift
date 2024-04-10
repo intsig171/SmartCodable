@@ -1,5 +1,5 @@
 //
-//  Strength_3ViewController.swift
+//  FinishMappingViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/7.
@@ -11,7 +11,7 @@ import SmartCodable
 
 
 /// 解码完成时回调
-class Strength_3ViewController: BaseViewController {
+class FinishMappingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class Strength_3ViewController: BaseViewController {
 
 
 
-extension Strength_3ViewController {
+extension FinishMappingViewController {
     
     struct Model: SmartCodable {
         var name: String = ""

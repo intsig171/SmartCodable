@@ -32,7 +32,6 @@ class ViewController: UIViewController {
             smart_test,
             replace_HandyJSON,
             smart_introduce,
-            smart_Strength,
             smart_customDecoding,
             smart_debug,
             smart_case,
@@ -74,35 +73,7 @@ extension ViewController {
         [
             "title": "Smart使用介绍",
             "list": [
-                ["name": "1. 简单使用",       "vc": "Introduce_1ViewController"],
-                ["name": "2. 字典 ⇆ 模型",    "vc": "Introduce_2ViewController"],
-                ["name": "3. 数组 ⇆ 模型数组", "vc": "Introduce_3ViewController"],
-                ["name": "4. 属性对象的解析",  "vc": "Introduce_4ViewController"],
-                ["name": "5. 解析包含Any的数据类型(SamrtAny)",  "vc": "Introduce_5ViewController"],
-                ["name": "6. 解析失败，支持初始值填充",  "vc": "Introduce_6ViewController"],
-                ["name": "7. 支持json字段的对象化解析",  "vc": "Introduce_7ViewController"],
-                ["name": "8. 支持枚举的解析",  "vc": "Introduce_8ViewController"],
-            ]
-        ]
-    }
-    
-    
-    
-    var smart_Strength: [String: Any] {
-        [
-            "title": "Smart的强大之处",
-            "list": [
-                ["name": "支持Any解析",             "vc": "Strength_1ViewController"],
-                ["name": "给Any加壳",               "vc": "Strength_2ViewController"],
-                ["name": "解码完成时回调",           "vc": "Strength_3ViewController"],
-                ["name": "支持默认值填充",            "vc": "Strength_4ViewController"],
-                ["name": "支持json字段值的对象化解析", "vc": "Strength_5ViewController"],
-                ["name": "支持枚举项的解析兼容",       "vc": "Strength_6ViewController"],
-                ["name": "支持自定义key的映射路径",    "vc": "Strength_7ViewController"],
-                ["name": "支持全局自定义key的映射规则", "vc": "Strength_8ViewController"],
-                ["name": "支持自定义单个key的映射规则", "vc": "Strength_9ViewController"],
-                ["name": "key的 映射路径+全局映射+局部映射 混用", "vc": "Strength_10ViewController"],
-
+                ["name": "使用介绍, 快速的了解SmartCodable >>>",       "vc": "IntroduceViewController"],
             ]
         ]
     }

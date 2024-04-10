@@ -1,24 +1,29 @@
 //
-//  Strength_9ViewController.swift
+//  CustomDecodingPathViewContriller.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/3/28.
+//  Created by qixin on 2024/4/10.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
 import Foundation
 import SmartCodable
 /** Key的映射关系
- * 1. 多个有效字段映射到同一个属性上，优先使用第一个。
+ * 1. 字段的重命名
+ * 2. 支持多个字段重命名到一个属性上
+ * 3. 支持自定义解析路径
  */
-class Strength_9ViewController: BaseViewController {
+class CustomDecodingKeyViewContriller: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let dict = [
             "nickName": "小花",
-            "person_age": 10
+            "person_age": 10,
+            "sexDict": [
+                "sex": "男"
+            ]
         ] as [String : Any]
 
 
@@ -32,6 +37,7 @@ class Strength_9ViewController: BaseViewController {
             "realName": "小花",
             "age": 10,
             "person_age": 20,
+            "sex": "女"
         ] as [String : Any]
 
         
@@ -42,15 +48,18 @@ class Strength_9ViewController: BaseViewController {
 
 
 
-extension Strength_9ViewController {
+extension CustomDecodingKeyViewContriller {
     
     struct Model: SmartCodable {
         var name: String = ""
         var age: Int?
+        var sex: String?
         static func mappingForKey() -> [SmartKeyTransformer]? {
             [
                 CodingKeys.name <--- ["nickName", "realName"],
-                CodingKeys.age <--- "person_age"
+                CodingKeys.age <--- "person_age",
+                // 如果当前数据结构中有 sex，就不做映射。
+                CodingKeys.sex <--- "sexDict.sex"
             ]
         }
     }

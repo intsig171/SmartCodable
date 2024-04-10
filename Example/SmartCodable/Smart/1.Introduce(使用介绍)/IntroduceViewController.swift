@@ -1,38 +1,24 @@
 //
-//  DecodingStrategyViewController.swift
+//  IntroduceViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/3/26.
+//  Created by qixin on 2024/4/10.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-
-/** 解码策略
- * 解析前：
- * - key的解析忽略
- *
- * 解析中：值解码策略
- * - 全局性
- * - 局部性
- *
- * 解析后
- * - 解码完成的回调
- */
-
-class DecodingStrategyViewController: BaseViewController {
+class IntroduceViewController: BaseViewController {
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "解码策略"
+        title = "使用介绍"
         
 
         dataArray = [
-            caseOne,
-            caseTwo,
-            caseThree,
+            smart_introduce,
         ]
         
         
@@ -48,40 +34,22 @@ class DecodingStrategyViewController: BaseViewController {
 
 
 
-extension DecodingStrategyViewController {
+extension IntroduceViewController {
     
-    var caseOne: [String: Any] {
+    var smart_introduce: [String: Any] {
         [
-            "title": "解码前的策略",
+            "title": "Smart使用介绍",
             "list": [
-                ["name": "忽略某些Key的解析",  "vc": "BeforeDecodingViewController"],
-            ]
-        ]
-    }
-    
-    var caseTwo: [String: Any] {
-        [
-            "title": "解码中的策略",
-            "list": [
-                ["name": "[全局策略] key解析策略",   "vc": "KeyDecodingStrategyViewController"],
-                ["name": "[全局策略] Data解析策略",  "vc": "DataDecodingStrategyViewController"],
-                ["name": "[全局策略] 浮点数解析策略", "vc": "FloatDecodingStrategyViewController"],
-                ["name": "[全局策略] Date解析策略",  "vc": "DateDecodingStrategyViewController"],
+                ["name": "1. 简单使用",       "vc": "Introduce_1ViewController"],
+                ["name": "2. 字典 ⇆ 模型",    "vc": "Introduce_2ViewController"],
+                ["name": "3. 数组 ⇆ 模型数组", "vc": "Introduce_3ViewController"],
+                ["name": "4. 属性对象的解析",  "vc": "Introduce_4ViewController"],
+                ["name": "5. 解析包含Any的数据类型(SamrtAny)",  "vc": "Introduce_5ViewController"],
+                ["name": "6. 解析失败，支持初始值填充",  "vc": "Introduce_6ViewController"],
+                ["name": "7. 支持json字段的对象化解析",  "vc": "Introduce_7ViewController"],
+                ["name": "8. 支持枚举的解析",  "vc": "Introduce_8ViewController"],
+                ["name": "9. 支持UIColor的解析",  "vc": "Introduce_9ViewController"],
 
-                ["name": "[局部策略] 自定义解析路径",   "vc": "CustomDecodingKeyViewContriller"],
-                ["name": "[局部策略] Key的重命名",     "vc": "CustomDecodingKeyViewContriller"],
-                ["name": "[局部策略] Value的解析策略", "vc":   "CustomDecodingValueViewContriller"],
-                ["name": "[局部策略] 自定义路径+全局Key映射+局部key映射混用",
-                 "vc":   "MixDecodingViewController"],
-            ]
-        ]
-    }
-    
-    var caseThree: [String: Any] {
-        [
-            "title": "解码后的策略",
-            "list": [
-                ["name": "解码完成的回调",     "vc": "FinishMappingViewController"],
             ]
         ]
     }
@@ -90,7 +58,7 @@ extension DecodingStrategyViewController {
 
 
 
-extension DecodingStrategyViewController: UITableViewDelegate, UITableViewDataSource {
+extension IntroduceViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataArray.count
@@ -154,7 +122,7 @@ extension DecodingStrategyViewController: UITableViewDelegate, UITableViewDataSo
 
 
 
-extension DecodingStrategyViewController {
+extension IntroduceViewController {
     
     func createViewControllerObject(form className: String) -> BaseViewController? {
         let projectName = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""

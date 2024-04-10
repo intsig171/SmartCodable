@@ -1,5 +1,5 @@
 //
-//  Strength_8ViewController.swift
+//  KeyDecodingStrategyViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/28.
@@ -11,9 +11,12 @@ import Foundation
 import SmartCodable
 
 /** 全局的Key映射关系
+ * 1. 首字母大写转小写
+ * 2. 蛇形转驼峰命名
+ * 3. 💗如有其他需求，可联系作者定制。
  */
 
-class Strength_8ViewController: BaseCompatibilityViewController {
+class KeyDecodingStrategyViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +29,8 @@ class Strength_8ViewController: BaseCompatibilityViewController {
                 "Name": "小李"
             ]
         ]
-
+        
+        // 首字母大写转小写
         let option: SmartDecodingOption = .key(.firstLetterLower)
         guard let model = Model.deserialize(from: dict, options: [option]) else { return }
         print(model)
@@ -42,6 +46,7 @@ class Strength_8ViewController: BaseCompatibilityViewController {
             ]
         ]
         
+        // 蛇形转驼峰命名
         let option1: SmartDecodingOption = .key(.fromSnakeCase)
         guard let model1 = TwoModel.deserialize(from: dict1, options: [option1]) else { return }
         print(model1)
@@ -49,7 +54,7 @@ class Strength_8ViewController: BaseCompatibilityViewController {
 }
 
 
-extension Strength_8ViewController {
+extension KeyDecodingStrategyViewController {
     struct Model: SmartCodable {
         var name: String = ""
         var age: Int = 0
@@ -63,7 +68,7 @@ extension Strength_8ViewController {
 }
 
 
-extension Strength_8ViewController {
+extension KeyDecodingStrategyViewController {
     struct TwoModel: SmartCodable {
         var nickName: String = ""
         var selfAge: Int = 0
