@@ -47,7 +47,7 @@ extension Strength_9ViewController {
     struct Model: SmartCodable {
         var name: String = ""
         var age: Int?
-        static func mapping() -> [KeyTransformer]? {
+        static func mapping() -> [SmartKeyTransformer]? {
             [
                 CodingKeys.name <--- ["nickName", "realName"],
                 CodingKeys.age <--- "person_age"

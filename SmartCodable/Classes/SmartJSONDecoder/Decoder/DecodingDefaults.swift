@@ -19,7 +19,7 @@ struct DecodingDefaults {
     /// 记录模型属性的默认值
     private var containers: [String: Any] = [:]
     
-    private(set) var tranforms: [String: any Transformable] = [:]
+    private(set) var tranforms: [SmartValueTransformer] = []
     
     /// 记录type类型的属性初始化的值
     mutating func recordAttributeValues<T: Decodable>(for type: T.Type, codingPath: [CodingKey]) {
@@ -37,6 +37,8 @@ struct DecodingDefaults {
             self.codingPath = codingPath
 
             // 记录tranform
+            tranforms = object.mappingForValue() ?? []
+            
 //            object.mapping()
 //            tranforms = [
 //                "date1": CustomDateFormatTransform(formatString: "yyyy-MM-dd"),

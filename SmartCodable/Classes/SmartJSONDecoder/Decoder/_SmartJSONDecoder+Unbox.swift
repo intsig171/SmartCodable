@@ -324,20 +324,16 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Date.Type) throws -> Date? {
         guard !(value is NSNull) else { return nil }
         
-//        todo： 从当前的defalutsStorage中获取
-//        todo：需要想想，对外的api如何处理。
-//        let tranformer = defalutsStorage.tranforms["date1"]
-//        if let t = tranformer  as? DateFormatterTransform, let va = t.transformFromJSON(value) {
-//            return va
-//        }
-//
-//        let tranformer1 = defalutsStorage.tranforms["date2"]
-//        if let t = tranformer1  as? DateTransform, let va = t.transformFromJSON(value) {
-//            return va
-//        }
-        
-        
-        
+        // 优先处理单个属性的解析策略
+        if let lastKey = codingPath.last {
+            let container = defalutsStorage.tranforms.first(where: {
+                $0.location.stringValue == lastKey.stringValue
+            })
+            if let tranformValue = container?.tranformer.transformFromJSON(value) as? Date {
+                return tranformValue
+            }
+        }
+
         
         switch self.options.dateDecodingStrategy {
         case .deferredToDate:
@@ -352,10 +348,6 @@ extension _SmartJSONDecoder {
             return Date(timeIntervalSinceReferenceDate: double)
             
         case .secondsSince1970:
-            
-            /**
-             接将值解包为Double，然后使用适当的时间间隔自1970年以来创建Date。在这些情况下，不需要将容器推入栈中，因为值已经解包并准备好使用。
-             */
             guard let double = try self.unbox(value, as: Double.self) else { return nil }
             return Date(timeIntervalSince1970: double)
             
@@ -367,18 +359,24 @@ extension _SmartJSONDecoder {
             if #available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
                 guard let string = try self.unbox(value, as: String.self) else { return nil }
                 guard let date = _iso8601Formatter.date(from: string) else {
-                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
+                    let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
+                    SmartLog.logError(error)
+                    return nil
                 }
                 
                 return date
             } else {
-                fatalError("ISO8601DateFormatter is unavailable on this platform.")
+                let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "ISO8601DateFormatter is unavailable on this platform."))
+                SmartLog.logError(error)
+                return nil
             }
             
         case .formatted(let formatter):
             guard let string = try self.unbox(value, as: String.self) else { return nil }
             guard let date = formatter.date(from: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
+                let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
+                SmartLog.logError(error)
+                return nil
             }
             
             return date
@@ -409,7 +407,9 @@ extension _SmartJSONDecoder {
             }
             
             guard let data = Data(base64Encoded: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid Base64."))
+                let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid Base64."))
+                SmartLog.logError(error)
+                return nil
             }
             
             return data

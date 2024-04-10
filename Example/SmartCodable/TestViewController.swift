@@ -27,27 +27,54 @@ class TestViewController: BaseViewController {
         
 
         let dict1: [String: Any] = [
-            "date1": "2024-04-07",
+            "date": "2024-04-07",
+            "date2": 1712491290,
             "sub": [
                 "date2": 1712491290,
             ]
         ]
-        
         guard let model1 = SmartModel.deserialize(from: dict1) else { return }
         print(model1)
-
     }
 }
 
 extension TestViewController {
     
     struct SmartModel: SmartCodable {
-        var sub: SmartSubModel?
+        var date1: Date?
+        var date2: Date?
+        
+        static func mapping() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.date1 <--- "date"
+            ]
+        }
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            let format = DateFormatter()
+            format.dateFormat = "yyyy-MM-dd"
+            return [
+                CodingKeys.date2 <--- SmartDateTransformer(),
+                CodingKeys.date1 <--- SmartDateFormatTransformer(format)
+            ]
+        }
     }
     
     struct SmartSubModel: SmartCodable {
 
         var date2: Date?
+        
+        static func mapping() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.date2 <--- "date2"
+            ]
+        }
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.date2 <--- SmartDateTransformer()
+            ]
+        }
     }
 }
 
