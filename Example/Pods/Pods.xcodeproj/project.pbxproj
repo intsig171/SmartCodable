@@ -256,7 +256,6 @@
 		98238A99285E5720BDC568359D649907 /* TimedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D67E5BBBE0B0CE733CE89F049DA3E12 /* TimedQueue.swift */; };
 		98F570DA48370453D648BD526FDAAEAA /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18D6541EFE81AFDF8F5EB531B779D4D /* LayoutConstraintItem.swift */; };
 		998EFC162BC56384004CEF1E /* URLTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998EFC152BC56384004CEF1E /* URLTransformer.swift */; };
-		998EFC182BC564B1004CEF1E /* DecimalTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998EFC172BC564B1004CEF1E /* DecimalTransformer.swift */; };
 		998EFC1A2BC5651A004CEF1E /* ColorTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998EFC192BC5651A004CEF1E /* ColorTransformer.swift */; };
 		99C3E4EDBE5BCDC161722B105F0FD62F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F616208225C5B42B50ABA5F5267C29F /* Database.swift */; };
 		9A5C397C4B518E59526372CA6AA0BE65 /* StatementAttach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F631CC802E2701AD6DEAB71A9B7134CB /* StatementAttach.swift */; };
@@ -863,7 +862,6 @@
 		981FC3D828F7DDCD2F77A0BF2CEB5313 /* btree.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = btree.c; path = src/btree.c; sourceTree = "<group>"; };
 		9930E634CA9F9592BA112E4EA073572B /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = swift/source/util/Error.swift; sourceTree = "<group>"; };
 		998EFC152BC56384004CEF1E /* URLTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTransformer.swift; sourceTree = "<group>"; };
-		998EFC172BC564B1004CEF1E /* DecimalTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalTransformer.swift; sourceTree = "<group>"; };
 		998EFC192BC5651A004CEF1E /* ColorTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTransformer.swift; sourceTree = "<group>"; };
 		9A09037802A20D832A880AA28340A8C1 /* FBSnapshotTestCase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-prefix.pch"; sourceTree = "<group>"; };
 		9A0CDA24DDDB701970130A91AE5FA140 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
@@ -1469,7 +1467,6 @@
 				9E985886CC993DCBA5F73507D20EAE5C /* DateTransformer.swift */,
 				C76C96D6617B709F4958F0A89C131B00 /* Transformer.swift */,
 				998EFC152BC56384004CEF1E /* URLTransformer.swift */,
-				998EFC172BC564B1004CEF1E /* DecimalTransformer.swift */,
 				998EFC192BC5651A004CEF1E /* ColorTransformer.swift */,
 			);
 			path = Transformer;
@@ -2534,7 +2531,6 @@
 				4A2A856E5C040C89A77C53C9A2C395C9 /* Patcher.swift in Sources */,
 				928201C3D7453A309C8FAC1CB449D2FF /* Patcher+Provider.swift in Sources */,
 				0C85DE11B1B9B03F7A01F4756E7902D5 /* Patcher+Transformer.swift in Sources */,
-				998EFC182BC564B1004CEF1E /* DecimalTransformer.swift in Sources */,
 				B09459182EDA567190598C86BEE48B17 /* SmartAny.swift in Sources */,
 				A2384086CE2C8B39A0D252E4663391EB /* SmartCaseDefaultable.swift in Sources */,
 				9AA4D6EDE7FB8D411171C0CCF89284F6 /* SmartCodable.swift in Sources */,

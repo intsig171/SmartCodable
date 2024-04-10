@@ -22,7 +22,6 @@
 		9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */; };
 		9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */; };
 		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
-		991452A82BB5074000970575 /* Strength_7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A72BB5074000970575 /* Strength_7ViewController.swift */; };
 		991452AA2BB50B2A00970575 /* Strength_8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A92BB50B2A00970575 /* Strength_8ViewController.swift */; };
 		991452AC2BB50DBC00970575 /* Strength_9ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452AB2BB50DBC00970575 /* Strength_9ViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
@@ -47,10 +46,9 @@
 		996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */; };
 		996760292B3EC930006C83EC /* CaseOne_StringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */; };
 		9967602A2B3EC930006C83EC /* CaseOne_IntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */; };
-		9967602B2B3EC930006C83EC /* Strength_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEC2B3EC930006C83EC /* Strength_6ViewController.swift */; };
+		9967602B2B3EC930006C83EC /* Introduce_8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEC2B3EC930006C83EC /* Introduce_8ViewController.swift */; };
 		9967602C2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */; };
 		9967602D2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEE2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift */; };
-		996760342B3EC930006C83EC /* Strength_1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF72B3EC930006C83EC /* Strength_1ViewController.swift */; };
 		996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FF92B3EC930006C83EC /* CaseThreeViewController.swift */; };
 		996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFA2B3EC930006C83EC /* CaseFiveViewController.swift */; };
 		996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FFB2B3EC930006C83EC /* CaseOneViewController.swift */; };
@@ -73,15 +71,14 @@
 		9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */; };
 		9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */; };
 		9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */; };
-		999FA2412B99B86100A2952F /* Strength_2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2402B99B86100A2952F /* Strength_2ViewController.swift */; };
 		999FA2432B99B86A00A2952F /* Strength_3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99AE7D932B3EC02E00B474E5 /* airports10.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8D2B3EC02E00B474E5 /* airports10.json */; };
 		99AE7D952B3EC02E00B474E5 /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
 		99C1E70D2B99A55E0090E8FD /* 说明信息 in Resources */ = {isa = PBXBuildFile; fileRef = 99C1E70C2B99A55E0090E8FD /* 说明信息 */; };
-		99C313332B99C32A0065FC45 /* Strength_4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313312B99C3290065FC45 /* Strength_4ViewController.swift */; };
-		99C313342B99C32A0065FC45 /* Strength_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313322B99C3290065FC45 /* Strength_5ViewController.swift */; };
+		99C313332B99C32A0065FC45 /* Introduce_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313312B99C3290065FC45 /* Introduce_6ViewController.swift */; };
+		99C313342B99C32A0065FC45 /* Introduce_7ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313322B99C3290065FC45 /* Introduce_7ViewController.swift */; };
 		99C3138C2B9B38910065FC45 /* ComplexDataStructureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313882B9B38910065FC45 /* ComplexDataStructureCell.swift */; };
 		99C3138D2B9B38910065FC45 /* ComplexDataStructureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C313892B9B38910065FC45 /* ComplexDataStructureModel.swift */; };
 		99C3138E2B9B38910065FC45 /* CaseSevenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C3138A2B9B38910065FC45 /* CaseSevenViewController.swift */; };
@@ -90,6 +87,10 @@
 		99CABA2D2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2C2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift */; };
 		99CABA2F2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA2E2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift */; };
 		99CABA312B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CABA302B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift */; };
+		99CE4D522BC687700006D435 /* Test2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE4D512BC687700006D435 /* Test2ViewController.swift */; };
+		99CE4D542BC6905E0006D435 /* Introduce_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE4D532BC6905E0006D435 /* Introduce_5ViewController.swift */; };
+		99CE4D592BC6973B0006D435 /* DecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE4D582BC6973B0006D435 /* DecodingStrategyViewController.swift */; };
+		99CE4D5D2BC699D10006D435 /* BeforeDecodingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE4D5C2BC699D10006D435 /* BeforeDecodingViewController.swift */; };
 		99D17BBA2B9F0CF9008ADAAB /* PerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D17BB82B9F0CF9008ADAAB /* PerformanceTest.swift */; };
 		99D945842B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945802B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift */; };
 		99D945852B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */; };
@@ -134,7 +135,6 @@
 		9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_6ViewController.swift; sourceTree = "<group>"; };
 		9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFive_wcdbViewController.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
-		991452A72BB5074000970575 /* Strength_7ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_7ViewController.swift; sourceTree = "<group>"; };
 		991452A92BB50B2A00970575 /* Strength_8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_8ViewController.swift; sourceTree = "<group>"; };
 		991452AB2BB50DBC00970575 /* Strength_9ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_9ViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
@@ -152,10 +152,9 @@
 		99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_DictNullViewController.swift; sourceTree = "<group>"; };
 		99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_StringViewController.swift; sourceTree = "<group>"; };
 		99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_IntViewController.swift; sourceTree = "<group>"; };
-		99675FEC2B3EC930006C83EC /* Strength_6ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_6ViewController.swift; sourceTree = "<group>"; };
+		99675FEC2B3EC930006C83EC /* Introduce_8ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_8ViewController.swift; sourceTree = "<group>"; };
 		99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_DictKeylessViewController.swift; sourceTree = "<group>"; };
 		99675FEE2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_DictTypeMismatchViewController.swift; sourceTree = "<group>"; };
-		99675FF72B3EC930006C83EC /* Strength_1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_1ViewController.swift; sourceTree = "<group>"; };
 		99675FF92B3EC930006C83EC /* CaseThreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseThreeViewController.swift; sourceTree = "<group>"; };
 		99675FFA2B3EC930006C83EC /* CaseFiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseFiveViewController.swift; sourceTree = "<group>"; };
 		99675FFB2B3EC930006C83EC /* CaseOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOneViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +177,6 @@
 		9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_didFinishMappingViewController.swift; sourceTree = "<group>"; };
 		9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_OptionalModelViewController.swift; sourceTree = "<group>"; };
 		9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_KeyStrategyViewController.swift; sourceTree = "<group>"; };
-		999FA2402B99B86100A2952F /* Strength_2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_2ViewController.swift; sourceTree = "<group>"; };
 		999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strength_3ViewController.swift; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
@@ -186,8 +184,8 @@
 		99AE7D8E2B3EC02E00B474E5 /* airports100.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports100.json; sourceTree = "<group>"; };
 		99AE7D8F2B3EC02E00B474E5 /* airports1000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1000.json; sourceTree = "<group>"; };
 		99C1E70C2B99A55E0090E8FD /* 说明信息 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "说明信息"; sourceTree = "<group>"; };
-		99C313312B99C3290065FC45 /* Strength_4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_4ViewController.swift; sourceTree = "<group>"; };
-		99C313322B99C3290065FC45 /* Strength_5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strength_5ViewController.swift; sourceTree = "<group>"; };
+		99C313312B99C3290065FC45 /* Introduce_6ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_6ViewController.swift; sourceTree = "<group>"; };
+		99C313322B99C3290065FC45 /* Introduce_7ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_7ViewController.swift; sourceTree = "<group>"; };
 		99C313882B9B38910065FC45 /* ComplexDataStructureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureCell.swift; sourceTree = "<group>"; };
 		99C313892B9B38910065FC45 /* ComplexDataStructureModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexDataStructureModel.swift; sourceTree = "<group>"; };
 		99C3138A2B9B38910065FC45 /* CaseSevenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseSevenViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +194,10 @@
 		99CABA2C2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayKeylessViewController.swift; sourceTree = "<group>"; };
 		99CABA2E2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayNullViewController.swift; sourceTree = "<group>"; };
 		99CABA302B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayTypeMismatchViewController.swift; sourceTree = "<group>"; };
+		99CE4D512BC687700006D435 /* Test2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2ViewController.swift; sourceTree = "<group>"; };
+		99CE4D532BC6905E0006D435 /* Introduce_5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_5ViewController.swift; sourceTree = "<group>"; };
+		99CE4D582BC6973B0006D435 /* DecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodingStrategyViewController.swift; sourceTree = "<group>"; };
+		99CE4D5C2BC699D10006D435 /* BeforeDecodingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeforeDecodingViewController.swift; sourceTree = "<group>"; };
 		99D17BB82B9F0CF9008ADAAB /* PerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerformanceTest.swift; path = Tests/PerformanceTest.swift; sourceTree = SOURCE_ROOT; };
 		99D945802B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_ArrayNestDictViewController.swift; sourceTree = "<group>"; };
 		99D945812B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTwo_DictNestDictViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
+				99CE4D512BC687700006D435 /* Test2ViewController.swift */,
 				99C1E70C2B99A55E0090E8FD /* 说明信息 */,
 				9902B4CE2BB2F32D00310E69 /* 平替HandyJSON */,
 				99A494E42B9028D900393193 /* 测试用例 */,
@@ -358,40 +361,22 @@
 			isa = PBXGroup;
 			children = (
 				99675FFE2B3EC930006C83EC /* 1.Introduce(使用介绍) */,
-				99675FF62B3EC930006C83EC /* 2.Strength(优点) */,
-				9967600D2B3EC930006C83EC /* 3.Strategy(解码策略) */,
-				99675FE02B3EC930006C83EC /* 4.SmartLog(调试日志) */,
-				99675FF82B3EC930006C83EC /* 5.Case(案例) */,
+				9967600D2B3EC930006C83EC /* 2.Strategy(解码策略) */,
+				99675FE02B3EC930006C83EC /* 3.SmartLog(调试日志) */,
+				99675FF82B3EC930006C83EC /* 4.Case(案例) */,
 			);
 			path = Smart;
 			sourceTree = "<group>";
 		};
-		99675FE02B3EC930006C83EC /* 4.SmartLog(调试日志) */ = {
+		99675FE02B3EC930006C83EC /* 3.SmartLog(调试日志) */ = {
 			isa = PBXGroup;
 			children = (
 				99675FE12B3EC930006C83EC /* DecodingLogViewController.swift */,
 			);
-			path = "4.SmartLog(调试日志)";
+			path = "3.SmartLog(调试日志)";
 			sourceTree = "<group>";
 		};
-		99675FF62B3EC930006C83EC /* 2.Strength(优点) */ = {
-			isa = PBXGroup;
-			children = (
-				99675FF72B3EC930006C83EC /* Strength_1ViewController.swift */,
-				999FA2402B99B86100A2952F /* Strength_2ViewController.swift */,
-				999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */,
-				99C313312B99C3290065FC45 /* Strength_4ViewController.swift */,
-				99C313322B99C3290065FC45 /* Strength_5ViewController.swift */,
-				99675FEC2B3EC930006C83EC /* Strength_6ViewController.swift */,
-				991452A72BB5074000970575 /* Strength_7ViewController.swift */,
-				991452A92BB50B2A00970575 /* Strength_8ViewController.swift */,
-				991452AB2BB50DBC00970575 /* Strength_9ViewController.swift */,
-				99F9E8A52BB5139900D68037 /* Strength_10ViewController.swift */,
-			);
-			path = "2.Strength(优点)";
-			sourceTree = "<group>";
-		};
-		99675FF82B3EC930006C83EC /* 5.Case(案例) */ = {
+		99675FF82B3EC930006C83EC /* 4.Case(案例) */ = {
 			isa = PBXGroup;
 			children = (
 				99675FFB2B3EC930006C83EC /* CaseOneViewController.swift */,
@@ -402,7 +387,7 @@
 				996760182B3EC930006C83EC /* CaseSixViewController.swift */,
 				99C313872B9B38910065FC45 /* CaseSeven */,
 			);
-			path = "5.Case(案例)";
+			path = "4.Case(案例)";
 			sourceTree = "<group>";
 		};
 		99675FFE2B3EC930006C83EC /* 1.Introduce(使用介绍) */ = {
@@ -412,18 +397,23 @@
 				99675FFF2B3EC930006C83EC /* Introduce_2ViewController.swift */,
 				996760062B3EC930006C83EC /* Introduce_3ViewController.swift */,
 				996760072B3EC930006C83EC /* Introduce_4ViewController.swift */,
+				99CE4D532BC6905E0006D435 /* Introduce_5ViewController.swift */,
+				99C313312B99C3290065FC45 /* Introduce_6ViewController.swift */,
+				99C313322B99C3290065FC45 /* Introduce_7ViewController.swift */,
+				99675FEC2B3EC930006C83EC /* Introduce_8ViewController.swift */,
 			);
 			path = "1.Introduce(使用介绍)";
 			sourceTree = "<group>";
 		};
-		9967600D2B3EC930006C83EC /* 3.Strategy(解码策略) */ = {
+		9967600D2B3EC930006C83EC /* 2.Strategy(解码策略) */ = {
 			isa = PBXGroup;
 			children = (
-				9967600F2B3EC930006C83EC /* DataDecodingStrategyViewController.swift */,
-				996760102B3EC930006C83EC /* FloatDecodingStrategyViewController.swift */,
-				996760112B3EC930006C83EC /* DateDecodingStrategyViewController.swift */,
+				99CE4D582BC6973B0006D435 /* DecodingStrategyViewController.swift */,
+				99CE4D572BC695AE0006D435 /* 解码前 */,
+				99CE4D552BC695AE0006D435 /* 解码中 */,
+				99CE4D562BC695AE0006D435 /* 解码后 */,
 			);
-			path = "3.Strategy(解码策略)";
+			path = "2.Strategy(解码策略)";
 			sourceTree = "<group>";
 		};
 		996760142B3EC930006C83EC /* Base */ = {
@@ -521,6 +511,51 @@
 				99D945832B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift */,
 			);
 			path = CaseTwo;
+			sourceTree = "<group>";
+		};
+		99CE4D552BC695AE0006D435 /* 解码中 */ = {
+			isa = PBXGroup;
+			children = (
+				99CE4D5B2BC699580006D435 /* 局部策略 */,
+				99CE4D5A2BC699580006D435 /* 全局策略 */,
+			);
+			path = "解码中";
+			sourceTree = "<group>";
+		};
+		99CE4D562BC695AE0006D435 /* 解码后 */ = {
+			isa = PBXGroup;
+			children = (
+				999FA2422B99B86A00A2952F /* Strength_3ViewController.swift */,
+			);
+			path = "解码后";
+			sourceTree = "<group>";
+		};
+		99CE4D572BC695AE0006D435 /* 解码前 */ = {
+			isa = PBXGroup;
+			children = (
+				99CE4D5C2BC699D10006D435 /* BeforeDecodingViewController.swift */,
+			);
+			path = "解码前";
+			sourceTree = "<group>";
+		};
+		99CE4D5A2BC699580006D435 /* 全局策略 */ = {
+			isa = PBXGroup;
+			children = (
+				991452A92BB50B2A00970575 /* Strength_8ViewController.swift */,
+				9967600F2B3EC930006C83EC /* DataDecodingStrategyViewController.swift */,
+				996760102B3EC930006C83EC /* FloatDecodingStrategyViewController.swift */,
+				996760112B3EC930006C83EC /* DateDecodingStrategyViewController.swift */,
+			);
+			path = "全局策略";
+			sourceTree = "<group>";
+		};
+		99CE4D5B2BC699580006D435 /* 局部策略 */ = {
+			isa = PBXGroup;
+			children = (
+				99F9E8A52BB5139900D68037 /* Strength_10ViewController.swift */,
+				991452AB2BB50DBC00970575 /* Strength_9ViewController.swift */,
+			);
+			path = "局部策略";
 			sourceTree = "<group>";
 		};
 		99D945882B91C4D500CC6470 /* CaseThree */ = {
@@ -770,6 +805,7 @@
 				99D945862B9182C800CC6470 /* CaseTwo_DictNestArrayViewController.swift in Sources */,
 				991452AC2BB50DBC00970575 /* Strength_9ViewController.swift in Sources */,
 				996760272B3EC930006C83EC /* CaseOne_FloatViewController.swift in Sources */,
+				99CE4D542BC6905E0006D435 /* Introduce_5ViewController.swift in Sources */,
 				996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */,
 				996760472B3EC930006C83EC /* FloatDecodingStrategyViewController.swift in Sources */,
 				9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */,
@@ -777,16 +813,17 @@
 				99D945842B9182C800CC6470 /* CaseTwo_ArrayNestDictViewController.swift in Sources */,
 				99D945852B9182C800CC6470 /* CaseTwo_DictNestDictViewController.swift in Sources */,
 				996760212B3EC930006C83EC /* ArraySafe.swift in Sources */,
+				99CE4D5D2BC699D10006D435 /* BeforeDecodingViewController.swift in Sources */,
 				9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */,
 				996760292B3EC930006C83EC /* CaseOne_StringViewController.swift in Sources */,
 				996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */,
 				9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */,
-				999FA2412B99B86100A2952F /* Strength_2ViewController.swift in Sources */,
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
 				9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */,
-				9967602B2B3EC930006C83EC /* Strength_6ViewController.swift in Sources */,
+				9967602B2B3EC930006C83EC /* Introduce_8ViewController.swift in Sources */,
 				991452AA2BB50B2A00970575 /* Strength_8ViewController.swift in Sources */,
-				99C313342B99C32A0065FC45 /* Strength_5ViewController.swift in Sources */,
+				99CE4D522BC687700006D435 /* Test2ViewController.swift in Sources */,
+				99C313342B99C32A0065FC45 /* Introduce_7ViewController.swift in Sources */,
 				99C3138C2B9B38910065FC45 /* ComplexDataStructureCell.swift in Sources */,
 				996760382B3EC930006C83EC /* CaseTwoViewController.swift in Sources */,
 				99D945872B9182C800CC6470 /* CaseTwo_ArrayNestArrayViewController.swift in Sources */,
@@ -797,7 +834,7 @@
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
 				99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
-				99C313332B99C32A0065FC45 /* Strength_4ViewController.swift in Sources */,
+				99C313332B99C32A0065FC45 /* Introduce_6ViewController.swift in Sources */,
 				99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				9967603A2B3EC930006C83EC /* Introduce_2ViewController.swift in Sources */,
@@ -807,12 +844,11 @@
 				996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */,
 				9902B4D02BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift in Sources */,
 				99F9E8A62BB5139900D68037 /* Strength_10ViewController.swift in Sources */,
-				996760342B3EC930006C83EC /* Strength_1ViewController.swift in Sources */,
 				9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
 				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
 				99C3138D2B9B38910065FC45 /* ComplexDataStructureModel.swift in Sources */,
-				991452A82BB5074000970575 /* Strength_7ViewController.swift in Sources */,
+				99CE4D592BC6973B0006D435 /* DecodingStrategyViewController.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,
 				9902B4D82BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift in Sources */,
 				9993D69A2B9208020089CA68 /* CaseThree_EnumViewController.swift in Sources */,

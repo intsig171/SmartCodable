@@ -458,6 +458,25 @@ extension _SmartJSONDecoder {
         return url
     }
     
+    func unbox(_ value: Any, as type: UIColor.Type) throws -> UIColor? {
+        guard !(value is NSNull) else { return nil }
+        guard let colorString = try self.unbox(value, as: String.self) else { return nil }
+        
+        
+        // 优先处理单个属性的解析策略
+        if let lastKey = codingPath.last {
+            let container = defalutsStorage.tranforms.first(where: {
+                $0.location.stringValue == lastKey.stringValue
+            })
+            if let tranformValue = container?.tranformer.transformFromJSON(value) as? UIColor {
+                return tranformValue
+            }
+        }
+       
+        
+        return UIColor.hex(colorString)
+    }
+    
     func unbox(_ value: Any, as type: SmartAny.Type) throws -> SmartAny? {
         guard !(value is NSNull) else { return nil }
 

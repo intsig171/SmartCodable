@@ -1,9 +1,9 @@
 //
-//  Strength_1ViewController.swift
+//  Introduce_5ViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/12/4.
-//  Copyright © 2023 CocoaPods. All rights reserved.
+//  Created by qixin on 2024/4/10.
+//  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
 import Foundation
@@ -17,7 +17,7 @@ import SmartCodable
  * 方案： 使用SmartAny替代Any，如果要获取原始值，使用.peel
  
  */
-class Strength_1ViewController: BaseViewController {
+class Introduce_5ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +68,23 @@ class Strength_1ViewController: BaseViewController {
         print(model1.dict.peel)
         print(model1.arr.peel)
     }
+    
+    /// 加壳
+    func cover() {
+        let name = SmartAny(from: "新名字")
+        let dict1 = ["key2": "value2"].cover
+        let arr1 = [ ["key3": "value3"] ].cover
+        
+        var model = AnyModel()
+        
+        model.name = name
+        model.dict = dict1
+        model.arr = arr1
+        print(model)
+    }
 }
 
-extension Strength_1ViewController {
+extension Introduce_5ViewController {
     struct AnyModel: SmartCodable {
         var sex: SmartAny?
         var height: SmartAny?
@@ -80,6 +94,3 @@ extension Strength_1ViewController {
         var arr: [SmartAny] = []
     }
 }
-
-
-

@@ -1,5 +1,5 @@
 //
-//  Strength_7ViewController.swift
+//  BeforeDecodingViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/28.
@@ -12,18 +12,17 @@ import Foundation
 import Foundation
 import SmartCodable
 
-/** 自定义key的解析路径
+/** 忽略Key的解析
  */
 
-class Strength_7ViewController: BaseCompatibilityViewController {
+class BeforeDecodingViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         let dict = [
-            "sub": [
-                "name": "Mccc"
-            ]
+            "name": "Mccc1",
+            "ignore": "请忽略我"
         ]
         
         guard let model = Model.deserialize(from: dict) else { return }
@@ -32,11 +31,15 @@ class Strength_7ViewController: BaseCompatibilityViewController {
 }
 
 
-extension Strength_7ViewController {
+extension BeforeDecodingViewController {
     struct Model: SmartCodable {
         var name: String = ""
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [ CodingKeys.name <--- "sub.name" ]
+        var ignore: String = ""
+        
+        enum CodingKeys: CodingKey {
+            case name
+            // 忽略ignore的解析。
+//            case ignore
         }
     }
 }

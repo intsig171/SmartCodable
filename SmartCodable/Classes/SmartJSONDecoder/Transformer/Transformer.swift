@@ -8,7 +8,7 @@
 import Foundation
 
 
-
+/// 解析key的映射
 public struct SmartKeyTransformer {
     var from: [String]
     var to: CodingKey

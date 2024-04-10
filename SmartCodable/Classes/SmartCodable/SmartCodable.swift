@@ -40,6 +40,19 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 
 
 //MARK: - ～> V3 版本
+// MARK: V3.3.0
+/**
+ * 1. ✅ 支持自定义的value解析规则
+ *   - 说明：支持value的解析规则，比如Date，可以设置解析策略做不同的实现。
+ *   - 结论：SmartValueTransformer
+ 
+ * 2. ❌ 为什么UIColor不能实现Codable。Date可以？
+ *   - 说明：
+ *   - 结论：
+ */
+
+
+
 
 // MARK: V3.2.1
 /**

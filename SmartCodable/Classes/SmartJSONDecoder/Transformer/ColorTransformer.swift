@@ -11,6 +11,46 @@ import UIKit
 #else
 import Cocoa
 #endif
+import UIKit
+
+
+public enum SmartColor {
+    case color(UIColor)
+    
+    public init(from value: UIColor) {
+        self = .color(value)
+    }
+    
+    /// 解包
+    public var peel: UIColor {
+        switch self {
+        case .color(let c):
+            return c
+        }
+    }
+}
+
+
+extension SmartColor: Codable {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let hexString = try container.decode(String.self)
+        guard let color = UIColor.hex(hexString) else {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode UIColor from provided hex string.")
+        }
+        self = .color(color)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .color(let color):
+            try container.encode(color.hexString)
+        }
+    }
+}
+
+
 
 public struct SmartHexColorTransformer: ValueTransformable {
 
@@ -19,63 +59,76 @@ public struct SmartHexColorTransformer: ValueTransformable {
     #else
     public typealias Object = NSColor
     #endif
-
     public typealias JSON = String
 
-    var prefix: Bool = false
-
-    var alpha: Bool = false
-
-    public init(prefixToJSON: Bool = false, alphaToJSON: Bool = false) {
-        alpha = alphaToJSON
-        prefix = prefixToJSON
-    }
-
-
+    public init() { }
 
     public func transformFromJSON(_ value: Any?) -> Object? {
         if let rgba = value as? String {
-            if rgba.hasPrefix("#") {
-                let index = rgba.index(rgba.startIndex, offsetBy: 1)
-                let hex = String(rgba[index...])
-                return getColor(hex: hex)
-            } else {
-                return getColor(hex: rgba)
-            }
+            return UIColor.hex(rgba)
         }
         return nil
     }
 
     public func transformToJSON(_ value: Object?) -> JSON? {
         if let value = value {
-            return hexString(color: value)
+            return value.hexString
         }
         return nil
     }
+}
 
-    fileprivate func hexString(color: Object) -> String {
-        let comps = color.cgColor.components!
-        let r = Int(comps[0] * 255)
-        let g = Int(comps[1] * 255)
-        let b = Int(comps[2] * 255)
-        let a = Int(comps[3] * 255)
-        var hexString: String = ""
-        if prefix {
-            hexString = "#"
-        }
-        hexString += String(format: "%02X%02X%02X", r, g, b)
 
-        if alpha {
-            hexString += String(format: "%02X", a)
-        }
-        return hexString
+extension UIColor {
+    
+    var hexString: String {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        let rgb: Int = (Int(red * 255) << 16) | (Int(green * 255) << 8) | Int(blue * 255)
+        return String(format:"#%06x", rgb)
     }
-
-    fileprivate func getColor(hex: String) -> Object? {
-        var red: CGFloat   = 0.0
+    
+    static func hex(_ hex: String) -> UIColor? {
+        
+        /**
+         * #ff000000 此为16进制颜色代码
+         * 前两位ff为透明度，后六位为颜色值（000000为黑色，ffffff为白色，可以用ps等软件获取）
+         * 透明度分为256阶（0~255），计算机上16进制表示为（00~ff）,透明为0阶，不透明为255阶，如果50%透明度就是127阶（256的一半当然是128，但是因为从0开始，所以实际上是127）
+         * 如果是6位，默认是不透明。
+         */
+        
+        var red:   CGFloat = 0.0
         var green: CGFloat = 0.0
-        var blue: CGFloat  = 0.0
-        var alpha: CGFloat = 1.0
+        var blue:  CGFloat = 0.0
+        
+        var useAlpha: CGFloat = 1
+
+
+        
+        var hex:   String = hex
+        
+        /** 开头是用0x开始的 */
+        if hex.hasPrefix("0X") {
+            let index = hex.index(hex.startIndex, offsetBy: 2)
+            hex = String(hex[index...])
+        }
+        
+        /** 开头是以＃＃开始的 */
+        if hex.hasPrefix("##") {
+            let index = hex.index(hex.startIndex, offsetBy: 2)
+            hex = String(hex[index...])
+        }
+        
+        /** 开头是以＃开头的 */
+        if hex.hasPrefix("#") {
+            let index = hex.index(hex.startIndex, offsetBy: 1)
+            hex = String(hex[index...])
+        }
 
         let scanner = Scanner(string: hex)
         var hexValue: CUnsignedLongLong = 0
@@ -86,31 +139,43 @@ public struct SmartHexColorTransformer: ValueTransformable {
                 green = CGFloat((hexValue & 0x0F0) >> 4)       / 15.0
                 blue  = CGFloat(hexValue & 0x00F)              / 15.0
             case 4:
-                red   = CGFloat((hexValue & 0xF000) >> 12)     / 15.0
-                green = CGFloat((hexValue & 0x0F00) >> 8)      / 15.0
-                blue  = CGFloat((hexValue & 0x00F0) >> 4)      / 15.0
-                alpha = CGFloat(hexValue & 0x000F)             / 15.0
+                let index = hex.index(hex.startIndex, offsetBy: 1)
+                
+                /// 处理透明度
+                let alphaStr = String(hex[hex.startIndex..<index])
+                if let doubleValue = Double(alphaStr) {
+                    useAlpha = CGFloat(doubleValue) / 15
+                }
+                
+                hex = String(hex[index...])
+                red   = CGFloat((hexValue & 0xF00) >> 8)       / 15.0
+                green = CGFloat((hexValue & 0x0F0) >> 4)       / 15.0
+                blue  = CGFloat(hexValue & 0x00F)              / 15.0
             case 6:
                 red   = CGFloat((hexValue & 0xFF0000) >> 16)   / 255.0
                 green = CGFloat((hexValue & 0x00FF00) >> 8)    / 255.0
                 blue  = CGFloat(hexValue & 0x0000FF)           / 255.0
             case 8:
-                red   = CGFloat((hexValue & 0xFF000000) >> 24) / 255.0
-                green = CGFloat((hexValue & 0x00FF0000) >> 16) / 255.0
-                blue  = CGFloat((hexValue & 0x0000FF00) >> 8)  / 255.0
-                alpha = CGFloat(hexValue & 0x000000FF)         / 255.0
+                let index = hex.index(hex.startIndex, offsetBy: 2)
+                /// 处理透明度
+                let alphaStr = String(hex[hex.startIndex..<index])
+                if let doubleValue = Double(alphaStr) {
+                    useAlpha = CGFloat(doubleValue) / 255
+                }
+                
+                hex = String(hex[index...])
+                red   = CGFloat((hexValue & 0xFF0000) >> 16)   / 255.0
+                green = CGFloat((hexValue & 0x00FF00) >> 8)    / 255.0
+                blue  = CGFloat(hexValue & 0x0000FF)           / 255.0
+                
+
             default:
-                // Invalid RGB string, number of characters after '#' should be either 3, 4, 6 or 8
+                print("Invalid RGB string, number of characters after '#' should be either 3, 4, 6 or 8", terminator: "")
                 return nil
             }
         } else {
-            // "Scan hex error
             return nil
         }
-        #if os(iOS) || os(tvOS) || os(watchOS)
-            return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-        #else
-            return NSColor(calibratedRed: red, green: green, blue: blue, alpha: alpha)
-        #endif
+        return UIColor(red: red, green: green, blue: blue, alpha: useAlpha)
     }
 }

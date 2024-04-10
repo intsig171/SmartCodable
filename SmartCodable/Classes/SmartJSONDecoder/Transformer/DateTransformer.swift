@@ -8,9 +8,9 @@
 import Foundation
 
 
-public struct SmartDateTransformer: ValueTransformable {
 
-    
+/// since1970的时间
+public struct SmartDateTransformer: ValueTransformable {
     public typealias JSON = Double
     public typealias Object = Date
         
@@ -39,6 +39,7 @@ public struct SmartDateTransformer: ValueTransformable {
 }
 
 
+/// DateFormat格式的日期时间
 public struct SmartDateFormatTransformer: ValueTransformable {
     public typealias JSON = String
     public typealias Object = Date

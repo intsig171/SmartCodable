@@ -74,10 +74,14 @@ extension ViewController {
         [
             "title": "Smart使用介绍",
             "list": [
-                ["name": "简单使用",       "vc": "Introduce_1ViewController"],
-                ["name": "字典 ⇆ 模型",    "vc": "Introduce_2ViewController"],
-                ["name": "数组 ⇆ 模型数组", "vc": "Introduce_3ViewController"],
-                ["name": "属性对象的解析",  "vc": "Introduce_4ViewController"],
+                ["name": "1. 简单使用",       "vc": "Introduce_1ViewController"],
+                ["name": "2. 字典 ⇆ 模型",    "vc": "Introduce_2ViewController"],
+                ["name": "3. 数组 ⇆ 模型数组", "vc": "Introduce_3ViewController"],
+                ["name": "4. 属性对象的解析",  "vc": "Introduce_4ViewController"],
+                ["name": "5. 解析包含Any的数据类型(SamrtAny)",  "vc": "Introduce_5ViewController"],
+                ["name": "6. 解析失败，支持初始值填充",  "vc": "Introduce_6ViewController"],
+                ["name": "7. 支持json字段的对象化解析",  "vc": "Introduce_7ViewController"],
+                ["name": "8. 支持枚举的解析",  "vc": "Introduce_8ViewController"],
             ]
         ]
     }
@@ -108,9 +112,7 @@ extension ViewController {
         [
             "title": "Smart的解码策略",
             "list": [
-                ["name": "Date的解码策略", "vc": "DateDecodingStrategyViewController"],
-                ["name": "Data的解码策略", "vc": "DataDecodingStrategyViewController"],
-                ["name": "浮点数的解码策略", "vc": "FloatDecodingStrategyViewController"],
+                ["name": "解码策略(解码前，解码中，解码后) >>>", "vc": "DecodingStrategyViewController"],
             ]
         ]
     }
@@ -145,9 +147,11 @@ extension ViewController {
     
     var other: [String: Any] {
         [
-            "title": "测试",
+            "title": "内部测试（请忽略）",
             "list": [
                 ["name": "测试代码", "vc": "TestViewController"],
+                ["name": "测试代码2", "vc": "Test2ViewController"],
+
             ]
         ]
     }

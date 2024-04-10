@@ -29,8 +29,6 @@ public struct SmartURLTransformer: ValueTransformable {
         if let prefix = prefix, !URLString.hasPrefix(prefix) {
             URLString = prefix + URLString
         }
-
-        
         
         if !shouldEncodeURLString {
             return URL(string: URLString)

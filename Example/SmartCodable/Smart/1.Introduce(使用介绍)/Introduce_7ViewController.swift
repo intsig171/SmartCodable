@@ -1,5 +1,5 @@
 //
-//  Strength_5ViewController.swift
+//  Introduce_7ViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/12/4.
@@ -9,8 +9,8 @@
 import Foundation
 import SmartCodable
 
-/// 当解析失败的时，使用当前属性初始化的值进行填充。
-class Strength_5ViewController: BaseViewController {
+/// 内部会解析有结构的json字符串到模型上
+class Introduce_7ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class Strength_5ViewController: BaseViewController {
 
 
 
-extension Strength_5ViewController {
+extension Introduce_7ViewController {
 
     struct Model: SmartCodable {
         var hobby: Hobby?
