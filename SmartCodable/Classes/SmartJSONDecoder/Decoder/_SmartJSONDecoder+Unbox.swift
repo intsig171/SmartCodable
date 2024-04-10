@@ -436,6 +436,27 @@ extension _SmartJSONDecoder {
         }
     }
     
+    func unbox(_ value: Any, as type: URL.Type) throws -> URL? {
+        guard !(value is NSNull) else { return nil }
+        guard let urlString = try self.unbox(value, as: String.self) else { return nil }
+        
+        
+        // 优先处理单个属性的解析策略
+        if let lastKey = codingPath.last {
+            let container = defalutsStorage.tranforms.first(where: {
+                $0.location.stringValue == lastKey.stringValue
+            })
+            if let tranformValue = container?.tranformer.transformFromJSON(value) as? URL {
+                return tranformValue
+            }
+        }
+        
+        guard let url = URL(string: urlString) else {
+            throw DecodingError.dataCorrupted(DecodingError.Context(
+                codingPath: self.codingPath, debugDescription: "Invalid URL string."))
+        }
+        return url
+    }
     
     func unbox(_ value: Any, as type: SmartAny.Type) throws -> SmartAny? {
         guard !(value is NSNull) else { return nil }
@@ -494,15 +515,7 @@ extension _SmartJSONDecoder {
             guard let data = try self.unbox(value, as: Data.self) else { return nil }
             decoded = data as? T
         } else if T.self == URL.self || T.self == NSURL.self {
-            guard let urlString = try self.unbox(value, as: String.self) else {
-                return nil
-            }
-            
-            guard let url = URL(string: urlString) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(
-                    codingPath: self.codingPath, debugDescription: "Invalid URL string."))
-            }
-            
+            guard let url = try self.unbox(value, as: URL.self) else { return nil }
             decoded = (url as! T)
         } else if T.self == Decimal.self || T.self == NSDecimalNumber.self {
             guard let decimal = try self.unbox(value, as: Decimal.self) else { return nil }

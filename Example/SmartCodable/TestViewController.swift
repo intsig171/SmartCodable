@@ -15,6 +15,8 @@ import CleanJSON
 
 class TestViewController: BaseViewController {
 
+    
+    var model: SmartModel?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,12 +31,21 @@ class TestViewController: BaseViewController {
         let dict1: [String: Any] = [
             "date": "2024-04-07",
             "date2": 1712491290,
+            "url": "www.baidu.com",
+            "color": "7DA5E3",
             "sub": [
                 "date2": 1712491290,
             ]
         ]
         guard let model1 = SmartModel.deserialize(from: dict1) else { return }
+        model = model1
         print(model1)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let url = model?.url {
+            UIApplication.shared.open(url)
+        }
     }
 }
 
@@ -43,6 +54,9 @@ extension TestViewController {
     struct SmartModel: SmartCodable {
         var date1: Date?
         var date2: Date?
+        var url: URL?
+//        var color: UIColor?
+        var sub: SmartSubModel?
         
         static func mappingForKey() -> [SmartKeyTransformer]? {
             [
@@ -54,6 +68,7 @@ extension TestViewController {
             let format = DateFormatter()
             format.dateFormat = "yyyy-MM-dd"
             return [
+                CodingKeys.url <--- SmartURLTransformer(prefix: "https://"),
                 CodingKeys.date2 <--- SmartDateTransformer(),
                 CodingKeys.date1 <--- SmartDateFormatTransformer(format)
             ]
