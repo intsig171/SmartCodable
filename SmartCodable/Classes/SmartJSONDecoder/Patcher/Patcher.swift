@@ -7,10 +7,8 @@
 
 import Foundation
 
-/// 兼容器
 struct Patcher<T: Decodable> {
     
-    /// 提供当前类型的默认值
     static func defaultForType() throws -> T {
         return try Provider.defaultValue()
     }

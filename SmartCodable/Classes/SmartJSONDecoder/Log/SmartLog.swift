@@ -7,17 +7,12 @@
 
 import Foundation
 
-/// 日志的level控制
 public struct SmartConfig {
     
     public enum DebugMode: Int {
-        /// 详细日志
         case verbose = 0
-        /// 调试日志
         case debug = 1
-        /// 错误日志
         case error = 2
-        /// 关闭日志
         case none = 3
     }
     
@@ -32,14 +27,14 @@ public struct SmartConfig {
     }
     
     
-    /// 是否开启断言（debug模式有效）
-    /// 开启之后，遇到解析失败的地方就会执行断言，更直接的提醒使用者这个地方解析失败了。
+    /// Whether to enable assertions (effective in debug mode)
+    /// Once enabled, an assertion will be performed where parsing fails, providing a more direct reminder to the user that parsing has failed at this point.
     public static var openErrorAssert: Bool = false
 }
 
 
 struct SmartLog {
-    /// 发生错误的时候，比如do catch，  正常预期之外的值。
+    /// Occurs when an error is encountered, such as in a do-catch, with values outside normal expectations.
     static func logError(_ error: Error, className: String? = nil) {
         logIfNeeded(level: .error) {
             guard let info = resolveError(error, className: className) else { return nil }
@@ -50,7 +45,6 @@ struct SmartLog {
         }
     }
     
-    /// 调试日志
     static func logDebug(_ item: String, className: String? = nil) {
         logIfNeeded(level: .debug) {
             let info = ErrorInfo(location: className, reason: item)
@@ -58,7 +52,6 @@ struct SmartLog {
         }
     }
     
-    /// 详细的日志
     static func logVerbose(_ item: String, className: String? = nil) {
         logIfNeeded(level: .verbose) {
             let info = ErrorInfo(location: className, reason: item)
@@ -71,11 +64,11 @@ struct SmartLog {
         func getHeader(level: SmartConfig.DebugMode) -> String {
             switch level {
             case .debug:
-                return "\n============= 💚 [SmartLog Debug日志] 💚 =============\n"
+                return "\n============= 💚 [SmartLog Debug] 💚 =============\n"
             case .verbose:
-                return "\n============= 💜 [SmartLog Verbose日志] 💜 =============\n"
+                return "\n============= 💜 [SmartLog Verbose] 💜 =============\n"
             case .error:
-                return "\n============= 💔 [SmartLog Error日志] 💔 =============\n"
+                return "\n============= 💔 [SmartLog Error] 💔 =============\n"
             default:
                 return ""
             }
@@ -113,39 +106,39 @@ extension SmartLog {
         if let decodeError = error as? DecodingError {
             
             switch decodeError {
-                // 表示找不到键的错误。当解码器期望在JSON中找到某个键，但在给定的数据中找不到该键时，会引发此错误。
-                // 通常发生在解码器试图从JSON中提取指定的键值对但未成功时
+                // Indicates an error in which the key cannot be found. This error is raised when the decoder expects to find a key in JSON but cannot find the key in the given data.
+                // Usually occurs when the decoder attempts to extract the specified key-value pair from JSON but is unsuccessful
             case .keyNotFound(let key, let context):
-                return ErrorInfo(type: "找不到键",
+                return ErrorInfo(type: "Key not found",
                                  location: className,
                                  fieldName: key.stringValue,
                                  codingPath: context.codingPath,
                                  reason: context.debugDescription)
                 
-                // 表示找不到值的错误。当解码器期望从JSON中提取某个值，但该值不存在时，会引发此错误。
-                // 通常发生在解码器试图从JSON中提取一个可选值，但实际上得到了一个null值。
+                // Indicates an error where a value cannot be found. This error is raised when the decoder expects to extract a value from JSON, but the value does not exist.
+                // This usually happens when the decoder tries to extract an optional value from JSON, but actually gets a null value.
             case .valueNotFound(let type, let context):
-                return ErrorInfo(type: "值为null",
+                return ErrorInfo(type: "Value is null",
                                  location: className,
                                  fieldName: context.codingPath.last?.stringValue ?? "",
                                  fieldType: "\(type)",
                                  codingPath: context.codingPath,
                                  reason: context.debugDescription)
                 
-                // 表示类型不匹配的错误。当解码器期望将JSON值解码为特定类型，但实际值的类型与期望的类型不匹配时，会引发此错误。
-                // 例如，解码器期望一个整数，但实际上得到了一个字符串
+                // Indicates a type mismatch error. This error is raised when the decoder expects the JSON value to be decoded to a specific type, but the type of the actual value does not match the expected type.
+                // For example, the decoder expects an integer but actually gets a string
             case .typeMismatch(let type, let context):
-                return ErrorInfo(type: "值类型不匹配",
+                return ErrorInfo(type: "type mismatch",
                                  location: className,
                                  fieldName: context.codingPath.last?.stringValue ?? "",
                                  fieldType: "\(type)",
                                  codingPath: context.codingPath,
                                  reason: context.debugDescription)
                 
-                // 表示数据损坏的错误。当解码器无法从给定的数据中提取所需的值时，会引发此错误。
-                // 通常发生在数据类型不匹配或数据结构不正确的情况下。
+                // An error indicating data corruption. This error is raised when the decoder cannot extract the required value from the given data.
+                // Usually occurs when the data type does not match or the data structure is incorrect.
             case .dataCorrupted(let context):
-                return ErrorInfo(type: "数据损坏",
+                return ErrorInfo(type: "data corrupted",
                                  location: className,
                                  fieldName: context.codingPath.last?.stringValue ?? "",
                                  codingPath: context.codingPath,
@@ -155,7 +148,7 @@ extension SmartLog {
             }
         }
         
-        return ErrorInfo(type: "未知的解析错误", reason: "\(error)")
+        return ErrorInfo(type: "Unknown parsing error", reason: "\(error)")
     }
 }
 
@@ -206,28 +199,28 @@ fileprivate struct ErrorInfo {
         var parts: [String] = []
         
         if let type = type, !type.isEmpty {
-            parts.append("错误类型: \(type)")
+            parts.append("ErrorType: \(type)")
         }
         
         if let location = location, !location.isEmpty {
-            parts.append("模型名称：\(location)")
+            parts.append("ModelName：\(location)")
         }
                 
         if let fieldName = fieldName {
             var fieldInfo = fieldName
             if let fieldType = fieldType, !fieldType.isEmpty {
-                fieldInfo += " | 类型\(fieldType)"
+                fieldInfo += " | Type is \(fieldType)"
             }
-            parts.append("属性信息：\(fieldInfo)")
+            parts.append("AttributeInfo：\(fieldInfo)")
         }
         
         if let paths = codingPath, paths.count > 1 {
             let pathInfo = paths.map { $0.stringValue }.joined(separator: " → ")
-            parts.append("解析路径：" + pathInfo)
+            parts.append("DecodingPath：" + pathInfo)
         }
         
         if let reason = reason, !reason.isEmpty {
-            parts.append("错误原因: \(reason)")
+            parts.append("ErrorReason: \(reason)")
         }
                 
         return parts.joined(separator: "\n")

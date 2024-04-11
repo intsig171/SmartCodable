@@ -7,14 +7,7 @@
 
 import Foundation
 
-/// 让解析器实现SingleValueDecodingContainer协议
 extension _SmartJSONDecoder : SingleValueDecodingContainer {
-    // MARK: SingleValueDecodingContainer Methods
-    
-    // 此时是重写的SingleValueDecodingContainer的协议方法， 代表着此时是单容器就只有一个值。
-    
-    // 期望是非空值。
-    
     private func expectNonNull<T>(_ type: T.Type) throws {
         guard !self.decodeNil() else {
             throw DecodingError.valueNotFound(type, DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected \(type) but found null value instead."))
@@ -26,7 +19,6 @@ extension _SmartJSONDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: Bool.Type) throws -> Bool {
-        // 判断是否为null， 如果是null抛出异常, 交给上层keyedContainer兼容。
         try expectNonNull(Bool.self)
         if let value = try? self.unbox(storage.topContainer, as: Bool.self) {
             return value

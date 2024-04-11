@@ -11,7 +11,7 @@ import Foundation
 
 
 struct ModelKeyMapper<T> {
-    /// 尝试转换为一个映射后的模型相关的格式
+    /// Attempts to convert to a format related to a mapped model
     static func convertToMappedFormat(_ jsonValue: Any) -> Any {
         guard let type = T.self as? SmartDecodable.Type else { return jsonValue }
         
@@ -37,10 +37,10 @@ struct ModelKeyMapper<T> {
         type.mappingForKey()?.forEach { mapping in
             for oldKey in mapping.from {
                 let newKey = mapping.to.stringValue
-                if let value = newDict[oldKey], !(value is NSNull) { // 如果存在有效值(存在并不是null)
+                if let value = newDict[oldKey], !(value is NSNull) {
                     newDict[newKey] = newDict.removeValue(forKey: oldKey)
                     break
-                } else { // 处理自定义解析路径的情况。
+                } else { // Handles the case of a custom parsing path.
                     if newDict[newKey] == nil, let pathValue = newDict.getValue(forKeyPath: oldKey) {
                         newDict.updateValue(pathValue, forKey: newKey)
                     }
@@ -54,23 +54,22 @@ struct ModelKeyMapper<T> {
 
 extension Dictionary {
     
-    // 添加或更新键值对，仅当键不存在时
     fileprivate mutating func updateIfAbsent(key: Key, value: Value) {
         guard self[key] == nil else { return }
         self[key] = value
     }
     
     
-    /// 在字典中，获取路径对应的值。
+    /// Retrieves the value corresponding to the path in the dictionary.
     ///  let dict = [
     ///      "inDict": [
     ///         "name": "Mccc"
     ///      ]
     ///  ]
     ///
-    ///  keyPath 为 “inDict.name”
+    ///  keyPath is “inDict.name”
     ///
-    ///  输出： Mccc
+    ///  result： Mccc
     ///
     fileprivate func getValue(forKeyPath keyPath: String) -> Any? {
         guard keyPath.contains(".") else { return nil }

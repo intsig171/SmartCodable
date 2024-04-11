@@ -7,19 +7,13 @@
 
 import Foundation
 
-/** SmartAny:
- * Codable不支持对Any类型解析，那么对应的Any类型，字典类型（[String: Any]），数组类型[Any] 都无法解析。
- *
- */
-
-/// 任意Smart类型，可以简单的理解为Any。
+/// SmartAny represents any type for Codable parsing, which can be simply understood as Any.
 ///
-/// Codable不支持对Any类型解析，那么对应的Any类型，字典类型（[String: Any]），数组类型[Any] 都无法解析。
-/// 通过SmartAny包裹一层，达到可以对Any解析的目的。
+/// Codable does not support parsing of the Any type. Consequently, corresponding types like dictionary [String: Any], array [Any], and [[String: Any]] cannot be parsed.
+/// By wrapping it with SmartAny, it achieves the purpose of enabling parsing for Any types.
 ///
-/// 获取的原始的值需要调用 '.peel' 进行去壳。
+/// To retrieve the original value, call '.peel' to unwrap it.
 public enum SmartAny {
-    
     case bool(Bool)
     case string(String)
     case double(Double), cgFloat(CGFloat), float(Float)
@@ -29,18 +23,19 @@ public enum SmartAny {
     case array([SmartAny])
     case null(NSNull)
     
-    /// 从 Any 类型转换为 SmartAny
+    
     public init(from value: Any) {
         self = .convertToSmartAny(value)
     }
 }
 
 extension Dictionary where Key == String {
-    /// 从 [String: Any] 类型转换为 [String: SmartAny]
+    /// Converts from [String: Any] type to [String: SmartAny]
     public var cover: [String: SmartAny] {
         mapValues { SmartAny(from: $0) }
     }
     
+    /// Unwraps if it exists, otherwise returns itself.
     public var peelIfPresent: [String: Any] {
         if let dict = self as? [String: SmartAny] {
             return dict.peel
@@ -51,12 +46,11 @@ extension Dictionary where Key == String {
 }
 
 extension Array {
-    /// 从 [Any] 类型转换为 [SmartAny]
     public var cover: [ SmartAny] {
         map { SmartAny(from: $0) }
     }
     
-    /// 如果存在就解包，否则返回自身。
+    /// Unwraps if it exists, otherwise returns itself.
     public var peelIfPresent: [Any] {
         if let arr = self as? [[String: SmartAny]] {
             return arr.peel
@@ -70,20 +64,20 @@ extension Array {
 
 
 extension Dictionary where Key == String, Value == SmartAny {
-    /// 解析完成会被SmartAny包裹，使用该属性去壳。
+    /// The parsed value will be wrapped by SmartAny. Use this property to unwrap it.
     public var peel: [String: Any] {
         mapValues { $0.peel }
     }
 }
 extension Array where Element == SmartAny {
-    /// 解析完成会被SmartAny包裹，使用该属性去壳。
+    /// The parsed value will be wrapped by SmartAny. Use this property to unwrap it.
     public var peel: [Any] {
         map { $0.peel }
     }
 }
 
 extension Array where Element == [String: SmartAny] {
-    /// 解析完成会被SmartAny包裹，使用该属性去壳。
+    /// The parsed value will be wrapped by SmartAny. Use this property to unwrap it.
     public var peel: [Any] {
         map { $0.peel }
     }
@@ -91,7 +85,7 @@ extension Array where Element == [String: SmartAny] {
 
 
 extension SmartAny {
-    /// 获取原本的值
+    /// The parsed value will be wrapped by SmartAny. Use this property to unwrap it.
     public var peel: Any {
         switch self {
         case .bool(let v):    return v
@@ -119,7 +113,6 @@ extension SmartAny {
 
 
 extension SmartAny: Codable {
-    // 实现 Codable
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
@@ -172,7 +165,6 @@ extension SmartAny: Codable {
 
 
 extension SmartAny {
-    // 辅助函数，将 Any 类型的值转换为 SmartAny
     private static func convertToSmartAny(_ value: Any) -> SmartAny {
         switch value {
         case let v as Bool:          return .bool(v)
@@ -193,7 +185,7 @@ extension SmartAny {
         case let v as [String: Any]: return .dict(v.mapValues { convertToSmartAny($0) })
         case let v as [Any]:         return .array(v.map { convertToSmartAny($0) })
         case is NSNull:              return .null(NSNull())
-        default:                     return .null(NSNull()) // 对于不支持的类型，返回 null
+        default:                     return .null(NSNull()) 
         }
     }
 }

@@ -43,13 +43,13 @@ class Test2ViewController: BaseViewController {
     
         
         let listModel = [CEPrinterTemplateTotal].deserialize(from: printer_temp_tab)
-        print(listModel)
+        print(listModel as Any)
         print("\n")
 
         
         let firstDict = printer_temp_tab.first ?? [:]
         let firstModel = CEPrinterTemplateTotal.deserialize(from: firstDict)
-        print(firstModel)
+        print(firstModel as Any)
          
         
         print("\n")

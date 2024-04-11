@@ -8,25 +8,23 @@
 import Foundation
 
 
-/// 记录解码中模型属性的默认值, 用于解码失败的时候填充。
+/// Records the default values of model properties during decoding, used for filling in when decoding fails.
 struct DecodingDefaults {
     
     private(set) var typeName: String = ""
     
-    /// 当前的解码路径（通过解码路径确保对应关系）
+    /// The current decoding path (ensuring the correspondence through the decoding path)
     private var codingPath: [CodingKey] = []
         
-    /// 记录模型属性的默认值
+    /// Records the default values of model properties
     private var containers: [String: Any] = [:]
     
-    private(set) var tranforms: [SmartValueTransformer] = []
+    /// Records the custom transformer for properties
+    private(set) var transformers: [SmartValueTransformer] = []
     
-    /// 记录type类型的属性初始化的值
     mutating func recordAttributeValues<T: Decodable>(for type: T.Type, codingPath: [CodingKey]) {
-        // 直接使用反射初始化对象，如果T符合SmartDecodable协议
         if let object = type as? SmartDecodable.Type {
             let instance = object.init()
-            // 使用反射获取属性名称和值
             let mirror = Mirror(reflecting: instance)
             mirror.children.forEach { child in
                 if let key = child.label {
@@ -36,15 +34,7 @@ struct DecodingDefaults {
             self.typeName = "\(type)"
             self.codingPath = codingPath
 
-            // 记录tranform
-            tranforms = object.mappingForValue() ?? []
-            
-//            object.mapping()
-//            tranforms = [
-//                "date1": CustomDateFormatTransform(formatString: "yyyy-MM-dd"),
-//                "date2": DateTransform(),
-//            ]
-            
+            transformers = object.mappingForValue() ?? []
         }
     }
     
@@ -58,13 +48,13 @@ struct DecodingDefaults {
     
     mutating func resetRecords<T: Decodable>(for type: T.Type) {
         
-        // 如果当前解码的类型不是继承SmartDecodable的Model，就不用处理
-        // 正在解码model中的属性时，不能清空。解码完成才可以清空。
+        // If the current type being decoded does not inherit from SmartDecodable Model, it does not need to be processed.
+        // The properties within the model being decoded should not be cleared. They can be cleared only after decoding is complete.
         if let _ = T.self as? SmartDecodable.Type {
             self.typeName = ""
             self.codingPath = []
             self.containers.removeAll()
-            self.tranforms.removeAll()
+            self.transformers.removeAll()
         }
     }
     

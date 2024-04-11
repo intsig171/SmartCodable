@@ -45,10 +45,14 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
  * 1. ✅ 支持自定义的value解析规则
  *   - 说明：支持value的解析规则，比如Date，可以设置解析策略做不同的实现。
  *   - 结论：SmartValueTransformer
- 
- * 2. ❌ 为什么UIColor不能实现Codable。Date可以？
- *   - 说明：
- *   - 结论：
+ *
+ * 2. ✅ 修复包含SmartAny的数据，转json失败问题。
+ *   - 说明：转换之前对数据进行类型判断，合适的时机进行解包。
+ *   - 结论：已完成
+ *
+ * 3. ✅ 修复json中包含null，进行模型化处理失败问题。
+ *   - 说明：json中某一个字段的值是json字符串，但是对应的属性是模型。
+ *   - 结论：已完成
  */
 
 

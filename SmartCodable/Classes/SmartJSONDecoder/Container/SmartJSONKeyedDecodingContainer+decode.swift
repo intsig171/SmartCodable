@@ -8,6 +8,7 @@
 import Foundation
 
 
+// ⚠️ Be aware of the impact of type erasure
 
 extension SmartJSONKeyedDecodingContainer {
     @inlinable
@@ -233,7 +234,6 @@ extension SmartJSONKeyedDecodingContainer {
         return nil
     }
     
-    /// 解析失败的非可选兼容
     fileprivate func smartDecode<T: Decodable>(forKey key: Key, entry: Any? = nil) throws -> T {
         
         func logInfo() {

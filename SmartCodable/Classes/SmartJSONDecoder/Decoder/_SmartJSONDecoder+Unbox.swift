@@ -11,19 +11,11 @@ import Foundation
     import AppKit
 #endif
 
-//这边的实现，还是要像系统的实现意义，抛出异常，让三个container实现的时候各自处理。 为nil的情况，异常的情况。
 
-/// 在这个中进行解码，container中调用（container中包含decoder对象）。
 extension _SmartJSONDecoder {
-    /// 解码bool类型的值
     func unbox(_ value: Any, as type: Bool.Type) throws -> Bool? {
-        
-        // expectNonNull是否重复了？
+
         guard !(value is NSNull) else { return nil }
-        
-        
-        /// 这个地方可能你会有疑惑？ 为什么正在进行Bool类型的值处理，却判断是否NSNumber类型？
-        /// 可以去看看对应的 box 方法的处理。将bool类型转成了NSNumber类型了。
         if let number = value as? NSNumber {
             // TODO: Add a flag to coerce non-boolean numbers into Bools?
             if number === kCFBooleanTrue as NSNumber {
@@ -38,23 +30,18 @@ extension _SmartJSONDecoder {
              */
             
         }
-        
         throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
     
     func unbox(_ value: Any, as type: Int.Type) throws -> Int? {
       
-        
         guard !(value is NSNull) else { return nil }
-        
-        
-        // 验证非Bool类型的值
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
         
-        // 为了预防NSNumber存储的是非Int值。
+        // To prevent storing non-Int values in NSNumber.
         /**
          let double: Double = 1.234
          let number = NSNumber.init(floatLiteral: double)
@@ -254,7 +241,6 @@ extension _SmartJSONDecoder {
     }
     
     
-    /// CGFloat的处理当Double的处理
     func unbox(_ value: Any, as type: CGFloat.Type) throws -> CGFloat? {
         if let double = try unbox(value, as: Double.self) {
             return CGFloat(double)
@@ -266,9 +252,6 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: Double.Type) throws -> Double? {
         guard !(value is NSNull) else { return nil }
-        
-        
-
         
         if let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse {
             // We are always willing to return the number as a Double:
@@ -324,9 +307,9 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Date.Type) throws -> Date? {
         guard !(value is NSNull) else { return nil }
         
-        // 优先处理单个属性的解析策略
+        // Prioritize the parsing strategy for individual properties
         if let lastKey = codingPath.last {
-            let container = defalutsStorage.tranforms.first(where: {
+            let container = defalutsStorage.transformers.first(where: {
                 $0.location.stringValue == lastKey.stringValue
             })
             if let tranformValue = container?.tranformer.transformFromJSON(value) as? Date {
@@ -443,7 +426,7 @@ extension _SmartJSONDecoder {
         
         // 优先处理单个属性的解析策略
         if let lastKey = codingPath.last {
-            let container = defalutsStorage.tranforms.first(where: {
+            let container = defalutsStorage.transformers.first(where: {
                 $0.location.stringValue == lastKey.stringValue
             })
             if let tranformValue = container?.tranformer.transformFromJSON(value) as? URL {
@@ -463,9 +446,9 @@ extension _SmartJSONDecoder {
         guard let colorString = try self.unbox(value, as: String.self) else { return nil }
         
         
-        // 优先处理单个属性的解析策略
+        // Prioritize the parsing strategy for individual properties
         if let lastKey = codingPath.last {
-            let container = defalutsStorage.tranforms.first(where: {
+            let container = defalutsStorage.transformers.first(where: {
                 $0.location.stringValue == lastKey.stringValue
             })
             if let tranformValue = container?.tranformer.transformFromJSON(value) as? UIColor {
@@ -523,9 +506,7 @@ extension _SmartJSONDecoder {
 
     
     func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? {
-            
-        // 判断type的类型，针对不同的类型，调用不同的方法。
-        
+                    
         let decoded: T?
         if T.self == Date.self || T.self == NSDate.self {
             guard let date = try self.unbox(value, as: Date.self) else { return nil }
@@ -544,7 +525,7 @@ extension _SmartJSONDecoder {
             decoded = float as? T
         } else {
             
-            // 请看 说明1⃣️
+            // Please see the description1⃣️
             if let _ = [] as? T {
                 // 如果T是数组类型，但value不是数组，则直接返回nil
                 guard value is [Any] else { return nil }
@@ -559,7 +540,7 @@ extension _SmartJSONDecoder {
 
             defalutsStorage.recordAttributeValues(for: type, codingPath: codingPath)
             
-            // 请看 说明2⃣️
+            // Please see the description2⃣️
             decoded = try T(from: self)
             storage.popContainer()
             defalutsStorage.resetRecords(for: type)
@@ -578,18 +559,32 @@ fileprivate var _iso8601Formatter: ISO8601DateFormatter = {
 
 
 
-/** 说明1⃣️
+/** description1⃣️
  * 避免可选属性是数组或字典的时候，通过 `try T(from: self)` 创建一个新的值。
  * 为什么基础数据类型（例如：Int，String）不需要这么处理？
  *  - 因为这些基本类型有对应的unbox方法。字典和数组涉及到范型的处理，没法这么设计。
+ *
+ ** Avoids creating a new value using `try T(from: self)` when the optional property is an array or dictionary.
+ * Why don't basic data types (e.g., Int, String) require this treatment?
+ *  - Because these basic types have corresponding unbox methods. Dictionaries and arrays involve generic processing, which can't be designed this way.
  */
 
 
-/** 说明2⃣️
+/** description2⃣️
  * decoded = try T(from: self)。这行代码是Swift中Codable解析的关键部分。
  * 目的：将外部数据源获取的原始数据转换为Swift中具体的类型。
  * 含义：“尝试使用当前的解码器（self）作为数据源来创建一个类型为 T 的新实例。”这一过程可能会抛出错误，因为数据可能与 T 类型不匹配，或者数据本身就是不完整或不正确的，所以这个调用是一个 try 表达式，需要被 catch 语句捕获错误或者使用 try? 或 try! 来处理。（这里的 T 指的是遵守 Decodable 协议的任意类型。该代码尝试通过调用类型 T 的 init(from:) 初始化器来创建该类型的实例，这个初始化器是 Decodable 协议的一部分。self 在这里指的是解码器本身，通常是一个 Decoder实例，它持有或者可以访问要解码的数据。）
  * 解析：
  * - 如果T是一个模型或模型数组：会nestedContainer 或 nestedUnkeyedContainer 创建一个容器。在容器中持有了_SmartJSONDecoder，解析属性。
  * - 如果是属性，会根据是否可选，调用decode或decodeIfPresent方法完成解析。
+ *
+ *
+ ** decoded = try T(from: self). This line of code is a key part of Codable parsing in Swift.
+ * Purpose: To convert raw data obtained from an external data source into a specific type in Swift.
+ * Meaning: "Attempts to create a new instance of type T using the current decoder (self) as the data source." This process may throw an error because the data may not match the T type, or the data itself is incomplete or incorrect, thus this call is a try expression and needs to be caught by a catch statement or handled using try? or try! (Here, T refers to any type that conforms to the Decodable protocol. This code attempts to create an instance of type T by calling the init(from:) initializer of type T, which is part of the Decodable protocol. self here refers to the decoder itself, usually a Decoder instance, which holds or has access to the data to be decoded.)
+ * Parsing:
+ * - If T is a model or an array of models: It will create a container using nestedContainer or nestedUnkeyedContainer. The container holds a _SmartJSONDecoder, parsing the properties.
+ * - If it is a property, it will complete the parsing by calling the decode or decodeIfPresent method depending on whether it is optional.
+ *
+ *
  */

@@ -11,7 +11,6 @@ import Foundation
 
 
 extension Patcher {
-    // 负责尝试兼容类型不匹配，只兼容数据有意义的情况（可以合理的进行类型转换的）。
     struct Transformer {
         static func typeTransform(from jsonValue: Any?) -> T? {
             guard let value = jsonValue else { return nil }
@@ -26,7 +25,6 @@ fileprivate protocol TypeTransformable {
 }
 
 
-/// 兼容Bool类型的值，Model中定义为Bool类型，但是数据中是String，Int的情况。
 extension Bool: TypeTransformable {
     static func transformValue(from value: Any) -> Bool? {
         switch value {

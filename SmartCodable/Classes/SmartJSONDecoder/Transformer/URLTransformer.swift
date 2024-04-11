@@ -14,8 +14,8 @@ public struct SmartURLTransformer: ValueTransformable {
     private let prefix: String?
 
     /**
-     用一个选项初始化URLTransformer，在将URL字符串转换为NSURL之前对其进行编码
-     - parameter shouldEncodeUrlString: 当为true(默认值)时，字符串在传递之前被编码
+     Initializes a URLTransformer with an option to encode the URL string before converting it to NSURL
+     - parameter shouldEncodeUrlString: When true (the default value), the string is encoded before being passed
      - returns: an initialized transformer
     */
     public init(prefix: String? = nil, shouldEncodeURLString: Bool = true) {

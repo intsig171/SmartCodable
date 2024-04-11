@@ -7,37 +7,15 @@
 
 import Foundation
 
-/** mapping 的功能支持以及扩展性的考量
- * 1. 支持字段的重命名。
- * 2. ❓支持字段的解析忽略。【是否有技术手段】
- * 3. 支持自定义解析策略。（URL， Date， Data，Color...）
- 
- 
 
- * 如何考量后续的扩展性？
- * 使用一个基础协议。通过协议的继承的方式。
- 
- */
-
-
-
-/**
- 前： key的映射， nickname -> name
- 中： 内部的数据解析完的转义，时间戳转Date。
- 后： 内部解码完成的回调, 就是：didFinishMapping
- */
-
-
-
-
-/// Smart的解码协议
 public protocol SmartDecodable: Decodable {
-    /// 映射完成的完成的回调
+    /// The callback for when mapping is complete
     mutating func didFinishMapping()
   
-    /// 映射关系
+    /// The mapping relationship of decoding keys
     static func mappingForKey() -> [SmartKeyTransformer]?
     
+    /// The strategy for decoding values
     static func mappingForValue() -> [SmartValueTransformer]?
     
     init()
@@ -51,21 +29,19 @@ extension SmartDecodable {
 }
 
 
-/// SmartCodable解析的选项
+/// Options for SmartCodable parsing
 public enum SmartDecodingOption: Hashable {
     
-    /// 用于解码 “Date” 值的策略
     case date(JSONDecoder.DateDecodingStrategy)
     
-    /// 用于解码 “Data” 值的策略
     case data(JSONDecoder.DataDecodingStrategy)
     
-    /// 用于不符合json的浮点值(IEEE 754无穷大和NaN)的策略
     case float(JSONDecoder.NonConformingFloatDecodingStrategy)
     
+    /// The mapping strategy for keys during parsing
     case key(JSONDecoder.SmartKeyDecodingStrategy)
     
-    /// 处理哈希值，忽略关联值的影响。
+    /// Handles the hash value, ignoring the impact of associated values.
     public func hash(into hasher: inout Hasher) {
         switch self {
         case .date:
@@ -98,11 +74,11 @@ public enum SmartDecodingOption: Hashable {
 
 extension SmartDecodable {
     
-    /// 反序列化成模型
-    /// - Parameter dict: 字典
-    /// - Parameter options: 解码策略
-    ///   不允许出现相同的枚举项，eg：不可以传入多个keyStrategy【只有第一个有效】。
-    /// - Returns: 模型
+    /// Deserializes into a model
+    /// - Parameter dict: Dictionary
+    /// - Parameter options: Decoding strategy
+    ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Model
     public static func deserialize(from dict: [String: Any]?, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _dict = dict else {
             SmartLog.logDebug("要解析的字典为nil", className: "\(self)")
@@ -121,11 +97,11 @@ extension SmartDecodable {
         return deserialize(from: _jsonData, options: options)
     }
     
-    /// 反序列化成模型
-    /// - Parameter json: json字符串
-    /// - Parameter options: 解码策略
-    ///   不允许出现相同的枚举项，eg：不可以传入多个keyStrategy【只有第一个有效】。
-    /// - Returns: 模型
+    /// Deserializes into a model
+    /// - Parameter json: JSON string
+    /// - Parameter options: Decoding strategy
+    ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Model
     public static func deserialize(from json: String?, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _json = json else {
             SmartLog.logDebug("要解析的json字符串为nil", className: "\(self)")
@@ -141,11 +117,11 @@ extension SmartDecodable {
     }
     
     
-    /// 反序列化成模型
-    /// - Parameter data: data
-    /// - Parameter options: 解码策略
-    ///   不允许出现相同的枚举项，eg：不可以传入多个keyStrategy【只有第一个有效】。
-    /// - Returns: 模型
+    /// Deserializes into a model
+    /// - Parameter data: Data
+    /// - Parameter options: Decoding strategy
+    ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Model
     public static func deserialize(from data: Data?, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _data = data else {
             SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
@@ -165,11 +141,11 @@ extension SmartDecodable {
 
 extension Array where Element: SmartDecodable {
     
-    /// 反序列化为模型数组
-    /// - Parameter array: 数组
-    /// - Parameter options: 解码策略
-    ///   不允许出现相同的枚举项，eg：不可以传入多个keyStrategy【只有第一个有效】。
-    /// - Returns: 模型数组
+    /// Deserializes into an array of models
+    /// - Parameter array: Array
+    /// - Parameter options: Decoding strategy
+    ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Array of models
     public static func deserialize(from array: [Any]?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
 
         guard let _arr = array else {
@@ -190,11 +166,11 @@ extension Array where Element: SmartDecodable {
     }
     
     
-    /// 反序列化为模型数组
-    /// - Parameter json: json字符串
-    /// - Parameter options: 解码策略
-    ///   只允许出现一个枚举项，eg：不可以传入多个keyStrategy【只有第一个有效】
-    /// - Returns: 模型数组
+    /// Deserializes into an array of models
+    /// - Parameter json: JSON string
+    /// - Parameter options: Decoding strategy
+    ///   Only one enumeration item is allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Array of models
     public static func deserialize(from json: String?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
         guard let _json = json else {
             SmartLog.logDebug("要解析的json为nil", className: "\(self)")
@@ -210,11 +186,11 @@ extension Array where Element: SmartDecodable {
         return deserialize(from: _jsonData, options: options)
     }
     
-    /// 反序列化为模型数组
-    /// - Parameter data: data
-    /// - Parameter options: 解码策略
-    ///   不允许出现相同的枚举项，eg：不可以传入多个keyStrategy【只有第一个有效】
-    /// - Returns: 模型数组
+    /// Deserializes into an array of models
+    /// - Parameter data: Data
+    /// - Parameter options: Decoding strategy
+    ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Array of models
     public static func deserialize(from data: Data?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
         guard let _data = data else {
             SmartLog.logDebug("要解析的data数据为nil", className: "\(self)")
@@ -257,7 +233,6 @@ extension Data {
     }
     
     
-    /// 字典
     fileprivate func _deserializeDict<T>(type: T.Type, options: Set<SmartDecodingOption>? = nil) throws -> T? where T: SmartDecodable {
 
         do {
@@ -272,7 +247,6 @@ extension Data {
     }
     
     
-    /// 数组
     fileprivate func _deserializeArray<T>(type: [T].Type, options: Set<SmartDecodingOption>? = nil) throws -> [T]? where T: SmartDecodable {
 
         do {
@@ -286,10 +260,7 @@ extension Data {
     }
 }
 
-
-// MARK: - 扩展实现
 extension Dictionary where Key == String {
-    /// 字典转Json字符串
     fileprivate func toJSONString() -> String? {
 
         let peeledDict = self.peelIfPresent
@@ -305,7 +276,6 @@ extension Dictionary where Key == String {
 }
 
 extension String {
-    /// JSONString转换为字典
     fileprivate func toDictionary() -> Dictionary<String, Any>? {
         guard let jsonData:Data = data(using: .utf8) else { return nil }
         if let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) {
@@ -316,7 +286,6 @@ extension String {
         return nil
     }
 
-    /// JSONString转换为数组
     fileprivate func toArray() -> Array<Any>? {
         guard let jsonData:Data = data(using: .utf8) else { return nil }
         if let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) {
@@ -328,7 +297,6 @@ extension String {
     }
 }
 extension Array {
-    /// 数组转json字符串
     fileprivate func toJSONString() -> String? {
         let peeledArr = self.peelIfPresent
         guard JSONSerialization.isValidJSONObject(peeledArr) else { return nil }

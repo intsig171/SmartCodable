@@ -21,7 +21,6 @@ public enum SmartColor {
         self = .color(value)
     }
     
-    /// 解包
     public var peel: UIColor {
         switch self {
         case .color(let c):
@@ -94,13 +93,6 @@ extension UIColor {
     }
     
     static func hex(_ hex: String) -> UIColor? {
-        
-        /**
-         * #ff000000 此为16进制颜色代码
-         * 前两位ff为透明度，后六位为颜色值（000000为黑色，ffffff为白色，可以用ps等软件获取）
-         * 透明度分为256阶（0~255），计算机上16进制表示为（00~ff）,透明为0阶，不透明为255阶，如果50%透明度就是127阶（256的一半当然是128，但是因为从0开始，所以实际上是127）
-         * 如果是6位，默认是不透明。
-         */
         
         var red:   CGFloat = 0.0
         var green: CGFloat = 0.0

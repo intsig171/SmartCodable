@@ -8,21 +8,19 @@
 import Foundation
 
 
-/// 解析key的映射
+/// Resolve the mapping relationship of keys
 public struct SmartKeyTransformer {
     var from: [String]
     var to: CodingKey
 }
 
 infix operator <---
-/// 映射关系
-/// 将from对应的数据字段映射到to对应的模型属性上
+/// Map the data fields corresponding to “from” to model properties corresponding to “to”.
 public func <---(to: CodingKey, from: String) -> SmartKeyTransformer {
     to <--- [from]
 }
 
-/// 映射关系
-/// 多个有效字段映射到同一个属性上优先使用第一个。
+/// When multiple valid fields are mapped to the same property, the first one is used first.
 public func <---(to: CodingKey, from: [String]) -> SmartKeyTransformer {
     SmartKeyTransformer(from: from, to: to)
 }

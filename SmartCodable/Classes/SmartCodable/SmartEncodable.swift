@@ -8,29 +8,27 @@
 import Foundation
 
 
-/// Smart的编码协议
 public protocol SmartEncodable: Encodable { }
 
 
 extension SmartEncodable {
-    
-    /// 序列化为字典
-    /// - Returns: 字典
+
     public func toDictionary() -> [String: Any]? {
         return _transformToJson(self, type: Self.self)
     }
     
     
-    /// 序列化为Json字符串
-    /// - Parameter prettyPrint: 是否格式化打印（json中会添加换行符号）
-    /// - Returns: Json字符串
+    /// Serializes into a JSON string
+    /// - Parameter prettyPrint: Whether to format print (adds line breaks in the JSON)
+    /// - Returns: JSON string
     public func toJSONString(prettyPrint: Bool = false) -> String? {
         
-        // 首先尝试将 self 直接转换为 [String: Any] 类型的字典
+        // is dictionary
         if let jsonObject = self as? [String: Any] {
             return _transformToJsonString(object: jsonObject, prettyPrint: prettyPrint, type: Self.self)
         }
         
+        // to dictionary
         if let anyObject = toDictionary() {
             return _transformToJsonString(object: anyObject, prettyPrint: prettyPrint, type: Self.self)
         }
@@ -42,16 +40,13 @@ extension SmartEncodable {
 
 
 extension Array where Element: SmartEncodable {
-    /// 序列化为数组
-    /// - Returns: 数组数据
     public func toArray() -> [Any]? {
         return _transformToJson(self,type: Element.self)
     }
     
-    
-    /// 转成Json字符串
-    /// - Parameter prettyPrint: 是否格式化打印（json中会添加换行符号）
-    /// - Returns: json字符串
+    /// Serializes into a JSON string
+    /// - Parameter prettyPrint: Whether to format print (adds line breaks in the JSON)
+    /// - Returns: JSON string
     public func toJSONString(prettyPrint: Bool = false) -> String? {
         if let anyObject = toArray() {
             return _transformToJsonString(object: anyObject, prettyPrint: prettyPrint, type: Element.self)
