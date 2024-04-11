@@ -53,8 +53,8 @@
 | ③ **#suggest 3 支持初始值填充**                    | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%203%20支持属性初始化值填充.md) |
 | ④ **#suggest 4 提供HandyJSON的替换指导**           | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md) |
 | ⑤ **#suggest 5 提供全局的Key映射策略**             | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%205%20提供全局的Key映射策略.md) |
-| ⑥ **#suggest 6 支持UIColor的解析**                 | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%205%20提供全局的Key映射策略.md) |
-| ⑦ **#suggest 7 增加单个Value的自定义转换策略**     | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%205%20提供全局的Key映射策略.md) |
+| ⑥ **#suggest 6 支持UIColor的解析**                 | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%206%20支持由hex颜色解析到UIColor.md) |
+| ⑦ **#suggest 7 增加单个Value的自定义转换策略**     | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%207%20增加单个Value的自定义转换策略.md) |
 
 
 ## 使用SmartCodable 平替 HandyJSON
@@ -557,3 +557,4 @@ SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到Sm
 ## 加入我们
 
 **SmartCodable** 是一个开源项目，我们欢迎所有对提高数据解析性能和健壮性感兴趣的开发者加入。无论是使用反馈、功能建议还是代码贡献，你的参与都将极大地推动 **SmartCodable** 项目的发展。
+
