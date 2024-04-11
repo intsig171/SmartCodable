@@ -69,7 +69,6 @@ extension CustomDecodingValueViewContriller {
                 CodingKeys.date1 <--- SmartDateFormatTransformer(format)
             ]
         }
-
     }
     
     struct SmartSubModel: SmartCodable {
@@ -91,4 +90,5 @@ extension CustomDecodingValueViewContriller {
         }
     }
 }
+
 

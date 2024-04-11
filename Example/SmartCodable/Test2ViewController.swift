@@ -36,7 +36,7 @@ class Test2ViewController: BaseViewController {
         }
         """
         guard let model =  CEPrinterTemplateTab.deserialize(from: json) else { return }
-        printStruct(model)
+//        printStruct(model)
         print("\n")
         
         let printer_temp_tab = model.printer_temp_tab ?? []

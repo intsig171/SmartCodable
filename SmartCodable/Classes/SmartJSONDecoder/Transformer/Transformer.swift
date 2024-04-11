@@ -41,7 +41,11 @@ public struct SmartValueTransformer {
 public protocol ValueTransformable {
     associatedtype Object
     associatedtype JSON
+    
+    /// transform from ’json‘ to ’object‘
     func transformFromJSON(_ value: Any?) -> Object?
+    
+    /// transform to ‘json’ from ‘object’
     func transformToJSON(_ value: Object?) -> JSON?
 }
 

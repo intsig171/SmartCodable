@@ -53,6 +53,8 @@
 | ③ **#suggest 3 支持初始值填充**                    | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%203%20支持属性初始化值填充.md) |
 | ④ **#suggest 4 提供HandyJSON的替换指导**           | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md) |
 | ⑤ **#suggest 5 提供全局的Key映射策略**             | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%205%20提供全局的Key映射策略.md) |
+| ⑥ **#suggest 6 支持UIColor的解析**                 | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%205%20提供全局的Key映射策略.md) |
+| ⑦ **#suggest 7 增加单个Value的自定义转换策略**     | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%205%20提供全局的Key映射策略.md) |
 
 
 ## 使用SmartCodable 平替 HandyJSON
@@ -64,7 +66,7 @@
 | ②反序列化       | 数据的模型化（数据转Model）                   | ★★★★★    | ☆☆☆☆☆    | 完全一样的调用方式，无需处理。                         |
 | ③序列化         | 模型的数据化（Model转数据）                   | ★☆☆☆☆    | ★☆☆☆☆    | 将 `toJSON()` 替换为 `toDictionary()` 或 `toArray()`。 |
 | ④解码完成的回调 | 解析完成进一步处理数据                        | ★★☆☆☆    | ☆☆☆☆☆    | 完全一样的调用方式，无需处理。                         |
-| ⑤自定义解析Key  | 忽略key的解析 & 自定义Key的映射关系           | ★★★☆☆    | ★★★★★    | 需要更改调用方式。                                     |
+| ⑤自定义解析Key  | 忽略key的解析 & 自定义Key的映射关系           | ★★★☆☆    | ★★★☆☆    | 需要更改调用方式。                                     |
 | ⑥解析Any        | 解析Any类型的数据。Any，[String: Any]， [Any] | ★☆☆☆☆    | ★☆☆☆☆    | 将Any替换为SmartAny                                    |
 | ⑦处理继承关系   | 解析存在的继承关系的Model                     | ★☆☆☆☆    | ★★★★★    | 建议使用协议实现。                                     |
 | ⑧枚举的解析     | 解析枚举属性                                  | ★☆☆☆☆    | ★☆☆☆☆    | 多实现一个 defaultCase                                 |
@@ -88,13 +90,15 @@ end
 
 ### SPM 集成 
 
+```
+https://github.com/intsig171/SmartCodable.git
+```
 
 
 
+## SmartCodable 使用介绍
 
-## SmartCodable 使用
-
-### 字典的解码
+### 1. 字典的解码
 
 ```
 import SmartCodable
@@ -109,7 +113,7 @@ guard let model = Model.deserialize(from: dict) else { return }
 
 
 
-### 数组的解码
+### 2. 数组的解码
 
 ```
 import SmartCodable
@@ -125,7 +129,7 @@ guard let models = [Model].deserialize(from: arr) else { return }
 
 
 
-###  序列化与反序列化
+###  3. 序列化与反序列化
 
 ```
 // 字典转模型
@@ -143,30 +147,178 @@ guard let xiaoMing2 = JsonToModel.deserialize(from: json1) else { return }
 
 
 
-### 解析完成的回调
+### 4. 解码Any
+
+Codable是无法解码Any类型的，这样就意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型， 这对解码造成了一定的困扰。**SmartAny** 是**SmartCodable** 提供的解决Any的方案。可以直接像使用 **Any** 一样使用它。 
 
 ```
-class Model: SmartDecodable {
+struct AnyModel: SmartCodable {
+    var name: SmartAny?
+    var dict: [String: SmartAny] = [:]
+    var arr: [SmartAny] = []
+}
+```
 
+```
+let dict = [
+    "name": "xiao ming",
+    "age": 20,
+    "dict": inDict,
+    "arr": arr
+] as [String : Any]
+
+guard let model = AnyModel.deserialize(from: dict) else { return }
+print(model.name.peel )
+print(model.dict.peel)
+print(model.arr.peel)
+```
+
+真实的数据被 **SmartAny** 包裹住了，需要使用 **peel** 对数据解包。
+
+
+
+#### 编码成SmartAny
+
+同时也提供了反向转换的方法：
+
+| From             | To                   | Example                        |
+| ---------------- | -------------------- | ------------------------------ |
+| `Any`            | `SmartAny`           | `SmartAny(from: "some")`       |
+| `[String: Any] ` | `[String: SmartAny]` | `["key2": "value2"].cover`     |
+| `[Any]`          | `[SmartAny]`         | `[ ["key3": "value3"] ].cover` |
+
+
+
+### 5. 模型化解析json字符串
+
+```
+let dict: [String: Any] = [
+    "hobby": "{\"name\":\"sleep\"}",
+]
+guard let model = Model.deserialize(from: dict) else { return }
+print(model)
+
+struct Model: SmartCodable {
+    var hobby: Hobby?
+}
+
+struct Hobby: SmartCodable {
     var name: String = ""
-    var age: Int = 0
-    var desc: String = ""
-    required init() { }
-    
-    // 解析完成的回调
-    func didFinishMapping() {    
-        if name.isEmpty {
-            desc = "\(age)岁的" + "人"
-        } else {
-            desc = "\(age)岁的" + name
-        }
+}
+```
+
+
+
+### 6. 支持解析UIColor
+
+```
+let dict = [
+    "color": "7DA5E3"
+]
+
+struct Model: SmartCodable {
+    var color: SmartColor?
+}
+
+guard let model = Model.deserialize(from: dict) else { return }
+print(model.color?.peel)
+```
+
+**UIColor** 是 `non-final class`。非最终类不能简单地实现`Codable`的`init(from:)`。具体可查阅 **suggest 6**。
+
+
+
+### 7. 枚举的解码
+
+让枚举遵循 **SmartCaseDefaultable** ，当解码失败时使用 **defaultCase**。
+
+```
+struct CompatibleEnum: SmartCodable {
+
+    var enumTest: TestEnum?
+
+    enum TestEnum: String, SmartCaseDefaultable {
+        case a
+        case b
+        case c = "hello"
     }
 }
 ```
 
 
 
-### 自定义解析路径
+
+
+
+
+
+
+## SmartCodable的解码策略
+
+解码策略分为三个阶段的操作：
+
+* 解码前
+  * 忽略某些key的解析
+* 解码中
+  * Key的映射策略
+  * Value的解析策略
+* 解码后
+  * 解码完成后的回调
+
+
+
+### [解码前] 忽略某些key的解析
+
+```
+struct Model: SmartCodable {
+    var name: String = ""
+    var ignore: String = ""
+    var age: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case age = "selfAge"
+        // 忽略ignore的解析。
+//            case ignore
+    }
+}
+```
+
+重写当前的 **CodingKeys**，不需要解析谁，就删掉谁。留下的是需要解析的。
+
+当然，也可以在这里进行key的重命名。
+
+### [解码中] Key的映射策略
+
+#### 全局的Key映射策略
+
+```
+public enum SmartKeyDecodingStrategy : Sendable {
+    case useDefaultKeys
+    
+    // 蛇形命名转驼峰命名
+    case fromSnakeCase
+    
+    // 首字母大写转小写
+    case firstLetterLower
+}
+```
+
+作用于本次解析，本次解析只能使用一种策略，不可混合使用。
+
+```
+let option1: SmartDecodingOption = .key(.fromSnakeCase)
+guard let model1 = TwoModel.deserialize(from: dict1, options: [option1]) else { return }
+```
+
+
+
+#### 局部的Key映射策略
+
+* 支持自定义路径解析。
+* 支持字段解析的重命名。
+
+##### 自定义解析路径
 
 跨层解析。将sub里面的name字段，解析到 Model的name属性上。
 
@@ -189,136 +341,7 @@ struct Model: SmartCodable {
 }
 ```
 
-
-
-### 自定义全局的解析策略
-
-全局代表当前本次解析。 目前支持两种策略：
-
-* 蛇形命名转驼峰命名
-* 首字母大写转小写
-
-#### 蛇形命名转驼峰命名
-
-```
-let dict1: [String: Any] = [
-    "nick_name": "Mccc",
-    "self_age": 10,
-    "sub_info": [
-        "real_name": "小李"
-    ]
-]
-```
-
-```
-struct TwoModel: SmartCodable {
-    var nickName: String = ""
-    var selfAge: Int = 0
-    var subInfo: SubTwoModel?
-}
-
-struct SubTwoModel: SmartCodable {
-    var realName: String = ""
-}
-```
-
-设置一个key的解析选项，影响本次解析。
-
-```
-let option1: SmartDecodingOption = .key(.fromSnakeCase)
-guard let model1 = TwoModel.deserialize(from: dict1, options: [option1]) else { return }
-```
-
-#### 首字母大写转小写
-
-```
-let dict: [String: Any] = [
-    "Name": "Mccc",
-    "Age": 10,
-    "Sex": "男",
-    "sub": [
-        "Name": "小李"
-    ]
-]
-```
-
-```
-struct Model: SmartCodable {
-    var name: String = ""
-    var age: Int = 0
-    var sex: String = ""
-    var sub: SubModel?
-}
-
-struct SubModel: SmartCodable {
-    var name: String = ""
-}
-```
-
-设置一个key的解析选项，影响本次解析。
-
-```
-let option: SmartDecodingOption = .key(.firstLetterLower)
-guard let model = Model.deserialize(from: dict, options: [option]) else { return }
-```
-
-
-
-### 自定义解析规则
-
-自定义映射分为两种： 
-
-* 忽略某些解码的key
-* 将解码的key重命名
-
-将这个字典dict
-
-```
-let dict = [
-    "nickName": "小花",
-    "realName": "小明",
-    "person_age": 10
-] as [String : Any]
-```
-
-解析到Model中
-
-```
-struct Model: SmartCodable {
-    var name: String = ""
-    var age: Int?
-    var ignoreKey: String?
-}
-```
-
-需要注意的是： 
-
-**ignoreKey** 属性是不需要解析的。
-
-**name** 和 **age** 需要重命名到字典中的key上。
-
-
-
-#### 忽略key
-
-通过重写CodingKeys提供要解析的属性。未提供的属性会自动忽略解析。
-
-```
-struct Model: SmartCodable {
-    var name: String = ""
-    var age: Int = 0
-    var ignoreKey: String?
-    
-    enum CodingKeys: CodingKey {
-        case name
-        case age
-    }
-}
-```
-
-
-
-#### 重命名key
+##### 重命名key
 
 支持自定义映射关系，你需要实现一个可选的`mapping`函数。
 
@@ -350,90 +373,9 @@ struct Model: SmartCodable {
 
   也可以像 `CodingKeys.name <--- ["nickName", "realName"]` 一样处理 **1对多** 的映射。如果恰好都有值，将选择第一个。
 
+### [解码中] Value的解析策略
 
-
-
-
-### 枚举的解码
-
-让枚举遵循 **SmartCaseDefaultable** ，当解码失败时使用 **defaultCase**。
-
-```
-struct CompatibleEnum: SmartCodable {
-
-    init() { }
-    var enumTest: TestEnum = .a
-
-    enum TestEnum: String, SmartCaseDefaultable {
-        static var defaultCase: TestEnum = .a
-
-        case a
-        case b
-        case c = "hello"
-    }
-}
-```
-
-
-
-### 解码Any
-
-Codable是无法解码Any类型的，这样就意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型， 这对解码造成了一定的困扰。
-
-**SmartAny** 是**SmartCodable** 提供的解决Any的方案。可以直接像使用 **Any** 一样使用它。 
-
-```
-struct AnyModel: SmartCodable {
-    var name: SmartAny?
-    var dict: [String: SmartAny] = [:]
-    var arr: [SmartAny] = []
-}
-```
-
-```
-let inDict = [
-    "key1": 1,
-    "key2": "two",
-    "key3": ["key": "1"],
-    "key4": [1, 2.2]
-] as [String : Any]
-
-let arr = [inDict]
-
-let dict = [
-    "name": "xiao ming",
-    "age": 20,
-    "dict": inDict,
-    "arr": arr
-] as [String : Any]
-
-guard let model = AnyModel.deserialize(from: dict) else { return }
-guard let model = AnyModel.deserialize(from: dict) else { return }
-print(model.name.peel )
-print(model.age?.peel ?? 0)
-print(model.dict.peel)
-print(model.arr.peel)
-```
-
-需要使用 **peel** 对数据解包。
-
-
-
-同时也提供了反向转换的方法：
-
-* Any ➡️ SmartAny
-* [Any] ➡️ [SmartAny]
-* [String: Any] ➡️ [String: SmartAny]
-
-```
-let name = SmartAny(from: "新名字")
-let dict1 = ["key2": "value2"].cover
-let arr1 = [ ["key3": "value3"] ].cover
-```
-
-
-
-## 解析选项 - SmartDecodingOption
+#### 全局的值解析策略
 
 SmartDecodingOption提供了三种解码选项，分别为：
 
@@ -451,7 +393,7 @@ public enum SmartDecodingOption {
 }
 ```
 
-### Date
+##### Date
 
 ```
 let dateFormatter = DateFormatter()
@@ -460,7 +402,7 @@ let option: JSONDecoder.SmartDecodingOption = .dateStrategy(.formatted(dateForma
 guard let model = FeedOne.deserialize(from: json, options: [option]) else { return }
 ```
 
-### Data
+##### Data
 
 ```
 let option: JSONDecoder.SmartDecodingOption = .dataStrategy(.base64)
@@ -468,11 +410,84 @@ guard let model = FeedOne.deserialize(from: json, options: [option]) else { retu
 gurad let data = model.address, let url = String(data: data, encoding: .utf8) { else }
 ```
 
-### Float
+##### Float
 
 ```
 let option: JSONDecoder.SmartDecodingOption = .floatStrategy(.convertFromString(positiveInfinity: "infinity", negativeInfinity: "-infinity", nan: "NaN"))
 guard let model1 = FeedOne.deserialize(from: json, options: [option]) else {  return }
+```
+
+
+
+#### 局部的值解析策略
+
+```
+struct SmartModel: SmartCodable {
+    var date1: Date?
+    var date2: Date?
+    var url: URL?
+            
+    // value的解析策略
+    static func mappingForValue() -> [SmartValueTransformer]? {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        return [
+            CodingKeys.url <--- SmartURLTransformer(prefix: "https://"),
+            CodingKeys.date2 <--- SmartDateTransformer(),
+            CodingKeys.date1 <--- SmartDateFormatTransformer(format)
+        ]
+    }
+}
+```
+
+您可以实现 `mappingForValue` 给每个属性设置不同的解析策略。
+
+支持的类型：
+
+* Date
+* UIColor
+* URL
+
+如需其他类型可以提 **issue**。
+
+##### 自定义解析策略
+
+遵守该协议，实现协议方法。
+
+```
+public protocol ValueTransformable {
+    associatedtype Object
+    associatedtype JSON
+    
+    /// transform from ’json‘ to ’object‘
+    func transformFromJSON(_ value: Any?) -> Object?
+    
+    /// transform to ‘json’ from ‘object’
+    func transformToJSON(_ value: Object?) -> JSON?
+}
+```
+
+
+
+### [解码后] 解析完成的回调
+
+```
+class Model: SmartDecodable {
+
+    var name: String = ""
+    var age: Int = 0
+    var desc: String = ""
+    required init() { }
+    
+    // 解析完成的回调
+    func didFinishMapping() {    
+        if name.isEmpty {
+            desc = "\(age)岁的" + "人"
+        } else {
+            desc = "\(age)岁的" + name
+        }
+    }
+}
 ```
 
 
