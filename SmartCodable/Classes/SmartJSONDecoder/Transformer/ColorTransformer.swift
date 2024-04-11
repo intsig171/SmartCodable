@@ -11,7 +11,6 @@ import UIKit
 #else
 import Cocoa
 #endif
-import UIKit
 
 
 public enum SmartColor {
