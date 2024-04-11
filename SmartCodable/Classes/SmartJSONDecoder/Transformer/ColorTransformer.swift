@@ -13,14 +13,15 @@ import Cocoa
 #endif
 
 
+
 public enum SmartColor {
-    case color(UIColor)
+    case color(ColorObject)
     
-    public init(from value: UIColor) {
+    public init(from value: ColorObject) {
         self = .color(value)
     }
     
-    public var peel: UIColor {
+    public var peel: ColorObject {
         switch self {
         case .color(let c):
             return c
@@ -33,8 +34,8 @@ extension SmartColor: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let hexString = try container.decode(String.self)
-        guard let color = UIColor.hex(hexString) else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode UIColor from provided hex string.")
+        guard let color = ColorObject.hex(hexString) else {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode Color from provided hex string.")
         }
         self = .color(color)
     }
@@ -63,7 +64,7 @@ public struct SmartHexColorTransformer: ValueTransformable {
 
     public func transformFromJSON(_ value: Any?) -> Object? {
         if let rgba = value as? String {
-            return UIColor.hex(rgba)
+            return ColorObject.hex(rgba)
         }
         return nil
     }
@@ -77,7 +78,7 @@ public struct SmartHexColorTransformer: ValueTransformable {
 }
 
 
-extension UIColor {
+extension ColorObject {
     
     var hexString: String {
         var red: CGFloat = 0
@@ -91,7 +92,7 @@ extension UIColor {
         return String(format:"#%06x", rgb)
     }
     
-    static func hex(_ hex: String) -> UIColor? {
+    static func hex(_ hex: String) -> ColorObject? {
         
         var red:   CGFloat = 0.0
         var green: CGFloat = 0.0

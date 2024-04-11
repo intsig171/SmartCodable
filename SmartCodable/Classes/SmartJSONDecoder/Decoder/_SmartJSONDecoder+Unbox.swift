@@ -5,10 +5,17 @@
 //  Created by Mccc on 2024/3/4.
 //
 import Foundation
-#if canImport(UIKit)
-    import UIKit
+
+#if os(iOS) || os(tvOS) || os(watchOS)
+import UIKit
 #else
-    import AppKit
+import Cocoa
+#endif
+
+#if os(iOS) || os(tvOS) || os(watchOS)
+public typealias ColorObject = UIColor
+#else
+public typealias ColorObject = NSColor
 #endif
 
 
@@ -441,7 +448,7 @@ extension _SmartJSONDecoder {
         return url
     }
     
-    func unbox(_ value: Any, as type: UIColor.Type) throws -> UIColor? {
+    func unbox(_ value: Any, as type: ColorObject.Type) throws -> ColorObject? {
         guard !(value is NSNull) else { return nil }
         guard let colorString = try self.unbox(value, as: String.self) else { return nil }
         
@@ -451,13 +458,13 @@ extension _SmartJSONDecoder {
             let container = defalutsStorage.transformers.first(where: {
                 $0.location.stringValue == lastKey.stringValue
             })
-            if let tranformValue = container?.tranformer.transformFromJSON(value) as? UIColor {
+            if let tranformValue = container?.tranformer.transformFromJSON(value) as? ColorObject {
                 return tranformValue
             }
         }
        
         
-        return UIColor.hex(colorString)
+        return ColorObject.hex(colorString)
     }
     
     func unbox(_ value: Any, as type: SmartAny.Type) throws -> SmartAny? {
