@@ -40,12 +40,31 @@ extension Dictionary where Key == String {
     public var cover: [String: SmartAny] {
         mapValues { SmartAny(from: $0) }
     }
+    
+    public var peelIfPresent: [String: Any] {
+        if let dict = self as? [String: SmartAny] {
+            return dict.peel
+        } else {
+            return self
+        }
+    }
 }
 
 extension Array {
     /// 从 [Any] 类型转换为 [SmartAny]
     public var cover: [ SmartAny] {
         map { SmartAny(from: $0) }
+    }
+    
+    /// 如果存在就解包，否则返回自身。
+    public var peelIfPresent: [Any] {
+        if let arr = self as? [[String: SmartAny]] {
+            return arr.peel
+        } else if let arr = self as? [SmartAny] {
+            return arr.peel
+        } else {
+            return self
+        }
     }
 }
 
@@ -62,6 +81,14 @@ extension Array where Element == SmartAny {
         map { $0.peel }
     }
 }
+
+extension Array where Element == [String: SmartAny] {
+    /// 解析完成会被SmartAny包裹，使用该属性去壳。
+    public var peel: [Any] {
+        map { $0.peel }
+    }
+}
+
 
 extension SmartAny {
     /// 获取原本的值

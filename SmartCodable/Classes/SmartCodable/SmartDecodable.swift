@@ -103,7 +103,7 @@ extension SmartDecodable {
     /// - Parameter options: 解码策略
     ///   不允许出现相同的枚举项，eg：不可以传入多个keyStrategy【只有第一个有效】。
     /// - Returns: 模型
-    public static func deserialize(from dict: [AnyHashable: Any]?, options: Set<SmartDecodingOption>? = nil) -> Self? {
+    public static func deserialize(from dict: [String: Any]?, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _dict = dict else {
             SmartLog.logDebug("要解析的字典为nil", className: "\(self)")
             return nil
@@ -288,14 +288,14 @@ extension Data {
 
 
 // MARK: - 扩展实现
-extension Dictionary {
+extension Dictionary where Key == String {
     /// 字典转Json字符串
     fileprivate func toJSONString() -> String? {
-        if (!JSONSerialization.isValidJSONObject(self)) {
-            return nil
-        }
+
+        let peeledDict = self.peelIfPresent
+        guard JSONSerialization.isValidJSONObject(peeledDict) else { return nil }
         
-        if let data = try? JSONSerialization.data(withJSONObject: self) {
+        if let data = try? JSONSerialization.data(withJSONObject: peeledDict) {
             if let json = String(data: data, encoding: String.Encoding.utf8) {
                 return json
             }
@@ -330,9 +330,10 @@ extension String {
 extension Array {
     /// 数组转json字符串
     fileprivate func toJSONString() -> String? {
-        guard JSONSerialization.isValidJSONObject(self) else { return nil }
+        let peeledArr = self.peelIfPresent
+        guard JSONSerialization.isValidJSONObject(peeledArr) else { return nil }
         do {
-            let data = try JSONSerialization.data(withJSONObject: self, options: [])
+            let data = try JSONSerialization.data(withJSONObject: peeledArr, options: [])
             let json = String(data: data, encoding: String.Encoding.utf8)
             return json
         } catch {
@@ -340,3 +341,4 @@ extension Array {
         }
     }
 }
+

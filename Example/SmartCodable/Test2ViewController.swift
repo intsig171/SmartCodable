@@ -12,37 +12,82 @@ import HandyJSON
 
 
 
-// todo 为什么
 class Test2ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let json = """
-
-        {\"msg\":\"操作成功\",\"code\":200,\"data\":{\"commonUse\": [{\"resId\":16,\"resName\":\"转正申请\",\"parentId\":3,\"resUrl\":null,\"picUrl\":\"/upload/app/staff.png\",\"isDefault\":2,\"children\":null}]}}
-
+        {
+            "printer_temp_tab": [
+                {
+                    "detail_list": [
+                        {
+                            "name": "实线纸",
+                            "original": "https://ss-cdn.camscanner.com/10000_778773f1a68a40f666a95e9e4d2532e5.jpg",
+                            "thumb": "https://ss-cdn.camscanner.com/10000_778773f1a68a40f666a95e9e4d2532e5.jpg"
+                        },
+                    ],
+                    "icon_url": "https://ss-cdn.camscanner.com/10000_43a7e569bb204db279e9079086591251.png",
+                    "title": "书写纸",
+                    "type": 1
+                },
+            ]
+        }
         """
-        let value =  (SmartResponseData<[String:SmartAny]>).deserialize(from: json)
+        guard let model =  CEPrinterTemplateTab.deserialize(from: json) else { return }
+        printStruct(model)
+        print("\n")
+        
+        let printer_temp_tab = model.printer_temp_tab ?? []
+    
+        
+        let listModel = [CEPrinterTemplateTotal].deserialize(from: printer_temp_tab)
+        print(listModel)
+        print("\n")
 
-        print("\(value)")
+        
+        let firstDict = printer_temp_tab.first ?? [:]
+        let firstModel = CEPrinterTemplateTotal.deserialize(from: firstDict)
+        print(firstModel)
+         
+        
+        print("\n")
+        
+//        let dict = model.toDictionary()
+//        print(dict)
     }
 
 }
 
+struct CEPrinterTemplateTab: SmartCodable {
+    var printer_temp_tab: [[String: SmartAny]]?
+}
+struct CEPrinterTemplateTotal: SmartCodable {
+    /// 类型名称
+    var title: String?
+    /// 类型图片
+    var icon_url: String?
+    /// 打印类型列表数据
+    var detail_list: [CEPrinterTemplateItem] = []
 
-struct SmartResponseData<T:SmartCodable>:SmartCodable{
-    var code: Int = 0
-    var msg:String?
-    var data: T?
-}
-struct TodoFatherModel: SmartCodable {
-    var commonUse: [TodoModel] = []
+    mutating func didFinishMapping() {
+        for index in detail_list.indices {
+            detail_list[index].typeName = title
+        }
+    }
 }
 
-struct TodoModel: SmartCodable {
-    var resId: Int = 0
-    var resName: String = ""
+struct CEPrinterTemplateItem: SmartCodable {
+    /// 打印类型名称
+    var name: String?
+    /// 原图
+    var original: String?
+    /// 缩略图
+    var thumb: String?
+    /// 类型名称
+    var typeName: String?
 }
+
 
 
