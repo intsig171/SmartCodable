@@ -168,6 +168,11 @@ extension UIColor {
         } else {
             return nil
         }
+        
+#if os(iOS) || os(tvOS) || os(watchOS)
         return UIColor(red: red, green: green, blue: blue, alpha: useAlpha)
+#else
+        return NSColor(calibratedRed: red, green: green, blue: blue, alpha: useAlpha)
+#endif        
     }
 }
