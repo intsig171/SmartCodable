@@ -158,9 +158,6 @@ extension SmartAny: Codable {
              布尔类型：Bool
              */
             
-//            throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: encoder.codingPath, debugDescription: "NSNumber contains unsupported type"))
-
-            
             if let bool = value as? Bool {
                 try container.encode(bool)
             }  else if let double = value as? Double {
