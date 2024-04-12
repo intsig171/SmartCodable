@@ -53,6 +53,10 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
  * 3. ✅ 修复json中包含null，进行模型化处理失败问题。
  *   - 说明：json中某一个字段的值是json字符串，但是对应的属性是模型。
  *   - 结论：已完成
+ *
+ * 4. ✅ 修复使用SmartAny导致明确类型问题。
+ *   - 说明：字段的值为5， 使用SmartAny包裹之后，5就被明确为Int类型了。 进行 as? Double 就会失败。不符合期望。
+ *   - 结论：已完成
  */
 
 
