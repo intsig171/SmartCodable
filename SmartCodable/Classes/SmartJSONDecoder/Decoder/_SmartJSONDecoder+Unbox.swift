@@ -470,43 +470,45 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: SmartAny.Type) throws -> SmartAny? {
         guard !(value is NSNull) else { return nil }
 
-        if let temp = try? unbox(value, as: Bool.self) {
-            return .bool(temp)
-        } else if let temp = try? unbox(value, as: String.self) {
+        if let temp = try? unbox(value, as: String.self) {
             return .string(temp)
+        } else if let temp = try? unbox(value, as: Bool.self) as? NSNumber {
+            return .number(temp)
         }
         
-        else if let temp = try? unbox(value, as: Int.self) {
-            return .int(temp)
-        } else if let temp = try? unbox(value, as: Int8.self) {
-            return .int8(temp)
-        } else if let temp = try? unbox(value, as: Int16.self) {
-            return .int16(temp)
-        } else if let temp = try? unbox(value, as: Int32.self) {
-            return .int32(temp)
-        } else if let temp = try? unbox(value, as: Int64.self) {
-            return .int64(temp)
+        else if let temp = try? unbox(value, as: Double.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: CGFloat.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: Float.self) as? NSNumber {
+            return .number(temp)
         }
         
-        else if let temp = try? unbox(value, as: UInt.self) {
-            return .uInt(temp)
-        } else if let temp = try? unbox(value, as: UInt8.self) {
-            return .uInt8(temp)
-        } else if let temp = try? unbox(value, as: UInt16.self) {
-            return .uInt16(temp)
-        } else if let temp = try? unbox(value, as: UInt32.self) {
-            return .uInt32(temp)
-        } else if let temp = try? unbox(value, as: UInt64.self) {
-            return .uInt64(temp)
+        else if let temp = try? unbox(value, as: Int.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: Int8.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: Int16.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: Int32.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: Int64.self) as? NSNumber {
+            return .number(temp)
         }
         
-        else if let temp = try? unbox(value, as: Double.self) {
-            return .double(temp)
-        } else if let temp = try? unbox(value, as: CGFloat.self) {
-            return .cgFloat(temp)
-        } else if let temp = try? unbox(value, as: Float.self) {
-            return .float(temp)
+        else if let temp = try? unbox(value, as: UInt.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: UInt8.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: UInt16.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: UInt32.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = try? unbox(value, as: UInt64.self) as? NSNumber {
+            return .number(temp)
         }
+        
+
 
         return nil
     }
