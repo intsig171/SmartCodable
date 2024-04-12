@@ -54,12 +54,6 @@ struct ModelKeyMapper<T> {
 
 extension Dictionary {
     
-    fileprivate mutating func updateIfAbsent(key: Key, value: Value) {
-        guard self[key] == nil else { return }
-        self[key] = value
-    }
-    
-    
     /// Retrieves the value corresponding to the path in the dictionary.
     ///  let dict = [
     ///      "inDict": [
