@@ -67,7 +67,7 @@ fileprivate func _transformToJsonString(object: Any, prettyPrint: Bool = false, 
             SmartLog.logError(error, className: "\(type)")
         }
     } else {
-        SmartLog.logDebug("\(object)) is not a valid JSON Object", className: "\(type)")
+        SmartLog.logVerbose("\(object)) is not a valid JSON Object", className: "\(type)")
     }
     return nil
 }
@@ -82,7 +82,7 @@ fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type) -> T? {
             if let temp = json as? T {
                 return temp
             } else {
-                SmartLog.logDebug("\(json)) is not a valid Type", className: "\(type)")
+                SmartLog.logVerbose("\(json)) is not a valid Type", className: "\(type)")
             }
         } catch {
             SmartLog.logError(error, className: "\(type)")

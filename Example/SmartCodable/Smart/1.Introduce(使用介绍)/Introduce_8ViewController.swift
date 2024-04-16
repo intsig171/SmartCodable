@@ -21,20 +21,20 @@ class Introduce_8ViewController: BaseCompatibilityViewController {
                 
     
         let dict = [
-            "enumTest": ""
+            "enum1": "123"
         ]
         
         guard let model = CompatibleEnum.deserialize(from: dict) else { return }
-        print(model.enum1)
-        print(model.enum2 ?? .hello)
-
-        // 如果进入兼容逻辑，json值将被修改，无法恢复。
-        guard let transformDict = model.toDictionary() else { return }
-        print(transformDict)
-        
-        /**
-         ["enum1": a]
-         */
+        print(model)
+//        print(model.enum2 ?? .hello)
+//
+//        // 如果进入兼容逻辑，json值将被修改，无法恢复。
+//        guard let transformDict = model.toDictionary() else { return }
+//        print(transformDict)
+//
+//        /**
+//         ["enum1": a]
+//         */
     }
 }
 

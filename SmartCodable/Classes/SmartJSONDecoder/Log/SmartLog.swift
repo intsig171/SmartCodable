@@ -51,14 +51,7 @@ struct SmartLog {
             return info.message
         }
     }
-    
-    static func logDebug(_ item: String, className: String? = nil) {
-        logIfNeeded(level: .debug) {
-            let info = ErrorInfo(location: className, reason: item)
-            return info.message
-        }
-    }
-    
+
     static func logVerbose(_ item: String, className: String? = nil) {
         logIfNeeded(level: .verbose) {
             let info = ErrorInfo(location: className, reason: item)

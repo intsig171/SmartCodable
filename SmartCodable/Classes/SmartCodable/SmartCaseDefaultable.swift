@@ -19,7 +19,6 @@ public extension SmartCaseDefaultable where Self: Decodable, Self.RawValue: Deco
             self = v
         } else {
             let des = "Cannot initialize \(Self.self) from invalid \(RawValue.self) value `\(decoded)`"
-            SmartLog.logDebug(des, className: "\(Self.self)")
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: des))
         }
     }
