@@ -240,16 +240,16 @@ extension SmartJSONKeyedDecodingContainer {
             let className = decoder.defalutsStorage.typeName
             let path = decoder.codingPath
             if let entry = entry {
-                if entry is NSNull {
+                if entry is NSNull { // 值为null
                     let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-                    SmartLog.logError(error, className: className)
-                } else {
+                    SmartLog.logDebug(error, className: className)
+                } else { // value类型不匹配
                     let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
                     SmartLog.logError(error, className: className)
                 }
-            } else {
+            } else { // key不存在或value为nil
                 let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-                SmartLog.logError(error, className: className)
+                SmartLog.logDebug(error, className: className)
             }
         }
         

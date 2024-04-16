@@ -442,8 +442,10 @@ extension _SmartJSONDecoder {
         }
         
         guard let url = URL(string: urlString) else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(
+            let error = DecodingError.dataCorrupted(DecodingError.Context(
                 codingPath: self.codingPath, debugDescription: "Invalid URL string."))
+            SmartLog.logError(error)
+            return nil
         }
         return url
     }
