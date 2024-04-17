@@ -48,6 +48,8 @@ extension Introduce_8ViewController {
         var enum2: TestEnum?
 
         enum TestEnum: String, SmartCaseDefaultable {
+            static var defaultCase: TestEnum = .a
+            
             case a
             case b
             case hello = "c"
