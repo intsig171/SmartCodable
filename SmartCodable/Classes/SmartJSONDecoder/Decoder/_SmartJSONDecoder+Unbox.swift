@@ -315,14 +315,10 @@ extension _SmartJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         // Prioritize the parsing strategy for individual properties
-        if let lastKey = codingPath.last {
-            let container = defalutsStorage.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(value) as? Date {
-                return tranformValue
-            }
+        if let tranformValue = defalutsStorage.tranformValue(value, key: codingPath.last) as? Date {
+            return tranformValue
         }
+        
 
         
         switch self.options.dateDecodingStrategy {
@@ -430,16 +426,11 @@ extension _SmartJSONDecoder {
         guard !(value is NSNull) else { return nil }
         guard let urlString = try self.unbox(value, as: String.self) else { return nil }
         
-        
         // 优先处理单个属性的解析策略
-        if let lastKey = codingPath.last {
-            let container = defalutsStorage.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(value) as? URL {
-                return tranformValue
-            }
+        if let tranformValue = defalutsStorage.tranformValue(value, key: codingPath.last) as? URL {
+            return tranformValue
         }
+
         
         guard let url = URL(string: urlString) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
@@ -452,15 +443,9 @@ extension _SmartJSONDecoder {
         guard !(value is NSNull) else { return nil }
         guard let colorString = try self.unbox(value, as: String.self) else { return nil }
         
-        
-        // Prioritize the parsing strategy for individual properties
-        if let lastKey = codingPath.last {
-            let container = defalutsStorage.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(value) as? ColorObject {
-                return tranformValue
-            }
+        // 优先处理单个属性的解析策略
+        if let tranformValue = defalutsStorage.tranformValue(value, key: codingPath.last) as? ColorObject {
+            return tranformValue
         }
        
         
@@ -547,7 +532,7 @@ extension _SmartJSONDecoder {
             let v = ModelKeyMapper<T>.convertToMappedFormat(value)
             self.storage.push(container: v)
 
-            defalutsStorage.recordAttributeValues(for: type, codingPath: codingPath)
+            defalutsStorage.recordAttributeValues(for: type)
             
             // Please see the description2⃣️
             decoded = try T(from: self)

@@ -18,29 +18,43 @@ class TestViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SmartConfig.debugMode = .none
+//        todo1()
+        
+        todo2()
+    }
+}
 
-        let dict1: [String: Any] = [
-            "data": [
-                "int": 3,
-                "double": 5.5
-            ]
+
+extension TestViewController {
+    
+    func todo2() {
+        
+        let dict: [String: Any] = [
+            "students": [
+                "name": "Mccc"
+            ],
+            "sex": "man123"
         ]
+        let model1 = ClassName.deserialize(from: dict)
+        BTPrint.print(model1)
 
-        guard let model = Model.deserialize(from: dict1) else { return }
-                
-        guard let data = model.data?.peel else { return }
+    }
+    
+    struct ClassName: SmartCodable {
+        var students: Student = Student()
+        var sex: Sex = .women
 
-        if let int = data["int"]  as? Int {
-            print("字段 int 的值为 \(int)")
+        enum Sex: String, SmartCaseDefaultable {
+            static var defaultCase: ClassName.Sex = .man
+            case man
+            case women
         }
+    }
 
-        if let double = data["int"]  as? Double {
-            print("字段 int 的值为 \(double)")
-        }
-
-        if let int = data["double"] as? Int {
-            print("字段 double 的值为 \(int)")
-        }
+    struct Student: SmartCodable {
+        var name: String = ""
     }
 }
 
@@ -48,8 +62,61 @@ class TestViewController: BaseViewController {
 
 extension TestViewController {
     
-    struct Model: SmartCodable {
-        var data: [String: SmartAny]?
+    func todo1() {
+        let json = """
+         {
+             "matches": [
+                    {
+                        "id": 2,
+                        "time_line": [
+                             {
+                                "count": 2
+                              }
+                         ]
+                      }
+                    ]
+                }
+        """
+        
+        let model = QLMatchList.deserialize(from: json)
+        
+        BTPrint.print(model)
+
+        if let matches = model?.matches, matches.count > 0 {
+            let uid = matches[0].id
+            if uid == 2 {
+                print("正确")
+            }else{
+                print("错误")
+            }
+        }
+    }
+    
+    
+    struct QLMatchList: SmartCodable {
+        var matches: [QLMatch]?
+    }
+
+    struct QLMatch: SmartCodable {
+        var id: Int = 0
+        var time_line: [QLTimeLine]?
+        var team_type: QLTeamType = .normal
+        
+//        enum CodingKeys: CodingKey {
+//            case id
+//            case time_line
+//        }
+    }
+    struct QLTimeLine: SmartCodable {
+        var count: Int = 2
+    }
+
+    public enum QLTeamType: Int, SmartCaseDefaultable {
+        public static var defaultCase: QLTeamType = .normal
+        
+
+        case normal = 0
+        case home = 1
+        case away = 2
     }
 }
-

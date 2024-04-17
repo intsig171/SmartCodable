@@ -11,38 +11,36 @@ import Foundation
 /// Records the default values of model properties during decoding, used for filling in when decoding fails.
 struct DecodingDefaults {
     
-    private(set) var typeName: String = ""
+    private(set) var recoders: [Recoder] = []
     
-    /// The current decoding path (ensuring the correspondence through the decoding path)
-    private var codingPath: [CodingKey] = []
-        
-    /// Records the default values of model properties
-    private var containers: [String: Any] = [:]
+    var topContainer: Recoder? {
+        assert(!self.recoders.isEmpty, "Empty container stack.")
+        return self.recoders.last
+    }
     
-    /// Records the custom transformer for properties
-    private(set) var transformers: [SmartValueTransformer] = []
-    
-    mutating func recordAttributeValues<T: Decodable>(for type: T.Type, codingPath: [CodingKey]) {
+    mutating func recordAttributeValues<T: Decodable>(for type: T.Type) {
         if let object = type as? SmartDecodable.Type {
+            
+            var recoder = Recoder()
+            
             let instance = object.init()
             let mirror = Mirror(reflecting: instance)
             mirror.children.forEach { child in
                 if let key = child.label {
-                    containers[key] = child.value
+                    recoder.containers[key] = child.value
                 }
             }
-            self.typeName = "\(type)"
-            self.codingPath = codingPath
+            recoder.typeName = "\(type)"
 
-            transformers = object.mappingForValue() ?? []
+            recoder.transformers = object.mappingForValue() ?? []
+            
+            recoders.append(recoder)
         }
     }
     
     func getValue<T: Decodable>(forKey key: CodingKey, atPath path: [CodingKey]) -> T? {
-        guard areCodingKeysEqual(codingPath, path),
-                let value = containers[key.stringValue] as? T else {
-            return nil
-        }
+        
+        let value = recoders.last?.containers[key.stringValue] as? T
         return value
     }
     
@@ -51,17 +49,36 @@ struct DecodingDefaults {
         // If the current type being decoded does not inherit from SmartDecodable Model, it does not need to be processed.
         // The properties within the model being decoded should not be cleared. They can be cleared only after decoding is complete.
         if let _ = T.self as? SmartDecodable.Type {
-            self.typeName = ""
-            self.codingPath = []
-            self.containers.removeAll()
-            self.transformers.removeAll()
+            if recoders.count > 0 {
+                recoders.removeLast()
+            }
         }
-    }
-    
-    private func areCodingKeysEqual(_ keys1: [CodingKey], _ keys2: [CodingKey]) -> Bool {
-        return keys1.count == keys2.count && !zip(keys1, keys2).contains { $0.stringValue != $1.stringValue }
     }
 }
 
+extension DecodingDefaults {
+    func tranformValue(_ value: Any?, key: CodingKey?) -> Any? {
+        if let lastKey = key {
+            let container = topContainer?.transformers.first(where: {
+                $0.location.stringValue == lastKey.stringValue
+            })
+            if let tranformValue = container?.tranformer.transformFromJSON(value) as? Date {
+                return tranformValue
+            }
+        }
+        return nil
+    }
+}
 
-
+extension DecodingDefaults {
+    struct Recoder {
+        /// The current decoding type
+        var typeName: String = ""
+        
+        /// The current decoding path (ensuring the correspondence through the decoding path)
+        var containers: [String: Any] = [:]
+        
+        /// Records the custom transformer for properties
+        var transformers: [SmartValueTransformer] = []
+    }
+}
