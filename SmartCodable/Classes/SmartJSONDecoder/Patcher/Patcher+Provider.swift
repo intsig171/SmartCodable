@@ -20,6 +20,8 @@ extension Patcher {
                 return object.init() as! T
             } else if let object = T.self as? any SmartCaseDefaultable.Type {
                 return object.defaultCase as! T
+            } else if let object = T.self as? any SmartAssociatedEnumerable.Type {
+                return object.defaultCase as! T
             } else {
                 throw DecodingError.valueNotFound(Self.self, DecodingError.Context(
                         codingPath: [], debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
