@@ -69,12 +69,12 @@ public struct SmartHexColorTransformer: ValueTransformable {
         return nil
     }
 
-    public func transformToJSON(_ value: Object?) -> JSON? {
-        if let value = value {
-            return value.hexString
-        }
-        return nil
-    }
+//    public func transformToJSON(_ value: Object?) -> JSON? {
+//        if let value = value {
+//            return value.hexString
+//        }
+//        return nil
+//    }
 }
 
 
