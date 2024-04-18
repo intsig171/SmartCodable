@@ -124,10 +124,6 @@ extension CustomDecodingValueViewContriller {
             return nil
         }
         
-        func transformToJSON(_ value: String?) -> String? {
-            return value
-        }
-        
         typealias Object = String
         typealias JSON = String
     }
@@ -138,10 +134,6 @@ extension CustomDecodingValueViewContriller {
                 return 100 + temp
             }
             return nil
-        }
-        
-        func transformToJSON(_ value: Int?) -> Int? {
-            return value
         }
         
         typealias Object = Int
@@ -156,10 +148,6 @@ extension CustomDecodingValueViewContriller {
             return nil
         }
         
-        func transformToJSON(_ value: Double?) -> Double? {
-            return value
-        }
-        
         typealias Object = Double
         typealias JSON = Double
     }
@@ -170,10 +158,6 @@ extension CustomDecodingValueViewContriller {
                 return 100 + temp
             }
             return nil
-        }
-        
-        func transformToJSON(_ value: CGFloat?) -> CGFloat? {
-            return value
         }
         
         typealias Object = CGFloat
@@ -189,14 +173,6 @@ extension CustomDecodingValueViewContriller {
                 }
             }
             return nil
-        }
-        
-        func transformToJSON(_ value: Bool?) -> String? {
-            if value == true {
-                return "Mccc"
-            } else {
-                return nil
-            }
         }
         
         typealias Object = Bool

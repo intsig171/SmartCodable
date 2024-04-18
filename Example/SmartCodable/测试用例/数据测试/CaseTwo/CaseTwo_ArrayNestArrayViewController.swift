@@ -34,7 +34,7 @@ class CaseTwo_ArrayNestArrayViewController: BaseCompatibilityViewController {
         ]
         
         
-        if let models = [PersonModel].deserialize(from: arr) as? [PersonModel] {
+        if let models = [PersonModel].deserialize(from: arr) {
             print(models)
         }
     }

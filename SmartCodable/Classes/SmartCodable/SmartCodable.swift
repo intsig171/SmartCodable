@@ -16,12 +16,6 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 //MARK: - =========== 版本Todo List ===========
 
 // MARK: 继承Model的解码支持
-/**
- * 1. ❌ 继承Model的解码支持
- *   - 说明：model继承时，编译器只给`ClassModel`添加了`init(from decoder: Decoder)`，`ClassSubModel`则没有。
- *   - 结论：在解码时，判断当前是否ClassSubModel，如果是的话，执行 `try super.init(from: decoder)`。
- */
-
 // MARK: 性能优化
 /**
  * 2. ❌ 性能优化
@@ -48,20 +42,24 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 //MARK: - ～> V3 版本
 // MARK: V3.3.1
 /**
- * 1. ✅ 支持自定义的value解析规则
- *   - 说明：支持value的解析规则，比如Date，可以设置解析策略做不同的实现。
- *   - 结论：SmartValueTransformer
+ * 1. ✅ 优化
+ *   - 说明：Error的日志仅限类型不匹配。值为nil或key不存在的情况定义为Debug日志。
+ *   - 结论：完成
  *
- * 2. ✅ 修复包含SmartAny的数据，转json失败问题。
- *   - 说明：转换之前对数据进行类型判断，合适的时机进行解包。
+ * 2. ✅ bugfix
+ *   - 说明：枚举默认值还是有存在的必要，可以加强程序的健壮性。
  *   - 结论：已完成
  *
- * 3. ✅ 修复json中包含null，进行模型化处理失败问题。
- *   - 说明：json中某一个字段的值是json字符串，但是对应的属性是模型。
+ * 3. ✅ bugfix
+ *   - 说明：修复json字段模型化中，模型数组解析失败
  *   - 结论：已完成
  *
- * 4. ✅ 修复使用SmartAny导致明确类型问题。
- *   - 说明：字段的值为5， 使用SmartAny包裹之后，5就被明确为Int类型了。 进行 as? Double 就会失败。不符合期望。
+ * 4. ✅ 新功能
+ *   - 说明：所有的可decode类型，支持自定义Value解析策略
+ *   - 结论：已完成
+ *
+ * 5. ✅ 新功能
+ *   - 说明：支持关联值枚举的解析
  *   - 结论：已完成
  */
 

@@ -22,7 +22,7 @@ class Introduce_8ViewController: BaseCompatibilityViewController {
     
         let dict = [
             "number": "one",
-//            "sex": "haha"
+            "sex": "haha"
         ]
         
         guard let model = CompatibleEnum.deserialize(from: dict) else { return }
@@ -31,10 +31,6 @@ class Introduce_8ViewController: BaseCompatibilityViewController {
         // 如果进入兼容逻辑，json值将被修改，无法恢复。
         guard let transformDict = model.toDictionary() else { return }
         print(transformDict)
-        
-        /**
-         ["enum1": a]
-         */
     }
 }
 
@@ -62,6 +58,7 @@ extension Introduce_8ViewController {
         case three
     }
     
+    /// 关联值枚举的解析， 需要自己接管decode
     enum Sex: SmartAssociatedEnumerable {
         static var defaultCase: Sex = .women
         
