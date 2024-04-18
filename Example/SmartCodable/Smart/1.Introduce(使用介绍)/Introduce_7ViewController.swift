@@ -16,7 +16,8 @@ class Introduce_7ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "hobby": "{\"name\":\"sleep\"}",
+            "hobby": "{\"name\":\"sleep1\"}",
+            "hobbys": "[{\"name\":\"sleep2\"}]",
         ]
         
         guard let model = Model.deserialize(from: dict) else { return }
@@ -31,11 +32,11 @@ extension Introduce_7ViewController {
 
     struct Model: SmartCodable {
         var hobby: Hobby?
+        var hobbys: [Hobby]?
     }
     
     struct Hobby: SmartCodable {
         var name: String = ""
     }
 }
-
 

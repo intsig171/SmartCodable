@@ -21,20 +21,20 @@ class Introduce_8ViewController: BaseCompatibilityViewController {
                 
     
         let dict = [
-            "enum1": "123"
+            "number": "one",
+//            "sex": "haha"
         ]
         
         guard let model = CompatibleEnum.deserialize(from: dict) else { return }
         print(model)
-//        print(model.enum2 ?? .hello)
-//
-//        // 如果进入兼容逻辑，json值将被修改，无法恢复。
-//        guard let transformDict = model.toDictionary() else { return }
-//        print(transformDict)
-//
-//        /**
-//         ["enum1": a]
-//         */
+
+        // 如果进入兼容逻辑，json值将被修改，无法恢复。
+        guard let transformDict = model.toDictionary() else { return }
+        print(transformDict)
+        
+        /**
+         ["enum1": a]
+         */
     }
 }
 
@@ -44,19 +44,52 @@ extension Introduce_8ViewController {
     struct CompatibleEnum: SmartCodable {
 
         init() { }
-        var enum1: TestEnum = .a
-        var enum2: TestEnum?
-
-        enum TestEnum: String, SmartCaseDefaultable {
-            case a
-            case b
-            case hello = "c"
+        var number: NumberType?
+        var sex: Sex = .man
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.sex <--- RelationEnumTranformer()
+            ]
         }
     }
-
+    
+    enum NumberType: String, SmartCaseDefaultable {
+        static var defaultCase: NumberType = .one
+        
+        case one
+        case two
+        case three
+    }
+    
+    enum Sex: SmartAssociatedEnumerable {
+        static var defaultCase: Sex = .women
+        
+        case man
+        case women
+        case other(String)
+    }
 }
 
 
+extension Introduce_8ViewController {
+    struct RelationEnumTranformer: ValueTransformable {
+        
+        
+        typealias Object = Sex
+        typealias JSON = String
+        
+        func transformFromJSON(_ value: Any?) -> Sex? {
+            guard let temp = value as? String else { return .man }
 
-
-
+            switch temp {
+            case "man":
+                return .man
+            case "women":
+                return .women
+            default:
+                return .other(temp)
+            }
+        }
+    }
+}

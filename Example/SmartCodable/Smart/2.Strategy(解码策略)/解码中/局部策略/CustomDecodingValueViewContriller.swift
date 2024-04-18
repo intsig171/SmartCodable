@@ -18,10 +18,19 @@ class CustomDecodingValueViewContriller: BaseViewController {
         super.viewDidLoad()
 
         let dict1: [String: Any] = [
+            "string": "Mccc",
+            "int": 10,
+            "double": 10.0,
+            "bool": "Mccc",
+            "cgFloat": 20.0,
+            
             "date": "2024-04-07",
             "date2": 1712491290,
+            
             "url": "www.baidu.com",
+            
             "color": "7DA5E3",
+            
             "sub": [
                 "subDate": 1712491290,
                 "subColor": "7DA5E3",
@@ -49,6 +58,13 @@ class CustomDecodingValueViewContriller: BaseViewController {
 extension CustomDecodingValueViewContriller {
     
     struct SmartModel: SmartCodable {
+        
+        var string: String = ""
+        var int: Int = 0
+        var bool: Bool = false
+        var cgFloat: CGFloat = 0.0
+        var double: Double = 0.0
+        
         var date1: Date?
         var date2: Date?
         var url: URL?
@@ -64,6 +80,13 @@ extension CustomDecodingValueViewContriller {
             let format = DateFormatter()
             format.dateFormat = "yyyy-MM-dd"
             return [
+                
+                CodingKeys.string <--- StringTransformer(),
+                CodingKeys.int <--- IntTransformer(),
+                CodingKeys.double <--- DoubleTransformer(),
+                CodingKeys.bool <--- BoolTransformer(),
+                CodingKeys.cgFloat <--- CGFloatTransformer(),
+                
                 CodingKeys.url <--- SmartURLTransformer(prefix: "https://"),
                 CodingKeys.date2 <--- SmartDateTransformer(),
                 CodingKeys.date1 <--- SmartDateFormatTransformer(format)
@@ -92,3 +115,92 @@ extension CustomDecodingValueViewContriller {
 }
 
 
+extension CustomDecodingValueViewContriller {
+    struct StringTransformer: ValueTransformable {
+        func transformFromJSON(_ value: Any?) -> String? {
+            if let temp = value as? String {
+                return "前缀" + temp
+            }
+            return nil
+        }
+        
+        func transformToJSON(_ value: String?) -> String? {
+            return value
+        }
+        
+        typealias Object = String
+        typealias JSON = String
+    }
+    
+    struct IntTransformer: ValueTransformable {
+        func transformFromJSON(_ value: Any?) -> Int? {
+            if let temp = value as? Int {
+                return 100 + temp
+            }
+            return nil
+        }
+        
+        func transformToJSON(_ value: Int?) -> Int? {
+            return value
+        }
+        
+        typealias Object = Int
+        typealias JSON = Int
+    }
+    
+    struct DoubleTransformer: ValueTransformable {
+        func transformFromJSON(_ value: Any?) -> Double? {
+            if let temp = value as? Double {
+                return 100 + temp
+            }
+            return nil
+        }
+        
+        func transformToJSON(_ value: Double?) -> Double? {
+            return value
+        }
+        
+        typealias Object = Double
+        typealias JSON = Double
+    }
+    
+    struct CGFloatTransformer: ValueTransformable {
+        func transformFromJSON(_ value: Any?) -> CGFloat? {
+            if let temp = value as? CGFloat {
+                return 100 + temp
+            }
+            return nil
+        }
+        
+        func transformToJSON(_ value: CGFloat?) -> CGFloat? {
+            return value
+        }
+        
+        typealias Object = CGFloat
+        typealias JSON = CGFloat
+    }
+
+    
+    struct BoolTransformer: ValueTransformable {
+        func transformFromJSON(_ value: Any?) -> Bool? {
+            if let temp = value as? String {
+                if temp == "Mccc" {
+                    return true
+                }
+            }
+            return nil
+        }
+        
+        func transformToJSON(_ value: Bool?) -> String? {
+            if value == true {
+                return "Mccc"
+            } else {
+                return nil
+            }
+        }
+        
+        typealias Object = Bool
+        typealias JSON = String
+    }
+
+}

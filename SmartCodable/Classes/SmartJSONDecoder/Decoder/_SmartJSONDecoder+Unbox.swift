@@ -23,6 +23,11 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Bool.Type) throws -> Bool? {
 
         guard !(value is NSNull) else { return nil }
+        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Bool {
+            return tranform
+        }
+        
         if let number = value as? NSNumber {
             // TODO: Add a flag to coerce non-boolean numbers into Bools?
             if number === kCFBooleanTrue as NSNumber {
@@ -43,6 +48,11 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Int.Type) throws -> Int? {
       
         guard !(value is NSNull) else { return nil }
+        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Int {
+            return tranform
+        }
+        
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -66,7 +76,9 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Int8.Type) throws -> Int8? {
       
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Int8 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -81,7 +93,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: Int16.Type) throws -> Int16? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Int16 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -96,7 +110,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: Int32.Type) throws -> Int32? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Int32 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -111,7 +127,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: Int64.Type) throws -> Int64? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Int64 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -126,7 +144,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: UInt.Type) throws -> UInt? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? UInt {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -141,7 +161,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: UInt8.Type) throws -> UInt8? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? UInt8 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -156,7 +178,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: UInt16.Type) throws -> UInt16? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? UInt16 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -171,7 +195,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: UInt32.Type) throws -> UInt32? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? UInt32 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -186,7 +212,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: UInt64.Type) throws -> UInt64? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? UInt64 {
+            return tranform
+        }
         guard let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -201,7 +229,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: Float.Type) throws -> Float? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Float {
+            return tranform
+        }
         if let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse {
             // We are willing to return a Float by losing precision:
             // * If the original value was integral,
@@ -247,19 +277,23 @@ extension _SmartJSONDecoder {
         throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
     }
     
-    
     func unbox(_ value: Any, as type: CGFloat.Type) throws -> CGFloat? {
+        guard !(value is NSNull) else { return nil }
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? CGFloat {
+            return tranform
+        }
+
         if let double = try unbox(value, as: Double.self) {
             return CGFloat(double)
         }
         return nil
     }
     
-    
-    
     func unbox(_ value: Any, as type: Double.Type) throws -> Double? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Double {
+            return tranform
+        }
         if let number = value as? NSNumber, number !== kCFBooleanTrue, number !== kCFBooleanFalse {
             // We are always willing to return the number as a Double:
             // * If the original value was integral, it is guaranteed to fit in a Double; we are willing to lose precision past 2^53 if you encoded a UInt64 but requested a Double
@@ -303,7 +337,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: String.Type) throws -> String? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? String {
+            return tranform
+        }
         guard let string = value as? String else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
@@ -315,15 +351,9 @@ extension _SmartJSONDecoder {
         guard !(value is NSNull) else { return nil }
         
         // Prioritize the parsing strategy for individual properties
-        if let lastKey = codingPath.last {
-            let container = defalutsStorage.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(value) as? Date {
-                return tranformValue
-            }
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Date {
+            return tranform
         }
-
         
         switch self.options.dateDecodingStrategy {
         case .deferredToDate:
@@ -384,6 +414,10 @@ extension _SmartJSONDecoder {
     func unbox(_ value: Any, as type: Data.Type) throws -> Data? {
         guard !(value is NSNull) else { return nil }
         
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Data {
+            return tranform
+        }
+        
         switch self.options.dataDecodingStrategy {
         case .deferredToData:
             self.storage.push(container: value)
@@ -416,7 +450,9 @@ extension _SmartJSONDecoder {
     
     func unbox(_ value: Any, as type: Decimal.Type) throws -> Decimal? {
         guard !(value is NSNull) else { return nil }
-        
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? Decimal {
+            return tranform
+        }
         // Attempt to bridge from NSDecimalNumber.
         if let decimal = value as? Decimal {
             return decimal
@@ -430,16 +466,11 @@ extension _SmartJSONDecoder {
         guard !(value is NSNull) else { return nil }
         guard let urlString = try self.unbox(value, as: String.self) else { return nil }
         
-        
         // 优先处理单个属性的解析策略
-        if let lastKey = codingPath.last {
-            let container = defalutsStorage.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(value) as? URL {
-                return tranformValue
-            }
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? URL {
+            return tranform
         }
+
         
         guard let url = URL(string: urlString) else {
             let error = DecodingError.dataCorrupted(DecodingError.Context(
@@ -454,15 +485,9 @@ extension _SmartJSONDecoder {
         guard !(value is NSNull) else { return nil }
         guard let colorString = try self.unbox(value, as: String.self) else { return nil }
         
-        
-        // Prioritize the parsing strategy for individual properties
-        if let lastKey = codingPath.last {
-            let container = defalutsStorage.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(value) as? ColorObject {
-                return tranformValue
-            }
+        // 优先处理单个属性的解析策略
+        if let tranform = cache.tranform(decodedValue: value, for: codingPath) as? ColorObject {
+            return tranform
         }
        
         
@@ -539,7 +564,7 @@ extension _SmartJSONDecoder {
             // Please see the description1⃣️
             if let _ = [] as? T {
                 // 如果T是数组类型，但value不是数组，则直接返回nil
-                guard value is [Any] else { return nil }
+                guard value is [Any] || value is String else { return nil }
             } else if let _ = [:] as? T {
                 // 如果T是字典类型，但value不是字典，则直接返回nil
                 guard value is [String: Any] else { return nil }
@@ -549,16 +574,19 @@ extension _SmartJSONDecoder {
             let v = ModelKeyMapper<T>.convertToMappedFormat(value)
             self.storage.push(container: v)
 
-            defalutsStorage.recordAttributeValues(for: type, codingPath: codingPath)
+            
+            cache.cacheInitialState(for: type)
             
             // Please see the description2⃣️
             decoded = try T(from: self)
             storage.popContainer()
-            defalutsStorage.resetRecords(for: type)
+            
+            cache.clearLastState(for: type)
         }
         return decoded
     }
 }
+
 
 @available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *)
 fileprivate var _iso8601Formatter: ISO8601DateFormatter = {

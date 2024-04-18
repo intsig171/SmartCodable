@@ -237,7 +237,7 @@ extension SmartJSONKeyedDecodingContainer {
     fileprivate func smartDecode<T: Decodable>(forKey key: Key, entry: Any? = nil) throws -> T {
         
         func logInfo() {
-            let className = decoder.defalutsStorage.typeName
+            let className = decoder.cache.topSnapshot?.typeName
             let path = decoder.codingPath
             if let entry = entry {
                 if entry is NSNull { // 值为null
@@ -258,7 +258,7 @@ extension SmartJSONKeyedDecodingContainer {
         var decoded: T
         if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
             decoded = value
-        } else if let value: T = decoder.defalutsStorage.getValue(forKey: key, atPath: codingPath) {
+        } else if let value: T = decoder.cache.getValue(forKey: key) {
             decoded = value
         } else {
             decoded = try Patcher<T>.defaultForType()

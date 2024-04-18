@@ -122,6 +122,7 @@ extension ViewController {
             "list": [
                 ["name": "测试代码", "vc": "TestViewController"],
                 ["name": "测试代码2", "vc": "Test2ViewController"],
+                ["name": "测试代码3", "vc": "Test3ViewController"],
 
             ]
         ]
