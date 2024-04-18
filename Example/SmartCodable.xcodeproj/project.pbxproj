@@ -23,6 +23,7 @@
 		9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */; };
 		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
 		991452AA2BB50B2A00970575 /* KeyDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */; };
+		99153D772BD1124C004C01AD /* Test3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99153D762BD1124C004C01AD /* Test3ViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
 		99328D992B5138210074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
 		99328D9A2B513A300074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
@@ -139,6 +140,7 @@
 		9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFive_wcdbViewController.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
 		991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDecodingStrategyViewController.swift; sourceTree = "<group>"; };
+		99153D762BD1124C004C01AD /* Test3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3ViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
 		99328D982B5138210074036A /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
 		993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTwoViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			children = (
 				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				99CE4D512BC687700006D435 /* Test2ViewController.swift */,
+				99153D762BD1124C004C01AD /* Test3ViewController.swift */,
 				99C1E70C2B99A55E0090E8FD /* 说明信息 */,
 				9902B4CE2BB2F32D00310E69 /* 平替HandyJSON */,
 				99A494E42B9028D900393193 /* 测试用例 */,
@@ -839,6 +842,7 @@
 				9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */,
 				9967602B2B3EC930006C83EC /* Introduce_8ViewController.swift in Sources */,
 				99CE4D662BC6AFC90006D435 /* IntroduceViewController.swift in Sources */,
+				99153D772BD1124C004C01AD /* Test3ViewController.swift in Sources */,
 				991452AA2BB50B2A00970575 /* KeyDecodingStrategyViewController.swift in Sources */,
 				99CE4D522BC687700006D435 /* Test2ViewController.swift in Sources */,
 				99C313342B99C32A0065FC45 /* Introduce_7ViewController.swift in Sources */,

@@ -12,7 +12,7 @@ final class _SmartJSONDecoder: Decoder {
     /// The decoder's storage.
     var storage: SmartJSONDecodingStorage
     
-    var defalutsStorage: DecodingDefaults
+    var cache: InitialModelCache
     
     /// Options set on the top-level decoder.
     let options: SmartJSONDecoder.Options
@@ -33,7 +33,7 @@ final class _SmartJSONDecoder: Decoder {
         self.storage.push(container: container)
         self.codingPath = codingPath
         self.options = options
-        self.defalutsStorage = DecodingDefaults()
+        self.cache = InitialModelCache()
     }
     
     // MARK: - Decoder Methods
