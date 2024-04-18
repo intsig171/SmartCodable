@@ -30,6 +30,12 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
  *   - 结论：todo
  */
 
+// MARK: 自定义Value的encode
+/**
+ * 3. ❌ 支持自定义Value的解码的编码。
+ *   - 说明：
+ *   - 结论：todo
+ */
 
 
 //MARK: - =========== 版本更新记录 ===========
@@ -40,6 +46,27 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 
 
 //MARK: - ～> V3 版本
+// MARK: V3.3.1
+/**
+ * 1. ✅ 支持自定义的value解析规则
+ *   - 说明：支持value的解析规则，比如Date，可以设置解析策略做不同的实现。
+ *   - 结论：SmartValueTransformer
+ *
+ * 2. ✅ 修复包含SmartAny的数据，转json失败问题。
+ *   - 说明：转换之前对数据进行类型判断，合适的时机进行解包。
+ *   - 结论：已完成
+ *
+ * 3. ✅ 修复json中包含null，进行模型化处理失败问题。
+ *   - 说明：json中某一个字段的值是json字符串，但是对应的属性是模型。
+ *   - 结论：已完成
+ *
+ * 4. ✅ 修复使用SmartAny导致明确类型问题。
+ *   - 说明：字段的值为5， 使用SmartAny包裹之后，5就被明确为Int类型了。 进行 as? Double 就会失败。不符合期望。
+ *   - 结论：已完成
+ */
+
+
+
 // MARK: V3.3.0
 /**
  * 1. ✅ 支持自定义的value解析规则
