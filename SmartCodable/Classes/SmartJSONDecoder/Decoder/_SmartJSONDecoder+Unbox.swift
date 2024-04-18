@@ -522,7 +522,7 @@ extension _SmartJSONDecoder {
             // Please see the description1⃣️
             if let _ = [] as? T {
                 // 如果T是数组类型，但value不是数组，则直接返回nil
-                guard value is [Any] else { return nil }
+                guard value is [Any] || value is String else { return nil }
             } else if let _ = [:] as? T {
                 // 如果T是字典类型，但value不是字典，则直接返回nil
                 guard value is [String: Any] else { return nil }
