@@ -45,12 +45,8 @@ public protocol ValueTransformable {
     /// transform from ’json‘ to ’object‘
     func transformFromJSON(_ value: Any?) -> Object?
     
-    /// transform to ‘json’ from ‘object’ （预留方法，内部没用到）
+    /// transform to ‘json’ from ‘object’
     func transformToJSON(_ value: Object?) -> JSON?
-}
-
-extension ValueTransformable {
-    public  func transformToJSON(_ value: Object?) -> JSON? { return nil }
 }
 
 

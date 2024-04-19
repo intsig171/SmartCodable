@@ -117,6 +117,10 @@ extension CustomDecodingValueViewContriller {
 
 extension CustomDecodingValueViewContriller {
     struct StringTransformer: ValueTransformable {
+        func transformToJSON(_ value: String?) -> String? {
+            return value
+        }
+        
         func transformFromJSON(_ value: Any?) -> String? {
             if let temp = value as? String {
                 return "前缀" + temp
@@ -129,6 +133,10 @@ extension CustomDecodingValueViewContriller {
     }
     
     struct IntTransformer: ValueTransformable {
+        func transformToJSON(_ value: Int?) -> Int? {
+            return value
+        }
+        
         func transformFromJSON(_ value: Any?) -> Int? {
             if let temp = value as? Int {
                 return 100 + temp
@@ -141,6 +149,10 @@ extension CustomDecodingValueViewContriller {
     }
     
     struct DoubleTransformer: ValueTransformable {
+        func transformToJSON(_ value: Double?) -> Double? {
+            return value
+        }
+        
         func transformFromJSON(_ value: Any?) -> Double? {
             if let temp = value as? Double {
                 return 100 + temp
@@ -153,6 +165,10 @@ extension CustomDecodingValueViewContriller {
     }
     
     struct CGFloatTransformer: ValueTransformable {
+        func transformToJSON(_ value: CGFloat?) -> CGFloat? {
+            return value
+        }
+        
         func transformFromJSON(_ value: Any?) -> CGFloat? {
             if let temp = value as? CGFloat {
                 return 100 + temp
@@ -166,6 +182,15 @@ extension CustomDecodingValueViewContriller {
 
     
     struct BoolTransformer: ValueTransformable {
+        func transformToJSON(_ value: Bool?) -> String? {
+            guard let value = value else { return nil }
+            if value {
+                return "Mccc"
+            } else {
+                return nil
+            }
+        }
+        
         func transformFromJSON(_ value: Any?) -> Bool? {
             if let temp = value as? String {
                 if temp == "Mccc" {

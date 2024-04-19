@@ -36,6 +36,12 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 // 【❌未完成   ✅已完成】
 
 //MARK: - ～> V4 版本
+// MARK: V4.0.0
+/**
+ * 1. ❌ 新功能支持
+ *   - 说明：目前对Encode的支持还不够完善，4.0.0版本开始，重写Encoder 和 container，支持自定义的encode。
+ *   - 结论：todo
+ */
 
 
 
@@ -51,7 +57,7 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
  *   - 结论：已完成
  *
  * 3. ✅ bugfix
- *   - 说明：修复json字段模型化中，模型数组解析失败
+ *   - 说明：修复json字段模型化中，模型数组解析失败。属性是[Model], 数据是可数组化的json字符串的解析支持。
  *   - 结论：已完成
  *
  * 4. ✅ 新功能

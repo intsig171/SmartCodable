@@ -248,6 +248,60 @@ struct CompatibleEnum: SmartCodable {
 
 
 
+#### 支持关联值枚举的解码
+
+完全交给你自定义解析规则。 如果不自定义，不进行解析。
+
+```
+/// 关联值枚举的解析， 需要自己接管decode
+enum Sex: SmartAssociatedEnumerable {
+    static var defaultCase: Sex = .women
+    
+    case man
+    case women
+    case other(String)
+}
+struct CompatibleEnum: SmartCodable {
+    var sex: Sex = .man
+    static func mappingForValue() -> [SmartValueTransformer]? {
+        [
+            CodingKeys.sex <--- RelationEnumTranformer()
+        ]
+    }
+}
+
+struct RelationEnumTranformer: ValueTransformable {
+    func transformToJSON(_ value: Introduce_8ViewController.Sex?) -> String? {
+        guard let value = value else { return nil }
+        
+        switch value {
+        case .man:
+            return "man"
+        case .women:
+            return "women"
+        case .other(let v):
+            return v
+        }
+    }
+
+    typealias Object = Sex
+    typealias JSON = String
+    
+    func transformFromJSON(_ value: Any?) -> Sex? {
+        guard let temp = value as? String else { return .man }
+
+        switch temp {
+        case "man":
+            return .man
+        case "women":
+            return .women
+        default:
+            return .other(temp)
+        }
+    }
+}
+```
+
 
 
 

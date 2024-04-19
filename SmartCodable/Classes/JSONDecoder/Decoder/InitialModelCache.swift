@@ -18,7 +18,6 @@ struct InitialModelCache {
     private(set) var snapshots: [Snapshot] = []
     
     var topSnapshot: Snapshot? {
-        assert(!self.snapshots.isEmpty, "Empty container stack.")
         return self.snapshots.last
     }
     

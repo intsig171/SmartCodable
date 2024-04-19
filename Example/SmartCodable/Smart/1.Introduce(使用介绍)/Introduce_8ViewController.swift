@@ -71,6 +71,19 @@ extension Introduce_8ViewController {
 
 extension Introduce_8ViewController {
     struct RelationEnumTranformer: ValueTransformable {
+        func transformToJSON(_ value: Introduce_8ViewController.Sex?) -> String? {
+            guard let value = value else { return nil }
+            
+            switch value {
+            case .man:
+                return "man"
+            case .women:
+                return "women"
+            case .other(let v):
+                return v
+            }
+        }
+        
         
         
         typealias Object = Sex
@@ -90,3 +103,5 @@ extension Introduce_8ViewController {
         }
     }
 }
+
+
