@@ -56,8 +56,16 @@ struct InitialModelCache {
     
     /// Gets the initialization value of the attribute (key)
     func getValue<T: Decodable>(forKey key: CodingKey) -> T? {
-        let value = snapshots.last?.initialValues[key.stringValue] as? T
-        return value
+        
+        let cacheValue = snapshots.last?.initialValues[key.stringValue]
+
+        if let value = cacheValue as? T {
+            return value
+        } else if let caseValue = cacheValue as? (any SmartCaseDefaultable) {
+            return caseValue.rawValue as? T
+        } else {
+            return nil
+        }
     }
     
     /// Custom conversion strategy for decoded values

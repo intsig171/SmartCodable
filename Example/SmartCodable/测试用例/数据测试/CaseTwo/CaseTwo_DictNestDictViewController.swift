@@ -15,20 +15,20 @@ class CaseTwo_DictNestDictViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
        
         let dict: [String: Any] = [
-//            "name": "father",
+            "name": "father",
             "age": 30,
-//            "love": [
-//                "name": "basketball",
-//                "time": 10
-//            ],
-//            "son": [
-//                "name": "son",
-//                "age": 4,
-//                "love": [
-//                    "name": "sleep",
-//                    "time": 4
-//                ],
-//            ]
+            "love": [
+                "name": "basketball",
+                "time": 10
+            ],
+            "son": [
+                "name": "son",
+                "age": 4,
+                "love": [
+                    "name": "sleep",
+                    "time": 4
+                ],
+            ]
         ]
 
        

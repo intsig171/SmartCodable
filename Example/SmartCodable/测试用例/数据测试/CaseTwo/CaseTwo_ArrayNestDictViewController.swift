@@ -26,7 +26,7 @@ class CaseTwo_ArrayNestDictViewController: BaseCompatibilityViewController {
                 ],
                 "love": [
                     "name": NSNull(),
-//                    "time": 4
+                    "time": 4
                 ],
                 "son": nil
             ],
@@ -43,7 +43,7 @@ class CaseTwo_ArrayNestDictViewController: BaseCompatibilityViewController {
                 ],
                 "love": [
                     "name": NSNull(),
-//                    "time": 4
+                    "time": 4
                 ],
                 "son": nil
             ]

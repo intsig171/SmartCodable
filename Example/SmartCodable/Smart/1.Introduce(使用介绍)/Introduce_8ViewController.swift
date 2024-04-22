@@ -20,13 +20,16 @@ class Introduce_8ViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
                 
     
-        let dict = [
-            "number": "one",
+        let dict: [String: Any] = [
+//            "number": "one",
+            "number1": [],
+            "number2": "one",
+
             "sex": "haha"
         ]
         
         guard let model = CompatibleEnum.deserialize(from: dict) else { return }
-        print(model)
+        print("model = \(model)")
 
         // 如果进入兼容逻辑，json值将被修改，无法恢复。
         guard let transformDict = model.toDictionary() else { return }
@@ -40,7 +43,11 @@ extension Introduce_8ViewController {
     struct CompatibleEnum: SmartCodable {
 
         init() { }
-        var number: NumberType?
+        var number: NumberType = .two
+        var number1: NumberType = .two
+        var number2: NumberType = .two
+
+        
         var sex: Sex = .man
         
         static func mappingForValue() -> [SmartValueTransformer]? {

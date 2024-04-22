@@ -46,6 +46,14 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 
 
 //MARK: - ～> V3 版本
+// MARK: V3.3.2
+/**
+ * 1. ✅ bugfix
+ *   - 说明：枚举的解析，会用到SingleValueDecodingContainer，里面没有做初始化值的兼容。
+ *   - 结论：已完成
+ */
+
+
 // MARK: V3.3.1
 /**
  * 1. ✅ 优化
