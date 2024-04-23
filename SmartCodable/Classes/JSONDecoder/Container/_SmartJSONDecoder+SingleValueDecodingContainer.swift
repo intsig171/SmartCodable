@@ -139,7 +139,10 @@ extension _SmartJSONDecoder : SingleValueDecodingContainer {
 extension _SmartJSONDecoder {
     fileprivate func smartDecode<T: Decodable>(type: T.Type) throws -> T {
 
-        if let key = codingPath.last, let value: T = cache.getValue(forKey: key) {
+        let entry = storage.topContainer
+        if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
+            return value
+        } else if let key = codingPath.last, let value: T = cache.getValue(forKey: key) {
             return value
         } else {
             return try Patcher<T>.defaultForType()
