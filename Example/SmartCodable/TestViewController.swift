@@ -31,60 +31,25 @@ class TestViewController: BaseViewController {
         
         SmartConfig.debugMode = .debug
         let dict: [String: Any] = [
-            "name": [],
-            "date": [],
-            "location": [],
-            "father": [
-                "name": NSNull(),
-                "age": "123",
-                "dog": [
-                    "hobby": 123,
-                ],
-                "sons": [
-                    [
-                        "hobby": [],
-                    ]
-                ]
-            ],
-            "sons": [
-                [
-                    "hobby": 123,
-                    "age": "Mccc"
-                ],
-                [
-                    "hobby": 123,
-                    "age": []
-                ]
-            ],
+            "age": "Mccc",
         ]
-        guard let _ = Family.deserialize(from: dict) else { return }
+        guard let model = Family.deserialize(from: dict) else { return }
+        print(model)
 
     }
 }
 extension TestViewController {
     struct Family: SmartCodable {
-//        var name: String = "我的家"
-//        var location: String = ""
-//        var date: Date = Date()
-        
-        var father: Father = Father()
-        var sons: [Son] = []
+        var name: String = "我的家"
+        var location: String = ""
+
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.name <--- "age",
+                CodingKeys.location <--- "age",
+            ]
+        }
     }
 
-    struct Father: SmartCodable {
-        var name: String = ""
-        var age: Int = 0
-        var sons: [Son] = []
-        var dog: Dog = Dog()
-    }
-
-
-    struct Son: SmartCodable {
-        var hobby: String = ""
-        var age: Int = 0
-    }
-
-    struct Dog: SmartCodable {
-        var hobby: String = ""
-    }
+    
 }

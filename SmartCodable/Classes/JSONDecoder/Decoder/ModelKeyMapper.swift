@@ -38,7 +38,7 @@ struct ModelKeyMapper<T> {
             for oldKey in mapping.from {
                 let newKey = mapping.to.stringValue
                 if let value = newDict[oldKey], !(value is NSNull) {
-                    newDict[newKey] = newDict.removeValue(forKey: oldKey)
+                    newDict[newKey] = newDict[oldKey]
                     break
                 } else { // Handles the case of a custom parsing path.
                     if newDict[newKey] == nil, let pathValue = newDict.getValue(forKeyPath: oldKey) {
