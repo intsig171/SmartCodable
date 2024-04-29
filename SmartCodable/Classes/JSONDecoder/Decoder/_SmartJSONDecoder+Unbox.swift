@@ -379,23 +379,17 @@ extension _SmartJSONDecoder {
             if #available(OSX 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
                 guard let string = try self.unbox(value, as: String.self) else { return nil }
                 guard let date = _iso8601Formatter.date(from: string) else {
-                    let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
-                    SmartLog.logError(error)
                     return nil
                 }
                 
                 return date
             } else {
-                let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "ISO8601DateFormatter is unavailable on this platform."))
-                SmartLog.logError(error)
                 return nil
             }
             
         case .formatted(let formatter):
             guard let string = try self.unbox(value, as: String.self) else { return nil }
             guard let date = formatter.date(from: string) else {
-                let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
-                SmartLog.logError(error)
                 return nil
             }
             
@@ -431,8 +425,6 @@ extension _SmartJSONDecoder {
             }
             
             guard let data = Data(base64Encoded: string) else {
-                let error = DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid Base64."))
-                SmartLog.logError(error)
                 return nil
             }
             
@@ -471,13 +463,7 @@ extension _SmartJSONDecoder {
             return tranform
         }
 
-        
-        guard let url = URL(string: urlString) else {
-            let error = DecodingError.dataCorrupted(DecodingError.Context(
-                codingPath: self.codingPath, debugDescription: "Invalid URL string."))
-            SmartLog.logError(error)
-            return nil
-        }
+        guard let url = URL(string: urlString) else { return nil }
         return url
     }
     
@@ -581,7 +567,7 @@ extension _SmartJSONDecoder {
             decoded = try T(from: self)
             storage.popContainer()
             
-            cache.clearLastState(for: type)
+            cache.clearLastState(for: type)            
         }
         return decoded
     }

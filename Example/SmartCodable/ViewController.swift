@@ -29,11 +29,11 @@ class ViewController: UIViewController {
         
         dataArray = [
             other,
+            smart_debug,
             smart_test,
             replace_HandyJSON,
             smart_introduce,
             smart_customDecoding,
-            smart_debug,
             smart_case,
         ]
         
@@ -94,7 +94,8 @@ extension ViewController {
         [
             "title": "Smart调试信息",
             "list": [
-                ["name": "日志等级 & 日志信息", "vc": "DecodingLogViewController"],
+                ["name": "字典日志", "vc": "DecodingDictLogViewController"],
+                ["name": "数组日志", "vc": "DecodingArrayLogViewController"],
             ]
         ]
     }

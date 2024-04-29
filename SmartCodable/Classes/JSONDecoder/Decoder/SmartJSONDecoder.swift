@@ -55,6 +55,7 @@ open class SmartJSONDecoder: JSONDecoder {
         guard let value = try decoder.unbox(topLevel, as: T.self) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data did not contain a top-level value."))
         }
+        SmartLog.printCacheLogs(in: "\(type)")
         return value
     }
 }

@@ -81,16 +81,16 @@ extension SmartDecodable {
     /// - Returns: Model
     public static func deserialize(from dict: [String: Any]?, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _dict = dict else {
-            SmartLog.logVerbose("要解析的字典为nil", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
             return nil
         }
         
         guard let _json = _dict.toJSONString() else {
-            SmartLog.logVerbose("要解析的字典转json失败", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Dictionary but is cannot be json.", in: "\(self)")
             return nil
         }
         guard let _jsonData = _json.data(using: .utf8) else {
-            SmartLog.logVerbose("要解析的字典转data失败", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Dictionary but is cannot be data.", in: "\(self)")
             return nil
         }
         
@@ -104,12 +104,12 @@ extension SmartDecodable {
     /// - Returns: Model
     public static func deserialize(from json: String?, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _json = json else {
-            SmartLog.logVerbose("要解析的json字符串为nil", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
             return nil
         }
     
         guard let jsonData = _json.data(using: .utf8) else {
-            SmartLog.logVerbose("要解析的json字符串转data失败", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Dictionary but is cannot be data.", in: "\(self)")
             return nil
         }
         
@@ -124,7 +124,7 @@ extension SmartDecodable {
     /// - Returns: Model
     public static func deserialize(from data: Data?, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _data = data else {
-            SmartLog.logVerbose("要解析的data数据为nil", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
             return nil
         }
         
@@ -149,17 +149,17 @@ extension Array where Element: SmartDecodable {
     public static func deserialize(from array: [Any]?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
 
         guard let _arr = array else {
-            SmartLog.logVerbose("要解析的数组为nil", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
             return nil
         }
         
         guard let _json = _arr.toJSONString() else {
-            SmartLog.logVerbose("要解析的数组转json字符串失败", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Array but is cannot be json.", in: "\(self)")
             return nil
         }
         
         guard let _jsonData = _json.data(using: .utf8) else {
-            SmartLog.logVerbose("要解析的数组转data失败", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Array but is cannot be data.", in: "\(self)")
             return nil
         }
         return deserialize(from: _jsonData, options: options)
@@ -173,13 +173,13 @@ extension Array where Element: SmartDecodable {
     /// - Returns: Array of models
     public static func deserialize(from json: String?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
         guard let _json = json else {
-            SmartLog.logVerbose("要解析的json为nil", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
             return nil
         }
         
         
         guard let _jsonData = _json.data(using: .utf8) else {
-            SmartLog.logVerbose("要解析的json转data失败", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Array but is cannot be data.", in: "\(self)")
             return nil
         }
         
@@ -193,7 +193,7 @@ extension Array where Element: SmartDecodable {
     /// - Returns: Array of models
     public static func deserialize(from data: Data?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
         guard let _data = data else {
-            SmartLog.logVerbose("要解析的data数据为nil", className: "\(self)")
+            SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
             return nil
         }
         
@@ -241,7 +241,6 @@ extension Data {
             obj.didFinishMapping()
             return obj
         } catch {
-            SmartLog.logError(error, className: "\(type)")
             return nil
         }
     }
@@ -254,7 +253,6 @@ extension Data {
             let decodeValue = try _decoder.decode(type, from: self)
             return decodeValue
         } catch {
-            SmartLog.logError(error, className: "\(type)")
             return nil
         }
     }
