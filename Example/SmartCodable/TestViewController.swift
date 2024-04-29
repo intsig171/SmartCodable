@@ -32,21 +32,33 @@ class TestViewController: BaseViewController {
         SmartConfig.debugMode = .debug
         let dict: [String: Any] = [
             "age": "Mccc",
+            "address": "aHR0cHM6Ly93d3cucWl4aW4uY29t"
         ]
         guard let model = Family.deserialize(from: dict) else { return }
         print(model)
+        
+        if let data = model.location, let dataStr = String(data: data, encoding: .utf8) {
+            print(dataStr)
+            // https://www.qixin.com
+        }
 
     }
 }
 extension TestViewController {
     struct Family: SmartCodable {
         var name: String = "我的家"
-        var location: String = ""
+        var location: Data?
 
         static func mappingForKey() -> [SmartKeyTransformer]? {
             [
                 CodingKeys.name <--- "age",
-                CodingKeys.location <--- "age",
+                CodingKeys.location <--- "address",
+            ]
+        }
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.location <--- SmartDataTransformer()
             ]
         }
     }
