@@ -46,6 +46,8 @@ class BeforeDecodingViewController: BaseCompatibilityViewController {
 }
 
 
+
+
 extension BeforeDecodingViewController {
     struct Model: SmartCodable {
         var name: String = ""
