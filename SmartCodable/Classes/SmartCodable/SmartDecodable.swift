@@ -11,13 +11,13 @@ import Foundation
 public protocol SmartDecodable: Decodable {
     /// The callback for when mapping is complete
     mutating func didFinishMapping()
-  
+
     /// The mapping relationship of decoding keys
     static func mappingForKey() -> [SmartKeyTransformer]?
-    
+
     /// The strategy for decoding values
     static func mappingForValue() -> [SmartValueTransformer]?
-    
+
     init()
 }
 
@@ -31,16 +31,16 @@ extension SmartDecodable {
 
 /// Options for SmartCodable parsing
 public enum SmartDecodingOption: Hashable {
-    
+
     case date(JSONDecoder.DateDecodingStrategy)
-    
+
     case data(JSONDecoder.DataDecodingStrategy)
-    
+
     case float(JSONDecoder.NonConformingFloatDecodingStrategy)
-    
+
     /// The mapping strategy for keys during parsing
     case key(JSONDecoder.SmartKeyDecodingStrategy)
-    
+
     /// Handles the hash value, ignoring the impact of associated values.
     public func hash(into hasher: inout Hasher) {
         switch self {
@@ -54,7 +54,7 @@ public enum SmartDecodingOption: Hashable {
             hasher.combine(3)
         }
     }
-    
+
     public static func == (lhs: SmartDecodingOption, rhs: SmartDecodingOption) -> Bool {
         switch (lhs, rhs) {
         case (.date, .date):
@@ -73,18 +73,18 @@ public enum SmartDecodingOption: Hashable {
 
 
 extension SmartDecodable {
-    
+
     /// Deserializes into a model
     /// - Parameter dict: Dictionary
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Model
-    public static func deserialize(from dict: [String: Any]?, options: Set<SmartDecodingOption>? = nil) -> Self? {
+    public static func deserialize(from dict: [String: Any]?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _dict = dict else {
             SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
             return nil
         }
-        
+
         guard let _json = _dict.toJSONString() else {
             SmartLog.logVerbose("Expected to decode Dictionary but is cannot be json.", in: "\(self)")
             return nil
@@ -93,46 +93,52 @@ extension SmartDecodable {
             SmartLog.logVerbose("Expected to decode Dictionary but is cannot be data.", in: "\(self)")
             return nil
         }
-        
-        return deserialize(from: _jsonData, options: options)
+
+        return deserialize(from: _jsonData, designatedPath: designatedPath, options: options)
     }
-    
+
     /// Deserializes into a model
     /// - Parameter json: JSON string
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Model
-    public static func deserialize(from json: String?, options: Set<SmartDecodingOption>? = nil) -> Self? {
+    public static func deserialize(from json: String?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _json = json else {
             SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
             return nil
         }
-    
+
         guard let jsonData = _json.data(using: .utf8) else {
             SmartLog.logVerbose("Expected to decode Dictionary but is cannot be data.", in: "\(self)")
             return nil
         }
-        
-        return deserialize(from: jsonData, options: options)
+
+        return deserialize(from: jsonData, designatedPath: designatedPath, options: options)
     }
-    
-    
+
+
     /// Deserializes into a model
     /// - Parameter data: Data
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Model
-    public static func deserialize(from data: Data?, options: Set<SmartDecodingOption>? = nil) -> Self? {
+    public static func deserialize(from data: Data?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> Self? {
         guard let _data = data else {
             SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
             return nil
         }
-        
+
         do {
-            return try _data._deserializeDict(type: Self.self, options: options)
-        } catch  {
-            return nil
-        }
+            if let path = designatedPath, let nestedObject = _data.getInnerObject(byPath: path) {
+                let jsonData = try JSONSerialization.data(withJSONObject: nestedObject)
+                return try jsonData._deserializeDict(type: Self.self, options: options)
+            } else {
+                return try _data._deserializeDict(type: Self.self, options: options)
+            }
+       } catch {
+           SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
+           return nil
+       }
     }
 }
 
@@ -140,66 +146,77 @@ extension SmartDecodable {
 
 
 extension Array where Element: SmartDecodable {
-    
+
     /// Deserializes into an array of models
     /// - Parameter array: Array
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Array of models
-    public static func deserialize(from array: [Any]?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
+    public static func deserialize(from array: [Any]?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
 
         guard let _arr = array else {
             SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
             return nil
         }
-        
+
         guard let _json = _arr.toJSONString() else {
             SmartLog.logVerbose("Expected to decode Array but is cannot be json.", in: "\(self)")
             return nil
         }
-        
+
         guard let _jsonData = _json.data(using: .utf8) else {
             SmartLog.logVerbose("Expected to decode Array but is cannot be data.", in: "\(self)")
             return nil
         }
-        return deserialize(from: _jsonData, options: options)
+        return deserialize(from: _jsonData, designatedPath: designatedPath, options: options)
     }
-    
-    
+
+
     /// Deserializes into an array of models
     /// - Parameter json: JSON string
     /// - Parameter options: Decoding strategy
     ///   Only one enumeration item is allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Array of models
-    public static func deserialize(from json: String?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
+    public static func deserialize(from json: String?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
         guard let _json = json else {
             SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
             return nil
         }
-        
-        
+
+
         guard let _jsonData = _json.data(using: .utf8) else {
             SmartLog.logVerbose("Expected to decode Array but is cannot be data.", in: "\(self)")
             return nil
         }
-        
-        return deserialize(from: _jsonData, options: options)
+
+        return deserialize(from: _jsonData, designatedPath: designatedPath, options: options)
     }
-    
+
     /// Deserializes into an array of models
     /// - Parameter data: Data
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Array of models
-    public static func deserialize(from data: Data?, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
+    public static func deserialize(from data: Data?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
         guard let _data = data else {
             SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
             return nil
         }
-        
+
         do {
-            return try _data._deserializeArray(type: Self.self, options: options)
-        } catch  {
+            if let path = designatedPath, !path.isEmpty {
+                if let nestedObject = _data.getInnerObject(byPath: path) {
+                    let jsonData = try JSONSerialization.data(withJSONObject: nestedObject)
+                    return try jsonData._deserializeArray(type: Self.self, options: options)
+                } else {
+                    SmartLog.logVerbose("No nested object found at the designated path", in: "\(self)")
+                    return nil
+                }
+            } else {
+                return try _data._deserializeArray(type: Self.self, options: options)
+            }
+        } catch {
+            SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
             return nil
         }
     }
@@ -210,17 +227,17 @@ extension Data {
 
     fileprivate func createDecoder<T>(type: T.Type, options: Set<SmartDecodingOption>? = nil) -> JSONDecoder {
         let _decoder = SmartJSONDecoder()
-        
+
 
         if let _options = options {
             for _option in _options {
                 switch _option {
                 case .data(let strategy):
                     _decoder.dataDecodingStrategy = strategy
-                    
+
                 case .date(let strategy):
                     _decoder.dateDecodingStrategy = strategy
-                    
+
                 case .float(let strategy):
                     _decoder.nonConformingFloatDecodingStrategy = strategy
                 case .key(let strategy):
@@ -228,11 +245,11 @@ extension Data {
                 }
             }
         }
-        
+
         return _decoder
     }
-    
-    
+
+
     fileprivate func _deserializeDict<T>(type: T.Type, options: Set<SmartDecodingOption>? = nil) throws -> T? where T: SmartDecodable {
 
         do {
@@ -244,8 +261,8 @@ extension Data {
             return nil
         }
     }
-    
-    
+
+
     fileprivate func _deserializeArray<T>(type: [T].Type, options: Set<SmartDecodingOption>? = nil) throws -> [T]? where T: SmartDecodable {
 
         do {
@@ -256,6 +273,30 @@ extension Data {
             return nil
         }
     }
+
+    fileprivate func getInnerObject(byPath path: String) -> Any? {
+        do {
+            let jsonObject = try JSONSerialization.jsonObject(with: self, options: [])
+            if let dictionary = jsonObject as? [String: Any] {
+                var currentObject: Any? = dictionary
+                for key in path.components(separatedBy: ".") {
+                    if let dict = currentObject as? [String: Any] {
+                        currentObject = dict[key]
+                    } else {
+                        SmartLog.logVerbose("Invalid path or path does not lead to a dictionary", in: "\(self)")
+                        return nil
+                    }
+                }
+                return currentObject
+            } else {
+                SmartLog.logVerbose("JSON is not a dictionary", in: "\(self)")
+                return nil
+            }
+        } catch {
+            SmartLog.logVerbose("Invalid path or path does not lead to a dictionary", in: "\(self)")
+            return nil
+        }
+    }
 }
 
 extension Dictionary where Key == String {
@@ -263,7 +304,7 @@ extension Dictionary where Key == String {
 
         let peeledDict = self.peelIfPresent
         guard JSONSerialization.isValidJSONObject(peeledDict) else { return nil }
-        
+
         if let data = try? JSONSerialization.data(withJSONObject: peeledDict) {
             if let json = String(data: data, encoding: String.Encoding.utf8) {
                 return json
