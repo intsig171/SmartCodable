@@ -28,6 +28,20 @@ class BeforeDecodingViewController: BaseCompatibilityViewController {
         
         guard let model = Model.deserialize(from: dict) else { return }
         print(model)
+        
+        
+        
+        let dict1: [String: Any] = [
+            "age": 10,
+            "name": "Mccc",
+            "area": "su zhou"
+        ]
+        
+        if let model = Home.deserialize(from: dict1) {
+            print(model)
+            let dict = model.toDictionary() ?? [:]
+            print(dict)
+        }
     }
 }
 
@@ -49,6 +63,15 @@ extension BeforeDecodingViewController {
 }
 
 
+extension BeforeDecodingViewController {
+    struct Home: SmartCodable {
+        var name: String = ""
+        @Ignored
+        var age: Any?
+        @Ignored
+        var area: String = "area"
+    }
+}
 
 
 

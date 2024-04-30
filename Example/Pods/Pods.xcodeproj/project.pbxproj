@@ -277,6 +277,7 @@
 		981B05C5C0681DA26CDE562B7B0CB0B9 /* fts3Int.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F14A4BF349F40CAAB558A775EABD9D1 /* fts3Int.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		98238A99285E5720BDC568359D649907 /* TimedQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D67E5BBBE0B0CE733CE89F049DA3E12 /* TimedQueue.swift */; };
 		98F570DA48370453D648BD526FDAAEAA /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18D6541EFE81AFDF8F5EB531B779D4D /* LayoutConstraintItem.swift */; };
+		995557702BE0E322005F9ABD /* Ignored.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955576F2BE0E322005F9ABD /* Ignored.swift */; };
 		9956B9BF2BDBE5FE00C711F5 /* LogContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956B9BE2BDBE5FE00C711F5 /* LogContainer.swift */; };
 		99B5B6FD2BD7A69500989420 /* LogCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5B6FC2BD7A69500989420 /* LogCache.swift */; };
 		99B5B6FF2BD7B2F400989420 /* LogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5B6FE2BD7B2F400989420 /* LogItem.swift */; };
@@ -870,6 +871,7 @@
 		97D90DEDEA77DAB3CC21506808D91533 /* BTBubble-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BTBubble-dummy.m"; sourceTree = "<group>"; };
 		981FC3D828F7DDCD2F77A0BF2CEB5313 /* btree.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = btree.c; path = src/btree.c; sourceTree = "<group>"; };
 		9930E634CA9F9592BA112E4EA073572B /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = swift/source/util/Error.swift; sourceTree = "<group>"; };
+		9955576F2BE0E322005F9ABD /* Ignored.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ignored.swift; sourceTree = "<group>"; };
 		9956B9BE2BDBE5FE00C711F5 /* LogContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogContainer.swift; sourceTree = "<group>"; };
 		99B5B6FC2BD7A69500989420 /* LogCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCache.swift; sourceTree = "<group>"; };
 		99B5B6FE2BD7B2F400989420 /* LogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogItem.swift; sourceTree = "<group>"; };
@@ -1741,6 +1743,7 @@
 				2C6A1B0FCC78730D186D15903D2AE951 /* SmartCodable.swift */,
 				4341969B2758FA389FC55365592E4B1C /* SmartDecodable.swift */,
 				AEFBD32E6B0F497DF302F4849C091F48 /* SmartEncodable.swift */,
+				9955576F2BE0E322005F9ABD /* Ignored.swift */,
 			);
 			name = SmartCodable;
 			path = SmartCodable/Classes/SmartCodable;
@@ -2577,6 +2580,7 @@
 				C903514AD70186B91CCAD8CB9E919BC4 /* SmartKeyDecodingStrategy.swift in Sources */,
 				E1E4EA8C31F82776302BE4B34B5BC253 /* SmartLog.swift in Sources */,
 				F62709F710C00B0A7BFBA4332BC13075 /* SmartSONUnkeyedDecodingContainer.swift in Sources */,
+				995557702BE0E322005F9ABD /* Ignored.swift in Sources */,
 				E7B8B2ED610C15DC2703CA2565DDDD76 /* SmartSONUnkeyedDecodingContainer+decode.swift in Sources */,
 				7BEE5AF6F3055E36150D204314701253 /* Transformer.swift in Sources */,
 				3D3677A90A113ABF5AE4C8A0228105EA /* URLTransformer.swift in Sources */,

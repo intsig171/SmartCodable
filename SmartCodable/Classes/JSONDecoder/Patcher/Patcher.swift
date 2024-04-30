@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Patcher<T: Decodable> {
+struct Patcher<T> {
     
     static func defaultForType() throws -> T {
         return try Provider.defaultValue()
