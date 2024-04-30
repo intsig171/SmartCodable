@@ -66,9 +66,9 @@ extension BeforeDecodingViewController {
 extension BeforeDecodingViewController {
     struct Home: SmartCodable {
         var name: String = ""
-        @Ignored
+        @IgnoredKey
         var age: Any?
-        @Ignored
+        @IgnoredKey
         var area: String = "area"
     }
 }

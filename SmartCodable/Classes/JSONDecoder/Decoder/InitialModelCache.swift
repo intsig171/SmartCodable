@@ -66,10 +66,9 @@ struct InitialModelCache {
         } else {
             let cacheValue1 = snapshots.last?.initialValues["_" + key.stringValue]
             
-            if let value = cacheValue1 as? Ignored<T> {
+            if let value = cacheValue1 as? IgnoredKey<T> {
                 return value.wrappedValue
             }
-            
         }
 
         return nil

@@ -8,7 +8,7 @@
 import Foundation
 
 @propertyWrapper
-public struct Ignored<T>: Codable {
+public struct IgnoredKey<T>: Codable {
     public var wrappedValue: T
 
     public init(wrappedValue: T) {
@@ -17,7 +17,7 @@ public struct Ignored<T>: Codable {
 
     public init(from decoder: Decoder) throws {
         guard let decoder = decoder as? _SmartJSONDecoder else {
-            throw DecodingError.typeMismatch(Ignored<T>.self, DecodingError.Context(
+            throw DecodingError.typeMismatch(IgnoredKey<T>.self, DecodingError.Context(
                 codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
             )
         }

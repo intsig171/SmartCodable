@@ -44,8 +44,8 @@ class TestViewController: BaseViewController {
 }
 struct Home: SmartCodable {
     var name: String = ""
-    @Ignored
-    var age: Any?
-    @Ignored
+    @IgnoredKey
+    var age: [Any] = ["1"]
+    @IgnoredKey
     var area: String = "area"
 }
