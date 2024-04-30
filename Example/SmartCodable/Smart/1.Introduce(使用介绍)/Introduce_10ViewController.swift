@@ -1,8 +1,8 @@
 //
-//  Test2ViewController.swift
+//  Introduce_10ViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/4/10.
+//  Created by qixin on 2024/4/30.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
@@ -12,15 +12,60 @@ import HandyJSON
 
 
 
-class Test2ViewController: BaseViewController {
+class Introduce_10ViewController: BaseViewController {
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        testDeserializeNestedStructure()
+//        testDeserializeNestedStructure()
         
+        test2()
+    }
+}
+
+
+extension Introduce_10ViewController {
+    func test() {
+        
+        let jsonArrayString: String? = "{\"result\":{\"data\":[{\"name\":\"Bob\",\"id\":\"1\",\"height\":180},{\"name\":\"Lily\",\"id\":\"2\",\"height\":150},{\"name\":\"Lucy\",\"id\":\"3\",\"height\":160}]}}"
+
+        let data = jsonArrayString?.data(using: .utf8)
+
+        guard let models = [Family].deserialize(from: data, designatedPath: "result.data") else { return }
+        print(models)
     }
     
+    struct Family: SmartCodable {
+        
+        var name: String?
+        var id: String?
+        var height: Int?
+    }
+}
+
+extension Introduce_10ViewController {
+    func test2() {
+        
+        let jsonString = "{\"data\":{\"result\":{\"id\":123456,\"arr1\":[1,2,3,4,5,6],\"arr2\":[\"a\",\"b\",\"c\",\"d\",\"e\"]}},\"code\":200}"
+
+        let data = jsonString.data(using: .utf8)
+
+        guard let models = Home.deserialize(from: data, designatedPath: "data.result") else { return }
+        print(models)
+    }
+    
+    struct Home: SmartCodable {
+        
+        var arr1: [SmartAny]?
+        var id: String?
+        var arr2: [String]?
+    }
+}
+
+
+extension Introduce_10ViewController {
     func testDeserializeArrayPath() {
         let jsonString = """
             {
@@ -158,10 +203,9 @@ class Test2ViewController: BaseViewController {
         print(departments)
         
     }
-}
-
-
-extension Test2ViewController {
+    
+    
+    
     struct PathModel: SmartCodable {
         var name: String?
         var age: Int?

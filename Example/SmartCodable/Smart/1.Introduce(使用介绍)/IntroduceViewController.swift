@@ -49,6 +49,8 @@ extension IntroduceViewController {
                 ["name": "7. 支持json字段的对象化解析",  "vc": "Introduce_7ViewController"],
                 ["name": "8. 支持枚举的解析",  "vc": "Introduce_8ViewController"],
                 ["name": "9. 支持UIColor的解析",  "vc": "Introduce_9ViewController"],
+                ["name": "10. 指定解析路径",  "vc": "Introduce_10ViewController"],
+                
 
             ]
         ]

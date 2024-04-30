@@ -25,31 +25,49 @@ import BTPrint
 
 
 class TestViewController: BaseViewController {
+    let jsonArrayString: String? = "{\"result\":{\"data\":[{\"name\":\"Bob\",\"id\":\"1\",\"height\":180},{\"name\":\"Lily\",\"id\":\"2\",\"height\":150},{\"name\":\"Lucy\",\"id\":\"3\",\"height\":160}]}}"
+    
+    let jsonString = "{\"data\":{\"result\":{\"id\":123456,\"arr1\":[1,2,3,4,5,6],\"arr2\":[\"a\",\"b\",\"c\",\"d\",\"e\"]}},\"code\":200}"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .debug
-        let dict: [String: Any] = [
-            "age": "Mccc",
-        ]
-        guard let model = Family.deserialize(from: dict) else { return }
-        print(model)
-
+        smartTest()
+        handyTest()
     }
 }
 extension TestViewController {
-    struct Family: SmartCodable {
-        var name: String = "我的家"
-        var location: String = ""
-
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.name <--- "age",
-                CodingKeys.location <--- "age",
-            ]
-        }
-    }
-
     
+    
+    func smartTest() {
+        SmartConfig.debugMode = .verbose
+        
+        let data = jsonString.data(using: .utf8)
+
+        guard let model = Family.deserialize(from: data, designatedPath: "data.result") else { return }
+        print(model)
+    }
+    
+    struct Family: SmartCodable {
+        var id: Int?
+        var arr1: [Int?]!
+        var arr2: [String?]?
+    }
+}
+
+
+extension TestViewController {
+    
+    
+    func handyTest() {
+
+        guard let model = Home.deserialize(from: jsonString, designatedPath: "data.result") else { return }
+        print(model)
+    }
+    
+    struct Home: HandyJSON {
+        var id: Int?
+        var arr1: [Int?]!
+        var arr2: [String?]?
+    }
 }
