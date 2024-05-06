@@ -282,6 +282,7 @@
 		99B5B6FD2BD7A69500989420 /* LogCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5B6FC2BD7A69500989420 /* LogCache.swift */; };
 		99B5B6FF2BD7B2F400989420 /* LogItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B5B6FE2BD7B2F400989420 /* LogItem.swift */; };
 		99C3E4EDBE5BCDC161722B105F0FD62F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F616208225C5B42B50ABA5F5267C29F /* Database.swift */; };
+		99E610182BE8846A000FC21D /* DataTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E610172BE8846A000FC21D /* DataTransformer.swift */; };
 		9A5C397C4B518E59526372CA6AA0BE65 /* StatementAttach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F631CC802E2701AD6DEAB71A9B7134CB /* StatementAttach.swift */; };
 		9A6CCC7BCACBE8218126670E6B08EF9E /* BTPrint-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15CC97091BEEC9AAC898E58EC68EBF05 /* BTPrint-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A744ABA4C667156B393D0D0854DF333 /* queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 8DA4771CF91F3004D3D65B79990DE177 /* queue.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -875,6 +876,7 @@
 		9956B9BE2BDBE5FE00C711F5 /* LogContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogContainer.swift; sourceTree = "<group>"; };
 		99B5B6FC2BD7A69500989420 /* LogCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCache.swift; sourceTree = "<group>"; };
 		99B5B6FE2BD7B2F400989420 /* LogItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogItem.swift; sourceTree = "<group>"; };
+		99E610172BE8846A000FC21D /* DataTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransformer.swift; sourceTree = "<group>"; };
 		9A09037802A20D832A880AA28340A8C1 /* FBSnapshotTestCase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-prefix.pch"; sourceTree = "<group>"; };
 		9A0CDA24DDDB701970130A91AE5FA140 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
 		9AB62CDC1D9A84669428234D73C264AF /* Pods-SmartCodable_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmartCodable_Example-dummy.m"; sourceTree = "<group>"; };
@@ -1284,6 +1286,7 @@
 			children = (
 				3AA520AC9B13ABB5E7D071A374BCB95D /* ColorTransformer.swift */,
 				87B0DEDE45C0302EEAB58E3D6178ABEA /* DateTransformer.swift */,
+				99E610172BE8846A000FC21D /* DataTransformer.swift */,
 				8FC17EEC27D06760DC8D832439411C11 /* Transformer.swift */,
 				964D474E9DF4EA74E8305D1ED2E7CBF4 /* URLTransformer.swift */,
 			);
@@ -2558,6 +2561,7 @@
 				3E01AA968DD7A66BF8D6CB2A4D0381D1 /* DecodingError+Extension.swift in Sources */,
 				51E7BEF5F249F785565069DFB5EBD436 /* DecodingProcessCoordinator.swift in Sources */,
 				0D45FBA1939455416E1DB97066E2EE06 /* InitialModelCache.swift in Sources */,
+				99E610182BE8846A000FC21D /* DataTransformer.swift in Sources */,
 				67506488EBF3AEA9527B85ACCFF85D75 /* ModelKeyMapper.swift in Sources */,
 				894C7E374F8656743893C630CE4CBFE1 /* Patcher.swift in Sources */,
 				3FBD0BC5B18F5F7B15CB4D7163DE9334 /* Patcher+Provider.swift in Sources */,
