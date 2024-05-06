@@ -76,6 +76,7 @@ extension SmartDecodable {
     
     /// Deserializes into a model
     /// - Parameter dict: Dictionary
+    /// - Parameter designatedPath: Specifies the data path to decode
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Model
@@ -96,6 +97,7 @@ extension SmartDecodable {
     
     /// Deserializes into a model
     /// - Parameter json: JSON string
+    /// - Parameter designatedPath: Specifies the data path to decode
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Model
@@ -116,6 +118,7 @@ extension SmartDecodable {
     
     /// Deserializes into a model
     /// - Parameter data: Data
+    /// - Parameter designatedPath: Specifies the data path to decode
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Model
@@ -140,6 +143,7 @@ extension Array where Element: SmartDecodable {
     
     /// Deserializes into an array of models
     /// - Parameter array: Array
+    /// - Parameter designatedPath: Specifies the data path to decode
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Array of models
@@ -161,6 +165,7 @@ extension Array where Element: SmartDecodable {
     
     /// Deserializes into an array of models
     /// - Parameter json: JSON string
+    /// - Parameter designatedPath: Specifies the data path to decode
     /// - Parameter options: Decoding strategy
     ///   Only one enumeration item is allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Array of models
@@ -180,6 +185,7 @@ extension Array where Element: SmartDecodable {
     
     /// Deserializes into an array of models
     /// - Parameter data: Data
+    /// - Parameter designatedPath: Specifies the data path to decode
     /// - Parameter options: Decoding strategy
     ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
     /// - Returns: Array of models

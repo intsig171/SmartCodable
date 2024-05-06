@@ -34,6 +34,7 @@ class CustomDecodingValueViewContriller: BaseViewController {
             "sub": [
                 "subDate": 1712491290,
                 "subColor": "7DA5E3",
+                "subData": "aHR0cHM6Ly93d3cucWl4aW4uY29t"
             ]
         ]
         guard let model1 = SmartModel.deserialize(from: dict1) else { return }
@@ -41,6 +42,11 @@ class CustomDecodingValueViewContriller: BaseViewController {
         print(model1)
         
         print("\n")
+        
+        if let data = model?.sub?.subData, let url = String(data: data, encoding: .utf8) {
+            print(url)
+            // https://www.qixin.com
+        }
         
         guard let dataValue = model1.toDictionary() else { return }
         print(dataValue)
@@ -64,9 +70,10 @@ extension CustomDecodingValueViewContriller {
         var bool: Bool = false
         var cgFloat: CGFloat = 0.0
         var double: Double = 0.0
-        
+
         var date1: Date?
         var date2: Date?
+        
         var url: URL?
         
         var ignoreKey: String?
@@ -80,7 +87,6 @@ extension CustomDecodingValueViewContriller {
             let format = DateFormatter()
             format.dateFormat = "yyyy-MM-dd"
             return [
-                
                 CodingKeys.string <--- StringTransformer(),
                 CodingKeys.int <--- IntTransformer(),
                 CodingKeys.double <--- DoubleTransformer(),
@@ -98,15 +104,19 @@ extension CustomDecodingValueViewContriller {
 
         var subDate: Date?
         var subColor: SmartColor?
+        var subData: Data?
+
         
         static func mappingForKey() -> [SmartKeyTransformer]? {
             [
-                CodingKeys.subDate <--- "date2"
+                CodingKeys.subDate <--- "date2",
             ]
         }
         
         static func mappingForValue() -> [SmartValueTransformer]? {
             [
+                CodingKeys.subData <--- SmartDataTransformer(),
+
                 CodingKeys.subDate <--- SmartDateTransformer(),
                 CodingKeys.subColor <--- SmartHexColorTransformer()
             ]

@@ -31,6 +31,7 @@ class MixDecodingViewController: BaseViewController {
             "sub": [
                 "subDate": 1712491290,
                 "subColor": "7DA5E3",
+                "subData": "aHR0cHM6Ly93d3cucWl4aW4uY29t"
             ]
         ]
         
@@ -38,6 +39,10 @@ class MixDecodingViewController: BaseViewController {
         
         guard let model = SmartModel.deserialize(from: dict1, options: [option]) else { return }
         print(model)
+        if let data = model.data, let url = String(data: data, encoding: .utf8) {
+            print(url)
+            // https://www.qixin.com
+        }
     }
 }
 
@@ -51,6 +56,7 @@ extension MixDecodingViewController {
         
         var date1: Date?
         var date2: Date?
+        var data: Data?
         var url: URL?
         
         var color: SmartColor?
@@ -61,6 +67,7 @@ extension MixDecodingViewController {
             //  case ignoreKey
             case date1
             case date2
+            case data
             case url
             case color
         }
@@ -70,7 +77,8 @@ extension MixDecodingViewController {
             [
                 CodingKeys.date1 <--- ["date", "date1"],
                 CodingKeys.date2 <--- "sub.subDate",
-                CodingKeys.color <--- "sub.subColor"
+                CodingKeys.color <--- "sub.subColor",
+                CodingKeys.data <--- "sub.subData"
             ]
         }
         
@@ -82,6 +90,7 @@ extension MixDecodingViewController {
                 CodingKeys.url <--- SmartURLTransformer(prefix: "https://"),
                 CodingKeys.date1 <--- SmartDateFormatTransformer(format),
                 CodingKeys.date2 <--- SmartDateTransformer(),
+                CodingKeys.data <--- SmartDataTransformer()
             ]
         }
         

@@ -9,12 +9,6 @@
 import UIKit
 import SmartCodable
 
-
-func isTypeDictionary<T: Decodable>(type: T.Type) -> Bool {
-    return T.self is Dictionary<String, String>.Type
-}
-
-
 class ViewController: UIViewController {
     
     
@@ -29,11 +23,11 @@ class ViewController: UIViewController {
         
         dataArray = [
             other,
-            smart_debug,
             smart_test,
             replace_HandyJSON,
             smart_introduce,
             smart_customDecoding,
+            smart_debug,
             smart_case,
         ]
         
@@ -121,7 +115,7 @@ extension ViewController {
         [
             "title": "内部测试（请忽略）",
             "list": [
-                ["name": "测试代码", "vc": "TestViewController"],
+                ["name": "测试代码1", "vc": "TestViewController"],
                 ["name": "测试代码2", "vc": "Test2ViewController"],
                 ["name": "测试代码3", "vc": "Test3ViewController"],
 

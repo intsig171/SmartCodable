@@ -46,6 +46,35 @@ extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 
 
 //MARK: - ～> V3 版本
+// MARK: V3.4.0
+/**
+ * 1. ✅ 聚合解析日志
+ *   - 说明：将原本分散的属性解析日志，以Model为单元汇总到一起。
+ *   - 结论：已完成
+ *
+ * 2. ✅ 支持designatedPath
+ *   - 说明：参考HandyJSON
+ *   - 结论：已完成
+ *
+ * 3. ✅ 更安全的忽略某个属性的解析
+ *   - 说明：使用属性包装器（@ IgnoredKey）支持某个属性的解析忽略
+ *   - 结论：已完成
+ *
+ * 4. ✅ 枚举解析的类型兼容
+ *   - 说明：枚举的RawValue是String类型，遇到Int类型，也要支持类型转换的兼容。
+ *   - 结论：已完成
+ *
+ * 5. ✅ 支持字段的多个映射逻辑
+ *   - 说明：一个字段，映射到两个属性上。
+ *   - 结论：已完成
+ *
+ * 6. ✅ 支持Data的自定义解析。
+ *   - 说明：使用SmartDataTransformer支持Data类型的自定义解析。
+ *   - 结论：已完成
+ */
+
+
+
 // MARK: V3.3.2
 /**
  * 1. ✅ bugfix

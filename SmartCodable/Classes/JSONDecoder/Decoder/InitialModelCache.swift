@@ -63,11 +63,9 @@ struct InitialModelCache {
             } else if let caseValue = cacheValue as? (any SmartCaseDefaultable) {
                 return caseValue.rawValue as? T
             }
-        } else {
-            let cacheValue1 = snapshots.last?.initialValues["_" + key.stringValue]
-            
-            if let value = cacheValue1 as? IgnoredKey<T> {
-                return value.wrappedValue
+        } else { // @propertyWrapper type， value logic
+            if let cacheValue = snapshots.last?.initialValues["_" + key.stringValue]  as? IgnoredKey<T> {
+                return cacheValue.wrappedValue
             }
         }
 
