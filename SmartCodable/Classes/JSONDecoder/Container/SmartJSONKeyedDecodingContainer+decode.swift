@@ -252,8 +252,13 @@ extension SmartJSONKeyedDecodingContainer {
                 SmartLog.logDebug(error, className: className)
             }
         }
+                
+        // 如果被忽略了，就不要输出log了。
+        let typeString = String(describing: T.self)
+        if !typeString.starts(with: "IgnoredKey<") {
+            logInfo()
+        }
         
-        logInfo()
         
         var decoded: T
         if let value = Patcher<T>.convertToType(from: entry) { // 类型转换

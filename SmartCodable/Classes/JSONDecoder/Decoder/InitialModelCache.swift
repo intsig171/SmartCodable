@@ -64,8 +64,12 @@ struct InitialModelCache {
                 return caseValue.rawValue as? T
             }
         } else { // @propertyWrapper type， value logic
-            if let cacheValue = snapshots.last?.initialValues["_" + key.stringValue]  as? IgnoredKey<T> {
-                return cacheValue.wrappedValue
+            if let cacheValue1 = snapshots.last?.initialValues["_" + key.stringValue] {
+                if let value = cacheValue1 as? IgnoredKey<T> {
+                    return value.wrappedValue
+                } else if let value = cacheValue1 as? T { // 当key缺失的时候，会进入
+                    return value
+                }
             }
         }
 
@@ -84,6 +88,8 @@ struct InitialModelCache {
         }
         return nil
     }
+    
+    
 }
 
 
