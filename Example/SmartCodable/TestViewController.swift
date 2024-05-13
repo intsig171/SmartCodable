@@ -30,7 +30,7 @@ class TestViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "age": 10,
+            "age": "10",
             "name": "Mccc",
             "area": "su zhou"
         ]
@@ -44,8 +44,8 @@ class TestViewController: BaseViewController {
 }
 struct Home: SmartCodable {
     var name: String = ""
-    @IgnoredKey
-    var age: [Any] = ["1"]
+    
+    var age: Int64 = 0
     @IgnoredKey
     var area: String = "area"
 }

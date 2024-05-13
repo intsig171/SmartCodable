@@ -8,7 +8,7 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - HandyJSON (5.0.0-beta.1)
-  - SmartCodable (3.4.1)
+  - SmartCodable (3.4.2)
   - SnapKit (5.6.0)
   - SQLiteRepairKit (1.3.0):
     - WCDBOptimizedSQLCipher (~> 1.3.0)
@@ -49,7 +49,7 @@ SPEC CHECKSUMS:
   CleanJSON: 910a36465ce4829e264a902ccf6d1455fdd9f980
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
-  SmartCodable: 9c9941a8303a8bedb16884a1c6efb27c91851126
+  SmartCodable: a99b61311a03dcbeab24d680ab684f61db1d76ea
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SQLiteRepairKit: a66145aadae91886c800f75e16f5cc6476af1a93
   WCDB.swift: 39e28fe29b5a3bf2927d9fb9218978f19bd49ff0

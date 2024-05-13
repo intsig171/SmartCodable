@@ -83,6 +83,75 @@ extension Int: TypeTransformable {
     }
 }
 
+extension Int8: TypeTransformable {
+    static func transformValue(from value: Any) -> Int8? {
+        switch value {
+        case let temp as String:
+            return Int8(temp)
+        case let temp as Float:
+            return Int8(temp)
+        case let temp as Double:
+            return Int8(temp)
+        case let temp as CGFloat:
+            return Int8(temp)
+        default:
+            return nil
+        }
+    }
+}
+
+extension Int16: TypeTransformable {
+    static func transformValue(from value: Any) -> Int16? {
+        switch value {
+        case let temp as String:
+            return Int16(temp)
+        case let temp as Float:
+            return Int16(temp)
+        case let temp as Double:
+            return Int16(temp)
+        case let temp as CGFloat:
+            return Int16(temp)
+        default:
+            return nil
+        }
+    }
+}
+
+
+extension Int32: TypeTransformable {
+    static func transformValue(from value: Any) -> Int32? {
+        switch value {
+        case let temp as String:
+            return Int32(temp)
+        case let temp as Float:
+            return Int32(temp)
+        case let temp as Double:
+            return Int32(temp)
+        case let temp as CGFloat:
+            return Int32(temp)
+        default:
+            return nil
+        }
+    }
+}
+
+extension Int64: TypeTransformable {
+    static func transformValue(from value: Any) -> Int64? {
+        switch value {
+        case let temp as String:
+            return Int64(temp)
+        case let temp as Float:
+            return Int64(temp)
+        case let temp as Double:
+            return Int64(temp)
+        case let temp as CGFloat:
+            return Int64(temp)
+        default:
+            return nil
+        }
+    }
+}
+
 
 extension Float: TypeTransformable {
     static func transformValue(from value: Any) -> Float? {
