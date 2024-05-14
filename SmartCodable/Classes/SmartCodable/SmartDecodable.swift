@@ -263,28 +263,34 @@ extension Data {
 }
 
 extension Dictionary where Key == String {
-    fileprivate func toJSONString() -> String? {
+    
+    fileprivate func toData() -> Data? {
         let peeled = self.peelIfPresent
         guard JSONSerialization.isValidJSONObject(peeled) else { return nil }
-        
-        if let data = try? JSONSerialization.data(withJSONObject: peeled) {
-            if let json = String(data: data, encoding: String.Encoding.utf8) {
-                return json
-            }
+        return try? JSONSerialization.data(withJSONObject: peeled)
+    }
+    
+    fileprivate func toJSONString() -> String? {
+        guard let data = toData() else { return nil }
+        if let json = String(data: data, encoding: String.Encoding.utf8) {
+            return json
         }
         return nil
     }
 }
 
 extension Array {
-    fileprivate func toJSONString() -> String? {
+    
+    fileprivate func toData() -> Data? {
         let peeled = self.peelIfPresent
         guard JSONSerialization.isValidJSONObject(peeled) else { return nil }
-        
-        if let data = try? JSONSerialization.data(withJSONObject: peeled) {
-            if let json = String(data: data, encoding: String.Encoding.utf8) {
-                return json
-            }
+        return try? JSONSerialization.data(withJSONObject: peeled)
+    }
+    
+    fileprivate func toJSONString() -> String? {
+        guard let data = toData() else { return nil }
+        if let json = String(data: data, encoding: String.Encoding.utf8) {
+            return json
         }
         return nil
     }
@@ -316,12 +322,13 @@ fileprivate func getInnerData(inside value: Any?, by designatedPath: String?) ->
         case let str as String:
             return Data(str.utf8)
         case let dict as [String: Any]:
-            return try? JSONSerialization.data(withJSONObject: dict, options: [])
+            return dict.toData()
         case let arr as [Any]:
-            return try? JSONSerialization.data(withJSONObject: arr, options: [])
+            return arr.toData()
         default:
-            return nil
+            break
         }
+        return nil
     }
 
     func getInnerObject(inside object: Any?, by designatedPath: String?) -> Any? {

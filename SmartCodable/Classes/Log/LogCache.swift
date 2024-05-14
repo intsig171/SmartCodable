@@ -24,12 +24,12 @@ struct LogCache {
     mutating func formatLogs() -> String? {
         
         guard !snapshotDict.isEmpty else { return nil }
+        guard !keyOrder.isEmpty else { return nil }
 
         filterLogItem()
 
         keyOrder = processArray(keyOrder)
         alignTypeNamesInAllSnapshots()
-       
         return keyOrder.compactMap { snapshotDict[$0]?.formatMessage() }.joined()
     }
 }
@@ -39,7 +39,6 @@ extension LogCache {
     mutating func processArray(_ array: [String]) -> [String] {
         var mutableArray = array
         var indexToInsert: [(index: Int, element: String)] = []
-        
         
         func createLogContainer(path: [CodingKey]) -> LogContainer {
             let container = LogContainer(typeName: "", logs: [], codingPath: path)
