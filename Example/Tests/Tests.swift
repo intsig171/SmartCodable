@@ -4,7 +4,7 @@ import HandyJSON
 import CleanJSON
 
 
-let count = 1000 // or 1, 10, 100, 1000, 10000
+let count = 10000 // or 1, 10, 100, 1000, 10000
 let data = airportsJSON(count: count)
 
 class Tests: XCTestCase {
@@ -65,6 +65,9 @@ class Tests: XCTestCase {
     
     func testSmartCodable() {
         measure {
+            
+            print("执行了")
+            
             guard let objects = [Smart].deserialize(from: data) else {
                 return
             }
@@ -142,6 +145,8 @@ struct Smart: SmartCodable {
     var icao: String?
     var coordinates: [Double]?
     var runways: [Runway]?
+    var abc: String = ""
+    var def: Int = 0
     
     struct Runway: SmartCodable {
         enum Surface: String, SmartCaseDefaultable {

@@ -12,7 +12,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
-  s.version          = '3.4.2'
+  s.version          = '3.4.3'
   s.summary          = '数据解析库'
   
   s.homepage         = 'https://github.com/intsig171'

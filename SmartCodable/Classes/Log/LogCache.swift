@@ -37,6 +37,8 @@ struct LogCache {
 extension LogCache {
     
     mutating func processArray(_ array: [String]) -> [String] {
+        guard !array.isEmpty else { return [] }
+        
         var mutableArray = array
         var indexToInsert: [(index: Int, element: String)] = []
         
@@ -61,7 +63,7 @@ extension LogCache {
                 }
             }
         }
-
+        
         // 处理数组的其余元素
         for i in 1..<mutableArray.count {
             let currentComponents = mutableArray[i].components(separatedBy: "-")
