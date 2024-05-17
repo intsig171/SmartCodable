@@ -8,13 +8,13 @@ Several users have proposed optimizations or requests for new features. Here are
 
 | 💡 Suggestion List                                            | Accepted | Reason                                                       |
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
-| ① **#suggest 1 Support parsing ignore in mapping methods**   | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest1.md) |
-| ② **#suggest 2 Support parsing inheritance relationships like HandyJSON** | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest2.md) |
-| ③ **#suggest 3 Support filling initial values**              | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest3md) |
-| ④ **#suggest 4 Provide guidance for replacing HandyJSON**    | ✅        | [Replacement guidance](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest4.md) |
-| ⑤ **#suggest 5 Provide a global key mapping strategy**       | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest5.md) |
-| ⑥ **#suggest 6 Support parsing UIColor**                     | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest6.md) |
-| ⑦ **#suggest 7 Add custom conversion strategies for individual values** | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest7.md) |
+| ① **#suggest 1 Support parsing ignore in mapping methods**   | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest1.md) |
+| ② **#suggest 2 Support parsing inheritance relationships like HandyJSON** | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest2.md) |
+| ③ **#suggest 3 Support filling initial values**              | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest3.md) |
+| ④ **#suggest 4 Provide guidance for replacing HandyJSON**    | ✅        | [Replacement guidance](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest4.md) |
+| ⑤ **#suggest 5 Provide a global key mapping strategy**       | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest5.md) |
+| ⑥ **#suggest 6 Support parsing UIColor**                     | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest6.md) |
+| ⑦ **#suggest 7 Add custom conversion strategies for individual values** | ✅        | [Implementation logic]https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest7.md) |
 
 ## Integrating SmartCodable
 

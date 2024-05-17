@@ -51,13 +51,13 @@
 
 | 💡 建议列表                                          | 是否采纳 | 理由                                                         |
 | --------------------------------------------------- | -------- | ------------------------------------------------------------ |
-| ① **#suggest 1 在mapping方法中支持解析忽略**        | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest1.md) |
-| ② **#suggest 2 像HandyJSON一样支持继承关系的解析**  | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest2.md) |
-| ③ **#suggest 3 支持初始值填充**                     | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest3.md) |
-| ④ **#suggest 4 提供HandyJSON的替换指导**            | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest4.md) |
-| ⑤ **#suggest 5 提供全局的Key映射策略**              | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest5.md) |
-| ⑥ **#suggest 6 支持UIColor的解析**                  | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest6.md) |
-| ⑦ **#suggest 7 增加单个Value的自定义转换策略**      | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest7.md) |
+| ① **#suggest 1 在mapping方法中支持解析忽略**        | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest1.md) |
+| ② **#suggest 2 像HandyJSON一样支持继承关系的解析**  | ❌        | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest2.md) |
+| ③ **#suggest 3 支持初始值填充**                     | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest3.md) |
+| ④ **#suggest 4 提供HandyJSON的替换指导**            | ✅        | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest4.md) |
+| ⑤ **#suggest 5 提供全局的Key映射策略**              | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest5.md) |
+| ⑥ **#suggest 6 支持UIColor的解析**                  | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest6.md) |
+| ⑦ **#suggest 7 增加单个Value的自定义转换策略**      | ✅        | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest7.md) |
 | ⑧ **#suggest 8 支持designatedPath的自定义路径解析** | ✅        | 参考HandyJSON实现                                            |
 
 
