@@ -8,13 +8,13 @@ Several users have proposed optimizations or requests for new features. Here are
 
 | 💡 Suggestion List                                            | Accepted | Reason                                                       |
 | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ |
-| ① **#suggest 1 Support parsing ignore in mapping methods**   | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest 1 在mapping方法中支持解析忽略.md) |
-| ② **#suggest 2 Support parsing inheritance relationships like HandyJSON** | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest 2 像HandyJSON一样支持继承关系的解析.md) |
-| ③ **#suggest 3 Support filling initial values**              | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest 3 支持属性初始化值填充.md) |
-| ④ **#suggest 4 Provide guidance for replacing HandyJSON**    | ✅        | [Replacement guidance](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest 4 使用SmartCodable 平替 HandyJSON.md) |
-| ⑤ **#suggest 5 Provide a global key mapping strategy**       | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest 5 提供全局的Key映射策略.md) |
-| ⑥ **#suggest 6 Support parsing UIColor**                     | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest 6 支持由hex颜色解析到UIColor.md) |
-| ⑦ **#suggest 7 Add custom conversion strategies for individual values** | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest 7 增加单个Value的自定义转换策略.md) |
+| ① **#suggest 1 Support parsing ignore in mapping methods**   | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest1.md) |
+| ② **#suggest 2 Support parsing inheritance relationships like HandyJSON** | ❌        | [Reason for not accepting](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest2.md) |
+| ③ **#suggest 3 Support filling initial values**              | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest3md) |
+| ④ **#suggest 4 Provide guidance for replacing HandyJSON**    | ✅        | [Replacement guidance](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest4.md) |
+| ⑤ **#suggest 5 Provide a global key mapping strategy**       | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest5.md) |
+| ⑥ **#suggest 6 Support parsing UIColor**                     | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest6.md) |
+| ⑦ **#suggest 7 Add custom conversion strategies for individual values** | ✅        | [Implementation logic](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/#suggest7.md) |
 
 ## Integrating SmartCodable
 
