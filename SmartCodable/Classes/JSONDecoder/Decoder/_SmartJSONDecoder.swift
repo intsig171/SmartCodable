@@ -15,7 +15,7 @@ final class _SmartJSONDecoder: Decoder {
     var cache: InitialModelCache
         
     /// Options set on the top-level decoder.
-    let options: SmartJSONDecoder.Options
+    let options: SmartJSONDecoder._Options
     
     /// The path to the current point in encoding.
     public var codingPath: [CodingKey]
@@ -28,7 +28,7 @@ final class _SmartJSONDecoder: Decoder {
     // MARK: - Initialization
     
     /// Initializes `self` with the given top-level container and options.
-    init(referencing container: Any, at codingPath: [CodingKey] = [], options: SmartJSONDecoder.Options) {
+    init(referencing container: Any, at codingPath: [CodingKey] = [], options: SmartJSONDecoder._Options) {
         self.storage = SmartJSONDecodingStorage()
         self.storage.push(container: container)
         self.codingPath = codingPath

@@ -9,7 +9,7 @@ import Foundation
 
 
 /// Records the default values of model properties during decoding, used for filling in when decoding fails.
-struct InitialModelCache {
+class InitialModelCache {
     
     
     /// Stores a snapshot of the Model being parsed.
@@ -22,7 +22,7 @@ struct InitialModelCache {
     }
     
     /// Cache the initial state of a Decodable object.
-    mutating func cacheInitialState<T: Decodable>(for type: T.Type) {
+    func cacheInitialState<T: Decodable>(for type: T.Type) {
         if let object = type as? SmartDecodable.Type {
             
             var snapshot = Snapshot()
@@ -43,7 +43,7 @@ struct InitialModelCache {
     }
     
     /// Clears the decoding status of the last record
-    mutating func clearLastState<T: Decodable>(for type: T.Type) {
+    func clearLastState<T: Decodable>(for type: T.Type) {
         
         // If the current type being decoded does not inherit from SmartDecodable Model, it does not need to be processed.
         // The properties within the model being decoded should not be cleared. They can be cleared only after decoding is complete.

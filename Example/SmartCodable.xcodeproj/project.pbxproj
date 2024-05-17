@@ -506,10 +506,10 @@
 		99CABA2A2B916DD30070DED0 /* CaseOne */ = {
 			isa = PBXGroup;
 			children = (
+				99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */,
 				99675FE82B3EC930006C83EC /* CaseOne_FloatViewController.swift */,
 				99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */,
 				99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */,
-				99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */,
 				99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */,
 				99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */,
 				99675FEE2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift */,

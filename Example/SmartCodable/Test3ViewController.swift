@@ -16,6 +16,25 @@ class Test3ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let dict: [String: Any] = [
+//            "name": "Mccc",
+//            "age": NSNull(),
+            "sex": 123
+        ]
+        
+        if let model = Model.deserialize(from: dict) {
+            print(model)
+        }
     }
+    
+    struct Model: SmartCodable {
+//        var name: String = ""
+//        var age: String = "Mccc"
+        var sex: Bool?
+    }
+    
+    
 }
+
 
