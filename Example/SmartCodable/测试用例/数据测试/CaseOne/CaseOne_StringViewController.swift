@@ -32,7 +32,7 @@ class CaseOne_StringViewController: BaseViewController {
         print("string2的值为", feed.string2)
         print("string3的值为", feed.string3)
         print("string4的值为", feed.string4 ?? "")
-        print("string5的值为", feed.string5 ?? "")
+        print("string5的值为", feed.string5)
 
         /**
          string1的值为 123
@@ -46,7 +46,7 @@ class CaseOne_StringViewController: BaseViewController {
         var string2: String = ""
         var string3: String = ""
         var string4: String?
-        var string5: String?
+        var string5: String = "123"
         init() { }
     }
 }

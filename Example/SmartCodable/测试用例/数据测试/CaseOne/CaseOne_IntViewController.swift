@@ -16,17 +16,17 @@ class CaseOne_IntViewController: BaseViewController {
         super.viewDidLoad()
      
         
-        let json = """
-        {
-          "int": "123",
-          "int1": "123.1",
-          "int2": 12.3,
-          "int3": null,
-          "int4": {},
-        }
-        """
+        let dict: [String: Any] = [
+            "int": "123",
+            "int1": "123.1",
+            "int2": 12.3,
+            "int3": NSNull(),
+            "int4": [],
+            "int5": true
+            
+        ]
         
-        guard let feed = CompatibleInt.deserialize(from: json) else { return }
+        guard let feed = CompatibleInt.deserialize(from: dict) else { return }
 //        print(feed)
         smartPrint(value: feed)
         /**
@@ -48,7 +48,7 @@ struct CompatibleInt: SmartCodable {
     var int2: Int?
     var int3: Int?
     var int4: Int?
-    var int5: Int?
+    var int5: Int = 0
 
     init() { }
 }

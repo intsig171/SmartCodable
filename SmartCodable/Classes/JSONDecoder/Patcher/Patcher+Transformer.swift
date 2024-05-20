@@ -53,6 +53,8 @@ extension String: TypeTransformable {
         }
         
         switch value {
+        case let stringValue as String:
+            return stringValue
         case let intValue as Int:
             return String(intValue)
         case let floatValue as Float:
