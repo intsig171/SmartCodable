@@ -42,6 +42,10 @@ struct SmartJSONKeyedDecodingContainer<K : CodingKey>: KeyedDecodingContainerPro
             self.container = Dictionary(container.map {
                 dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToLowercase(dict.key), dict.value)
             }, uniquingKeysWith: { (first, _) in first })
+        case .firstLetterUpper:
+            self.container = Dictionary(container.map {
+                dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToUppercase(dict.key), dict.value)
+            }, uniquingKeysWith: { (first, _) in first })
         }
     }
     
@@ -123,3 +127,4 @@ extension SmartJSONKeyedDecodingContainer {
         return DecodingProcessCoordinator.didFinishMapping(decodeValue)
     }
 }
+

@@ -32,6 +32,12 @@ extension JSONDecoder {
         ///
         /// - Note: This strategy should be used with caution, especially if the key's first letter is intended to be uppercase for distinguishing purposes. It also incurs a nominal performance cost, as the first character of each key needs to be inspected and possibly modified.
         case firstLetterLower
+        
+        /// Convert the first letter of the key to upper case before attempting to match a key with the one specified by each type.
+        /// For example, `oneTwoThree` becomes `OneTwoThree`.
+        ///
+        /// - Note: This strategy should be used when the keys are expected to start with a lowercase letter and need to be converted to start with an uppercase letter. It incurs a nominal performance cost, as the first character of each key needs to be inspected and possibly modified.
+        case firstLetterUpper
     }
 }
 
@@ -43,6 +49,12 @@ extension JSONDecoder.SmartKeyDecodingStrategy {
         guard !stringKey.isEmpty else { return stringKey }
 
         return stringKey.prefix(1).lowercased() + stringKey.dropFirst()
+    }
+    
+    static func _convertFirstLetterToUppercase(_ stringKey: String) -> String {
+        guard !stringKey.isEmpty else { return stringKey }
+
+        return stringKey.prefix(1).uppercased() + stringKey.dropFirst()
     }
     
     static func _convertFromSnakeCase(_ stringKey: String) -> String {
