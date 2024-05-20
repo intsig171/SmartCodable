@@ -12,16 +12,18 @@ import SmartCodable
 
 /** 全局的Key映射关系
  * 1. 首字母大写转小写
- * 2. 蛇形转驼峰命名
- * 3. 💗如有其他需求，可联系作者定制。
+ * 2. 首字母小写转大写
+ * 3 蛇形转驼峰命名
+ * 4. 💗如有其他需求，可联系作者定制。
  */
 
 class KeyDecodingStrategyViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        let dict: [String: Any] = [
+        
+        // 首字母大写转小写
+        let dictFirst: [String: Any] = [
             "Name": "Mccc",
             "Age": 10,
             "Sex": "男",
@@ -29,53 +31,86 @@ class KeyDecodingStrategyViewController: BaseCompatibilityViewController {
                 "Name": "小李"
             ]
         ]
+        let optionFirst: SmartDecodingOption = .key(.firstLetterLower)
+        if let modelFirst = ModelFirst.deserialize(from: dictFirst, options: [optionFirst]) {
+            print(String(describing: modelFirst))
+        } else {
+            print("Failed to deserialize ModelFirst.")
+        }
         
-        // 首字母大写转小写
-        let option: SmartDecodingOption = .key(.firstLetterLower)
-        guard let model = Model.deserialize(from: dict, options: [option]) else { return }
-        print(model)
-
-
         
         
-        let dict1: [String: Any] = [
+        // 首字母小写转大写
+        let dictSecond: [String: Any] = [
+            "name": "Mccc",
+            "age": 10,
+            "sex": "男",
+            "sub": [
+                "name": "小李"
+            ]
+        ]
+        let optionSecond: SmartDecodingOption = .key(.firstLetterUpper)
+        if let modelSecond = ModelSecond.deserialize(from: dictSecond, options: [optionSecond]) {
+            print(String(describing: modelSecond))
+        } else {
+            print("Failed to deserialize ModelSecond.")
+        }
+        
+        
+        
+        // 蛇形转驼峰命名
+        let dictThird: [String: Any] = [
             "nick_name": "Mccc",
             "self_age": 10,
             "sub_info": [
                 "real_name": "小李"
             ]
         ]
-        
-        // 蛇形转驼峰命名
-        let option1: SmartDecodingOption = .key(.fromSnakeCase)
-        guard let model1 = TwoModel.deserialize(from: dict1, options: [option1]) else { return }
-        print(model1)
+        let optionThird: SmartDecodingOption = .key(.fromSnakeCase)
+        if let modelThird = ModelThird.deserialize(from: dictThird, options: [optionThird]) {
+            print(String(describing: modelThird))
+        } else {
+            print("Failed to deserialize ModelThird.")
+        }
     }
 }
 
 
 extension KeyDecodingStrategyViewController {
-    struct Model: SmartCodable {
+    struct ModelFirst: SmartCodable {
         var name: String = ""
-        var age: Int = 0
+        var age: String = ""
         var sex: String = ""
-        var sub: SubModel?
+        var sub: SubModelFirst?
     }
     
-    struct SubModel: SmartCodable {
+    struct SubModelFirst: SmartCodable {
         var name: String = ""
     }
 }
 
+extension KeyDecodingStrategyViewController {
+    struct ModelSecond: SmartCodable {
+        var Name: String = ""
+        var Age: Int = 0
+        var Sex: String = ""
+        var Sub: SubModelSecond?
+    }
+    
+    struct SubModelSecond: SmartCodable {
+        var Name: String = ""
+    }
+}
 
 extension KeyDecodingStrategyViewController {
-    struct TwoModel: SmartCodable {
+    struct ModelThird: SmartCodable {
         var nickName: String = ""
         var selfAge: Int = 0
-        var subInfo: SubTwoModel?
+        var subInfo: SubModelThird?
     }
     
-    struct SubTwoModel: SmartCodable {
+    struct SubModelThird: SmartCodable {
         var realName: String = ""
     }
 }
+
