@@ -18,33 +18,37 @@ class CaseOne_IntViewController: BaseViewController {
         
         let json = """
         {
-          "intValue": "123",
-          "intValue1": "123.1",
-          "intValue2": 12.3,
+          "int": "123",
+          "int1": "123.1",
+          "int2": 12.3,
+          "int3": null,
+          "int4": {},
         }
         """
         
         guard let feed = CompatibleInt.deserialize(from: json) else { return }
-        print(feed.intValue)
-        print(feed.intValue1)
-        print(feed.intValue2)
-        print(feed.intValue3 ?? 0)
-        
+//        print(feed)
+        smartPrint(value: feed)
         /**
-         123
-         0
-         0
-         nil
+         "CompatibleInt的属性打印信息："
+         "属性：int 的类型是 Int， 其值为 123"
+         "属性：int1 的类型是 Optional<Int>， 其值为 nil"
+         "属性：int2 的类型是 Optional<Int>， 其值为 nil"
+         "属性：int3 的类型是 Optional<Int>， 其值为 nil"
+         "属性：int4 的类型是 Optional<Int>， 其值为 nil"
+         "属性：int5 的类型是 Optional<Int>， 其值为 nil"
          */
     }
 
 }
 
 struct CompatibleInt: SmartCodable {
-    var intValue: Int = 0
-    var intValue1: Int = 0
-    var intValue2: Int = 0
-    var intValue3: Int?
+    var int: Int = 1
+    var int1: Int?
+    var int2: Int?
+    var int3: Int?
+    var int4: Int?
+    var int5: Int?
 
     init() { }
 }
