@@ -23,8 +23,8 @@ class CaseOne_DictViewController: BaseViewController {
             "sub2": NSNull(),
             "sub3": "123.1",
             
-            "arr2": NSNull(),
-            "arr3": []
+            "dict2": NSNull(),
+            "dict3": [:]
         ]
         
         guard let feed = Model.deserialize(from: dict) else { return }
@@ -34,13 +34,15 @@ class CaseOne_DictViewController: BaseViewController {
 }
 extension CaseOne_DictViewController {
     struct Model: SmartCodable {
-        var sub1 = SubModel()
-        var sub2 = SubModel()
-        var sub3 = SubModel()
         
-        var arr1: [SubModel] = []
-        var arr2: [SubModel] = []
-        var arr3: [SubModel] = []
+        var dict1: [String: String] = [:]
+//        var dict2: [String: String] = [:]
+//        var dict3: [String: String] = [:]
+        
+//        var sub1 = SubModel()
+//        var sub2 = SubModel()
+//        var sub3 = SubModel()
+//        
     }
     
     struct SubModel: SmartCodable {

@@ -17,8 +17,8 @@ class CaseOne_ArrayViewController: BaseViewController {
      
         
         let dict: [String: Any] = [
-            "sub2": ["name": "Mccc"],
-            "sub3": "123.1",
+            "models2": ["name": "Mccc"],
+            "models3": "123.1",
             
             "arr2": NSNull(),
             "arr3": []
@@ -33,13 +33,13 @@ class CaseOne_ArrayViewController: BaseViewController {
 }
 extension CaseOne_ArrayViewController {
     struct Model: SmartCodable {
-        var sub1 = SubModel()
-        var sub2 = SubModel()
-        var sub3 = SubModel()
+        var models1: [SubModel] = []
+        var models2: [SubModel] = []
+        var models3: [SubModel] = []
         
-        var arr1: [SubModel] = []
-        var arr2: [SubModel] = []
-        var arr3: [SubModel] = []
+        var arr1: [String] = []
+        var arr2: [String] = []
+        var arr3: [String] = []
     }
     
     struct SubModel: SmartCodable {
