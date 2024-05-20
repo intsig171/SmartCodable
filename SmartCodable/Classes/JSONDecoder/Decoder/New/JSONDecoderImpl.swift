@@ -32,7 +32,6 @@ struct JSONDecoderImpl {
         self.json = json
         self.options = options
         self.cache = InitialModelCache()
-
     }
 }
 extension JSONDecoderImpl: Decoder {
@@ -81,15 +80,25 @@ extension JSONDecoderImpl: Decoder {
                 array: array
             )
         case .null:
-            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
+            return UnkeyedContainer(
+                impl: self,
                 codingPath: self.codingPath,
-                debugDescription: "Cannot get unkeyed decoding container -- found null value instead"
-            ))
+                array: []
+            )
+//            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
+//                codingPath: self.codingPath,
+//                debugDescription: "Cannot get unkeyed decoding container -- found null value instead"
+//            ))
         default:
-            throw DecodingError.typeMismatch([JSONValue].self, DecodingError.Context(
+            return UnkeyedContainer(
+                impl: self,
                 codingPath: self.codingPath,
-                debugDescription: "Expected to decode \([JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-            ))
+                array: []
+            )
+//            throw DecodingError.typeMismatch([JSONValue].self, DecodingError.Context(
+//                codingPath: self.codingPath,
+//                debugDescription: "Expected to decode \([JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
+//            ))
         }
     }
 
