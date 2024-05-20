@@ -50,13 +50,19 @@ extension TestCaseViewController {
                 
                 ["name": "类型兼容 - Bool",   "vc": "CaseOne_BoolViewController"],
                 ["name": "类型兼容 - Int",    "vc": "CaseOne_IntViewController"],
+                ["name": "类型兼容 - Int8",   "vc": "CaseOne_Int8ViewController"],
                 ["name": "类型兼容 - String", "vc": "CaseOne_StringViewController"],
                 ["name": "类型兼容 - Float",  "vc": "CaseOne_FloatViewController"],
 
-                
+                ["name": "字典",    "vc": "CaseOne_DictViewController"],
+
                 ["name": "字典 - 键缺失",    "vc": "CaseOne_DictKeylessViewController"],
                 ["name": "字典 - 值为null",  "vc": "CaseOne_DictNullViewController"],
                 ["name": "字典 - 值类型错误", "vc": "CaseOne_DictTypeMismatchViewController"],
+                
+                ["name": "数组",    "vc": "CaseOne_ArrayViewController"],
+
+                
                 
                 ["name": "数组 - 键缺失",    "vc": "CaseOne_ArrayKeylessViewController"],
                 ["name": "数组 - 值为null",  "vc": "CaseOne_ArrayNullViewController"],

@@ -48,15 +48,27 @@ extension JSONDecoderImpl: Decoder {
             )
             return KeyedDecodingContainer(container)
         case .null:
-            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Cannot get keyed decoding container -- found null value instead"
-            ))
+            let container = KeyedContainer<Key>(
+                impl: self,
+                codingPath: codingPath,
+                dictionary: [:]
+            )
+            return KeyedDecodingContainer(container)
+//            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
+//                codingPath: self.codingPath,
+//                debugDescription: "Cannot get keyed decoding container -- found null value instead"
+//            ))
         default:
-            throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-            ))
+            let container = KeyedContainer<Key>(
+                impl: self,
+                codingPath: codingPath,
+                dictionary: [:]
+            )
+            return KeyedDecodingContainer(container)
+//            throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
+//                codingPath: self.codingPath,
+//                debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
+//            ))
         }
     }
 

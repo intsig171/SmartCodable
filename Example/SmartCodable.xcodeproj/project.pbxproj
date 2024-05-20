@@ -22,6 +22,9 @@
 		9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */; };
 		9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */; };
 		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
+		991259ED2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */; };
+		991259EF2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EE2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift */; };
+		991259F12BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259F02BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift */; };
 		991452AA2BB50B2A00970575 /* KeyDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */; };
 		99153D772BD1124C004C01AD /* Test3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99153D762BD1124C004C01AD /* Test3ViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
@@ -141,6 +144,9 @@
 		9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_6ViewController.swift; sourceTree = "<group>"; };
 		9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFive_wcdbViewController.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
+		991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_Int8ViewController.swift; sourceTree = "<group>"; };
+		991259EE2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_DictViewController.swift; sourceTree = "<group>"; };
+		991259F02BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayViewController.swift; sourceTree = "<group>"; };
 		991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		99153D762BD1124C004C01AD /* Test3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3ViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
@@ -510,9 +516,12 @@
 				99675FE82B3EC930006C83EC /* CaseOne_FloatViewController.swift */,
 				99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */,
 				99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */,
+				991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */,
+				991259EE2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift */,
 				99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */,
 				99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */,
 				99675FEE2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift */,
+				991259F02BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift */,
 				99CABA2C2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift */,
 				99CABA2E2B916E8A0070DED0 /* CaseOne_ArrayNullViewController.swift */,
 				99CABA302B916E970070DED0 /* CaseOne_ArrayTypeMismatchViewController.swift */,
@@ -823,6 +832,7 @@
 				996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */,
 				996760412B3EC930006C83EC /* Introduce_4ViewController.swift in Sources */,
 				996760222B3EC930006C83EC /* DecodingDictLogViewController.swift in Sources */,
+				991259ED2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift in Sources */,
 				9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */,
 				990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */,
 				999FA2432B99B86A00A2952F /* FinishMappingViewController.swift in Sources */,
@@ -871,9 +881,11 @@
 				99CE4D622BC6AA780006D435 /* CustomDecodingValueViewContriller.swift in Sources */,
 				9967604C2B3EC930006C83EC /* CaseSixViewController.swift in Sources */,
 				9902B4D22BB2F6BB00310E69 /* ReplaceHandyJSON_2ViewController.swift in Sources */,
+				991259EF2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift in Sources */,
 				9967602D2B3EC930006C83EC /* CaseOne_DictTypeMismatchViewController.swift in Sources */,
 				996760282B3EC930006C83EC /* CaseOne_DictNullViewController.swift in Sources */,
 				9902B4D02BB2F36000310E69 /* ReplaceHandyJSON_1ViewController.swift in Sources */,
+				991259F12BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift in Sources */,
 				99F9E8A62BB5139900D68037 /* MixDecodingViewController.swift in Sources */,
 				9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
