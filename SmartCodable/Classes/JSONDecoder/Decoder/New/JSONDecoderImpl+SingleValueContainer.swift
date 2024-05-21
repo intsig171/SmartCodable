@@ -12,6 +12,13 @@ import Foundation
  * 2.
  */
 
+/** 单容器的解析
+ struct Model: SmartCodable {
+     var models: [String] = ["one"]
+ }
+ */
+
+
 extension JSONDecoderImpl {
     struct SingleValueContainer: SingleValueDecodingContainer {
         let impl: JSONDecoderImpl
@@ -122,12 +129,12 @@ extension JSONDecoderImpl {
 
 extension JSONDecoderImpl.SingleValueContainer {
     fileprivate func smartDecode<T>(type: T.Type) throws -> T {
+        
+        // 当容器的值，不适合取初始化值。涉及到[Int]这样的解析。 不好确定key。
         let entry = value.peel
         if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
             return value
-        } else if let key = codingPath.last, let value: T = impl.cache.getValue(forKey: key) {
-            return value
-        } else {
+        }  else {
             return try Patcher<T>.defaultForType()
         }
     }

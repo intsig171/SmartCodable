@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SmartCodable
 
 
 
@@ -87,7 +88,7 @@ extension Dictionary {
         do {
             guard let jsonStr = self.toJSONString() else { return nil }
             guard let jsonData = jsonStr.data(using: .utf8) else { return nil }
-            let decoder = JSONDecoder()
+            let decoder = SmartJSONDecoder()
             decoder.dateDecodingStrategy = .deferredToDate
             let obj = try decoder.decode(type, from: jsonData)
             return obj

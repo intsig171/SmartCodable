@@ -60,15 +60,11 @@ extension JSONDecoderImpl {
         }
 
         private mutating func decoderForNextElement<T>(ofType: T.Type) -> JSONDecoderImpl {
-            
-            var value = JSONValue.array([])
-            
-            
+            var value: JSONValue
             do {
                 value = try getNextValue(ofType: T.self)
             } catch {
-                // 获取不到值
-                print(error)
+                value = JSONValue.array([])
             }
             
             let newPath = self.codingPath + [_JSONKey(index: self.currentIndex)]
@@ -91,143 +87,144 @@ extension JSONDecoderImpl {
 
 extension JSONDecoderImpl.UnkeyedContainer {
     mutating func decode(_ type: Bool.Type) throws -> Bool {
-        self.currentIndex += 1
         guard let value = try? self.getNextValue(ofType: Bool.self) else {
-            return try fillDefault()
+            return try forceDecode()
         }
         guard case .bool(let bool) = value else {
             return try forceDecode()
         }
+        self.currentIndex += 1
         return bool
     }
 
     mutating func decode(_ type: String.Type) throws -> String {
-        
-        self.currentIndex += 1
-        guard let value = try? self.getNextValue(ofType: String.self) else {
-            return try fillDefault()
+        guard let value = try? self.getNextValue(ofType: Bool.self) else {
+            return try forceDecode()
         }
         guard case .string(let string) = value else {
             return try forceDecode()
         }
+        self.currentIndex += 1
         return string
-        
-//        throw impl.createTypeMismatchError(type: type, for: _JSONKey(index: currentIndex), value: value)
-
     }
 
     mutating func decode(_: Double.Type) throws -> Double {
-        if let decoded: Double = decodeFloatingPoint() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFloatingPoint()
     }
 
     mutating func decode(_: Float.Type) throws -> Float {
-        if let decoded: Float = decodeFloatingPoint() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFloatingPoint()
     }
 
     mutating func decode(_: Int.Type) throws -> Int {
-        if let decoded: Int = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: Int8.Type) throws -> Int8 {
-        if let decoded: Int8 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: Int16.Type) throws -> Int16 {
-        if let decoded: Int16 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: Int32.Type) throws -> Int32 {
-        if let decoded: Int32 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: Int64.Type) throws -> Int64 {
-        if let decoded: Int64 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: UInt.Type) throws -> UInt {
-        if let decoded: UInt = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: UInt8.Type) throws -> UInt8 {
-        if let decoded: UInt8 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: UInt16.Type) throws -> UInt16 {
-        if let decoded: UInt16 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: UInt32.Type) throws -> UInt32 {
-        if let decoded: UInt32 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode(_: UInt64.Type) throws -> UInt64 {
-        if let decoded: UInt64 = decodeFixedWidthInteger() {
-            return decoded
-        }
-        return try fillDefault()
+        try decodeFixedWidthInteger()
     }
 
     mutating func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
         let newDecoder = decoderForNextElement(ofType: type)
+        guard let result = try? newDecoder.unwrap(as: type) else {
+            let decoded: T = try forceDecode()
+            return didFinishMapping(decoded)
+        }
 
         // Because of the requirement that the index not be incremented unless
         // decoding the desired result type succeeds, it can not be a tail call.
         // Hopefully the compiler still optimizes well enough that the result
         // doesn't get copied around.
         self.currentIndex += 1
-        
-        guard let result = try? newDecoder.unwrap(as: type) else {
-            let decoded: T = try forceDecode()
-            return didFinishMapping(decoded)
-        }
-
         return didFinishMapping(result)
+    }
+    
+    @inline(__always) private mutating func decodeFixedWidthInteger<T: FixedWidthInteger>() throws -> T {
+        guard let value = try? self.getNextValue(ofType: T.self) else {
+            return try forceDecode()
+        }
+        
+        let key = _JSONKey(index: self.currentIndex)
+        guard let result = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
+            return try forceDecode()
+        }
+        self.currentIndex += 1
+        return result
+    }
+    @inline(__always) private mutating func decodeFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() throws -> T {
+        guard let value = try? self.getNextValue(ofType: T.self) else {
+            return try forceDecode()
+        }
+        
+        let key = _JSONKey(index: self.currentIndex)
+        guard let result = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
+            return try forceDecode()
+        }
+        self.currentIndex += 1
+        return result
+    }
+    
+    
+    fileprivate mutating func forceDecode<T>() throws -> T {
+        guard let value = try? self.getNextValue(ofType: T.self) else {
+            let decoded: T = try Patcher<T>.defaultForType()
+            self.currentIndex += 1
+            return decoded
+        }
+        
+        if let decoded = Patcher<T>.convertToType(from: value.peel) {
+            self.currentIndex += 1
+            return decoded
+        } else {
+            let decoded: T = try Patcher<T>.defaultForType()
+            self.currentIndex += 1
+            return decoded
+        }
     }
 }
 
 extension JSONDecoderImpl.UnkeyedContainer {
 
     mutating func decodeIfPresent(_ type: Bool.Type) throws -> Bool? {
-        self.currentIndex += 1
         guard let value = try? self.getNextValue(ofType: Bool.self) else {
-            return nil
+            return optionalDecode()
         }
         guard case .bool(let bool) = value else {
             return optionalDecode()
         }
+        self.currentIndex += 1
         return bool
     }
 
@@ -235,179 +232,150 @@ extension JSONDecoderImpl.UnkeyedContainer {
     mutating func decodeIfPresent(_ type: String.Type) throws -> String? {
         self.currentIndex += 1
         guard let value = try? self.getNextValue(ofType: String.self) else {
-            return nil
+            return optionalDecode()
         }
         guard case .string(let string) = value else {
             return optionalDecode()
         }
+        self.currentIndex += 1
         return string
     }
 
 
     
     mutating func decodeIfPresent(_ type: Double.Type) throws -> Double? {
-        return decodeFloatingPoint()
+        return decodeIfPresentFloatingPoint()
     }
 
 
     
     mutating func decodeIfPresent(_ type: Float.Type) throws -> Float? {
-        return decodeFloatingPoint()
+        return decodeIfPresentFloatingPoint()
     }
 
 
     
     mutating func decodeIfPresent(_ type: Int.Type) throws -> Int? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: Int8.Type) throws -> Int8? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: Int16.Type) throws -> Int16? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: Int32.Type) throws -> Int32? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: Int64.Type) throws -> Int64? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: UInt.Type) throws -> UInt? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: UInt8.Type) throws -> UInt8? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: UInt16.Type) throws -> UInt16? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: UInt32.Type) throws -> UInt32? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     
     mutating func decodeIfPresent(_ type: UInt64.Type) throws -> UInt64? {
-        return decodeFixedWidthInteger()
+        return decodeIfPresentFixedWidthInteger()
     }
 
 
     ///   is not convertible to the requested type.
     mutating func decodeIfPresent<T>(_ type: T.Type) throws -> T? where T : Decodable {
         let newDecoder = decoderForNextElement(ofType: type)
-
-        // Because of the requirement that the index not be incremented unless
-        // decoding the desired result type succeeds, it can not be a tail call.
-        // Hopefully the compiler still optimizes well enough that the result
-        // doesn't get copied around.
-        self.currentIndex += 1
-        
-        guard let result = try? newDecoder.unwrap(as: type) else {
-            if let decoded: T = optionalDecode() {
-                return didFinishMapping(decoded)
-            }
+        if let decoded = try? newDecoder.unwrap(as: type) {
+            self.currentIndex += 1
+            return didFinishMapping(decoded)
+        } else if let decoded: T = optionalDecode() {
+            self.currentIndex += 1
+            return didFinishMapping(decoded)
+        } else {
+            self.currentIndex += 1
             return nil
         }
-        return didFinishMapping(result)
     }
-
-
+    
+    @inline(__always) private mutating func decodeIfPresentFixedWidthInteger<T: FixedWidthInteger>() -> T? {
+        guard let value = try? self.getNextValue(ofType: T.self) else {
+            return optionalDecode()
+        }
+        
+        let key = _JSONKey(index: self.currentIndex)
+        guard let result = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
+            return optionalDecode()
+        }
+        self.currentIndex += 1
+        return result
+    }
+    @inline(__always) private mutating func decodeIfPresentFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() -> T?  {
+        guard let value = try? self.getNextValue(ofType: T.self) else {
+            return optionalDecode()
+        }
+        
+        let key = _JSONKey(index: self.currentIndex)
+        guard let result = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
+            return optionalDecode()
+        }
+        self.currentIndex += 1
+        return result
+    }
+    
+    fileprivate mutating func optionalDecode<T>() -> T? {
+        guard let value = try? self.getNextValue(ofType: T.self) else {
+            self.currentIndex += 1
+            return nil
+        }
+        
+        if let decoded = Patcher<T>.convertToType(from: value.peel) {
+            self.currentIndex += 1
+            return decoded
+        } else {
+            self.currentIndex += 1
+            return nil
+        }
+    }
 }
 
 
 extension JSONDecoderImpl.UnkeyedContainer {
-    fileprivate func optionalDecode<T>() -> T? {
-        let entry = array[currentIndex]
-        guard let decoded = Patcher<T>.convertToType(from: entry.peel) else {
-            return nil
-        }
-        
-        //        func logInfo() {
-        //            let className = decoder.cache.topSnapshot?.typeName ?? ""
-        //            let path = decoder.codingPath
-        //            if let entry = entry {
-        //                if entry is NSNull { // 值为null
-        //                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-        //                    SmartLog.logDebug(error, className: className)
-        //                } else { // value类型不匹配
-        //                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
-        //                    SmartLog.logWarning(error: error, className: className)
-        //                }
-        //            } else { // key不存在或value为nil
-        //                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-        //                SmartLog.logDebug(error, className: className)
-        //            }
-        //        }
-                        
-                // 如果被忽略了，就不要输出log了。
-                let typeString = String(describing: T.self)
-                if !typeString.starts(with: "IgnoredKey<") {
-        //            logInfo()
-                }
-        
-        return didFinishMapping(decoded)
-    }
     
-    fileprivate func fillDefault<T>() throws -> T {
-        //        func logInfo() {
-        //            let className = decoder.cache.topSnapshot?.typeName ?? ""
-        //            let path = decoder.codingPath
-        //            if let entry = entry {
-        //                if entry is NSNull { // 值为null
-        //                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-        //                    SmartLog.logDebug(error, className: className)
-        //                } else { // value类型不匹配
-        //                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
-        //                    SmartLog.logWarning(error: error, className: className)
-        //                }
-        //            } else { // key不存在或value为nil
-        //                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-        //                SmartLog.logDebug(error, className: className)
-        //            }
-        //        }
-                        
-                // 如果被忽略了，就不要输出log了。
-                let typeString = String(describing: T.self)
-                if !typeString.starts(with: "IgnoredKey<") {
-        //            logInfo()
-                }
-        
-        
-        
-        return try Patcher<T>.defaultForType()
-    }
+
     
-    fileprivate func forceDecode<T>() throws -> T {
-        if let decoded: T = optionalDecode() {
-            return decoded
-        } else {
-            return try fillDefault()
-        }
-    }
+   
     
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {
         return DecodingProcessCoordinator.didFinishMapping(decodeValue)
@@ -438,29 +406,5 @@ extension JSONDecoderImpl.UnkeyedContainer {
                       underlyingError: nil))
         }
         return self.array[self.currentIndex]
-    }
-    
-    @inline(__always) private mutating func decodeFixedWidthInteger<T: FixedWidthInteger>() -> T? {
-        self.currentIndex += 1
-        guard let value = try? self.getNextValue(ofType: T.self) else {
-            return optionalDecode()
-        }
-        let key = _JSONKey(index: self.currentIndex)
-        guard let result = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
-            return optionalDecode()
-        }
-        return result
-    }
-
-    @inline(__always) private mutating func decodeFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() -> T? {
-        self.currentIndex += 1
-        guard let value = try? self.getNextValue(ofType: T.self) else {
-            return optionalDecode()
-        }
-        let key = _JSONKey(index: self.currentIndex)
-        guard let result = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
-            return optionalDecode()
-        }
-        return result
     }
 }

@@ -18,6 +18,8 @@ struct JSONDecoderImpl {
     let json: JSONValue
     let options: SmartJSONDecoder._Options
     
+    
+    /// 记录当前keyed容器的各个属性的初始化值， 不支持Unkey容器的记录。
     let cache: InitialModelCache
 
     init(userInfo: [CodingUserInfoKey: Any], from json: JSONValue, codingPath: [CodingKey], options: SmartJSONDecoder._Options) {
@@ -28,6 +30,9 @@ struct JSONDecoderImpl {
         self.cache = InitialModelCache()
     }
 }
+
+
+// 关于容器的生成，不用进行兼容，类型错误的时候，抛出异常，进行异常处理时，可以获取初始化值。
 extension JSONDecoderImpl: Decoder {
     func container<Key>(keyedBy _: Key.Type) throws ->
         KeyedDecodingContainer<Key> where Key: CodingKey
@@ -41,27 +46,15 @@ extension JSONDecoderImpl: Decoder {
             )
             return KeyedDecodingContainer(container)
         case .null:
-            let container = KeyedContainer<Key>(
-                impl: self,
-                codingPath: codingPath,
-                dictionary: [:]
-            )
-            return KeyedDecodingContainer(container)
-//            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
-//                codingPath: self.codingPath,
-//                debugDescription: "Cannot get keyed decoding container -- found null value instead"
-//            ))
+            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
+                codingPath: self.codingPath,
+                debugDescription: "Cannot get keyed decoding container -- found null value instead"
+            ))
         default:
-            let container = KeyedContainer<Key>(
-                impl: self,
-                codingPath: codingPath,
-                dictionary: [:]
-            )
-            return KeyedDecodingContainer(container)
-//            throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
-//                codingPath: self.codingPath,
-//                debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-//            ))
+            throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
+                codingPath: self.codingPath,
+                debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
+            ))
         }
     }
 
@@ -74,25 +67,15 @@ extension JSONDecoderImpl: Decoder {
                 array: array
             )
         case .null:
-            return UnkeyedContainer(
-                impl: self,
+            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
                 codingPath: self.codingPath,
-                array: []
-            )
-//            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
-//                codingPath: self.codingPath,
-//                debugDescription: "Cannot get unkeyed decoding container -- found null value instead"
-//            ))
+                debugDescription: "Cannot get unkeyed decoding container -- found null value instead"
+            ))
         default:
-            return UnkeyedContainer(
-                impl: self,
+            throw DecodingError.typeMismatch([JSONValue].self, DecodingError.Context(
                 codingPath: self.codingPath,
-                array: []
-            )
-//            throw DecodingError.typeMismatch([JSONValue].self, DecodingError.Context(
-//                codingPath: self.codingPath,
-//                debugDescription: "Expected to decode \([JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-//            ))
+                debugDescription: "Expected to decode \([JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
+            ))
         }
     }
 
@@ -103,29 +86,7 @@ extension JSONDecoderImpl: Decoder {
             json: self.json
         )
     }
-
-
-
-    func createTypeMismatchError(type: Any.Type, for additionalKey: CodingKey? = nil, value: JSONValue) -> DecodingError {
-        var path = self.codingPath
-        if let additionalKey = additionalKey {
-            path.append(additionalKey)
-        }
-
-        return DecodingError.typeMismatch(type, .init(
-            codingPath: path,
-            debugDescription: "Expected to decode \(type) but found \(value.debugDataTypeDescription) instead."
-        ))
-    }
 }
-
-
-
-extension JSONDecoderImpl {
-    
-}
-
-
 
 
 

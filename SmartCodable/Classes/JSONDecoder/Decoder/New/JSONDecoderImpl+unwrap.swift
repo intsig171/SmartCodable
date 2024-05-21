@@ -149,8 +149,11 @@ extension JSONDecoderImpl {
         for (key, value) in object {
             var newPath = self.codingPath
             newPath.append(_JSONKey(stringValue: key)!)
-            let newDecoder = JSONDecoderImpl(userInfo: self.userInfo, from: value, codingPath: newPath, options: self.options)
-
+            let newDecoder = JSONDecoderImpl(
+                userInfo: self.userInfo,
+                from: value,
+                codingPath: newPath,
+                options: self.options)
             result[key] = try dictType.elementType.createByDirectlyUnwrapping(from: newDecoder)
         }
 
@@ -248,6 +251,18 @@ extension JSONDecoderImpl {
         throw DecodingError.dataCorrupted(.init(
             codingPath: path,
             debugDescription: "Parsed JSON number <\(number)> does not fit in \(T.self)."))
+    }
+    
+    private func createTypeMismatchError(type: Any.Type, for additionalKey: CodingKey? = nil, value: JSONValue) -> DecodingError {
+        var path = self.codingPath
+        if let additionalKey = additionalKey {
+            path.append(additionalKey)
+        }
+
+        return DecodingError.typeMismatch(type, .init(
+            codingPath: path,
+            debugDescription: "Expected to decode \(type) but found \(value.debugDataTypeDescription) instead."
+        ))
     }
 }
 

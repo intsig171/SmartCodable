@@ -16,26 +16,39 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-  
+        let arr = ["1", "2"]
         let dict: [String: Any] = [
-            "models": 1
+            "models": arr
+            
+//            "models": [
+//                [
+//                    "name": 10
+//                ]
+//            ]
+
         ]
         
-        let arr = [1, 2, 3]
         
+        let value = dict.decode(type: Model.self)
+        print(value)
         
-        if let jsonObject = [Model].deserialize(from: dict) {
-            print(jsonObject)
-        }
+        // typeMismatch(Swift.Int, Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "models", intValue: nil), _JSONKey(stringValue: "Index 0", intValue: 0)], debugDescription: "Expected to decode Int but found a string instead.", underlyingError: nil))
+        return
+//        if let jsonObject = Model.deserialize(from: dict) {
+//            print(jsonObject)
+//        }
     }
     
 
     
     struct Model: SmartCodable {
-        var models: [SubModel] = []
+        var models: [Int] = []
+
+//        var models: [SubModel] = [SubModel()]
     }
     
     struct SubModel: SmartCodable {
-        var name: String = ""
+        var name: Int = 123
     }
 }
+
