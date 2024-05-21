@@ -126,11 +126,11 @@ extension JSONDecoderImpl {
         @inline(__always) private func decodeFixedWidthInteger<T: FixedWidthInteger>(key: Self.Key) -> T? {
             
             guard let value = try? getValue(forKey: key) else {
-                return optionalDecode(T.self, entry: nil)
+                return optionalDecode(entry: nil)
             }
             
             guard let decoded = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
-                return optionalDecode(T.self, entry: value.peel)
+                return optionalDecode(entry: value.peel)
             }
             return decoded
         }
@@ -138,11 +138,11 @@ extension JSONDecoderImpl {
         @inline(__always) private func decodeFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>(key: K) -> T? {
             
             guard let value = try? getValue(forKey: key) else {
-                return optionalDecode(T.self, entry: nil)
+                return optionalDecode(entry: nil)
             }
             
             guard let decoded = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
-                return optionalDecode(T.self, entry: value.peel)
+                return optionalDecode(entry: value.peel)
             }
             return decoded
         }
@@ -172,98 +172,101 @@ extension JSONDecoderImpl.KeyedContainer {
     }
 
     func decode(_: Double.Type, forKey key: K) throws -> Double {
-        if let decoded: Double = try? decodeFloatingPoint(key: key) {
+        if let decoded: Double = decodeFloatingPoint(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: Float.Type, forKey key: K) throws -> Float {
-        if let decoded: Float = try? decodeFloatingPoint(key: key) {
+        if let decoded: Float = decodeFloatingPoint(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: Int.Type, forKey key: K) throws -> Int {
-        if let decoded: Int = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: Int = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: Int8.Type, forKey key: K) throws -> Int8 {
-        if let decoded: Int8 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: Int8 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: Int16.Type, forKey key: K) throws -> Int16 {
-        if let decoded: Int16 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: Int16 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: Int32.Type, forKey key: K) throws -> Int32 {
-        if let decoded: Int32 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: Int32 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: Int64.Type, forKey key: K) throws -> Int64 {
-        if let decoded: Int64 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: Int64 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: UInt.Type, forKey key: K) throws -> UInt {
-        if let decoded: UInt = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: UInt = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: UInt8.Type, forKey key: K) throws -> UInt8 {
-        if let decoded: UInt8 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: UInt8 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: UInt16.Type, forKey key: K) throws -> UInt16 {
-        if let decoded: UInt16 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: UInt16 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: UInt32.Type, forKey key: K) throws -> UInt32 {
-        if let decoded: UInt32 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: UInt32 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode(_: UInt64.Type, forKey key: K) throws -> UInt64 {
-        if let decoded: UInt64 = try? decodeFixedWidthInteger(key: key) {
+        if let decoded: UInt64 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
-        return try fillDefault()
+        return try fillDefault(forKey: key)
     }
 
     func decode<T>(_ type: T.Type, forKey key: K) throws -> T where T: Decodable {
         guard let value = try? getValue(forKey: key) else {
-            return try forceDecode(forKey: key)
+            let decoded: T = try forceDecode(forKey: key)
+            return didFinishMapping(decoded)
         }
         do {
             let newDecoder = try decoderForKey(key)
-            return try newDecoder.unwrap(as: type)
+            let decoded = try newDecoder.unwrap(as: type)
+            return decoded
         } catch {
-            return try forceDecode(forKey: key, entry: value.peel)
+            let decoded: T = try forceDecode(forKey: key, entry: value.peel)
+            return decoded
         }
     }
 }
@@ -274,7 +277,7 @@ extension JSONDecoderImpl.KeyedContainer {
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
         guard let value = try? getValue(forKey: key) else { return nil }
         guard case .bool(let bool) = value else {
-            return optionalDecode(Bool.self, entry: value.peel)
+            return optionalDecode(entry: value.peel)
         }
         return bool
     }
@@ -282,166 +285,146 @@ extension JSONDecoderImpl.KeyedContainer {
     func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
         guard let value = try? getValue(forKey: key) else { return nil }
         guard case .string(let bool) = value else {
-            return optionalDecode(String.self, entry: value.peel)
+            return optionalDecode(entry: value.peel)
         }
         return bool
     }
     
     func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
-        guard let decoded: Float = try? decodeFloatingPoint(key: key) else {
-            return nil
-        }
-        return decoded
+        return decodeFloatingPoint(key: key)
     }
     
     func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: Double = try? decodeFloatingPoint(key: key, value: value) else {
-            return optionalDecode(Double.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFloatingPoint(key: key)
     }
 
     
     func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: Int = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(Int.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: Int8.Type, forKey key: K) throws -> Int8? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: Int8 = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(Int8.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: Int16.Type, forKey key: K) throws -> Int16? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: Int16 = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(Int16.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: Int32.Type, forKey key: K) throws -> Int32? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: Int32 = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(Int32.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: Int64.Type, forKey key: K) throws -> Int64? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: Int64 = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(Int64.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: UInt.Type, forKey key: K) throws -> UInt? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: UInt = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(UInt.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: UInt8.Type, forKey key: K) throws -> UInt8? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: UInt8 = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(UInt8.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: UInt16.Type, forKey key: K) throws -> UInt16? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: UInt16 = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(UInt16.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: UInt32.Type, forKey key: K) throws -> UInt32? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: UInt32 = try? decodeFixedWidthInteger(key: key, value: value) else {
-            return optionalDecode(UInt32.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent(_ type: UInt64.Type, forKey key: K) throws -> UInt64? {
-        guard let value = try? getValue(forKey: key) else { return nil }
-        guard let decoded: UInt64 = try? decodeFixedWidthInteger(key: key) else {
-            return optionalDecode(UInt64.self, entry: value.peel)
-        }
-        return decoded
+        return decodeFixedWidthInteger(key: key)
     }
     
     func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T: Decodable {
         guard let value = try? getValue(forKey: key) else { return nil }
         do {
             let newDecoder = try decoderForKey(key)
-            return try newDecoder.unwrap(as: type)
+            let decoded = try newDecoder.unwrap(as: type)
+            return didFinishMapping(decoded)
         } catch {
-            return optionalDecode(type, entry: value.peel)
+            if let decoded: T = optionalDecode(entry: value.peel) {
+                return didFinishMapping(decoded)
+            }
+            return nil
         }
     }
 }
 extension JSONDecoderImpl.KeyedContainer {
     /// 可选解析不能使用统一方法，如果decoder.unbox不明确指定类型，全都走到func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? 中， 会走到decoded = try T(from: self)方法，进而初始化一个默认值。
-    fileprivate func optionalDecode<T>(_ type: T.Type, entry: Any?) -> T? {
-        if let decoded = Patcher<T>.convertToType(from: entry) {
-            return didFinishMapping(decoded)
+    fileprivate func optionalDecode<T>(entry: Any?) -> T? {
+        guard let decoded = Patcher<T>.convertToType(from: entry) else {
+            return nil
         }
-        return nil
+        
+        //        func logInfo() {
+        //            let className = decoder.cache.topSnapshot?.typeName ?? ""
+        //            let path = decoder.codingPath
+        //            if let entry = entry {
+        //                if entry is NSNull { // 值为null
+        //                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+        //                    SmartLog.logDebug(error, className: className)
+        //                } else { // value类型不匹配
+        //                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
+        //                    SmartLog.logWarning(error: error, className: className)
+        //                }
+        //            } else { // key不存在或value为nil
+        //                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+        //                SmartLog.logDebug(error, className: className)
+        //            }
+        //        }
+                        
+                // 如果被忽略了，就不要输出log了。
+                let typeString = String(describing: T.self)
+                if !typeString.starts(with: "IgnoredKey<") {
+        //            logInfo()
+                }
+        
+        return decoded
     }
     
-    fileprivate func fillDefault<T>() throws -> T {
-         let decoded = try Patcher<T>.defaultForType()
-        return didFinishMapping(decoded)
+    fileprivate func fillDefault<T>(forKey key: Key) throws -> T {
+    
+        //        func logInfo() {
+        //            let className = decoder.cache.topSnapshot?.typeName ?? ""
+        //            let path = decoder.codingPath
+        //            if let entry = entry {
+        //                if entry is NSNull { // 值为null
+        //                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+        //                    SmartLog.logDebug(error, className: className)
+        //                } else { // value类型不匹配
+        //                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
+        //                    SmartLog.logWarning(error: error, className: className)
+        //                }
+        //            } else { // key不存在或value为nil
+        //                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+        //                SmartLog.logDebug(error, className: className)
+        //            }
+        //        }
+                        
+                // 如果被忽略了，就不要输出log了。
+                let typeString = String(describing: T.self)
+                if !typeString.starts(with: "IgnoredKey<") {
+        //            logInfo()
+                }
+        
+        if let value: T = impl.cache.getValue(forKey: key) {
+            return value
+        } else {
+            return try Patcher<T>.defaultForType()
+        }
     }
     
     fileprivate func forceDecode<T>(forKey key: Key, entry: Any? = nil) throws -> T {
-        
-//        func logInfo() {
-//            let className = decoder.cache.topSnapshot?.typeName ?? ""
-//            let path = decoder.codingPath
-//            if let entry = entry {
-//                if entry is NSNull { // 值为null
-//                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-//                    SmartLog.logDebug(error, className: className)
-//                } else { // value类型不匹配
-//                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
-//                    SmartLog.logWarning(error: error, className: className)
-//                }
-//            } else { // key不存在或value为nil
-//                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-//                SmartLog.logDebug(error, className: className)
-//            }
-//        }
-                
-        // 如果被忽略了，就不要输出log了。
-        let typeString = String(describing: T.self)
-        if !typeString.starts(with: "IgnoredKey<") {
-//            logInfo()
-        }
-        
-        
-        var decoded: T
-        if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
-            decoded = value
-        } else if let value: T = impl.cache.getValue(forKey: key) {
-            decoded = value
+
+        if let decoded: T = optionalDecode(entry: entry) {
+            return decoded
         } else {
-            decoded = try Patcher<T>.defaultForType()
+            return try fillDefault(forKey: key)
         }
-        return didFinishMapping(decoded)
     }
     
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {

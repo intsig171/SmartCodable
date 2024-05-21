@@ -121,6 +121,11 @@ extension JSONDecoderImpl: Decoder {
 
 
 
+extension JSONDecoderImpl {
+    
+}
+
+
 
 
 
