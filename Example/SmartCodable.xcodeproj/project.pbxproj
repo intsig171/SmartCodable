@@ -25,6 +25,7 @@
 		991259ED2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */; };
 		991259EF2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EE2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift */; };
 		991259F12BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259F02BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift */; };
+		991259F32BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259F22BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift */; };
 		991452AA2BB50B2A00970575 /* KeyDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */; };
 		99153D772BD1124C004C01AD /* Test3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99153D762BD1124C004C01AD /* Test3ViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
@@ -147,6 +148,7 @@
 		991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_Int8ViewController.swift; sourceTree = "<group>"; };
 		991259EE2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_DictViewController.swift; sourceTree = "<group>"; };
 		991259F02BFB709F00ED76B5 /* CaseOne_ArrayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_ArrayViewController.swift; sourceTree = "<group>"; };
+		991259F22BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_DateViewController.swift; sourceTree = "<group>"; };
 		991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		99153D762BD1124C004C01AD /* Test3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3ViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */,
 				99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */,
 				991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */,
+				991259F22BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift */,
 				991259EE2BFB6C1000ED76B5 /* CaseOne_DictViewController.swift */,
 				99675FED2B3EC930006C83EC /* CaseOne_DictKeylessViewController.swift */,
 				99675FE92B3EC930006C83EC /* CaseOne_DictNullViewController.swift */,
@@ -901,6 +904,7 @@
 				9993D6962B91EEED0089CA68 /* CaseThree_DictViewController.swift in Sources */,
 				996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */,
 				9967602A2B3EC930006C83EC /* CaseOne_IntViewController.swift in Sources */,
+				991259F32BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift in Sources */,
 				99D9458C2B91C80300CC6470 /* CaseThree_dataViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
 				99CABA2D2B916E720070DED0 /* CaseOne_ArrayKeylessViewController.swift in Sources */,
