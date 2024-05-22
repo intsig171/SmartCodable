@@ -26,7 +26,7 @@ class CaseThree_ColorViewController: BaseCompatibilityViewController {
         guard let model = Model.deserialize(from: dict) else { return }
         smartPrint(value: model)
         
-        view.backgroundColor = model.color4.peel
+        view.backgroundColor = model.color2?.peel
     }
 }
 
@@ -34,9 +34,9 @@ class CaseThree_ColorViewController: BaseCompatibilityViewController {
 extension CaseThree_ColorViewController {
     struct Model: SmartCodable {
 //        var color1: SmartColor?
-//        var color2: SmartColor?
+        var color2: SmartColor?
 //        var color3: SmartColor = .color(UIColor.white)
-        var color4: SmartColor = .color(UIColor.red)
+//        var color4: SmartColor = .color(UIColor.red)
     }
 }
 

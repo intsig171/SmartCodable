@@ -19,13 +19,17 @@ extension Patcher {
             } else if let object = T.self as? SmartDecodable.Type {
                 return object.init() as! T
             } else if let object = T.self as? any SmartCaseDefaultable.Type {
-                return object.defaultCase as! T
+                if let first = object.allCases.first as? T {
+                    return first 
+                }
             } else if let object = T.self as? any SmartAssociatedEnumerable.Type {
                 return object.defaultCase as! T
             } else {
                 throw DecodingError.valueNotFound(Self.self, DecodingError.Context(
                         codingPath: [], debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
             }
+            throw DecodingError.valueNotFound(Self.self, DecodingError.Context(
+                    codingPath: [], debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
         }
     }
 }

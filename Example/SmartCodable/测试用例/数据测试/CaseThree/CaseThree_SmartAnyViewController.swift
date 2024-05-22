@@ -15,22 +15,40 @@ class CaseThree_SmartAnyViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "a": NSNull(),
-            "b": "Mccc",
-            "c": [],
-            "d": NSNull(),
-            "e": [:],
-            "f": [
-                "key": "value123"
-            ],
+
+            "single_b": NSNull(),
+            "single_c": ["abc": "Test"],
+            "single_d": 123,
+            
+            "single_f": NSNull(),
+            "single_g": ["abc": "Test"],
+            "single_h": 123,
             
             
-            "arr1": "0",
-            "arr2": "Mccc",
-            "arr3": [:],
-            "arr4": NSNull(),
-            "arr5": [1, 2, 3, 4],
-            "arr6": [1, 2, 3, 4, "好的"]
+            "dict_b": NSNull(),
+            "dict_c": 123,
+            "dict_d": ["abc": 123],
+            
+            "dict_f": NSNull(),
+            "dict_g": 123,
+            "dict_h": ["abc": true],
+            
+            
+            "arr_b": NSNull(),
+            "arr_c": 123,
+            "arr_d": [123],
+            
+            "arr_f": NSNull(),
+            "arr_g": 123,
+            "arr_h": ["abc"],
+            
+            "complex": [
+                "a": [
+                    "a": true,
+                    "b": "mccc",
+                    "c": 1.1
+                ]
+            ]
         ]
   
 //        if let model = dict.decode(type: DictModel.self) {
@@ -38,8 +56,9 @@ class CaseThree_SmartAnyViewController: BaseCompatibilityViewController {
 //        }
         
         if let model = DictModel.deserialize(from: dict) {
-            print(model)
-            print(model.f.peel)
+            smartPrint(value: model)
+            
+            print(model.complex)
         }
     }
 }
@@ -47,18 +66,38 @@ class CaseThree_SmartAnyViewController: BaseCompatibilityViewController {
 
 extension CaseThree_SmartAnyViewController {
     struct DictModel: SmartCodable {
-        var a: Bool?
-        var b: [String: SmartAny]?
-        var c: [String: SmartAny]?
-        var d: [String: SmartAny]?
-        var e: [String: SmartAny]?
-        var f: [String: SmartAny] = [:]
         
-        var arr1: [SmartAny]?
-        var arr2: [SmartAny]?
-        var arr3: [SmartAny]?
-        var arr4: [SmartAny]?
-        var arr5: [SmartAny]?
-        var arr6: [SmartAny] = []
+        var complex: [String: SmartAny] = [:]
+        
+//        var single_a: SmartAny?
+//        var single_b: SmartAny?
+//        var single_c: SmartAny?
+//        var single_d: SmartAny?
+//
+//        var single_e: SmartAny = .string("single_e")
+//        var single_f: SmartAny = .string("single_f")
+//        var single_g: SmartAny = .string("single_g")
+//        var single_h: SmartAny = .string("single_h")
+//
+//        
+//        var dict_a: [String: SmartAny]?
+//        var dict_b: [String: SmartAny]?
+//        var dict_c: [String: SmartAny]?
+//        var dict_d: [String: SmartAny]?
+//        
+//        var dict_e: [String: SmartAny] = [:]
+//        var dict_f: [String: SmartAny] = [:]
+//        var dict_g: [String: SmartAny] = [:]
+//        var dict_h: [String: SmartAny] = [:]
+//        
+//        var arr_a: [SmartAny]?
+//        var arr_b: [SmartAny]?
+//        var arr_c: [SmartAny]?
+//        var arr_d: [SmartAny]?
+//
+//        var arr_e: [SmartAny] = []
+//        var arr_f: [SmartAny] = []
+//        var arr_g: [SmartAny] = []
+//        var arr_h: [SmartAny] = []
     }
 }

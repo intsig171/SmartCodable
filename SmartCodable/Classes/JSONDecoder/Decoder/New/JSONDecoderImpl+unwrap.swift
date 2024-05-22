@@ -45,8 +45,13 @@ extension JSONDecoderImpl {
             return try self.unwrapDecimal() as! T
         }
         
-        if type == ColorObject.self {
-            return try self.unwrapColor() as! T
+        if type == SmartAny.self {
+            return try self.unwrapSmartAny() as! T
+        }
+        
+        // 如果解析的是SmartColor类型属性，此处没有处理，就会进入SmartColor的init(decoder:)方法中。
+        if type == SmartColor.self {
+            return try self.unwrapSmartColor() as! T
         }
         
         if type is _JSONStringDictionaryDecodableMarker.Type {
@@ -137,11 +142,63 @@ extension JSONDecoderImpl {
         return url
     }
 
-    private func unwrapColor() throws -> ColorObject {
+    
+    private func unwrapSmartColor() throws -> SmartColor {
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
         let string = try container.decode(String.self)
 
-        return ColorObject.hex(string) ?? ColorObject.white
+        guard let color = ColorObject.hex(string) else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: self.codingPath,
+                                      debugDescription: "Invalid Color string."))
+        }
+        return SmartColor(from: color)
+    }
+    
+    
+    
+    private func unwrapSmartAny() throws -> SmartAny {
+        
+        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+        
+    
+        if let temp =  container.decodeIfPresent(String.self) {
+            return .string(temp)
+        } else if let temp = container.decodeIfPresent(Bool.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Double.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Float.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int8.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int16.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int32.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int64.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt8.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt16.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt32.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt64.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent([String: SmartAny].self) {
+            return .dict(temp)
+        } else if let temp = container.decodeIfPresent([SmartAny].self) {
+            return .array(temp)
+        }
+
+        throw DecodingError.dataCorrupted(
+            DecodingError.Context(codingPath: self.codingPath,
+                                  debugDescription: "Invalid SmartAny."))
     }
     
     private func unwrapDecimal() throws -> Decimal {
@@ -157,6 +214,7 @@ extension JSONDecoderImpl {
 
         return decimal
     }
+    
 
     private func unwrapDictionary<T: Decodable>(as: T.Type) throws -> T {
         guard let dictType = T.self as? (_JSONStringDictionaryDecodableMarker & Decodable).Type else {
@@ -298,6 +356,8 @@ extension Decodable {
             || Self.self == Date.self
             || Self.self == Data.self
             || Self.self == Decimal.self
+            || Self.self == SmartAny.self
+            || Self.self == SmartColor.self
             || Self.self is _JSONStringDictionaryDecodableMarker.Type
         {
             return try decoder.unwrap(as: Self.self)

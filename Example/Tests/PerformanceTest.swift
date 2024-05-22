@@ -86,9 +86,7 @@ struct SmartModel: SmartCodable {
     var runways: [Runway]?
     
     struct Runway: SmartCodable {
-        enum Surface: String, SmartCaseDefaultable {
-            static var defaultCase: SmartModel.Runway.Surface = .other
-            
+        enum Surface: String, SmartCaseDefaultable {            
             case rigid, flexible, gravel, sealed, unpaved, other
         }
         

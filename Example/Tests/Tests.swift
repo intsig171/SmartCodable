@@ -149,9 +149,7 @@ struct Smart: SmartCodable {
     var def: Int = 0
     
     struct Runway: SmartCodable {
-        enum Surface: String, SmartCaseDefaultable {
-            static var defaultCase: Smart.Runway.Surface = .other
-            
+        enum Surface: String, SmartCaseDefaultable {            
             case rigid, flexible, gravel, sealed, unpaved, other
         }
         

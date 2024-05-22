@@ -57,9 +57,7 @@ extension Introduce_8ViewController {
         }
     }
     
-    enum NumberType: String, SmartCaseDefaultable {
-        static var defaultCase: NumberType = .one
-        
+    enum NumberType: String, SmartCaseDefaultable {        
         case one
         case two
         case three
@@ -67,7 +65,7 @@ extension Introduce_8ViewController {
     
     /// 关联值枚举的解析， 需要自己接管decode
     enum Sex: SmartAssociatedEnumerable {
-        static var defaultCase: Sex = .women
+        static var defaultCase: Sex = .man
         
         case man
         case women

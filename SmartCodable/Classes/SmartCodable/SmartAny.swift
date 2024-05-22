@@ -116,21 +116,21 @@ extension SmartAny {
 
 extension SmartAny: Codable {
     public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
         
-        guard let decoder = decoder as? _SmartJSONDecoder else {
+        guard let decoder = decoder as? JSONDecoderImpl,
+              let container = try? decoder.singleValueContainer() as? JSONDecoderImpl.SingleValueContainer else {
             throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
                 codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
             )
         }
-        
+       
         if container.decodeNil() {
             self = .null(NSNull())
-        } else if let value = try? decoder.unbox(decoder.storage.topContainer, as: SmartAny.self) {
+        } else if let value = container.decodeIfPresent(SmartAny.self) {
             self = value
-        } else if let value = try? decoder.unbox(decoder.storage.topContainer, as: [String: SmartAny].self) {
+        } else if let value = try? container.decode([String: SmartAny].self) {
             self = .dict(value)
-        } else if let value = try? decoder.unbox(decoder.storage.topContainer, as: [SmartAny].self) {
+        } else if let value = try? container.decode([SmartAny].self) {
             self = .array(value)
         } else {
             throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
@@ -138,6 +138,9 @@ extension SmartAny: Codable {
             )
         }
     }
+    
+    
+    
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()

@@ -277,6 +277,7 @@
 		99107B8D2BF750450090017D /* JSONDecoderImpl+UnkeyedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99107B8C2BF750450090017D /* JSONDecoderImpl+UnkeyedContainer.swift */; };
 		991259F52BFC477600ED76B5 /* JSONDecoderImpl+unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259F42BFC477600ED76B5 /* JSONDecoderImpl+unwrap.swift */; };
 		9951E30E41B161724BE858FC6518229B /* os_wcdb.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A335F1EDB942166F2779121CE29E585 /* os_wcdb.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9957743D2BFDCC32003613C5 /* SmartColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957743C2BFDCC32003613C5 /* SmartColor.swift */; };
 		99C3E4EDBE5BCDC161722B105F0FD62F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F616208225C5B42B50ABA5F5267C29F /* Database.swift */; };
 		9A199C92D34FD11A9F07EB0D164560A0 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569CFD3EAF9272EE5F4AFAA1F9EF564 /* JSONParser.swift */; };
 		9A5C397C4B518E59526372CA6AA0BE65 /* StatementAttach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F631CC802E2701AD6DEAB71A9B7134CB /* StatementAttach.swift */; };
@@ -891,6 +892,7 @@
 		99107B8C2BF750450090017D /* JSONDecoderImpl+UnkeyedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoderImpl+UnkeyedContainer.swift"; sourceTree = "<group>"; };
 		991259F42BFC477600ED76B5 /* JSONDecoderImpl+unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoderImpl+unwrap.swift"; sourceTree = "<group>"; };
 		9930E634CA9F9592BA112E4EA073572B /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = swift/source/util/Error.swift; sourceTree = "<group>"; };
+		9957743C2BFDCC32003613C5 /* SmartColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartColor.swift; sourceTree = "<group>"; };
 		9A09037802A20D832A880AA28340A8C1 /* FBSnapshotTestCase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-prefix.pch"; sourceTree = "<group>"; };
 		9A0CDA24DDDB701970130A91AE5FA140 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
 		9AB62CDC1D9A84669428234D73C264AF /* Pods-SmartCodable_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmartCodable_Example-dummy.m"; sourceTree = "<group>"; };
@@ -1918,6 +1920,7 @@
 			children = (
 				8224719BF93802AC51382B196A6B30C5 /* IgnoredKey.swift */,
 				46A766AE91E8CF4C4930E74AD1BF9210 /* SmartAny.swift */,
+				9957743C2BFDCC32003613C5 /* SmartColor.swift */,
 				56F0CCA54FAF427CF38B01CBAAE7E03D /* SmartCaseDefaultable.swift */,
 				2B5009BA615F605E4770A0F999C8EAC7 /* SmartCodable.swift */,
 				70B952A2FD0BD10A80C59B2F4BE7F89C /* SmartDecodable.swift */,
@@ -2620,6 +2623,7 @@
 				7DFE63C6A045536B9CBADEF1BC28E844 /* IgnoredKey.swift in Sources */,
 				99107B8B2BF74FEC0090017D /* JSONDecoderImpl+KeyedContainer.swift in Sources */,
 				8D0104D1F651E53B0C3D3F98332D8F87 /* InitialModelCache.swift in Sources */,
+				9957743D2BFDCC32003613C5 /* SmartColor.swift in Sources */,
 				3A53F4335453AC0DE6C89D55DF2AE487 /* JSONDecoderImpl.swift in Sources */,
 				9A199C92D34FD11A9F07EB0D164560A0 /* JSONParser.swift in Sources */,
 				C005CE261BD9EDC6C6F2BE1A39434966 /* JSONValue.swift in Sources */,

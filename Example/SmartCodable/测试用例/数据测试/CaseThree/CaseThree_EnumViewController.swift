@@ -44,10 +44,7 @@ class CaseThree_EnumViewController: BaseCompatibilityViewController {
     }
     
     
-    enum NunmberEnum: String, SmartCaseDefaultable {
-
-        static var defaultCase: CaseThree_EnumViewController.NunmberEnum = .one
-                
+    enum NunmberEnum: String, SmartCaseDefaultable {                
         case one
         case two
         case three

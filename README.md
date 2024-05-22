@@ -257,9 +257,7 @@ struct CompatibleEnum: SmartCodable {
 
 ```
 /// 关联值枚举的解析， 需要自己接管decode
-enum Sex: SmartAssociatedEnumerable {
-    static var defaultCase: Sex = .women
-    
+enum Sex: SmartAssociatedEnumerable {    
     case man
     case women
     case other(String)

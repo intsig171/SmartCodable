@@ -45,7 +45,6 @@ extension ReplaceHandyJSON_6ViewController {
 extension ReplaceHandyJSON_6ViewController {
     
     enum SmartSex: String, SmartCaseDefaultable {
-        static var defaultCase: SmartSex = .man
         case man
         case women
     }
