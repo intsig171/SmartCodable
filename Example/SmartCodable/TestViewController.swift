@@ -31,9 +31,9 @@ class TestViewController: BaseViewController {
         
   
         let dict: [String: Any] = [
-            "model": [
-                "name": 123
-            ]
+            "a": 1,
+            "b": 1.1,
+            "c": true
         ]
         
         
@@ -43,7 +43,11 @@ class TestViewController: BaseViewController {
     }
     
     struct BigModel: SmartCodable {
-        var model = Model()
+//        var model = Model()
+        var a: CGFloat?
+        var b: CGFloat?
+        var c: CGFloat?
+        var d: CGFloat = 1
     }
     
     struct Model: SmartCodable {

@@ -141,7 +141,6 @@ extension JSONDecoderImpl {
         }
         return url
     }
-
     
     private func unwrapSmartColor() throws -> SmartColor {
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)

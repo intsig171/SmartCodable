@@ -177,6 +177,11 @@ extension JSONDecoderImpl.KeyedContainer {
         }
         return try fillDefault(forKey: key)
     }
+    
+    func decode(_: CGFloat.Type, forKey key: K) throws -> CGFloat {
+        let value = try decode(Double.self, forKey: key)
+        return CGFloat(value)
+    }
 
     func decode(_: Float.Type, forKey key: K) throws -> Float {
         if let decoded: Float = decodeFloatingPoint(key: key) {
@@ -256,6 +261,12 @@ extension JSONDecoderImpl.KeyedContainer {
     }
 
     func decode<T>(_ type: T.Type, forKey key: K) throws -> T where T: Decodable {
+        
+        if type == CGFloat.self {
+            return try decode(CGFloat.self, forKey: key) as! T
+        }
+        
+        
         guard let value = try? getValue(forKey: key) else {
             let decoded: T = try forceDecode(forKey: key)
             return didFinishMapping(decoded)
@@ -293,6 +304,13 @@ extension JSONDecoderImpl.KeyedContainer {
     
     func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
         return decodeFloatingPoint(key: key)
+    }
+    
+    func decodeIfPresent(_ type: CGFloat.Type, forKey key: K) throws -> CGFloat? {
+        if let value: Double = decodeFloatingPoint(key: key) {
+            return CGFloat(value)
+        }
+        return nil
     }
     
     func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
@@ -341,6 +359,11 @@ extension JSONDecoderImpl.KeyedContainer {
     }
     
     func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T: Decodable {
+        
+        if type == CGFloat.self {
+            return try decodeIfPresent(CGFloat.self, forKey: key) as? T
+        }
+        
         guard let value = try? getValue(forKey: key) else { return nil }
         do {
             let newDecoder = try decoderForKey(key)

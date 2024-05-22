@@ -57,7 +57,12 @@ class InitialModelCache {
     /// Gets the initialization value of the attribute (key)
     func getValue<T>(forKey key: CodingKey) -> T? {
         
-        if let cacheValue = snapshots.last?.initialValues[key.stringValue] {
+        if var cacheValue = snapshots.last?.initialValues[key.stringValue] {
+            // 进行CGFloat类型解析时候，是当Double来解析的。所以需要进行类型转换一下。
+            if let temp = cacheValue as? CGFloat {
+                cacheValue = Double(temp)
+            }
+            
             if let value = cacheValue as? T {
                 return value
             } else if let caseValue = cacheValue as? (any SmartCaseDefaultable) {
