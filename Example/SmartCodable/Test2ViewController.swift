@@ -42,9 +42,25 @@ class Test2ViewController: BaseViewController {
 
     
     struct Model: SmartCodable {
+        init() {
+            
+        }
+        
         var models: [Int] = []
 
 //        var models: [SubModel] = [SubModel()]
+        
+        init(from decoder: any Decoder) throws {
+            let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
+            
+            var unkeyedContainer = try container.nestedUnkeyedContainer(forKey: .models)
+
+            let first = try unkeyedContainer.decode(Int.self)
+            let second = try unkeyedContainer.decode(Int.self)
+            
+            self.models = [first, second]
+            
+        }
     }
     
     struct SubModel: SmartCodable {

@@ -1,5 +1,5 @@
 //
-//  CaseOne_DictTypeMismatchViewController.swift
+//  Container_DictKeylessViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -10,14 +10,14 @@ import UIKit
 import SmartCodable
 
 
-/// 类型错误的兼容， 尝试值对值的类型转换，如果失败，使用默认值填充。
-class CaseOne_DictTypeMismatchViewController: BaseCompatibilityViewController {
+/// 键缺失的兼容，使用默认值填充
+class Container_DictKeylessViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        let json = typeMissmatchJson
+        let json = keylssJson
         
         explicitType(json: json)
         
@@ -30,10 +30,11 @@ class CaseOne_DictTypeMismatchViewController: BaseCompatibilityViewController {
 
 
 
-extension CaseOne_DictTypeMismatchViewController {
+extension Container_DictKeylessViewController {
     /// 明确类型
     func explicitType(json: String) {
         guard let person = CompatibleTypes.deserialize(from: json) else { return }
+        print("非可选属性")
         let mirr = Mirror(reflecting: person)
         for (key, value) in mirr.children {
             printValueType(key: key!, value: value)
@@ -67,10 +68,14 @@ extension CaseOne_DictTypeMismatchViewController {
     }
 }
 
-extension CaseOne_DictTypeMismatchViewController {
+
+
+extension Container_DictKeylessViewController {
     /// 可选类型
     func optionalType(json: String) {
         guard let person = OptionalCompatibleTypes.deserialize(from: json) else { return }
+        
+        print("可选属性")
         let mirr = Mirror(reflecting: person)
         for (key, value) in mirr.children {
             printValueType(key: key!, value: value)
@@ -102,4 +107,5 @@ extension CaseOne_DictTypeMismatchViewController {
          */
     }
 }
+
 

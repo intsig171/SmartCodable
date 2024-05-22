@@ -21,8 +21,8 @@ class TestCaseViewController: BaseViewController {
         
         dataArray = [
             testCaseOne,
-            testCaseTwo,
             testCaseThree,
+            testCaseTwo,
             testCaseFour,
             testCaseFive
 
@@ -54,19 +54,12 @@ extension TestCaseViewController {
                 ["name": "类型兼容 - String", "vc": "CaseOne_StringViewController"],
                 ["name": "类型兼容 - Float",  "vc": "CaseOne_FloatViewController"],
 
-                ["name": "字典",    "vc": "CaseOne_DictViewController"],
-
-                ["name": "字典 - 键缺失",    "vc": "CaseOne_DictKeylessViewController"],
-                ["name": "字典 - 值为null",  "vc": "CaseOne_DictNullViewController"],
-                ["name": "字典 - 值类型错误", "vc": "CaseOne_DictTypeMismatchViewController"],
+            
                 
-                ["name": "数组",    "vc": "CaseOne_ArrayViewController"],
 
                 
                 
-                ["name": "数组 - 键缺失",    "vc": "CaseOne_ArrayKeylessViewController"],
-                ["name": "数组 - 值为null",  "vc": "CaseOne_ArrayNullViewController"],
-                ["name": "数组 - 值类型错误", "vc": "CaseOne_ArrayTypeMismatchViewController"],
+                
             ]
         ]
     }
@@ -76,11 +69,19 @@ extension TestCaseViewController {
         [
             "title": "CaseTwo - 嵌套数据测试",
             "list": [
-                ["name": "字典 - 嵌套字典", "vc": "CaseTwo_DictNestDictViewController"],
-                ["name": "字典 - 嵌套数组", "vc": "CaseTwo_DictNestArrayViewController"],
+                ["name": "字典",            "vc": "Container_DictViewController"],
+                ["name": "字典 - 键缺失",    "vc": "Container_DictKeylessViewController"],
+                ["name": "字典 - 值为null",  "vc": "Container_DictNullViewController"],
+                ["name": "字典 - 值类型错误", "vc": "Container_DictTypeMismatchViewController"],
+                ["name": "字典 - 嵌套字典",   "vc": "Container_DictNestDictViewController"],
+                ["name": "字典 - 嵌套数组",   "vc": "Container_DictNestArrayViewController"],
                 
-                ["name": "数组 - 嵌套字典", "vc": "CaseTwo_ArrayNestDictViewController"],
-                ["name": "数组 - 嵌套数组", "vc": "CaseTwo_ArrayNestArrayViewController"],
+                ["name": "数组",            "vc": "Container_ArrayViewController"],
+                ["name": "数组 - 键缺失",    "vc": "Container_ArrayKeylessViewController"],
+                ["name": "数组 - 值为null",  "vc": "Container_ArrayNullViewController"],
+                ["name": "数组 - 值类型错误", "vc": "Container_ArrayTypeMismatchViewController"],
+                ["name": "数组 - 嵌套字典",   "vc": "Container_ArrayNestDictViewController"],
+                ["name": "数组 - 嵌套数组",   "vc": "Container_ArrayNestArrayViewController"],
             ]
         ]
     }
@@ -89,14 +90,14 @@ extension TestCaseViewController {
         [
             "title": "CaseThree - 特殊格式数据测试",
             "list": [
-                ["name": "特殊格式 - Date",  "vc": "CaseThree_dateViewController"],
-                ["name": "特殊格式 - Data",  "vc": "CaseThree_dataViewController"],
-                ["name": "特殊格式 - Float", "vc": "CaseThree_FloatViewController"],
-                ["name": "特殊格式 - URL", "vc": "CaseThree_URLViewController"],
-                ["name": "特殊格式 - Enum", "vc": "CaseThree_EnumViewController"],
-                ["name": "特殊格式 - 字典", "vc": "CaseThree_DictViewController"],
-                ["name": "特殊格式 - 数组", "vc": "CaseThree_ArrViewController"],
-                ["name": "特殊格式 - json数据", "vc": "CaseThreeJSONStringViewController"],
+                ["name": "特殊格式 - Date",       "vc": "CaseThree_dateViewController"],
+                ["name": "特殊格式 - Data",       "vc": "CaseThree_dataViewController"],
+                ["name": "特殊格式 - Float",      "vc": "CaseThree_FloatViewController"],
+                ["name": "特殊格式 - URL",        "vc": "CaseThree_URLViewController"],
+                ["name": "特殊格式 - Enum",       "vc": "CaseThree_EnumViewController"],
+                ["name": "特殊格式 - SmartColor", "vc": "CaseThree_ColorViewController"],
+                ["name": "特殊格式 - SmartAny",   "vc": "CaseThree_SmartAnyViewController"],
+                ["name": "特殊格式 - json数据",    "vc": "CaseThreeJSONStringViewController"],
 
             ]
         ]

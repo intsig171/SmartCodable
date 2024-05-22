@@ -265,6 +265,7 @@ extension JSONDecoderImpl.KeyedContainer {
             let decoded = try newDecoder.unwrap(as: type)
             return decoded
         } catch {
+            //todo log日志： 异常记录。比如SmartColor类型。
             let decoded: T = try forceDecode(forKey: key, entry: value.peel)
             return decoded
         }

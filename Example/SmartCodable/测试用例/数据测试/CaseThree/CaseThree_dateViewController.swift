@@ -23,7 +23,7 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
         // 5种情况，逐个测试。
 //        let strategy: JSONDecoder.DateDecodingStrategy = .deferredToDate
         
-//        let strategy: JSONDecoder.DateDecodingStrategy = .secondsSince1970
+        let strategy: JSONDecoder.DateDecodingStrategy = .secondsSince1970
         
 //        let strategy: JSONDecoder.DateDecodingStrategy = .millisecondsSince1970
 //
@@ -33,16 +33,16 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
 //        formatter.dateFormat = "yyyy年MM月dd号 hh点mm分"
 //        let strategy: JSONDecoder.DateDecodingStrategy = .formatted(formatter)
 //
-        let strategy: JSONDecoder.DateDecodingStrategy = .custom { decoder in
-            let container = try decoder.singleValueContainer()
-            let dateStr = try container.decode(String.self)
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd-MM-yyyy"
-            if let date = formatter.date(from: dateStr) {
-                return date
-            }
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string")
-        }
+//        let strategy: JSONDecoder.DateDecodingStrategy = .custom { decoder in
+//            let container = try decoder.singleValueContainer()
+//            let dateStr = try container.decode(String.self)
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "dd-MM-yyyy"
+//            if let date = formatter.date(from: dateStr) {
+//                return date
+//            }
+//            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string")
+//        }
         
         return strategy
     }

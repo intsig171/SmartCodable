@@ -1,5 +1,5 @@
 //
-//  CaseTwo_ArrayNestArrayViewController.swift
+//  Container_ArrayNestArrayViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseTwo_ArrayNestArrayViewController: BaseCompatibilityViewController {
+class Container_ArrayNestArrayViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class CaseTwo_ArrayNestArrayViewController: BaseCompatibilityViewController {
     }
 
 }
-extension CaseTwo_ArrayNestArrayViewController {
+extension Container_ArrayNestArrayViewController {
     struct PersonModel: SmartCodable {
         var loves: [Love]?
         var sons: [SonModel]?

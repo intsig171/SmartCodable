@@ -1,5 +1,5 @@
 //
-//  CaseOne_ArrayTypeMismatchViewController.swift
+//  Container_ArrayTypeMismatchViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CaseOne_ArrayTypeMismatchViewController: BaseViewController {
+class Container_ArrayTypeMismatchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

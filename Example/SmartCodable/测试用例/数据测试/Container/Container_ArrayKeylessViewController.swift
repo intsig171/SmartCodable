@@ -1,5 +1,5 @@
 //
-//  CaseOne_ArrayKeylessViewController.swift
+//  Container_ArrayKeylessViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseOne_ArrayKeylessViewController: BaseCompatibilityViewController {
+class Container_ArrayKeylessViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

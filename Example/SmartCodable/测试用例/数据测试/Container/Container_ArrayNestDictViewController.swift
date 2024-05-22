@@ -1,5 +1,5 @@
 //
-//  CaseTwo_ArrayNestDictViewController.swift
+//  Container_ArrayNestDictViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseTwo_ArrayNestDictViewController: BaseCompatibilityViewController {
+class Container_ArrayNestDictViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class CaseTwo_ArrayNestDictViewController: BaseCompatibilityViewController {
     }
 
 }
-extension CaseTwo_ArrayNestDictViewController {
+extension Container_ArrayNestDictViewController {
     struct PersonModel: SmartCodable {
         var name: String = ""
         var age: Int = 0

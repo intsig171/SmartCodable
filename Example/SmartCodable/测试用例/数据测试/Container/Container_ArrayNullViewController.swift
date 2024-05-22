@@ -1,5 +1,5 @@
 //
-//  CaseOne_ArrayNullViewController.swift
+//  Container_ArrayNullViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CaseOne_ArrayNullViewController: BaseCompatibilityViewController {
+class Container_ArrayNullViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -1,5 +1,5 @@
 //
-//  CaseOne_ArrayViewController.swift
+//  Container_ArrayViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/5/20.
@@ -10,7 +10,7 @@ import Foundation
 import SmartCodable
 
 /// 兼容Int类型，只兼容String类型的int值。
-class CaseOne_ArrayViewController: BaseViewController {
+class Container_ArrayViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class CaseOne_ArrayViewController: BaseViewController {
     }
 
 }
-extension CaseOne_ArrayViewController {
+extension Container_ArrayViewController {
     struct Model: SmartCodable {
         var models1: [SubModel] = []
         var models2: [SubModel] = []

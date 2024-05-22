@@ -6,6 +6,20 @@
 //
 
 import Foundation
+
+//#if os(iOS) || os(tvOS) || os(watchOS)
+//import UIKit
+//#else
+//import Cocoa
+//#endif
+//
+//#if os(iOS) || os(tvOS) || os(watchOS)
+//public typealias ColorObject = UIColor
+//#else
+//public typealias ColorObject = NSColor
+//#endif
+
+
 fileprivate protocol _JSONStringDictionaryDecodableMarker {
     static var elementType: Decodable.Type { get }
 }
@@ -30,6 +44,11 @@ extension JSONDecoderImpl {
         if type == Decimal.self {
             return try self.unwrapDecimal() as! T
         }
+        
+        if type == ColorObject.self {
+            return try self.unwrapColor() as! T
+        }
+        
         if type is _JSONStringDictionaryDecodableMarker.Type {
             return try self.unwrapDictionary(as: type)
         }
@@ -118,6 +137,13 @@ extension JSONDecoderImpl {
         return url
     }
 
+    private func unwrapColor() throws -> ColorObject {
+        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+        let string = try container.decode(String.self)
+
+        return ColorObject.hex(string) ?? ColorObject.white
+    }
+    
     private func unwrapDecimal() throws -> Decimal {
         guard case .number(let numberString) = self.json else {
             throw DecodingError.typeMismatch(Decimal.self, DecodingError.Context(codingPath: self.codingPath, debugDescription: ""))

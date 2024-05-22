@@ -84,7 +84,10 @@ extension JSONDecoderImpl {
 }
 
 
-
+// 由于UnkeyedDecodingContainer本身并不直接关联到特定的模型属性，
+// 而是用于解析未标记的序列，所以它不会自动选择针对特定类型的解码方法。
+// 相反，它会尝试使用泛型的解码方法，以便能够处理各种类型的值。
+// 特定类型的decode方法，使用场景比较少，一般是自定义 `init(from decoder: any Decoder) throws` 解析方法中 `let first = try unkeyedContainer.decode(Int.self)`.
 extension JSONDecoderImpl.UnkeyedContainer {
     mutating func decode(_ type: Bool.Type) throws -> Bool {
         guard let value = try? self.getNextValue(ofType: Bool.self) else {
@@ -157,6 +160,9 @@ extension JSONDecoderImpl.UnkeyedContainer {
     }
 
     mutating func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
+        
+        // 如果是基本数据类型的话，仍会创建一个新的decoder用来解析、。 如果此时type是Int类型，那么就会创建SingleContainer。
+        
         let newDecoder = decoderForNextElement(ofType: type)
         guard let result = try? newDecoder.unwrap(as: type) else {
             let decoded: T = try forceDecode()

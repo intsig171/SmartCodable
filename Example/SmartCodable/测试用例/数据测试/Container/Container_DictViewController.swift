@@ -1,5 +1,5 @@
 //
-//  CaseOne_DictViewController.swift
+//  Container_DictViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/5/20.
@@ -13,7 +13,7 @@ import Foundation
 import SmartCodable
 
 /// 兼容Int类型，只兼容String类型的int值。
-class CaseOne_DictViewController: BaseViewController {
+class Container_DictViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class CaseOne_DictViewController: BaseViewController {
     }
 
 }
-extension CaseOne_DictViewController {
+extension Container_DictViewController {
     struct Model: SmartCodable {
         
         var dict1: [String: String] = [:]
