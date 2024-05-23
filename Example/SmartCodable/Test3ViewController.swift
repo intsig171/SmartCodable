@@ -18,24 +18,25 @@ class Test3ViewController: BaseViewController {
         super.viewDidLoad()
         
   
-        request(model:ResponseData<Dictionary<String,SmartAny>>.self) { response in
-            print(response)
+        let dict: [String: Any] = [
+            "int": "11",
+            "int8": "12",
+            "uInt": "13",
+            "uInt8": "14",
+        ]
+
+        
+        if let model = IntModel.deserialize(from: dict) {
+            print(model)
         }
     }
     
-    struct ResponseData<T: SmartCodable>: SmartCodable{
-        var code: Int = 0
-        var msg: String = ""
-        var data: T?
-    }
-
-    func request<T: SmartCodable>(model: T.Type, completion:((_ response:T?) -> Void)?){
-        let json = """
-        {"code":1, "data":{ "index": "4", "msg": " EftI", "size":1780}, "msg": "success", "rid":"DgOS" }
-        """
-        if let model = model.deserialize(from:json) {
-            completion?(model)
-        }
+    
+    struct IntModel: SmartCodable {
+        var int: Int = 0
+        var int8: Int8 = 0
+        var uInt: UInt = 0
+        var uInt8: UInt8 = 0
     }
 }
 
