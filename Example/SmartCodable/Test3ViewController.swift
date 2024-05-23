@@ -18,20 +18,37 @@ class Test3ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-//            "name": "Mccc",
-//            "age": NSNull(),
-            "sex": 123
+            "name": "Mccc",
+            "sub": [
+                "selfAge": 10
+            ]
         ]
         
         if let model = Model.deserialize(from: dict) {
+            print("执行了")
             print(model)
         }
     }
     
     struct Model: SmartCodable {
-//        var name: String = ""
-//        var age: String = "Mccc"
-        var sex: Bool?
+        var nickName: String = ""
+        var sub: SubModel = SubModel()
+
+        
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.nickName <--- "name"
+            ]
+        }
+    }
+    
+    struct SubModel: SmartCodable {
+        var age: Int = 0
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.age <--- "selfAge"
+            ]
+        }
     }
     
     

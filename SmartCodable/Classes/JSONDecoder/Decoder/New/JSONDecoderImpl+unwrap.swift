@@ -30,7 +30,7 @@ extension Dictionary: _JSONStringDictionaryDecodableMarker where Key == String, 
 
 extension JSONDecoderImpl {
     // MARK: Special case handling
-
+    
     func unwrap<T: Decodable>(as type: T.Type) throws -> T {
         if type == Date.self {
             return try self.unwrapDate() as! T
@@ -57,227 +57,46 @@ extension JSONDecoderImpl {
         if type is _JSONStringDictionaryDecodableMarker.Type {
             return try self.unwrapDictionary(as: type)
         }
-
+        
         cache.cacheInitialState(for: type)
         let decoded = try type.init(from: self)
         cache.clearLastState(for: type)
         return decoded
     }
-
-    private func unwrapDate() throws -> Date {
-
-        switch self.options.dateDecodingStrategy {
-        case .deferredToDate:
-            return try Date(from: self)
-
-        case .secondsSince1970:
-            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-            let double = try container.decode(Double.self)
-            return Date(timeIntervalSince1970: double)
-
-        case .millisecondsSince1970:
-            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-            let double = try container.decode(Double.self)
-            return Date(timeIntervalSince1970: double / 1000.0)
-
-        case .iso8601:
-            if #available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
-                let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-                let string = try container.decode(String.self)
-                guard let date = _iso8601Formatter.date(from: string) else {
-                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
-                }
-
-                return date
-            } else {
-                fatalError("ISO8601DateFormatter is unavailable on this platform.")
-            }
-
-        case .formatted(let formatter):
-            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-            let string = try container.decode(String.self)
-            guard let date = formatter.date(from: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
-            }
-            return date
-
-        case .custom(let closure):
-            return try closure(self)
-        @unknown default:
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Date is not valid , unknown anomaly"))
-        }
-    }
-
-    private func unwrapData() throws -> Data {
-        switch self.options.dataDecodingStrategy {
-        case .deferredToData:
-            return try Data(from: self)
-
-        case .base64:
-            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-            let string = try container.decode(String.self)
-
-            guard let data = Data(base64Encoded: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid Base64."))
-            }
-
-            return data
-
-        case .custom(let closure):
-            return try closure(self)
-        @unknown default:
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid , unknown anomaly"))
-        }
-    }
-
-    private func unwrapURL() throws -> URL {
-        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-        let string = try container.decode(String.self)
-
-        guard let url = URL(string: string) else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: self.codingPath,
-                                      debugDescription: "Invalid URL string."))
-        }
-        return url
-    }
     
-    private func unwrapSmartColor() throws -> SmartColor {
-        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-        let string = try container.decode(String.self)
-
-        guard let color = ColorObject.hex(string) else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: self.codingPath,
-                                      debugDescription: "Invalid Color string."))
-        }
-        return SmartColor(from: color)
-    }
-    
-    
-    
-    private func unwrapSmartAny() throws -> SmartAny {
-        
-        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-        
-    
-        if let temp =  container.decodeIfPresent(String.self) {
-            return .string(temp)
-        } else if let temp = container.decodeIfPresent(Bool.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Double.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Float.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int8.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int16.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int32.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int64.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt8.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt16.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt32.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt64.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent([String: SmartAny].self) {
-            return .dict(temp)
-        } else if let temp = container.decodeIfPresent([SmartAny].self) {
-            return .array(temp)
-        }
-
-        throw DecodingError.dataCorrupted(
-            DecodingError.Context(codingPath: self.codingPath,
-                                  debugDescription: "Invalid SmartAny."))
-    }
-    
-    private func unwrapDecimal() throws -> Decimal {
-        guard case .number(let numberString) = self.json else {
-            throw DecodingError.typeMismatch(Decimal.self, DecodingError.Context(codingPath: self.codingPath, debugDescription: ""))
-        }
-
-        guard let decimal = Decimal(string: numberString) else {
-            throw DecodingError.dataCorrupted(.init(
-                codingPath: self.codingPath,
-                debugDescription: "Parsed JSON number <\(numberString)> does not fit in \(Decimal.self)."))
-        }
-
-        return decimal
-    }
-    
-
-    private func unwrapDictionary<T: Decodable>(as: T.Type) throws -> T {
-        guard let dictType = T.self as? (_JSONStringDictionaryDecodableMarker & Decodable).Type else {
-            preconditionFailure("Must only be called of T implements _JSONStringDictionaryDecodableMarker")
-        }
-
-        guard case .object(let object) = self.json else {
-            throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-            ))
-        }
-
-        var result = [String: Any]()
-
-        for (key, value) in object {
-            var newPath = self.codingPath
-            newPath.append(_JSONKey(stringValue: key)!)
-            let newDecoder = JSONDecoderImpl(
-                userInfo: self.userInfo,
-                from: value,
-                codingPath: newPath,
-                options: self.options)
-            result[key] = try dictType.elementType.createByDirectlyUnwrapping(from: newDecoder)
-        }
-
-        return result as! T
-    }
-
     func unwrapFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>(
         from value: JSONValue,
         for additionalKey: CodingKey? = nil,
-        as type: T.Type) throws -> T
-    {
-        if case .number(let number) = value {
-            guard let floatingPoint = T(number), floatingPoint.isFinite else {
-                var path = self.codingPath
-                if let additionalKey = additionalKey {
-                    path.append(additionalKey)
+        as type: T.Type) throws -> T {
+            if case .number(let number) = value {
+                guard let floatingPoint = T(number), floatingPoint.isFinite else {
+                    var path = self.codingPath
+                    if let additionalKey = additionalKey {
+                        path.append(additionalKey)
+                    }
+                    throw DecodingError.dataCorrupted(.init(
+                        codingPath: path,
+                        debugDescription: "Parsed JSON number <\(number)> does not fit in \(T.self)."))
                 }
-                throw DecodingError.dataCorrupted(.init(
-                    codingPath: path,
-                    debugDescription: "Parsed JSON number <\(number)> does not fit in \(T.self)."))
+                
+                return floatingPoint
             }
-
-            return floatingPoint
-        }
-
-        if case .string(let string) = value,
-           case .convertFromString(let posInfString, let negInfString, let nanString) =
-            self.options.nonConformingFloatDecodingStrategy
-        {
-            if string == posInfString {
-                return T.infinity
-            } else if string == negInfString {
-                return -T.infinity
-            } else if string == nanString {
-                return T.nan
+            
+            if case .string(let string) = value,
+               case .convertFromString(let posInfString, let negInfString, let nanString) =
+                self.options.nonConformingFloatDecodingStrategy {
+                if string == posInfString {
+                    return T.infinity
+                } else if string == negInfString {
+                    return -T.infinity
+                } else if string == nanString {
+                    return T.nan
+                }
             }
+            
+            throw self.createTypeMismatchError(type: T.self, for: additionalKey, value: value)
         }
-
-        throw self.createTypeMismatchError(type: T.self, for: additionalKey, value: value)
-    }
-
+    
     func unwrapFixedWidthInteger<T: FixedWidthInteger>(
         from value: JSONValue,
         for additionalKey: CodingKey? = nil,
@@ -291,7 +110,7 @@ extension JSONDecoderImpl {
         if let integer = T(number) {
             return integer
         }
-
+        
         // this is the really slow path... If the fast path has failed. For example for "34.0" as
         // an integer, we try to go through NSNumber
         if let nsNumber = NSNumber.fromJSONNumber(number) {
@@ -326,7 +145,7 @@ extension JSONDecoderImpl {
                 return nsNumber.intValue as! T
             }
         }
-
+        
         var path = self.codingPath
         if let additionalKey = additionalKey {
             path.append(additionalKey)
@@ -335,19 +154,198 @@ extension JSONDecoderImpl {
             codingPath: path,
             debugDescription: "Parsed JSON number <\(number)> does not fit in \(T.self)."))
     }
+}
+
+extension JSONDecoderImpl {
+    private func unwrapDate() throws -> Date {
+        
+        switch self.options.dateDecodingStrategy {
+        case .deferredToDate:
+            return try Date(from: self)
+            
+        case .secondsSince1970:
+            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+            let double = try container.decode(Double.self)
+            return Date(timeIntervalSince1970: double)
+            
+        case .millisecondsSince1970:
+            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+            let double = try container.decode(Double.self)
+            return Date(timeIntervalSince1970: double / 1000.0)
+            
+        case .iso8601:
+            if #available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
+                let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+                let string = try container.decode(String.self)
+                guard let date = _iso8601Formatter.date(from: string) else {
+                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
+                }
+                
+                return date
+            } else {
+                fatalError("ISO8601DateFormatter is unavailable on this platform.")
+            }
+            
+        case .formatted(let formatter):
+            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+            let string = try container.decode(String.self)
+            guard let date = formatter.date(from: string) else {
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
+            }
+            return date
+            
+        case .custom(let closure):
+            return try closure(self)
+        @unknown default:
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Date is not valid , unknown anomaly"))
+        }
+    }
+    
+    private func unwrapData() throws -> Data {
+        switch self.options.dataDecodingStrategy {
+        case .deferredToData:
+            return try Data(from: self)
+            
+        case .base64:
+            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+            let string = try container.decode(String.self)
+            
+            guard let data = Data(base64Encoded: string) else {
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid Base64."))
+            }
+            
+            return data
+            
+        case .custom(let closure):
+            return try closure(self)
+        @unknown default:
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid , unknown anomaly"))
+        }
+    }
+    
+    private func unwrapURL() throws -> URL {
+        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+        let string = try container.decode(String.self)
+        
+        guard let url = URL(string: string) else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: self.codingPath,
+                                      debugDescription: "Invalid URL string."))
+        }
+        return url
+    }
+    
+    private func unwrapSmartColor() throws -> SmartColor {
+        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+        let string = try container.decode(String.self)
+        
+        guard let color = ColorObject.hex(string) else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: self.codingPath,
+                                      debugDescription: "Invalid Color string."))
+        }
+        return SmartColor(from: color)
+    }
+    
+    private func unwrapSmartAny() throws -> SmartAny {
+        
+        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+        
+        
+        if let temp =  container.decodeIfPresent(String.self) {
+            return .string(temp)
+        } else if let temp = container.decodeIfPresent(Bool.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Double.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Float.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int8.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int16.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int32.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(Int64.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt8.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt16.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt32.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent(UInt64.self) as? NSNumber {
+            return .number(temp)
+        } else if let temp = container.decodeIfPresent([String: SmartAny].self) {
+            return .dict(temp)
+        } else if let temp = container.decodeIfPresent([SmartAny].self) {
+            return .array(temp)
+        }
+        
+        throw DecodingError.dataCorrupted(
+            DecodingError.Context(codingPath: self.codingPath,
+                                  debugDescription: "Invalid SmartAny."))
+    }
+    
+    private func unwrapDecimal() throws -> Decimal {
+        guard case .number(let numberString) = self.json else {
+            throw DecodingError.typeMismatch(Decimal.self, DecodingError.Context(codingPath: self.codingPath, debugDescription: ""))
+        }
+        
+        guard let decimal = Decimal(string: numberString) else {
+            throw DecodingError.dataCorrupted(.init(
+                codingPath: self.codingPath,
+                debugDescription: "Parsed JSON number <\(numberString)> does not fit in \(Decimal.self)."))
+        }
+        
+        return decimal
+    }
+    
+    private func unwrapDictionary<T: Decodable>(as: T.Type) throws -> T {
+        guard let dictType = T.self as? (_JSONStringDictionaryDecodableMarker & Decodable).Type else {
+            preconditionFailure("Must only be called of T implements _JSONStringDictionaryDecodableMarker")
+        }
+        
+        guard case .object(let object) = self.json else {
+            throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
+                codingPath: self.codingPath,
+                debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
+            ))
+        }
+        
+        var result = [String: Any]()
+        
+        for (key, value) in object {
+            var newPath = self.codingPath
+            newPath.append(_JSONKey(stringValue: key)!)
+            let newDecoder = JSONDecoderImpl(
+                userInfo: self.userInfo,
+                from: value,
+                codingPath: newPath,
+                options: self.options)
+            result[key] = try dictType.elementType.createByDirectlyUnwrapping(from: newDecoder)
+        }
+        
+        return result as! T
+    }
     
     private func createTypeMismatchError(type: Any.Type, for additionalKey: CodingKey? = nil, value: JSONValue) -> DecodingError {
         var path = self.codingPath
         if let additionalKey = additionalKey {
             path.append(additionalKey)
         }
-
+        
         return DecodingError.typeMismatch(type, .init(
             codingPath: path,
             debugDescription: "Expected to decode \(type) but found \(value.debugDataTypeDescription) instead."
         ))
     }
 }
+
 
 extension Decodable {
     fileprivate static func createByDirectlyUnwrapping(from decoder: JSONDecoderImpl) throws -> Self {

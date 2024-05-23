@@ -19,21 +19,21 @@ class BeforeDecodingViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        let dict: [String: Any] = [
-            "name": "Mccc1",
-            "ignore": "请忽略我",
-            "selfAge": 10
-        ]
-        
-        guard let model = Model.deserialize(from: dict) else { return }
-        print(model)
+//                
+//        let dict: [String: Any] = [
+//            "name": "Mccc1",
+//            "ignore": "请忽略我",
+//            "selfAge": 10
+//        ]
+//        
+//        guard let model = Model.deserialize(from: dict) else { return }
+//        print(model)
         
         
         
         let dict1: [String: Any] = [
-            "age": 10,
-            "name": "Mccc",
+//            "age": 10,
+//            "name": "Mccc",
             "area": "su zhou"
         ]
         
@@ -67,11 +67,11 @@ extension BeforeDecodingViewController {
 
 extension BeforeDecodingViewController {
     struct Home: SmartCodable {
-        var name: String = ""
+//        var name: String = ""
+//        @IgnoredKey
+//        var age: Any?
         @IgnoredKey
-        var age: Any?
-        @IgnoredKey
-        var area: String = "area"
+        var area: String = "area123"
     }
 }
 

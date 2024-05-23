@@ -6,7 +6,47 @@
 //
 
 import Foundation
+struct ModelKeyMapperNew {
+    
+    static func convertToMappedFormat(_ jsonValue: Any?, type: Any.Type) -> Any? {
+        guard let type = type as? SmartDecodable.Type else { return jsonValue }
+        
+        if let stringValue = jsonValue as? String {
+            return parseJSON(from: stringValue, as: type)
+        } else if let dictValue = jsonValue as? [String: Any] {
+            return mapDictionary(dict: dictValue, using: type)
+        }
+        return jsonValue
+    }
 
+    
+    private static func parseJSON(from string: String, as type: SmartDecodable.Type) -> Any {
+        guard let jsonObject = string.toJSONObject() else { return string }
+        if let dict = jsonObject as? [String: Any] {
+            return mapDictionary(dict: dict, using: type)
+        } else {
+            return jsonObject
+        }
+    }
+    
+    private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any] {
+        var newDict = dict
+        type.mappingForKey()?.forEach { mapping in
+            for oldKey in mapping.from {
+                let newKey = mapping.to.stringValue
+                if let value = newDict[oldKey], !(value is NSNull) {
+                    newDict[newKey] = newDict[oldKey]
+                    break
+                } else { // Handles the case of a custom parsing path.
+                    if newDict[newKey] == nil, let pathValue = newDict.getValue(forKeyPath: oldKey) {
+                        newDict.updateValue(pathValue, forKey: newKey)
+                    }
+                }
+            }
+        }
+        return newDict
+    }
+}
 
 
 

@@ -16,12 +16,11 @@ public struct IgnoredKey<T>: Codable {
     }
 
     public init(from decoder: Decoder) throws {
-        guard let decoder = decoder as? _SmartJSONDecoder else {
-            throw DecodingError.typeMismatch(IgnoredKey<T>.self, DecodingError.Context(
-                codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
-            )
-        }
-        wrappedValue = try decoder.smartDecode(type: T.self)
+        
+        // 将异常抛出，在解析容器中进行兼容。
+        throw DecodingError.typeMismatch(IgnoredKey<T>.self, DecodingError.Context(
+            codingPath: decoder.codingPath, debugDescription: "\(Self.self) does not participate in the parsing, please ignore it.")
+        )
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -31,16 +30,6 @@ public struct IgnoredKey<T>: Codable {
         } else {
             var container = encoder.singleValueContainer()
             try container.encodeNil()
-        }
-    }
-}
-extension _SmartJSONDecoder {
-    fileprivate func smartDecode<T>(type: T.Type) throws -> T {
-
-        if let key = codingPath.last, let value: T = cache.getValue(forKey: key) {
-            return value
-        } else {
-            return try Patcher<T>.defaultForType()
         }
     }
 }

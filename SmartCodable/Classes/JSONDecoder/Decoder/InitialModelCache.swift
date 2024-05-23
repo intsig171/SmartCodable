@@ -17,13 +17,20 @@ class InitialModelCache {
     /// - avoid parsing confusion with multi-level nested models
     private(set) var snapshots: [Snapshot] = []
     
+    /// 正在解析的属性类型
+    var decodedType: SmartDecodable.Type?
+    
     var topSnapshot: Snapshot? {
         return self.snapshots.last
     }
     
     /// Cache the initial state of a Decodable object.
     func cacheInitialState<T: Decodable>(for type: T.Type) {
+        
+        
         if let object = type as? SmartDecodable.Type {
+        
+            decodedType = object
             
             var snapshot = Snapshot()
             

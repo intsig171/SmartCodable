@@ -15,28 +15,13 @@ extension JSONDecoderImpl {
         let dictionary: [String: JSONValue]
 
         init(impl: JSONDecoderImpl, codingPath: [CodingKey], dictionary: [String: JSONValue]) {
-            self.impl = impl
+            
             self.codingPath = codingPath
             
-            switch impl.options.keyDecodingStrategy {
-            case .useDefaultKeys:
-                self.dictionary = dictionary
-            case .fromSnakeCase:
-                // Convert the snake case keys in the container to camel case.
-                // If we hit a duplicate key after conversion, then we'll use the first one we saw. Effectively an undefined behavior with JSON dictionaries.
-                self.dictionary = Dictionary(dictionary.map {
-                    dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFromSnakeCase(dict.key), dict.value)
-                }, uniquingKeysWith: { (first, _) in first })
-            case .firstLetterLower:
-                self.dictionary = Dictionary(dictionary.map {
-                    dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToLowercase(dict.key), dict.value)
-                }, uniquingKeysWith: { (first, _) in first })
-            case .firstLetterUpper:
-                self.dictionary = Dictionary(dictionary.map {
-                    dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToUppercase(dict.key), dict.value)
-                }, uniquingKeysWith: { (first, _) in first })
-
-            }
+            self.dictionary = _convertDictionary(dictionary, impl: impl)
+            
+            // dictionary的转换，并没有影响结构，只是在当前容器对应的数据新增了字段。并不需要改动impl
+            self.impl = impl
         }
 
         var allKeys: [K] {
@@ -91,11 +76,6 @@ extension JSONDecoderImpl {
             var value = try getValue(forKey: key)
             var newPath = self.codingPath
             newPath.append(key)
-            
-            
-            if type is [SmartDecodable].Type {
-                print("是数组")
-            }
             
             /// Model或[Model]的情况下，如果json是字符串并且可以进行对象化。
             if let _ = type as? SmartDecodable.Type {
@@ -411,6 +391,7 @@ extension JSONDecoderImpl.KeyedContainer {
 
 
 extension JSONDecoderImpl.KeyedContainer {
+
     
     /// 可选解析不能使用统一方法，如果decoder.unbox不明确指定类型，全都走到func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? 中， 会走到decoded = try T(from: self)方法，进而初始化一个默认值。
     fileprivate func optionalDecode<T>(entry: Any?) -> T? {
@@ -492,4 +473,41 @@ extension JSONDecoderImpl.KeyedContainer {
 fileprivate func _toData(_ value: Any) -> Data? {
     guard JSONSerialization.isValidJSONObject(value) else { return nil }
     return try? JSONSerialization.data(withJSONObject: value)
+}
+
+
+
+/// 处理需要解析的字段名的对应关系。
+fileprivate func _convertDictionary(_ dictionary: [String: JSONValue], impl: JSONDecoderImpl) -> [String: JSONValue] {
+    
+    var dictionary = dictionary
+    
+    // 全局的改动，是否重复了？ 应该只需要在最外层改动一次就够了吧？
+    switch impl.options.keyDecodingStrategy {
+    case .useDefaultKeys:
+        break
+    case .fromSnakeCase:
+        // Convert the snake case keys in the container to camel case.
+        // If we hit a duplicate key after conversion, then we'll use the first one we saw. Effectively an undefined behavior with JSON dictionaries.
+        dictionary = Dictionary(dictionary.map {
+            dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFromSnakeCase(dict.key), dict.value)
+        }, uniquingKeysWith: { (first, _) in first })
+    case .firstLetterLower:
+        dictionary = Dictionary(dictionary.map {
+            dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToLowercase(dict.key), dict.value)
+        }, uniquingKeysWith: { (first, _) in first })
+    case .firstLetterUpper:
+        dictionary = Dictionary(dictionary.map {
+            dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToUppercase(dict.key), dict.value)
+        }, uniquingKeysWith: { (first, _) in first })
+    }
+
+    guard let type = impl.cache.decodedType else { return dictionary }
+    
+    guard let trans = ModelKeyMapperNew.convertToMappedFormat(impl.json.peel, type: type) else { return dictionary }
+    
+    guard let data = _toData(trans) else { return dictionary }
+    var parser = JSONParser(bytes: Array(data))
+    guard let json = try? parser.parse(), let newDict = json.object else { return dictionary }
+    return newDict
 }

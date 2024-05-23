@@ -34,23 +34,6 @@ extension JSONValue {
             return false
         }
     }
-    
-    var peel: Any? {
-        switch self {
-        case .array(let v):
-            return v
-        case .bool(let v):
-            return v
-        case .number(let v):
-            return v
-        case .string(let v):
-            return v
-        case .object(let v):
-            return v
-        case .null:
-            return nil
-        }
-    }
 }
 
 extension JSONValue {
