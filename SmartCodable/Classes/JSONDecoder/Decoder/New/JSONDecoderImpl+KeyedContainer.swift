@@ -85,6 +85,37 @@ extension JSONDecoderImpl {
                 options: self.impl.options
             )
         }
+        
+        
+        private func decoderForKeyCompatibleForJson<LocalKey: CodingKey, T>(_ key: LocalKey, type: T.Type) throws -> JSONDecoderImpl {
+            var value = try getValue(forKey: key)
+            var newPath = self.codingPath
+            newPath.append(key)
+            
+            
+            if type is [SmartDecodable].Type {
+                print("是数组")
+            }
+            
+            /// Model或[Model]的情况下，如果json是字符串并且可以进行对象化。
+            if let _ = type as? SmartDecodable.Type {
+                if case .string(let string) = value {
+                    let trans = ModelKeyMapper<T>.convertToMappedFormat(string)
+                    if let data = _toData(trans) {
+                        var parser = JSONParser(bytes: Array(data))
+                        value = try parser.parse()
+                    }
+                }
+            }
+
+            return JSONDecoderImpl(
+                userInfo: self.impl.userInfo,
+                from: value,
+                codingPath: newPath,
+                options: self.impl.options
+            )
+        }
+        
 
         private func decoderForKeyNoThrow<LocalKey: CodingKey>(_ key: LocalKey) -> JSONDecoderImpl {
             let value: JSONValue
@@ -272,7 +303,7 @@ extension JSONDecoderImpl.KeyedContainer {
             return didFinishMapping(decoded)
         }
         do {
-            let newDecoder = try decoderForKey(key)
+            let newDecoder = try decoderForKeyCompatibleForJson(key, type: type)
             let decoded = try newDecoder.unwrap(as: type)
             return decoded
         } catch {
@@ -366,7 +397,7 @@ extension JSONDecoderImpl.KeyedContainer {
         
         guard let value = try? getValue(forKey: key) else { return nil }
         do {
-            let newDecoder = try decoderForKey(key)
+            let newDecoder = try decoderForKeyCompatibleForJson(key, type: type)
             let decoded = try newDecoder.unwrap(as: type)
             return didFinishMapping(decoded)
         } catch {
@@ -377,7 +408,10 @@ extension JSONDecoderImpl.KeyedContainer {
         }
     }
 }
+
+
 extension JSONDecoderImpl.KeyedContainer {
+    
     /// 可选解析不能使用统一方法，如果decoder.unbox不明确指定类型，全都走到func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? 中， 会走到decoded = try T(from: self)方法，进而初始化一个默认值。
     fileprivate func optionalDecode<T>(entry: Any?) -> T? {
         guard let decoded = Patcher<T>.convertToType(from: entry) else {
@@ -454,4 +488,8 @@ extension JSONDecoderImpl.KeyedContainer {
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {
         return DecodingProcessCoordinator.didFinishMapping(decodeValue)
     }
+}
+fileprivate func _toData(_ value: Any) -> Data? {
+    guard JSONSerialization.isValidJSONObject(value) else { return nil }
+    return try? JSONSerialization.data(withJSONObject: value)
 }
