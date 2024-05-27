@@ -26,9 +26,9 @@ class TestViewController: BaseViewController {
         
         let dict: [String: Any] = [
 //            "name": "Mccc",
-            "age": 10,
-            "love": "{\"age\":10}",
-//            "loves": "[{\"name\":\"sleep222\"}]"
+//            "selfAge": 10,
+            "love": "{\"age\":15}",
+//            "loves": "[{\"selfAge\": 20},{\"selfAge\": 20}]"
         ]
         
         if let model = JSONStringModel.deserialize(from: dict) {
@@ -38,12 +38,32 @@ class TestViewController: BaseViewController {
     
     struct JSONStringModel: SmartCodable {
 //        var name: String = ""
-        var age: Int = 0
-//        var love: Love = Love()
+//        var age: Int = 0
+        var love: Love = Love()
 //        var loves: [Love] = []
+        
+//        static func mappingForKey() -> [SmartKeyTransformer]? {
+//            [
+//                CodingKeys.age <--- "selfAge"
+//            ]
+//        }
+//        
+//        func didFinishMapping() {
+//            print("JSONStringModel中的age值为", age)
+//        }
     }
     
     struct Love: SmartCodable {
         var age: Int = 0
+        
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.age <--- "selfAge"
+            ]
+        }
+        
+//        func didFinishMapping() {
+//            print("Love中的age值为", age)
+//        }
     }
 }

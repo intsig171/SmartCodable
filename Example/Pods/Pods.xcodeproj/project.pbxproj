@@ -280,6 +280,7 @@
 		9957743D2BFDCC32003613C5 /* SmartColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957743C2BFDCC32003613C5 /* SmartColor.swift */; };
 		99C3E4EDBE5BCDC161722B105F0FD62F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F616208225C5B42B50ABA5F5267C29F /* Database.swift */; };
 		99D6AC852BFF519400A2137A /* JSONValue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6AC842BFF519400A2137A /* JSONValue+Extension.swift */; };
+		99D6ACA92C04371300A2137A /* KeysMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6ACA82C04371300A2137A /* KeysMapper.swift */; };
 		9A199C92D34FD11A9F07EB0D164560A0 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3569CFD3EAF9272EE5F4AFAA1F9EF564 /* JSONParser.swift */; };
 		9A5C397C4B518E59526372CA6AA0BE65 /* StatementAttach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F631CC802E2701AD6DEAB71A9B7134CB /* StatementAttach.swift */; };
 		9A6CCC7BCACBE8218126670E6B08EF9E /* BTPrint-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15CC97091BEEC9AAC898E58EC68EBF05 /* BTPrint-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -895,6 +896,7 @@
 		9930E634CA9F9592BA112E4EA073572B /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = swift/source/util/Error.swift; sourceTree = "<group>"; };
 		9957743C2BFDCC32003613C5 /* SmartColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartColor.swift; sourceTree = "<group>"; };
 		99D6AC842BFF519400A2137A /* JSONValue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONValue+Extension.swift"; sourceTree = "<group>"; };
+		99D6ACA82C04371300A2137A /* KeysMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeysMapper.swift; sourceTree = "<group>"; };
 		9A09037802A20D832A880AA28340A8C1 /* FBSnapshotTestCase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-prefix.pch"; sourceTree = "<group>"; };
 		9A0CDA24DDDB701970130A91AE5FA140 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
 		9AB62CDC1D9A84669428234D73C264AF /* Pods-SmartCodable_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmartCodable_Example-dummy.m"; sourceTree = "<group>"; };
@@ -1320,6 +1322,7 @@
 				3569CFD3EAF9272EE5F4AFAA1F9EF564 /* JSONParser.swift */,
 				EC3091C4CD64FCD2D294E1130602237F /* JSONValue.swift */,
 				99D6AC842BFF519400A2137A /* JSONValue+Extension.swift */,
+				99D6ACA82C04371300A2137A /* KeysMapper.swift */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -2653,6 +2656,7 @@
 				1E9D5BE7D32FC7DABC95A57B498C7E2C /* SmartJSONKeyedDecodingContainer+decode.swift in Sources */,
 				612341DE0C134B04537AAC4F5B51075B /* SmartJSONKeyedDecodingContainer+decodeIfPresent.swift in Sources */,
 				DE6A0BADE7E1F427BA884F575E34CE4C /* SmartKeyDecodingStrategy.swift in Sources */,
+				99D6ACA92C04371300A2137A /* KeysMapper.swift in Sources */,
 				40F41C45A430ACF11300F19CA453D00E /* SmartLog.swift in Sources */,
 				8FBDBE69F0B0C73509E9F064C55420FD /* SmartSONUnkeyedDecodingContainer.swift in Sources */,
 				F3B1C02985CEE73351F365D81813FCC9 /* SmartSONUnkeyedDecodingContainer+decode.swift in Sources */,

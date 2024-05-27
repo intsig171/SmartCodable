@@ -19,7 +19,6 @@ extension JSONDecoderImpl {
             self.codingPath = codingPath
             
             self.dictionary = _convertDictionary(dictionary, impl: impl)
-//            self.dictionary = dictionary
             // dictionary的转换，并没有影响结构，只是在当前容器对应的数据新增了字段。并不需要改动impl
             self.impl = impl
         }
@@ -73,23 +72,10 @@ extension JSONDecoderImpl {
         
         
         private func decoderForKeyCompatibleForJson<LocalKey: CodingKey, T>(_ key: LocalKey, type: T.Type) throws -> JSONDecoderImpl {
-            var value = try getValue(forKey: key)
+            let value = try getValue(forKey: key)
             var newPath = self.codingPath
             newPath.append(key)
-            
-            /// Model或[Model]的情况下，如果json是字符串并且可以进行对象化。
-            if let _ = type as? SmartDecodable.Type {
-                if case .string(let string) = value {
 
-                    if let trans = ModelKeyMapperNew.convertToMappedFormat(string, type: type) {
-                        if let data = _toData(trans) {
-                            var parser = JSONParser(bytes: Array(data))
-                            value = try parser.parse()
-                        }
-                    }
-                }
-            }
-            
             return JSONDecoderImpl(
                 userInfo: self.impl.userInfo,
                 from: value,
@@ -483,13 +469,9 @@ fileprivate func _convertDictionary(_ dictionary: [String: JSONValue], impl: JSO
     
     guard let type = impl.cache.decodedType else { return dictionary }
     
-//
-    guard let trans = ModelKeyMapperNew.convertToMappedFormat(impl.json.peel, type: type) else { return dictionary }
     
-
-//
-    guard let data = _toData(trans) else { return dictionary }
-    var parser = JSONParser(bytes: Array(data))
-    guard let json = try? parser.parse(), let newDict = json.object else { return dictionary }
-    return newDict
+    if let tempValue = KeysMapper.convertFrom(JSONValue.object(dictionary), type: type), let dict = tempValue.object {
+        return dict
+    }
+    return dictionary
 }

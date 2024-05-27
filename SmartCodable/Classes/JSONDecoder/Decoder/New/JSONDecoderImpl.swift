@@ -34,7 +34,7 @@ struct JSONDecoderImpl {
 
 // 关于容器的生成，不用进行兼容，类型错误的时候，抛出异常，进行异常处理时，可以获取初始化值。
 extension JSONDecoderImpl: Decoder {
-    func container<Key>(keyedBy _: Key.Type) throws ->
+    func container<Key>(keyedBy key: Key.Type) throws ->
         KeyedDecodingContainer<Key> where Key: CodingKey
     {
         switch self.json {
@@ -45,17 +45,30 @@ extension JSONDecoderImpl: Decoder {
                 dictionary: dictionary
             )
             return KeyedDecodingContainer(container)
+            
+        case .string(let string): // json字符串的模型化兼容
+            if let dict = string.toJSONObject() as? [String: Any],
+               let dictionary = JSONValue.make(dict)?.object {
+                let container = KeyedContainer<Key>(
+                    impl: self,
+                    codingPath: codingPath,
+                    dictionary: dictionary
+                )
+                return KeyedDecodingContainer(container)
+            }
+            
         case .null:
             throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
                 codingPath: self.codingPath,
                 debugDescription: "Cannot get keyed decoding container -- found null value instead"
             ))
         default:
-            throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-            ))
+            break
         }
+        throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
+            codingPath: self.codingPath,
+            debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
+        ))
     }
 
     func unkeyedContainer() throws -> UnkeyedDecodingContainer {

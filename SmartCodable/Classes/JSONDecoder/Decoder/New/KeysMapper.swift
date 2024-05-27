@@ -1,25 +1,34 @@
 //
-//  ModelKeyMapper.swift
+//  KeysMapper.swift
 //  SmartCodable
 //
-//  Created by Mccc on 2024/3/4.
+//  Created by qixin on 2024/5/27.
 //
 
 import Foundation
-
-
-struct ModelKeyMapper<T> {
-    /// Attempts to convert to a format related to a mapped model
-    static func convertToMappedFormat(_ jsonValue: Any) -> Any {
-        guard let type = T.self as? SmartDecodable.Type else { return jsonValue }
+struct KeysMapper {
+    
+    static func convertFrom(_ jsonValue: JSONValue, type: Any.Type) -> JSONValue? {
         
-        if let stringValue = jsonValue as? String {
-            return parseJSON(from: stringValue, as: type)
-        } else if let dictValue = jsonValue as? [String: Any] {
-            return mapDictionary(dict: dictValue, using: type)
+        // 如果当前不是Model类型，就不会存在key的重命名需求。
+        guard let type = type as? SmartDecodable.Type else { return jsonValue }
+        
+        switch jsonValue {
+        case .string(let stringValue):
+            let value = parseJSON(from: stringValue, as: type)
+            return JSONValue.make(value)
+            
+        case .object(let dictValue):
+            if let dict = mapDictionary(dict: dictValue, using: type) as? [String: JSONValue] {
+                return JSONValue.object(dict)
+            }
+            
+        default:
+            break
         }
-        return jsonValue
+        return nil
     }
+
     
     private static func parseJSON(from string: String, as type: SmartDecodable.Type) -> Any {
         guard let jsonObject = string.toJSONObject() else { return string }
@@ -48,6 +57,7 @@ struct ModelKeyMapper<T> {
         return newDict
     }
 }
+
 
 
 extension Dictionary {
@@ -84,9 +94,9 @@ extension Dictionary {
 
 
 
-//extension String {
-//    fileprivate func toJSONObject() -> Any? {
-//        guard starts(with: "{") || starts(with: "[") else { return nil }
-//        return data(using: .utf8).flatMap { try? JSONSerialization.jsonObject(with: $0) }
-//    }
-//}
+extension String {
+    func toJSONObject() -> Any? {
+        guard starts(with: "{") || starts(with: "[") else { return nil }
+        return data(using: .utf8).flatMap { try? JSONSerialization.jsonObject(with: $0) }
+    }
+}

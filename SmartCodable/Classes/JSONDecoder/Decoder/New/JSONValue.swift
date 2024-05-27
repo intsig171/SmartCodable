@@ -14,6 +14,24 @@ enum JSONValue: Equatable {
 
     case array([JSONValue])
     case object([String: JSONValue])
+    
+    
+    static func make(_ value: Any) -> Self? {
+        var value = value
+        if let temp = value as? JSONValue {
+            value = temp.peel
+        }
+        if let data = _toData(value) {
+            var parser = JSONParser(bytes: Array(data))
+            return try? parser.parse()
+        }
+        return nil
+    }
+}
+
+fileprivate func _toData(_ value: Any) -> Data? {
+    guard JSONSerialization.isValidJSONObject(value) else { return nil }
+    return try? JSONSerialization.data(withJSONObject: value)
 }
 
 extension JSONValue {
