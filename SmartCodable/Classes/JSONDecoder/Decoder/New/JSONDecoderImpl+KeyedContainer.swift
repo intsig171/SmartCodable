@@ -9,60 +9,60 @@ import Foundation
 extension JSONDecoderImpl {
     struct KeyedContainer<K: CodingKey>: KeyedDecodingContainerProtocol {
         typealias Key = K
-
+        
         let impl: JSONDecoderImpl
         let codingPath: [CodingKey]
         let dictionary: [String: JSONValue]
-
+        
         init(impl: JSONDecoderImpl, codingPath: [CodingKey], dictionary: [String: JSONValue]) {
             
             self.codingPath = codingPath
             
             self.dictionary = _convertDictionary(dictionary, impl: impl)
-            
+//            self.dictionary = dictionary
             // dictionary的转换，并没有影响结构，只是在当前容器对应的数据新增了字段。并不需要改动impl
             self.impl = impl
         }
-
+        
         var allKeys: [K] {
             self.dictionary.keys.compactMap { K(stringValue: $0) }
         }
-
+        
         func contains(_ key: K) -> Bool {
             if let _ = dictionary[key.stringValue] {
                 return true
             }
             return false
         }
-
+        
         func decodeNil(forKey key: K) throws -> Bool {
             let value = try getValue(forKey: key)
             return value == .null
         }
-
+        
         func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: K) throws
-            -> KeyedDecodingContainer<NestedKey> where NestedKey: CodingKey
+        -> KeyedDecodingContainer<NestedKey> where NestedKey: CodingKey
         {
             try decoderForKey(key).container(keyedBy: type)
         }
-
+        
         func nestedUnkeyedContainer(forKey key: K) throws -> UnkeyedDecodingContainer {
             try decoderForKey(key).unkeyedContainer()
         }
-
+        
         func superDecoder() throws -> Decoder {
             return decoderForKeyNoThrow(_JSONKey.super)
         }
-
+        
         func superDecoder(forKey key: K) throws -> Decoder {
             return decoderForKeyNoThrow(key)
         }
-
+        
         private func decoderForKey<LocalKey: CodingKey>(_ key: LocalKey) throws -> JSONDecoderImpl {
             let value = try getValue(forKey: key)
             var newPath = self.codingPath
             newPath.append(key)
-
+            
             return JSONDecoderImpl(
                 userInfo: self.impl.userInfo,
                 from: value,
@@ -80,14 +80,16 @@ extension JSONDecoderImpl {
             /// Model或[Model]的情况下，如果json是字符串并且可以进行对象化。
             if let _ = type as? SmartDecodable.Type {
                 if case .string(let string) = value {
-                    let trans = ModelKeyMapper<T>.convertToMappedFormat(string)
-                    if let data = _toData(trans) {
-                        var parser = JSONParser(bytes: Array(data))
-                        value = try parser.parse()
+
+                    if let trans = ModelKeyMapperNew.convertToMappedFormat(string, type: type) {
+                        if let data = _toData(trans) {
+                            var parser = JSONParser(bytes: Array(data))
+                            value = try parser.parse()
+                        }
                     }
                 }
             }
-
+            
             return JSONDecoderImpl(
                 userInfo: self.impl.userInfo,
                 from: value,
@@ -96,7 +98,7 @@ extension JSONDecoderImpl {
             )
         }
         
-
+        
         private func decoderForKeyNoThrow<LocalKey: CodingKey>(_ key: LocalKey) -> JSONDecoderImpl {
             let value: JSONValue
             do {
@@ -107,7 +109,7 @@ extension JSONDecoderImpl {
             }
             var newPath = self.codingPath
             newPath.append(key)
-
+            
             return JSONDecoderImpl(
                 userInfo: self.impl.userInfo,
                 from: value,
@@ -115,7 +117,7 @@ extension JSONDecoderImpl {
                 options: self.impl.options
             )
         }
-
+        
         @inline(__always) private func getValue<LocalKey: CodingKey>(forKey key: LocalKey) throws -> JSONValue {
             guard let value = dictionary[key.stringValue] else {
                 throw DecodingError.keyNotFound(key, .init(
@@ -123,37 +125,37 @@ extension JSONDecoderImpl {
                     debugDescription: "No value associated with key \(key) (\"\(key.stringValue)\")."
                 ))
             }
-
+            
             return value
         }
-
+        
         @inline(__always) private func createTypeMismatchError(type: Any.Type, forKey key: K, value: JSONValue) -> DecodingError {
             let codingPath = self.codingPath + [key]
             return DecodingError.typeMismatch(type, .init(
                 codingPath: codingPath, debugDescription: "Expected to decode \(type) but found \(value.debugDataTypeDescription) instead."
             ))
         }
-
+        
         @inline(__always) private func decodeFixedWidthInteger<T: FixedWidthInteger>(key: Self.Key) -> T? {
             
             guard let value = try? getValue(forKey: key) else {
-                return optionalDecode(entry: nil)
+                return optionalDecode(forKey: key, entry: nil)
             }
             
             guard let decoded = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
-                return optionalDecode(entry: value.peel)
+                return optionalDecode(forKey: key, entry: value.peel)
             }
             return decoded
         }
-
+        
         @inline(__always) private func decodeFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>(key: K) -> T? {
             
             guard let value = try? getValue(forKey: key) else {
-                return optionalDecode(entry: nil)
+                return optionalDecode(forKey: key, entry: nil)
             }
             
             guard let decoded = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
-                return optionalDecode(entry: value.peel)
+                return optionalDecode(forKey: key, entry: value.peel)
             }
             return decoded
         }
@@ -171,7 +173,7 @@ extension JSONDecoderImpl.KeyedContainer {
         }
         return bool
     }
-
+    
     func decode(_ type: String.Type, forKey key: K) throws -> String {
         guard let value = try? getValue(forKey: key) else {
             return try forceDecode(forKey: key)
@@ -181,7 +183,7 @@ extension JSONDecoderImpl.KeyedContainer {
         }
         return string
     }
-
+    
     func decode(_: Double.Type, forKey key: K) throws -> Double {
         if let decoded: Double = decodeFloatingPoint(key: key) {
             return decoded
@@ -193,84 +195,84 @@ extension JSONDecoderImpl.KeyedContainer {
         let value = try decode(Double.self, forKey: key)
         return CGFloat(value)
     }
-
+    
     func decode(_: Float.Type, forKey key: K) throws -> Float {
         if let decoded: Float = decodeFloatingPoint(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: Int.Type, forKey key: K) throws -> Int {
         if let decoded: Int = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: Int8.Type, forKey key: K) throws -> Int8 {
         if let decoded: Int8 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: Int16.Type, forKey key: K) throws -> Int16 {
         if let decoded: Int16 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: Int32.Type, forKey key: K) throws -> Int32 {
         if let decoded: Int32 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: Int64.Type, forKey key: K) throws -> Int64 {
         if let decoded: Int64 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: UInt.Type, forKey key: K) throws -> UInt {
         if let decoded: UInt = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: UInt8.Type, forKey key: K) throws -> UInt8 {
         if let decoded: UInt8 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: UInt16.Type, forKey key: K) throws -> UInt16 {
         if let decoded: UInt16 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: UInt32.Type, forKey key: K) throws -> UInt32 {
         if let decoded: UInt32 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode(_: UInt64.Type, forKey key: K) throws -> UInt64 {
         if let decoded: UInt64 = decodeFixedWidthInteger(key: key) {
             return decoded
         }
         return try fillDefault(forKey: key)
     }
-
+    
     func decode<T>(_ type: T.Type, forKey key: K) throws -> T where T: Decodable {
         
         if type == CGFloat.self {
@@ -285,22 +287,22 @@ extension JSONDecoderImpl.KeyedContainer {
         do {
             let newDecoder = try decoderForKeyCompatibleForJson(key, type: type)
             let decoded = try newDecoder.unwrap(as: type)
-            return decoded
+            return didFinishMapping(decoded)
         } catch {
             //todo log日志： 异常记录。比如SmartColor类型。
             let decoded: T = try forceDecode(forKey: key, entry: value.peel)
-            return decoded
+            return didFinishMapping(decoded)
         }
     }
 }
 
 
 extension JSONDecoderImpl.KeyedContainer {
-
+    
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
         guard let value = try? getValue(forKey: key) else { return nil }
         guard case .bool(let bool) = value else {
-            return optionalDecode(entry: value.peel)
+            return optionalDecode(forKey: key, entry: value.peel)
         }
         return bool
     }
@@ -308,7 +310,7 @@ extension JSONDecoderImpl.KeyedContainer {
     func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
         guard let value = try? getValue(forKey: key) else { return nil }
         guard case .string(let bool) = value else {
-            return optionalDecode(entry: value.peel)
+            return optionalDecode(forKey: key, entry: value.peel)
         }
         return bool
     }
@@ -327,7 +329,7 @@ extension JSONDecoderImpl.KeyedContainer {
     func decodeIfPresent(_ type: Double.Type, forKey key: K) throws -> Double? {
         return decodeFloatingPoint(key: key)
     }
-
+    
     
     func decodeIfPresent(_ type: Int.Type, forKey key: K) throws -> Int? {
         return decodeFixedWidthInteger(key: key)
@@ -381,7 +383,7 @@ extension JSONDecoderImpl.KeyedContainer {
             let decoded = try newDecoder.unwrap(as: type)
             return didFinishMapping(decoded)
         } catch {
-            if let decoded: T = optionalDecode(entry: value.peel) {
+            if let decoded: T = optionalDecode(forKey: key, entry: value.peel) {
                 return didFinishMapping(decoded)
             }
             return nil
@@ -391,65 +393,41 @@ extension JSONDecoderImpl.KeyedContainer {
 
 
 extension JSONDecoderImpl.KeyedContainer {
-
+    
     
     /// 可选解析不能使用统一方法，如果decoder.unbox不明确指定类型，全都走到func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? 中， 会走到decoded = try T(from: self)方法，进而初始化一个默认值。
-    fileprivate func optionalDecode<T>(entry: Any?) -> T? {
+    fileprivate func optionalDecode<T>(forKey key: Key, entry: Any?) -> T? {
+
+        
+        func logInfo() {
+            let className = impl.cache.topSnapshot?.typeName ?? ""
+            let path = impl.codingPath
+            if let entry = entry {
+                if entry is NSNull { // 值为null
+                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+                    SmartLog.logDebug(error, className: className)
+                } else { // value类型不匹配
+                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
+                    SmartLog.logWarning(error: error, className: className)
+                }
+            } else { // key不存在或value为nil
+                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+                SmartLog.logDebug(error, className: className)
+            }
+        }
+        
+        // 如果被忽略了，就不要输出log了。
+        let typeString = String(describing: T.self)
+        if !typeString.starts(with: "IgnoredKey<") {
+            logInfo()
+        }
         guard let decoded = Patcher<T>.convertToType(from: entry) else {
             return nil
         }
-        
-        //        func logInfo() {
-        //            let className = decoder.cache.topSnapshot?.typeName ?? ""
-        //            let path = decoder.codingPath
-        //            if let entry = entry {
-        //                if entry is NSNull { // 值为null
-        //                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-        //                    SmartLog.logDebug(error, className: className)
-        //                } else { // value类型不匹配
-        //                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
-        //                    SmartLog.logWarning(error: error, className: className)
-        //                }
-        //            } else { // key不存在或value为nil
-        //                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-        //                SmartLog.logDebug(error, className: className)
-        //            }
-        //        }
-                        
-                // 如果被忽略了，就不要输出log了。
-                let typeString = String(describing: T.self)
-                if !typeString.starts(with: "IgnoredKey<") {
-        //            logInfo()
-                }
-        
         return decoded
     }
     
     fileprivate func fillDefault<T>(forKey key: Key) throws -> T {
-    
-        //        func logInfo() {
-        //            let className = decoder.cache.topSnapshot?.typeName ?? ""
-        //            let path = decoder.codingPath
-        //            if let entry = entry {
-        //                if entry is NSNull { // 值为null
-        //                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-        //                    SmartLog.logDebug(error, className: className)
-        //                } else { // value类型不匹配
-        //                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
-        //                    SmartLog.logWarning(error: error, className: className)
-        //                }
-        //            } else { // key不存在或value为nil
-        //                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-        //                SmartLog.logDebug(error, className: className)
-        //            }
-        //        }
-                        
-                // 如果被忽略了，就不要输出log了。
-                let typeString = String(describing: T.self)
-                if !typeString.starts(with: "IgnoredKey<") {
-        //            logInfo()
-                }
-        
         if let value: T = impl.cache.getValue(forKey: key) {
             return value
         } else {
@@ -458,8 +436,8 @@ extension JSONDecoderImpl.KeyedContainer {
     }
     
     fileprivate func forceDecode<T>(forKey key: Key, entry: Any? = nil) throws -> T {
-
-        if let decoded: T = optionalDecode(entry: entry) {
+        
+        if let decoded: T = optionalDecode(forKey: key, entry: entry) {
             return decoded
         } else {
             return try fillDefault(forKey: key)
@@ -501,11 +479,15 @@ fileprivate func _convertDictionary(_ dictionary: [String: JSONValue], impl: JSO
             dict in (JSONDecoder.SmartKeyDecodingStrategy._convertFirstLetterToUppercase(dict.key), dict.value)
         }, uniquingKeysWith: { (first, _) in first })
     }
-
+    
+    
     guard let type = impl.cache.decodedType else { return dictionary }
     
+//
     guard let trans = ModelKeyMapperNew.convertToMappedFormat(impl.json.peel, type: type) else { return dictionary }
     
+
+//
     guard let data = _toData(trans) else { return dictionary }
     var parser = JSONParser(bytes: Array(data))
     guard let json = try? parser.parse(), let newDict = json.object else { return dictionary }

@@ -25,10 +25,10 @@ class TestViewController: BaseViewController {
 
         
         let dict: [String: Any] = [
-            "name": "Mccc",
+//            "name": "Mccc",
             "age": 10,
-            "love": "{\"name\":\"sleep111\"}",
-            "loves": "[{\"name\":\"sleep222\"}]"
+            "love": "{\"age\":10}",
+//            "loves": "[{\"name\":\"sleep222\"}]"
         ]
         
         if let model = JSONStringModel.deserialize(from: dict) {
@@ -37,13 +37,13 @@ class TestViewController: BaseViewController {
     }
     
     struct JSONStringModel: SmartCodable {
-        var name: String = ""
+//        var name: String = ""
         var age: Int = 0
-        var love: Love = Love()
-        var loves: [Love] = []
+//        var love: Love = Love()
+//        var loves: [Love] = []
     }
     
     struct Love: SmartCodable {
-        var name: String = ""
+        var age: Int = 0
     }
 }

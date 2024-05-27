@@ -8,6 +8,21 @@
 import Foundation
 struct ModelKeyMapperNew {
     
+    
+//    static func convertJsonToObject(_ jsonValue: String, type: Any.Type) -> JSONValue? {
+//        guard let type = type as? SmartDecodable.Type else { return jsonValue }
+//        
+//        if let stringValue = jsonValue as? String {
+//            return parseJSON(from: stringValue, as: type)
+//        } else if let dictValue = jsonValue as? [String: Any] {
+//            return mapDictionary(dict: dictValue, using: type)
+//        }
+//        return jsonValue
+//    }
+
+    
+    
+    
     static func convertToMappedFormat(_ jsonValue: Any?, type: Any.Type) -> Any? {
         guard let type = type as? SmartDecodable.Type else { return jsonValue }
         
