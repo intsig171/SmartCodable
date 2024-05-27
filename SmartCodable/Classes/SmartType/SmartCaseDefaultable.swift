@@ -37,14 +37,14 @@ extension SmartAssociatedEnumerable {
 public extension SmartAssociatedEnumerable {
     init(from decoder: Decoder) throws {
         
-        guard let _decoder = decoder as? _SmartJSONDecoder else {
+        guard let _decoder = decoder as? JSONDecoderImpl else {
             let des = "Cannot initiali"
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: des))
         }
         
-        let value = _decoder.storage.topContainer
+        let value = _decoder.json
         
-        if let tranform = _decoder.cache.tranform(decodedValue: value, for: _decoder.codingPath) as? Self {
+        if let tranform = _decoder.cache.tranform(value: value, for: _decoder.codingPath.last) as? Self {
             self = tranform
         } else {
             throw DecodingError.valueNotFound(Self.self, DecodingError.Context.init(codingPath: _decoder.codingPath, debugDescription: "未对关联值枚举实现自定义解析策略"))

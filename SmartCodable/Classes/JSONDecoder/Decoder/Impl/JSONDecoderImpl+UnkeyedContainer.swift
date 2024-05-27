@@ -379,7 +379,11 @@ extension JSONDecoderImpl.UnkeyedContainer {
 
 extension JSONDecoderImpl.UnkeyedContainer {
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {
-        return DecodingProcessCoordinator.didFinishMapping(decodeValue)
+        if var value = decodeValue as? SmartDecodable {
+            value.didFinishMapping()
+            if let temp = value as? T { return temp }
+        }
+        return decodeValue
     }
 }
 

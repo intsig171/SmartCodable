@@ -7,19 +7,6 @@
 
 import Foundation
 
-//#if os(iOS) || os(tvOS) || os(watchOS)
-//import UIKit
-//#else
-//import Cocoa
-//#endif
-//
-//#if os(iOS) || os(tvOS) || os(watchOS)
-//public typealias ColorObject = UIColor
-//#else
-//public typealias ColorObject = NSColor
-//#endif
-
-
 fileprivate protocol _JSONStringDictionaryDecodableMarker {
     static var elementType: Decodable.Type { get }
 }
