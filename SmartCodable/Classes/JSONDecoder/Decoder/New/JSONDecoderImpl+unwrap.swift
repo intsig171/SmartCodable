@@ -159,6 +159,10 @@ extension JSONDecoderImpl {
 extension JSONDecoderImpl {
     private func unwrapDate() throws -> Date {
         
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? Date {
+            return decoded
+        }
+        
         switch self.options.dateDecodingStrategy {
         case .deferredToDate:
             return try Date(from: self)
@@ -202,6 +206,11 @@ extension JSONDecoderImpl {
     }
     
     private func unwrapData() throws -> Data {
+        
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? Data {
+            return decoded
+        }
+        
         switch self.options.dataDecodingStrategy {
         case .deferredToData:
             return try Data(from: self)
@@ -224,6 +233,11 @@ extension JSONDecoderImpl {
     }
     
     private func unwrapURL() throws -> URL {
+        
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? URL {
+            return decoded
+        }
+        
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
         let string = try container.decode(String.self)
         
@@ -236,6 +250,11 @@ extension JSONDecoderImpl {
     }
     
     private func unwrapSmartColor() throws -> SmartColor {
+        
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartColor {
+            return decoded
+        }
+        
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
         let string = try container.decode(String.self)
         
@@ -249,8 +268,11 @@ extension JSONDecoderImpl {
     
     private func unwrapSmartAny() throws -> SmartAny {
         
-        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartAny {
+            return decoded
+        }
         
+        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
         
         if let temp =  container.decodeIfPresent(String.self) {
             return .string(temp)
@@ -292,6 +314,11 @@ extension JSONDecoderImpl {
     }
     
     private func unwrapDecimal() throws -> Decimal {
+        
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? Decimal {
+            return decoded
+        }
+        
         guard case .number(let numberString) = self.json else {
             throw DecodingError.typeMismatch(Decimal.self, DecodingError.Context(codingPath: self.codingPath, debugDescription: ""))
         }

@@ -75,13 +75,20 @@ extension JSONDecoderImpl {
             let value = try getValue(forKey: key)
             var newPath = self.codingPath
             newPath.append(key)
-
-            return JSONDecoderImpl(
+            
+            var newImpl = JSONDecoderImpl(
                 userInfo: self.impl.userInfo,
                 from: value,
                 codingPath: newPath,
                 options: self.impl.options
             )
+            
+            // 如果新的解析器不是解析Model，就继承上一个的cache。
+            if !(type is SmartDecodable.Type) {
+                newImpl.cache = impl.cache
+            }
+            
+            return newImpl
         }
         
         
@@ -128,6 +135,10 @@ extension JSONDecoderImpl {
                 return optionalDecode(forKey: key, entry: nil)
             }
             
+            if let decoded = impl.cache.tranform(value: value, for: key) as? T {
+                return decoded
+            }
+            
             guard let decoded = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
                 return optionalDecode(forKey: key, entry: value.peel)
             }
@@ -140,6 +151,9 @@ extension JSONDecoderImpl {
                 return optionalDecode(forKey: key, entry: nil)
             }
             
+            if let decoded = impl.cache.tranform(value: value, for: key) as? T {
+                return decoded
+            }
             guard let decoded = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
                 return optionalDecode(forKey: key, entry: value.peel)
             }
@@ -154,6 +168,11 @@ extension JSONDecoderImpl.KeyedContainer {
         guard let value = try? getValue(forKey: key) else {
             return try forceDecode(forKey: key)
         }
+        
+        if let decoded = impl.cache.tranform(value: value, for: key) as? Bool {
+            return decoded
+        }
+        
         guard case .bool(let bool) = value else {
             return try forceDecode(forKey: key, entry: value.peel)
         }
@@ -164,6 +183,11 @@ extension JSONDecoderImpl.KeyedContainer {
         guard let value = try? getValue(forKey: key) else {
             return try forceDecode(forKey: key)
         }
+            
+        if let decoded = impl.cache.tranform(value: value, for: key) as? String {
+            return decoded
+        }
+        
         guard case .string(let string) = value else {
             return try forceDecode(forKey: key, entry: value.peel)
         }
@@ -287,6 +311,11 @@ extension JSONDecoderImpl.KeyedContainer {
     
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
         guard let value = try? getValue(forKey: key) else { return nil }
+        
+        if let decoded = impl.cache.tranform(value: value, for: key) as? Bool {
+            return decoded
+        }
+        
         guard case .bool(let bool) = value else {
             return optionalDecode(forKey: key, entry: value.peel)
         }
@@ -295,6 +324,11 @@ extension JSONDecoderImpl.KeyedContainer {
     
     func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
         guard let value = try? getValue(forKey: key) else { return nil }
+        
+        if let decoded = impl.cache.tranform(value: value, for: key) as? String {
+            return decoded
+        }
+        
         guard case .string(let bool) = value else {
             return optionalDecode(forKey: key, entry: value.peel)
         }

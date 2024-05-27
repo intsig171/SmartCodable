@@ -101,7 +101,17 @@ class InitialModelCache {
         return nil
     }
     
-    
+    func tranform(value: JSONValue, for key: CodingKey?) -> Any? {
+        if let lastKey = key {
+            let container = topSnapshot?.transformers.first(where: {
+                $0.location.stringValue == lastKey.stringValue
+            })
+            if let tranformValue = container?.tranformer.transformFromJSON(value.peel) {
+                return tranformValue
+            }
+        }
+        return nil
+    }
 }
 
 
