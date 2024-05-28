@@ -40,7 +40,7 @@ extension JSONDecoderImpl {
 extension JSONDecoderImpl.SingleValueContainer {
     func decode(_: Bool.Type) throws -> Bool {
         guard case .bool(let bool) = self.value else {
-            return try smartDecode(type: Bool.self)
+            throw self.impl.createTypeMismatchError(type: Bool.self, value: self.value)
         }
 
         return bool
@@ -48,7 +48,7 @@ extension JSONDecoderImpl.SingleValueContainer {
 
     func decode(_: String.Type) throws -> String {
         guard case .string(let string) = self.value else {
-            return try smartDecode(type: String.self)
+            throw self.impl.createTypeMismatchError(type: String.self, value: self.value)
         }
         return string
     }
@@ -102,37 +102,15 @@ extension JSONDecoderImpl.SingleValueContainer {
     }
 
     func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
-        if let decoded: T = try? self.impl.unwrap(as: type) {
-            return decoded
-        } else {
-            return try smartDecode(type: type)
-        }
+        try self.impl.unwrap(as: type)
     }
     
     @inline(__always) private func decodeFixedWidthInteger<T: FixedWidthInteger>() throws -> T {
-        guard let decoded = try? self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self) else {
-            return try smartDecode(type: T.self)
-        }
-        return decoded
+        try self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self)
     }
 
     @inline(__always) private func decodeFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() throws -> T {
-        
-        guard let decoded = try? self.impl.unwrapFloatingPoint(from: self.value, as: T.self) else {
-            return try smartDecode(type: T.self)
-        }
-        return decoded
-    }
-    
-    fileprivate func smartDecode<T>(type: T.Type) throws -> T {
-        
-        // 当容器的值，不适合取初始化值。涉及到[Int]这样的解析。 不好确定key。
-        let entry = value.peel
-        if let value = Patcher<T>.convertToType(from: entry) { // 类型转换
-            return value
-        }  else {
-            return try Patcher<T>.defaultForType()
-        }
+        try self.impl.unwrapFloatingPoint(from: self.value, as: T.self)
     }
 }
 
