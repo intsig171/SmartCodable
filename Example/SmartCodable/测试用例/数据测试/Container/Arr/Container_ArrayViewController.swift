@@ -17,11 +17,11 @@ class Container_ArrayViewController: BaseViewController {
      
         
         let dict: [String: Any] = [
-            "models2": ["name": "Mccc"],
-            "models3": "123.1",
-            
-            "arr2": NSNull(),
-            "arr3": []
+            "models2": [["name": "Mccc"]],
+//            "models3": "123.1",
+//            
+//            "arr2": NSNull(),
+//            "arr3": []
         ]
         
         let arr: [Any] = [NSNull(), 1, dict]
@@ -33,13 +33,13 @@ class Container_ArrayViewController: BaseViewController {
 }
 extension Container_ArrayViewController {
     struct Model: SmartCodable {
-        var models1: [SubModel] = []
+//        var models1: [SubModel] = []
         var models2: [SubModel] = []
-        var models3: [SubModel] = []
-        
-        var arr1: [String] = []
-        var arr2: [String] = []
-        var arr3: [String] = []
+//        var models3: [SubModel] = []
+//        
+//        var arr1: [String] = []
+//        var arr2: [String] = []
+//        var arr3: [String] = []
     }
     
     struct SubModel: SmartCodable {

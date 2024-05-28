@@ -164,14 +164,23 @@ extension JSONDecoderImpl.UnkeyedContainer {
         // 如果是基本数据类型的话，仍会创建一个新的decoder用来解析、。 如果此时type是Int类型，那么就会创建SingleContainer。
         
         let newDecoder = decoderForNextElement(ofType: type)
-        let result = try newDecoder.unwrap(as: type)
-
         // Because of the requirement that the index not be incremented unless
         // decoding the desired result type succeeds, it can not be a tail call.
         // Hopefully the compiler still optimizes well enough that the result
         // doesn't get copied around.
-        self.currentIndex += 1
-        return didFinishMapping(result)
+        if codingPath.isEmpty {
+            guard let result = try? newDecoder.unwrap(as: type) else {
+                let decoded: T = try forceDecode()
+                return didFinishMapping(decoded)
+            }
+            self.currentIndex += 1
+            return didFinishMapping(result)
+        } else {
+            // 如果不是第一层级的数组模型的解析，就不兼容。抛出异常让keyedController兼容。
+            let result = try newDecoder.unwrap(as: type)
+            self.currentIndex += 1
+            return didFinishMapping(result)
+        }
     }
     
     @inline(__always) private mutating func decodeFixedWidthInteger<T: FixedWidthInteger>() throws -> T {
