@@ -347,7 +347,7 @@ extension JSONDecoderImpl {
         return result as! T
     }
     
-    private func createTypeMismatchError(type: Any.Type, for additionalKey: CodingKey? = nil, value: JSONValue) -> DecodingError {
+    func createTypeMismatchError(type: Any.Type, for additionalKey: CodingKey? = nil, value: JSONValue) -> DecodingError {
         var path = self.codingPath
         if let additionalKey = additionalKey {
             path.append(additionalKey)
