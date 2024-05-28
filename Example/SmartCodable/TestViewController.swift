@@ -26,8 +26,8 @@ class TestViewController: BaseViewController {
         
         let dict: [String: Any] = [
 //            "name": "Mccc",
-//            "selfAge": 10,
-            "love": "{\"age\":15}",
+            "age": "10",
+//            "love": "{\"age\":15}",
 //            "loves": "[{\"selfAge\": 20},{\"selfAge\": 20}]"
         ]
         
@@ -38,8 +38,8 @@ class TestViewController: BaseViewController {
     
     struct JSONStringModel: SmartCodable {
 //        var name: String = ""
-//        var age: Int = 0
-        var love: Love = Love()
+        var age: Int = 0
+//        var love: Love = Love()
 //        var loves: [Love] = []
         
 //        static func mappingForKey() -> [SmartKeyTransformer]? {

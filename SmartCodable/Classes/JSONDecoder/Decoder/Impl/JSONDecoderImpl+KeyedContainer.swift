@@ -421,7 +421,8 @@ extension JSONDecoderImpl.KeyedContainer {
         
         func logInfo() {
             let className = impl.cache.topSnapshot?.typeName ?? ""
-            let path = impl.codingPath
+            var path = impl.codingPath
+            path.append(key)
             if let entry = entry {
                 if entry is NSNull { // 值为null
                     let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
