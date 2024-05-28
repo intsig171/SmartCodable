@@ -527,18 +527,8 @@
 		99CABA2B2B916DE40070DED0 /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				99D945812B9182C800CC6470 /* Container_DictNestDictViewController.swift */,
-				99D945822B9182C800CC6470 /* Container_DictNestArrayViewController.swift */,
-				99D945802B9182C800CC6470 /* Container_ArrayNestDictViewController.swift */,
-				99D945832B9182C800CC6470 /* Container_ArrayNestArrayViewController.swift */,
-				991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */,
-				99675FED2B3EC930006C83EC /* Container_DictKeylessViewController.swift */,
-				99675FE92B3EC930006C83EC /* Container_DictNullViewController.swift */,
-				99675FEE2B3EC930006C83EC /* Container_DictTypeMismatchViewController.swift */,
-				991259F02BFB709F00ED76B5 /* Container_ArrayViewController.swift */,
-				99CABA2C2B916E720070DED0 /* Container_ArrayKeylessViewController.swift */,
-				99CABA2E2B916E8A0070DED0 /* Container_ArrayNullViewController.swift */,
-				99CABA302B916E970070DED0 /* Container_ArrayTypeMismatchViewController.swift */,
+				99DA98CB2C05FF7B00891833 /* Arr */,
+				99DA98CC2C05FF7B00891833 /* Dict */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -609,6 +599,32 @@
 				990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */,
 			);
 			path = CaseThree;
+			sourceTree = "<group>";
+		};
+		99DA98CB2C05FF7B00891833 /* Arr */ = {
+			isa = PBXGroup;
+			children = (
+				99D945802B9182C800CC6470 /* Container_ArrayNestDictViewController.swift */,
+				99D945832B9182C800CC6470 /* Container_ArrayNestArrayViewController.swift */,
+				991259F02BFB709F00ED76B5 /* Container_ArrayViewController.swift */,
+				99CABA2C2B916E720070DED0 /* Container_ArrayKeylessViewController.swift */,
+				99CABA2E2B916E8A0070DED0 /* Container_ArrayNullViewController.swift */,
+				99CABA302B916E970070DED0 /* Container_ArrayTypeMismatchViewController.swift */,
+			);
+			path = Arr;
+			sourceTree = "<group>";
+		};
+		99DA98CC2C05FF7B00891833 /* Dict */ = {
+			isa = PBXGroup;
+			children = (
+				991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */,
+				99675FED2B3EC930006C83EC /* Container_DictKeylessViewController.swift */,
+				99675FE92B3EC930006C83EC /* Container_DictNullViewController.swift */,
+				99675FEE2B3EC930006C83EC /* Container_DictTypeMismatchViewController.swift */,
+				99D945812B9182C800CC6470 /* Container_DictNestDictViewController.swift */,
+				99D945822B9182C800CC6470 /* Container_DictNestArrayViewController.swift */,
+			);
+			path = Dict;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
