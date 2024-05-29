@@ -1,5 +1,5 @@
 //
-//  CaseOne_BoolViewController.swift
+//  BaseData_BoolViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -13,7 +13,7 @@ import SmartCodable
 /// 对Bool类型进行兼容
 /// int类型：   0会被转义为false， 1会被转义为true，其他值会被抛弃
 /// sting类型： true / false / no / yes 以及对应的大小的情况，转义成Bool值。
-class CaseOne_BoolViewController: BaseViewController {
+class BaseData_BoolViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class CaseOne_BoolViewController: BaseViewController {
 }
 
 
-extension CaseOne_BoolViewController {
+extension BaseData_BoolViewController {
     func getBoolAdaptiveData() -> [String: Any] {
         let dict = [
             "a": 0,

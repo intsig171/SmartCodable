@@ -1,5 +1,5 @@
 //
-//  CaseFour_didFinishMappingViewController.swift
+//  Support_didFinishMappingViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseFour_didFinishMappingViewController: BaseViewController {
+class Support_didFinishMappingViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,13 +101,13 @@ class CaseFour_didFinishMappingViewController: BaseViewController {
             ]
         ]
         
-        guard let models = [HobbysModel].deserialize(from: arr) as? [HobbysModel] else { return }
+        guard let models = [HobbysModel].deserialize(from: arr) else { return }
         smartPrint(value: models)
     }
 }
 
 
-extension CaseFour_didFinishMappingViewController {
+extension Support_didFinishMappingViewController {
     struct HobbysModel: SmartCodable {
         var hobbys: [HobbyModel] = []
         var optionalHobbys: [HobbyModel]?
@@ -123,7 +123,7 @@ extension CaseFour_didFinishMappingViewController {
     }
 }
 
-extension CaseFour_didFinishMappingViewController {
+extension Support_didFinishMappingViewController {
     struct PersonModel: SmartCodable {
         var name: String = ""
         var hobby = HobbyModel()
@@ -148,7 +148,7 @@ extension CaseFour_didFinishMappingViewController {
     }
 }
 
-extension CaseFour_didFinishMappingViewController {
+extension Support_didFinishMappingViewController {
     struct HobbyModel: SmartCodable {
         var name: String = ""
 

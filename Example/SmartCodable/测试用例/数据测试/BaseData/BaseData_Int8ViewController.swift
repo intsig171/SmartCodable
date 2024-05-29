@@ -1,5 +1,5 @@
 //
-//  CaseOne_Int8ViewController.swift
+//  BaseData_Int8ViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/5/20.
@@ -10,7 +10,7 @@ import Foundation
 import SmartCodable
 
 /// 兼容Int类型，只兼容String类型的int值。
-class CaseOne_Int8ViewController: BaseViewController {
+class BaseData_Int8ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class CaseOne_Int8ViewController: BaseViewController {
     }
 
 }
-extension CaseOne_Int8ViewController {
+extension BaseData_Int8ViewController {
     struct CompatibleInt: SmartCodable {
         var int: Int8 = 1
         var int1: Int8?

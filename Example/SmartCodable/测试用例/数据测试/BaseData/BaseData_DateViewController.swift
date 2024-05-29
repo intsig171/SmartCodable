@@ -1,32 +1,28 @@
 //
-//  CaseOne_IntViewController.swift
+//  BaseData_DateViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/9/1.
-//  Copyright © 2023 CocoaPods. All rights reserved.
+//  Created by qixin on 2024/5/21.
+//  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SmartCodable
 
-/// 兼容Int类型，只兼容String类型的int值。
-class CaseOne_IntViewController: BaseViewController {
+class BaseData_DateViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
      
         
         let dict: [String: Any] = [
-            "int": "123",
-            "int1": "123.1",
-            "int2": 12.3,
-            "int3": NSNull(),
-            "int4": [],
-            "int5": true
-            
+//            "a": "123",
+            "b": "123.1",
+            "c": 12.3,
+            "d": NSNull(),
         ]
         
-        guard let feed = CompatibleInt.deserialize(from: dict) else { return }
+        guard let feed = DateModel.deserialize(from: dict) else { return }
 //        print(feed)
         smartPrint(value: feed)
         /**
@@ -41,16 +37,21 @@ class CaseOne_IntViewController: BaseViewController {
     }
 
 }
-
-struct CompatibleInt: SmartCodable {
-    var int: Int = 1
-    var int1: Int?
-    var int2: Int?
-    var int3: Int?
-    var int4: Int?
-    var int5: Int = 0
-
-    init() { }
+extension BaseData_DateViewController {
+    struct DateModel: SmartCodable {
+        var a: Date?
+        var b: Date?
+        var c: Date?
+        var d: Date?
+        
+        
+        var e: Date?
+        var f: Date?
+        var j: Date?
+        var h: Date?
+        
+        init() { }
+    }
 }
 
 

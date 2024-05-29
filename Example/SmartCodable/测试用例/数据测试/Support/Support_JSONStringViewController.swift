@@ -1,5 +1,5 @@
 //
-//  CaseThreeJSONStringViewController.swift
+//  Support_JSONStringViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/4.
@@ -9,7 +9,7 @@
 import Foundation
 import SmartCodable
 
-class CaseThreeJSONStringViewController: BaseCompatibilityViewController {
+class Support_JSONStringViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,8 @@ class CaseThreeJSONStringViewController: BaseCompatibilityViewController {
         let dict: [String: Any] = [
 //            "name": "Mccc",
 //            "age": 10,
-            "love": "{\"name\":\"sleep\"}"
+//            "love": "{\"name\":\"sleep\"}",
+            "loves": "[{\"name\":\"eat\"}]",
         ]
 
         
@@ -34,7 +35,8 @@ class CaseThreeJSONStringViewController: BaseCompatibilityViewController {
     struct JSONStringModel: SmartCodable {
 //        var name: String?
 //        var age: Int?
-        var love: Love = Love()
+//        var love: Love = Love()
+        var loves: [Love] = []
     }
     
     struct Love: SmartCodable {

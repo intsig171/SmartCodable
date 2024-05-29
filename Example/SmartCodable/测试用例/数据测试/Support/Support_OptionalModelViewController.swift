@@ -1,5 +1,5 @@
 //
-//  CaseFour_OptionalModelViewController.swift
+//  Support_OptionalModelViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseFour_OptionalModelViewController: BaseViewController {
+class Support_OptionalModelViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class CaseFour_OptionalModelViewController: BaseViewController {
     }
 }
 
-extension CaseFour_OptionalModelViewController {
+extension Support_OptionalModelViewController {
     
     struct BigModel: SmartCodable {
         var model = Model()

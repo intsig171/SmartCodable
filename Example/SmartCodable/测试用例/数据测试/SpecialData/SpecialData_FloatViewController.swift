@@ -1,5 +1,5 @@
 //
-//  CaseThree_FloatViewController.swift
+//  SpecialData_FloatViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseThree_FloatViewController: BaseCompatibilityViewController {
+class SpecialData_FloatViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

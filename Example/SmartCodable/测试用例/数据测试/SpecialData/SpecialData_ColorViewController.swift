@@ -1,5 +1,5 @@
 //
-//  CaseThree_ColorViewController.swift
+//  SpecialData_ColorViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/5/22.
@@ -10,33 +10,32 @@ import Foundation
 import SmartCodable
 
 
-class CaseThree_ColorViewController: BaseCompatibilityViewController {
+class SpecialData_ColorViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
     
         let dict: [String: Any] = [
-//            "color1": "7DA5E3",
-            "color2": "7DA5E3",
-//            "color3": "7DA5E3",
-//            "color4": NSNull()
+            "color2": NSNull(),
+            "color3": "VVVVVV", // bad color hex
+            "color4": "7DA5E3"
         ]
         
         guard let model = Model.deserialize(from: dict) else { return }
         smartPrint(value: model)
         
-        view.backgroundColor = model.color2?.peel
+        view.backgroundColor = model.color3.peel
     }
 }
 
 
-extension CaseThree_ColorViewController {
+extension SpecialData_ColorViewController {
     struct Model: SmartCodable {
-//        var color1: SmartColor?
+        var color1: SmartColor?
         var color2: SmartColor?
-//        var color3: SmartColor = .color(UIColor.white)
-//        var color4: SmartColor = .color(UIColor.red)
+        var color3: SmartColor = .color(UIColor.yellow)
+        var color4: SmartColor = .color(UIColor.red)
     }
 }
 

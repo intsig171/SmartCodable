@@ -1,5 +1,5 @@
 //
-//  CaseThree_URLViewController.swift
+//  SpecialData_URLViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import Foundation
 import SmartCodable
 
-class CaseThree_URLViewController: BaseCompatibilityViewController {
+class SpecialData_URLViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,23 +27,16 @@ class CaseThree_URLViewController: BaseCompatibilityViewController {
         ]
   
         
-        if let url = URL(string: "0") {
-            print(url.absoluteString)
-        }
-        
-        
         if let model = URLModel.deserialize(from: dict) {
-            print(model)
-        
+            smartPrint(value: model)
         }
-        
     }
     
     struct URLModel: SmartCodable {
-//        var a: URL?
-//        var b: URL?
-//        var c: URL?
-//        var d: URL?
+        var a: URL?
+        var b: URL?
+        var c: URL?
+        var d: URL?
         var e: URL?
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CaseThree_dataViewController.swift
+//  SpecialData_dataViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseThree_dataViewController: BaseCompatibilityViewController {
+class SpecialData_dataViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class CaseThree_dataViewController: BaseCompatibilityViewController {
 }
 
 
-extension CaseThree_dataViewController {
+extension SpecialData_dataViewController {
     enum Mode {
         /// 缺少键
         case keyless
@@ -103,7 +103,7 @@ extension CaseThree_dataViewController {
 
 
 
-extension CaseThree_dataViewController {
+extension SpecialData_dataViewController {
     struct DataModel: SmartCodable {
         var aData: Data = Data()
         var bData: Data?

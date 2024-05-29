@@ -1,5 +1,5 @@
 //
-//  CaseOne_StringViewController.swift
+//  BaseData_StringViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2023/9/1.
@@ -11,7 +11,7 @@ import UIKit
 import SmartCodable
 
 /// 兼容类String型，只兼容String类型的int值。
-class CaseOne_StringViewController: BaseViewController {
+class BaseData_StringViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

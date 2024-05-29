@@ -1,5 +1,5 @@
 //
-//  CaseThree_DictViewController.swift
+//  SpecialData_SmartAnyViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import Foundation
 import SmartCodable
 
-class CaseThree_SmartAnyViewController: BaseCompatibilityViewController {
+class SpecialData_SmartAnyViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +50,7 @@ class CaseThree_SmartAnyViewController: BaseCompatibilityViewController {
                 ]
             ]
         ]
-  
-//        if let model = dict.decode(type: DictModel.self) {
-//            print(model)
-//        }
-        
+
         if let model = DictModel.deserialize(from: dict) {
             smartPrint(value: model)
             
@@ -64,40 +60,40 @@ class CaseThree_SmartAnyViewController: BaseCompatibilityViewController {
 }
 
 
-extension CaseThree_SmartAnyViewController {
+extension SpecialData_SmartAnyViewController {
     struct DictModel: SmartCodable {
         
         var complex: [String: SmartAny] = [:]
         
-//        var single_a: SmartAny?
-//        var single_b: SmartAny?
-//        var single_c: SmartAny?
-//        var single_d: SmartAny?
-//
-//        var single_e: SmartAny = .string("single_e")
-//        var single_f: SmartAny = .string("single_f")
-//        var single_g: SmartAny = .string("single_g")
-//        var single_h: SmartAny = .string("single_h")
-//
-//        
-//        var dict_a: [String: SmartAny]?
-//        var dict_b: [String: SmartAny]?
-//        var dict_c: [String: SmartAny]?
-//        var dict_d: [String: SmartAny]?
-//        
-//        var dict_e: [String: SmartAny] = [:]
-//        var dict_f: [String: SmartAny] = [:]
-//        var dict_g: [String: SmartAny] = [:]
-//        var dict_h: [String: SmartAny] = [:]
-//        
-//        var arr_a: [SmartAny]?
-//        var arr_b: [SmartAny]?
-//        var arr_c: [SmartAny]?
-//        var arr_d: [SmartAny]?
-//
-//        var arr_e: [SmartAny] = []
-//        var arr_f: [SmartAny] = []
-//        var arr_g: [SmartAny] = []
-//        var arr_h: [SmartAny] = []
+        var single_a: SmartAny?
+        var single_b: SmartAny?
+        var single_c: SmartAny?
+        var single_d: SmartAny?
+
+        var single_e: SmartAny = .string("single_e")
+        var single_f: SmartAny = .string("single_f")
+        var single_g: SmartAny = .string("single_g")
+        var single_h: SmartAny = .string("single_h")
+
+        
+        var dict_a: [String: SmartAny]?
+        var dict_b: [String: SmartAny]?
+        var dict_c: [String: SmartAny]?
+        var dict_d: [String: SmartAny]?
+        
+        var dict_e: [String: SmartAny] = [:]
+        var dict_f: [String: SmartAny] = [:]
+        var dict_g: [String: SmartAny] = [:]
+        var dict_h: [String: SmartAny] = [:]
+        
+        var arr_a: [SmartAny]?
+        var arr_b: [SmartAny]?
+        var arr_c: [SmartAny]?
+        var arr_d: [SmartAny]?
+
+        var arr_e: [SmartAny] = []
+        var arr_f: [SmartAny] = []
+        var arr_g: [SmartAny] = []
+        var arr_h: [SmartAny] = []
     }
 }

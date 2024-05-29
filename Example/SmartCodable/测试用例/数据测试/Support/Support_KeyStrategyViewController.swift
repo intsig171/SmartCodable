@@ -1,5 +1,5 @@
 //
-//  CaseFour_KeyStrategyViewController.swift
+//  Support_KeyStrategyViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -20,7 +20,7 @@ import SmartCodable
  */
 
 
-class CaseFour_KeyStrategyViewController: BaseViewController {
+class Support_KeyStrategyViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class CaseFour_KeyStrategyViewController: BaseViewController {
     }
 }
 
-extension CaseFour_KeyStrategyViewController {
+extension Support_KeyStrategyViewController {
     
     struct CodingKeysModel: SmartCodable {
         var jsonString: JSONString?
@@ -72,7 +72,7 @@ extension CaseFour_KeyStrategyViewController {
 
 
 
-extension CaseFour_KeyStrategyViewController {
+extension Support_KeyStrategyViewController {
     
     struct FeedTwo: SmartCodable {
         var nickName: String = ""
@@ -123,7 +123,7 @@ extension CaseFour_KeyStrategyViewController {
 }
 
 
-extension CaseFour_KeyStrategyViewController {
+extension Support_KeyStrategyViewController {
     
     func 使用CodingKeys进行值映射() {
         let dict: [String: Any] = [

@@ -1,5 +1,5 @@
 //
-//  CaseThree_EnumViewController.swift
+//  SpecialData_EnumViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -11,7 +11,7 @@ import Foundation
 // todo enum
 import SmartCodable
 
-class CaseThree_EnumViewController: BaseCompatibilityViewController {
+class SpecialData_EnumViewController: BaseCompatibilityViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

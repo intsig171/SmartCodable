@@ -1,5 +1,5 @@
 //
-//  CaseThree_dateViewController.swift
+//  SpecialData_dateViewController.swift
 //  SmartCodable_Example
 //
 //  Created by qixin on 2024/3/1.
@@ -9,7 +9,7 @@
 import UIKit
 import SmartCodable
 
-class CaseThree_dateViewController: BaseCompatibilityViewController {
+class SpecialData_dateViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,9 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
     
     func getStrategy() -> JSONDecoder.DateDecodingStrategy {
         // 5种情况，逐个测试。
-//        let strategy: JSONDecoder.DateDecodingStrategy = .deferredToDate
+        let strategy: JSONDecoder.DateDecodingStrategy = .deferredToDate
         
-        let strategy: JSONDecoder.DateDecodingStrategy = .secondsSince1970
+//        let strategy: JSONDecoder.DateDecodingStrategy = .secondsSince1970
         
 //        let strategy: JSONDecoder.DateDecodingStrategy = .millisecondsSince1970
 //
@@ -50,7 +50,7 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
     func test() {
                 
         let strategy = getStrategy()
-        let dict = getDictDate(mode: .normal, strategy: strategy)
+        let dict = getDictDate(mode: .null, strategy: strategy)
         
         if let model = DateModel.deserialize(from: dict, options: [.date(strategy)]) {
             print(model)
@@ -60,7 +60,7 @@ class CaseThree_dateViewController: BaseCompatibilityViewController {
 
 
 
-extension CaseThree_dateViewController {
+extension SpecialData_dateViewController {
     enum Mode {
         /// 缺少键
         case keyless
@@ -135,7 +135,7 @@ extension CaseThree_dateViewController {
 }
 
 
-extension CaseThree_dateViewController {
+extension SpecialData_dateViewController {
     struct DateModel: SmartCodable {
         var aDate: Date = Date()
         var bDate: Date?

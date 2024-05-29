@@ -47,12 +47,11 @@ extension TestCaseViewController {
         [
             "title": "CaseOne - 基础数据测试",
             "list": [
-                
-                ["name": "类型兼容 - Bool",   "vc": "CaseOne_BoolViewController"],
-                ["name": "类型兼容 - Int",    "vc": "CaseOne_IntViewController"],
-                ["name": "类型兼容 - Int8",   "vc": "CaseOne_Int8ViewController"],
-                ["name": "类型兼容 - String", "vc": "CaseOne_StringViewController"],
-                ["name": "类型兼容 - Float",  "vc": "CaseOne_FloatViewController"],
+                ["name": "类型兼容 - Bool",   "vc": "BaseData_BoolViewController"],
+                ["name": "类型兼容 - Int",    "vc": "BaseData_IntViewController"],
+                ["name": "类型兼容 - Int8",   "vc": "BaseData_Int8ViewController"],
+                ["name": "类型兼容 - String", "vc": "BaseData_StringViewController"],
+                ["name": "类型兼容 - Float",  "vc": "BaseData_FloatViewController"],
 
             
                 
@@ -90,14 +89,13 @@ extension TestCaseViewController {
         [
             "title": "CaseThree - 特殊格式数据测试",
             "list": [
-                ["name": "特殊格式 - Date",       "vc": "CaseThree_dateViewController"],
-                ["name": "特殊格式 - Data",       "vc": "CaseThree_dataViewController"],
-                ["name": "特殊格式 - Float",      "vc": "CaseThree_FloatViewController"],
-                ["name": "特殊格式 - URL",        "vc": "CaseThree_URLViewController"],
-                ["name": "特殊格式 - Enum",       "vc": "CaseThree_EnumViewController"],
-                ["name": "特殊格式 - SmartColor", "vc": "CaseThree_ColorViewController"],
-                ["name": "特殊格式 - SmartAny",   "vc": "CaseThree_SmartAnyViewController"],
-                ["name": "特殊格式 - json数据",    "vc": "CaseThreeJSONStringViewController"],
+                ["name": "特殊格式 - Date",       "vc": "SpecialData_dateViewController"],
+                ["name": "特殊格式 - Data",       "vc": "SpecialData_dataViewController"],
+                ["name": "特殊格式 - Float",      "vc": "SpecialData_FloatViewController"],
+                ["name": "特殊格式 - URL",        "vc": "SpecialData_URLViewController"],
+                ["name": "特殊格式 - Enum",       "vc": "SpecialData_EnumViewController"],
+                ["name": "特殊格式 - SmartColor", "vc": "SpecialData_ColorViewController"],
+                ["name": "特殊格式 - SmartAny",   "vc": "SpecialData_SmartAnyViewController"],
 
             ]
         ]
@@ -107,9 +105,11 @@ extension TestCaseViewController {
         [
             "title": "CaseFour - 功能性测试",
             "list": [
-                ["name": "功能性 - Key解码策略",    "vc": "CaseFour_KeyStrategyViewController"],
-                ["name": "功能性 - 解码完成的回调",  "vc": "CaseFour_didFinishMappingViewController"],
-                ["name": "功能性 - 可选Model属性",  "vc": "CaseFour_OptionalModelViewController"],
+                ["name": "功能性 - Key解码策略",    "vc": "Support_KeyStrategyViewController"],
+                ["name": "功能性 - 解码完成的回调",  "vc": "Support_didFinishMappingViewController"],
+                ["name": "功能性 - 可选Model属性",  "vc": "Support_OptionalModelViewController"],
+                ["name": "特殊格式 - json数据",    "vc": "Support_JSONStringViewController"],
+
             ]
         ]
     }

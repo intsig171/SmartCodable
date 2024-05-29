@@ -21,11 +21,11 @@
 		9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4D92BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift */; };
 		9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */; };
 		9908EE142B972B0C0026E357 /* CaseFive_wcdbViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */; };
-		990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */; };
-		991259ED2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */; };
+		990ECFA92B95A45B003D37F1 /* Support_JSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* Support_JSONStringViewController.swift */; };
+		991259ED2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EC2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift */; };
 		991259EF2BFB6C1000ED76B5 /* Container_DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */; };
 		991259F12BFB709F00ED76B5 /* Container_ArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259F02BFB709F00ED76B5 /* Container_ArrayViewController.swift */; };
-		991259F32BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259F22BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift */; };
+		991259F32BFC3E4D00ED76B5 /* BaseData_DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259F22BFC3E4D00ED76B5 /* BaseData_DateViewController.swift */; };
 		991452AA2BB50B2A00970575 /* KeyDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */; };
 		99153D772BD1124C004C01AD /* Test3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99153D762BD1124C004C01AD /* Test3ViewController.swift */; };
 		99328D972B5138170074036A /* AreaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99328D962B5138170074036A /* AreaTest.swift */; };
@@ -34,7 +34,7 @@
 		993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */; };
 		9955576E2BE0DCC6005F9ABD /* Introduce_10ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955576D2BE0DCC6005F9ABD /* Introduce_10ViewController.swift */; };
 		9956B9B92BD92D1900C711F5 /* DecodingArrayLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956B9B82BD92D1900C711F5 /* DecodingArrayLogViewController.swift */; };
-		9957743B2BFD95E4003613C5 /* CaseThree_ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957743A2BFD95E4003613C5 /* CaseThree_ColorViewController.swift */; };
+		9957743B2BFD95E4003613C5 /* SpecialData_ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957743A2BFD95E4003613C5 /* SpecialData_ColorViewController.swift */; };
 		99675FD02B3EC750006C83EC /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99675FD12B3EC822006C83EC /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
 		99675FD22B3EC851006C83EC /* airports100.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8E2B3EC02E00B474E5 /* airports100.json */; };
@@ -47,12 +47,12 @@
 		996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */; };
 		996760212B3EC930006C83EC /* ArraySafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FDE2B3EC930006C83EC /* ArraySafe.swift */; };
 		996760222B3EC930006C83EC /* DecodingDictLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE12B3EC930006C83EC /* DecodingDictLogViewController.swift */; };
-		996760242B3EC930006C83EC /* CaseOne_BoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */; };
+		996760242B3EC930006C83EC /* BaseData_BoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE52B3EC930006C83EC /* BaseData_BoolViewController.swift */; };
 		996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */; };
-		996760272B3EC930006C83EC /* CaseOne_FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE82B3EC930006C83EC /* CaseOne_FloatViewController.swift */; };
+		996760272B3EC930006C83EC /* BaseData_FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE82B3EC930006C83EC /* BaseData_FloatViewController.swift */; };
 		996760282B3EC930006C83EC /* Container_DictNullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FE92B3EC930006C83EC /* Container_DictNullViewController.swift */; };
-		996760292B3EC930006C83EC /* CaseOne_StringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */; };
-		9967602A2B3EC930006C83EC /* CaseOne_IntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */; };
+		996760292B3EC930006C83EC /* BaseData_StringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEA2B3EC930006C83EC /* BaseData_StringViewController.swift */; };
+		9967602A2B3EC930006C83EC /* BaseData_IntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEB2B3EC930006C83EC /* BaseData_IntViewController.swift */; };
 		9967602B2B3EC930006C83EC /* Introduce_8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEC2B3EC930006C83EC /* Introduce_8ViewController.swift */; };
 		9967602C2B3EC930006C83EC /* Container_DictKeylessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FED2B3EC930006C83EC /* Container_DictKeylessViewController.swift */; };
 		9967602D2B3EC930006C83EC /* Container_DictTypeMismatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99675FEE2B3EC930006C83EC /* Container_DictTypeMismatchViewController.swift */; };
@@ -71,12 +71,12 @@
 		9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760152B3EC930006C83EC /* BaseViewController.swift */; };
 		9967604C2B3EC930006C83EC /* CaseSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760182B3EC930006C83EC /* CaseSixViewController.swift */; };
 		9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6912B91DF3D0089CA68 /* Data+Extension.swift */; };
-		9993D6942B91ED9B0089CA68 /* CaseThree_URLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6932B91ED9B0089CA68 /* CaseThree_URLViewController.swift */; };
-		9993D6962B91EEED0089CA68 /* CaseThree_SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6952B91EEED0089CA68 /* CaseThree_SmartAnyViewController.swift */; };
-		9993D69A2B9208020089CA68 /* CaseThree_EnumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6992B9208020089CA68 /* CaseThree_EnumViewController.swift */; };
-		9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */; };
-		9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */; };
-		9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */; };
+		9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */; };
+		9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */; };
+		9993D69A2B9208020089CA68 /* SpecialData_EnumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6992B9208020089CA68 /* SpecialData_EnumViewController.swift */; };
+		9993D69D2B9215B70089CA68 /* Support_didFinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69C2B9215B70089CA68 /* Support_didFinishMappingViewController.swift */; };
+		9993D69F2B9215C60089CA68 /* Support_OptionalModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D69E2B9215C60089CA68 /* Support_OptionalModelViewController.swift */; };
+		9993D6A12B9215D00089CA68 /* Support_KeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6A02B9215D00089CA68 /* Support_KeyStrategyViewController.swift */; };
 		999FA2432B99B86A00A2952F /* FinishMappingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999FA2422B99B86A00A2952F /* FinishMappingViewController.swift */; };
 		99AE7D902B3EC02E00B474E5 /* airports1.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8A2B3EC02E00B474E5 /* airports1.json */; };
 		99AE7D922B3EC02E00B474E5 /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
@@ -106,9 +106,9 @@
 		99D945852B9182C800CC6470 /* Container_DictNestDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945812B9182C800CC6470 /* Container_DictNestDictViewController.swift */; };
 		99D945862B9182C800CC6470 /* Container_DictNestArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945822B9182C800CC6470 /* Container_DictNestArrayViewController.swift */; };
 		99D945872B9182C800CC6470 /* Container_ArrayNestArrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945832B9182C800CC6470 /* Container_ArrayNestArrayViewController.swift */; };
-		99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */; };
-		99D9458C2B91C80300CC6470 /* CaseThree_dataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */; };
-		99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */; };
+		99D9458A2B91C75600CC6470 /* SpecialData_dateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945892B91C75600CC6470 /* SpecialData_dateViewController.swift */; };
+		99D9458C2B91C80300CC6470 /* SpecialData_dataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458B2B91C80300CC6470 /* SpecialData_dataViewController.swift */; };
+		99D9458E2B91C80C00CC6470 /* SpecialData_FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458D2B91C80C00CC6470 /* SpecialData_FloatViewController.swift */; };
 		99F9E8A62BB5139900D68037 /* MixDecodingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F9E8A52BB5139900D68037 /* MixDecodingViewController.swift */; };
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -144,11 +144,11 @@
 		9902B4D92BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_5ViewController.swift; sourceTree = "<group>"; };
 		9902B4DB2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceHandyJSON_6ViewController.swift; sourceTree = "<group>"; };
 		9908EE132B972B0C0026E357 /* CaseFive_wcdbViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFive_wcdbViewController.swift; sourceTree = "<group>"; };
-		990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThreeJSONStringViewController.swift; sourceTree = "<group>"; };
-		991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_Int8ViewController.swift; sourceTree = "<group>"; };
+		990ECFA82B95A45B003D37F1 /* Support_JSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support_JSONStringViewController.swift; sourceTree = "<group>"; };
+		991259EC2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData_Int8ViewController.swift; sourceTree = "<group>"; };
 		991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container_DictViewController.swift; sourceTree = "<group>"; };
 		991259F02BFB709F00ED76B5 /* Container_ArrayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container_ArrayViewController.swift; sourceTree = "<group>"; };
-		991259F22BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseOne_DateViewController.swift; sourceTree = "<group>"; };
+		991259F22BFC3E4D00ED76B5 /* BaseData_DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData_DateViewController.swift; sourceTree = "<group>"; };
 		991452A92BB50B2A00970575 /* KeyDecodingStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		99153D762BD1124C004C01AD /* Test3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3ViewController.swift; sourceTree = "<group>"; };
 		99328D962B5138170074036A /* AreaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTest.swift; sourceTree = "<group>"; };
@@ -156,19 +156,19 @@
 		993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTwoViewController.swift; sourceTree = "<group>"; };
 		9955576D2BE0DCC6005F9ABD /* Introduce_10ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_10ViewController.swift; sourceTree = "<group>"; };
 		9956B9B82BD92D1900C711F5 /* DecodingArrayLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingArrayLogViewController.swift; sourceTree = "<group>"; };
-		9957743A2BFD95E4003613C5 /* CaseThree_ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_ColorViewController.swift; sourceTree = "<group>"; };
+		9957743A2BFD95E4003613C5 /* SpecialData_ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_ColorViewController.swift; sourceTree = "<group>"; };
 		99675FD62B3EC930006C83EC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+Extension.swift"; sourceTree = "<group>"; };
 		99675FDC2B3EC930006C83EC /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		99675FDD2B3EC930006C83EC /* UITableView+Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Reusable.swift"; sourceTree = "<group>"; };
 		99675FDE2B3EC930006C83EC /* ArraySafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySafe.swift; sourceTree = "<group>"; };
 		99675FE12B3EC930006C83EC /* DecodingDictLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodingDictLogViewController.swift; sourceTree = "<group>"; };
-		99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_BoolViewController.swift; sourceTree = "<group>"; };
+		99675FE52B3EC930006C83EC /* BaseData_BoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData_BoolViewController.swift; sourceTree = "<group>"; };
 		99675FE62B3EC930006C83EC /* BaseCompatibilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCompatibilityViewController.swift; sourceTree = "<group>"; };
-		99675FE82B3EC930006C83EC /* CaseOne_FloatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_FloatViewController.swift; sourceTree = "<group>"; };
+		99675FE82B3EC930006C83EC /* BaseData_FloatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData_FloatViewController.swift; sourceTree = "<group>"; };
 		99675FE92B3EC930006C83EC /* Container_DictNullViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container_DictNullViewController.swift; sourceTree = "<group>"; };
-		99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_StringViewController.swift; sourceTree = "<group>"; };
-		99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseOne_IntViewController.swift; sourceTree = "<group>"; };
+		99675FEA2B3EC930006C83EC /* BaseData_StringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData_StringViewController.swift; sourceTree = "<group>"; };
+		99675FEB2B3EC930006C83EC /* BaseData_IntViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData_IntViewController.swift; sourceTree = "<group>"; };
 		99675FEC2B3EC930006C83EC /* Introduce_8ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Introduce_8ViewController.swift; sourceTree = "<group>"; };
 		99675FED2B3EC930006C83EC /* Container_DictKeylessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container_DictKeylessViewController.swift; sourceTree = "<group>"; };
 		99675FEE2B3EC930006C83EC /* Container_DictTypeMismatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container_DictTypeMismatchViewController.swift; sourceTree = "<group>"; };
@@ -187,12 +187,12 @@
 		996760152B3EC930006C83EC /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		996760182B3EC930006C83EC /* CaseSixViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseSixViewController.swift; sourceTree = "<group>"; };
 		9993D6912B91DF3D0089CA68 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
-		9993D6932B91ED9B0089CA68 /* CaseThree_URLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_URLViewController.swift; sourceTree = "<group>"; };
-		9993D6952B91EEED0089CA68 /* CaseThree_SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_SmartAnyViewController.swift; sourceTree = "<group>"; };
-		9993D6992B9208020089CA68 /* CaseThree_EnumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_EnumViewController.swift; sourceTree = "<group>"; };
-		9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_didFinishMappingViewController.swift; sourceTree = "<group>"; };
-		9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_OptionalModelViewController.swift; sourceTree = "<group>"; };
-		9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseFour_KeyStrategyViewController.swift; sourceTree = "<group>"; };
+		9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_URLViewController.swift; sourceTree = "<group>"; };
+		9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_SmartAnyViewController.swift; sourceTree = "<group>"; };
+		9993D6992B9208020089CA68 /* SpecialData_EnumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_EnumViewController.swift; sourceTree = "<group>"; };
+		9993D69C2B9215B70089CA68 /* Support_didFinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support_didFinishMappingViewController.swift; sourceTree = "<group>"; };
+		9993D69E2B9215C60089CA68 /* Support_OptionalModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support_OptionalModelViewController.swift; sourceTree = "<group>"; };
+		9993D6A02B9215D00089CA68 /* Support_KeyStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support_KeyStrategyViewController.swift; sourceTree = "<group>"; };
 		999FA2422B99B86A00A2952F /* FinishMappingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishMappingViewController.swift; sourceTree = "<group>"; };
 		99AE7D8A2B3EC02E00B474E5 /* airports1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports1.json; sourceTree = "<group>"; };
 		99AE7D8C2B3EC02E00B474E5 /* airports10000.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = airports10000.json; sourceTree = "<group>"; };
@@ -223,9 +223,9 @@
 		99D945812B9182C800CC6470 /* Container_DictNestDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container_DictNestDictViewController.swift; sourceTree = "<group>"; };
 		99D945822B9182C800CC6470 /* Container_DictNestArrayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container_DictNestArrayViewController.swift; sourceTree = "<group>"; };
 		99D945832B9182C800CC6470 /* Container_ArrayNestArrayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container_ArrayNestArrayViewController.swift; sourceTree = "<group>"; };
-		99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_dateViewController.swift; sourceTree = "<group>"; };
-		99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_dataViewController.swift; sourceTree = "<group>"; };
-		99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseThree_FloatViewController.swift; sourceTree = "<group>"; };
+		99D945892B91C75600CC6470 /* SpecialData_dateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_dateViewController.swift; sourceTree = "<group>"; };
+		99D9458B2B91C80300CC6470 /* SpecialData_dataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_dataViewController.swift; sourceTree = "<group>"; };
+		99D9458D2B91C80C00CC6470 /* SpecialData_FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_FloatViewController.swift; sourceTree = "<group>"; };
 		99F9E8A52BB5139900D68037 /* MixDecodingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixDecodingViewController.swift; sourceTree = "<group>"; };
 		AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -456,14 +456,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		9993D69B2B9215A40089CA68 /* CaseFour */ = {
+		9993D69B2B9215A40089CA68 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				9993D6A02B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift */,
-				9993D69C2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift */,
-				9993D69E2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift */,
+				990ECFA82B95A45B003D37F1 /* Support_JSONStringViewController.swift */,
+				9993D6A02B9215D00089CA68 /* Support_KeyStrategyViewController.swift */,
+				9993D69C2B9215B70089CA68 /* Support_didFinishMappingViewController.swift */,
+				9993D69E2B9215C60089CA68 /* Support_OptionalModelViewController.swift */,
 			);
-			path = CaseFour;
+			path = Support;
 			sourceTree = "<group>";
 		};
 		99A494E42B9028D900393193 /* 测试用例 */ = {
@@ -478,10 +479,10 @@
 		99A494E52B9028EB00393193 /* 数据测试 */ = {
 			isa = PBXGroup;
 			children = (
-				99CABA2A2B916DD30070DED0 /* CaseOne */,
+				99CABA2A2B916DD30070DED0 /* BaseData */,
 				99CABA2B2B916DE40070DED0 /* Container */,
-				99D945882B91C4D500CC6470 /* CaseThree */,
-				9993D69B2B9215A40089CA68 /* CaseFour */,
+				99D945882B91C4D500CC6470 /* SpecialData */,
+				9993D69B2B9215A40089CA68 /* Support */,
 				9908EE122B972AF00026E357 /* CaseFive */,
 			);
 			path = "数据测试";
@@ -511,17 +512,17 @@
 			path = CaseSeven;
 			sourceTree = "<group>";
 		};
-		99CABA2A2B916DD30070DED0 /* CaseOne */ = {
+		99CABA2A2B916DD30070DED0 /* BaseData */ = {
 			isa = PBXGroup;
 			children = (
-				99675FE52B3EC930006C83EC /* CaseOne_BoolViewController.swift */,
-				99675FE82B3EC930006C83EC /* CaseOne_FloatViewController.swift */,
-				99675FEA2B3EC930006C83EC /* CaseOne_StringViewController.swift */,
-				99675FEB2B3EC930006C83EC /* CaseOne_IntViewController.swift */,
-				991259EC2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift */,
-				991259F22BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift */,
+				99675FE52B3EC930006C83EC /* BaseData_BoolViewController.swift */,
+				99675FE82B3EC930006C83EC /* BaseData_FloatViewController.swift */,
+				99675FEA2B3EC930006C83EC /* BaseData_StringViewController.swift */,
+				99675FEB2B3EC930006C83EC /* BaseData_IntViewController.swift */,
+				991259EC2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift */,
+				991259F22BFC3E4D00ED76B5 /* BaseData_DateViewController.swift */,
 			);
-			path = CaseOne;
+			path = BaseData;
 			sourceTree = "<group>";
 		};
 		99CABA2B2B916DE40070DED0 /* Container */ = {
@@ -586,19 +587,18 @@
 			path = "混合使用";
 			sourceTree = "<group>";
 		};
-		99D945882B91C4D500CC6470 /* CaseThree */ = {
+		99D945882B91C4D500CC6470 /* SpecialData */ = {
 			isa = PBXGroup;
 			children = (
-				99D945892B91C75600CC6470 /* CaseThree_dateViewController.swift */,
-				99D9458B2B91C80300CC6470 /* CaseThree_dataViewController.swift */,
-				99D9458D2B91C80C00CC6470 /* CaseThree_FloatViewController.swift */,
-				9993D6932B91ED9B0089CA68 /* CaseThree_URLViewController.swift */,
-				9957743A2BFD95E4003613C5 /* CaseThree_ColorViewController.swift */,
-				9993D6992B9208020089CA68 /* CaseThree_EnumViewController.swift */,
-				9993D6952B91EEED0089CA68 /* CaseThree_SmartAnyViewController.swift */,
-				990ECFA82B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift */,
+				99D945892B91C75600CC6470 /* SpecialData_dateViewController.swift */,
+				99D9458B2B91C80300CC6470 /* SpecialData_dataViewController.swift */,
+				99D9458D2B91C80C00CC6470 /* SpecialData_FloatViewController.swift */,
+				9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */,
+				9957743A2BFD95E4003613C5 /* SpecialData_ColorViewController.swift */,
+				9993D6992B9208020089CA68 /* SpecialData_EnumViewController.swift */,
+				9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */,
 			);
-			path = CaseThree;
+			path = SpecialData;
 			sourceTree = "<group>";
 		};
 		99DA98CB2C05FF7B00891833 /* Arr */ = {
@@ -847,19 +847,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9993D69D2B9215B70089CA68 /* CaseFour_didFinishMappingViewController.swift in Sources */,
+				9993D69D2B9215B70089CA68 /* Support_didFinishMappingViewController.swift in Sources */,
 				996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */,
 				996760412B3EC930006C83EC /* Introduce_4ViewController.swift in Sources */,
 				996760222B3EC930006C83EC /* DecodingDictLogViewController.swift in Sources */,
-				991259ED2BFB5B2000ED76B5 /* CaseOne_Int8ViewController.swift in Sources */,
-				9993D6A12B9215D00089CA68 /* CaseFour_KeyStrategyViewController.swift in Sources */,
-				990ECFA92B95A45B003D37F1 /* CaseThreeJSONStringViewController.swift in Sources */,
+				991259ED2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift in Sources */,
+				9993D6A12B9215D00089CA68 /* Support_KeyStrategyViewController.swift in Sources */,
+				990ECFA92B95A45B003D37F1 /* Support_JSONStringViewController.swift in Sources */,
 				999FA2432B99B86A00A2952F /* FinishMappingViewController.swift in Sources */,
 				9967602C2B3EC930006C83EC /* Container_DictKeylessViewController.swift in Sources */,
 				99CABA312B916E970070DED0 /* Container_ArrayTypeMismatchViewController.swift in Sources */,
 				99D945862B9182C800CC6470 /* Container_DictNestArrayViewController.swift in Sources */,
 				9955576E2BE0DCC6005F9ABD /* Introduce_10ViewController.swift in Sources */,
-				996760272B3EC930006C83EC /* CaseOne_FloatViewController.swift in Sources */,
+				996760272B3EC930006C83EC /* BaseData_FloatViewController.swift in Sources */,
 				99CE4D542BC6905E0006D435 /* Introduce_5ViewController.swift in Sources */,
 				996760352B3EC930006C83EC /* CaseThreeViewController.swift in Sources */,
 				99CE4D642BC6AB8B0006D435 /* Introduce_9ViewController.swift in Sources */,
@@ -870,8 +870,8 @@
 				99D945852B9182C800CC6470 /* Container_DictNestDictViewController.swift in Sources */,
 				996760212B3EC930006C83EC /* ArraySafe.swift in Sources */,
 				99CE4D5D2BC699D10006D435 /* BeforeDecodingViewController.swift in Sources */,
-				9993D69F2B9215C60089CA68 /* CaseFour_OptionalModelViewController.swift in Sources */,
-				996760292B3EC930006C83EC /* CaseOne_StringViewController.swift in Sources */,
+				9993D69F2B9215C60089CA68 /* Support_OptionalModelViewController.swift in Sources */,
+				996760292B3EC930006C83EC /* BaseData_StringViewController.swift in Sources */,
 				996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */,
 				9956B9B92BD92D1900C711F5 /* DecodingArrayLogViewController.swift in Sources */,
 				9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */,
@@ -891,10 +891,10 @@
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
 				99C3138E2B9B38910065FC45 /* CaseSevenViewController.swift in Sources */,
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
-				99D9458A2B91C75600CC6470 /* CaseThree_dateViewController.swift in Sources */,
+				99D9458A2B91C75600CC6470 /* SpecialData_dateViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
 				99C313332B99C32A0065FC45 /* Introduce_6ViewController.swift in Sources */,
-				9957743B2BFD95E4003613C5 /* CaseThree_ColorViewController.swift in Sources */,
+				9957743B2BFD95E4003613C5 /* SpecialData_ColorViewController.swift in Sources */,
 				99CABA292B906A640070DED0 /* TestCaseViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				9967603A2B3EC930006C83EC /* Introduce_2ViewController.swift in Sources */,
@@ -909,25 +909,25 @@
 				99F9E8A62BB5139900D68037 /* MixDecodingViewController.swift in Sources */,
 				9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
-				99D9458E2B91C80C00CC6470 /* CaseThree_FloatViewController.swift in Sources */,
+				99D9458E2B91C80C00CC6470 /* SpecialData_FloatViewController.swift in Sources */,
 				99C3138D2B9B38910065FC45 /* ComplexDataStructureModel.swift in Sources */,
 				99CE4D592BC6973B0006D435 /* DecodingStrategyViewController.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,
 				99CE4D5F2BC6A86E0006D435 /* CustomDecodingKeyViewContriller.swift in Sources */,
 				9902B4D82BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift in Sources */,
-				9993D69A2B9208020089CA68 /* CaseThree_EnumViewController.swift in Sources */,
-				9993D6942B91ED9B0089CA68 /* CaseThree_URLViewController.swift in Sources */,
+				9993D69A2B9208020089CA68 /* SpecialData_EnumViewController.swift in Sources */,
+				9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */,
 				99C3138F2B9B38910065FC45 /* ComplexDataStructureSectionHeader.swift in Sources */,
-				9993D6962B91EEED0089CA68 /* CaseThree_SmartAnyViewController.swift in Sources */,
+				9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */,
 				996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */,
-				9967602A2B3EC930006C83EC /* CaseOne_IntViewController.swift in Sources */,
-				991259F32BFC3E4D00ED76B5 /* CaseOne_DateViewController.swift in Sources */,
-				99D9458C2B91C80300CC6470 /* CaseThree_dataViewController.swift in Sources */,
+				9967602A2B3EC930006C83EC /* BaseData_IntViewController.swift in Sources */,
+				991259F32BFC3E4D00ED76B5 /* BaseData_DateViewController.swift in Sources */,
+				99D9458C2B91C80300CC6470 /* SpecialData_dataViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
 				99CABA2D2B916E720070DED0 /* Container_ArrayKeylessViewController.swift in Sources */,
 				9902B4D42BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift in Sources */,
 				9902B4D62BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift in Sources */,
-				996760242B3EC930006C83EC /* CaseOne_BoolViewController.swift in Sources */,
+				996760242B3EC930006C83EC /* BaseData_BoolViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
 				9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */,
 			);
