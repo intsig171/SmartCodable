@@ -42,7 +42,7 @@ class Container_ArrayNestDictViewController: BaseCompatibilityViewController {
                     ]
                 ],
                 "love": [
-                    "name": NSNull(),
+                    "name": [],
                     "time": 4
                 ],
                 "son": nil
@@ -52,7 +52,7 @@ class Container_ArrayNestDictViewController: BaseCompatibilityViewController {
 
         
         if let models = [PersonModel].deserialize(from: arr) {
-            print(models)
+            smartPrint(value: models)
         }
     }
 

@@ -20,11 +20,11 @@ class Container_ArrayNullViewController: BaseCompatibilityViewController {
         let nullArr: [Any] = [dict]
         
         if let models = [CompatibleTypes].deserialize(from: nullArr) {
-            print(models)
+            smartPrint(value: models.first)
         }
         
         if let models = [OptionalCompatibleTypes].deserialize(from: nullArr) {
-            print(models)
+            smartPrint(value: models.first)
         }
     }
 

@@ -20,12 +20,12 @@ class Container_ArrayTypeMismatchViewController: BaseViewController {
         
         let typeMismatchArr: [Any] = [dict]
         
-        if let models = [CompatibleTypes].deserialize(from: typeMismatchArr) as? [CompatibleTypes] {
-            print(models)
+        if let models = [CompatibleTypes].deserialize(from: typeMismatchArr) {
+            smartPrint(value: models.first)
         }
         
-        if let models = [OptionalCompatibleTypes].deserialize(from: typeMismatchArr) as? [OptionalCompatibleTypes] {
-            print(models)
+        if let models = [OptionalCompatibleTypes].deserialize(from: typeMismatchArr) {
+            smartPrint(value: models.first)
         }
     }
 }

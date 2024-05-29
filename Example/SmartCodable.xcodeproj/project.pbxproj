@@ -527,8 +527,8 @@
 		99CABA2B2B916DE40070DED0 /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				99DA98CB2C05FF7B00891833 /* Arr */,
 				99DA98CC2C05FF7B00891833 /* Dict */,
+				99DA98CB2C05FF7B00891833 /* Arr */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -605,11 +605,11 @@
 			isa = PBXGroup;
 			children = (
 				991259F02BFB709F00ED76B5 /* Container_ArrayViewController.swift */,
-				99D945802B9182C800CC6470 /* Container_ArrayNestDictViewController.swift */,
-				99D945832B9182C800CC6470 /* Container_ArrayNestArrayViewController.swift */,
 				99CABA2C2B916E720070DED0 /* Container_ArrayKeylessViewController.swift */,
 				99CABA2E2B916E8A0070DED0 /* Container_ArrayNullViewController.swift */,
 				99CABA302B916E970070DED0 /* Container_ArrayTypeMismatchViewController.swift */,
+				99D945802B9182C800CC6470 /* Container_ArrayNestDictViewController.swift */,
+				99D945832B9182C800CC6470 /* Container_ArrayNestArrayViewController.swift */,
 			);
 			path = Arr;
 			sourceTree = "<group>";

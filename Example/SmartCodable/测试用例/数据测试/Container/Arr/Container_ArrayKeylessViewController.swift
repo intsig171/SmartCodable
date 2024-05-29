@@ -19,18 +19,12 @@ class Container_ArrayKeylessViewController: BaseCompatibilityViewController {
         let keylessArr: [Any] = [dict]
         
         if let models = [CompatibleTypes].deserialize(from: keylessArr) {
-            let mirr = Mirror(reflecting: models.first!)
-            for (key, value) in mirr.children {
-                printValueType(key: key ?? "", value: value)
-            }
+            smartPrint(value: models.first)
         }
         
         
         if let models = [OptionalCompatibleTypes].deserialize(from: keylessArr) {
-            let mirr = Mirror(reflecting: models.first!)
-            for (key, value) in mirr.children {
-                printValueType(key: key!, value: value)
-            }
+            smartPrint(value: models.first)
         }
         
     }

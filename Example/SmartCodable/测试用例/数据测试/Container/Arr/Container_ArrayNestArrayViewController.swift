@@ -35,7 +35,7 @@ class Container_ArrayNestArrayViewController: BaseCompatibilityViewController {
         
         
         if let models = [PersonModel].deserialize(from: arr) {
-            print(models)
+            smartPrint(value: models)
         }
     }
 
