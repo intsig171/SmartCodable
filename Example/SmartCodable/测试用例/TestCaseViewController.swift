@@ -105,9 +105,7 @@ extension TestCaseViewController {
         [
             "title": "CaseFour - 功能性测试",
             "list": [
-                ["name": "功能性 - Key解码策略",    "vc": "Support_KeyStrategyViewController"],
                 ["name": "功能性 - 解码完成的回调",  "vc": "Support_didFinishMappingViewController"],
-                ["name": "功能性 - 可选Model属性",  "vc": "Support_OptionalModelViewController"],
                 ["name": "特殊格式 - json数据",    "vc": "Support_JSONStringViewController"],
 
             ]
@@ -117,9 +115,10 @@ extension TestCaseViewController {
     
     var testCaseFive: [String: Any] {
         [
-            "title": "CaseFive - 杂项测试",
+            "title": "CaseFive - Key的映射策略",
             "list": [
-                ["name": "杂项测试 - 兼容WCDB",    "vc": "CaseFive_wcdbViewController"],
+                ["name": "Key全局策略 - 首字母（大小写）",  "vc": "Support_KeyStrategyViewController"],
+                ["name": "Key全局策略 - 蛇形命名转驼峰",    "vc": "CaseFive_wcdbViewController"],
 
             ]
         ]

@@ -19,9 +19,9 @@ class Support_JSONStringViewController: BaseCompatibilityViewController {
 
         
         let dict: [String: Any] = [
-//            "name": "Mccc",
-//            "age": 10,
-//            "love": "{\"name\":\"sleep\"}",
+            "name": "Mccc",
+            "age": 10,
+            "love": "{\"name\":\"sleep\"}",
             "loves": "[{\"name\":\"eat\"}]",
         ]
 
@@ -33,9 +33,9 @@ class Support_JSONStringViewController: BaseCompatibilityViewController {
     }
     
     struct JSONStringModel: SmartCodable {
-//        var name: String?
-//        var age: Int?
-//        var love: Love = Love()
+        var name: String?
+        var age: Int?
+        var love: Love = Love()
         var loves: [Love] = []
     }
     

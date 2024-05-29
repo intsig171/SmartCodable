@@ -15,16 +15,12 @@ class Support_didFinishMappingViewController: BaseViewController {
         super.viewDidLoad()
      
 
-        单层字典的测试()
+//        单层字典的测试()
 //        多层字典的测试()
 //        字典中嵌套数组的测试()
-//        数组嵌套字典的测试()
+        数组嵌套字典的测试()
     }
-    
-    
-    /** didFinishMapping的测试
-     *
-     */
+
     
     func 单层字典的测试() {
         

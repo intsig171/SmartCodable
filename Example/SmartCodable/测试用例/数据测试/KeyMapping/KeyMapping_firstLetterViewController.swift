@@ -13,14 +13,12 @@ import SmartCodable
 
 
 
-/** 修改字段映射关系
- * 使用CodingKeys：修改当前Model的属性。建议使用。
- * 使用keyDecodingStrategy： 当前解析的所有Model生效（包含嵌套Model），
+/** todo
  
  */
 
 
-class Support_KeyStrategyViewController: BaseViewController {
+class KeyMapping_firstLetterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,7 @@ class Support_KeyStrategyViewController: BaseViewController {
     }
 }
 
-extension Support_KeyStrategyViewController {
+extension KeyMapping_firstLetterViewController {
     
     struct CodingKeysModel: SmartCodable {
         var jsonString: JSONString?
@@ -72,7 +70,7 @@ extension Support_KeyStrategyViewController {
 
 
 
-extension Support_KeyStrategyViewController {
+extension KeyMapping_firstLetterViewController {
     
     struct FeedTwo: SmartCodable {
         var nickName: String = ""
@@ -123,7 +121,7 @@ extension Support_KeyStrategyViewController {
 }
 
 
-extension Support_KeyStrategyViewController {
+extension KeyMapping_firstLetterViewController {
     
     func 使用CodingKeys进行值映射() {
         let dict: [String: Any] = [

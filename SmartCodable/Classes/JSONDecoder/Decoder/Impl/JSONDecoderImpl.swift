@@ -79,17 +79,27 @@ extension JSONDecoderImpl: Decoder {
                 codingPath: self.codingPath,
                 array: array
             )
+        case .string(let string): // json字符串的模型化兼容
+            if let arr = string.toJSONObject() as? [Any],
+               let array = JSONValue.make(arr)?.array {
+               return UnkeyedContainer(
+                   impl: self,
+                   codingPath: self.codingPath,
+                   array: array
+               )
+            }
         case .null:
             throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
                 codingPath: self.codingPath,
                 debugDescription: "Cannot get unkeyed decoding container -- found null value instead"
             ))
         default:
-            throw DecodingError.typeMismatch([JSONValue].self, DecodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Expected to decode \([JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-            ))
+            break
         }
+        throw DecodingError.typeMismatch([JSONValue].self, DecodingError.Context(
+            codingPath: self.codingPath,
+            debugDescription: "Expected to decode \([JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
+        ))
     }
 
     func singleValueContainer() throws -> SingleValueDecodingContainer {

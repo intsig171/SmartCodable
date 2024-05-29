@@ -42,25 +42,15 @@ class Test2ViewController: BaseViewController {
 
     
     struct Model: SmartCodable {
-        init() {
-            
-        }
-        
-        var models: [Int] = []
 
-//        var models: [SubModel] = [SubModel()]
+        var sub: SubModel?
         
-        init(from decoder: any Decoder) throws {
-            let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
-            
-            var unkeyedContainer = try container.nestedUnkeyedContainer(forKey: .models)
-
-            let first = try unkeyedContainer.decode(Int.self)
-            let second = try unkeyedContainer.decode(Int.self)
-            
-            self.models = [first, second]
-            
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.sub <---
+            ]
         }
+
     }
     
     struct SubModel: SmartCodable {
@@ -68,3 +58,11 @@ class Test2ViewController: BaseViewController {
     }
 }
 
+
+struct DictTranformer: ValueTransformable {
+    typealias Object = <#type#>
+    
+    typealias JSON = []
+    
+    
+}

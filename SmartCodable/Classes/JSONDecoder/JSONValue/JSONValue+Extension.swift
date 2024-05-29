@@ -18,6 +18,15 @@ extension JSONValue {
         }
     }
     
+    var array: [JSONValue]? {
+        switch self {
+        case .array(let v):
+            return v
+        default:
+            return nil
+        }
+    }
+    
     var peel: Any {
         switch self {
         case .array(let v):
