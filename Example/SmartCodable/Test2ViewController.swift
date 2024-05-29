@@ -16,41 +16,25 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let arr = ["1", "2"]
+
         let dict: [String: Any] = [
-            "models": arr
-            
-//            "models": [
-//                [
-//                    "name": 10
-//                ]
-//            ]
-
+            "sub": ["name": "Mccc"]
         ]
-        
-        
-        let value = dict.decode(type: Model.self)
-        print(value)
-        
-        // typeMismatch(Swift.Int, Swift.DecodingError.Context(codingPath: [CodingKeys(stringValue: "models", intValue: nil), _JSONKey(stringValue: "Index 0", intValue: 0)], debugDescription: "Expected to decode Int but found a string instead.", underlyingError: nil))
-        return
-//        if let jsonObject = Model.deserialize(from: dict) {
-//            print(jsonObject)
-//        }
-    }
-    
 
-    
+        if let jsonObject = Model.deserialize(from: dict) {
+            print(jsonObject)
+        }
+    }
+        
     struct Model: SmartCodable {
 
-        var sub: SubModel?
+        var sub: [[String: String]]?
         
         static func mappingForValue() -> [SmartValueTransformer]? {
             [
-                CodingKeys.sub <---
+                CodingKeys.sub <--- DictTranformer()
             ]
         }
-
     }
     
     struct SubModel: SmartCodable {
@@ -58,11 +42,22 @@ class Test2ViewController: BaseViewController {
     }
 }
 
-
 struct DictTranformer: ValueTransformable {
-    typealias Object = <#type#>
+    func transformFromJSON(_ value: Any?) -> [[String : String]]? {
+        return [
+            [
+                "name": "Mccc"
+            ]
+        ]
+    }
     
-    typealias JSON = []
+    func transformToJSON(_ value: [[String : String]]?) -> [String : String]? {
+        ["name": "Mccc"]
+    }
+    
+    typealias Object = [[String: String]]
+    
+    typealias JSON = [String: String]
     
     
 }

@@ -285,6 +285,12 @@ extension JSONDecoderImpl.KeyedContainer {
             return try decode(CGFloat.self, forKey: key) as! T
         }
         
+        if let value = try? getValue(forKey: key) {
+            if let decoded = impl.cache.tranform(value: value, for: key) as? T {
+                return decoded
+            }
+        }
+        
         do {
             let newDecoder = try decoderForKeyCompatibleForJson(key, type: type)
             let decoded = try newDecoder.unwrap(as: type)
@@ -424,6 +430,12 @@ extension JSONDecoderImpl.KeyedContainer {
         
         if type == CGFloat.self {
             return try decodeIfPresent(CGFloat.self, forKey: key) as? T
+        }
+        
+        if let value = try? getValue(forKey: key) {
+            if let decoded = impl.cache.tranform(value: value, for: key) as? T {
+                return decoded
+            }
         }
         
         guard let newDecoder = try? decoderForKeyCompatibleForJson(key, type: type) else {
