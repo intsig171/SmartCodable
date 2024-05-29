@@ -210,11 +210,18 @@ extension JSONDecoderImpl.UnkeyedContainer {
     
     
     fileprivate mutating func forceDecode<T>() throws -> T {
+        
+        let key = _JSONKey(index: currentIndex)
+
         guard let value = try? self.getNextValue(ofType: T.self) else {
             let decoded: T = try Patcher<T>.defaultForType()
+            SmartLog.createLog(impl: impl, forKey: key, entry: nil, type: T.self)
             self.currentIndex += 1
             return decoded
         }
+        
+        SmartLog.createLog(impl: impl, forKey: key, entry: value.peel, type: T.self)
+
         
         if let decoded = Patcher<T>.convertToType(from: value.peel) {
             self.currentIndex += 1
@@ -371,7 +378,8 @@ extension JSONDecoderImpl.UnkeyedContainer {
             self.currentIndex += 1
             return nil
         }
-        
+        let key = _JSONKey(index: self.currentIndex)
+        SmartLog.createLog(impl: impl, forKey: key, entry: value.peel, type: T.self)
         if let decoded = Patcher<T>.convertToType(from: value.peel) {
             self.currentIndex += 1
             return decoded

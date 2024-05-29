@@ -46,7 +46,7 @@ class Container_DictViewController: BaseViewController {
         ]
         
         guard let feed = Model.deserialize(from: dict) else { return }
-        print(feed)
+        smartPrint(value: feed)
     }
 
 }

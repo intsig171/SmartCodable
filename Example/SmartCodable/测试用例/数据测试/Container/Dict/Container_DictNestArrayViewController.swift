@@ -16,57 +16,54 @@ class Container_DictNestArrayViewController: BaseCompatibilityViewController {
         
 
         let dict: [String: Any] = [
-            
-            "sons": ["Mcc", "Mcc1"],
-//            "age": 30,
-//            "loves": [
-//                [
-//                    "name": "basketball",
-//                    "time": 10
-//                ],
-//                [
-//                    "name": "football",
-//                    "time": 10
-//                ]
-//            ],
-//            "sons": [
-//                [
-//                    "name": "son1",
-//                    "age": 4,
-//                    "love": [
-//                        "name": "sleep",
-//                        "time": 4
-//                    ],
-//                ],
-//                [
-//                    "name": "son2",
-//                    "age": 4,
-//                    "love": [
-//                        "name": "look Books",
-//                        "time": 2
-//                    ],
-//                ]
-//            ]
+            "name": "Mccc",
+            "age": 30,
+            "loves": [
+                [
+                    "name": "basketball",
+                    "time": 10
+                ],
+                [
+                    "name": "football",
+                    "time": 10
+                ]
+            ],
+            "sons": [
+                [
+                    "name": "son1",
+                    "age": 4,
+                    "love": [
+                        "name": "sleep",
+                        "time": 4
+                    ],
+                ],
+                [
+                    "name": "son2",
+                    "age": 4,
+                    "love": [
+                        "name": "look Books",
+                        "time": 2
+                    ],
+                ]
+            ]
         ]
         
-//        let mo = dict.decode(type: FatherModel.self)
-//        print(mo)
+
 
        
         if let model = FatherModel.deserialize(from: dict) {
-            print(model)
+            smartPrint(value: model)
         }
     }
 
 }
 extension Container_DictNestArrayViewController {
     struct FatherModel: SmartCodable {
-        var sons: [Int] = []
         
-//        var name: String = ""
-//        var age: Int = 0
-//        var loves: [Love] = []
-//        var sons: [SonModel] = []
+        var name: String = ""
+        var age: Int = 0
+        var loves: [Love] = []
+        var sons: [SonModel] = []
     }
 
     struct SonModel: SmartCodable {

@@ -445,16 +445,12 @@ extension JSONDecoderImpl.KeyedContainer {
 
 extension JSONDecoderImpl.KeyedContainer {
     
-    
-    /// 可选解析不能使用统一方法，如果decoder.unbox不明确指定类型，全都走到func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? 中， 会走到decoded = try T(from: self)方法，进而初始化一个默认值。
     fileprivate func optionalDecode<T>(forKey key: Key) -> T? {
         
         guard let value = try? getValue(forKey: key) else {
-            logInfo(isOptionalLog: true, forKey: key, entry: nil, type: T.self)
             return nil
         }
-        
-        logInfo(isOptionalLog: true, forKey: key, entry: value.peel, type: T.self)
+        SmartLog.createLog(impl: impl, forKey: key, entry: value.peel, type: T.self)
         guard let decoded = Patcher<T>.convertToType(from: value.peel) else {
             return nil
         }
@@ -474,11 +470,11 @@ extension JSONDecoderImpl.KeyedContainer {
         }
         
         guard let value = try? getValue(forKey: key) else {
-            logInfo(forKey: key, entry: nil, type: T.self)
+            SmartLog.createLog(impl: impl, forKey: key, entry: nil, type: T.self)
             return try fillDefault()
         }
         
-        logInfo(forKey: key, entry: value.peel, type: T.self)
+        SmartLog.createLog(impl: impl, forKey: key, entry: value.peel, type: T.self)
         if let decoded = Patcher<T>.convertToType(from: value.peel) {
             return decoded
         } else {
@@ -486,36 +482,36 @@ extension JSONDecoderImpl.KeyedContainer {
         }
     }
     
-    fileprivate func logInfo<T>(
-        isOptionalLog: Bool = false,
-        forKey key: Key, entry: Any?, type: T.Type) {
-        
-        // 如果被忽略了，就不要输出log了。
-        let typeString = String(describing: T.self)
-        guard !typeString.starts(with: "IgnoredKey<") else { return }
-        
-        let className = impl.cache.topSnapshot?.typeName ?? ""
-        var path = impl.codingPath
-        path.append(key)
-        
-        
-        
-        if let entry = entry {
-            if entry is NSNull { // 值为null
-                if isOptionalLog { return }
-                let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-                SmartLog.logDebug(error, className: className)
-            } else { // value类型不匹配
-                let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
-                SmartLog.logWarning(error: error, className: className)
-            }
-        } else { // key不存在或value为nil
-            if isOptionalLog { return }
-            let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-            SmartLog.logDebug(error, className: className)
-        }
-    }
-    
+//    fileprivate func logInfo<T>(
+//        isOptionalLog: Bool = false,
+//        forKey key: Key, entry: Any?, type: T.Type) {
+//        
+//        // 如果被忽略了，就不要输出log了。
+//        let typeString = String(describing: T.self)
+//        guard !typeString.starts(with: "IgnoredKey<") else { return }
+//        
+//        let className = impl.cache.topSnapshot?.typeName ?? ""
+//        var path = impl.codingPath
+//        path.append(key)
+//        
+//        
+//        
+//        if let entry = entry {
+//            if entry is NSNull { // 值为null
+//                if isOptionalLog { return }
+//                let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+//                SmartLog.logDebug(error, className: className)
+//            } else { // value类型不匹配
+//                let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
+//                SmartLog.logWarning(error: error, className: className)
+//            }
+//        } else { // key不存在或value为nil
+//            if isOptionalLog { return }
+//            let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+//            SmartLog.logDebug(error, className: className)
+//        }
+//    }
+//    
     
     
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {

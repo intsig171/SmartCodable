@@ -33,7 +33,7 @@ class Container_DictNestDictViewController: BaseCompatibilityViewController {
 
        
         if let model = FatherModel.deserialize(from: dict) {
-            print(model)
+            smartPrint(value: model)
         }
     }
 

@@ -18,28 +18,31 @@ class Container_ArrayViewController: BaseViewController {
         
         let dict: [String: Any] = [
             "models2": [["name": "Mccc"]],
-//            "models3": "123.1",
+            "models3": "123.1",
 //            
-//            "arr2": NSNull(),
-//            "arr3": []
+            "arr2": NSNull(),
+            "arr3": []
         ]
         
         let arr: [Any] = [NSNull(), 1, dict]
         
-        guard let feed = [Model].deserialize(from: arr) else { return }
-        print(feed)
+        if let feed = [Model].deserialize(from: arr) {
+            smartPrint(value: feed)
+        }
     }
 
 }
 extension Container_ArrayViewController {
     struct Model: SmartCodable {
-//        var models1: [SubModel] = []
+        
+        var arr1: [String] = []
+        var arr2: [String] = []
+        var arr3: [String] = []
+        
+        
+        var models1: [SubModel] = []
         var models2: [SubModel] = []
-//        var models3: [SubModel] = []
-//        
-//        var arr1: [String] = []
-//        var arr2: [String] = []
-//        var arr3: [String] = []
+        var models3: [SubModel] = []
     }
     
     struct SubModel: SmartCodable {

@@ -38,6 +38,41 @@ public struct SmartConfig {
 }
 
 
+extension SmartLog {
+    static func createLog<T>(
+        impl: JSONDecoderImpl,
+        isOptionalLog: Bool = false,
+        forKey key: CodingKey, entry: Any?, type: T.Type) {
+        
+        // 如果被忽略了，就不要输出log了。
+        let typeString = String(describing: T.self)
+        guard !typeString.starts(with: "IgnoredKey<") else { return }
+        
+        let className = impl.cache.topSnapshot?.typeName ?? ""
+        var path = impl.codingPath
+        path.append(key)
+        
+        
+        
+        if let entry = entry {
+            if entry is NSNull { // 值为null
+                if isOptionalLog { return }
+                let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+                SmartLog.logDebug(error, className: className)
+            } else { // value类型不匹配
+                let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
+                SmartLog.logWarning(error: error, className: className)
+            }
+        } else { // key不存在或value为nil
+            if isOptionalLog { return }
+            let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+            SmartLog.logDebug(error, className: className)
+        }
+    }
+}
+
+
+
 struct SmartLog {
     
     private static var cache = LogCache()
