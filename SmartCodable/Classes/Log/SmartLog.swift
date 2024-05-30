@@ -42,7 +42,7 @@ extension SmartLog {
     static func createLog<T>(
         impl: JSONDecoderImpl,
         isOptionalLog: Bool = false,
-        forKey key: CodingKey, entry: Any?, type: T.Type) {
+        forKey key: CodingKey, value: JSONValue?, type: T.Type) {
         
         // 如果被忽略了，就不要输出log了。
         let typeString = String(describing: T.self)
@@ -54,13 +54,13 @@ extension SmartLog {
         
         
         
-        if let entry = entry {
-            if entry is NSNull { // 值为null
+        if let entry = value {
+            if entry.isNull { // 值为null
                 if isOptionalLog { return }
                 let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
                 SmartLog.logDebug(error, className: className)
             } else { // value类型不匹配
-                let error = DecodingError._typeMismatch(at: path, expectation: T.self, reality: entry)
+                let error = DecodingError._typeMismatch(at: path, expectation: T.self, desc: entry.debugDataTypeDescription)
                 SmartLog.logWarning(error: error, className: className)
             }
         } else { // key不存在或value为nil

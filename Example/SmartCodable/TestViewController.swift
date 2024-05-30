@@ -24,6 +24,9 @@ class TestViewController: BaseViewController {
         /// 底层将这两个值当成了字符串处理，遇到了就提供默认值。
 
         
+        let button = UIButton()
+        
+        
         let dict: [String: Any] = [
 //            "name": "Mccc",
             "age": "10",

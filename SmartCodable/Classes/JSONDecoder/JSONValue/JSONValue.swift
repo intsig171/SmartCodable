@@ -44,6 +44,15 @@ extension JSONValue {
         }
     }
     
+    var isNull: Bool {
+        switch self {
+        case .null:
+            return true
+        case .array, .object, .number, .string, .bool:
+            return false
+        }
+    }
+    
     var isContainer: Bool {
         switch self {
         case .array, .object:

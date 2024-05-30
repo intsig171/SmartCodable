@@ -115,10 +115,15 @@ extension TestCaseViewController {
     
     var testCaseFive: [String: Any] {
         [
-            "title": "CaseFive - Key的映射策略",
+            "title": "CaseFive - 解码关系",
             "list": [
-                ["name": "Key全局策略 - 首字母（大小写）",  "vc": "Support_KeyStrategyViewController"],
+                ["name": "解码关系 - 忽略Key的解析",    "vc": "Decoding_keyIgnoreViewController"],
+                ["name": "解码关系 - key的映射(mappingForKey)",    "vc": "Decoding_keyMapViewController"],
+
+                
+                ["name": "解码关系 - key的映射(Strategy)",  "vc": "Decoding_globalKeyStrategyViewController"],
                 ["name": "Key全局策略 - 蛇形命名转驼峰",    "vc": "CaseFive_wcdbViewController"],
+
 
             ]
         ]
