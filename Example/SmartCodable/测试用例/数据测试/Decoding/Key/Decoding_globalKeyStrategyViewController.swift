@@ -18,21 +18,21 @@ class Decoding_globalKeyStrategyViewController: BaseViewController {
         
         首字母大写转小写()
 
-//        首字母小写转大写()
+        首字母小写转大写()
         
-//        蛇形转驼峰命名()
+        蛇形转驼峰命名()
     }
 }
 
 extension Decoding_globalKeyStrategyViewController {
     func 首字母大写转小写() {
         let dictFirst: [String: Any] = [
-//            "Name": "Mccc",
+            "Name": "Mccc",
             "Age": 10,
-//            "Sex": "男",
-//            "sub": [
-//                "Name": "小李"
-//            ]
+            "Sex": "男",
+            "sub": [
+                "Name": "小李"
+            ]
         ]
         let optionFirst: SmartDecodingOption = .key(.firstLetterLower)
         if let model = ModelFirst.deserialize(from: dictFirst, options: [optionFirst]) {
@@ -41,10 +41,10 @@ extension Decoding_globalKeyStrategyViewController {
     }
     
     struct ModelFirst: SmartCodable {
-//        var name: String = ""
+        var name: String = ""
         var age: String = ""
-//        var sex: String = ""
-//        var sub: SubModelFirst?
+        var sex: String = ""
+        var sub: SubModelFirst?
     }
     
     struct SubModelFirst: SmartCodable {

@@ -117,12 +117,12 @@ extension TestCaseViewController {
         [
             "title": "CaseFive - 解码关系",
             "list": [
-                ["name": "解码关系 - 忽略Key的解析",    "vc": "Decoding_keyIgnoreViewController"],
+                ["name": "解码关系 - Key的解析忽略",    "vc": "Decoding_keyIgnoreViewController"],
                 ["name": "解码关系 - key的映射(mappingForKey)",    "vc": "Decoding_keyMapViewController"],
-
-                
                 ["name": "解码关系 - key的映射(Strategy)",  "vc": "Decoding_globalKeyStrategyViewController"],
-                ["name": "Key全局策略 - 蛇形命名转驼峰",    "vc": "CaseFive_wcdbViewController"],
+                
+                ["name": "解码关系 - Value的解码规则（Date/Data）",    "vc": "Decoding_globalValueStrategyViewController"],
+                ["name": "解码关系 - Value的解码规则（mappingForValue）",    "vc": "Decoding_valueMapViewController"],
 
 
             ]

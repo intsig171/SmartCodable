@@ -23,6 +23,8 @@
 		9905129F2C08299200A2C5D8 /* Decoding_keyIgnoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9905129E2C08299200A2C5D8 /* Decoding_keyIgnoreViewController.swift */; };
 		990512A12C08580600A2C5D8 /* Decoding_keyMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512A02C08580600A2C5D8 /* Decoding_keyMapViewController.swift */; };
 		990512A52C0869CA00A2C5D8 /* Decoding_globalKeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512A42C0869CA00A2C5D8 /* Decoding_globalKeyStrategyViewController.swift */; };
+		990512A72C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512A62C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift */; };
+		990512A92C0873F200A2C5D8 /* Decoding_valueMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512A82C0873F200A2C5D8 /* Decoding_valueMapViewController.swift */; };
 		990ECFA92B95A45B003D37F1 /* Support_JSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* Support_JSONStringViewController.swift */; };
 		991259ED2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EC2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift */; };
 		991259EF2BFB6C1000ED76B5 /* Container_DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */; };
@@ -146,6 +148,8 @@
 		9905129E2C08299200A2C5D8 /* Decoding_keyIgnoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoding_keyIgnoreViewController.swift; sourceTree = "<group>"; };
 		990512A02C08580600A2C5D8 /* Decoding_keyMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoding_keyMapViewController.swift; sourceTree = "<group>"; };
 		990512A42C0869CA00A2C5D8 /* Decoding_globalKeyStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoding_globalKeyStrategyViewController.swift; sourceTree = "<group>"; };
+		990512A62C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoding_globalValueStrategyViewController.swift; sourceTree = "<group>"; };
+		990512A82C0873F200A2C5D8 /* Decoding_valueMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoding_valueMapViewController.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* Support_JSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support_JSONStringViewController.swift; sourceTree = "<group>"; };
 		991259EC2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData_Int8ViewController.swift; sourceTree = "<group>"; };
 		991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container_DictViewController.swift; sourceTree = "<group>"; };
@@ -383,6 +387,8 @@
 		990512A32C0869A700A2C5D8 /* Value */ = {
 			isa = PBXGroup;
 			children = (
+				990512A62C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift */,
+				990512A82C0873F200A2C5D8 /* Decoding_valueMapViewController.swift */,
 			);
 			path = Value;
 			sourceTree = "<group>";
@@ -934,9 +940,11 @@
 				9993D69A2B9208020089CA68 /* SpecialData_EnumViewController.swift in Sources */,
 				9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */,
 				99C3138F2B9B38910065FC45 /* ComplexDataStructureSectionHeader.swift in Sources */,
+				990512A72C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift in Sources */,
 				9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */,
 				996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */,
 				9967602A2B3EC930006C83EC /* BaseData_IntViewController.swift in Sources */,
+				990512A92C0873F200A2C5D8 /* Decoding_valueMapViewController.swift in Sources */,
 				991259F32BFC3E4D00ED76B5 /* BaseData_DateViewController.swift in Sources */,
 				99D9458C2B91C80300CC6470 /* SpecialData_dataViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
