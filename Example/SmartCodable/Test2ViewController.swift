@@ -11,53 +11,41 @@ import SmartCodable
 import HandyJSON
 
 
+import SmartCodable
+
 class Test2ViewController: BaseViewController {
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         let dict: [String: Any] = [
-            "sub": ["name": "Mccc"]
-        ]
-
-        if let jsonObject = Model.deserialize(from: dict) {
-            print(jsonObject)
-        }
-    }
-        
-    struct Model: SmartCodable {
-
-        var sub: [[String: String]]?
-        
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            [
-                CodingKeys.sub <--- DictTranformer()
-            ]
-        }
-    }
-    
-    struct SubModel: SmartCodable {
-        var name: Int = 123
-    }
-}
-
-struct DictTranformer: ValueTransformable {
-    func transformFromJSON(_ value: Any?) -> [[String : String]]? {
-        return [
-            [
+            "age": "10",
+            "sub": [
                 "name": "Mccc"
             ]
         ]
+        
+        
+        let updateDict: [String: Any] = [
+            "age": "20",
+            "sub": [
+                "name": "xiao li"
+            ]
+        ]
+        guard let from = Model.deserialize(from: updateDict) else { return }
+        guard var model = Model.deserialize(from: dict) else { return }
+
+        
+        SmartUpdater.update(&model, from: from, keyPaths: (\.age, \.sub))
+        print(model)
     }
     
-    func transformToJSON(_ value: [[String : String]]?) -> [String : String]? {
-        ["name": "Mccc"]
+    struct Model: SmartCodable {
+        var age: String = ""
+        var sub: SubModel?
     }
-    
-    typealias Object = [[String: String]]
-    
-    typealias JSON = [String: String]
-    
-    
+   
+    struct SubModel: SmartCodable {
+        var name: String = ""
+    }
 }

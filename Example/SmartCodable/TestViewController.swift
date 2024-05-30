@@ -20,53 +20,41 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// 浮点数的异常数据（Nan & inf）处理，不再提供demo。
-        /// 底层将这两个值当成了字符串处理，遇到了就提供默认值。
-
-        
-        let button = UIButton()
-        
-        
         let dict: [String: Any] = [
-//            "name": "Mccc",
-            "age": "10",
-//            "love": "{\"age\":15}",
-//            "loves": "[{\"selfAge\": 20},{\"selfAge\": 20}]"
+            "age": 200,
         ]
         
-        if let model = JSONStringModel.deserialize(from: dict) {
-            print(model)
-        }
-    }
-    
-    struct JSONStringModel: SmartCodable {
-//        var name: String = ""
-        var age: Int = 0
-//        var love: Love = Love()
-//        var loves: [Love] = []
+        var model = Model.init(age: 10)
         
-//        static func mappingForKey() -> [SmartKeyTransformer]? {
-//            [
-//                CodingKeys.age <--- "selfAge"
-//            ]
-//        }
+        abc(&model)
+        
+        
+        
+        
+//        let updateDict: [String: Any] = [
+//            "age": "20",
+//        ]
 //        
-//        func didFinishMapping() {
-//            print("JSONStringModel中的age值为", age)
-//        }
+//        guard var model = Model.deserialize(from: dict) else { return }
+//        JSONDeserializer.update(object: &model, from: updateDict)
+//        print(model)
     }
     
-    struct Love: SmartCodable {
+    struct Model: HandyJSON {
         var age: Int = 0
+    }
+    
+    func abc<T>(_ model: inout T) {
         
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.age <--- "selfAge"
-            ]
+        let name: Int = 10
+        
+        
+        
+        
+        let mirr = Mirror(reflecting: model)
+        for item in mirr.children {
+            print(item.label)
+            print(item.value)
         }
-        
-//        func didFinishMapping() {
-//            print("Love中的age值为", age)
-//        }
     }
 }
