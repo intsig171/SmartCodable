@@ -31,8 +31,7 @@ class Introduce_2ViewController: BaseViewController {
        
         // 字典转模型
         guard let xiaoMing = JsonToModel.deserialize(from: dict) else { return }
-        print(xiaoMing)
-        print("\n")
+        smartPrint(value: xiaoMing)
         /**
          JsonToModel(name: "xiaoming", className: "35 class", detail: SmartCodable_Example.JsonToModelDetail(detail: "my name is xiaoming"), love: [["time": "7 years", "name": "basketball"], ["time": "3 years", "name": "football"]])
          */
@@ -96,16 +95,13 @@ class Introduce_2ViewController: BaseViewController {
          */
         let arr = [dict, dict]
         guard let models = [JsonToModel].deserialize(from: arr) else { return }
-        print(models)
-        print("\n")
+        smartPrint(value: xiaoMing)
 
         let arrTranform = models.toArray() ?? []
-        print(arrTranform)
-        print("\n")
+        smartPrint(value: xiaoMing)
 
         let arrJson = models.toJSONString() ?? ""
-        print(arrJson)
-        print("\n")
+        smartPrint(value: xiaoMing)
     }
 }
 

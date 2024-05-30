@@ -23,9 +23,9 @@ class ViewController: UIViewController {
         
         dataArray = [
             other,
+            smart_introduce,
             smart_test,
             replace_HandyJSON,
-            smart_introduce,
             smart_customDecoding,
             smart_debug,
             smart_case,
