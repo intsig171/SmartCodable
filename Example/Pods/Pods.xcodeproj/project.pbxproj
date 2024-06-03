@@ -266,6 +266,9 @@
 		98F570DA48370453D648BD526FDAAEAA /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18D6541EFE81AFDF8F5EB531B779D4D /* LayoutConstraintItem.swift */; };
 		99C3E4EDBE5BCDC161722B105F0FD62F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F616208225C5B42B50ABA5F5267C29F /* Database.swift */; };
 		99D88D652C0DBD5600BC8A1B /* _SpecialTreatmentEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D88D642C0DBD5600BC8A1B /* _SpecialTreatmentEncoder.swift */; };
+		99D88D672C0DBDF500BC8A1B /* JSONSingleValueEncodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D88D662C0DBDF500BC8A1B /* JSONSingleValueEncodingContainer.swift */; };
+		99D88D692C0DBE4C00BC8A1B /* JSONUnkeyedEncodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D88D682C0DBE4C00BC8A1B /* JSONUnkeyedEncodingContainer.swift */; };
+		99D88D6B2C0DBE7C00BC8A1B /* JSONKeyedEncodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D88D6A2C0DBE7C00BC8A1B /* JSONKeyedEncodingContainer.swift */; };
 		9A5196151929E0673C550F2178A0BFB4 /* global.c in Sources */ = {isa = PBXBuildFile; fileRef = CC539335DC60778548E801CDB7F2D02F /* global.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9A5C397C4B518E59526372CA6AA0BE65 /* StatementAttach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F631CC802E2701AD6DEAB71A9B7134CB /* StatementAttach.swift */; };
 		9A6CCC7BCACBE8218126670E6B08EF9E /* BTPrint-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15CC97091BEEC9AAC898E58EC68EBF05 /* BTPrint-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -874,6 +877,9 @@
 		984A89D212DC48F91832EC1F55F78FA0 /* SmartCodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartCodable.swift; sourceTree = "<group>"; };
 		9930E634CA9F9592BA112E4EA073572B /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = swift/source/util/Error.swift; sourceTree = "<group>"; };
 		99D88D642C0DBD5600BC8A1B /* _SpecialTreatmentEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _SpecialTreatmentEncoder.swift; sourceTree = "<group>"; };
+		99D88D662C0DBDF500BC8A1B /* JSONSingleValueEncodingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSingleValueEncodingContainer.swift; sourceTree = "<group>"; };
+		99D88D682C0DBE4C00BC8A1B /* JSONUnkeyedEncodingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONUnkeyedEncodingContainer.swift; sourceTree = "<group>"; };
+		99D88D6A2C0DBE7C00BC8A1B /* JSONKeyedEncodingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONKeyedEncodingContainer.swift; sourceTree = "<group>"; };
 		9A09037802A20D832A880AA28340A8C1 /* FBSnapshotTestCase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-prefix.pch"; sourceTree = "<group>"; };
 		9A0CDA24DDDB701970130A91AE5FA140 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
 		9AB62CDC1D9A84669428234D73C264AF /* Pods-SmartCodable_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmartCodable_Example-dummy.m"; sourceTree = "<group>"; };
@@ -1621,6 +1627,9 @@
 			children = (
 				51592CDEEE2AA4342692528D2269F428 /* SmartJSONEncoder.swift */,
 				C7FFBE2F4E54FDA9FCE231DD562C3D07 /* Impl */,
+				99D88D662C0DBDF500BC8A1B /* JSONSingleValueEncodingContainer.swift */,
+				99D88D682C0DBE4C00BC8A1B /* JSONUnkeyedEncodingContainer.swift */,
+				99D88D6A2C0DBE7C00BC8A1B /* JSONKeyedEncodingContainer.swift */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -3004,6 +3013,7 @@
 				AC48D6B0C86FC5AAF9EC71D3FE8BF2BB /* JSONEncoderImpl.swift in Sources */,
 				EBFDE8EBDAAD6F55B3D99EE0C704B688 /* JSONFuture.swift in Sources */,
 				72A11D08D6BEE8DEBA03FAC05B5520A1 /* JSONParser.swift in Sources */,
+				99D88D692C0DBE4C00BC8A1B /* JSONUnkeyedEncodingContainer.swift in Sources */,
 				645233841B6B3ECBA7C303FF1836F8C5 /* JSONValue.swift in Sources */,
 				CAD63075ACEB4A7070FCB59742A308A9 /* JSONValue+Extension.swift in Sources */,
 				CE1B01C5EC3874F5CB252B08FDC52025 /* KeysMapper.swift in Sources */,
@@ -3024,10 +3034,12 @@
 				362354A25515C0A05DF38565E18D9E1C /* SmartJSONDecoder.swift in Sources */,
 				AD09A68A4A349815987023634D2B1D77 /* SmartJSONEncoder.swift in Sources */,
 				C5763198CB8E47482776D9BC3B983589 /* SmartKeyDecodingStrategy.swift in Sources */,
+				99D88D6B2C0DBE7C00BC8A1B /* JSONKeyedEncodingContainer.swift in Sources */,
 				A4727ECB2315D8ABC21C58589B8B4C60 /* SmartLog.swift in Sources */,
 				1AEB75978E6B881C9A6C5B978D8275BC /* SmartUpdater.swift in Sources */,
 				0BE6A78B3358F867CCF74CCEBFC68CD9 /* Transformer.swift in Sources */,
 				CA45D77D3DAB3E4D0D3288B68A63BFA0 /* URLTransformer.swift in Sources */,
+				99D88D672C0DBDF500BC8A1B /* JSONSingleValueEncodingContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
