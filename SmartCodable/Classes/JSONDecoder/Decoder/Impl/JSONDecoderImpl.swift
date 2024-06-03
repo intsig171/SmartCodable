@@ -20,14 +20,14 @@ struct JSONDecoderImpl {
     
     
     /// 记录当前keyed容器的各个属性的初始化值， 不支持Unkey容器的记录。
-    var cache: InitialModelCache
+    var cache: DecodingCache
 
     init(userInfo: [CodingUserInfoKey: Any], from json: JSONValue, codingPath: [CodingKey], options: SmartJSONDecoder._Options) {
         self.userInfo = userInfo
         self.codingPath = codingPath
         self.json = json
         self.options = options
-        self.cache = InitialModelCache()
+        self.cache = DecodingCache()
     }
 }
 

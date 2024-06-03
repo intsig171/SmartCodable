@@ -9,7 +9,7 @@ import Foundation
 
 
 /// Records the default values of model properties during decoding, used for filling in when decoding fails.
-class InitialModelCache {
+class DecodingCache {
     
     
     /// Stores a snapshot of the Model being parsed.
@@ -115,7 +115,7 @@ class InitialModelCache {
 }
 
 
-extension InitialModelCache {
+extension DecodingCache {
     struct Snapshot {
         /// The current decoding type
         var typeName: String = ""
