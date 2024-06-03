@@ -175,3 +175,220 @@ enum JSONError: Swift.Error, Equatable {
     case singleFragmentFoundButNotAllowed
     case invalidUTF8Sequence(Data, characterIndex: Int)
 }
+
+
+
+// for encdoe
+extension JSONValue {
+
+    internal struct Writer {
+        let options: SmartJSONEncoder.OutputFormatting
+
+        init(options: SmartJSONEncoder.OutputFormatting) {
+            self.options = options
+        }
+
+        func writeValue(_ value: JSONValue) -> [UInt8] {
+            var bytes = [UInt8]()
+            if self.options.contains(.prettyPrinted) {
+                self.writeValuePretty(value, into: &bytes)
+            }
+            else {
+                self.writeValue(value, into: &bytes)
+            }
+            return bytes
+        }
+
+        private func writeValue(_ value: JSONValue, into bytes: inout [UInt8]) {
+            switch value {
+            case .null:
+                bytes.append(contentsOf: [UInt8]._null)
+            case .bool(true):
+                bytes.append(contentsOf: [UInt8]._true)
+            case .bool(false):
+                bytes.append(contentsOf: [UInt8]._false)
+            case .string(let string):
+                self.encodeString(string, to: &bytes)
+            case .number(let string):
+                bytes.append(contentsOf: string.utf8)
+            case .array(let array):
+                var iterator = array.makeIterator()
+                bytes.append(._openbracket)
+                // we don't like branching, this is why we have this extra
+                if let first = iterator.next() {
+                    self.writeValue(first, into: &bytes)
+                }
+                while let item = iterator.next() {
+                    bytes.append(._comma)
+                    self.writeValue(item, into:&bytes)
+                }
+                bytes.append(._closebracket)
+            case .object(let dict):
+                if #available(macOS 10.13, *), options.contains(.sortedKeys) {
+                    let sorted = dict.sorted { $0.key.compare($1.key, options: [.caseInsensitive, .diacriticInsensitive, .forcedOrdering, .numeric, .widthInsensitive]) == .orderedAscending }
+                    self.writeObject(sorted, into: &bytes)
+                } else {
+                    self.writeObject(dict, into: &bytes)
+                }
+            }
+        }
+
+        private func writeObject<Object: Sequence>(_ object: Object, into bytes: inout [UInt8], depth: Int = 0)
+            where Object.Element == (key: String, value: JSONValue)
+        {
+            var iterator = object.makeIterator()
+            bytes.append(._openbrace)
+            if let (key, value) = iterator.next() {
+                self.encodeString(key, to: &bytes)
+                bytes.append(._colon)
+                self.writeValue(value, into: &bytes)
+            }
+            while let (key, value) = iterator.next() {
+                bytes.append(._comma)
+                // key
+                self.encodeString(key, to: &bytes)
+                bytes.append(._colon)
+
+                self.writeValue(value, into: &bytes)
+            }
+            bytes.append(._closebrace)
+        }
+
+        private func addInset(to bytes: inout [UInt8], depth: Int) {
+            bytes.append(contentsOf: [UInt8](repeating: ._space, count: depth * 2))
+        }
+
+        private func writeValuePretty(_ value: JSONValue, into bytes: inout [UInt8], depth: Int = 0) {
+            switch value {
+            case .null:
+                bytes.append(contentsOf: [UInt8]._null)
+            case .bool(true):
+                bytes.append(contentsOf: [UInt8]._true)
+            case .bool(false):
+                bytes.append(contentsOf: [UInt8]._false)
+            case .string(let string):
+                self.encodeString(string, to: &bytes)
+            case .number(let string):
+                bytes.append(contentsOf: string.utf8)
+            case .array(let array):
+                var iterator = array.makeIterator()
+                bytes.append(contentsOf: [._openbracket, ._newline])
+                if let first = iterator.next() {
+                    self.addInset(to: &bytes, depth: depth + 1)
+                    self.writeValuePretty(first, into: &bytes, depth: depth + 1)
+                }
+                while let item = iterator.next() {
+                    bytes.append(contentsOf: [._comma, ._newline])
+                    self.addInset(to: &bytes, depth: depth + 1)
+                    self.writeValuePretty(item, into: &bytes, depth: depth + 1)
+                }
+                bytes.append(._newline)
+                self.addInset(to: &bytes, depth: depth)
+                bytes.append(._closebracket)
+            case .object(let dict):
+                if #available(macOS 10.13, *), options.contains(.sortedKeys) {
+                    let sorted = dict.sorted { $0.key.compare($1.key, options: [.caseInsensitive, .diacriticInsensitive, .forcedOrdering, .numeric, .widthInsensitive]) == .orderedAscending }
+                    self.writePrettyObject(sorted, into: &bytes, depth: depth)
+                } else {
+                    self.writePrettyObject(dict, into: &bytes, depth: depth)
+                }
+            }
+        }
+
+        private func writePrettyObject<Object: Sequence>(_ object: Object, into bytes: inout [UInt8], depth: Int = 0)
+            where Object.Element == (key: String, value: JSONValue)
+        {
+            var iterator = object.makeIterator()
+            bytes.append(contentsOf: [._openbrace, ._newline])
+            if let (key, value) = iterator.next() {
+                self.addInset(to: &bytes, depth: depth + 1)
+                self.encodeString(key, to: &bytes)
+                bytes.append(contentsOf: [._space, ._colon, ._space])
+                self.writeValuePretty(value, into: &bytes, depth: depth + 1)
+            }
+            while let (key, value) = iterator.next() {
+                bytes.append(contentsOf: [._comma, ._newline])
+                self.addInset(to: &bytes, depth: depth + 1)
+                // key
+                self.encodeString(key, to: &bytes)
+                bytes.append(contentsOf: [._space, ._colon, ._space])
+                // value
+                self.writeValuePretty(value, into: &bytes, depth: depth + 1)
+            }
+            bytes.append(._newline)
+            self.addInset(to: &bytes, depth: depth)
+            bytes.append(._closebrace)
+        }
+
+        private func encodeString(_ string: String, to bytes: inout [UInt8]) {
+            bytes.append(UInt8(ascii: "\""))
+            let stringBytes = string.utf8
+            var startCopyIndex = stringBytes.startIndex
+            var nextIndex = startCopyIndex
+
+            while nextIndex != stringBytes.endIndex {
+                switch stringBytes[nextIndex] {
+                case 0 ..< 32, UInt8(ascii: "\""), UInt8(ascii: "\\"):
+                    // All Unicode characters may be placed within the
+                    // quotation marks, except for the characters that MUST be escaped:
+                    // quotation mark, reverse solidus, and the control characters (U+0000
+                    // through U+001F).
+                    // https://tools.ietf.org/html/rfc8259#section-7
+
+                    // copy the current range over
+                    bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
+                    switch stringBytes[nextIndex] {
+                    case UInt8(ascii: "\""): // quotation mark
+                        bytes.append(contentsOf: [._backslash, ._quote])
+                    case UInt8(ascii: "\\"): // reverse solidus
+                        bytes.append(contentsOf: [._backslash, ._backslash])
+                    case 0x08: // backspace
+                        bytes.append(contentsOf: [._backslash, UInt8(ascii: "b")])
+                    case 0x0C: // form feed
+                        bytes.append(contentsOf: [._backslash, UInt8(ascii: "f")])
+                    case 0x0A: // line feed
+                        bytes.append(contentsOf: [._backslash, UInt8(ascii: "n")])
+                    case 0x0D: // carriage return
+                        bytes.append(contentsOf: [._backslash, UInt8(ascii: "r")])
+                    case 0x09: // tab
+                        bytes.append(contentsOf: [._backslash, UInt8(ascii: "t")])
+                    default:
+                        func valueToAscii(_ value: UInt8) -> UInt8 {
+                            switch value {
+                            case 0 ... 9:
+                                return value + UInt8(ascii: "0")
+                            case 10 ... 15:
+                                return value - 10 + UInt8(ascii: "a")
+                            default:
+                                preconditionFailure()
+                            }
+                        }
+                        bytes.append(UInt8(ascii: "\\"))
+                        bytes.append(UInt8(ascii: "u"))
+                        bytes.append(UInt8(ascii: "0"))
+                        bytes.append(UInt8(ascii: "0"))
+                        let first = stringBytes[nextIndex] / 16
+                        let remaining = stringBytes[nextIndex] % 16
+                        bytes.append(valueToAscii(first))
+                        bytes.append(valueToAscii(remaining))
+                    }
+
+                    nextIndex = stringBytes.index(after: nextIndex)
+                    startCopyIndex = nextIndex
+                case UInt8(ascii: "/") where options.contains(.withoutEscapingSlashes) == false:
+                    bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
+                    bytes.append(contentsOf: [._backslash, UInt8(ascii: "/")])
+                    nextIndex = stringBytes.index(after: nextIndex)
+                    startCopyIndex = nextIndex
+                default:
+                    nextIndex = stringBytes.index(after: nextIndex)
+                }
+            }
+
+            // copy everything, that hasn't been copied yet
+            bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
+            bytes.append(UInt8(ascii: "\""))
+        }
+    }
+}
+
