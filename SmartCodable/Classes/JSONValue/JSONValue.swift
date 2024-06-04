@@ -17,15 +17,28 @@ enum JSONValue: Equatable {
     
     
     static func make(_ value: Any) -> Self? {
-        var value = value
-        if let temp = value as? JSONValue {
-            value = temp.peel
+        if let jsonValue = value as? JSONValue {
+            return jsonValue
         }
-        if let data = _toData(value) {
-            var parser = JSONParser(bytes: Array(data))
-            return try? parser.parse()
+        
+        switch value {
+        case is NSNull:
+            return .null
+        case let string as String:
+            return .string(string)
+        case let bool as Bool:
+            return .bool(bool)
+        case let number as NSNumber:
+            return .number(number.stringValue)
+        case let array as [Any]:
+            let jsonArray = array.compactMap { make($0) }
+            return .array(jsonArray)
+        case let dictionary as [String: Any]:
+            let jsonObject = dictionary.compactMapValues { make($0) }
+            return .object(jsonObject)
+        default:
+            return nil
         }
-        return nil
     }
 }
 

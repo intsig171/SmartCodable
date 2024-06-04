@@ -33,6 +33,19 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
     }
 
     private func _converted(_ key: Key) -> CodingKey {
+        
+        if let objectType = impl.cache.chaceType {
+            if let mappings = objectType.mappingForKey() {
+                for mapping in mappings {
+                    if mapping.to.stringValue == key.stringValue {
+                        if let first = mapping.from.first {
+                            return _JSONKey(stringValue: first, intValue: key.intValue)
+                        }
+                    }
+                }
+            }
+        }
+                
         switch self.options.keyEncodingStrategy {
         case .useDefaultKeys:
             return key

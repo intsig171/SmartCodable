@@ -8,7 +8,18 @@
 import Foundation
 
 
-public protocol SmartEncodable: Encodable { }
+public protocol SmartEncodable: Encodable {
+    /// The callback for when mapping is complete
+    mutating func didFinishMapping()
+  
+    /// The mapping relationship of decoding keys
+    static func mappingForKey() -> [SmartKeyTransformer]?
+    
+    /// The strategy for decoding values
+    static func mappingForValue() -> [SmartValueTransformer]?
+    
+    init()
+}
 
 
 extension SmartEncodable {
@@ -74,7 +85,7 @@ fileprivate func _transformToJsonString(object: Any, prettyPrint: Bool = false, 
 
 
 fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type) -> T? {
-    let jsonEncoder = JSONEncoder()
+    let jsonEncoder = SmartJSONEncoder()
     if let jsonData = try? jsonEncoder.encode(some) {
         do {
             let json = try JSONSerialization.jsonObject(with: jsonData, options: .fragmentsAllowed)

@@ -19,7 +19,7 @@ public struct SmartDateTransformer: ValueTransformable {
     
     public func transformFromJSON(_ value: Any?) -> Date? {
         if let timeInt = value as? Double {
-            return Date(timeIntervalSince1970: TimeInterval(timeInt))
+            return Date(timeIntervalSinceReferenceDate: timeInt)
         }
 
         if let timeStr = value as? String {
@@ -35,8 +35,8 @@ public struct SmartDateTransformer: ValueTransformable {
         }
         return nil
     }
-
 }
+
 
 
 /// DateFormat Date

@@ -6,6 +6,9 @@ class JSONEncoderImpl {
     var userInfo: [CodingUserInfoKey: Any] {
         options.userInfo
     }
+    
+    /// 记录当前keyed容器的各个属性的初始化值， 不支持Unkey容器的记录。
+    var cache: EncodingCache
 
     var singleValue: JSONValue?
     var array: JSONFuture.RefArray?
@@ -24,6 +27,8 @@ class JSONEncoderImpl {
     init(options: SmartJSONEncoder._Options, codingPath: [CodingKey]) {
         self.options = options
         self.codingPath = codingPath
+        self.cache = EncodingCache()
+
     }
 }
 

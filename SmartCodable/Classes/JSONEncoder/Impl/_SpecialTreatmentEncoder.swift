@@ -66,13 +66,26 @@ extension _SpecialTreatmentEncoder {
         case let object as _JSONStringDictionaryEncodableMarker:
             return try self.wrapObject(object as! [String: Encodable], for: additionalKey)
         default:
+            
+            impl.cache.cacheSnapshot(for: E.self)
+            
             let encoder = self.getEncoder(for: additionalKey)
             try encodable.encode(to: encoder)
+            
+            impl.cache.removeSnapshot(for: E.self)
+            
+            
             return encoder.value
         }
     }
 
     func wrapDate(_ date: Date, for additionalKey: CodingKey?) throws -> JSONValue {
+        
+        if let value = impl.cache.tranform(from: date, with: additionalKey) {
+            return value
+        }
+
+        
         switch self.options.dateEncodingStrategy {
         case .deferredToDate:
             let encoder = self.getEncoder(for: additionalKey)

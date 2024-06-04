@@ -21,40 +21,39 @@ class TestViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "age": 200,
+//            "date": "2024-06-03",
+            "currentDate": 739107587,
+            "age": 100
         ]
         
-        var model = Model.init(age: 10)
-        
-        abc(&model)
-        
-        
-        
-        
-//        let updateDict: [String: Any] = [
-//            "age": "20",
-//        ]
-//        
-//        guard var model = Model.deserialize(from: dict) else { return }
-//        JSONDeserializer.update(object: &model, from: updateDict)
-//        print(model)
-    }
-    
-    struct Model: HandyJSON {
-        var age: Int = 0
-    }
-    
-    func abc<T>(_ model: inout T) {
-        
-        let name: Int = 10
-        
-        
-        
-        
-        let mirr = Mirror(reflecting: model)
-        for item in mirr.children {
-            print(item.label)
-            print(item.value)
+        if let model = Model.deserialize(from: dict) {
+            print(model)
+            
+            let dict = model.toDictionary()
+            print(dict)
         }
+
+    }
+    
+    struct Model: SmartCodable {
+        var date: Date = Date()
+        var age: Int?
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            let df = DateFormatter()
+            df.dateFormat = "yyyy-MM-dd"
+            return [
+                CodingKeys.date <--- SmartDateFormatTransformer(df)
+//                CodingKeys.date <--- SmartDateTransformer()
+            ]
+        }
+        
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.date <--- "currentDate"
+            ]
+        }
+        
     }
 }
+
