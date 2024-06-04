@@ -23,6 +23,14 @@ import BTPrint
  
  */
 
+var snapArr: [String] = []
+
+struct Log {
+    static func save(name: String) {
+        snapArr.append(name)
+    }
+}
+
 
 class TestViewController: BaseViewController {
     
@@ -35,51 +43,63 @@ class TestViewController: BaseViewController {
         let group = DispatchGroup()
         
         queue.async(group: group) {
+//            Log.save(name: "abc")
             if let model = NewModel.deserialize(from: dict) {
                 //            print(model)
             }
         }
         
         queue.async(group: group) {
-            print("\n\n 开始解析old")
-            
+//            Log.save(name: "abcd")
             if let model = OldModel.deserialize(from: dict) {
                 //            print(model)
             }
         }
+//        
+//        queue.async(group: group) {
+////            Log.save(name: "abcde")
+//            if let model = MiddleModel.deserialize(from: dict) {
+//                //            print(model)
+//            }
+//        }
         
         group.notify(queue: DispatchQueue.main) {
+            print(snapArr)
             print("Both methods are completed.")
         }
     }
 }
 
+
 struct NewModel: SmartCodable {
-    var newa: String = ""
-    var newb: String = ""
-    var newc: String = ""
-    var newd: String = ""
-    var newe: String = ""
-    var newf: String = ""
-    var newSub: NewsubModel = NewsubModel()
+    var new_a: String = ""
+    var new_b: String = ""
+    var new_c: String = ""
+    var new_d: String = ""
+    var new_e: String = ""
+    var new_f: String = ""
 }
 
-struct NewsubModel: SmartCodable {
-    var newname: String = ""
-    
-}
 
 
 struct OldModel: SmartCodable {
-    var olda: String = ""
-    var oldb: String = ""
-    var oldc: String = ""
-    var oldd: String = ""
-    var olde: String = ""
-    var oldf: String = ""
-    var oldSub = OldsubModel()
+    var old_a: String = ""
+    var old_b: String = ""
+    var old_c: String = ""
+    var old_d: String = ""
+    var old_e: String = ""
+    var old_f: String = ""
 }
 
-struct OldsubModel: SmartCodable {
-    var oldname: String = ""
+
+
+struct MiddleModel: SmartCodable {
+    var middle_a: String = ""
+    var middle_b: String = ""
+    var middle_c: String = ""
+    var middle_d: String = ""
+    var middle_e: String = ""
+    var middle_f: String = ""
 }
+
+

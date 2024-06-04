@@ -8,7 +8,7 @@
 import Foundation
 
 struct LogCache {
-    private var snapshotDict: [String: LogContainer] = [:]
+    private var snapshotDict = ThreadSafeDictionary<String, LogContainer>()
     private var keyOrder: [String] = [] // 记录key的添加顺序
     
     mutating func save(error: DecodingError, className: String) {
@@ -23,14 +23,14 @@ struct LogCache {
     
     mutating func formatLogs() -> String? {
         
-        guard !snapshotDict.isEmpty else { return nil }
         guard !keyOrder.isEmpty else { return nil }
 
         filterLogItem()
 
         keyOrder = processArray(keyOrder)
         alignTypeNamesInAllSnapshots()
-        return keyOrder.compactMap { snapshotDict[$0]?.formatMessage() }.joined()
+        return keyOrder.compactMap {
+            snapshotDict.getValue(forKey: $0)?.formatMessage() }.joined()
     }
 }
 
@@ -57,9 +57,9 @@ extension LogCache {
                 let newElement = components.dropLast(2).joined(separator: "-")
                 mutableArray.insert(newElement, at: 0)
  
-                if let snap = snapshotDict[firstElement] {
+                if let snap = snapshotDict.getValue(forKey: firstElement) {
                     let container = LogContainer(typeName: "", logs: [], codingPath: snap.codingPath.dropLast(2))
-                    snapshotDict.updateValue(container, forKey: newElement)
+                    snapshotDict.setValue(container, forKey: newElement)
                 }
             }
         }
@@ -95,7 +95,7 @@ extension LogCache {
         // 使用正则表达式匹配 keys
         let pattern = "Index \\d+"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
-        var matchedKeys = snapshotDict.keys.filter { key in
+        var matchedKeys = snapshotDict.getAllKeys().filter { key in
             let range = NSRange(key.startIndex..<key.endIndex, in: key)
             return regex.firstMatch(in: key, options: [], range: range) != nil
         }
@@ -104,10 +104,10 @@ extension LogCache {
         
         var allLogs: [LogItem] = []
         
-        var tempDict = snapshotDict
+        let tempDict = snapshotDict
         for key in matchedKeys {
             var lessLogs: [LogItem] = []
-            if var snap = snapshotDict[key] {
+            if var snap = snapshotDict.getValue(forKey: key) {
                 let logs = snap.logs
                 for log in logs {
                     if !allLogs.contains(where: { $0 == log }) {
@@ -120,7 +120,7 @@ extension LogCache {
                     tempDict.removeValue(forKey: key)
                 } else {
                     snap.logs = lessLogs
-                    tempDict.updateValue(snap, forKey: key)
+                    tempDict.setValue(snap, forKey: key)
                 }
             }
         }
@@ -135,16 +135,17 @@ extension LogCache {
         let key = createKey(path: path)
                 
         // 如果存在相同的typeName和path，则合并logs
-        if var existingSnapshot = snapshotDict[key] {
+        if var existingSnapshot = snapshotDict.getValue(forKey: key) {
             
             if !existingSnapshot.logs.contains(where: { $0 == log }) {
                 existingSnapshot.logs.append(log)
-                snapshotDict[key] = existingSnapshot
+                snapshotDict.setValue(existingSnapshot, forKey: key)
+                
             }
         } else {
             // 创建新的snapshot并添加到字典中
             let newSnapshot = LogContainer(typeName: className, logs: [log], codingPath: path)
-            snapshotDict[key] = newSnapshot
+            snapshotDict.setValue(newSnapshot, forKey: key)
             keyOrder.append(key) // 记录新添加的key
         }
     }
@@ -155,14 +156,15 @@ extension LogCache {
     }
     
     private mutating func alignTypeNamesInAllSnapshots() {
-        for (key, var snapshot) in snapshotDict {
+        
+        snapshotDict.updateEach { key, snapshot in
+            
             let maxLength = snapshot.logs.max(by: { $0.fieldName.count < $1.fieldName.count })?.fieldName.count ?? 0
             snapshot.logs = snapshot.logs.map { log in
                 var modifiedLog = log
                 modifiedLog.fieldName = modifiedLog.fieldName.padding(toLength: maxLength, withPad: " ", startingAt: 0)
                 return modifiedLog
             }
-            snapshotDict[key] = snapshot
         }
     }
 }
@@ -170,3 +172,54 @@ extension LogCache {
 
 
 
+class ThreadSafeDictionary<Key: Hashable, Value> {
+    private var dictionary: [Key: Value] = [:]
+    private let queue = DispatchQueue(label: "com.example.ThreadSafeDictionary", attributes: .concurrent)
+    
+    func getValue(forKey key: Key) -> Value? {
+        return queue.sync {
+            return dictionary[key]
+        }
+    }
+    
+    func setValue(_ value: Value, forKey key: Key) {
+        queue.async(flags: .barrier) {
+            self.dictionary[key] = value
+        }
+    }
+    
+    func removeValue(forKey key: Key) {
+        queue.async(flags: .barrier) {
+            self.dictionary.removeValue(forKey: key)
+        }
+    }
+    
+    func removeAll() {
+        queue.async(flags: .barrier) {
+            self.dictionary.removeAll()
+        }
+    }
+    
+    func getAllValues() -> [Value] {
+        return queue.sync {
+            return Array(dictionary.values)
+        }
+    }
+    
+    func getAllKeys() -> [Key] {
+        return queue.sync {
+            return Array(dictionary.keys)
+        }
+    }
+    
+    func updateEach(_ body: (Key, inout Value) throws -> Void) rethrows {
+        try queue.sync {
+            for (key, var value) in dictionary {
+                try body(key, &value)
+                queue.async(flags: .barrier) {
+                    self.dictionary[key] = value
+                }
+            }
+        }
+    }
+}
