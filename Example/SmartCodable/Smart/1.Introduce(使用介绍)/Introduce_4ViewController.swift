@@ -18,7 +18,7 @@ class Introduce_4ViewController: BaseViewController {
         
         let dict = [
             "subModel1": [
-                "name": "小名"
+                "name": 123
             ],
             "subModel2": [
                 "name": "小花"

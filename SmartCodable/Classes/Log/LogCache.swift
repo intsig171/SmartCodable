@@ -34,6 +34,8 @@ struct LogCache {
             return container?.formatMessage()
         }
         
+        if arr.isEmpty { return nil }
+        
         return arr.joined()
     }
 }
