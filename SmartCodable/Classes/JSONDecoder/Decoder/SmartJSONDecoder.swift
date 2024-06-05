@@ -57,8 +57,12 @@ open class SmartJSONDecoder: JSONDecoder {
             return value
         } catch let error as JSONError {
             let err = DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: error))
+                        
+            
+            SmartLog.logVerbose(err, in: "\(type)")
             throw err
         } catch {
+            SmartLog.logVerbose("\(error)", in: "\(type)")
             throw error
         }
     }
