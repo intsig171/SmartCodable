@@ -113,7 +113,7 @@ extension TestCaseViewController {
             "title": "CaseFive - 杂项测试",
             "list": [
                 ["name": "杂项测试 - 兼容WCDB",    "vc": "CaseFive_wcdbViewController"],
-
+                ["name": "杂项测试 - 并发解码",    "vc": "CaseFive_concurrenceViewController"],
             ]
         ]
     }

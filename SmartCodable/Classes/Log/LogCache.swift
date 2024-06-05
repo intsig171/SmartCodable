@@ -14,22 +14,22 @@ struct LogCache {
         let log = LogItem.make(with: error)
         cacheLog(log, className: className, decoder: decoder)
     }
-
+    
     mutating func clearCache(decoder: String) {
         snapshotDict.removeValue(forKey: decoder)
     }
     
     mutating func formatLogs(decoder: String) -> String? {
         
-
+        
         filterLogItem()
-
+        
         alignTypeNamesInAllSnapshots(decoder: decoder)
         
         let keyOrder = processArray(snapshotDict.getAllKeys(), decoder: decoder)
         
         
-        let  arr = keyOrder.compactMap {
+        let arr = keyOrder.compactMap {
             let container = snapshotDict.getValue(forKey: $0)
             return container?.formatMessage()
         }
@@ -47,10 +47,10 @@ extension LogCache {
         }
         
         guard !mutableArray.isEmpty else { return [] }
-
+        
         
         var indexToInsert: [(index: Int, element: String)] = []
-
+        
         // 特别处理数组的第一个元素
         if let firstElement = mutableArray.first {
             let components = firstElement.components(separatedBy: "-")
@@ -60,7 +60,7 @@ extension LogCache {
                !components[components.count - 3].hasPrefix("Index ") {
                 let newElement = components.dropLast(2).joined(separator: "-")
                 mutableArray.insert(newElement, at: 0)
- 
+                
                 if let snap = snapshotDict.getValue(forKey: firstElement) {
                     let container = LogContainer(typeName: "", logs: [], decoder: snap.decoder, codingPath: snap.codingPath.dropLast(2))
                     snapshotDict.setValue(container, forKey: newElement)
@@ -75,23 +75,23 @@ extension LogCache {
                 let lastKey = currentComponents.last!
                 let secondLastKey = currentComponents[currentComponents.count - 2]
                 let thirdLastKey = currentComponents[currentComponents.count - 3]
-
+                
                 if lastKey.hasPrefix("Index "), !secondLastKey.hasPrefix("Index "), !thirdLastKey.hasPrefix("Index ") {
                     let newElement = currentComponents.dropLast(2).joined(separator: "-")
                     let previousElement = mutableArray[i - 1]
-
+                    
                     if newElement != previousElement {
                         indexToInsert.append((i, newElement))
                     }
                 }
             }
         }
-
+        
         // 插入新元素
         for insertion in indexToInsert.reversed() {
             mutableArray.insert(insertion.element, at: insertion.index)
         }
-
+        
         return mutableArray
     }
     
@@ -137,7 +137,7 @@ extension LogCache {
         
         let path = log.codingPath
         let key = createKey(path: path, decoder: decoder)
-                
+        
         // 如果存在相同的typeName和path，则合并logs
         if var existingSnapshot = snapshotDict.getValue(forKey: key) {
             
@@ -174,58 +174,57 @@ extension LogCache {
 
 
 
-public class ThreadSafeDictionary<Key: Hashable, Value> {
-    public var dictionary: [Key: Value] = [:]
+class ThreadSafeDictionary<Key: Hashable, Value> {
+    private var dictionary: [Key: Value] = [:]
     private let queue = DispatchQueue(label: "com.example.ThreadSafeDictionary", attributes: .concurrent)
     
-    public init() { }
     
-    public func getValue(forKey key: Key) -> Value? {
+    func getValue(forKey key: Key) -> Value? {
         return queue.sync {
             return dictionary[key]
         }
     }
     
-    public func setValue(_ value: Value, forKey key: Key) {
+    func setValue(_ value: Value, forKey key: Key) {
         queue.async(flags: .barrier) { [weak self] in
             self?.dictionary[key] = value
         }
     }
     
-    public func removeValue(forKey key: Key) {
+    func removeValue(forKey key: Key) {
         queue.async(flags: .barrier) {
             self.dictionary.removeValue(forKey: key)
         }
     }
     
-    public func removeAll() {
+    func removeAll() {
         queue.async(flags: .barrier) {
             self.dictionary.removeAll()
         }
     }
     
-    public func getAllValues() -> [Value] {
+    func getAllValues() -> [Value] {
         return queue.sync {
             return Array(dictionary.values)
         }
     }
     
-    public func getAllKeys() -> [Key] {
+    func getAllKeys() -> [Key] {
         return queue.sync {
             return Array(dictionary.keys)
         }
     }
     
-    public func updateEach(_ body: (Key, inout Value) throws -> Void) rethrows {
-            try queue.sync {
-                var updatedDictionary: [Key: Value] = [:]
-                for (key, var value) in dictionary {
-                    try body(key, &value)
-                    updatedDictionary[key] = value
-                }
-                queue.async(flags: .barrier) {
-                    self.dictionary = updatedDictionary
-                }
+    func updateEach(_ body: (Key, inout Value) throws -> Void) rethrows {
+        try queue.sync {
+            var updatedDictionary: [Key: Value] = [:]
+            for (key, var value) in dictionary {
+                try body(key, &value)
+                updatedDictionary[key] = value
+            }
+            queue.async(flags: .barrier) {
+                self.dictionary = updatedDictionary
             }
         }
+    }
 }
