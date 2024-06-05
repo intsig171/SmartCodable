@@ -18,11 +18,11 @@ class DecodingArrayLogViewController: BaseViewController {
         SmartConfig.debugMode = .verbose
         SmartConfig.space = "   "
         
-//        demo()
-//        demo1()
+        demo()
+        demo1()
         demo2()
-//        demo3()
-//        demo4()
+        demo3()
+        demo4()
     }
     
     func demo() {
@@ -101,11 +101,11 @@ class DecodingArrayLogViewController: BaseViewController {
 
 extension DecodingArrayLogViewController {
     struct Family: SmartCodable {
-//        var name: String = "我的家"
-//        var location: String = ""
-//        var date: Date = Date()
-//
-//        var father: Father = Father()
+        var name: String = "我的家"
+        var location: String = ""
+        var date: Date = Date()
+
+        var father: Father = Father()
         var sons: [Son] = []
     }
 

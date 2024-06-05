@@ -277,6 +277,7 @@
 		987C3D1EBBBA49394F20232E1FE79E85 /* hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 18D88FE24C75AD053966BC639186BD5D /* hash.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		98F570DA48370453D648BD526FDAAEAA /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18D6541EFE81AFDF8F5EB531B779D4D /* LayoutConstraintItem.swift */; };
 		990512AB2C0880AA00A2C5D8 /* SmartUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512AA2C0880AA00A2C5D8 /* SmartUpdater.swift */; };
+		998567072C103E550021B7FD /* SafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567062C103E550021B7FD /* SafeDictionary.swift */; };
 		99C3E4EDBE5BCDC161722B105F0FD62F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F616208225C5B42B50ABA5F5267C29F /* Database.swift */; };
 		9A5C397C4B518E59526372CA6AA0BE65 /* StatementAttach.swift in Sources */ = {isa = PBXBuildFile; fileRef = F631CC802E2701AD6DEAB71A9B7134CB /* StatementAttach.swift */; };
 		9A6CCC7BCACBE8218126670E6B08EF9E /* BTPrint-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15CC97091BEEC9AAC898E58EC68EBF05 /* BTPrint-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -872,6 +873,7 @@
 		981FC3D828F7DDCD2F77A0BF2CEB5313 /* btree.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = btree.c; path = src/btree.c; sourceTree = "<group>"; };
 		990512AA2C0880AA00A2C5D8 /* SmartUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartUpdater.swift; sourceTree = "<group>"; };
 		9930E634CA9F9592BA112E4EA073572B /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = swift/source/util/Error.swift; sourceTree = "<group>"; };
+		998567062C103E550021B7FD /* SafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeDictionary.swift; sourceTree = "<group>"; };
 		9A09037802A20D832A880AA28340A8C1 /* FBSnapshotTestCase-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FBSnapshotTestCase-prefix.pch"; sourceTree = "<group>"; };
 		9A0CDA24DDDB701970130A91AE5FA140 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
 		9AB62CDC1D9A84669428234D73C264AF /* Pods-SmartCodable_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmartCodable_Example-dummy.m"; sourceTree = "<group>"; };
@@ -1325,6 +1327,7 @@
 				9DAECB1770D664679AB707C61CF11BA3 /* LogContainer.swift */,
 				3F5E97BA02994E706692DF6E6BA341F7 /* LogItem.swift */,
 				E2E5E95D22544DB37275024A313BD202 /* SmartLog.swift */,
+				998567062C103E550021B7FD /* SafeDictionary.swift */,
 			);
 			name = Log;
 			path = SmartCodable/Classes/Log;
@@ -2589,6 +2592,7 @@
 				F1D6B25FEB3AF94B569F8D993628C772 /* JSONParser.swift in Sources */,
 				0C06C97C2994BD031E55220B47618A90 /* JSONValue.swift in Sources */,
 				57AD10A4590243D08D263E6EC5568C8D /* JSONValue+Extension.swift in Sources */,
+				998567072C103E550021B7FD /* SafeDictionary.swift in Sources */,
 				1D199D790329A9E9AB4D8DAD724394D5 /* KeysMapper.swift in Sources */,
 				1982D0C9C27937C5872DECF369C43899 /* LogCache.swift in Sources */,
 				990512AB2C0880AA00A2C5D8 /* SmartUpdater.swift in Sources */,

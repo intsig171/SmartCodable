@@ -1,21 +1,15 @@
 //
-//  TestViewController.swift
+//  CaseFive_concurrenceViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/9/1.
-//  Copyright © 2023 CocoaPods. All rights reserved.
+//  Created by qixin on 2024/6/5.
+//  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
 import Foundation
-import UIKit
-import SmartCodable
-import HandyJSON
-import CleanJSON
-import BTPrint
-
 import SmartCodable
 
-class TestViewController: BaseViewController {
+class CaseFive_concurrenceViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

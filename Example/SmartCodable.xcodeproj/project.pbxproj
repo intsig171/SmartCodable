@@ -74,6 +74,7 @@
 		996760482B3EC930006C83EC /* DateDecodingStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760112B3EC930006C83EC /* DateDecodingStrategyViewController.swift */; };
 		9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760152B3EC930006C83EC /* BaseViewController.swift */; };
 		9967604C2B3EC930006C83EC /* CaseSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760182B3EC930006C83EC /* CaseSixViewController.swift */; };
+		998567092C1044060021B7FD /* ConcurrenceLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567082C1044060021B7FD /* ConcurrenceLogViewController.swift */; };
 		9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6912B91DF3D0089CA68 /* Data+Extension.swift */; };
 		9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */; };
 		9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */; };
@@ -192,6 +193,7 @@
 		996760112B3EC930006C83EC /* DateDecodingStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateDecodingStrategyViewController.swift; sourceTree = "<group>"; };
 		996760152B3EC930006C83EC /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		996760182B3EC930006C83EC /* CaseSixViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseSixViewController.swift; sourceTree = "<group>"; };
+		998567082C1044060021B7FD /* ConcurrenceLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrenceLogViewController.swift; sourceTree = "<group>"; };
 		9993D6912B91DF3D0089CA68 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_URLViewController.swift; sourceTree = "<group>"; };
 		9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_SmartAnyViewController.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 			children = (
 				99675FE12B3EC930006C83EC /* DecodingDictLogViewController.swift */,
 				9956B9B82BD92D1900C711F5 /* DecodingArrayLogViewController.swift */,
+				998567082C1044060021B7FD /* ConcurrenceLogViewController.swift */,
 			);
 			path = "3.SmartLog(调试日志)";
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				99C3138F2B9B38910065FC45 /* ComplexDataStructureSectionHeader.swift in Sources */,
 				990512A72C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift in Sources */,
 				9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */,
+				998567092C1044060021B7FD /* ConcurrenceLogViewController.swift in Sources */,
 				996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */,
 				9967602A2B3EC930006C83EC /* BaseData_IntViewController.swift in Sources */,
 				990512A92C0873F200A2C5D8 /* Decoding_valueMapViewController.swift in Sources */,

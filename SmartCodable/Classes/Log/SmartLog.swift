@@ -52,21 +52,28 @@ extension SmartLog {
         var path = impl.codingPath
         path.append(key)
         
+            
+            var address = ""
+            
+            if let parsingMark = CodingUserInfoKey.parsingMark {
+                address = impl.userInfo[parsingMark] as? String ?? ""
+            }
+            
         
-        
+            
         if let entry = value {
             if entry.isNull { // 值为null
                 if isOptionalLog { return }
                 let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
-                SmartLog.logDebug(error, className: className)
+                SmartLog.logDebug(error, className: className, parsingMark: address)
             } else { // value类型不匹配
                 let error = DecodingError._typeMismatch(at: path, expectation: T.self, desc: entry.debugDataTypeDescription)
-                SmartLog.logWarning(error: error, className: className)
+                SmartLog.logWarning(error: error, className: className, parsingMark: address)
             }
         } else { // key不存在或value为nil
             if isOptionalLog { return }
             let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
-            SmartLog.logDebug(error, className: className)
+            SmartLog.logDebug(error, className: className, parsingMark: address)
         }
     }
 }
@@ -77,18 +84,18 @@ struct SmartLog {
     
     private static var cache = LogCache()
     
-    static func logDebug(_ error: DecodingError, className: String) {
+    static func logDebug(_ error: DecodingError, className: String, parsingMark: String) {
         logIfNeeded(level: .debug) {
             if SmartConfig.openErrorAssert {
                 assert(false, "\(error)")
             }
-            cache.save(error: error, className: className)
+            cache.save(error: error, className: className, parsingMark: parsingMark)
         }
     }
     
-    static func logWarning(error: DecodingError, className: String) {
+    static func logWarning(error: DecodingError, className: String, parsingMark: String) {
         logIfNeeded(level: .warning) {
-            cache.save(error: error, className: className)
+            cache.save(error: error, className: className, parsingMark: parsingMark)
         }
     }
     
@@ -101,11 +108,11 @@ struct SmartLog {
         }
     }
     
-    static func printCacheLogs(in name: String) {
+    static func printCacheLogs(in name: String, parsingMark: String) {
         
         guard isAllowCacheLog() else { return }
-        
-        if let format = cache.formatLogs() {
+
+        if let format = cache.formatLogs(parsingMark: parsingMark) {
             var message: String = ""
             message += getHeader()
             message += name + " 👈🏻 👀\n"
@@ -114,7 +121,7 @@ struct SmartLog {
             print(message)
         }
         
-        cache.clearCache()
+        cache.clearCache(parsingMark: parsingMark)
     }
     
     static func isAllowCacheLog() -> Bool {
@@ -122,6 +129,15 @@ struct SmartLog {
            return true
         }
         return false
+    }
+}
+
+
+extension SmartLog {
+    /// 生成唯一标记，用来标记是否本次解析。
+    static func parsingMark() -> String {
+        let mark = "SmartMark" + UUID().uuidString
+        return mark
     }
 }
 

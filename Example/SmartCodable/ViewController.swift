@@ -90,6 +90,8 @@ extension ViewController {
             "list": [
                 ["name": "字典日志", "vc": "DecodingDictLogViewController"],
                 ["name": "数组日志", "vc": "DecodingArrayLogViewController"],
+                ["name": "并发日志", "vc": "ConcurrenceLogViewController"],
+
             ]
         ]
     }
