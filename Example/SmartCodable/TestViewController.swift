@@ -20,65 +20,52 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dict: [String: Any] = [:]
-        
-        let queue = DispatchQueue.global(qos: .userInitiated)
-        let group = DispatchGroup()
-        
-        queue.async(group: group) {
-            if let model = NewModel.deserialize(from: dict) {
-                print(model)
-            }
+
+        let model = Model()
+        if let dict = model.toDictionary() {
+            print(dict)
         }
         
-        queue.async(group: group) {
-            if let model = OldModel.deserialize(from: dict) {
-                print(model)
-            }
+        
+        
+    }
+    
+    struct Model: SmartCodable {
+        var age: Int = 100
+//        var sex: Bool = true
+//        var name: String = "Mccc"
+  
+        enum CodingKeys: String, CodingKey {
+            case age = "selfAge"
         }
         
-        queue.async(group: group) {
-            if let model = MiddleModel.deserialize(from: dict) {
-                print(model)
-            }
-        }
+//        static func mappingForKey() -> [SmartKeyTransformer]? {
+//            [
+//                CodingKeys.age <--- "selfAge"
+//            ]
+//        }
         
-        group.notify(queue: DispatchQueue.main) {
-            print("Both methods are completed.")
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.age <--- IntTransformer()
+            ]
         }
     }
 }
 
 
-struct NewModel: SmartCodable {
-    var new_a: String = ""
-    var new_bbbbb: String = ""
-    var new_c: String = ""
-    var new_d: String = ""
-    var new_e: String = ""
-    var new_f: String = ""
+
+struct IntTransformer: ValueTransformable {
+    
+    typealias Object = Int
+    typealias JSON = Int
+    
+    
+    func transformFromJSON(_ value: Any?) -> Int? {
+        return 1000
+    }
+    
+    func transformToJSON(_ value: Int?) -> Int? {
+        return 1000
+    }
 }
-
-
-
-struct OldModel: SmartCodable {
-    var old_a: String = ""
-    var old_bbbbb: String = ""
-    var old_c: String = ""
-    var old_d: String = ""
-    var old_e: String = ""
-    var old_f: String = ""
-}
-
-
-
-struct MiddleModel: SmartCodable {
-    var middle_a: String = ""
-    var middle_b: String = ""
-    var middle_c: String = ""
-    var middle_d: String = ""
-    var middle_e: String = ""
-    var middle_f: String = ""
-}
-
-

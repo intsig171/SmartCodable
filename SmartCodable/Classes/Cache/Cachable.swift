@@ -12,7 +12,7 @@ protocol Cachable {
     
     associatedtype CacheType
     
-    var chaceType: CacheType? { get set }
+    var cacheType: CacheType? { get set }
     
     /// Stores a snapshot of the Model being parsed.
     /// Why array records must be used

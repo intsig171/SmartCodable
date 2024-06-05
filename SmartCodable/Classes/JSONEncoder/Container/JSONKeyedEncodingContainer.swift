@@ -34,7 +34,7 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
 
     private func _converted(_ key: Key) -> CodingKey {
         
-        if let objectType = impl.cache.chaceType {
+        if let objectType = impl.cache.cacheType {
             if let mappings = objectType.mappingForKey() {
                 for mapping in mappings {
                     if mapping.to.stringValue == key.stringValue {
@@ -157,11 +157,21 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
 
 extension JSONKeyedEncodingContainer {
     @inline(__always) private mutating func encodeFloatingPoint<F: FloatingPoint & CustomStringConvertible>(_ float: F, key: CodingKey) throws {
-        let value = try self.wrapFloat(float, for: key)
-        self.object.set(value, for: key.stringValue)
+        
+        if let jsonValue = impl.cache.tranform(from: float, with: key) {
+            self.object.set(jsonValue, for: key.stringValue)
+        } else {
+            let value = try self.wrapFloat(float, for: key)
+            self.object.set(value, for: key.stringValue)
+        }
     }
 
     @inline(__always) private mutating func encodeFixedWidthInteger<N: FixedWidthInteger>(_ value: N, key: CodingKey) throws {
-        self.object.set(.number(value.description), for: key.stringValue)
+        
+        if let jsonValue = impl.cache.tranform(from: value, with: key) {
+            self.object.set(jsonValue, for: key.stringValue)
+        } else {
+            self.object.set(.number(value.description), for: key.stringValue)
+        }
     }
 }
