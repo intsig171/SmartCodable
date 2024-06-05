@@ -73,7 +73,7 @@ class TestViewController: BaseViewController {
 
 struct NewModel: SmartCodable {
     var new_a: String = ""
-    var new_b: String = ""
+    var new_bbbbb: String = ""
     var new_c: String = ""
     var new_d: String = ""
     var new_e: String = ""
@@ -84,7 +84,7 @@ struct NewModel: SmartCodable {
 
 struct OldModel: SmartCodable {
     var old_a: String = ""
-    var old_b: String = ""
+    var old_bbbbb: String = ""
     var old_c: String = ""
     var old_d: String = ""
     var old_e: String = ""

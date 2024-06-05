@@ -42,18 +42,18 @@ struct SmartLog {
     
     private static var cache = LogCache()
     
-    static func logDebug(_ error: DecodingError, className: String) {
+    static func logDebug(_ error: DecodingError, className: String, decoder: String) {
         logIfNeeded(level: .debug) {
             if SmartConfig.openErrorAssert {
                 assert(false, "\(error)")
             }
-            cache.save(error: error, className: className)
+            cache.save(error: error, className: className, decoder: decoder)
         }
     }
     
-    static func logWarning(error: DecodingError, className: String) {
+    static func logWarning(error: DecodingError, className: String, decoder: String) {
         logIfNeeded(level: .warning) {
-            cache.save(error: error, className: className)
+            cache.save(error: error, className: className, decoder: decoder)
         }
     }
     
@@ -66,11 +66,11 @@ struct SmartLog {
         }
     }
     
-    static func printCacheLogs(in name: String) {
+    static func printCacheLogs(in name: String, decoder: String) {
         
         guard isAllowCacheLog() else { return }
         
-        if let format = cache.formatLogs() {
+        if let format = cache.formatLogs(decoder: decoder) {
             var message: String = ""
             message += getHeader()
             message += name + " 👈🏻 👀\n"
@@ -79,7 +79,7 @@ struct SmartLog {
             print(message)
         }
         
-        cache.clearCache()
+        cache.clearCache(decoder: decoder)
     }
     
     static func isAllowCacheLog() -> Bool {

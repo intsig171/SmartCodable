@@ -17,9 +17,22 @@ class Test3ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if var temp = Model.make(name: "Mccc") {
-            temp.name = "abc"
-            print(temp)
+        let dict = ThreadSafeDictionary<String, [String]>()
+        dict.setValue(["one11", "one22", "one33"], forKey: "one")
+        dict.setValue(["two11", "two22", "two33"], forKey: "two")
+        dict.setValue(["three11", "three22", "three33"], forKey: "three")
+        
+        // 等待一小会儿以确保异步操作完成
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            print(dict.dictionary)
+        }
+        print("\n")
+        dict.updateEach { key, value in
+            value.append(key)
+        }
+        // 等待一小会儿以确保异步操作完成
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            print(dict.dictionary)
         }
     }
     

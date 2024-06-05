@@ -52,12 +52,18 @@ open class SmartJSONDecoder: JSONDecoder {
         }
         
         let decoder = _SmartJSONDecoder(referencing: topLevel, options: self.options)
+        
+        
         guard let value = try decoder.unbox(topLevel, as: T.self) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data did not contain a top-level value."))
         }
-        SmartLog.printCacheLogs(in: "\(type)")
+        SmartLog.printCacheLogs(in: "\(type)", decoder: getObjectAddress(decoder))
         return value
     }
 }
 
 
+func getObjectAddress(_ object: AnyObject) -> String {
+    let address = Unmanaged.passUnretained(object).toOpaque()
+    return (String(format: "%p", UInt(bitPattern: address)))
+}

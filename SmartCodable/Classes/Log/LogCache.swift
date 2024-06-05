@@ -9,43 +9,47 @@ import Foundation
 
 struct LogCache {
     private var snapshotDict = ThreadSafeDictionary<String, LogContainer>()
-    private var keyOrder: [String] = [] // 记录key的添加顺序
     
-    mutating func save(error: DecodingError, className: String) {
+    mutating func save(error: DecodingError, className: String, decoder: String) {
         let log = LogItem.make(with: error)
-        cacheLog(log, className: className)
+        cacheLog(log, className: className, decoder: decoder)
     }
 
-    mutating func clearCache() {
-        snapshotDict.removeAll()
-        keyOrder.removeAll()
+    mutating func clearCache(decoder: String) {
+        snapshotDict.removeValue(forKey: decoder)
     }
     
-    mutating func formatLogs() -> String? {
+    mutating func formatLogs(decoder: String) -> String? {
         
-        guard !keyOrder.isEmpty else { return nil }
 
         filterLogItem()
 
-        keyOrder = processArray(keyOrder)
-        alignTypeNamesInAllSnapshots()
-        return keyOrder.compactMap {
-            snapshotDict.getValue(forKey: $0)?.formatMessage() }.joined()
+//        alignTypeNamesInAllSnapshots(decoder: decoder)
+        
+        let keyOrder = processArray(snapshotDict.getAllKeys(), decoder: decoder)
+        
+        
+        let  arr = keyOrder.compactMap {
+            let container = snapshotDict.getValue(forKey: $0)
+            return container?.formatMessage()
+        }
+        
+        return arr.joined()
     }
 }
 
 extension LogCache {
     
-    mutating func processArray(_ array: [String]) -> [String] {
-        guard !array.isEmpty else { return [] }
+    mutating func processArray(_ array: [String], decoder: String) -> [String] {
         
-        var mutableArray = array
-        var indexToInsert: [(index: Int, element: String)] = []
-        
-        func createLogContainer(path: [CodingKey]) -> LogContainer {
-            let container = LogContainer(typeName: "", logs: [], codingPath: path)
-            return container
+        var mutableArray = array.filter {
+            $0.starts(with: decoder)
         }
+        
+        guard !mutableArray.isEmpty else { return [] }
+
+        
+        var indexToInsert: [(index: Int, element: String)] = []
 
         // 特别处理数组的第一个元素
         if let firstElement = mutableArray.first {
@@ -58,7 +62,7 @@ extension LogCache {
                 mutableArray.insert(newElement, at: 0)
  
                 if let snap = snapshotDict.getValue(forKey: firstElement) {
-                    let container = LogContainer(typeName: "", logs: [], codingPath: snap.codingPath.dropLast(2))
+                    let container = LogContainer(typeName: "", logs: [], decoder: snap.decoder, codingPath: snap.codingPath.dropLast(2))
                     snapshotDict.setValue(container, forKey: newElement)
                 }
             }
@@ -127,12 +131,12 @@ extension LogCache {
         snapshotDict = tempDict
     }
     
-    private mutating func cacheLog(_ log: LogItem?, className: String) {
+    private mutating func cacheLog(_ log: LogItem?, className: String, decoder: String) {
         
         guard let log = log else { return }
         
         let path = log.codingPath
-        let key = createKey(path: path)
+        let key = createKey(path: path, decoder: decoder)
                 
         // 如果存在相同的typeName和path，则合并logs
         if var existingSnapshot = snapshotDict.getValue(forKey: key) {
@@ -144,19 +148,17 @@ extension LogCache {
             }
         } else {
             // 创建新的snapshot并添加到字典中
-            let newSnapshot = LogContainer(typeName: className, logs: [log], codingPath: path)
+            let newSnapshot = LogContainer(typeName: className, logs: [log], decoder: decoder, codingPath: path)
             snapshotDict.setValue(newSnapshot, forKey: key)
-            keyOrder.append(key) // 记录新添加的key
         }
     }
     
-    private func createKey(path: [CodingKey]) -> String {
+    private func createKey(path: [CodingKey], decoder: String) -> String {
         let arr = path.map { $0.stringValue }
-        return "\(arr.joined(separator: "-"))"
+        return decoder + "\(arr.joined(separator: "-"))"
     }
     
-    private mutating func alignTypeNamesInAllSnapshots() {
-        
+    private mutating func alignTypeNamesInAllSnapshots(decoder: String) {
         snapshotDict.updateEach { key, snapshot in
             
             let maxLength = snapshot.logs.max(by: { $0.fieldName.count < $1.fieldName.count })?.fieldName.count ?? 0
@@ -172,54 +174,58 @@ extension LogCache {
 
 
 
-class ThreadSafeDictionary<Key: Hashable, Value> {
-    private var dictionary: [Key: Value] = [:]
+public class ThreadSafeDictionary<Key: Hashable, Value> {
+    public var dictionary: [Key: Value] = [:]
     private let queue = DispatchQueue(label: "com.example.ThreadSafeDictionary", attributes: .concurrent)
     
-    func getValue(forKey key: Key) -> Value? {
+    public init() { }
+    
+    public func getValue(forKey key: Key) -> Value? {
         return queue.sync {
             return dictionary[key]
         }
     }
     
-    func setValue(_ value: Value, forKey key: Key) {
-        queue.async(flags: .barrier) {
-            self.dictionary[key] = value
+    public func setValue(_ value: Value, forKey key: Key) {
+        queue.async(flags: .barrier) { [weak self] in
+            self?.dictionary[key] = value
         }
     }
     
-    func removeValue(forKey key: Key) {
+    public func removeValue(forKey key: Key) {
         queue.async(flags: .barrier) {
             self.dictionary.removeValue(forKey: key)
         }
     }
     
-    func removeAll() {
+    public func removeAll() {
         queue.async(flags: .barrier) {
             self.dictionary.removeAll()
         }
     }
     
-    func getAllValues() -> [Value] {
+    public func getAllValues() -> [Value] {
         return queue.sync {
             return Array(dictionary.values)
         }
     }
     
-    func getAllKeys() -> [Key] {
+    public func getAllKeys() -> [Key] {
         return queue.sync {
             return Array(dictionary.keys)
         }
     }
     
-    func updateEach(_ body: (Key, inout Value) throws -> Void) rethrows {
-        try queue.sync {
-            for (key, var value) in dictionary {
-                try body(key, &value)
+    public func updateEach(_ body: (Key, inout Value) throws -> Void) rethrows {
+            try queue.sync {
+                var updatedDictionary: [Key: Value] = [:]
+                for (key, var value) in dictionary {
+                    try body(key, &value)
+                    updatedDictionary[key] = value
+                }
                 queue.async(flags: .barrier) {
-                    self.dictionary[key] = value
+                    self.dictionary = updatedDictionary
                 }
             }
         }
-    }
 }
