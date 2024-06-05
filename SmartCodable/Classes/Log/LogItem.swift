@@ -28,7 +28,6 @@ extension LogItem: Equatable {
 }
 
 struct LogItem {
-    var level: SmartConfig.DebugMode
     /// 字段名称
     var fieldName: String
     /// 错误类型
@@ -39,8 +38,7 @@ struct LogItem {
     private(set) var codingPath: [CodingKey]
     
     
-    init(level: SmartConfig.DebugMode, fieldName: String, logType: String, logDetail: String, codingPath: [CodingKey]) {
-        self.level = level
+    init(fieldName: String, logType: String, logDetail: String, codingPath: [CodingKey]) {
         self.fieldName = fieldName
         self.logType = logType
         self.logDetail = logDetail
@@ -65,25 +63,25 @@ extension LogItem {
         case .keyNotFound(let key, let context):
             // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
-            return LogItem(level: .debug, fieldName: key.stringValue, logType: "MISSING KEY", logDetail: "No value associated with key.", codingPath: codingPath)
+            return LogItem(fieldName: key.stringValue, logType: "MISSING KEY", logDetail: "No value associated with key.", codingPath: codingPath)
             
         case .valueNotFound( _, let context):
             // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
             let key = context.codingPath.last?.stringValue ?? ""
-            return LogItem(level: .debug, fieldName: key, logType: "NULL VALUE", logDetail: context.debugDescription, codingPath: codingPath)
+            return LogItem(fieldName: key, logType: "NULL VALUE", logDetail: context.debugDescription, codingPath: codingPath)
             
         case .typeMismatch( _, let context):
             // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
             let key = context.codingPath.last?.stringValue ?? ""
-            return LogItem(level: .debug, fieldName: key, logType: "TYPE MISMATCH", logDetail: context.debugDescription, codingPath: codingPath)
+            return LogItem(fieldName: key, logType: "TYPE MISMATCH", logDetail: context.debugDescription, codingPath: codingPath)
             
         case .dataCorrupted(let context):
             // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
             let key = context.codingPath.last?.stringValue ?? ""
-            return LogItem(level: .debug, fieldName: key, logType: "DATA CORRUPTED", logDetail: context.debugDescription, codingPath: codingPath)
+            return LogItem(fieldName: key, logType: "DATA CORRUPTED", logDetail: context.debugDescription, codingPath: codingPath)
         default:
             break
         }

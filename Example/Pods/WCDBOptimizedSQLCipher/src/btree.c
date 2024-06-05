@@ -112,6 +112,40 @@ int sqlite3_enable_shared_cache(int enable){
   #define hasReadConflicts(a, b) 0
 #endif
 
+char* sqlite3Base64Encode(u8 *data, u32 size) {
+  if(size == 0){
+    return NULL;
+  }
+  u32 base32Len = ((size + 2) / 3 * 4) + 1;
+  char* encoded = sqlite3Malloc(base32Len);
+  if(encoded == NULL){
+    return encoded;
+  }
+  int i;
+  char *p = encoded;
+  static const char base64Code[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  for (i = 0; i < size - 2; i += 3) {
+    *p++ = base64Code[(data[i] >> 2) & 0x3F];
+    *p++ = base64Code[((data[i] & 0x3) << 4) | ((int) (data[i + 1] & 0xF0) >> 4)];
+    *p++ = base64Code[((data[i + 1] & 0xF) << 2) | ((int) (data[i + 2] & 0xC0) >> 6)];
+    *p++ = base64Code[data[i + 2] & 0x3F];
+  }
+  if (i < size) {
+    *p++ = base64Code[(data[i] >> 2) & 0x3F];
+    if (i == (size - 1)) {
+      *p++ = base64Code[((data[i] & 0x3) << 4)];
+      *p++ = '=';
+    }
+    else {
+      *p++ = base64Code[((data[i] & 0x3) << 4) | ((int) (data[i + 1] & 0xF0) >> 4)];
+      *p++ = base64Code[((data[i + 1] & 0xF) << 2)];
+    }
+    *p++ = '=';
+  }
+  *p++ = '\0';
+  return encoded;
+}
+
 /*
 ** Implementation of the SQLITE_CORRUPT_PAGE() macro. Takes a single
 ** (MemPage*) as an argument. The (MemPage*) must not be NULL.
@@ -121,24 +155,32 @@ int sqlite3_enable_shared_cache(int enable){
 ** normally produced as a side-effect of SQLITE_CORRUPT_BKPT is augmented
 ** with the page number and filename associated with the (MemPage*).
 */
-#ifdef SQLITE_DEBUG
+//#ifdef SQLITE_DEBUG
+
 int corruptPageError(int lineno, MemPage *p){
-  char *zMsg;
+  char *zMsg = NULL;
+  char* pageContent = NULL;
   sqlite3BeginBenignMalloc();
-  zMsg = sqlite3_mprintf("database corruption page %d of %s",
-      (int)p->pgno, sqlite3PagerFilename(p->pBt->pPager, 0)
-  );
-  sqlite3EndBenignMalloc();
-  if( zMsg ){
-    sqlite3ReportError(SQLITE_CORRUPT, lineno, zMsg);
+  if(p != NULL && sqlite3GlobalConfig.xLog) {
+    pageContent = sqlite3Base64Encode(p->aData, p->pBt->pageSize);
+    if(pageContent != NULL){
+      zMsg = sqlite3_mprintf("database corruption detected at line %d: page index %d, path %s, page content %s",
+                             lineno, (int)p->pgno, sqlite3PagerFilename(p->pBt->pPager, 0), pageContent);
+    }else{
+      zMsg = sqlite3_mprintf("database corruption detected at line %d: page index %d, path %s",
+                             lineno, (int)p->pgno, sqlite3PagerFilename(p->pBt->pPager, 0));
+    }
+    sqlite3GlobalConfig.xLog(sqlite3GlobalConfig.pLogArg, SQLITE_CORRUPT, zMsg);
   }
+  sqlite3EndBenignMalloc();
+  sqlite3_free(pageContent);
   sqlite3_free(zMsg);
   return SQLITE_CORRUPT_BKPT;
 }
 # define SQLITE_CORRUPT_PAGE(pMemPage) corruptPageError(__LINE__, pMemPage)
-#else
-# define SQLITE_CORRUPT_PAGE(pMemPage) SQLITE_CORRUPT_PGNO(pMemPage->pgno)
-#endif
+//#else
+//# define SQLITE_CORRUPT_PAGE(pMemPage) SQLITE_CORRUPT_PGNO(pMemPage->pgno)
+//#endif
 
 #ifndef SQLITE_OMIT_SHARED_CACHE
 
@@ -810,7 +852,7 @@ static int btreeMoveto(
     if( pIdxKey==0 ) return SQLITE_NOMEM_BKPT;
     sqlite3VdbeRecordUnpack(pKeyInfo, (int)nKey, pKey, pIdxKey);
     if( pIdxKey->nField==0 || pIdxKey->nField>pKeyInfo->nAllField ){
-      rc = SQLITE_CORRUPT_BKPT;
+      rc = SQLITE_CORRUPT_PAGE(pCur->pPage);
       goto moveto_done;
     }
   }else{
@@ -3129,7 +3171,7 @@ static int lockBtree(BtShared *pBt){
       return rc;
     }
     if( sqlite3WritableSchema(pBt->db)==0 && nPage>nPageFile ){
-      rc = SQLITE_CORRUPT_BKPT;
+      rc = SQLITE_CORRUPT_PAGE(pPage1);
       goto page1_init_failed;
     }
     /* EVIDENCE-OF: R-28312-64704 However, the usable size is not allowed to
@@ -3380,9 +3422,6 @@ int sqlite3BtreeBeginTrans(Btree *p, int wrflag, int *pSchemaVersion){
 
   pBt->btsFlags &= ~BTS_INITIALLY_EMPTY;
   if( pBt->nPage==0 ) pBt->btsFlags |= BTS_INITIALLY_EMPTY;
-#if SQLITE_WCDB_SIGNAL_RETRY
-  WCDBPagerSetWait(pBt->pPager, 1);
-#endif// SQLITE_WCDB_SIGNAL_RETRY
   do {
     /* Call lockBtree() until either pBt->pPage1 is populated or
     ** lockBtree() returns something other than SQLITE_OK. lockBtree()
@@ -3415,10 +3454,6 @@ int sqlite3BtreeBeginTrans(Btree *p, int wrflag, int *pSchemaVersion){
   }while( (rc&0xFF)==SQLITE_BUSY && pBt->inTransaction==TRANS_NONE &&
           btreeInvokeBusyHandler(pBt) );
   sqlite3PagerResetLockTimeout(pBt->pPager);
-  
-#if SQLITE_WCDB_SIGNAL_RETRY
-  WCDBPagerSetWait(pBt->pPager, 0);
-#endif// SQLITE_WCDB_SIGNAL_RETRY
 
   if( rc==SQLITE_OK ){
     if( p->inTrans==TRANS_NONE ){
@@ -3609,7 +3644,7 @@ static int relocatePage(
       eType==PTRMAP_BTREE || eType==PTRMAP_ROOTPAGE );
   assert( sqlite3_mutex_held(pBt->mutex) );
   assert( pDbPage->pBt==pBt );
-  if( iDbPage<3 ) return SQLITE_CORRUPT_BKPT;
+  if( iDbPage<3 ) return SQLITE_CORRUPT_PAGE(pDbPage);
 
   /* Move page iDbPage from its current location to page number iFreePage */
   TRACE(("AUTOVACUUM: Moving %d to free page %d (ptr page %d type %d)\n", 
@@ -5533,7 +5568,7 @@ int sqlite3BtreeMovetoUnpacked(
           *pRes = 0;
           rc = SQLITE_OK;
           pCur->ix = (u16)idx;
-          if( pIdxKey->errCode ) rc = SQLITE_CORRUPT_BKPT;
+          if( pIdxKey->errCode ) rc = SQLITE_CORRUPT_PAGE(pPage);
           goto moveto_finish;
         }
         if( lwr>upr ) break;
@@ -5845,7 +5880,7 @@ static int allocateBtreePage(
   n = get4byte(&pPage1->aData[36]);
   testcase( n==mxPage-1 );
   if( n>=mxPage ){
-    return SQLITE_CORRUPT_BKPT;
+    return SQLITE_CORRUPT_PAGE(pPage1);
   }
   if( n>0 ){
     /* There are pages on the freelist.  Reuse one of those pages. */
@@ -6208,7 +6243,7 @@ static int freePage2(BtShared *pBt, MemPage *pMemPage, Pgno iPage){
     nLeaf = get4byte(&pTrunk->aData[4]);
     assert( pBt->usableSize>32 );
     if( nLeaf > (u32)pBt->usableSize/4 - 2 ){
-      rc = SQLITE_CORRUPT_BKPT;
+      rc = SQLITE_CORRUPT_PAGE(pTrunk);
       goto freepage_out;
     }
     if( nLeaf < (u32)pBt->usableSize/4 - 8 ){
@@ -7078,7 +7113,7 @@ static int editPage(
   assert( nCell>=0 );
   if( iOld<iNew ){
     int nShift = pageFreeArray(pPg, iOld, iNew-iOld, pCArray);
-    if( nShift>nCell ) return SQLITE_CORRUPT_BKPT;
+    if( nShift>nCell ) return SQLITE_CORRUPT_PAGE(pPg);
     memmove(pPg->aCellIdx, &pPg->aCellIdx[nShift*2], nCell*2);
     nCell -= nShift;
   }
@@ -7188,7 +7223,7 @@ static int balance_quick(MemPage *pParent, MemPage *pPage, u8 *pSpace){
   assert( sqlite3PagerIswriteable(pParent->pDbPage) );
   assert( pPage->nOverflow==1 );
 
-  if( pPage->nCell==0 ) return SQLITE_CORRUPT_BKPT;  /* dbfuzz001.test */
+  if( pPage->nCell==0 ) return SQLITE_CORRUPT_PAGE(pPage);  /* dbfuzz001.test */
 
   /* Allocate a new page. This page will become the right-sibling of 
   ** pPage. Make the parent page writable, so that the new divider cell
@@ -7535,7 +7570,7 @@ static int balance_nonroot(
 
         iOff = SQLITE_PTR_TO_INT(apDiv[i]) - SQLITE_PTR_TO_INT(pParent->aData);
         if( (iOff+szNew[i])>(int)pBt->usableSize ){
-          rc = SQLITE_CORRUPT_BKPT;
+          rc = SQLITE_CORRUPT_PAGE(pParent);
           memset(apOld, 0, (i+1)*sizeof(MemPage*));
           goto balance_cleanup;
         }else{
@@ -7600,7 +7635,7 @@ static int balance_nonroot(
     ** table-interior, index-leaf, or index-interior).
     */
     if( pOld->aData[0]!=apOld[0]->aData[0] ){
-      rc = SQLITE_CORRUPT_BKPT;
+      rc = SQLITE_CORRUPT_PAGE(pOld);
       goto balance_cleanup;
     }
 
@@ -8658,7 +8693,7 @@ int sqlite3BtreeInsert(
       ** new entry uses overflow pages, as the insertCell() call below is
       ** necessary to add the PTRMAP_OVERFLOW1 pointer-map entry.  */
       assert( rc==SQLITE_OK ); /* clearCell never fails when nLocal==nPayload */
-      if( oldCell+szNew > pPage->aDataEnd ) return SQLITE_CORRUPT_BKPT;
+      if( oldCell+szNew > pPage->aDataEnd ) return SQLITE_CORRUPT_PAGE(pPage);
       memcpy(oldCell, newCell, szNew);
       return SQLITE_OK;
     }
@@ -8847,7 +8882,7 @@ int sqlite3BtreeDelete(BtCursor *pCur, u8 flags){
       n = pCur->pPage->pgno;
     }
     pCell = findCell(pLeaf, pLeaf->nCell-1);
-    if( pCell<&pLeaf->aData[4] ) return SQLITE_CORRUPT_BKPT;
+    if( pCell<&pLeaf->aData[4] ) return SQLITE_CORRUPT_PAGE(pLeaf);
     nCell = pLeaf->xCellSize(pLeaf, pCell);
     assert( MX_CELL_SIZE(pBt) >= nCell );
     pTmp = pBt->pTmpSpace;
@@ -10128,20 +10163,30 @@ int sqlite3BtreeCheckpoint(Btree *p, int eMode, int *pnLog, int *pnCkpt){
   return rc;
 }
 
+#ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
+int sqlite3BtreeLockCheckPoint(Btree *p, int lock) {
+    int rc = SQLITE_OK;
+    if( p ){
+      BtShared *pBt = p->pBt;
+      sqlite3BtreeEnter(p);
+        rc = sqlite3PagerLockCheckpoint(pBt->pPager, p->db, lock);
+      sqlite3BtreeLeave(p);
+    }
+    return rc;
+}
 #endif
 
-#ifdef SQLITE_WCDB_DIRTY_PAGE_COUNT
-int sqlite3BtreeDirtyPageCount(Btree *p){
-  int count = 0;
-  if (p) {
-    BtShared *pBt = p->pBt;
-    sqlite3BtreeEnter(p);
-    count = sqlite3PagerDirtyPageCount(pBt->pPager);
-    sqlite3BtreeLeave(p);
-  }
-  return count;
+#endif
+
+#ifdef SQLITE_WCDB
+void sqlite3BtreeResetPageStat(Btree *p) {
+  sqlite3PagerResetPageStat(p->pBt->pPager);
 }
-#endif //SQLITE_WCDB_DIRTY_PAGE_COUNT
+
+int* sqlite3BtreeGetPageStat(Btree *p) {
+  return sqlite3PagerGetPageStat(p->pBt->pPager);
+}
+#endif
 
 /*
 ** Return non-zero if a read (or write) transaction is active.

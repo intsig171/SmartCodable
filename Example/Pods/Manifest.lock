@@ -8,14 +8,11 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - HandyJSON (5.0.0-beta.1)
-  - SmartCodable (3.4.5)
-  - SnapKit (5.6.0)
-  - SQLiteRepairKit (1.3.0):
-    - WCDBOptimizedSQLCipher (~> 1.3.0)
-  - WCDB.swift (1.1.0):
-    - SQLiteRepairKit (~> 1.3.0)
-    - WCDBOptimizedSQLCipher (~> 1.3.0)
-  - WCDBOptimizedSQLCipher (1.3.0)
+  - SmartCodable (3.4.6-beta)
+  - SnapKit (5.7.1)
+  - WCDB.swift (2.1.5):
+    - WCDBOptimizedSQLCipher (= 1.4.4)
+  - WCDBOptimizedSQLCipher (1.4.4)
 
 DEPENDENCIES:
   - BTBubble
@@ -35,7 +32,6 @@ SPEC REPOS:
     - FBSnapshotTestCase
     - HandyJSON
     - SnapKit
-    - SQLiteRepairKit
     - WCDB.swift
     - WCDBOptimizedSQLCipher
 
@@ -49,11 +45,10 @@ SPEC CHECKSUMS:
   CleanJSON: 910a36465ce4829e264a902ccf6d1455fdd9f980
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
-  SmartCodable: 935b8b3d83133cb07286b0780f614bc739c1e116
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  SQLiteRepairKit: a66145aadae91886c800f75e16f5cc6476af1a93
-  WCDB.swift: 39e28fe29b5a3bf2927d9fb9218978f19bd49ff0
-  WCDBOptimizedSQLCipher: fc5d49fe6761e54aad29e88da01b6fc1283e5759
+  SmartCodable: 986b785bf32cdf4c212b57b0da2d1f4c9ddb1353
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  WCDB.swift: 175885bda1e00d58baaa0a8f276fa0c03ba62a96
+  WCDBOptimizedSQLCipher: 7f03bb7c94ad164996f0fa87d0f76026f5ab0f92
 
 PODFILE CHECKSUM: c05dc28f2a31c55d860978b6a89fa7017b7f6ee1
 

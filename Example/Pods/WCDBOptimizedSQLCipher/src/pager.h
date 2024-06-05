@@ -173,16 +173,27 @@ int sqlite3PagerOpenSavepoint(Pager *pPager, int n);
 int sqlite3PagerSavepoint(Pager *pPager, int op, int iSavepoint);
 int sqlite3PagerSharedLock(Pager *pPager);
 
-#ifdef SQLITE_WCDB_DIRTY_PAGE_COUNT
-int sqlite3PagerDirtyPageCount(Pager *);
-#endif //SQLITE_WCDB_DIRTY_PAGE_COUNT
-
 #ifndef SQLITE_OMIT_WAL
   int sqlite3PagerCheckpoint(Pager *pPager, sqlite3*, int, int*, int*);
   int sqlite3PagerWalSupported(Pager *pPager);
   int sqlite3PagerWalCallback(Pager *pPager);
   int sqlite3PagerOpenWal(Pager *pPager, int *pisOpen);
   int sqlite3PagerCloseWal(Pager *pPager, sqlite3*);
+
+#ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
+  int sqlite3PagerLockCheckpoint(Pager *pPager, sqlite3 *db, int lock);
+#endif
+
+#ifdef SQLITE_WCDB
+  #define Page_Read_Op 0
+  #define Page_Write_Op 1
+  #define Page_Type_Table 0
+  #define Page_Type_Index 1
+  #define Page_Type_OverFlow 2
+  #define Page_Stat_Last_Offset (Page_Type_OverFlow + 1) * 2
+  void sqlite3PagerResetPageStat(Pager* pPager);
+  int* sqlite3PagerGetPageStat(Pager* pPager);
+#endif
 
 # ifdef SQLITE_ENABLE_SNAPSHOT
   int sqlite3PagerSnapshotGet(Pager *pPager, sqlite3_snapshot **ppSnapshot);
@@ -247,10 +258,5 @@ void *sqlite3PagerCodec(DbPage *);
 # define disable_simulated_io_errors()
 # define enable_simulated_io_errors()
 #endif
-
-#if SQLITE_WCDB_SIGNAL_RETRY
-void WCDBPagerSetWait(Pager* pPager, int bFlag);
-int WCDBPagerGetWait(Pager* pPager);
-#endif// SQLITE_WCDB_SIGNAL_RETRY
 
 #endif /* SQLITE_PAGER_H */

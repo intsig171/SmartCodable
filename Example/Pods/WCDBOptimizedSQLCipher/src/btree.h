@@ -348,11 +348,15 @@ void sqlite3BtreeCursorList(Btree*);
 
 #ifndef SQLITE_OMIT_WAL
   int sqlite3BtreeCheckpoint(Btree*, int, int *, int *);
+#ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
+  int sqlite3BtreeLockCheckPoint(Btree*, int);
+#endif
 #endif
 
-#ifdef SQLITE_WCDB_DIRTY_PAGE_COUNT
-int sqlite3BtreeDirtyPageCount(Btree *);
-#endif //SQLITE_WCDB_DIRTY_PAGE_COUNT
+#ifdef SQLITE_WCDB
+  void sqlite3BtreeResetPageStat(Btree*);
+  int* sqlite3BtreeGetPageStat(Btree*);
+#endif
 
 /*
 ** If we are not using shared cache, then there is no need to

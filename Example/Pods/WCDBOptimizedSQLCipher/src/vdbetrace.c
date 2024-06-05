@@ -133,7 +133,7 @@ char *sqlite3VdbeExpandSql(
       }else if( pVar->flags & MEM_Int ){
         sqlite3_str_appendf(&out, "%lld", pVar->u.i);
       }else if( pVar->flags & MEM_Real ){
-        sqlite3_str_appendf(&out, "%!.15g", pVar->u.r);
+        sqlite3_str_appendf(&out, "%!.17g", pVar->u.r);
       }else if( pVar->flags & MEM_Str ){
         int nOut;  /* Number of bytes of the string text to include in output */
 #ifndef SQLITE_OMIT_UTF16

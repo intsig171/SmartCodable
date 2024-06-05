@@ -121,7 +121,7 @@ int sqlite3VdbeMemConsistentDualRep(Mem *p){
   if( p->flags & MEM_Int ){
     sqlite3_snprintf(sizeof(zBuf),zBuf,"%lld",p->u.i);
   }else{
-    sqlite3_snprintf(sizeof(zBuf),zBuf,"%!.15g",p->u.r);
+    sqlite3_snprintf(sizeof(zBuf),zBuf,"%!.17g",p->u.r);
   }
   z = p->z;
   i = j = 0;
@@ -375,7 +375,7 @@ int sqlite3VdbeMemStringify(Mem *pMem, u8 enc, u8 bForce){
     sqlite3_snprintf(nByte, pMem->z, "%lld", pMem->u.i);
   }else{
     assert( fg & MEM_Real );
-    sqlite3_snprintf(nByte, pMem->z, "%!.15g", pMem->u.r);
+    sqlite3_snprintf(nByte, pMem->z, "%!.17g", pMem->u.r);
   }
   assert( pMem->z!=0 );
   pMem->n = sqlite3Strlen30NN(pMem->z);

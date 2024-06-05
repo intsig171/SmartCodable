@@ -610,7 +610,7 @@ int sqlite3RunParser(Parse *pParse, const char *zSql, char **pzErrMsg){
     if( tokenType>=TK_SPACE ){
       assert( tokenType==TK_SPACE || tokenType==TK_ILLEGAL );
 #endif /* SQLITE_OMIT_WINDOWFUNC */
-      if( db->u1.isInterrupted ){
+      if( (db->u1.isInterrupted || db->suspended) && !db->unimpeded ){
         pParse->rc = SQLITE_INTERRUPT;
         break;
       }

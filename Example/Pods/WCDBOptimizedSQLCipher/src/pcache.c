@@ -878,13 +878,3 @@ void sqlite3PcacheIterateDirty(PCache *pCache, void (*xIter)(PgHdr *)){
   }
 }
 #endif
-
-
-#ifdef SQLITE_WCDB_DIRTY_PAGE_COUNT
-int sqlite3PCacheDirtyPageCount(PCache *pCache){
-  PgHdr *pDirty;
-  int nDirty = 0;
-  for(pDirty=pCache->pDirty; pDirty; pDirty=pDirty->pDirtyNext) nDirty++;
-  return nDirty;
-}
-#endif //SQLITE_WCDB_DIRTY_PAGE_COUNT

@@ -12,6 +12,7 @@
 
 #import "sqlite3.h"
 #import "fts3_tokenizer.h"
+#import "sqlite3_wcdb.h"
 
 FOUNDATION_EXPORT double sqlcipherVersionNumber;
 FOUNDATION_EXPORT const unsigned char sqlcipherVersionString[];

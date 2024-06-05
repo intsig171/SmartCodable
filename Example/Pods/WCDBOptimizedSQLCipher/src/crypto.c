@@ -639,6 +639,9 @@ int sqlcipher_codec_pragma(sqlite3* db, int iDb, Parse *pParse, const char *zLef
 #define CODEC_READ_OP 3
 #define CODEC_WRITE_OP 6
 #define CODEC_JOURNAL_OP 7
+#ifdef SQLITE_WCDB
+#define CODEC_WCDB_READ_OP 4
+#endif
 
 /*
  * sqlite3Codec can be called in multiple modes.
@@ -647,7 +650,8 @@ int sqlcipher_codec_pragma(sqlite3* db, int iDb, Parse *pParse, const char *zLef
  * decrypt mode - expected to return a pointer to pData, with
  *   the data decrypted in the input buffer
  */
-static void* sqlite3Codec(void *iCtx, void *data, Pgno pgno, int mode) {
+
+void* sqlite3Codec(void *iCtx, void *data, Pgno pgno, int mode) {
   codec_ctx *ctx = (codec_ctx *) iCtx;
   int offset = 0, rc = 0;
   int page_sz = sqlcipher_codec_ctx_get_pagesize(ctx); 
@@ -664,6 +668,11 @@ static void* sqlite3Codec(void *iCtx, void *data, Pgno pgno, int mode) {
 
   /* call to derive keys if not present yet */
   if((rc = sqlcipher_codec_key_derive(ctx)) != SQLITE_OK) {
+#ifdef SQLITE_WCDB
+   if(mode == CODEC_WCDB_READ_OP) {
+     return NULL;
+   }
+#endif
    sqlcipher_codec_ctx_set_error(ctx, rc); 
    return NULL;
   }
@@ -675,14 +684,27 @@ static void* sqlite3Codec(void *iCtx, void *data, Pgno pgno, int mode) {
   CODEC_TRACE("sqlite3Codec: switch mode=%d offset=%d\n",  mode, offset);
   switch(mode) {
     case CODEC_READ_OP: /* decrypt */
+#ifdef SQLITE_WCDB
+    case CODEC_WCDB_READ_OP: /* decrypt data from WCDB*/
+#endif
       if(pgno == 1) /* copy initial part of file header or SQLite magic to buffer */ 
         memcpy(buffer, plaintext_header_sz ? pData : (void *) SQLITE_FILE_HEADER, offset); 
 
       rc = sqlcipher_page_cipher(ctx, cctx, pgno, CIPHER_DECRYPT, page_sz - offset, pData + offset, (unsigned char*)buffer + offset);
       if(rc != SQLITE_OK) { /* clear results of failed cipher operation and set error */
         sqlcipher_memset((unsigned char*) buffer+offset, 0, page_sz-offset);
+#ifdef SQLITE_WCDB
+        if(mode == CODEC_WCDB_READ_OP) {
+          return NULL;
+        }
+#endif
         sqlcipher_codec_ctx_set_error(ctx, rc);
       }
+#ifdef SQLITE_WCDB
+      if(mode == CODEC_WCDB_READ_OP) {
+        return buffer;
+      }
+#endif
       memcpy(pData, buffer, page_sz); /* copy buffer data back to pData and return */
       return pData;
       break;
@@ -714,6 +736,16 @@ static void* sqlite3Codec(void *iCtx, void *data, Pgno pgno, int mode) {
       break;
   }
 }
+
+#ifdef SQLITE_WCDB
+
+void* sqlite3_getCipherContext(sqlite3 *db, const char* schema) {
+  int index = sqlcipher_find_db_index(db, schema);
+  struct Db *pDb = &db->aDb[index];
+  return sqlite3PagerGetCodec(pDb->pBt->pBt->pPager);
+}
+
+#endif
 
 static void sqlite3FreeCodecArg(void *pCodecArg) {
   codec_ctx *ctx = (codec_ctx *) pCodecArg;

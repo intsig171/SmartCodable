@@ -1578,9 +1578,6 @@ static int sqliteDefaultBusyCallback(
 ** returns 0, the operation aborts with an SQLITE_BUSY error.
 */
 int sqlite3InvokeBusyHandler(BusyHandler *p, sqlite3_file *pFile){
-#if SQLITE_WCDB_SIGNAL_RETRY
-  return 1;
-#endif// SQLITE_WCDB_SIGNAL_RETRY
   int rc;
   if( p->xBusyHandler==0 || p->nBusy<0 ) return 0;
   if( p->bExtraFileArg ){
@@ -1675,6 +1672,7 @@ int sqlite3_busy_timeout(sqlite3 *db, int ms){
   return SQLITE_OK;
 }
 
+
 /*
 ** Cause any pending operation to stop at its earliest opportunity.
 */
@@ -1688,6 +1686,46 @@ void sqlite3_interrupt(sqlite3 *db){
   db->u1.isInterrupted = 1;
 }
 
+#ifdef SQLITE_WCDB_SUSPEND
+void sqlite3_suspend(sqlite3 *db, int suspend){
+#ifdef SQLITE_ENABLE_API_ARMOR
+  if( !sqlite3SafetyCheckOk(db) && (db==0 || db->magic!=SQLITE_MAGIC_ZOMBIE) ){
+    (void)SQLITE_MISUSE_BKPT;
+    return;
+  }
+#endif
+  db->suspended = !!suspend;
+}
+
+int sqlite3_is_suspended(sqlite3 *db) {
+#ifdef SQLITE_ENABLE_API_ARMOR
+  if( !sqlite3SafetyCheckOk(db) && (db==0 || db->magic!=SQLITE_MAGIC_ZOMBIE) ){
+    (void)SQLITE_MISUSE_BKPT;
+    return 0;
+  }
+#endif
+  return db->suspended;
+}
+
+void sqlite3_unimpeded(sqlite3 *db, int unimpeded)
+{
+#ifdef SQLITE_ENABLE_API_ARMOR
+  if( !sqlite3SafetyCheckOk(db) && (db==0 || db->magic!=SQLITE_MAGIC_ZOMBIE) ){
+    (void)SQLITE_MISUSE_BKPT;
+    return;
+  }
+#endif
+  db->unimpeded = !!unimpeded;
+}
+#endif
+
+void sqlite3_revertCommitOrder(sqlite3 *db)
+{
+    if(db == NULL){
+        return;
+    }
+    db->revertCommit = 1;
+}
 
 /*
 ** This function is exactly the same as sqlite3_create_function(), except
@@ -2304,6 +2342,18 @@ int sqlite3_wal_checkpoint_v2(
 #endif
 }
 
+SQLITE_API int sqlite3_lock_checkpoint(sqlite3 *db, int lock) {
+  int rc;
+  sqlite3_mutex_enter(db->mutex);
+  if(db->nDb == 0){
+    rc = SQLITE_ERROR;
+  }else{
+    rc = sqlite3BtreeLockCheckPoint(db->aDb[0].pBt, lock);
+  }
+  sqlite3_mutex_leave(db->mutex);
+  return rc;
+}
+
 
 /*
 ** Checkpoint database zDb. If zDb is NULL, or if the buffer zDb points
@@ -2318,8 +2368,10 @@ int sqlite3_wal_checkpoint(sqlite3 *db, const char *zDb){
 
 #ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
 void *sqlite3_wal_checkpoint_handler(sqlite3 *db,
-                                   void (*xCallback)(void*, sqlite3*, const char *),
-                                   void* pArg){
+                                     void (*xCheckPointBegin)(void *ctx, int nBackFill, int mxFrame, int salt1, int salt2),
+                                     void (*xCheckPointPage)(void *ctx, int pageNo, void *data, int size),
+                                     void (*xCheckPointFinish)(void *ctx, int nBackFill, int mxFrame, int salt1, int salt2),
+                                     void* pCtx){
 #ifndef SQLITE_OMIT_WAL
   void *pRet;
 #ifdef SQLITE_ENABLE_API_ARMOR
@@ -2329,9 +2381,11 @@ void *sqlite3_wal_checkpoint_handler(sqlite3 *db,
   }
 #endif
   sqlite3_mutex_enter(db->mutex);
-  pRet = db->pCheckpointArg;
-  db->xCheckpointCallback = xCallback;
-  db->pCheckpointArg = pArg;
+  pRet = db->pCheckpointCtx;
+  db->xCheckPointBegin = xCheckPointBegin;
+  db->xCheckPointPage = xCheckPointPage;
+  db->xCheckPointFinish = xCheckPointFinish;
+  db->pCheckpointCtx = pCtx;
   sqlite3_mutex_leave(db->mutex);
   return pRet;
 #else
@@ -2339,23 +2393,6 @@ void *sqlite3_wal_checkpoint_handler(sqlite3 *db,
 #endif
 }
 #endif //SQLITE_WCDB_CHECKPOINT_HANDLER
-
-#ifdef SQLITE_WCDB_DIRTY_PAGE_COUNT
-int sqlite3_dirty_page_count(sqlite3 *db){
-#ifdef SQLITE_ENABLE_API_ARMOR
-  if( !sqlite3SafetyCheckOk(db) ) return 0;
-#endif
-  sqlite3_mutex_enter(db->mutex);
-  int count = 0;
-  int i;
-  for(i=0; i<db->nDb; i++){
-    count += sqlite3BtreeDirtyPageCount(db->aDb[i].pBt);
-  }
-  sqlite3_mutex_leave(db->mutex);
-  return count;
-}
-#endif //SQLITE_WCDB_DIRTY_PAGE_COUNT
-
 
 #ifndef SQLITE_OMIT_WAL
 /*
@@ -2386,7 +2423,7 @@ int sqlite3Checkpoint(sqlite3 *db, int iDb, int eMode, int *pnLog, int *pnCkpt){
   assert( sqlite3_mutex_held(db->mutex) );
   assert( !pnLog || *pnLog==-1 );
   assert( !pnCkpt || *pnCkpt==-1 );
-
+  
   for(i=0; i<db->nDb && rc==SQLITE_OK; i++){
     if( i==iDb || iDb==SQLITE_MAX_ATTACHED ){
       rc = sqlite3BtreeCheckpoint(db->aDb[i].pBt, eMode, pnLog, pnCkpt);
@@ -2395,9 +2432,6 @@ int sqlite3Checkpoint(sqlite3 *db, int iDb, int eMode, int *pnLog, int *pnCkpt){
       if( rc==SQLITE_BUSY ){
         bBusy = 1;
         rc = SQLITE_OK;
-      }
-      if( rc==SQLITE_OK && db->xCheckpointCallback) {
-        db->xCheckpointCallback(db->pCheckpointArg, db, db->aDb[i].zDbSName);
       }
     }
   }
@@ -3624,6 +3658,176 @@ int sqlite3IoerrnomemError(int lineno){
 */
 void sqlite3_thread_cleanup(void){
 }
+#endif
+
+#ifdef SQLITE_WCDB
+
+SQLITE_API int sqlite3_schema_info(
+  sqlite3 *db,
+  int *tableCount,
+  int *indexCount,
+  int *triggerCount
+) {
+  if( db == 0 ){
+    return SQLITE_MISUSE_BKPT;
+  }
+  sqlite3_mutex_enter(db->mutex);
+  sqlite3BtreeEnterAll(db);
+    
+  char *zErrMsg = 0;
+  int rc = sqlite3Init(db, &zErrMsg);
+  if( SQLITE_OK!=rc ){
+    goto error_out;
+  }
+  if(tableCount != NULL){
+    *tableCount = 0;
+  }
+  if(indexCount != NULL) {
+    *indexCount = 0;
+  }
+  if(triggerCount != NULL){
+    *triggerCount = 0;
+  }
+  for(int i=0; i<db->nDb; i++){
+    Schema *pSchema = db->aDb[i].pSchema;
+    if( ALWAYS(pSchema!=0) ){
+      HashElem *p;
+      if(tableCount != NULL){
+        *tableCount += pSchema->tblHash.count;
+      }
+      if(indexCount != NULL) {
+        *indexCount += pSchema->idxHash.count;
+      }
+      if(triggerCount != NULL){
+        *triggerCount += pSchema->trigHash.count;
+      }
+    }
+  }
+error_out:
+  sqlite3BtreeLeaveAll(db);
+  sqlite3ErrorWithMsg(db, rc, (zErrMsg?"%s":0), zErrMsg);
+  sqlite3DbFree(db, zErrMsg);
+  rc = sqlite3ApiExit(db, rc);
+  sqlite3_mutex_leave(db->mutex);
+  return rc;
+}
+
+SQLITE_API int sqlite3_table_config(
+  sqlite3 *db,
+  const char *dbName,
+  const char *tableName,
+  int *pAutoIncrement,
+  int *pWithoutRowid,
+  int *pVirtual,
+  const char **pIntegerPrimaryKey
+) {
+  if( db == 0 || tableName==0 ){
+    return SQLITE_MISUSE_BKPT;
+  }
+  int rc;
+  char *zErrMsg = 0;
+  Table *pTab = 0;
+  /* Ensure the database schema has been loaded */
+  sqlite3_mutex_enter(db->mutex);
+  sqlite3BtreeEnterAll(db);
+  rc = sqlite3Init(db, &zErrMsg);
+  if( SQLITE_OK!=rc ){
+    goto error_out;
+  }
+
+  /* Locate the table in question */
+  pTab = sqlite3FindTable(db, tableName, dbName);
+  if( !pTab || pTab->pSelect ){
+    pTab = 0;
+    goto error_out;
+  }
+    
+  if(pIntegerPrimaryKey && pTab->iPKey >= 0) {
+    const char* name = pTab->aCol[pTab->iPKey].zName;
+    int length = name != NULL ? strlen(name) : 0;
+    if(length > 0) {
+      int length = strlen(name);
+      int size = (strlen(name) + 1) * sizeof(char);
+      char* buffer = malloc(size);
+      if(buffer != NULL) {
+        memcpy(buffer, name, size);
+        *pIntegerPrimaryKey = buffer;
+      }
+    }
+  }
+  if(pAutoIncrement) {
+    *pAutoIncrement = (pTab->tabFlags & TF_Autoincrement)!=0;
+  }
+  if(pWithoutRowid) {
+    *pWithoutRowid = (pTab->tabFlags & TF_WithoutRowid)!=0;
+  }
+  if(pVirtual){
+    *pVirtual = IsVirtual(pTab);
+  }
+    
+error_out:
+  sqlite3BtreeLeaveAll(db);
+
+  if( SQLITE_OK==rc && !pTab ){
+    sqlite3DbFree(db, zErrMsg);
+    zErrMsg = sqlite3MPrintf(db, "no such table: %s", tableName);
+    rc = SQLITE_ERROR;
+  }
+  sqlite3ErrorWithMsg(db, rc, (zErrMsg?"%s":0), zErrMsg);
+  sqlite3DbFree(db, zErrMsg);
+  rc = sqlite3ApiExit(db, rc);
+  sqlite3_mutex_leave(db->mutex);
+  return rc;
+}
+
+SQLITE_API int sqlite3_table_config_auto_increment(
+  sqlite3 *db,
+  const char *tableName
+) {
+  if( db == 0 || tableName==0 ){
+    return SQLITE_MISUSE_BKPT;
+  }
+  int rc;
+  char *zErrMsg = 0;
+  Table *pTab = 0;
+  /* Ensure the database schema has been loaded */
+  sqlite3_mutex_enter(db->mutex);
+  sqlite3BtreeEnterAll(db);
+  rc = sqlite3Init(db, &zErrMsg);
+  if( SQLITE_OK!=rc ){
+    goto error_out;
+  }
+
+  /* Locate the table in question */
+  pTab = sqlite3FindTable(db, tableName, "main");
+  if( !pTab || pTab->pSelect ){
+    pTab = 0;
+    goto error_out;
+  }
+
+  pTab->tabFlags |= TF_Autoincrement;
+  
+  Db* mainDB = &db->aDb[0];
+  int schema_cookie = mainDB->pSchema->schema_cookie;
+  schema_cookie += 1;
+  mainDB->pSchema->schema_cookie = schema_cookie;
+  rc = sqlite3BtreeUpdateMeta(mainDB->pBt, BTREE_SCHEMA_VERSION, schema_cookie);
+    
+error_out:
+  sqlite3BtreeLeaveAll(db);
+
+  if( SQLITE_OK==rc && !pTab ){
+    sqlite3DbFree(db, zErrMsg);
+    zErrMsg = sqlite3MPrintf(db, "no such table: %s", tableName);
+    rc = SQLITE_ERROR;
+  }
+  sqlite3ErrorWithMsg(db, rc, (zErrMsg?"%s":0), zErrMsg);
+  sqlite3DbFree(db, zErrMsg);
+  rc = sqlite3ApiExit(db, rc);
+  sqlite3_mutex_leave(db->mutex);
+  return rc;
+}
+
 #endif
 
 /*

@@ -565,6 +565,7 @@ SQLITE_API int sqlite3_exec(
 #define SQLITE_OPEN_SHAREDCACHE      0x00020000  /* Ok for sqlite3_open_v2() */
 #define SQLITE_OPEN_PRIVATECACHE     0x00040000  /* Ok for sqlite3_open_v2() */
 #define SQLITE_OPEN_WAL              0x00080000  /* VFS only */
+#define SQLITE_OPEN_MAINDB_READONLY  0x00100000  /* Main db readonly */
 
 /* Reserved:                         0x00F00000 */
 
@@ -8661,20 +8662,6 @@ SQLITE_API int sqlite3_wal_checkpoint_v2(
   int *pnLog,                     /* OUT: Size of WAL log in frames */
   int *pnCkpt                     /* OUT: Total number of frames checkpointed */
 );
-
-#ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
-/*
- ** Register a handler when checkpoint did happen.
- */
-SQLITE_API void *sqlite3_wal_checkpoint_handler(sqlite3 *, void (*xCallback)(void*, sqlite3*, const char *), void*);
-#endif //SQLITE_WCDB_CHECKPOINT_HANDLER
-    
-#ifdef SQLITE_WCDB_DIRTY_PAGE_COUNT
-/*
- ** Return the number of dirty pages currently in the cache.
- */
-SQLITE_API int sqlite3_dirty_page_count(sqlite3*);
-#endif //SQLITE_WCDB_DIRTY_PAGE_COUNT
 
 /*
 ** CAPI3REF: Checkpoint Mode Values

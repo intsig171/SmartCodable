@@ -44,10 +44,10 @@ class DecodingDictLogViewController: BaseViewController {
         SmartConfig.debugMode = .verbose
         SmartConfig.space = "   "
         
-        demo()
-        demo1()
-        demo2()
-        demo3()
+//        demo()
+//        demo1()
+//        demo2()
+//        demo3()
         demo4()
     }
     

@@ -56,7 +56,11 @@ typedef struct Wal Wal;
 
 /* Open and close a connection to a write-ahead log. */
 int sqlite3WalOpen(sqlite3_vfs*, sqlite3_file*, const char *, int, i64, Wal**);
-int sqlite3WalClose(Wal *pWal, sqlite3*, int sync_flags, int, u8 *);
+int sqlite3WalClose(
+#ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
+  void *pager,
+#endif
+  Wal *pWal, sqlite3*, int sync_flags, int, u8 *);
 
 /* Set the limiting size of a WAL file. */
 void sqlite3WalLimit(Wal*, i64);
@@ -98,6 +102,9 @@ int sqlite3WalFrames(Wal *pWal, int, PgHdr *, Pgno, int, int);
 
 /* Copy pages from the log to the database file */ 
 int sqlite3WalCheckpoint(
+#ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
+  void *pager,
+#endif
   Wal *pWal,                      /* Write-ahead log connection */
   sqlite3 *db,                    /* Check this handle's interrupt flag */
   int eMode,                      /* One of PASSIVE, FULL and RESTART */
@@ -109,6 +116,10 @@ int sqlite3WalCheckpoint(
   int *pnLog,                     /* OUT: Number of frames in WAL */
   int *pnCkpt                     /* OUT: Number of backfilled frames in WAL */
 );
+
+#ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
+int sqlite3WalLockCheckPoint(Wal *pWal, sqlite3 *db, int lock);
+#endif
 
 /* Return the value to pass to a sqlite3_wal_hook callback, the
 ** number of frames in the WAL at the point of the last commit since

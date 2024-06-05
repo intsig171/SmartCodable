@@ -209,9 +209,4 @@ int sqlite3OsCurrentTimeInt64(sqlite3_vfs *, sqlite3_int64*);
 int sqlite3OsOpenMalloc(sqlite3_vfs *, const char *, sqlite3_file **, int,int*);
 void sqlite3OsCloseFree(sqlite3_file *);
 
-#if SQLITE_WCDB_SIGNAL_RETRY
-void sqlite3OsSetWait(sqlite3_file *, int);
-int sqlite3OsGetWait(sqlite3_file *);
-#endif// SQLITE_WCDB_SIGNAL_RETRY
-
 #endif /* _SQLITE_OS_H_ */

@@ -187,8 +187,4 @@ int sqlite3PCachePercentDirty(PCache*);
 int sqlite3PCacheIsDirty(PCache *pCache);
 #endif
 
-#ifdef SQLITE_WCDB_DIRTY_PAGE_COUNT
-int sqlite3PCacheDirtyPageCount(PCache*);
-#endif //SQLITE_WCDB_DIRTY_PAGE_COUNT
-
 #endif /* _PCACHE_H_ */

@@ -1524,7 +1524,7 @@ static char *displayP4(Op *pOp, char *zTemp, int nTemp){
       break;
     }
     case P4_REAL: {
-      sqlite3_str_appendf(&x, "%.16g", *pOp->p4.pReal);
+      sqlite3_str_appendf(&x, "%.17g", *pOp->p4.pReal);
       break;
     }
     case P4_MEM: {
@@ -1534,7 +1534,7 @@ static char *displayP4(Op *pOp, char *zTemp, int nTemp){
       }else if( pMem->flags & MEM_Int ){
         sqlite3_str_appendf(&x, "%lld", pMem->u.i);
       }else if( pMem->flags & MEM_Real ){
-        sqlite3_str_appendf(&x, "%.16g", pMem->u.r);
+        sqlite3_str_appendf(&x, "%.17g", pMem->u.r);
       }else if( pMem->flags & MEM_Null ){
         zP4 = "NULL";
       }else{
@@ -1930,7 +1930,7 @@ int sqlite3VdbeList(
   }
 
   if( rc==SQLITE_OK ){
-    if( db->u1.isInterrupted ){
+    if( (db->u1.isInterrupted || db->suspended) && !db->unimpeded ){
       p->rc = SQLITE_INTERRUPT;
       rc = SQLITE_ERROR;
       sqlite3VdbeError(p, sqlite3ErrStr(p->rc));
@@ -2516,10 +2516,23 @@ static int vdbeCommit(sqlite3 *db, Vdbe *p){
   if( 0==sqlite3Strlen30(sqlite3BtreeGetFilename(db->aDb[0].pBt))
    || nTrans<=1
   ){
-    for(i=0; rc==SQLITE_OK && i<db->nDb; i++){
-      Btree *pBt = db->aDb[i].pBt;
-      if( pBt ){
-        rc = sqlite3BtreeCommitPhaseOne(pBt, 0);
+#ifdef SQLITE_WCDB
+    if(db->revertCommit){
+      for(i=db->nDb-1; rc==SQLITE_OK && i>=0; i--){
+        Btree *pBt = db->aDb[i].pBt;
+        if( pBt ){
+          rc = sqlite3BtreeCommitPhaseOne(pBt, 0);
+        }
+      }
+      db->revertCommit = 0;
+    }else
+#endif
+    {
+      for(i=0; rc==SQLITE_OK && i<db->nDb; i++){
+        Btree *pBt = db->aDb[i].pBt;
+        if( pBt ){
+          rc = sqlite3BtreeCommitPhaseOne(pBt, 0);
+        }
       }
     }
 

@@ -16,44 +16,69 @@ import BTPrint
 import SmartCodable
 
 class TestViewController: BaseViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dict: [String: Any] = [
-//            "date": "2024-06-03",
-            "currentDate": 739107587,
-            "age": 100
-        ]
+        let dict: [String: Any] = [:]
         
-        if let model = Model.deserialize(from: dict) {
-            print(model)
-            
-            let dict = model.toDictionary()
-            print(dict)
-        }
-
-    }
-    
-    struct Model: SmartCodable {
-        var date: Date = Date()
-        var age: Int?
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        let group = DispatchGroup()
         
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            let df = DateFormatter()
-            df.dateFormat = "yyyy-MM-dd"
-            return [
-                CodingKeys.date <--- SmartDateFormatTransformer(df)
-//                CodingKeys.date <--- SmartDateTransformer()
-            ]
+        queue.async(group: group) {
+            if let model = NewModel.deserialize(from: dict) {
+                print(model)
+            }
         }
         
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.date <--- "currentDate"
-            ]
+        queue.async(group: group) {
+            if let model = OldModel.deserialize(from: dict) {
+                print(model)
+            }
         }
         
+        queue.async(group: group) {
+            if let model = MiddleModel.deserialize(from: dict) {
+                print(model)
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            print("Both methods are completed.")
+        }
     }
 }
+
+
+struct NewModel: SmartCodable {
+    var new_a: String = ""
+    var new_bbbbb: String = ""
+    var new_c: String = ""
+    var new_d: String = ""
+    var new_e: String = ""
+    var new_f: String = ""
+}
+
+
+
+struct OldModel: SmartCodable {
+    var old_a: String = ""
+    var old_bbbbb: String = ""
+    var old_c: String = ""
+    var old_d: String = ""
+    var old_e: String = ""
+    var old_f: String = ""
+}
+
+
+
+struct MiddleModel: SmartCodable {
+    var middle_a: String = ""
+    var middle_b: String = ""
+    var middle_c: String = ""
+    var middle_d: String = ""
+    var middle_e: String = ""
+    var middle_f: String = ""
+}
+
 

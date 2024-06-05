@@ -702,6 +702,9 @@ static int sqlite3LockAndPrepare(
   if( ppStmt==0 ) return SQLITE_MISUSE_BKPT;
 #endif
   *ppStmt = 0;
+#ifdef SQLITE_WCDB_SUSPEND
+  if( db->suspended && !db->unimpeded ) return SQLITE_INTERRUPT;
+#endif
   if( !sqlite3SafetyCheckOk(db)||zSql==0 ){
     return SQLITE_MISUSE_BKPT;
   }
@@ -714,7 +717,7 @@ static int sqlite3LockAndPrepare(
     rc = sqlite3Prepare(db, zSql, nBytes, prepFlags, pOld, ppStmt, pzTail);
     assert( rc==SQLITE_OK || *ppStmt==0 );
   }while( rc==SQLITE_ERROR_RETRY
-       || (rc==SQLITE_SCHEMA && (sqlite3ResetOneSchema(db,-1), cnt++)==0) );
+       || (rc==SQLITE_SCHEMA && (sqlite3ResetOneSchema(db,-1), cnt++)<SQLITE_MAX_SCHEMA_RETRY) );
   sqlite3BtreeLeaveAll(db);
   rc = sqlite3ApiExit(db, rc);
   assert( (rc&db->errMask)==rc );

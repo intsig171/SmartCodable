@@ -178,8 +178,7 @@ static void attachFunc(
     sqlite3BtreeSecureDelete(pNew->pBt,
                              sqlite3BtreeSecureDelete(db->aDb[0].pBt,-1) );
 #ifndef SQLITE_OMIT_PAGER_PRAGMAS
-    sqlite3BtreeSetPagerFlags(pNew->pBt,
-                      PAGER_SYNCHRONOUS_FULL | (db->flags & PAGER_FLAGS_MASK));
+    sqlite3BtreeSetPagerFlags(pNew->pBt, (db->flags & PAGER_FLAGS_MASK));
 #endif
     sqlite3BtreeLeave(pNew->pBt);
   }

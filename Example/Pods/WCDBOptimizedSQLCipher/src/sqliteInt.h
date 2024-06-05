@@ -166,6 +166,12 @@
 */
 #include "sqlite3.h"
 
+#if __STDC_VERSION__ >= 201112L
+#include <stdatomic.h>
+#define SQLITE_HAS_STDATOMIC
+#endif
+
+
 /*
 ** Include the configuration header output by 'configure' if we're using the
 ** autoconf-based build
@@ -1442,8 +1448,10 @@ struct sqlite3 {
   int (*xWalCallback)(void *, sqlite3 *, const char *, int);
   void *pWalArg;
 #ifdef SQLITE_WCDB_CHECKPOINT_HANDLER
-  void (*xCheckpointCallback)(void *, sqlite3 *, const char *);
-  void *pCheckpointArg;
+  void (*xCheckPointBegin)(void *ctx, int nBackFill, int mxFrame, int salt1, int salt2);
+  void (*xCheckPointPage)(void *ctx, int pageNo, void *data, int size);
+  void (*xCheckPointFinish)(void *ctx, int nBackFill, int mxFrame, int salt1, int salt2);
+  void *pCheckpointCtx;
 #endif
 #endif
   void(*xCollNeeded)(void*,sqlite3*,int eTextRep,const char*);
@@ -1451,9 +1459,20 @@ struct sqlite3 {
   void *pCollNeededArg;
   sqlite3_value *pErr;          /* Most recent error message */
   union {
+#ifdef SQLITE_HAS_STDATOMIC
+    atomic_int isInterrupted;
+#else
     volatile int isInterrupted; /* True if sqlite3_interrupt has been called */
     double notUsed1;            /* Spacer */
+#endif
   } u1;
+#ifdef SQLITE_HAS_STDATOMIC
+  atomic_int suspended;         /* True if sqlite_suspend has been called */
+  atomic_int unimpeded;         /* True if interrupt and suspend are ignorable */
+#else
+  volatile int suspended;       /* True if sqlite_suspend has been called */
+  volatile int unimpeded;       /* True if interrupt and suspend are ignorable */
+#endif
   Lookaside lookaside;          /* Lookaside malloc configuration */
 #ifndef SQLITE_OMIT_AUTHORIZATION
   sqlite3_xauth xAuth;          /* Access authorization function */
@@ -1501,6 +1520,9 @@ struct sqlite3 {
 #endif
 #ifdef SQLITE_USER_AUTHENTICATION
   sqlite3_userauth auth;        /* User authentication information */
+#endif
+#ifdef SQLITE_WCDB
+  u8 revertCommit;
 #endif
 };
 
