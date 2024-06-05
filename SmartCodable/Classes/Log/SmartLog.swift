@@ -99,11 +99,26 @@ struct SmartLog {
         }
     }
     
+    static func logVerbose(_ error: DecodingError, in className: String) {
+        logIfNeeded(level: .verbose) {
+            let header = getHeader()
+            let footer = getFooter()
+            
+            
+            if let logItem = LogItem.make(with: error) {
+                let output = "\(className) 👈🏻 👀\n \(logItem.formartMessage)\n"
+                print("\(header)\(output)\(footer)")
+            }
+            
+        }
+    }
+    
+    
     static func logVerbose(_ item: String, in className: String) {
         logIfNeeded(level: .verbose) {
             let header = getHeader()
             let footer = getFooter()
-            let output = "[\(className)] \(item)\n"
+            let output = "\(className) 👈🏻 👀\n \(item)\n"
             print("\(header)\(output)\(footer)")
         }
     }

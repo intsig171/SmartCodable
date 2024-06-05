@@ -47,9 +47,11 @@ struct LogItem {
     
     
     var formartMessage: String {
-         """
-         \(fieldName): \(logDetail)\n
-         """
+        if fieldName.isEmpty {
+            return  "\(logDetail)"
+        } else {
+            return "\(fieldName): \(logDetail)\n"
+        }
     }
 }
 
