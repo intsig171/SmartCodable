@@ -8,11 +8,8 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - HandyJSON (5.0.0-beta.1)
-  - SmartCodable (3.4.6-beta)
-  - SnapKit (5.7.1)
-  - WCDB.swift (2.1.5):
-    - WCDBOptimizedSQLCipher (= 1.4.4)
-  - WCDBOptimizedSQLCipher (1.4.4)
+  - SmartCodable (4.0.0-beta)
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - BTBubble
@@ -22,7 +19,6 @@ DEPENDENCIES:
   - HandyJSON (= 5.0.0-beta.1)
   - SmartCodable (from `../`)
   - SnapKit
-  - WCDB.swift
 
 SPEC REPOS:
   trunk:
@@ -32,8 +28,6 @@ SPEC REPOS:
     - FBSnapshotTestCase
     - HandyJSON
     - SnapKit
-    - WCDB.swift
-    - WCDBOptimizedSQLCipher
 
 EXTERNAL SOURCES:
   SmartCodable:
@@ -45,11 +39,9 @@ SPEC CHECKSUMS:
   CleanJSON: 910a36465ce4829e264a902ccf6d1455fdd9f980
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
-  SmartCodable: 986b785bf32cdf4c212b57b0da2d1f4c9ddb1353
-  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  WCDB.swift: 175885bda1e00d58baaa0a8f276fa0c03ba62a96
-  WCDBOptimizedSQLCipher: 7f03bb7c94ad164996f0fa87d0f76026f5ab0f92
+  SmartCodable: 85da5d98e365eb0c84d39645d97ebaea12dbaf07
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: c05dc28f2a31c55d860978b6a89fa7017b7f6ee1
+PODFILE CHECKSUM: 7f3af03f81934df0c035518074a7abbec8fa9d3f
 
 COCOAPODS: 1.15.2
