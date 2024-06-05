@@ -11,9 +11,11 @@ struct LogContainer {
     /// 当前容器的类型，通过判断path的最后一个key，是Index么？ 判断是keyed还是unKeyed容器。
     var typeName: String
     
+    
     // 当前容器下，解析错误的属性日志
     var logs: [LogItem] = []
-    
+    var decoder: String
+
     /// 容器的路径
     var codingPath: [CodingKey] = []
     
