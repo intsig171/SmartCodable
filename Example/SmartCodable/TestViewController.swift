@@ -43,25 +43,22 @@ class TestViewController: BaseViewController {
         let group = DispatchGroup()
         
         queue.async(group: group) {
-//            Log.save(name: "abc")
             if let model = NewModel.deserialize(from: dict) {
                 //            print(model)
             }
         }
         
         queue.async(group: group) {
-//            Log.save(name: "abcd")
             if let model = OldModel.deserialize(from: dict) {
                 //            print(model)
             }
         }
-//        
-//        queue.async(group: group) {
-////            Log.save(name: "abcde")
-//            if let model = MiddleModel.deserialize(from: dict) {
-//                //            print(model)
-//            }
-//        }
+        
+        queue.async(group: group) {
+            if let model = MiddleModel.deserialize(from: dict) {
+                //            print(model)
+            }
+        }
         
         group.notify(queue: DispatchQueue.main) {
             print(snapArr)

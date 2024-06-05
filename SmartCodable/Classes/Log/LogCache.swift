@@ -24,7 +24,7 @@ struct LogCache {
 
         filterLogItem()
 
-//        alignTypeNamesInAllSnapshots(decoder: decoder)
+        alignTypeNamesInAllSnapshots(decoder: decoder)
         
         let keyOrder = processArray(snapshotDict.getAllKeys(), decoder: decoder)
         
