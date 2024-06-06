@@ -80,6 +80,13 @@
 		998567132C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567122C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift */; };
 		998567152C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567142C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift */; };
 		998567172C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567162C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift */; };
+		9985671A2C11C6010021B7FD /* Encode_SpecialData_dateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567192C11C6010021B7FD /* Encode_SpecialData_dateViewController.swift */; };
+		9985671C2C11C6510021B7FD /* Encode_SpecialData_dataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985671B2C11C6510021B7FD /* Encode_SpecialData_dataViewController.swift */; };
+		9985671E2C11C6570021B7FD /* Encode_SpecialData_urlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985671D2C11C6570021B7FD /* Encode_SpecialData_urlViewController.swift */; };
+		998567202C11C65C0021B7FD /* Encode_SpecialData_enumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985671F2C11C65C0021B7FD /* Encode_SpecialData_enumViewController.swift */; };
+		998567222C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567212C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift */; };
+		998567242C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567232C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift */; };
+		998567262C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567252C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift */; };
 		9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6912B91DF3D0089CA68 /* Data+Extension.swift */; };
 		9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */; };
 		9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */; };
@@ -204,6 +211,13 @@
 		998567122C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_BaseData_StringViewController.swift; sourceTree = "<group>"; };
 		998567142C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_BaseData_IntViewController.swift; sourceTree = "<group>"; };
 		998567162C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_BaseData_FloatiewController.swift; sourceTree = "<group>"; };
+		998567192C11C6010021B7FD /* Encode_SpecialData_dateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_dateViewController.swift; sourceTree = "<group>"; };
+		9985671B2C11C6510021B7FD /* Encode_SpecialData_dataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_dataViewController.swift; sourceTree = "<group>"; };
+		9985671D2C11C6570021B7FD /* Encode_SpecialData_urlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_urlViewController.swift; sourceTree = "<group>"; };
+		9985671F2C11C65C0021B7FD /* Encode_SpecialData_enumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_enumViewController.swift; sourceTree = "<group>"; };
+		998567212C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_colorViewController.swift; sourceTree = "<group>"; };
+		998567232C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_anyViewController.swift; sourceTree = "<group>"; };
+		998567252C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_modelViewController.swift; sourceTree = "<group>"; };
 		9993D6912B91DF3D0089CA68 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_URLViewController.swift; sourceTree = "<group>"; };
 		9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_SmartAnyViewController.swift; sourceTree = "<group>"; };
@@ -526,6 +540,13 @@
 		998567182C11C46C0021B7FD /* SpecialData */ = {
 			isa = PBXGroup;
 			children = (
+				998567192C11C6010021B7FD /* Encode_SpecialData_dateViewController.swift */,
+				9985671B2C11C6510021B7FD /* Encode_SpecialData_dataViewController.swift */,
+				9985671D2C11C6570021B7FD /* Encode_SpecialData_urlViewController.swift */,
+				9985671F2C11C65C0021B7FD /* Encode_SpecialData_enumViewController.swift */,
+				998567212C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift */,
+				998567232C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift */,
+				998567252C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift */,
 			);
 			path = SpecialData;
 			sourceTree = "<group>";
@@ -914,6 +935,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9993D69D2B9215B70089CA68 /* Support_didFinishMappingViewController.swift in Sources */,
+				998567242C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift in Sources */,
 				996760252B3EC930006C83EC /* BaseCompatibilityViewController.swift in Sources */,
 				996760412B3EC930006C83EC /* Introduce_4ViewController.swift in Sources */,
 				996760222B3EC930006C83EC /* DecodingDictLogViewController.swift in Sources */,
@@ -943,6 +965,7 @@
 				9956B9B92BD92D1900C711F5 /* DecodingArrayLogViewController.swift in Sources */,
 				9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */,
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
+				9985671A2C11C6010021B7FD /* Encode_SpecialData_dateViewController.swift in Sources */,
 				9967603F2B3EC930006C83EC /* Introduce_1ViewController.swift in Sources */,
 				9967602B2B3EC930006C83EC /* Introduce_8ViewController.swift in Sources */,
 				99CE4D662BC6AFC90006D435 /* IntroduceViewController.swift in Sources */,
@@ -956,6 +979,7 @@
 				996760462B3EC930006C83EC /* DataDecodingStrategyViewController.swift in Sources */,
 				99CABA2F2B916E8A0070DED0 /* Container_ArrayNullViewController.swift in Sources */,
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
+				998567222C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift in Sources */,
 				99C3138E2B9B38910065FC45 /* CaseSevenViewController.swift in Sources */,
 				998567132C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift in Sources */,
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
@@ -976,11 +1000,13 @@
 				991259F12BFB709F00ED76B5 /* Container_ArrayViewController.swift in Sources */,
 				99F9E8A62BB5139900D68037 /* MixDecodingViewController.swift in Sources */,
 				9902B4DA2BB3010C00310E69 /* ReplaceHandyJSON_5ViewController.swift in Sources */,
+				998567262C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift in Sources */,
 				9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */,
 				99D9458E2B91C80C00CC6470 /* SpecialData_FloatViewController.swift in Sources */,
 				99C3138D2B9B38910065FC45 /* ComplexDataStructureModel.swift in Sources */,
 				990512A12C08580600A2C5D8 /* Decoding_keyMapViewController.swift in Sources */,
 				99CE4D592BC6973B0006D435 /* DecodingStrategyViewController.swift in Sources */,
+				998567202C11C65C0021B7FD /* Encode_SpecialData_enumViewController.swift in Sources */,
 				9967601F2B3EC930006C83EC /* TestViewController.swift in Sources */,
 				99CE4D5F2BC6A86E0006D435 /* CustomDecodingKeyViewContriller.swift in Sources */,
 				9902B4D82BB2FF0500310E69 /* ReplaceHandyJSON_4ViewController.swift in Sources */,
@@ -988,6 +1014,7 @@
 				9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */,
 				99C3138F2B9B38910065FC45 /* ComplexDataStructureSectionHeader.swift in Sources */,
 				990512A72C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift in Sources */,
+				9985671E2C11C6570021B7FD /* Encode_SpecialData_urlViewController.swift in Sources */,
 				9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */,
 				998567092C1044060021B7FD /* ConcurrenceLogViewController.swift in Sources */,
 				996760362B3EC930006C83EC /* CaseFiveViewController.swift in Sources */,
@@ -1004,6 +1031,7 @@
 				9985670E2C11B9810021B7FD /* TestEncodeCaseViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
 				9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */,
+				9985671C2C11C6510021B7FD /* Encode_SpecialData_dataViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

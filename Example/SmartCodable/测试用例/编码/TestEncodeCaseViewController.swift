@@ -57,15 +57,13 @@ extension TestEncodeCaseViewController {
         [
             "title": "CaseOne - 特殊数据测试",
             "list": [
-                ["name": "Date",                 "vc": "BaseData_BoolViewController"],
-                ["name": "Data",                 "vc": "BaseData_BoolViewController"],
-                ["name": "URL",                  "vc": "BaseData_BoolViewController"],
-                ["name": "Enum",                 "vc": "BaseData_BoolViewController"],
-                ["name": "SmartColor",           "vc": "BaseData_BoolViewController"],
-                ["name": "SmartAny",             "vc": "BaseData_BoolViewController"],
-                ["name": "[SmartAny]",           "vc": "BaseData_BoolViewController"],
-                ["name": "[String: SmartAny]",   "vc": "BaseData_BoolViewController"],
-                ["name": "嵌套模型",              "vc": "BaseData_BoolViewController"],
+                ["name": "Date",                 "vc": "Encode_SpecialData_dateViewController"],
+                ["name": "Data",                 "vc": "Encode_SpecialData_dataViewController"],
+                ["name": "URL",                  "vc": "Encode_SpecialData_urlViewController"],
+                ["name": "Enum",                 "vc": "Encode_SpecialData_enumViewController"],
+                ["name": "SmartColor",           "vc": "Encode_SpecialData_colorViewController"],
+                ["name": "SmartAny",             "vc": "Encode_SpecialData_anyViewController"],
+                ["name": "嵌套模型",              "vc": "Encode_SpecialData_modelViewController"],
             ]
         ]
     }
