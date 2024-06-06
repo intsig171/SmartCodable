@@ -20,52 +20,46 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        let dict: [String: Any] = [
+            "name": "Mccc",
+            "sex": 1,
+            "selfAge": 0,
+            "sub": [
+                "name": "xiao li"
+            ]
+        ]
+        
 
-        let model = Model()
-        if let dict = model.toDictionary() {
-            print(dict)
+        if let model = Model.deserialize(from: dict) {
+            print(model)
+            
+            if let dict = model.toDictionary() {
+                print(dict)
+            }
         }
-        
-        
-        
     }
     
     struct Model: SmartCodable {
-        var age: Int = 100
-//        var sex: Bool = true
-//        var name: String = "Mccc"
-  
-        enum CodingKeys: String, CodingKey {
-            case age = "selfAge"
-        }
+        var age: Int = 1
+        var sex: Bool = true
+        var name: String = "Mccc"
+        var date: Date?
+        var sub: SubModel?
         
-//        static func mappingForKey() -> [SmartKeyTransformer]? {
-//            [
-//                CodingKeys.age <--- "selfAge"
-//            ]
-//        }
-        
-        static func mappingForValue() -> [SmartValueTransformer]? {
+        static func mappingForKey() -> [SmartKeyTransformer]? {
             [
-                CodingKeys.age <--- IntTransformer()
+                CodingKeys.age <--- "selfAge"
             ]
         }
+        
+       
+    }
+    
+    struct SubModel: SmartCodable {
+        var name: String = ""
     }
 }
 
 
-
-struct IntTransformer: ValueTransformable {
-    
-    typealias Object = Int
-    typealias JSON = Int
-    
-    
-    func transformFromJSON(_ value: Any?) -> Int? {
-        return 1000
-    }
-    
-    func transformToJSON(_ value: Int?) -> Int? {
-        return 1000
-    }
-}

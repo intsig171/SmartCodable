@@ -17,7 +17,7 @@ public struct SmartDateTransformer: ValueTransformable {
     public init() {}
 
     
-    public func transformFromJSON(_ value: Any?) -> Date? {
+    public func transformFromJSON(_ value: Any) -> Date? {
         if let timeInt = value as? Double {
             return Date(timeIntervalSinceReferenceDate: timeInt)
         }
@@ -29,11 +29,8 @@ public struct SmartDateTransformer: ValueTransformable {
         return nil
     }
     
-    public func transformToJSON(_ value: Date?) -> Double? {
-        if let date = value {
-            return Double(date.timeIntervalSince1970)
-        }
-        return nil
+    public func transformToJSON(_ value: Date) -> Double? {
+        return Double(value.timeIntervalSince1970)
     }
 }
 
@@ -50,17 +47,14 @@ public struct SmartDateFormatTransformer: ValueTransformable {
         self.dateFormatter = dateFormatter
     }
 
-    public func transformFromJSON(_ value: Any?) -> Date? {
+    public func transformFromJSON(_ value: Any) -> Date? {
         if let dateString = value as? String {
             return dateFormatter.date(from: dateString)
         }
         return nil
     }
 
-    public func transformToJSON(_ value: Date?) -> String? {
-        if let date = value {
-            return dateFormatter.string(from: date)
-        }
-        return nil
+    public func transformToJSON(_ value: Date) -> String? {
+        return dateFormatter.string(from: value)
     }
 }

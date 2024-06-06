@@ -19,18 +19,15 @@ public struct SmartHexColorTransformer: ValueTransformable {
 
     public init() { }
 
-    public func transformFromJSON(_ value: Any?) -> Object? {
+    public func transformFromJSON(_ value: Any) -> Object? {
         if let rgba = value as? String {
             return ColorObject.hex(rgba)
         }
         return nil
     }
 
-    public func transformToJSON(_ value: Object?) -> JSON? {
-        if let value = value {
-            return value.hexString
-        }
-        return nil
+    public func transformToJSON(_ value: Object) -> JSON? {
+        return value.hexString
     }
 }
 

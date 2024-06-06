@@ -18,34 +18,23 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dict: [String: Any] = [
-            "age": "10",
-            "sub": [
-                "name": "Mccc"
-            ]
-        ]
+        let model1 = ModelT4(age: "123")
+        let model2 = ModelT4(age: "123")
         
-        
-        let updateDict: [String: Any] = [
-            "age": "20",
-            "sub": [
-                "name": "xiao li"
-            ]
-        ]
-        guard let from = Model.deserialize(from: updateDict) else { return }
-        guard var model = Model.deserialize(from: dict) else { return }
-
-        
-        SmartUpdater.update(&model, from: from, keyPaths: (\.age, \.sub))
-        print(model)
+        if model1 == model2 {
+            print("==")
+        }
+    }
+}
+class ModelT4: NSObject {
+    
+    var age: String
+    
+    init(age: String) {
+        self.age = age
     }
     
-    struct Model: SmartCodable {
-        var age: String = ""
-        var sub: SubModel?
-    }
-   
-    struct SubModel: SmartCodable {
-        var name: String = ""
+    static func == (lhs: ModelT4, rhs: ModelT4) -> Bool {
+        return lhs.age == rhs.age
     }
 }

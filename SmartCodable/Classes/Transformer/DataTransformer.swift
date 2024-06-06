@@ -13,17 +13,14 @@ public struct SmartDataTransformer: ValueTransformable {
     
     public init() {}
     
-    public func transformFromJSON(_ value: Any?) -> Data? {
+    public func transformFromJSON(_ value: Any) -> Data? {
         guard let string = value as? String else {
             return nil
         }
         return Data(base64Encoded: string)
     }
 
-    public func transformToJSON(_ value: Data?) -> String? {
-        guard let data = value else {
-            return nil
-        }
-        return data.base64EncodedString()
+    public func transformToJSON(_ value: Data) -> String? {
+        return value.base64EncodedString()
     }
 }

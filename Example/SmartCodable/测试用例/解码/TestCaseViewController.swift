@@ -15,7 +15,7 @@ class TestCaseViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "SmartCodable测试用例"
+        title = "解码测试用例"
         
        
         
@@ -148,12 +148,19 @@ extension TestCaseViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         if let dict = dataArray[section~] {
-            let title = dict["title"] as? String
-            return title
+            let title = dict["title"] as? String ?? ""
+            label.text = "    " + title
         }
-        return ""
+        
+        return label
     }
     
     

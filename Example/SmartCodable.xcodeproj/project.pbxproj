@@ -75,6 +75,11 @@
 		9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760152B3EC930006C83EC /* BaseViewController.swift */; };
 		9967604C2B3EC930006C83EC /* CaseSixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996760182B3EC930006C83EC /* CaseSixViewController.swift */; };
 		998567092C1044060021B7FD /* ConcurrenceLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567082C1044060021B7FD /* ConcurrenceLogViewController.swift */; };
+		9985670E2C11B9810021B7FD /* TestEncodeCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9985670D2C11B9810021B7FD /* TestEncodeCaseViewController.swift */; };
+		998567112C11BCD60021B7FD /* Encode_BaseData_BoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567102C11BCD60021B7FD /* Encode_BaseData_BoolViewController.swift */; };
+		998567132C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567122C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift */; };
+		998567152C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567142C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift */; };
+		998567172C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567162C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift */; };
 		9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6912B91DF3D0089CA68 /* Data+Extension.swift */; };
 		9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */; };
 		9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */; };
@@ -194,6 +199,11 @@
 		996760152B3EC930006C83EC /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		996760182B3EC930006C83EC /* CaseSixViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseSixViewController.swift; sourceTree = "<group>"; };
 		998567082C1044060021B7FD /* ConcurrenceLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrenceLogViewController.swift; sourceTree = "<group>"; };
+		9985670D2C11B9810021B7FD /* TestEncodeCaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEncodeCaseViewController.swift; sourceTree = "<group>"; };
+		998567102C11BCD60021B7FD /* Encode_BaseData_BoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_BaseData_BoolViewController.swift; sourceTree = "<group>"; };
+		998567122C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_BaseData_StringViewController.swift; sourceTree = "<group>"; };
+		998567142C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_BaseData_IntViewController.swift; sourceTree = "<group>"; };
+		998567162C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_BaseData_FloatiewController.swift; sourceTree = "<group>"; };
 		9993D6912B91DF3D0089CA68 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_URLViewController.swift; sourceTree = "<group>"; };
 		9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_SmartAnyViewController.swift; sourceTree = "<group>"; };
@@ -483,6 +493,43 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		9985670B2C11B96B0021B7FD /* 解码 */ = {
+			isa = PBXGroup;
+			children = (
+				99CABA282B906A640070DED0 /* TestCaseViewController.swift */,
+				99A494E52B9028EB00393193 /* 数据测试 */,
+			);
+			path = "解码";
+			sourceTree = "<group>";
+		};
+		9985670C2C11B96B0021B7FD /* 编码 */ = {
+			isa = PBXGroup;
+			children = (
+				9985670D2C11B9810021B7FD /* TestEncodeCaseViewController.swift */,
+				998567182C11C46C0021B7FD /* SpecialData */,
+				9985670F2C11BCB80021B7FD /* BaseData */,
+			);
+			path = "编码";
+			sourceTree = "<group>";
+		};
+		9985670F2C11BCB80021B7FD /* BaseData */ = {
+			isa = PBXGroup;
+			children = (
+				998567122C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift */,
+				998567102C11BCD60021B7FD /* Encode_BaseData_BoolViewController.swift */,
+				998567142C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift */,
+				998567162C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift */,
+			);
+			path = BaseData;
+			sourceTree = "<group>";
+		};
+		998567182C11C46C0021B7FD /* SpecialData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SpecialData;
+			sourceTree = "<group>";
+		};
 		9993D69B2B9215A40089CA68 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,8 +542,8 @@
 		99A494E42B9028D900393193 /* 测试用例 */ = {
 			isa = PBXGroup;
 			children = (
-				99CABA282B906A640070DED0 /* TestCaseViewController.swift */,
-				99A494E52B9028EB00393193 /* 数据测试 */,
+				9985670C2C11B96B0021B7FD /* 编码 */,
+				9985670B2C11B96B0021B7FD /* 解码 */,
 			);
 			path = "测试用例";
 			sourceTree = "<group>";
@@ -873,6 +920,8 @@
 				991259ED2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift in Sources */,
 				990ECFA92B95A45B003D37F1 /* Support_JSONStringViewController.swift in Sources */,
 				999FA2432B99B86A00A2952F /* FinishMappingViewController.swift in Sources */,
+				998567172C11C0D50021B7FD /* Encode_BaseData_FloatiewController.swift in Sources */,
+				998567152C11C0CF0021B7FD /* Encode_BaseData_IntViewController.swift in Sources */,
 				9967602C2B3EC930006C83EC /* Container_DictKeylessViewController.swift in Sources */,
 				990512A52C0869CA00A2C5D8 /* Decoding_globalKeyStrategyViewController.swift in Sources */,
 				99CABA312B916E970070DED0 /* Container_ArrayTypeMismatchViewController.swift in Sources */,
@@ -908,6 +957,7 @@
 				99CABA2F2B916E8A0070DED0 /* Container_ArrayNullViewController.swift in Sources */,
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
 				99C3138E2B9B38910065FC45 /* CaseSevenViewController.swift in Sources */,
+				998567132C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift in Sources */,
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
 				99D9458A2B91C75600CC6470 /* SpecialData_dateViewController.swift in Sources */,
 				9967601C2B3EC930006C83EC /* NSDictionary+Extension.swift in Sources */,
@@ -945,11 +995,13 @@
 				990512A92C0873F200A2C5D8 /* Decoding_valueMapViewController.swift in Sources */,
 				991259F32BFC3E4D00ED76B5 /* BaseData_DateViewController.swift in Sources */,
 				99D9458C2B91C80300CC6470 /* SpecialData_dataViewController.swift in Sources */,
+				998567112C11BCD60021B7FD /* Encode_BaseData_BoolViewController.swift in Sources */,
 				996760202B3EC930006C83EC /* UITableView+Reusable.swift in Sources */,
 				99CABA2D2B916E720070DED0 /* Container_ArrayKeylessViewController.swift in Sources */,
 				9902B4D42BB2F7F300310E69 /* ReplaceHandyJSON_3ViewController.swift in Sources */,
 				9902B4D62BB2F8F800310E69 /* ReplaceHandyJSONViewController.swift in Sources */,
 				996760242B3EC930006C83EC /* BaseData_BoolViewController.swift in Sources */,
+				9985670E2C11B9810021B7FD /* TestEncodeCaseViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
 				9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */,
 			);

@@ -62,11 +62,22 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
     }
 
     mutating func encode(_ value: Bool, forKey key: Self.Key) throws {
-        self.object.set(.bool(value), for: self._converted(key).stringValue)
+        
+        let convertedKey = self._converted(key)
+        if let jsonValue = impl.cache.tranform(from: value, with: convertedKey) {
+            self.object.set(jsonValue, for: convertedKey.stringValue)
+        } else {
+            self.object.set(.bool(value), for: self._converted(key).stringValue)
+        }
     }
 
     mutating func encode(_ value: String, forKey key: Self.Key) throws {
-        self.object.set(.string(value), for: self._converted(key).stringValue)
+        let convertedKey = self._converted(key)
+        if let jsonValue = impl.cache.tranform(from: value, with: convertedKey) {
+            self.object.set(jsonValue, for: convertedKey.stringValue)
+        } else {
+            self.object.set(.string(value), for: convertedKey.stringValue)
+        }
     }
 
     mutating func encode(_ value: Double, forKey key: Self.Key) throws {
@@ -119,8 +130,12 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
 
     mutating func encode<T>(_ value: T, forKey key: Self.Key) throws where T: Encodable {
         let convertedKey = self._converted(key)
-        let encoded = try self.wrapEncodable(value, for: convertedKey)
-        self.object.set(encoded ?? .object([:]), for: convertedKey.stringValue)
+        if let jsonValue = impl.cache.tranform(from: value, with: convertedKey) {
+            self.object.set(jsonValue, for: convertedKey.stringValue)
+        } else {
+            let encoded = try self.wrapEncodable(value, for: convertedKey)
+            self.object.set(encoded ?? .object([:]), for: convertedKey.stringValue)
+        }
     }
 
     mutating func nestedContainer<NestedKey>(keyedBy _: NestedKey.Type, forKey key: Self.Key) ->

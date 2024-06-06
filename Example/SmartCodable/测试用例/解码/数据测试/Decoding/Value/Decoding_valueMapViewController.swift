@@ -59,45 +59,47 @@ extension Decoding_valueMapViewController {
     struct SubModel: SmartCodable {
         var name: String?
     }
+    
+    struct IntTranformer: ValueTransformable {
+        typealias Object = Int
+        typealias JSON = Int
+        
+        func transformFromJSON(_ value: Any) -> Int? {
+            return 10
+        }
+        
+        func transformToJSON(_ value: Int) -> Int? {
+            return 10
+        }
+    }
+
+    struct StringTranformer: ValueTransformable {
+        typealias Object = String
+        typealias JSON = String
+        
+        func transformFromJSON(_ value: Any) -> String? {
+            return "我是Mccc"
+        }
+        
+        func transformToJSON(_ value: String) -> String? {
+            return "Mccc"
+        }
+    }
+
+    struct SubModelTranformer: ValueTransformable {
+        
+        typealias Object = Decoding_valueMapViewController.SubModel
+        typealias JSON = String
+        
+        func transformFromJSON(_ value: Any) -> Decoding_valueMapViewController.SubModel? {
+            return Decoding_valueMapViewController.SubModel.init(name: "我是Mccc")
+        }
+        
+        func transformToJSON(_ value: Decoding_valueMapViewController.SubModel) -> String? {
+            return "Mccc"
+        }
+    }
+
 }
 
 
-struct IntTranformer: ValueTransformable {
-    typealias Object = Int
-    typealias JSON = Int
-    
-    func transformFromJSON(_ value: Any?) -> Int? {
-        return 10
-    }
-    
-    func transformToJSON(_ value: Int?) -> Int? {
-        return 10
-    }
-}
-
-struct StringTranformer: ValueTransformable {
-    typealias Object = String
-    typealias JSON = String
-    
-    func transformFromJSON(_ value: Any?) -> String? {
-        return "我是Mccc"
-    }
-    
-    func transformToJSON(_ value: String?) -> String? {
-        return "Mccc"
-    }
-}
-
-struct SubModelTranformer: ValueTransformable {
-    
-    typealias Object = Decoding_valueMapViewController.SubModel
-    typealias JSON = String
-    
-    func transformFromJSON(_ value: Any?) -> Decoding_valueMapViewController.SubModel? {
-        return Decoding_valueMapViewController.SubModel.init(name: "我是Mccc")
-    }
-    
-    func transformToJSON(_ value: Decoding_valueMapViewController.SubModel?) -> String? {
-        return "Mccc"
-    }
-}

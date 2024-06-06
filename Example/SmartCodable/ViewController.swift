@@ -45,9 +45,10 @@ extension ViewController {
     
     var smart_test: [String: Any] {
         [
-            "title": "Smart的测试用例",
+            "title": "测试用例",
             "list": [
-                ["name": "丰富的测试用例 >>>", "vc": "TestCaseViewController"],
+                ["name": "解码测试用例 >>>", "vc": "TestCaseViewController"],
+                ["name": "编码测试用例 >>>", "vc": "TestEncodeCaseViewController"],
             ]
         ]
     }
@@ -151,8 +152,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-//        label.backgroundColor = UIColor.red.withAlphaComponent(0.01)
-        
         if let dict = dataArray[section~] {
             let title = dict["title"] as? String ?? ""
             label.text = "    " + title

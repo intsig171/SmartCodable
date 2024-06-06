@@ -75,8 +75,7 @@ extension Introduce_8ViewController {
 
 extension Introduce_8ViewController {
     struct RelationEnumTranformer: ValueTransformable {
-        func transformToJSON(_ value: Introduce_8ViewController.Sex?) -> String? {
-            guard let value = value else { return nil }
+        func transformToJSON(_ value: Introduce_8ViewController.Sex) -> String? {
             
             switch value {
             case .man:
@@ -93,7 +92,7 @@ extension Introduce_8ViewController {
         typealias Object = Sex
         typealias JSON = String
         
-        func transformFromJSON(_ value: Any?) -> Sex? {
+        func transformFromJSON(_ value: Any) -> Sex? {
             guard let temp = value as? String else { return .man }
 
             switch temp {

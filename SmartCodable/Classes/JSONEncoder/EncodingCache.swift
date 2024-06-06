@@ -36,13 +36,13 @@ class EncodingCache: Cachable {
 
 extension EncodingCache {
     
-    func tranform(from value: Any?, with key: CodingKey?) -> JSONValue? {
+    func tranform(from value: Any, with key: CodingKey?) -> JSONValue? {
  
         if let trans = topSnapshot?.transformers, let key = key {
+            
+            let wantKey = key.stringValue
             let tran = trans.first(where: { transformer in
-                let wantKey = transformer.location.stringValue
-                
-                if wantKey == key.stringValue {
+                if wantKey == transformer.location.stringValue {
                     return true
                 } else {
                     
@@ -66,8 +66,11 @@ extension EncodingCache {
     }
     
     /// Custom conversion strategy for decoded values
-    private func tranform<Transform: ValueTransformable>(decodedValue: Any?, transformer: Transform) -> Any? {
-        return transformer.transformToJSON(decodedValue as? Transform.Object)
+    private func tranform<Transform: ValueTransformable>(decodedValue: Any, transformer: Transform) -> Any? {
+        if let value = decodedValue as? Transform.Object {
+            return transformer.transformToJSON(value)
+        }
+        return nil
     }
 }
 
