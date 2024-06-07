@@ -87,6 +87,7 @@
 		998567222C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567212C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift */; };
 		998567242C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567232C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift */; };
 		998567262C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567252C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift */; };
+		998567292C12A3AE0021B7FD /* Encode_CustomKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998567282C12A3AE0021B7FD /* Encode_CustomKeyViewController.swift */; };
 		9993D6922B91DF3D0089CA68 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6912B91DF3D0089CA68 /* Data+Extension.swift */; };
 		9993D6942B91ED9B0089CA68 /* SpecialData_URLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */; };
 		9993D6962B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */; };
@@ -218,6 +219,7 @@
 		998567212C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_colorViewController.swift; sourceTree = "<group>"; };
 		998567232C11C6680021B7FD /* Encode_SpecialData_anyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_anyViewController.swift; sourceTree = "<group>"; };
 		998567252C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_SpecialData_modelViewController.swift; sourceTree = "<group>"; };
+		998567282C12A3AE0021B7FD /* Encode_CustomKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_CustomKeyViewController.swift; sourceTree = "<group>"; };
 		9993D6912B91DF3D0089CA68 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		9993D6932B91ED9B0089CA68 /* SpecialData_URLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_URLViewController.swift; sourceTree = "<group>"; };
 		9993D6952B91EEED0089CA68 /* SpecialData_SmartAnyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_SmartAnyViewController.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				9985670D2C11B9810021B7FD /* TestEncodeCaseViewController.swift */,
+				998567272C12A2960021B7FD /* CustomKey */,
 				998567182C11C46C0021B7FD /* SpecialData */,
 				9985670F2C11BCB80021B7FD /* BaseData */,
 			);
@@ -549,6 +552,14 @@
 				998567252C11C66E0021B7FD /* Encode_SpecialData_modelViewController.swift */,
 			);
 			path = SpecialData;
+			sourceTree = "<group>";
+		};
+		998567272C12A2960021B7FD /* CustomKey */ = {
+			isa = PBXGroup;
+			children = (
+				998567282C12A3AE0021B7FD /* Encode_CustomKeyViewController.swift */,
+			);
+			path = CustomKey;
 			sourceTree = "<group>";
 		};
 		9993D69B2B9215A40089CA68 /* Support */ = {
@@ -963,6 +974,7 @@
 				996760292B3EC930006C83EC /* BaseData_StringViewController.swift in Sources */,
 				996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */,
 				9956B9B92BD92D1900C711F5 /* DecodingArrayLogViewController.swift in Sources */,
+				998567292C12A3AE0021B7FD /* Encode_CustomKeyViewController.swift in Sources */,
 				9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */,
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
 				9985671A2C11C6010021B7FD /* Encode_SpecialData_dateViewController.swift in Sources */,
