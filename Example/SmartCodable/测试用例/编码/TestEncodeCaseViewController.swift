@@ -72,10 +72,9 @@ extension TestEncodeCaseViewController {
         [
             "title": "CaseOne - 自定义行为的影响",
             "list": [
-                ["name": "通过CodingKeys",     "vc": "BaseData_BoolViewController"],
-                ["name": "通过mappingForKey",  "vc": "BaseData_BoolViewController"],
-                ["name": "通过全局策略",         "vc": "BaseData_BoolViewController"],
-                ["name": "json字符串的模型化",   "vc": "BaseData_BoolViewController"],
+                ["name": "通过CodingKeys",     "vc": "Encode_CustomKeyViewController"],
+                ["name": "通过mappingForKey",  "vc": "Encode_CustomKeyViewController"],
+                ["name": "通过全局策略",         "vc": "Encode_CustomKeyViewController"],
             ]
         ]
     }
