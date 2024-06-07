@@ -74,7 +74,7 @@ extension TestEncodeCaseViewController {
             "list": [
                 ["name": "通过CodingKeys",     "vc": "Encode_CustomKeyViewController"],
                 ["name": "通过mappingForKey",  "vc": "Encode_CustomKeyViewController"],
-                ["name": "通过全局策略",         "vc": "Encode_CustomKeyViewController"],
+                ["name": "IgnoredKey",         "vc": "Encode_IgnoredKeyViewController"],
             ]
         ]
     }
