@@ -47,7 +47,32 @@ extension Encode_SpecialData_modelViewController {
     
     struct SubModel: SmartCodable {
         var name: String = ""
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.name <--- StringTransformer()
+            ]
+        }
+        
     }
+    
+    struct StringTransformer: ValueTransformable {
+        
+        typealias Object = String
+        typealias JSON = String
+        
+        func transformFromJSON(_ value: Any) -> String? {
+            if let string = value as? String {
+                return "my name is " + string
+            }
+            return nil
+        }
+        
+        func transformToJSON(_ value: String) -> String? {
+            return value
+        }
+    }
+
     
     struct Tranformer: ValueTransformable {
         
@@ -59,7 +84,12 @@ extension Encode_SpecialData_modelViewController {
         }
         
         func transformFromJSON(_ value: Any) -> SubModel? {
-            return SubModel.init(name: "Mccc")
+            
+            if let dict = value as? [String: Any]  {
+                return SubModel.deserialize(from: dict)
+            }
+            return nil
+            
         }
     }
 }

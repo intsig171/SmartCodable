@@ -40,6 +40,7 @@
 		9956B9B92BD92D1900C711F5 /* DecodingArrayLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956B9B82BD92D1900C711F5 /* DecodingArrayLogViewController.swift */; };
 		9957743B2BFD95E4003613C5 /* SpecialData_ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957743A2BFD95E4003613C5 /* SpecialData_ColorViewController.swift */; };
 		995E03BD2C12F727009E1E5B /* Encode_IgnoredKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995E03BC2C12F727009E1E5B /* Encode_IgnoredKeyViewController.swift */; };
+		995E03C02C12F93C009E1E5B /* Encode_ContainerViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995E03BF2C12F93C009E1E5B /* Encode_ContainerViewcontroller.swift */; };
 		99675FD02B3EC750006C83EC /* airports10000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8C2B3EC02E00B474E5 /* airports10000.json */; };
 		99675FD12B3EC822006C83EC /* airports1000.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8F2B3EC02E00B474E5 /* airports1000.json */; };
 		99675FD22B3EC851006C83EC /* airports100.json in Resources */ = {isa = PBXBuildFile; fileRef = 99AE7D8E2B3EC02E00B474E5 /* airports100.json */; };
@@ -179,6 +180,7 @@
 		9956B9B82BD92D1900C711F5 /* DecodingArrayLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingArrayLogViewController.swift; sourceTree = "<group>"; };
 		9957743A2BFD95E4003613C5 /* SpecialData_ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_ColorViewController.swift; sourceTree = "<group>"; };
 		995E03BC2C12F727009E1E5B /* Encode_IgnoredKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_IgnoredKeyViewController.swift; sourceTree = "<group>"; };
+		995E03BF2C12F93C009E1E5B /* Encode_ContainerViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_ContainerViewcontroller.swift; sourceTree = "<group>"; };
 		99675FD62B3EC930006C83EC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		99675FD82B3EC930006C83EC /* NSDictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDictionary+Extension.swift"; sourceTree = "<group>"; };
 		99675FDC2B3EC930006C83EC /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -432,6 +434,14 @@
 			path = Decoding;
 			sourceTree = "<group>";
 		};
+		995E03BE2C12F926009E1E5B /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				995E03BF2C12F93C009E1E5B /* Encode_ContainerViewcontroller.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
 		99675FDF2B3EC930006C83EC /* Smart */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				9985670D2C11B9810021B7FD /* TestEncodeCaseViewController.swift */,
+				995E03BE2C12F926009E1E5B /* Container */,
 				998567272C12A2960021B7FD /* CustomKey */,
 				998567182C11C46C0021B7FD /* SpecialData */,
 				9985670F2C11BCB80021B7FD /* BaseData */,
@@ -996,6 +1007,7 @@
 				996760392B3EC930006C83EC /* CaseFourViewController.swift in Sources */,
 				998567222C11C6620021B7FD /* Encode_SpecialData_colorViewController.swift in Sources */,
 				99C3138E2B9B38910065FC45 /* CaseSevenViewController.swift in Sources */,
+				995E03C02C12F93C009E1E5B /* Encode_ContainerViewcontroller.swift in Sources */,
 				998567132C11C0C60021B7FD /* Encode_BaseData_StringViewController.swift in Sources */,
 				993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */,
 				99D9458A2B91C75600CC6470 /* SpecialData_dateViewController.swift in Sources */,
