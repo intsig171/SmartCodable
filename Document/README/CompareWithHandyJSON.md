@@ -1,29 +1,4 @@
-
-
-# SmartCodable
-
-**SmartCodable** is a data parsing library based on Swift's **Codable** protocol, designed to provide more powerful and flexible parsing capabilities. By optimizing and rewriting the standard features of **Codable**, **SmartCodable** effectively solves common problems in the traditional parsing process and improves the fault tolerance and flexibility of parsing.
-
-**SmartCodable** 是一个基于Swift的**Codable**协议的数据解析库，旨在提供更为强大和灵活的解析能力。通过优化和重写**Codable**的标准功能，**SmartCodable** 有效地解决了传统解析过程中的常见问题，并提高了解析的容错性和灵活性。
-
-```
-struct Model: SmartCodable {
-    var age: Int?
-    var name: String = ""
-}
-
-let model = Model.deserialize(from: json)
-```
-
-
-
-## HandyJSON vs Codable
-
-If you are using HandyJSON and would like to replace it, follow this link.
-
-如果你正在使用HandyJSON，并希望替换掉它，请关注该链接。
-
- [SmartCodable - Compare With HandyJSON]()
+# SmartCodable - Compare With HandyJSON
 
 | 序号 | 🎯 特性                        | 💬 特性说明 💬                                                 | SmartCodable | HandyJSON |
 | ---- | ----------------------------- | ------------------------------------------------------------ | ------------ | --------- |
@@ -44,56 +19,29 @@ If you are using HandyJSON and would like to replace it, follow this link.
 | 15   | **异常解码日志**              | 当解码异常进行了兼容处理时，提供排查日志                     | ✅            | ❌         |
 | 16   | **安全性方面**                | 底层实现的稳定性和安全性。                                   | ✅            | ❌         |
 
+整体来讲： SmartCodable 和  HandyJSON 相比，在功能和使用上相近。
 
 
-## FAQ
+#### 安全性 & 稳定性
 
-If you're looking forward to learning more about the Codable protocol and the design thinking behind SmartCodable, check it out.
+* **HandyJSON** 使用Swift的反射特性来实现数据的序列化和反序列化。**该机制是非法的，不安全的**， 更多的细节请访问 **[HandyJSON 的466号issue](https://github.com/alibaba/HandyJSON/issues/466)**.
 
-如果你期望了解更多Codable协议以及SmartCodable的设计思考，请关注它。	
-
-[learn more about Codable & SmartCodable]()
-
-
-
-## Use SmartCodable
-
-### Installation - cocopods 
-
-Add the following line to your `Podfile`:
-
-```
-pod 'SmartCodable'
-```
-
-Then, run the following command:
-
-```
-$ pod install
-```
-
-### Installation - Swift Package Manager
-
-- File > Swift Packages > Add Package Dependency
-- Add `https://github.com/intsig171/SmartCodable.git`
+* **Codable** 是Swift标准库的一部分，提供了一种声明式的方式来进行序列化和反序列化，它更为通用。
 
 
 
-### Usages
+## 使用SmartCodable 平替 HandyJSON
 
-If you don't know how to use it, check it out.
+更多内容请查看： [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md) 
 
-如果你不知道如何使用，请查看它。
+| 内容项          | 内容项说明                                    | 使用场景 | 替换难度 | 评判理由                                               |
+| --------------- | --------------------------------------------- | -------- | -------- | ------------------------------------------------------ |
+| ①声明Model      | 声明Model                                     | ★★★★★    | ★☆☆☆☆    | 全局将 HandyJSON 替换为 SmartCodable即可。             |
+| ②反序列化       | 数据的模型化（数据转Model）                   | ★★★★★    | ☆☆☆☆☆    | 完全一样的调用方式，无需处理。                         |
+| ③序列化         | 模型的数据化（Model转数据）                   | ★☆☆☆☆    | ★☆☆☆☆    | 将 `toJSON()` 替换为 `toDictionary()` 或 `toArray()`。 |
+| ④解码完成的回调 | 解析完成进一步处理数据                        | ★★☆☆☆    | ☆☆☆☆☆    | 完全一样的调用方式，无需处理。                         |
+| ⑤自定义解析Key  | 忽略key的解析 & 自定义Key的映射关系           | ★★★☆☆    | ★★★☆☆    | 需要更改调用方式。                                     |
+| ⑥解析Any        | 解析Any类型的数据。Any，[String: Any]， [Any] | ★☆☆☆☆    | ★☆☆☆☆    | 将Any替换为SmartAny                                    |
+| ⑦处理继承关系   | 解析存在的继承关系的Model                     | ★☆☆☆☆    | ★★★★★    | 建议使用协议实现。                                     |
+| ⑧枚举的解析     | 解析枚举属性                                  | ★☆☆☆☆    | ★☆☆☆☆    | 多实现一个 defaultCase                                 |
 
- [How do I use SmartCodable?]()
-
-
-
-
-## Join us
-
-**SmartCodable** is an open source project, and we welcome all developers interested in improving data parsing performance and robustness. Whether it's using feedback, feature suggestions, or code contributions, your participation will greatly advance the **SmartCodable** project.
-
-**SmartCodable** 是一个开源项目，我们欢迎所有对提高数据解析性能和健壮性感兴趣的开发者加入。无论是使用反馈、功能建议还是代码贡献，你的参与都将极大地推动 **SmartCodable** 项目的发展。
-
-![QQ](https://github.com/intsig171/SmartCodable/assets/87351449/5d3a98fe-17ba-402f-aefe-3e7472f35f82)
