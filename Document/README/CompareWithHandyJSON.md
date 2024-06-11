@@ -32,7 +32,7 @@
 
 ## 使用SmartCodable 平替 HandyJSON
 
-更多内容请查看： [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/建议/%23suggest%204%20使用SmartCodable%20平替%20HandyJSON.md) 
+更多内容请查看： [替换指导](https://github.com/intsig171/SmartCodable/blob/develop/Document/Suggest/suggest4.md) 
 
 | 内容项          | 内容项说明                                    | 使用场景 | 替换难度 | 评判理由                                               |
 | --------------- | --------------------------------------------- | -------- | -------- | ------------------------------------------------------ |

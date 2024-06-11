@@ -23,7 +23,7 @@ If you are using HandyJSON and would like to replace it, follow this link.
 
 如果你正在使用HandyJSON，并希望替换掉它，请关注该链接。
 
- [SmartCodable - Compare With HandyJSON]()
+ [SmartCodable - Compare With HandyJSON](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/CompareWithHandyJSON.md)
 
 | 序号 | 🎯 特性                        | 💬 特性说明 💬                                                 | SmartCodable | HandyJSON |
 | ---- | ----------------------------- | ------------------------------------------------------------ | ------------ | --------- |
@@ -52,7 +52,7 @@ If you're looking forward to learning more about the Codable protocol and the de
 
 如果你期望了解更多Codable协议以及SmartCodable的设计思考，请关注它。	
 
-[learn more about Codable & SmartCodable]()
+[learn more about Codable & SmartCodable](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/LearnMore.md)
 
 
 
@@ -85,7 +85,7 @@ If you don't know how to use it, check it out.
 
 如果你不知道如何使用，请查看它。
 
- [How do I use SmartCodable?]()
+ [How do I use SmartCodable?](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/Usages.md)
 
 
 
