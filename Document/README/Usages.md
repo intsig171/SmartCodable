@@ -100,7 +100,9 @@ struct SubModel: SmartCodable {
 
 ### 1. Decoding Any（解码Any）
 
-Codable does not decode Any type, meaning that the attribute type of the model cannot be **Any**, **[Any]**, **[String: Any]**. **SmartAny** is a solution to Any provided by **SmartCodable**.
+Codable does not decode Any type, meaning that the attribute type of the model cannot be **Any**， **[Any]** and **[String: Any]**. 
+
+ **SmartAny** is a solution to Any provided by **SmartCodable**.
 
 Codable是无法解码Any类型的，意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型。**SmartCodable** 提供了 **SmartAny** 替代 **Any**。
 
@@ -517,33 +519,5 @@ If you need to change more than one at a time（如果你需要同时更改多�
 
 ```
 SmartUpdater.update(&dest, from: src, keyPaths: (\.name, \.hobby))
-```
-
-## Debug log (调试日志)
-
-**SmartLog Error** indicates that **SmartCodable** encountered a resolution problem and executed compatibility logic. This does not mean that the analysis failed.
-
-SmartCodable encourages the root of the resolution problem: it does not require SmartCodable compatibility logic.
-
-出现 **SmartLog Error** 日志代表着 **SmartCodable** 遇到了解析问题，执行了兼容逻辑。 并不代表着本次解析失败。
-
-SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 
-
-```
- ========================  [Smart Decoding Log]  ========================
- Family 👈🏻 👀
-    |- name    : Expected to decode String but found an array instead.
-    |- location: Expected to decode String but found an array instead.
-    |- date    : Expected to decode Date but found an array instead.
-    |> father: Father
-       |- name: Expected String value but found null instead.
-       |- age : Expected to decode Int but found a string/data instead.
-       |> dog: Dog
-          |- hobby: Expected to decode String but found a number instead.
-    |> sons: [Son]
-       |- [Index 0] hobby: Expected to decode String but found a number instead.
-       |- [Index 0] age  : Expected to decode Int but found a string/data instead.
-       |- [Index 1] age  : Expected to decode Int but found an array instead.
- =========================================================================
 ```
 

@@ -17,45 +17,6 @@ let model = Model.deserialize(from: json)
 
 
 
-## HandyJSON vs Codable
-
-If you are using HandyJSON and would like to replace it, follow this link.
-
-如果你正在使用HandyJSON，并希望替换掉它，请关注该链接。
-
- [SmartCodable - Compare With HandyJSON](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/CompareWithHandyJSON.md)
-
-| 序号 | 🎯 特性                        | 💬 特性说明 💬                                                 | SmartCodable | HandyJSON |
-| ---- | ----------------------------- | ------------------------------------------------------------ | ------------ | --------- |
-| 1    | **强大的兼容性**              | 完美兼容：**字段缺失** & **字段值为nul** & **字段类型错误**  | ✅            | ✅         |
-| 2    | **类型自适应**                | 如JSON中是一个Int，但对应Model是String字段，会自动完成转化   | ✅            | ✅         |
-| 3    | **解析Any**                   | 支持解析 **[Any], [String: Any]** 等类型                     | ✅            | ✅         |
-| 4    | **解码回调**                  | 支持Model解码完成的回调，即：**didFinishingMapping**         | ✅            | ✅         |
-| 5    | **属性初始化值填充**          | 当解析失败时，支持使用初始的Model属性的赋值。                | ✅            | ✅         |
-| 6    | **字符串的Model化**           | 字符串是json字符串，支持进行Model化解析                      | ✅            | ✅         |
-| 7    | **枚举的解析**                | 当枚举解析失败时，支持兼容。                                 | ✅            | ✅         |
-| 8    | **属性的自定义解析** - 重命名 | 自定义解码key（对解码的Model属性重命名）                     | ✅            | ✅         |
-| 9    | **属性的自定义解析** - 忽略   | 忽略某个Model属性的解码                                      | ✅            | ✅         |
-| 10   | **支持designatedPath**        | 实现自定义解析路径                                           | ✅            | ✅         |
-| 11   | **Model的继承**               | 在model的继承关系下，Codable的支持力度较弱，使用不便（可以支持） | ❌            | ✅         |
-| 12   | **自定义解析路径**            | 指定从json的层级开始解析                                     | ✅            | ✅         |
-| 13   | **超复杂的数据解码**          | 解码过程中，多数据做进一步的整合/处理。如： 数据的扁平化处理 | ✅            | ⚠️         |
-| 14   | **解码性能**                  | 在解码性能上，SmartCodable 平均强 30%                        | ✅            | ⚠️         |
-| 15   | **异常解码日志**              | 当解码异常进行了兼容处理时，提供排查日志                     | ✅            | ❌         |
-| 16   | **安全性方面**                | 底层实现的稳定性和安全性。                                   | ✅            | ❌         |
-
-
-
-## FAQ
-
-If you're looking forward to learning more about the Codable protocol and the design thinking behind SmartCodable, check it out.
-
-如果你期望了解更多Codable协议以及SmartCodable的设计思考，请关注它。	
-
-[learn more about Codable & SmartCodable](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/LearnMore.md)
-
-
-
 ## Use SmartCodable
 
 ### Installation - cocopods 
@@ -85,7 +46,80 @@ If you don't know how to use it, check it out.
 
 如果你不知道如何使用，请查看它。
 
- [How do I use SmartCodable?](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/Usages.md)
+ [👉 How do I use SmartCodable?](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/Usages.md)
+
+
+
+## Debug log
+
+**SmartLog Error** indicates that **SmartCodable** encountered a resolution problem and executed compatibility logic. This does not mean that the analysis failed.
+
+SmartCodable encourages the root of the resolution problem: it does not require SmartCodable compatibility logic.
+
+出现 **SmartLog Error** 日志代表着 **SmartCodable** 遇到了解析问题，执行了兼容逻辑。 并不代表着本次解析失败。
+
+SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 
+
+```
+ ========================  [Smart Decoding Log]  ========================
+ Family 👈🏻 👀
+    |- name    : Expected to decode String but found an array instead.
+    |- location: Expected to decode String but found an array instead.
+    |- date    : Expected to decode Date but found an array instead.
+    |> father: Father
+       |- name: Expected String value but found null instead.
+       |- age : Expected to decode Int but found a string/data instead.
+       |> dog: Dog
+          |- hobby: Expected to decode String but found a number instead.
+    |> sons: [Son]
+       |- [Index 0] hobby: Expected to decode String but found a number instead.
+       |- [Index 0] age  : Expected to decode Int but found a string/data instead.
+       |- [Index 1] age  : Expected to decode Int but found an array instead.
+ =========================================================================
+```
+
+
+
+
+
+## Codable vs HandyJSON 
+
+If you are using HandyJSON and would like to replace it, follow this link.
+
+如果你正在使用HandyJSON，并希望替换掉它，请关注该链接。
+
+ [👉 SmartCodable - Compare With HandyJSON](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/CompareWithHandyJSON.md)
+
+| 序号 | 🎯 特性                        | 💬 特性说明 💬                                                 | SmartCodable | HandyJSON |
+| ---- | ----------------------------- | ------------------------------------------------------------ | ------------ | --------- |
+| 1    | **强大的兼容性**              | 完美兼容：**字段缺失** & **字段值为nul** & **字段类型错误**  | ✅            | ✅         |
+| 2    | **类型自适应**                | 如JSON中是一个Int，但对应Model是String字段，会自动完成转化   | ✅            | ✅         |
+| 3    | **解析Any**                   | 支持解析 **[Any], [String: Any]** 等类型                     | ✅            | ✅         |
+| 4    | **解码回调**                  | 支持Model解码完成的回调，即：**didFinishingMapping**         | ✅            | ✅         |
+| 5    | **属性初始化值填充**          | 当解析失败时，支持使用初始的Model属性的赋值。                | ✅            | ✅         |
+| 6    | **字符串的Model化**           | 字符串是json字符串，支持进行Model化解析                      | ✅            | ✅         |
+| 7    | **枚举的解析**                | 当枚举解析失败时，支持兼容。                                 | ✅            | ✅         |
+| 8    | **属性的自定义解析** - 重命名 | 自定义解码key（对解码的Model属性重命名）                     | ✅            | ✅         |
+| 9    | **属性的自定义解析** - 忽略   | 忽略某个Model属性的解码                                      | ✅            | ✅         |
+| 10   | **支持designatedPath**        | 实现自定义解析路径                                           | ✅            | ✅         |
+| 11   | **Model的继承**               | 在model的继承关系下，Codable的支持力度较弱，使用不便（可以支持） | ❌            | ✅         |
+| 12   | **自定义解析路径**            | 指定从json的层级开始解析                                     | ✅            | ✅         |
+| 13   | **超复杂的数据解码**          | 解码过程中，多数据做进一步的整合/处理。如： 数据的扁平化处理 | ✅            | ⚠️         |
+| 14   | **解码性能**                  | 在解码性能上，SmartCodable 平均强 30%                        | ✅            | ⚠️         |
+| 15   | **异常解码日志**              | 当解码异常进行了兼容处理时，提供排查日志                     | ✅            | ❌         |
+| 16   | **安全性方面**                | 底层实现的稳定性和安全性。                                   | ✅            | ❌         |
+
+
+
+## FAQ
+
+If you're looking forward to learning more about the Codable protocol and the design thinking behind SmartCodable, check it out.
+
+如果你期望了解更多Codable协议以及SmartCodable的设计思考，请关注它。	
+
+[👉 learn more](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/LearnMore.md)
+
+
 
 
 
