@@ -84,6 +84,8 @@ if let models = [PathModel].deserialize(from: jsonString, designatedPath: "peopl
 
 Notice that all the properties of a class/struct need to deserialized should be type conformed to `SmartCodable`.
 
+注意，类/结构体中所有需要反序列化的属性都应该符合 `SmartCodable`。
+
 ```
 struct Model: SmartCodable {
     var name: String = "Mccc"
@@ -100,9 +102,9 @@ struct SubModel: SmartCodable {
 
 ### 1. Decoding Any（解码Any）
 
-Codable does not decode Any type, meaning that the attribute type of the model cannot be **Any**， **[Any]** and **[String: Any]**. 
+Codable does not decode the Any type, meaning that the attribute type of the model cannot be **Any**， **[Any]** and **[String: Any]**.
 
- **SmartAny** is a solution to Any provided by **SmartCodable**.
+**SmartAny** is a solution to Any provided by **SmartCodable**.
 
 Codable是无法解码Any类型的，意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型。**SmartCodable** 提供了 **SmartAny** 替代 **Any**。
 
@@ -137,11 +139,11 @@ print(model.arr.peel)
 
  **To SmartAny** (Pay attention to it if you need to)
 
-| From             | To                   | Example                        |
-| ---------------- | -------------------- | ------------------------------ |
-| `Any`            | `SmartAny`           | `SmartAny(from: "some")`       |
-| `[String: Any] ` | `[String: SmartAny]` | `["key2": "value2"].cover`     |
-| `[Any]`          | `[SmartAny]`         | `[ ["key3": "value3"] ].cover` |
+| From             | To                   | Example                      |
+| ---------------- | -------------------- | ---------------------------- |
+| `Any`            | `SmartAny`           | `SmartAny(from: "some")`     |
+| `[Any]`          | `[SmartAny]`         | `[["key3": "value3"]].cover` |
+| `[String: Any] ` | `[String: SmartAny]` | `["key2": "value2"].cover`   |
 
 
 
@@ -167,7 +169,7 @@ struct Hobby: SmartCodable {
 
 ### 3. Decoding UIColor（解析UIColor）
 
-Use SmartColor instead of UIColor（使用SmartColor 替代 UIColor）
+Use SmartColor instead of UIColor.
 
 ```
 let dict = [

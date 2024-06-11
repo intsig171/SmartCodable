@@ -46,7 +46,7 @@ If you don't know how to use it, check it out.
 
 如果你不知道如何使用，请查看它。
 
- [👉 How do I use SmartCodable?](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/Usages.md)
+ [👉 How to use SmartCodable?](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/Usages.md)
 
 
 
