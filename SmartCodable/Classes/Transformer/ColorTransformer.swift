@@ -6,6 +6,11 @@
 //
 
 
+#if os(iOS) || os(tvOS) || os(watchOS)
+import UIKit
+#else
+import Cocoa
+#endif
 
 
 public struct SmartHexColorTransformer: ValueTransformable {

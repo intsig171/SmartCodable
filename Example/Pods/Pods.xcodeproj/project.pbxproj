@@ -355,7 +355,6 @@
 		63337F29437FD6A05DCA6E50C4DF6945 /* ExtendCustomBasicType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExtendCustomBasicType.swift; path = Source/ExtendCustomBasicType.swift; sourceTree = "<group>"; };
 		63D6FCCD448B91FE5083D3C830B09E34 /* BTPrint */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BTPrint; path = BTPrint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64E44B798553A3E18727230F8D89E3F9 /* SmartEncodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartEncodable.swift; sourceTree = "<group>"; };
-		654D835D5104DFE4AE4A8EE015283423 /* SmartCodable.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SmartCodable.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		666C02C1B42B0868B4A816FBD07E22A6 /* BTBubbleConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BTBubbleConfig.swift; path = BTBubble/Classes/BTBubbleConfig.swift; sourceTree = "<group>"; };
 		68F996F21CE4381BFEAC8BDD8BC5E788 /* BTPrint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BTPrint.swift; path = BTPrint/Classes/BTPrint.swift; sourceTree = "<group>"; };
 		6B6AE0B9AEB52789C2BA9C70151E337A /* MangledName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MangledName.swift; path = Source/MangledName.swift; sourceTree = "<group>"; };
@@ -387,6 +386,7 @@
 		87C56FECBDEE19803E1748DE1C16FBBA /* UIApplication+StrictKeyWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+StrictKeyWindow.m"; path = "FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.m"; sourceTree = "<group>"; };
 		87EF2DCAFAACA539DB4A58A75FC36303 /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCasePlatform.h; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		89305DC7AA8CF17C4DFF5582FDC4E381 /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
+		89D27D01563CE1DAAD49F56EC8284738 /* SmartCodable.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SmartCodable.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8ADD33B297AB30B353CFB5D0A4234E39 /* DateTransformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
 		8D31C1D12C0D9C516CE738486208A159 /* HandyJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HandyJSON.h; path = Source/HandyJSON.h; sourceTree = "<group>"; };
 		8EF8CFAD648CDD728E621EF9F95D03A0 /* JSONSingleValueEncodingContainer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JSONSingleValueEncodingContainer.swift; sourceTree = "<group>"; };
@@ -411,7 +411,6 @@
 		A11B531AF457EC4F99F06F115FDE0A45 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		A247AF8B486EBFFB5B5CED8A27FD6D94 /* _CleanJSONDecoder+Decode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "_CleanJSONDecoder+Decode.swift"; path = "Sources/CleanJSON/_CleanJSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		A370EE4D019ADFE65F2DC1FF9EDBA187 /* CleanJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CleanJSON-dummy.m"; sourceTree = "<group>"; };
-		A4B1D181204AB8C8580AAC26D60ED44F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		A4CFCEB2A58CA7A3CB15E26DD28CA8D6 /* Pods-SmartCodable_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SmartCodable_Example"; path = Pods_SmartCodable_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4FA9C2F58756A6AFCF914B64DC8959B /* Transformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transformer.swift; sourceTree = "<group>"; };
 		A698925A05268E73A17E232B6FB6FAC6 /* Patcher+Transformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Patcher+Transformer.swift"; sourceTree = "<group>"; };
@@ -430,6 +429,7 @@
 		B4E9A27193AA9BC77F718F28EA0E1B65 /* SmartJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartJSONDecoder.swift; sourceTree = "<group>"; };
 		B5D179B728984FF882E8BF4096799056 /* JSONDecoderImpl+unwrap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "JSONDecoderImpl+unwrap.swift"; sourceTree = "<group>"; };
 		B66F7BC9A4DCD060099089C86B6DBC00 /* BTBubble */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BTBubble; path = BTBubble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7FDF252ED60310F04697FD38BA56AE6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		B884BE2A9A48EFA0DCB33348C5EECBCA /* BTBubble.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BTBubble.modulemap; sourceTree = "<group>"; };
 		B8F06552F963B43848600AFDC8043A19 /* CleanDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CleanDecoder.swift; path = Sources/CleanJSON/CleanDecoder.swift; sourceTree = "<group>"; };
 		B9E5E84322D1072C445D51381EACDD7D /* DecodingError+CleanJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DecodingError+CleanJSON.swift"; path = "Sources/CleanJSON/DecodingError+CleanJSON.swift"; sourceTree = "<group>"; };
@@ -465,7 +465,6 @@
 		DB06E31B883A63C5DE4A5A6308F36C8F /* CleanJSONDecoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CleanJSONDecoder.swift; path = Sources/CleanJSON/CleanJSONDecoder.swift; sourceTree = "<group>"; };
 		DC816DCD26D7E20707BD2C4B66521329 /* FBSnapshotTestCase.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FBSnapshotTestCase.modulemap; sourceTree = "<group>"; };
 		DCD54B400F0BA763829F393B36FC4C7F /* CleanJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CleanJSON.modulemap; sourceTree = "<group>"; };
-		DD62EB3C6BC4A7D3F4331F8E19901550 /* README-EN.md */ = {isa = PBXFileReference; includeInIndex = 1; path = "README-EN.md"; sourceTree = "<group>"; };
 		DD91016CD3E4DB108E6B6B782539B2EC /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Sources/Constraint.swift; sourceTree = "<group>"; };
 		DDEF3ACF04599EB1C214870D993C7153 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Sources/ConstraintDSL.swift; sourceTree = "<group>"; };
 		E1687BCA2D5089035366568970461716 /* Pods-SmartCodable_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SmartCodable_Tests-Info.plist"; sourceTree = "<group>"; };
@@ -493,6 +492,7 @@
 		F9693744257055D6E8D886301B98967F /* SnapKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.release.xcconfig; sourceTree = "<group>"; };
 		FA5EA7509BA3790A709778D9D36944E7 /* HandyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "HandyJSON-Info.plist"; sourceTree = "<group>"; };
 		FAA37D00854B1424AE598ADE8E254D07 /* SmartAny.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartAny.swift; sourceTree = "<group>"; };
+		FB8DBD5CFA5CEBDCE3E21C0F74DF249C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		FCBDA27A176AE2D1C34BA797339DE8BB /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Sources/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
 		FD311A04C42FFDF8D95E30DC09B7EA57 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Sources/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		FD9C9CD93F7F692FE8121F7F78EE6DB8 /* NSDecimalNumberTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NSDecimalNumberTransform.swift; path = Source/NSDecimalNumberTransform.swift; sourceTree = "<group>"; };
@@ -753,16 +753,6 @@
 			path = BTBubble;
 			sourceTree = "<group>";
 		};
-		4E8C6BDCF82CF13D8A81EF41B26145DF /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				A4B1D181204AB8C8580AAC26D60ED44F /* LICENSE */,
-				DD62EB3C6BC4A7D3F4331F8E19901550 /* README-EN.md */,
-				654D835D5104DFE4AE4A8EE015283423 /* SmartCodable.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
 		50F10E578FD38297123917C54A81025D /* Impl */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,7 +771,7 @@
 				D0F4B0152FF9B0F5344FAF2C27139713 /* JSONEncoder */,
 				3F48FE6DFD3F4F7158F51E5CE37B2DDF /* JSONValue */,
 				09F4DFCA7B51F6578C440A3013934F1B /* Log */,
-				4E8C6BDCF82CF13D8A81EF41B26145DF /* Pod */,
+				E58AF6FD854CFA3E8C95C4B2408DBD50 /* Pod */,
 				9E08D8F8739D7EF5BE062758CF51F6E9 /* SmartCodable */,
 				866B8F9B854657C57015129E41A31C64 /* SmartType */,
 				6563CF7E170D3CE734DB0B7A96075769 /* Support Files */,
@@ -1070,6 +1060,16 @@
 			);
 			name = Container;
 			path = Container;
+			sourceTree = "<group>";
+		};
+		E58AF6FD854CFA3E8C95C4B2408DBD50 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				FB8DBD5CFA5CEBDCE3E21C0F74DF249C /* LICENSE */,
+				B7FDF252ED60310F04697FD38BA56AE6 /* README.md */,
+				89D27D01563CE1DAAD49F56EC8284738 /* SmartCodable.podspec */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		F02A47C6E8279678BBAFA51319D05818 /* BTPrint */ = {
