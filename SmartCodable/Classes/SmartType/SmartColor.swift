@@ -8,16 +8,25 @@
 import Foundation
 
 
+
 #if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
-#else
+#elseif os(macOS)
 import Cocoa
+#else
+import VisionKit
 #endif
+
+
+
+
 
 #if os(iOS) || os(tvOS) || os(watchOS)
 public typealias ColorObject = UIColor
-#else
+#elseif os(macOS)
 public typealias ColorObject = NSColor
+#else
+public typealias ColorObject = UIColor // 根据 VisionKit 框架设置适当的颜色类型
 #endif
 
 public enum SmartColor {

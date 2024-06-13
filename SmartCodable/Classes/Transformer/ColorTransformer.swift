@@ -8,18 +8,17 @@
 
 #if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
-#else
+#elseif os(macOS)
 import Cocoa
+#else
+import VisionKit
 #endif
 
 
 public struct SmartHexColorTransformer: ValueTransformable {
 
-    #if os(iOS) || os(tvOS) || os(watchOS)
-    public typealias Object = UIColor
-    #else
-    public typealias Object = NSColor
-    #endif
+    public typealias Object = ColorObject
+    
     public typealias JSON = String
 
     public init() { }
@@ -128,10 +127,10 @@ extension ColorObject {
             return nil
         }
         
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
         return UIColor(red: red, green: green, blue: blue, alpha: useAlpha)
 #else
         return NSColor(calibratedRed: red, green: green, blue: blue, alpha: useAlpha)
-#endif        
+#endif
     }
 }
