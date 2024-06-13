@@ -88,19 +88,6 @@ class DecodingCache {
         return nil
     }
     
-    /// Custom conversion strategy for decoded values
-    func tranform(decodedValue: Any?, for codingPath: [CodingKey]) -> Any? {
-        if let lastKey = codingPath.last {
-            let container = topSnapshot?.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(decodedValue) {
-                return tranformValue
-            }
-        }
-        return nil
-    }
-    
     func tranform(value: JSONValue, for key: CodingKey?) -> Any? {
         if let lastKey = key {
             let container = topSnapshot?.transformers.first(where: {
