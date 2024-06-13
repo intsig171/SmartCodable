@@ -8,25 +8,26 @@
 import Foundation
 
 struct LogCache {
-    private var snapshotDict = ThreadSafeDictionary<String, LogContainer>()
     
-    mutating func save(error: DecodingError, className: String, decoder: String) {
+    private var snapshotDict = SafeDictionary<String, LogContainer>()
+    
+    mutating func save(error: DecodingError, className: String, parsingMark: String) {
         let log = LogItem.make(with: error)
-        cacheLog(log, className: className, decoder: decoder)
+        cacheLog(log, className: className, parsingMark: parsingMark)
     }
     
-    mutating func clearCache(decoder: String) {
-        snapshotDict.removeValue(forKey: decoder)
+    mutating func clearCache(parsingMark: String) {
+        snapshotDict.removeValue(forKey: parsingMark)
     }
     
-    mutating func formatLogs(decoder: String) -> String? {
+    mutating func formatLogs(parsingMark: String) -> String? {
         
         
         filterLogItem()
         
-        alignTypeNamesInAllSnapshots(decoder: decoder)
+        alignTypeNamesInAllSnapshots(parsingMark: parsingMark)
         
-        let keyOrder = processArray(snapshotDict.getAllKeys(), decoder: decoder)
+        let keyOrder = processArray(snapshotDict.getAllKeys(), parsingMark: parsingMark)
         
         
         let arr = keyOrder.compactMap {
@@ -42,10 +43,10 @@ struct LogCache {
 
 extension LogCache {
     
-    mutating func processArray(_ array: [String], decoder: String) -> [String] {
+    mutating func processArray(_ array: [String], parsingMark: String) -> [String] {
         
         var mutableArray = array.filter {
-            $0.starts(with: decoder)
+            $0.starts(with: parsingMark)
         }
         
         guard !mutableArray.isEmpty else { return [] }
@@ -64,7 +65,7 @@ extension LogCache {
                 mutableArray.insert(newElement, at: 0)
                 
                 if let snap = snapshotDict.getValue(forKey: firstElement) {
-                    let container = LogContainer(typeName: "", logs: [], decoder: snap.decoder, codingPath: snap.codingPath.dropLast(2))
+                    let container = LogContainer(typeName: "", logs: [], parsingMark: snap.parsingMark, codingPath: snap.codingPath.dropLast(2))
                     snapshotDict.setValue(container, forKey: newElement)
                 }
             }
@@ -133,12 +134,12 @@ extension LogCache {
         snapshotDict = tempDict
     }
     
-    private mutating func cacheLog(_ log: LogItem?, className: String, decoder: String) {
+    private mutating func cacheLog(_ log: LogItem?, className: String, parsingMark: String) {
         
         guard let log = log else { return }
         
         let path = log.codingPath
-        let key = createKey(path: path, decoder: decoder)
+        let key = createKey(path: path, parsingMark: parsingMark)
         
         // 如果存在相同的typeName和path，则合并logs
         if var existingSnapshot = snapshotDict.getValue(forKey: key) {
@@ -150,17 +151,19 @@ extension LogCache {
             }
         } else {
             // 创建新的snapshot并添加到字典中
-            let newSnapshot = LogContainer(typeName: className, logs: [log], decoder: decoder, codingPath: path)
+            let newSnapshot = LogContainer(typeName: className, logs: [log], parsingMark: parsingMark, codingPath: path)
             snapshotDict.setValue(newSnapshot, forKey: key)
         }
+        
+        
     }
     
-    private func createKey(path: [CodingKey], decoder: String) -> String {
+    private func createKey(path: [CodingKey], parsingMark: String) -> String {
         let arr = path.map { $0.stringValue }
-        return decoder + "\(arr.joined(separator: "-"))"
+        return parsingMark + "\(arr.joined(separator: "-"))"
     }
     
-    private mutating func alignTypeNamesInAllSnapshots(decoder: String) {
+    private mutating func alignTypeNamesInAllSnapshots(parsingMark: String) {
         snapshotDict.updateEach { key, snapshot in
             
             let maxLength = snapshot.logs.max(by: { $0.fieldName.count < $1.fieldName.count })?.fieldName.count ?? 0
@@ -176,57 +179,3 @@ extension LogCache {
 
 
 
-class ThreadSafeDictionary<Key: Hashable, Value> {
-    private var dictionary: [Key: Value] = [:]
-    private let queue = DispatchQueue(label: "com.example.ThreadSafeDictionary", attributes: .concurrent)
-    
-    
-    func getValue(forKey key: Key) -> Value? {
-        return queue.sync {
-            return dictionary[key]
-        }
-    }
-    
-    func setValue(_ value: Value, forKey key: Key) {
-        queue.async(flags: .barrier) { [weak self] in
-            self?.dictionary[key] = value
-        }
-    }
-    
-    func removeValue(forKey key: Key) {
-        queue.async(flags: .barrier) {
-            self.dictionary.removeValue(forKey: key)
-        }
-    }
-    
-    func removeAll() {
-        queue.async(flags: .barrier) {
-            self.dictionary.removeAll()
-        }
-    }
-    
-    func getAllValues() -> [Value] {
-        return queue.sync {
-            return Array(dictionary.values)
-        }
-    }
-    
-    func getAllKeys() -> [Key] {
-        return queue.sync {
-            return Array(dictionary.keys)
-        }
-    }
-    
-    func updateEach(_ body: (Key, inout Value) throws -> Void) rethrows {
-        try queue.sync {
-            var updatedDictionary: [Key: Value] = [:]
-            for (key, var value) in dictionary {
-                try body(key, &value)
-                updatedDictionary[key] = value
-            }
-            queue.async(flags: .barrier) {
-                self.dictionary = updatedDictionary
-            }
-        }
-    }
-}

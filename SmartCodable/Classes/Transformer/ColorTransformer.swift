@@ -5,75 +5,33 @@
 //  Created by qixin on 2024/4/9.
 //
 
-import Foundation
+
 #if os(iOS) || os(tvOS) || os(watchOS)
 import UIKit
-#else
+#elseif os(macOS)
 import Cocoa
+#else
+import VisionKit
 #endif
-
-
-
-public enum SmartColor {
-    case color(ColorObject)
-    
-    public init(from value: ColorObject) {
-        self = .color(value)
-    }
-    
-    public var peel: ColorObject {
-        switch self {
-        case .color(let c):
-            return c
-        }
-    }
-}
-
-
-extension SmartColor: Codable {
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        let hexString = try container.decode(String.self)
-        guard let color = ColorObject.hex(hexString) else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode Color from provided hex string.")
-        }
-        self = .color(color)
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .color(let color):
-            try container.encode(color.hexString)
-        }
-    }
-}
-
 
 
 public struct SmartHexColorTransformer: ValueTransformable {
 
-    #if os(iOS) || os(tvOS) || os(watchOS)
-    public typealias Object = UIColor
-    #else
-    public typealias Object = NSColor
-    #endif
+    public typealias Object = ColorObject
+    
     public typealias JSON = String
 
     public init() { }
 
-    public func transformFromJSON(_ value: Any?) -> Object? {
+    public func transformFromJSON(_ value: Any) -> Object? {
         if let rgba = value as? String {
             return ColorObject.hex(rgba)
         }
         return nil
     }
 
-    public func transformToJSON(_ value: Object?) -> JSON? {
-        if let value = value {
-            return value.hexString
-        }
-        return nil
+    public func transformToJSON(_ value: Object) -> JSON? {
+        return value.hexString
     }
 }
 
@@ -169,10 +127,10 @@ extension ColorObject {
             return nil
         }
         
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
         return UIColor(red: red, green: green, blue: blue, alpha: useAlpha)
 #else
         return NSColor(calibratedRed: red, green: green, blue: blue, alpha: useAlpha)
-#endif        
+#endif
     }
 }

@@ -8,9 +8,7 @@ target 'SmartCodable_Example' do
   pod 'SnapKit'
   pod 'BTPrint'
   pod 'BTBubble'
-  
-  pod 'WCDB.swift'
- 
+   
   #对比组
   pod 'HandyJSON', '5.0.0-beta.1'
   pod 'CleanJSON'

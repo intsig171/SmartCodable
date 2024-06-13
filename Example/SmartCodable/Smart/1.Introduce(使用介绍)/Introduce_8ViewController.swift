@@ -29,7 +29,7 @@ class Introduce_8ViewController: BaseCompatibilityViewController {
         ]
         
         guard let model = CompatibleEnum.deserialize(from: dict) else { return }
-        print("model = \(model)")
+        smartPrint(value: model)
 
         // 如果进入兼容逻辑，json值将被修改，无法恢复。
         guard let transformDict = model.toDictionary() else { return }
@@ -57,9 +57,7 @@ extension Introduce_8ViewController {
         }
     }
     
-    enum NumberType: String, SmartCaseDefaultable {
-        static var defaultCase: NumberType = .one
-        
+    enum NumberType: String, SmartCaseDefaultable {        
         case one
         case two
         case three
@@ -67,8 +65,7 @@ extension Introduce_8ViewController {
     
     /// 关联值枚举的解析， 需要自己接管decode
     enum Sex: SmartAssociatedEnumerable {
-        static var defaultCase: Sex = .women
-        
+        static var defaultCase: Sex = .man
         case man
         case women
         case other(String)
@@ -78,8 +75,7 @@ extension Introduce_8ViewController {
 
 extension Introduce_8ViewController {
     struct RelationEnumTranformer: ValueTransformable {
-        func transformToJSON(_ value: Introduce_8ViewController.Sex?) -> String? {
-            guard let value = value else { return nil }
+        func transformToJSON(_ value: Introduce_8ViewController.Sex) -> String? {
             
             switch value {
             case .man:
@@ -96,7 +92,7 @@ extension Introduce_8ViewController {
         typealias Object = Sex
         typealias JSON = String
         
-        func transformFromJSON(_ value: Any?) -> Sex? {
+        func transformFromJSON(_ value: Any) -> Sex? {
             guard let temp = value as? String else { return .man }
 
             switch temp {

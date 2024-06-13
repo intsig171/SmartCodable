@@ -48,7 +48,5 @@ struct Student: SmartCodable {
     enum Sex: String, SmartCaseDefaultable {
         case man = "男"
         case woman = "女"
-        
-        static var defaultCase: Student.Sex = .man
     }
 }

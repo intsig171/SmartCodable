@@ -13,6 +13,10 @@ extension Array: SmartCodable where Element: SmartCodable { }
 extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 
 
+/**
+ 1. 进行Int的解析，浮点数是否支持类型转换，可以考虑提供一个兼容规则。让外面自定义。
+ */
+
 //MARK: - =========== 版本Todo List ===========
 
 // MARK: 继承Model的解码支持

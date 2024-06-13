@@ -23,9 +23,9 @@ class ViewController: UIViewController {
         
         dataArray = [
             other,
+            smart_introduce,
             smart_test,
             replace_HandyJSON,
-            smart_introduce,
             smart_customDecoding,
             smart_debug,
             smart_case,
@@ -45,9 +45,10 @@ extension ViewController {
     
     var smart_test: [String: Any] {
         [
-            "title": "Smart的测试用例",
+            "title": "测试用例",
             "list": [
-                ["name": "丰富的测试用例 >>>", "vc": "TestCaseViewController"],
+                ["name": "解码测试用例 >>>", "vc": "TestCaseViewController"],
+                ["name": "编码测试用例 >>>", "vc": "TestEncodeCaseViewController"],
             ]
         ]
     }
@@ -90,6 +91,8 @@ extension ViewController {
             "list": [
                 ["name": "字典日志", "vc": "DecodingDictLogViewController"],
                 ["name": "数组日志", "vc": "DecodingArrayLogViewController"],
+                ["name": "并发日志", "vc": "ConcurrenceLogViewController"],
+
             ]
         ]
     }
@@ -149,8 +152,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
-//        label.backgroundColor = UIColor.red.withAlphaComponent(0.01)
-        
         if let dict = dataArray[section~] {
             let title = dict["title"] as? String ?? ""
             label.text = "    " + title

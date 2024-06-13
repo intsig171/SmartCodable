@@ -14,7 +14,9 @@ struct LogContainer {
     
     // 当前容器下，解析错误的属性日志
     var logs: [LogItem] = []
-    var decoder: String
+    
+    /// 用来从属哪次解析，以便做聚合
+    var parsingMark: String
 
     /// 容器的路径
     var codingPath: [CodingKey] = []

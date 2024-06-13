@@ -24,7 +24,7 @@ public struct SmartURLTransformer: ValueTransformable {
     }
     
     
-    public func transformFromJSON(_ value: Any?) -> URL? {
+    public func transformFromJSON(_ value: Any) -> URL? {
         guard var URLString = value as? String else { return nil }
         if let prefix = prefix, !URLString.hasPrefix(prefix) {
             URLString = prefix + URLString
@@ -40,10 +40,7 @@ public struct SmartURLTransformer: ValueTransformable {
         return URL(string: escapedURLString)
     }
 
-    public func transformToJSON(_ value: URL?) -> String? {
-        if let URL = value {
-            return URL.absoluteString
-        }
-        return nil
+    public func transformToJSON(_ value: URL) -> String? {
+        return value.absoluteString
     }
 }

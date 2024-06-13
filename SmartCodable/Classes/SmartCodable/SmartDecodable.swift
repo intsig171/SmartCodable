@@ -32,6 +32,8 @@ extension SmartDecodable {
 /// Options for SmartCodable parsing
 public enum SmartDecodingOption: Hashable {
     
+    
+    /// date的默认策略是ReferenceDate（参考日期是指2001年1月1日 00:00:00 UTC），以秒为单位。
     case date(JSONDecoder.DateDecodingStrategy)
     
     case data(JSONDecoder.DataDecodingStrategy)
