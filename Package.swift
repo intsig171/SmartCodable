@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SmartCodable",
-    platforms: [.iOS(.v12)],
+    platforms: [.macOS(.v10_13), .iOS(.v12), .tvOS(.v12), .watchOS(.v5), .visionOS(.v1)],
     products: [
         .library(
             name: "SmartCodable",

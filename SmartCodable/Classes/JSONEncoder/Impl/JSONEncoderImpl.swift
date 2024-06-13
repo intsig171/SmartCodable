@@ -1,4 +1,5 @@
 
+import Foundation
 
 class JSONEncoderImpl {
     let options: SmartJSONEncoder._Options
