@@ -63,24 +63,20 @@ extension LogItem {
         
         switch error {
         case .keyNotFound(let key, let context):
-            // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
             return LogItem(fieldName: key.stringValue, logType: "MISSING KEY", logDetail: "No value associated with key.", codingPath: codingPath)
             
         case .valueNotFound( _, let context):
-            // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
             let key = context.codingPath.last?.stringValue ?? ""
             return LogItem(fieldName: key, logType: "NULL VALUE", logDetail: context.debugDescription, codingPath: codingPath)
             
         case .typeMismatch( _, let context):
-            // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
             let key = context.codingPath.last?.stringValue ?? ""
             return LogItem(fieldName: key, logType: "TYPE MISMATCH", logDetail: context.debugDescription, codingPath: codingPath)
             
         case .dataCorrupted(let context):
-            // 获取属性对应的Model的路径
             let codingPath = context.codingPath.removeFromEnd(1) ?? []
             let key = context.codingPath.last?.stringValue ?? ""
             return LogItem(fieldName: key, logType: "DATA CORRUPTED", logDetail: context.debugDescription, codingPath: codingPath)

@@ -9,8 +9,8 @@
 public typealias SmartCodable = SmartDecodable & SmartEncodable
 
 
+// 用在泛型解析中
 extension Array: SmartCodable where Element: SmartCodable { }
-extension Dictionary: SmartCodable where Key == String, Value == SmartAny { }
 
 
 /**

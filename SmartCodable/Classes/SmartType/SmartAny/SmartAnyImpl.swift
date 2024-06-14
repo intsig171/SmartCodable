@@ -116,30 +116,18 @@ extension SmartAnyImpl: Codable {
         
         guard let decoder = decoder as? JSONDecoderImpl,
               let container = try? decoder.singleValueContainer() as? JSONDecoderImpl.SingleValueContainer else {
-<<<<<<< HEAD:SmartCodable/Classes/SmartType/SmartAny.swift
-            throw DecodingError.typeMismatch(SmartAny.self, DecodingError.Context(
-=======
             throw DecodingError.typeMismatch(SmartAnyImpl.self, DecodingError.Context(
->>>>>>> main:SmartCodable/Classes/SmartType/SmartAny/SmartAnyImpl.swift
                 codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
             )
         }
        
         if container.decodeNil() {
             self = .null(NSNull())
-<<<<<<< HEAD:SmartCodable/Classes/SmartType/SmartAny.swift
-        } else if let value = container.decodeIfPresent(SmartAny.self) {
-            self = value
-        } else if let value = try? container.decode([String: SmartAny].self) {
-            self = .dict(value)
-        } else if let value = try? container.decode([SmartAny].self) {
-=======
         } else if let value = container.decodeIfPresent(SmartAnyImpl.self) {
             self = value
         } else if let value = try? container.decode([String: SmartAnyImpl].self) {
             self = .dict(value)
         } else if let value = try? container.decode([SmartAnyImpl].self) {
->>>>>>> main:SmartCodable/Classes/SmartType/SmartAny/SmartAnyImpl.swift
             self = .array(value)
         } else {
             throw DecodingError.typeMismatch(SmartAnyImpl.self, DecodingError.Context(
@@ -148,9 +136,6 @@ extension SmartAnyImpl: Codable {
         }
     }
         
-    
-    
-    
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()

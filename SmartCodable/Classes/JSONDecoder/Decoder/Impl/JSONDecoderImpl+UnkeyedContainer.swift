@@ -84,10 +84,12 @@ extension JSONDecoderImpl {
 }
 
 
-// 由于UnkeyedDecodingContainer本身并不直接关联到特定的模型属性，
-// 而是用于解析未标记的序列，所以它不会自动选择针对特定类型的解码方法。
-// 相反，它会尝试使用泛型的解码方法，以便能够处理各种类型的值。
-// 特定类型的decode方法，使用场景比较少，一般是自定义 `init(from decoder: any Decoder) throws` 解析方法中 `let first = try unkeyedContainer.decode(Int.self)`.
+// Because UnkeyedDecodingContainer itself is not directly associated with a particular model property,
+// but is used to parse unlabeled sequences,
+// it does not automatically select a decoding method for a particular type.
+// Instead, it tries to use generic decoding methods so that it can handle values of various types.
+// Specific types of decode methods, the use of scenarios are relatively few,
+// `let first = try unkeyedContainer.decode(Int.self) '.
 extension JSONDecoderImpl.UnkeyedContainer {
     mutating func decode(_ type: Bool.Type) throws -> Bool {
         guard let value = try? self.getNextValue(ofType: Bool.self) else {
@@ -161,9 +163,11 @@ extension JSONDecoderImpl.UnkeyedContainer {
 
     mutating func decode<T>(_ type: T.Type) throws -> T where T: Decodable {
         
-        // 如果是基本数据类型的话，仍会创建一个新的decoder用来解析、。 如果此时type是Int类型，那么就会创建SingleContainer。
-        
+        // If it is a basic data type,
+        // a new decoder is still created for parsing.
+        // If type is of type Int, then SingleContainer is created.
         let newDecoder = decoderForNextElement(ofType: type)
+        
         // Because of the requirement that the index not be incremented unless
         // decoding the desired result type succeeds, it can not be a tail call.
         // Hopefully the compiler still optimizes well enough that the result
@@ -176,7 +180,8 @@ extension JSONDecoderImpl.UnkeyedContainer {
             self.currentIndex += 1
             return didFinishMapping(result)
         } else {
-            // 如果不是第一层级的数组模型的解析，就不兼容。抛出异常让keyedController兼容。
+            // If it is not the first level of array model parsing, it is not compatible.
+            // Throw an exception to make keyedController compatible.
             let result = try newDecoder.unwrap(as: type)
             self.currentIndex += 1
             return didFinishMapping(result)
@@ -259,79 +264,54 @@ extension JSONDecoderImpl.UnkeyedContainer {
         self.currentIndex += 1
         return string
     }
-
-
     
     mutating func decodeIfPresent(_ type: Double.Type) throws -> Double? {
         return decodeIfPresentFloatingPoint()
     }
-
-
     
     mutating func decodeIfPresent(_ type: Float.Type) throws -> Float? {
         return decodeIfPresentFloatingPoint()
     }
-
-
     
     mutating func decodeIfPresent(_ type: Int.Type) throws -> Int? {
         return decodeIfPresentFixedWidthInteger()
     }
-
-
     
     mutating func decodeIfPresent(_ type: Int8.Type) throws -> Int8? {
         return decodeIfPresentFixedWidthInteger()
     }
 
-
-    
     mutating func decodeIfPresent(_ type: Int16.Type) throws -> Int16? {
         return decodeIfPresentFixedWidthInteger()
     }
-
-
     
     mutating func decodeIfPresent(_ type: Int32.Type) throws -> Int32? {
         return decodeIfPresentFixedWidthInteger()
     }
 
-
-    
     mutating func decodeIfPresent(_ type: Int64.Type) throws -> Int64? {
         return decodeIfPresentFixedWidthInteger()
     }
 
-
-    
     mutating func decodeIfPresent(_ type: UInt.Type) throws -> UInt? {
         return decodeIfPresentFixedWidthInteger()
     }
-
-
     
     mutating func decodeIfPresent(_ type: UInt8.Type) throws -> UInt8? {
         return decodeIfPresentFixedWidthInteger()
     }
-
-
     
     mutating func decodeIfPresent(_ type: UInt16.Type) throws -> UInt16? {
         return decodeIfPresentFixedWidthInteger()
     }
-
-
     
     mutating func decodeIfPresent(_ type: UInt32.Type) throws -> UInt32? {
         return decodeIfPresentFixedWidthInteger()
     }
-
-
     
     mutating func decodeIfPresent(_ type: UInt64.Type) throws -> UInt64? {
         return decodeIfPresentFixedWidthInteger()
     }
-
 
     ///   is not convertible to the requested type.
     mutating func decodeIfPresent<T>(_ type: T.Type) throws -> T? where T : Decodable {

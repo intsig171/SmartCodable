@@ -58,7 +58,8 @@ extension Introduce_10ViewController {
     
     struct Home: SmartCodable {
         
-        var arr1: [SmartAny]?
+        @SmartAny
+        var arr1: [Any]?
         var id: String?
         var arr2: [String]?
     }

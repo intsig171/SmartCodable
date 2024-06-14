@@ -1,5 +1,10 @@
+<p align="center">
+<img src="https://github.com/intsig171/SmartCodable/assets/87351449/89de27ac-1760-42ee-a680-4811a043c8b1" alt="SmartCodable" title="SmartCodable" width="500"/>
+</p>
 
-![Smarter](https://github.com/intsig171/SmartCodable/assets/87351449/89de27ac-1760-42ee-a680-4811a043c8b1)
+
+
+# SmartCodable - Swift data decoding & encoding
 
 **SmartCodable** is a data parsing library based on Swift's **Codable** protocol, designed to provide more powerful and flexible parsing capabilities. By optimizing and rewriting the standard features of **Codable**, **SmartCodable** effectively solves common problems in the traditional parsing process and improves the fault tolerance and flexibility of parsing.
 
@@ -40,6 +45,39 @@ $ pod install
 
 
 ### Usages
+
+```
+import SmartCodable
+
+struct Model: SmartCodable {
+    var string: String?
+    var date: Date?
+    var subModel: SubModel?
+    
+    @SmartAny
+    var dict: [String: Any]?
+    
+    @IgnoredKey
+    var ignoreKey: String?
+    
+    static func mappingForKey() -> [SmartKeyTransformer]? {
+        [
+            CodingKeys.date <--- "nowDate"
+        ]
+    }
+    
+    static func mappingForValue() -> [SmartValueTransformer]? {
+        [
+            CodingKeys.date <--- SmartDateTransformer(),
+        ]
+    }
+    
+    func didFinishMapping() {
+        // do something
+    }
+}
+
+```
 
 If you don't know how to use it, check it out.
 

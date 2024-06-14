@@ -19,7 +19,9 @@ extension JSONDecoderImpl {
             self.codingPath = codingPath
             
             self.dictionary = _convertDictionary(dictionary, impl: impl)
-            // dictionary的转换，并没有影响结构，只是在当前容器对应的数据新增了字段。并不需要改动impl
+            // The transformation of the dictionary does not affect the structure,
+            // but only adds a new field to the data corresponding to the current container.
+            // No impl changes are required
             self.impl = impl
         }
         
@@ -83,7 +85,8 @@ extension JSONDecoderImpl {
                 options: self.impl.options
             )
             
-            // 如果新的解析器不是解析Model，就继承上一个的cache。
+            // If the new parser is not a parse Model,
+            // it inherits the cache from the previous one.
             if !(type is SmartDecodable.Type) {
                 newImpl.cache = impl.cache
             }
@@ -296,7 +299,6 @@ extension JSONDecoderImpl.KeyedContainer {
             let decoded = try newDecoder.unwrap(as: type)
             return didFinishMapping(decoded)
         } catch {
-            //todo log日志： 异常记录。比如SmartColor类型。
             let decoded: T = try forceDecode(forKey: key)
             return didFinishMapping(decoded)
         }
@@ -510,12 +512,11 @@ fileprivate func _toData(_ value: Any) -> Data? {
 
 
 
-/// 处理需要解析的字段名的对应关系。
+/// Handles correspondence between field names that need to be parsed.
 fileprivate func _convertDictionary(_ dictionary: [String: JSONValue], impl: JSONDecoderImpl) -> [String: JSONValue] {
     
     var dictionary = dictionary
     
-    // 全局的改动，是否重复了？ 应该只需要在最外层改动一次就够了吧？
     switch impl.options.keyDecodingStrategy {
     case .useDefaultKeys:
         break
@@ -535,9 +536,7 @@ fileprivate func _convertDictionary(_ dictionary: [String: JSONValue], impl: JSO
         }, uniquingKeysWith: { (first, _) in first })
     }
     
-    
     guard let type = impl.cache.decodedType else { return dictionary }
-    
     
     if let tempValue = KeysMapper.convertFrom(JSONValue.object(dictionary), type: type), let dict = tempValue.object {
         return dict

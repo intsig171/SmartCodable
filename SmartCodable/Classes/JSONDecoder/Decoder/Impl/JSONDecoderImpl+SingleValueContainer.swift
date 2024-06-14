@@ -8,11 +8,7 @@
 import Foundation
 
 /** 进入Single的场景
- * 1. SmartAny
- * 2.
- */
-
-/** 单容器的解析
+ 单容器的解析
  struct Model: SmartCodable {
      var models: [String] = ["one"]
  }
@@ -115,10 +111,9 @@ extension JSONDecoderImpl.SingleValueContainer {
 }
 
 
-///decodeIfPresent 为了实现SmartAny 而加的， 不能做兼容处理，否则会影响数据的类型。 非SingleValueDecodingContainer协议方法。
+
 extension JSONDecoderImpl.SingleValueContainer {
-    
-    func decodeIfPresent(_: SmartAny.Type) -> SmartAny? {
+    func decodeIfPresent(_: SmartAnyImpl.Type) -> SmartAnyImpl? {
         if let temp = decodeIfPresent(String.self) {
             return .string(temp)
         } else if let temp = decodeIfPresent(Bool.self) as? NSNumber {

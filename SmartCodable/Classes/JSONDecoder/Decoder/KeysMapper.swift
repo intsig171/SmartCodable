@@ -10,7 +10,7 @@ struct KeysMapper {
     
     static func convertFrom(_ jsonValue: JSONValue, type: Any.Type) -> JSONValue? {
         
-        // 如果当前不是Model类型，就不会存在key的重命名需求。
+        //type is not Model, there is no renaming requirement for key.
         guard let type = type as? SmartDecodable.Type else { return jsonValue }
         
         switch jsonValue {

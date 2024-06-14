@@ -25,24 +25,27 @@ class Encode_SpecialData_anyViewController: BaseViewController {
         
         smartPrint(value: adaptive)
         
-        if let to = adaptive.toDictionary() {
-            print(to)
-        }
+//        if let to = adaptive.toDictionary() {
+//            print(to)
+//        }
     }
 }
 
 
 extension Encode_SpecialData_anyViewController {
     struct Model: SmartCodable {
-        var a: SmartAny?
-        var b: [SmartAny]?
-        var c: [String: SmartAny]?
+        @SmartAny
+        var a: Any?
+//        @SmartAny
+//        var b: [Any]?
+//        @SmartAny
+//        var c: [String: Any]?
         
         static func mappingForValue() -> [SmartValueTransformer]? {
             return [
                 CodingKeys.a <--- OneTranformer(),
-                CodingKeys.b <--- TwoTranformer(),
-                CodingKeys.c <--- ThreeTranformer()
+//                CodingKeys.b <--- TwoTranformer(),
+//                CodingKeys.c <--- ThreeTranformer()
 
             ]
         }
@@ -50,45 +53,45 @@ extension Encode_SpecialData_anyViewController {
     
     struct OneTranformer: ValueTransformable {
         
-        typealias Object = SmartAny
+        typealias Object = Any
         typealias JSON = Any
         
-        func transformToJSON(_ value: SmartAny) -> Any? {
-            return value.peel
+        func transformToJSON(_ value: Any) -> Any? {
+            return value
         }
         
-        func transformFromJSON(_ value: Any) -> SmartAny? {
-            return SmartAny(from: value)
+        func transformFromJSON(_ value: Any) -> Any? {
+            return "value"
         }
     }
     
     
     struct TwoTranformer: ValueTransformable {
         
-        typealias Object = [SmartAny]
+        typealias Object = [Any]
         typealias JSON = Any
         
-        func transformToJSON(_ value: [SmartAny]) -> Any? {
-            return value.peel
+        func transformToJSON(_ value: [Any]) -> Any? {
+            return value
         }
         
-        func transformFromJSON(_ value: Any) -> [SmartAny]? {
-            return [.string("mccc")]
+        func transformFromJSON(_ value: Any) -> [Any]? {
+            return ["mccc"]
         }
     }
     
     
     struct ThreeTranformer: ValueTransformable {
         
-        typealias Object = [String: SmartAny]
+        typealias Object = [String: Any]
         typealias JSON = Any
         
-        func transformToJSON(_ value: [String: SmartAny]) -> Any? {
-            return value.peel
+        func transformToJSON(_ value: [String: Any]) -> Any? {
+            return value
         }
         
-        func transformFromJSON(_ value: Any) -> [String: SmartAny]? {
-            return ["key": .string("value")]
+        func transformFromJSON(_ value: Any) -> [String: Any]? {
+            return ["key": "value"]
         }
     }
 }

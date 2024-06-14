@@ -267,9 +267,8 @@ extension Data {
 extension Dictionary where Key == String {
     
     fileprivate func toData() -> Data? {
-        let peeled = self.peelIfPresent
-        guard JSONSerialization.isValidJSONObject(peeled) else { return nil }
-        return try? JSONSerialization.data(withJSONObject: peeled)
+        guard JSONSerialization.isValidJSONObject(self) else { return nil }
+        return try? JSONSerialization.data(withJSONObject: self)
     }
     
     fileprivate func toJSONString() -> String? {
@@ -284,9 +283,8 @@ extension Dictionary where Key == String {
 extension Array {
     
     fileprivate func toData() -> Data? {
-        let peeled = self.peelIfPresent
-        guard JSONSerialization.isValidJSONObject(peeled) else { return nil }
-        return try? JSONSerialization.data(withJSONObject: peeled)
+        guard JSONSerialization.isValidJSONObject(self) else { return nil }
+        return try? JSONSerialization.data(withJSONObject: self)
     }
     
     fileprivate func toJSONString() -> String? {

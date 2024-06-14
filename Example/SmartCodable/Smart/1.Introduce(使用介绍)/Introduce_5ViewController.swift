@@ -43,12 +43,12 @@ class Introduce_5ViewController: BaseViewController {
         
         
         guard let model = AnyModel.deserialize(from: dict) else { return }
-        print(model.sex?.peel ?? false)
-        print(model.height?.peel ?? 0)
-        print(model.name.peel )
-        print(model.age?.peel ?? 0)
-        print(model.dict.peel)
-        print(model.arr.peel)
+        print(model.sex ?? false)
+        print(model.height ?? 0)
+        print(model.name ?? "")
+        print(model.age ?? 0)
+        print(model.dict)
+        print(model.arr)
         
         print("\n")
         print("\n")
@@ -61,36 +61,30 @@ class Introduce_5ViewController: BaseViewController {
         print("\n")
 
         guard let model1 = AnyModel.deserialize(from: encodeDict) else { return }
-        print(model1.sex?.peel ?? false)
-        print(model.height?.peel ?? 0)
-        print(model1.name.peel )
-        print(model1.age?.peel ?? 0)
-        print(model1.dict.peel)
-        print(model1.arr.peel)
+        print(model1.sex ?? false)
+        print(model.height ?? 0)
+        print(model1.name ?? "")
+        print(model1.age ?? 0)
+        print(model1.dict)
+        print(model1.arr)
     }
     
-    /// 加壳
-    func cover() {
-        let name = SmartAny(from: "新名字")
-        let dict1 = ["key2": "value2"].cover
-        let arr1 = [ ["key3": "value3"] ].cover
-        
-        var model = AnyModel()
-        
-        model.name = name
-        model.dict = dict1
-        model.arr = arr1
-        print(model)
-    }
+   
 }
 
 extension Introduce_5ViewController {
     struct AnyModel: SmartCodable {
-        var sex: SmartAny?
-        var height: SmartAny?
-        var name: SmartAny = .string("")
-        var age: SmartAny?
-        var dict: [String: SmartAny] = [:]
-        var arr: [SmartAny] = []
+        @SmartAny
+        var sex: Any?
+        @SmartAny
+        var height: Any?
+        @SmartAny
+        var name: Any?
+        @SmartAny
+        var age: Any?
+        @SmartAny
+        var dict: [String: Any] = [:]
+        @SmartAny
+        var arr: [Any] = []
     }
 }

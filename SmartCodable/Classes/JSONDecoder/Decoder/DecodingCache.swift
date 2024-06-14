@@ -17,7 +17,7 @@ class DecodingCache {
     /// - avoid parsing confusion with multi-level nested models
     private(set) var snapshots: [Snapshot] = []
     
-    /// 正在解析的属性类型
+    /// The type of the property being parsed
     var decodedType: SmartDecodable.Type?
     
     var topSnapshot: Snapshot? {
@@ -65,7 +65,7 @@ class DecodingCache {
     func getValue<T>(forKey key: CodingKey) -> T? {
         
         if var cacheValue = snapshots.last?.initialValues[key.stringValue] {
-            // 进行CGFloat类型解析时候，是当Double来解析的。所以需要进行类型转换一下。
+            // When the CGFloat type is resolved, it is resolved as Double. So we need to do a type conversion.
             if let temp = cacheValue as? CGFloat {
                 cacheValue = Double(temp)
             }
@@ -76,10 +76,12 @@ class DecodingCache {
                 return caseValue.rawValue as? T
             }
         } else { // @propertyWrapper type， value logic
-            if let cacheValue1 = snapshots.last?.initialValues["_" + key.stringValue] {
-                if let value = cacheValue1 as? IgnoredKey<T> {
+            if let cached = snapshots.last?.initialValues["_" + key.stringValue] {
+                if let value = cached as? IgnoredKey<T> {
                     return value.wrappedValue
-                } else if let value = cacheValue1 as? T { // 当key缺失的时候，会进入
+                } else if let value = cached as? SmartAny<T> {
+                    return value.wrappedValue
+                } else if let value = cached as? T { // 当key缺失的时候，会进入
                     return value
                 }
             }

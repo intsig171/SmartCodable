@@ -8,9 +8,6 @@
 import Foundation
 
 
-
-
-
 struct JSONDecoderImpl {
     let codingPath: [CodingKey]
     let userInfo: [CodingUserInfoKey: Any]
@@ -19,7 +16,7 @@ struct JSONDecoderImpl {
     let options: SmartJSONDecoder._Options
     
     
-    /// 记录当前keyed容器的各个属性的初始化值， 不支持Unkey容器的记录。
+    /// Records the initialization values of the properties in the keyed container.
     var cache: DecodingCache
 
     init(userInfo: [CodingUserInfoKey: Any], from json: JSONValue, codingPath: [CodingKey], options: SmartJSONDecoder._Options) {
@@ -32,7 +29,9 @@ struct JSONDecoderImpl {
 }
 
 
-// 关于容器的生成，不用进行兼容，类型错误的时候，抛出异常，进行异常处理时，可以获取初始化值。
+// Regarding the generation of containers, there is no need for compatibility,
+// when the type is wrong, an exception is thrown,
+// and when the exception is handled, the initial value can be obtained.
 extension JSONDecoderImpl: Decoder {
     func container<Key>(keyedBy key: Key.Type) throws ->
         KeyedDecodingContainer<Key> where Key: CodingKey
@@ -46,7 +45,7 @@ extension JSONDecoderImpl: Decoder {
             )
             return KeyedDecodingContainer(container)
             
-        case .string(let string): // json字符串的模型化兼容
+        case .string(let string): // json string modeling compatibility
             if let dict = string.toJSONObject() as? [String: Any],
                let dictionary = JSONValue.make(dict)?.object {
                 let container = KeyedContainer<Key>(

@@ -55,7 +55,8 @@ extension Container_DictViewController {
         
         var dict1: [String: String] = [:]
         var dict2: [String: String] = [:]
-        var dict3: [String: SmartAny] = [:]
+        @SmartAny
+        var dict3: [String: Any] = [:]
         
         
         var dict4: [String: String]?
