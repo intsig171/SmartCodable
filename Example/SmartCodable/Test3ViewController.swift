@@ -19,9 +19,10 @@ class Test3ViewController: BaseViewController {
         
         let dict: [String: Any] = [
             "name": true,
-            "dict": [
-                "name": "mccc"
-            ],
+//            "dict": NSNull(),
+//            "dict": [
+//                "name": "mccc"
+//            ],
             "arr": [1, 2, 3]
         ]
         
@@ -31,12 +32,12 @@ class Test3ViewController: BaseViewController {
     }
     
     struct Model: SmartCodable {
-        @SmartAny
-        var name: Any?
-        @SmartAny
-        var dict: [String: Any] = [:]
-        @SmartAny
-        var arr: [Any] = []
+//        @SmartAny
+//        var name: Any?
+        @IgnoredKey
+        var dict: [String: Any] = ["name": "Mccc"]
+//        @SmartAny
+//        var arr: [Any] = []
     }
 }
 

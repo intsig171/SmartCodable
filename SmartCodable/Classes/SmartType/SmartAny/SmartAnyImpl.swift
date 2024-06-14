@@ -15,9 +15,6 @@ import Foundation
 /// To retrieve the original value, call '.peel' to unwrap it.
 enum SmartAnyImpl {
     
-    
-    
-    
     /// In Swift, NSNumber is a composite type that can accommodate various numeric types:
     ///  - All integer types: Int, Int8, Int16, Int32, Int64, UInt, UInt8, UInt16, UInt32, UInt64
     ///  - All floating-point types: Float, Double
@@ -138,9 +135,7 @@ extension SmartAnyImpl: Codable {
             )
         }
     }
-    
-    
-    
+        
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
@@ -160,7 +155,6 @@ extension SmartAnyImpl: Codable {
              所有的浮点类型：Float, Double
              布尔类型：Bool
              */
-            
             
             if value === kCFBooleanTrue as NSNumber || value === kCFBooleanFalse as NSNumber {
                 if let bool = value as? Bool {
@@ -198,7 +192,6 @@ extension SmartAnyImpl: Codable {
         }
     }
 }
-
 
 
 extension SmartAnyImpl {

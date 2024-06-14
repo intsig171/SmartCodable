@@ -41,14 +41,12 @@ extension Bool: TypeTransformable {
 
 extension String: TypeTransformable {
     static func transformValue(from value: Any) -> String? {
-        // 检查NSNumber实例是否代表Bool类型
         if let number = value as? NSNumber {
-            // 检查是否为布尔值，NSNumber表示布尔值时objCType返回的是"c"
+            // Check if it's a Boolean, NSNumber is a Boolean and objCType returns "c"
             if String(cString: number.objCType) == "c" {
                 return nil
             }
         }
-        
         switch value {
         case let stringValue as String:
             return stringValue
@@ -159,11 +157,9 @@ extension CGFloat: TypeTransformable {
 
 private func _floatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>(from value: Any) -> T? {
     
-    // 在Swift中，FixedWidthInteger 是一个协议，
-    // 它定义了一套操作和属性，这些操作和属性是固定宽度整数类型所共有的。
-    // 实现这个协议的类型包括标准库中的所有整数类型，
-    // 比如 Int8, Int16, Int32, Int64 以及它们的无符号版本 UInt8, UInt16, UInt32, UInt64。
-    
+    // In Swift, FixedWidthInteger is a protocol that defines a set of operations and properties that are common to fixed-width integer types.
+    // The types that implement this protocol include all the integer types in the standard library,
+    // such as Int8, Int16, Int32, Int64 and their unsigned versions UInt8, UInt16, UInt32, UInt64.
     switch value {
     case let temp as String:
         return T(temp)

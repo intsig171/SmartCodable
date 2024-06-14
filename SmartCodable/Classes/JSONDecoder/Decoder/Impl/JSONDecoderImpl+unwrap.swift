@@ -36,7 +36,8 @@ extension JSONDecoderImpl {
             return try self.unwrapSmartAny() as! T
         }
         
-        // 如果解析的是SmartColor类型属性，此处没有处理，就会进入SmartColor的init(decoder:)方法中。
+        // If you are parsing a SmartColor type property, which is not handled here,
+        // you will enter SmartColor's `init(decoder:)` method.
         if type == SmartColor.self {
             return try self.unwrapSmartColor() as! T
         }

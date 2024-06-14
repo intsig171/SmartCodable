@@ -5,7 +5,7 @@
 //  Created by qixin on 2024/6/13.
 //
 
-
+/// Attribute wrapper, used to wrap Any.
 @propertyWrapper
 public struct SmartAny<T>: Codable {
     public var wrappedValue: T
@@ -13,7 +13,6 @@ public struct SmartAny<T>: Codable {
     public init(wrappedValue: T) {
         self.wrappedValue = wrappedValue
     }
-        
 
     public init(from decoder: Decoder) throws {
         guard let decoder = decoder as? JSONDecoderImpl,
@@ -29,9 +28,6 @@ public struct SmartAny<T>: Codable {
                 return
             }
         }
-
-        
-        
         
         if let value = container.decodeIfPresent(SmartAnyImpl.self), let peel = value.peel as? T {
             self = .init(wrappedValue: peel)
@@ -61,10 +57,6 @@ public struct SmartAny<T>: Codable {
             let value = SmartAnyImpl(from: wrappedValue)
             try container.encode(value)
         }
-        
-        
-        
-        
     }
 }
 
