@@ -32,7 +32,7 @@ extension JSONDecoderImpl {
             return try self.unwrapDecimal() as! T
         }
         
-        if type == SmartAny.self {
+        if type == SmartAnyImpl.self {
             return try self.unwrapSmartAny() as! T
         }
         
@@ -253,9 +253,9 @@ extension JSONDecoderImpl {
         return SmartColor(from: color)
     }
     
-    private func unwrapSmartAny() throws -> SmartAny {
+    private func unwrapSmartAny() throws -> SmartAnyImpl {
         
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartAny {
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartAnyImpl {
             return decoded
         }
         
@@ -289,9 +289,9 @@ extension JSONDecoderImpl {
             return .number(temp)
         } else if let temp = container.decodeIfPresent(UInt64.self) as? NSNumber {
             return .number(temp)
-        } else if let temp = container.decodeIfPresent([String: SmartAny].self) {
+        } else if let temp = container.decodeIfPresent([String: SmartAnyImpl].self) {
             return .dict(temp)
-        } else if let temp = container.decodeIfPresent([SmartAny].self) {
+        } else if let temp = container.decodeIfPresent([SmartAnyImpl].self) {
             return .array(temp)
         }
         
@@ -367,7 +367,7 @@ extension Decodable {
             || Self.self == Date.self
             || Self.self == Data.self
             || Self.self == Decimal.self
-            || Self.self == SmartAny.self
+            || Self.self == SmartAnyImpl.self
             || Self.self == SmartColor.self
             || Self.self is _JSONStringDictionaryDecodableMarker.Type
         {

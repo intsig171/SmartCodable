@@ -30,8 +30,8 @@ class ReplaceHandyJSON_4ViewController: BaseViewController {
         print(handyModel.dict)
         
         guard let smartModel = SmartModel.deserialize(from: dict) else { return }
-        print(smartModel.name?.peel ?? "")
-        print(smartModel.dict.peel)
+        print(smartModel.name ?? "")
+        print(smartModel.dict)
     }
 }
 extension ReplaceHandyJSON_4ViewController {
@@ -41,8 +41,10 @@ extension ReplaceHandyJSON_4ViewController {
     }
     
     struct SmartModel: SmartCodable {
-        var name: SmartAny?
-        var dict: [String: SmartAny] = [:]
+        @SmartAny
+        var name: Any?
+        @SmartAny
+        var dict: [String: Any] = [:]
     }
 }
 

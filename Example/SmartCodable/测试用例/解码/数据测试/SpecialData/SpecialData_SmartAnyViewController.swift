@@ -63,37 +63,60 @@ class SpecialData_SmartAnyViewController: BaseCompatibilityViewController {
 extension SpecialData_SmartAnyViewController {
     struct DictModel: SmartCodable {
         
-        var complex: [String: SmartAny] = [:]
-        
-        var single_a: SmartAny?
-        var single_b: SmartAny?
-        var single_c: SmartAny?
-        var single_d: SmartAny?
+        @SmartAny
+        var complex: [String: Any] = [:]
+        @SmartAny
+        var single_a: Any?
+        @SmartAny
+        var single_b: Any?
+        @SmartAny
+        var single_c: Any?
+        @SmartAny
+        var single_d: Any?
 
-        var single_e: SmartAny = .string("single_e")
-        var single_f: SmartAny = .string("single_f")
-        var single_g: SmartAny = .string("single_g")
-        var single_h: SmartAny = .string("single_h")
+        @SmartAny
+        var single_e: Any = "single_e"
+        @SmartAny
+        var single_f: Any = "single_f"
+        @SmartAny
+        var single_g: Any = "single_g"
+        @SmartAny
+        var single_h: Any = "single_h"
 
+        @SmartAny
+        var dict_a: [String: Any]?
+        @SmartAny
+        var dict_b: [String: Any]?
+        @SmartAny
+        var dict_c: [String: Any]?
+        @SmartAny
+        var dict_d: [String: Any]?
         
-        var dict_a: [String: SmartAny]?
-        var dict_b: [String: SmartAny]?
-        var dict_c: [String: SmartAny]?
-        var dict_d: [String: SmartAny]?
+        @SmartAny
+        var dict_e: [String: Any] = [:]
+        @SmartAny
+        var dict_f: [String: Any] = [:]
+        @SmartAny
+        var dict_g: [String: Any] = [:]
+        @SmartAny
+        var dict_h: [String: Any] = [:]
         
-        var dict_e: [String: SmartAny] = [:]
-        var dict_f: [String: SmartAny] = [:]
-        var dict_g: [String: SmartAny] = [:]
-        var dict_h: [String: SmartAny] = [:]
-        
-        var arr_a: [SmartAny]?
-        var arr_b: [SmartAny]?
-        var arr_c: [SmartAny]?
-        var arr_d: [SmartAny]?
+        @SmartAny
+        var arr_a: [Any]?
+        @SmartAny
+        var arr_b: [Any]?
+        @SmartAny
+        var arr_c: [Any]?
+        @SmartAny
+        var arr_d: [Any]?
 
-        var arr_e: [SmartAny] = []
-        var arr_f: [SmartAny] = []
-        var arr_g: [SmartAny] = []
-        var arr_h: [SmartAny] = []
+        @SmartAny
+        var arr_e: [Any] = []
+        @SmartAny
+        var arr_f: [Any] = []
+        @SmartAny
+        var arr_g: [Any] = []
+        @SmartAny
+        var arr_h: [Any] = []
     }
 }

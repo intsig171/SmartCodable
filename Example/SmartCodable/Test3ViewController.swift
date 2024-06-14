@@ -18,40 +18,26 @@ class Test3ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "name": "Mccc",
-            "sub": [
-                "selfAge": 10
-            ]
+            "name": true,
+            "dict": [
+                "name": "mccc"
+            ],
+            "arr": [1, 2, 3]
         ]
         
         if let model = Model.deserialize(from: dict) {
-            print("执行了")
-            print(model)
+            print(model.toJSONString(prettyPrint: true) ?? "")
         }
     }
     
     struct Model: SmartCodable {
-        var nickName: String = ""
-        var sub: SubModel = SubModel()
-
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.nickName <--- "name"
-            ]
-        }
+        @SmartAny
+        var name: Any?
+        @SmartAny
+        var dict: [String: Any] = [:]
+        @SmartAny
+        var arr: [Any] = []
     }
-    
-    struct SubModel: SmartCodable {
-        var age: Int = 0
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.age <--- "selfAge"
-            ]
-        }
-    }
-    
-    
 }
 
 
