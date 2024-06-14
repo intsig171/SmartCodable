@@ -106,13 +106,18 @@ Codable does not decode the Any type, meaning that the attribute type of the mod
 
 **SmartAny** is a solution to Any provided by **SmartCodable**.
 
-Codable是无法解码Any类型的，意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型。**SmartCodable** 提供了 **SmartAny** 替代 **Any**。
+Codable是无法解码Any类型的，意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型。**SmartCodable** 提供了 **SmartAny** 来解决改它。
 
 ```
 struct AnyModel: SmartCodable {
-    var name: SmartAny?
-    var dict: [String: SmartAny] = [:]
-    var arr: [SmartAny] = []
+    // @SmartAny
+    var name: Any?
+    
+    // @SmartAny
+    var dict: [String: Any] = [:]
+    
+    // @SmartAny
+    var arr: [Any] = []
 }
 ```
 
@@ -126,24 +131,6 @@ let dict = [
 
 guard let model = AnyModel.deserialize(from: dict) else { return }
 ```
-
-The real data is wrapped in SmartAny, you need to use **peel** to convert SmartAny to Any.
-
-真实的数据被 SmartAny 包裹住了，需要使用 **peel** 将SmartAny 转 成Any。
-
-```
-print(model.name.peel )
-print(model.dict.peel)
-print(model.arr.peel)
-```
-
- **To SmartAny** (Pay attention to it if you need to)
-
-| From             | To                   | Example                      |
-| ---------------- | -------------------- | ---------------------------- |
-| `Any`            | `SmartAny`           | `SmartAny(from: "some")`     |
-| `[Any]`          | `[SmartAny]`         | `[["key3": "value3"]].cover` |
-| `[String: Any] ` | `[String: SmartAny]` | `["key2": "value2"].cover`   |
 
 
 
