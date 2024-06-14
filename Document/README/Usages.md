@@ -106,7 +106,7 @@ Codable does not decode the Any type, meaning that the attribute type of the mod
 
 **SmartAny** is a solution to Any provided by **SmartCodable**.
 
-Codable是无法解码Any类型的，意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]**等类型。**SmartCodable** 提供了 **SmartAny** 替代 **Any**。
+Codable是无法解码Any类型的，意味着模型的属性类型不可以是 **Any**，**[Any]**，**[String: Any]** 等类型。**SmartCodable** 提供了 **SmartAny** 替代 **Any**。
 
 ```
 struct AnyModel: SmartCodable {
