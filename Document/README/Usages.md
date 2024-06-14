@@ -110,13 +110,13 @@ Codable是无法解码Any类型的，意味着模型的属性类型不可以是 
 
 ```
 struct AnyModel: SmartCodable {
-    // @SmartAny
+    @SmartAny
     var name: Any?
     
-    // @SmartAny
+    @SmartAny
     var dict: [String: Any] = [:]
     
-    // @SmartAny
+    @SmartAny
     var arr: [Any] = []
 }
 ```
