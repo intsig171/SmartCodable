@@ -24,41 +24,37 @@ class TestViewController: BaseViewController {
         
         let dict: [String: Any] = [
             "name": "Mccc",
-            "sex": 1,
-            "selfAge": 0,
-            "sub": [
-                "name": "xiao li"
-            ]
+//            "sex": 1,
+//            "dict": [
+//                "name": "😊xiao ming"
+//            ]
         ]
         
-
-        if let model = Model.deserialize(from: dict) {
-            print(model)
-            
-            if let dict = model.toDictionary() {
-                print(dict)
-            }
+        if let model = decode(Model.self, element: dict) {
+            print(model.name)
+//            print(model.dict)
         }
+        
+        
+    
     }
     
     struct Model: SmartCodable {
-        var age: Int = 1
-        var sex: Bool = true
-        var name: String = "Mccc"
-        var date: Date?
-        var sub: SubModel?
+//        var sex: Any = 0
+        @SmartAny
+        var name: Any?
         
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.age <--- "selfAge"
-            ]
-        }
-        
-       
+//        @SmartAny
+//        var dict: [String: Any] = [:]
     }
     
-    struct SubModel: SmartCodable {
-        var name: String = ""
+    func decode<T: SmartCodable>(_ type: T.Type, element: Any) -> T? {
+        
+        if let dict = element as? [String: Any] {
+            let model = T.deserialize(from: dict)
+            return model
+        }
+        return nil
     }
 }
 

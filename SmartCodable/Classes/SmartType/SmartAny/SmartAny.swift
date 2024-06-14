@@ -23,7 +23,8 @@ public struct SmartAny<T>: Codable {
         }
         let value = decoder.json
         if let key = decoder.codingPath.last {
-            if let decoded = decoder.cache.tranform(value: value, for: key) as? T {
+            if let cached = decoder.cache.tranform(value: value, for: key), 
+                let decoded = cached as? T {
                 self = .init(wrappedValue: decoded)
                 return
             }
