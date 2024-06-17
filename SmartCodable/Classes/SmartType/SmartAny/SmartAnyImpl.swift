@@ -123,12 +123,8 @@ extension SmartAnyImpl: Codable {
        
         if container.decodeNil() {
             self = .null(NSNull())
-        } else if let value = container.decodeIfPresent(SmartAnyImpl.self) {
+        } else if let value = try? decoder.unwrapSmartAny() {
             self = value
-        } else if let value = try? container.decode([String: SmartAnyImpl].self) {
-            self = .dict(value)
-        } else if let value = try? container.decode([SmartAnyImpl].self) {
-            self = .array(value)
         } else {
             throw DecodingError.typeMismatch(SmartAnyImpl.self, DecodingError.Context(
                 codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
@@ -204,5 +200,165 @@ extension SmartAnyImpl {
         case is NSNull:              return .null(NSNull())
         default:                     return .null(NSNull())
         }
+    }
+}
+
+
+extension JSONDecoderImpl {
+    fileprivate func unwrapSmartAny() throws -> SmartAnyImpl {
+        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartAnyImpl {
+            return decoded
+        }
+        
+        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
+        
+        
+        switch json {
+        case .null:
+            return .null(NSNull())
+        case .string(let string):
+            return .string(string)
+        case .bool(let bool):
+            return .number(bool as NSNumber)
+        case .object(_):
+            if let temp = container.decodeIfPresent([String: SmartAnyImpl].self) {
+                return .dict(temp)
+            }
+        case .array(_):
+            if let temp = container.decodeIfPresent([SmartAnyImpl].self) {
+                return .array(temp)
+            }
+        case .number(let number):
+            if number.contains(".") { // 浮点数
+                if number.contains("e") { // 检查字符串中是否包含字符 e，这表示数字可能以科学计数法表示
+                    if let temp = container.decodeIfPresent(Decimal.self) as? NSNumber {
+                        return .number(temp)
+                    }
+                } else {
+                    if let temp = container.decodeIfPresent(Double.self) as? NSNumber {
+                        return .number(temp)
+                    }
+                }
+            } else {
+                if let _ = Int64(number) { // 在Int64的范围内
+                    if let temp = container.decodeIfPresent(Int8.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(UInt8.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(Int16.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(UInt16.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(Int32.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(UInt32.self) as? NSNumber {
+                        return .number(temp)
+                    }  else if let temp = container.decodeIfPresent(Int64.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(UInt64.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(Int.self) as? NSNumber {
+                        return .number(temp)
+                    } else if let temp = container.decodeIfPresent(UInt.self) as? NSNumber {
+                        return .number(temp)
+                    }
+                } else {
+                    return .string(number)
+                }
+            }
+        }
+ 
+        throw DecodingError.dataCorrupted(
+            DecodingError.Context(codingPath: self.codingPath,
+                                  debugDescription: "Invalid SmartAny."))
+    }
+}
+
+extension JSONDecoderImpl.SingleValueContainer {
+    
+    fileprivate func decodeIfPresent(_: Bool.Type) -> Bool? {
+        guard case .bool(let bool) = self.value else {
+            return nil
+        }
+
+        return bool
+    }
+
+    fileprivate func decodeIfPresent(_: String.Type) -> String? {
+        guard case .string(let string) = self.value else {
+            return nil
+        }
+        return string
+    }
+
+    fileprivate func decodeIfPresent(_: Double.Type) -> Double? {
+        decodeIfPresentFloatingPoint()
+    }
+
+    fileprivate func decodeIfPresent(_: Float.Type) -> Float? {
+        decodeIfPresentFloatingPoint()
+    }
+
+    fileprivate func decodeIfPresent(_: Int.Type) -> Int? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: Int8.Type) -> Int8? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: Int16.Type) -> Int16? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: Int32.Type) -> Int32? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: Int64.Type) -> Int64? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: UInt.Type) -> UInt? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: UInt8.Type) -> UInt8? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: UInt16.Type) -> UInt16? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: UInt32.Type) -> UInt32? {
+        decodeIfPresentFixedWidthInteger()
+    }
+
+    fileprivate func decodeIfPresent(_: UInt64.Type) -> UInt64? {
+        decodeIfPresentFixedWidthInteger()
+    }
+    
+    fileprivate func decodeIfPresent<T>(_ type: T.Type) -> T? where T: Decodable {
+        if let decoded: T = try? self.impl.unwrap(as: type) {
+            return decoded
+        } else {
+            return nil
+        }
+    }
+    
+    @inline(__always) private func decodeIfPresentFixedWidthInteger<T: FixedWidthInteger>() -> T? {
+        guard let decoded = try? self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self) else {
+            return nil
+        }
+        return decoded
+    }
+
+    @inline(__always) private func decodeIfPresentFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() -> T? {
+        
+        guard let decoded = try? self.impl.unwrapFloatingPoint(from: self.value, as: T.self) else {
+            return nil
+        }
+        return decoded
     }
 }

@@ -19,21 +19,50 @@ class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+    
+        // 1802527796438790100
+        // 1802527796438790100
+        // 1802527796438790146.1
         let dict: [String: Any] = [
-            "data": NSNull(),
-//            "data": 1802527796438790146,
+                  
+            "de": 1802527796438790146.1,
+            "data": [
+                "int": -9223372036854775808,
+
+                "int2": 18035768958676993,
+                "int3": 1802527796438790146,
+            ],
+            "float": [
+                "float": 1.1,
+                "float2": 1.12,
+                "float3": 1.123
+            ]
         ]
         
         if let model = Model.deserialize(from: dict) {
-            print(model.data)
+            print(model)
+//            print("smartCodable = \(model.data)")
+            print("\n")
+//            print("smartCodable = \(model.float)")
+
+
         }
     }
     
     struct Model: SmartCodable {
         @SmartAny
+        var de: Any?
+        
+//        @SmartAny
+//        var data: Any?
+//        
+//        @SmartAny
+//        var float: Any?
+    }
+    
+    struct ModelHandy: HandyJSON {
         var data: Any?
+        var float: Any?
     }
 }
 

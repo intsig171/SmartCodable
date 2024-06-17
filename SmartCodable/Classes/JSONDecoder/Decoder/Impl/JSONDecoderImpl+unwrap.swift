@@ -32,10 +32,6 @@ extension JSONDecoderImpl {
             return try self.unwrapDecimal() as! T
         }
         
-        if type == SmartAnyImpl.self {
-            return try self.unwrapSmartAny() as! T
-        }
-        
         // If you are parsing a SmartColor type property, which is not handled here,
         // you will enter SmartColor's `init(decoder:)` method.
         if type == SmartColor.self {
@@ -252,54 +248,6 @@ extension JSONDecoderImpl {
                                       debugDescription: "Invalid Color string."))
         }
         return SmartColor(from: color)
-    }
-    
-    private func unwrapSmartAny() throws -> SmartAnyImpl {
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartAnyImpl {
-            return decoded
-        }
-        
-        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-        
-        if container.decodeNil() {
-            return .null(NSNull())
-        } else if let temp =  container.decodeIfPresent(String.self) {
-            return .string(temp)
-        } else if let temp = container.decodeIfPresent(Bool.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Double.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Float.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int8.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int16.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int32.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(Int64.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt8.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt16.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt32.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent(UInt64.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = container.decodeIfPresent([String: SmartAnyImpl].self) {
-            return .dict(temp)
-        } else if let temp = container.decodeIfPresent([SmartAnyImpl].self) {
-            return .array(temp)
-        }
-        
-        throw DecodingError.dataCorrupted(
-            DecodingError.Context(codingPath: self.codingPath,
-                                  debugDescription: "Invalid SmartAny."))
     }
     
     private func unwrapDecimal() throws -> Decimal {

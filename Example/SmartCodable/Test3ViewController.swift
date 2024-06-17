@@ -20,18 +20,18 @@ class Test3ViewController: BaseViewController {
         
         
         let dict: [String: Any] = [
-            "data": 1802527796438790146,
+            "data": 1.1,
         ]
         
         guard let data = _toData(dict) else { return }
         
-        let decoder = CleanJSONDecoder()
+        let decoder = JSONDecoder()
         let dict1 = try? decoder.decode(Model.self, from: data)
         print(dict1)
     }
     
     struct Model: Codable {
-        var data: Double?
+        var data: Decimal?
     }
 }
 fileprivate func _toData(_ value: Any) -> Data? {
