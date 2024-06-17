@@ -158,8 +158,8 @@ If you're looking forward to learning more about the Codable protocol and the de
 
 
 
-
-
+## Github Stars
+![GitHub stars](https://starchart.cc/intsig171/SmartCodable.svg?theme=dark)
 
 ## Join us
 
