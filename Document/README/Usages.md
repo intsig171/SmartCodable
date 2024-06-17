@@ -182,11 +182,11 @@ Make the enumeration follow **SmartCaseDefaultable**.
 让枚举遵循 **SmartCaseDefaultable**。
 
 ```
-struct CompatibleEnum: SmartCodable {
-    var enumTest: TestEnum?
+struct Model: SmartCodable {
+    var enum: MyEnum?
 }
 
-enum TestEnum: String, SmartCaseDefaultable {
+enum myEnum: String, SmartCaseDefaultable {
     case a
     case b
     case c = "hello"
@@ -205,7 +205,7 @@ enum Sex: SmartAssociatedEnumerable {
     case women
     case other(String)
 }
-struct CompatibleEnum: SmartCodable {
+struct Model: SmartCodable {
     var sex: Sex = .man
     static func mappingForValue() -> [SmartValueTransformer]? {
         [
