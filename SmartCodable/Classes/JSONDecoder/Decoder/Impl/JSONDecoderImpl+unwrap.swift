@@ -255,14 +255,15 @@ extension JSONDecoderImpl {
     }
     
     private func unwrapSmartAny() throws -> SmartAnyImpl {
-        
         if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartAnyImpl {
             return decoded
         }
         
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
         
-        if let temp =  container.decodeIfPresent(String.self) {
+        if container.decodeNil() {
+            return .null(NSNull())
+        } else if let temp =  container.decodeIfPresent(String.self) {
             return .string(temp)
         } else if let temp = container.decodeIfPresent(Bool.self) as? NSNumber {
             return .number(temp)
@@ -344,7 +345,6 @@ extension JSONDecoderImpl {
                 options: self.options)
             result[key] = try dictType.elementType.createByDirectlyUnwrapping(from: newDecoder)
         }
-        
         return result as! T
     }
     

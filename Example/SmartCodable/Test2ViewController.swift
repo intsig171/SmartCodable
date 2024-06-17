@@ -15,26 +15,39 @@ import SmartCodable
 
 class Test2ViewController: BaseViewController {
 
+
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let model1 = ModelT4(age: "123")
-        let model2 = ModelT4(age: "123")
-        
-        if model1 == model2 {
-            print("==")
+            super.viewDidLoad()
+                    
+            let dict: [String: Any] = [
+                "code": [1, 200, "300"],
+                "data": [
+                    "name": "mccc",
+                    "height": NSNull(),
+                    "id": 1802527796438790146,
+                    "icon": "1231231122",
+                    "r1": 0,
+                    "dis": 321123,
+                ],
+                "msg": "success"
+            ]
+            
+            if let model = demo.deserialize(from: dict) {
+                print(model.code as Any)
+                print(model.msg as Any)
+                print(model.data as Any)
+            }
+            
+            
         }
-    }
+            
+        struct demo: SmartCodable {
+            @SmartAny
+            public var code: [Any]?
+            @SmartAny
+            public var msg: Any?
+            @SmartAny
+            public var data: [String: Any]?
+        }
 }
-class ModelT4: NSObject {
-    
-    var age: String
-    
-    init(age: String) {
-        self.age = age
-    }
-    
-    static func == (lhs: ModelT4, rhs: ModelT4) -> Bool {
-        return lhs.age == rhs.age
-    }
-}
+

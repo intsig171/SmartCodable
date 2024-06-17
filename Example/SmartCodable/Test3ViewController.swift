@@ -9,36 +9,32 @@
 import Foundation
 import SmartCodable
 import HandyJSON
+import CleanJSON
 
 
 
 class Test3ViewController: BaseViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         let dict: [String: Any] = [
-            "name": true,
-//            "dict": NSNull(),
-//            "dict": [
-//                "name": "mccc"
-//            ],
-            "arr": [1, 2, 3]
+            "data": 1802527796438790146,
         ]
         
-        if let model = Model.deserialize(from: dict) {
-            print(model.toJSONString(prettyPrint: true) ?? "")
-        }
+        guard let data = _toData(dict) else { return }
+        
+        let decoder = CleanJSONDecoder()
+        let dict1 = try? decoder.decode(Model.self, from: data)
+        print(dict1)
     }
     
-    struct Model: SmartCodable {
-//        @SmartAny
-//        var name: Any?
-        @IgnoredKey
-        var dict: [String: Any] = ["name": "Mccc"]
-//        @SmartAny
-//        var arr: [Any] = []
+    struct Model: Codable {
+        var data: Double?
     }
 }
-
-
+fileprivate func _toData(_ value: Any) -> Data? {
+    guard JSONSerialization.isValidJSONObject(value) else { return nil }
+    return try? JSONSerialization.data(withJSONObject: value)
+}

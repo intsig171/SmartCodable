@@ -15,8 +15,7 @@ public struct SmartAny<T>: Codable {
     }
 
     public init(from decoder: Decoder) throws {
-        guard let decoder = decoder as? JSONDecoderImpl,
-              let container = try? decoder.singleValueContainer() as? JSONDecoderImpl.SingleValueContainer else {
+        guard let decoder = decoder as? JSONDecoderImpl else {
             throw DecodingError.typeMismatch(SmartAnyImpl.self, DecodingError.Context(
                 codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
             )
@@ -25,17 +24,16 @@ public struct SmartAny<T>: Codable {
         if let key = decoder.codingPath.last {
             // Note the case where T is nil. nil as? T is true.
             if let cached = decoder.cache.tranform(value: value, for: key),
-                let decoded = cached as? T {
+               let decoded = cached as? T {
                 self = .init(wrappedValue: decoded)
                 return
             }
         }
         
-        if let value = container.decodeIfPresent(SmartAnyImpl.self), let peel = value.peel as? T {
-            self = .init(wrappedValue: peel)
-        } else if let value = try? container.decode([String: SmartAnyImpl].self), let peel = value.peel as? T  {
-            self = .init(wrappedValue: peel)
-        } else if let value = try? container.decode([SmartAnyImpl].self), let peel = value.peel as? T  {
+        
+        
+        if let new = try? decoder.unwrap(as: SmartAnyImpl.self),
+           let peel = new.peel as? T {
             self = .init(wrappedValue: peel)
         } else {
             // Exceptions thrown in the parse container will be compatible.
@@ -43,10 +41,13 @@ public struct SmartAny<T>: Codable {
                 codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！")
             )
         }
+        
+        
+        
     }
-
+    
     public func encode(to encoder: Encoder) throws {
-
+        
         var container = encoder.singleValueContainer()
         
         if let dict = wrappedValue as? [String: Any] {
