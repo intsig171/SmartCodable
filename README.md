@@ -168,6 +168,11 @@ If you're looking forward to learning more about the Codable protocol and the de
 ## Github Stars
 ![GitHub stars](https://starchart.cc/intsig171/SmartCodable.svg?theme=dark)
 
+## Supporters
+[![Stargazers repo roster for @intsig171/SmartCodable](https://reporoster.com/stars/intsig171/SmartCodable)](https://github.com/intsig171/SmartCodable/stargazers)
+
+[![Forkers repo roster for @intsig171/SmartCodable](https://reporoster.com/forks/intsig171/SmartCodable)](https://github.com/intsig171/SmartCodable/network/members)
+
 ## Join us
 
 **SmartCodable** is an open source project, and we welcome all developers interested in improving data parsing performance and robustness. Whether it's using feedback, feature suggestions, or code contributions, your participation will greatly advance the **SmartCodable** project.
