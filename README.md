@@ -5,7 +5,7 @@
 
 
 # SmartCodable - Swift data decoding & encoding
-
+[![Platforms](https://img.shields.io/cocoapods/p/ExCodable.svg)](#readme)[![GitHub Releases (latest SemVer)](https://img.shields.io/github/v/release/iwill/ExCodable.svg?sort=semver)](https://github.com/iwill/ExCodable/releases)[![LICENSE](https://img.shields.io/github/license/iwill/ExCodable.svg)](https://github.com/iwill/ExCodable/blob/master/LICENSE)
 **SmartCodable** is a data parsing library based on Swift's **Codable** protocol, designed to provide more powerful and flexible parsing capabilities. By optimizing and rewriting the standard features of **Codable**, **SmartCodable** effectively solves common problems in the traditional parsing process and improves the fault tolerance and flexibility of parsing.
 
 **SmartCodable** 是一个基于Swift的**Codable**协议的数据解析库，旨在提供更为强大和灵活的解析能力。通过优化和重写**Codable**的标准功能，**SmartCodable** 有效地解决了传统解析过程中的常见问题，并提高了解析的容错性和灵活性。
