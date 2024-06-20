@@ -24,45 +24,30 @@ class TestViewController: BaseViewController {
         // 1802527796438790100
         // 1802527796438790146.1
         let dict: [String: Any] = [
-                  
-            "de": 1802527796438790146.1,
-            "data": [
-                "int": -9223372036854775808,
-
-                "int2": 18035768958676993,
-                "int3": 1802527796438790146,
-            ],
-            "float": [
-                "float": 1.1,
-                "float2": 1.12,
-                "float3": 1.123
+            "sub": [
+                "name": "mccc"
             ]
         ]
         
         if let model = Model.deserialize(from: dict) {
             print(model)
-//            print("smartCodable = \(model.data)")
             print("\n")
-//            print("smartCodable = \(model.float)")
+            print(model.toDictionary())
 
 
         }
     }
     
     struct Model: SmartCodable {
-        @SmartAny
-        var de: Any?
+        var name: String = ""
         
-//        @SmartAny
-//        var data: Any?
-//        
-//        @SmartAny
-//        var float: Any?
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.name <--- "sub.name"
+            ]
+        }
     }
     
-    struct ModelHandy: HandyJSON {
-        var data: Any?
-        var float: Any?
-    }
+
 }
 
