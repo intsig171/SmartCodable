@@ -34,71 +34,46 @@ struct JSONDecoderImpl {
 // and when the exception is handled, the initial value can be obtained.
 extension JSONDecoderImpl: Decoder {
     func container<Key>(keyedBy key: Key.Type) throws ->
-        KeyedDecodingContainer<Key> where Key: CodingKey
-    {
+        KeyedDecodingContainer<Key> where Key: CodingKey {
+        var newDictionary: [String: JSONValue] = [:]
         switch self.json {
         case .object(let dictionary):
-            let container = KeyedContainer<Key>(
-                impl: self,
-                codingPath: codingPath,
-                dictionary: dictionary
-            )
-            return KeyedDecodingContainer(container)
-            
+            newDictionary = dictionary
         case .string(let string): // json string modeling compatibility
             if let dict = string.toJSONObject() as? [String: Any],
                let dictionary = JSONValue.make(dict)?.object {
-                let container = KeyedContainer<Key>(
-                    impl: self,
-                    codingPath: codingPath,
-                    dictionary: dictionary
-                )
-                return KeyedDecodingContainer(container)
+                newDictionary = dictionary
             }
-            
-        case .null:
-            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Cannot get keyed decoding container -- found null value instead"
-            ))
         default:
             break
         }
-        throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
-            codingPath: self.codingPath,
-            debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-        ))
+        let container = KeyedContainer<Key>(
+            impl: self,
+            codingPath: codingPath,
+            dictionary: newDictionary
+        )
+        return KeyedDecodingContainer(container)
     }
+    
 
     func unkeyedContainer() throws -> UnkeyedDecodingContainer {
+        var newArray: [JSONValue] = []
         switch self.json {
         case .array(let array):
-            return UnkeyedContainer(
-                impl: self,
-                codingPath: self.codingPath,
-                array: array
-            )
+            newArray = array
         case .string(let string): // json字符串的模型化兼容
             if let arr = string.toJSONObject() as? [Any],
                let array = JSONValue.make(arr)?.array {
-               return UnkeyedContainer(
-                   impl: self,
-                   codingPath: self.codingPath,
-                   array: array
-               )
+               newArray = array
             }
-        case .null:
-            throw DecodingError.valueNotFound([String: JSONValue].self, DecodingError.Context(
-                codingPath: self.codingPath,
-                debugDescription: "Cannot get unkeyed decoding container -- found null value instead"
-            ))
         default:
             break
         }
-        throw DecodingError.typeMismatch([JSONValue].self, DecodingError.Context(
+        return UnkeyedContainer(
+            impl: self,
             codingPath: self.codingPath,
-            debugDescription: "Expected to decode \([JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-        ))
+            array: newArray
+        )
     }
 
     func singleValueContainer() throws -> SingleValueDecodingContainer {

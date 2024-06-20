@@ -15,17 +15,21 @@ import BTPrint
 
 import SmartCodable
 
+
+/** todo
+ 1. 验证plat的准确性
+ 2. 验证解析容器/容器模型的准确性。 
+ */
+
+
 class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        // 1802527796438790100
-        // 1802527796438790100
-        // 1802527796438790146.1
         let dict: [String: Any] = [
-            "sub": [
-                "name": "mccc"
+            "name": [
+                1, 2, 3
             ]
         ]
         
@@ -39,15 +43,7 @@ class TestViewController: BaseViewController {
     }
     
     struct Model: SmartCodable {
-        var name: String = ""
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.name <--- "sub.name"
-            ]
-        }
+        var name: [String] = []
     }
-    
-
 }
 

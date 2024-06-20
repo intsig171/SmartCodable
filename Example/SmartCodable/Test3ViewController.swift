@@ -13,28 +13,41 @@ import CleanJSON
 
 
 
+
 class Test3ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let dict: [String: Any] = [
-            "data": 1.1,
-        ]
-        
-        guard let data = _toData(dict) else { return }
-        
-        let decoder = JSONDecoder()
-        let dict1 = try? decoder.decode(Model.self, from: data)
-        print(dict1)
+        let jsonString = """
+        {
+            "a": "aa",
+            "b": 100,
+            "c": {
+                "longitude": 300,
+                "latitude": 400
+            },
+
+            "longitude": 3,
+            "latitude": 4
+        }
+        """
+        if let model = SubClass.deserialize(from: jsonString) {
+            smartPrint(value: model.c)
+        }
     }
-    
-    struct Model: Codable {
-        var data: Decimal?
+    struct SuperClass: SmartCodable {
+        var longitude: Double?
+        var latitude: Double?
+        
+        var a: String?
+        var b: Int?
     }
-}
-fileprivate func _toData(_ value: Any) -> Data? {
-    guard JSONSerialization.isValidJSONObject(value) else { return nil }
-    return try? JSONSerialization.data(withJSONObject: value)
+    struct SubClass: SmartCodable {
+        var a: String?
+        var b: Int?
+        
+        @SmartFlat
+        var c: SuperClass?
+    }
 }
