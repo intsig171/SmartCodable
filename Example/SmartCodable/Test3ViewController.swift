@@ -23,31 +23,27 @@ class Test3ViewController: BaseViewController {
         {
             "a": "aa",
             "b": 100,
-            "c": {
-                "longitude": 300,
-                "latitude": 400
-            },
-
-            "longitude": 3,
+            "longitude": "3",
             "latitude": 4
         }
         """
-        if let model = SubClass.deserialize(from: jsonString) {
+        if let model = SubModel.deserialize(from: jsonString) {
             smartPrint(value: model.c)
         }
     }
-    struct SuperClass: SmartCodable {
+    struct SuperModel: SmartCodable {
         var longitude: Double?
         var latitude: Double?
-        
-        var a: String?
-        var b: Int?
     }
-    struct SubClass: SmartCodable {
+    struct SubModel: SmartCodable {
         var a: String?
         var b: Int?
         
         @SmartFlat
-        var c: SuperClass?
+        var c: SuperModel?
     }
 }
+
+
+
+

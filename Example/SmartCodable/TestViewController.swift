@@ -13,37 +13,40 @@ import HandyJSON
 import CleanJSON
 import BTPrint
 
-import SmartCodable
-
-
-/** todo
- 1. 验证plat的准确性
- 2. 验证解析容器/容器模型的准确性。 
- */
-
-
 class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        let dict: [String: Any] = [
-            "name": [
-                1, 2, 3
-            ]
-        ]
         
-        if let model = Model.deserialize(from: dict) {
-            print(model)
-            print("\n")
-            print(model.toDictionary())
+        let jsonString = """
+        {
+            "a": "aa",
+            "b": 100,
+            "c": {
+                "longitude": 300,
+                "latitude": 400
+            },
 
-
+            "longitude": 3,
+            "latitude": 4
+        }
+        """
+        if let model = SubClass.deserialize(from: jsonString) {
+            smartPrint(value: model.c)
         }
     }
-    
-    struct Model: SmartCodable {
-        var name: [String] = []
+    struct SuperClass: SmartCodable {
+        var longitude: Double?
+        var latitude: Double?
+        
+        var a: String?
+        var b: Int?
+    }
+    struct SubClass: SmartCodable {
+        var a: String?
+        var b: Int?
+        
+        @SmartFlat
+        var c: SuperClass?
     }
 }
-

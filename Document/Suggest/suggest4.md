@@ -221,7 +221,7 @@ struct SmartModel: SmartCodable {
 //            case ignoreKey
     }
 
-    static func mapping() -> [MappingRelationship]? {
+    static func mappingForKey() -> [SmartKeyTransformer]? {
         [
             CodingKeys.name <--- ["nick_name", "realName"],
             CodingKeys.age <--- "self_age"
@@ -261,13 +261,16 @@ print(handyModel.dict)
 
 ```
 struct SmartModel: SmartCodable {
-    var name: SmartAny?
-    var dict: [String: SmartAny] = [:]
+    @SmartAny
+    var name: Any?
+    
+    @SmartAny
+    var dict: [String: Any] = [:]
 }
 
 guard let smartModel = SmartModel.deserialize(from: dict) else { return }
-print(smartModel.name?.peel)
-print(smartModel.dict.peel)
+print(smartModel.name)
+print(smartModel.dict)
 ```
 
 
@@ -293,7 +296,7 @@ class HandyModel: HandyBaseModel {
 
 ### SmartCodable
 
-需要子类重写 `required init(from decoder: Decoder) throws`  方法。
+方案1: 需要子类重写 `required init(from decoder: Decoder) throws`  方法。
 
 ```
 class SmartBaseModel: SmartCodable {
@@ -322,7 +325,7 @@ class SmartModel: SmartBaseModel {
 
 
 
-### 使用协议替代继承
+方案2: 使用协议替代继承
 
 继承代表着Model必须是 **class** 。这并不可取。完全可以使用更轻量化的 **struct** 。
 
@@ -345,6 +348,38 @@ extension ReplaceHandyJSON_5ViewController {
 ```
 
 声明一个协议 `Baseable` ，包含公共的属性。这也更符合面向对象的**依赖倒置原则**: 依赖抽象，不依赖具体。
+
+
+
+方案3: 使用组合代替继承
+
+继承在Codable中没有特别好的实现方案， SmartCodable提供了组合方式（@SmartFlat）用来间接实现继承的需求。
+
+```
+let jsonString = """
+{
+    "a": "aa",
+    "b": 100,
+    "longitude": 3,
+    "latitude": 4
+}
+"""
+if let model = SubModel.deserialize(from: jsonString) {
+    smartPrint(value: model.superModel)
+}
+
+struct SuperModel: SmartCodable {
+    var longitude: Double?
+    var latitude: Double?
+}
+struct SubModel: SmartCodable {
+    var a: String?
+    var b: Int?
+    
+    @SmartFlat
+    var superModel: SuperModel?
+}
+```
 
 
 

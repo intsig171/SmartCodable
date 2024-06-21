@@ -40,7 +40,7 @@ class Test2ViewController: BaseViewController {
         }
     }
     struct OptionalArrayElementsExample: SmartCodable {
-//        @SmartFlat
+        @SmartFlat
         var array: [ArrayElement] = []
     }
 
