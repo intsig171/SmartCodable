@@ -18,35 +18,21 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let jsonString = """
+        let jsonStr = """
         {
-            "a": "aa",
-            "b": 100,
-            "c": {
-                "longitude": 300,
-                "latitude": 400
-            },
-
-            "longitude": 3,
-            "latitude": 4
+            "age": "18",
+            "weight": "65.4",
+            "sex": "1"
         }
         """
-        if let model = SubClass.deserialize(from: jsonString) {
-            smartPrint(value: model.c)
+        if let model = ZJSmartCodableModel.deserialize(from: jsonStr) {
+            smartPrint(value: model)
         }
     }
-    struct SuperClass: SmartCodable {
-        var longitude: Double?
-        var latitude: Double?
-        
-        var a: String?
-        var b: Int?
-    }
-    struct SubClass: SmartCodable {
-        var a: String?
-        var b: Int?
-        
-        @SmartFlat
-        var c: SuperClass?
+    //模型
+    struct ZJSmartCodableModel: SmartCodable {
+        var age: Int?
+        var weight: Double?
+        var sex: Bool?
     }
 }

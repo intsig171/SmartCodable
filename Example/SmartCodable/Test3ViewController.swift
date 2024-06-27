@@ -21,26 +21,27 @@ class Test3ViewController: BaseViewController {
         
         let jsonString = """
         {
-            "a": "aa",
-            "b": 100,
-            "longitude": "3",
-            "latitude": 4
+            "46": "aa",
+            "47": 100,
         }
         """
         if let model = SubModel.deserialize(from: jsonString) {
-            smartPrint(value: model.c)
+            smartPrint(value: model)
         }
     }
-    struct SuperModel: SmartCodable {
-        var longitude: Double?
-        var latitude: Double?
-    }
+
     struct SubModel: SmartCodable {
-        var a: String?
-        var b: Int?
+        var a46: String?
+        var b47: Int?
         
-        @SmartFlat
-        var c: SuperModel?
+        
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.a46 <--- ["1314520", "5201314"],
+                CodingKeys.b47 <--- "47",
+            ]
+        }
+        
     }
 }
 
