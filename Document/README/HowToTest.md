@@ -24,5 +24,7 @@ A major version update of SmartCodable will be released as a beta version for pu
 
 构建尽可能完善的测试用例。
 
+![](https://github.com/intsig171/SmartCodable/blob/main/Document/testCase2.png)
 
+![](https://github.com/intsig171/SmartCodable/blob/main/Document/TestCase.png)
 
