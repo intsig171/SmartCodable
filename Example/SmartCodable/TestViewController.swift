@@ -18,21 +18,66 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let jsonStr = """
-        {
-            "age": "18",
-            "weight": "65.4",
-            "sex": "1"
-        }
-        """
-        if let model = ZJSmartCodableModel.deserialize(from: jsonStr) {
+        SmartConfig.debugMode = .none
+        
+        let dict1: [String: Any] = [
+            :
+        ]
+        
+        let dict2: [String: Any] = [
+            "dict": NSNull(),
+            "optionalDict": NSNull()
+        ]
+        
+        let dict3: [String: Any] = [
+            "dict": 1,
+            "optionalDict":2
+        ]
+        
+        let dict4: [String: Any] = [
+            "dict": [ "name": "mccc" ],
+            "optionalDict": [ "name": "mccc" ],
+        ]
+        
+        
+        
+        print("-------------- 无key")
+        if let model = FeedModel.deserialize(from: dict1) {
             smartPrint(value: model)
         }
+        
+        print("-------------- null")
+        if let model = FeedModel.deserialize(from: dict2) {
+            smartPrint(value: model)
+        }
+        
+        print("-------------- 类型错误")
+        if let model = FeedModel.deserialize(from: dict3) {
+            smartPrint(value: model)
+        }
+        
+        print("-------------- 解析正确的")
+        if let model = FeedModel.deserialize(from: dict4) {
+            smartPrint(value: model)
+        }
+
     }
     //模型
-    struct ZJSmartCodableModel: SmartCodable {
-        var age: Int?
-        var weight: Double?
-        var sex: Bool?
+    struct FeedModel: SmartCodable {
+//        var dict: [String: String] = [:]
+//        var optionalDict: [String: String]?
+        
+        @SmartAny
+        var dict: [String: Any?] = [:]
+        @SmartAny
+        var optionalDict: [String: Any]?
+        
+        
+//        var dict: SubModel = SubModel()
+//        var optionalDict: SubModel?
+    }
+    
+    struct SubModel: SmartCodable {
+        var name: String?
     }
 }
