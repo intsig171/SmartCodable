@@ -11,6 +11,12 @@ import SmartCodable
 import HandyJSON
 
 
+整体验证一遍
+1. 字典容器
+2. 数组容器
+3. 基础类型
+
+
 class Test2ViewController: BaseViewController {
     
     override func viewDidLoad() {
