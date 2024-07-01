@@ -13,6 +13,30 @@ import HandyJSON
 import CleanJSON
 import BTPrint
 
+
+
+/** 字典的值情况
+ * 无key
+ * 值为null
+ * 值类型错误
+ */
+
+/** 字典的类型情况
+ * 非可选基础字典
+ * 可选基础字典
+ *
+ * 非可续Model
+ * 可选Model
+ *
+ * 使用 SmartAny 修饰
+ * 使用 SmartPlat 修饰
+ *
+ */
+
+
+
+
+
 class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
@@ -20,64 +44,21 @@ class TestViewController: BaseViewController {
         
         SmartConfig.debugMode = .none
         
-        let dict1: [String: Any] = [
-            :
-        ]
+
         
-        let dict2: [String: Any] = [
-            "dict": NSNull(),
-            "optionalDict": NSNull()
-        ]
-        
-        let dict3: [String: Any] = [
-            "dict": 1,
-            "optionalDict":2
-        ]
-        
-        let dict4: [String: Any] = [
-            "dict": [ "name": "mccc" ],
-            "optionalDict": [ "name": "mccc" ],
+        let dict: [String: Any] = [
+            "dict": [ "1": "2" ],
         ]
         
         
         
-        print("-------------- 无key")
-        if let model = FeedModel.deserialize(from: dict1) {
-            smartPrint(value: model)
-        }
-        
-        print("-------------- null")
-        if let model = FeedModel.deserialize(from: dict2) {
-            smartPrint(value: model)
-        }
-        
-        print("-------------- 类型错误")
-        if let model = FeedModel.deserialize(from: dict3) {
-            smartPrint(value: model)
-        }
-        
-        print("-------------- 解析正确的")
-        if let model = FeedModel.deserialize(from: dict4) {
+        if let model = FeedModel.deserialize(from: dict) {
             smartPrint(value: model)
         }
 
     }
     //模型
     struct FeedModel: SmartCodable {
-//        var dict: [String: String] = [:]
-//        var optionalDict: [String: String]?
-        
-        @SmartAny
-        var dict: [String: Any?] = [:]
-        @SmartAny
-        var optionalDict: [String: Any]?
-        
-        
-//        var dict: SubModel = SubModel()
-//        var optionalDict: SubModel?
-    }
-    
-    struct SubModel: SmartCodable {
-        var name: String?
+        var dict: [String: String] = [:]
     }
 }
