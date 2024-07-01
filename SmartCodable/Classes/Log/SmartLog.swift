@@ -14,7 +14,7 @@ public struct SmartConfig {
         case debug = 1
         case warning = 2
         case none = 3
-
+        
     }
     
     /// Set debug mode
@@ -43,39 +43,50 @@ extension SmartLog {
         impl: JSONDecoderImpl,
         isOptionalLog: Bool = false,
         forKey key: CodingKey, value: JSONValue?, type: T.Type) {
-        
-        // 如果被忽略了，就不要输出log了。
-        let typeString = String(describing: T.self)
-        guard !typeString.starts(with: "IgnoredKey<") else { return }
-        
-        let className = impl.cache.topSnapshot?.typeName ?? ""
-        var path = impl.codingPath
-        path.append(key)
-        
+            
+            // 如果被忽略了，就不要输出log了。
+            let typeString = String(describing: T.self)
+            guard !typeString.starts(with: "IgnoredKey<") else { return }
+            
+            let className = impl.cache.topSnapshot?.typeName ?? ""
+            var path = impl.codingPath
+            path.append(key)
             
             var address = ""
-            
             if let parsingMark = CodingUserInfoKey.parsingMark {
                 address = impl.userInfo[parsingMark] as? String ?? ""
             }
             
-        
-            
-        if let entry = value {
-            if entry.isNull { // 值为null
+            if let entry = value {
+                if entry.isNull { // 值为null
+                    if isOptionalLog { return }
+                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+                    SmartLog.logDebug(error, className: className, parsingMark: address)
+                } else { // value类型不匹配
+                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, desc: entry.debugDataTypeDescription)
+                    SmartLog.logWarning(error: error, className: className, parsingMark: address)
+                }
+            } else { // key不存在或value为nil
                 if isOptionalLog { return }
-                let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
                 SmartLog.logDebug(error, className: className, parsingMark: address)
-            } else { // value类型不匹配
-                let error = DecodingError._typeMismatch(at: path, expectation: T.self, desc: entry.debugDataTypeDescription)
-                SmartLog.logWarning(error: error, className: className, parsingMark: address)
             }
-        } else { // key不存在或value为nil
-            if isOptionalLog { return }
-            let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+        }
+    
+    static func createContainerLog(
+        impl: JSONDecoderImpl,
+        error: DecodingError) {
+            let className = impl.cache.topSnapshot?.typeName ?? ""
+            var path = impl.codingPath
+//            path.append(key)
+            
+            var address = ""
+            if let parsingMark = CodingUserInfoKey.parsingMark {
+                address = impl.userInfo[parsingMark] as? String ?? ""
+            }
+            
             SmartLog.logDebug(error, className: className, parsingMark: address)
         }
-    }
 }
 
 
@@ -126,7 +137,7 @@ struct SmartLog {
     static func printCacheLogs(in name: String, parsingMark: String) {
         
         guard isAllowCacheLog() else { return }
-
+        
         if let format = cache.formatLogs(parsingMark: parsingMark) {
             var message: String = ""
             message += getHeader()
@@ -141,7 +152,7 @@ struct SmartLog {
     
     static func isAllowCacheLog() -> Bool {
         if SmartConfig.debugMode.rawValue >= SmartConfig.DebugMode.verbose.rawValue {
-           return true
+            return true
         }
         return false
     }
@@ -169,7 +180,7 @@ extension SmartLog {
     
     private static func logIfNeeded(level: SmartConfig.DebugMode, callback: () -> ()) {
         if SmartConfig.debugMode.rawValue <= level.rawValue {
-           callback()
+            callback()
         }
     }
 }

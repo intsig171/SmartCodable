@@ -36,6 +36,9 @@ extension JSONDecoderImpl {
 extension JSONDecoderImpl.SingleValueContainer {
     func decode(_: Bool.Type) throws -> Bool {
         guard case .bool(let bool) = self.value else {
+            if let trans = Patcher<Bool>.convertToType(from: value.peel) {
+                return trans
+            }
             throw self.impl.createTypeMismatchError(type: Bool.self, value: self.value)
         }
 
@@ -44,6 +47,9 @@ extension JSONDecoderImpl.SingleValueContainer {
 
     func decode(_: String.Type) throws -> String {
         guard case .string(let string) = self.value else {
+            if let trans = Patcher<String>.convertToType(from: value.peel) {
+                return trans
+            }
             throw self.impl.createTypeMismatchError(type: String.self, value: self.value)
         }
         return string
@@ -102,134 +108,29 @@ extension JSONDecoderImpl.SingleValueContainer {
     }
     
     @inline(__always) private func decodeFixedWidthInteger<T: FixedWidthInteger>() throws -> T {
-        try self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self)
+        
+        do {
+            return try self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self)
+        } catch {
+            if let trnas = Patcher<T>.convertToType(from: value.peel) {
+                return trnas
+            } else {
+                throw error
+            }
+        }
     }
 
     @inline(__always) private func decodeFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() throws -> T {
-        try self.impl.unwrapFloatingPoint(from: self.value, as: T.self)
+        do {
+            return try self.impl.unwrapFloatingPoint(from: self.value, as: T.self)
+        } catch {
+            if let trnas = Patcher<T>.convertToType(from: value.peel) {
+                return trnas
+            } else {
+                throw error
+            }
+        }
     }
 }
 
 
-
-extension JSONDecoderImpl.SingleValueContainer {
-    func decodeIfPresent(_: SmartAnyImpl.Type) -> SmartAnyImpl? {
-        if let temp = decodeIfPresent(String.self) {
-            return .string(temp)
-        } else if let temp = decodeIfPresent(Bool.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(Double.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(Float.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(Int.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(Int8.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(Int16.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(Int32.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(Int64.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(UInt.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(UInt8.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(UInt16.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(UInt32.self) as? NSNumber {
-            return .number(temp)
-        } else if let temp = decodeIfPresent(UInt64.self) as? NSNumber {
-            return .number(temp)
-        }
-
-        return nil
-    }
-    
-    
-    func decodeIfPresent(_: Bool.Type) -> Bool? {
-        guard case .bool(let bool) = self.value else {
-            return nil
-        }
-
-        return bool
-    }
-
-    func decodeIfPresent(_: String.Type) -> String? {
-        guard case .string(let string) = self.value else {
-            return nil
-        }
-        return string
-    }
-
-    func decodeIfPresent(_: Double.Type) -> Double? {
-        decodeIfPresentFloatingPoint()
-    }
-
-    func decodeIfPresent(_: Float.Type) -> Float? {
-        decodeIfPresentFloatingPoint()
-    }
-
-    func decodeIfPresent(_: Int.Type) -> Int? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: Int8.Type) -> Int8? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: Int16.Type) -> Int16? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: Int32.Type) -> Int32? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: Int64.Type) -> Int64? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: UInt.Type) -> UInt? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: UInt8.Type) -> UInt8? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: UInt16.Type) -> UInt16? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: UInt32.Type) -> UInt32? {
-        decodeIfPresentFixedWidthInteger()
-    }
-
-    func decodeIfPresent(_: UInt64.Type) -> UInt64? {
-        decodeIfPresentFixedWidthInteger()
-    }
-    func decodeIfPresent<T>(_ type: T.Type) -> T? where T: Decodable {
-        if let decoded: T = try? self.impl.unwrap(as: type) {
-            return decoded
-        } else {
-            return nil
-        }
-    }
-    
-    @inline(__always) private func decodeIfPresentFixedWidthInteger<T: FixedWidthInteger>() -> T? {
-        guard let decoded = try? self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self) else {
-            return nil
-        }
-        return decoded
-    }
-
-    @inline(__always) private func decodeIfPresentFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() -> T? {
-        
-        guard let decoded = try? self.impl.unwrapFloatingPoint(from: self.value, as: T.self) else {
-            return nil
-        }
-        return decoded
-    }
-}

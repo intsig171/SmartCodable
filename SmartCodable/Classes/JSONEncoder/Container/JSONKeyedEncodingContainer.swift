@@ -38,9 +38,7 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
             if let mappings = objectType.mappingForKey() {
                 for mapping in mappings {
                     if mapping.to.stringValue == key.stringValue {
-                        if let first = mapping.from.first {
-                            return _JSONKey(stringValue: first, intValue: key.intValue)
-                        }
+                        return mapping.to
                     }
                 }
             }

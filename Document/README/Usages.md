@@ -491,6 +491,40 @@ class Model: SmartDecodable {
 
 
 
+### extend（继承）
+
+Inheritance does not have a particularly good implementation in Codable, but SmartCodable provides a combination (@SmartFlat) that indirectly implements inheritance requirements.
+
+继承在Codable中没有特别好的实现方案， SmartCodable提供了组合方式（@SmartFlat）用来间接实现继承的需求。
+
+```
+let jsonString = """
+{
+    "a": "aa",
+    "b": 100,
+    "longitude": 3,
+    "latitude": 4
+}
+"""
+if let model = SubModel.deserialize(from: jsonString) {
+    smartPrint(value: model.c)
+}
+
+struct SuperModel: SmartCodable {
+    var longitude: Double?
+    var latitude: Double?
+}
+struct SubModel: SmartCodable {
+    var a: String?
+    var b: Int?
+    
+    @SmartFlat
+    var c: SuperModel?
+}
+```
+
+
+
 ### Update Existing Model（更新现有模型）
 
 ```

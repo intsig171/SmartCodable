@@ -11,30 +11,40 @@ import SmartCodable
 import HandyJSON
 
 
-import SmartCodable
-
 class Test2ViewController: BaseViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let model1 = ModelT4(age: "123")
-        let model2 = ModelT4(age: "123")
+        let jsonString = """
+        {
+            "array": [
+                null,
+                {
+                "element": 3
+                }
+            ]
+        }
+        """
         
-        if model1 == model2 {
-            print("==")
+        let jsonString1 = """
+        {
+            "array": [
+                null,
+            ]
+        }
+        """
+        
+        if let model = OptionalArrayElementsExample.deserialize(from: jsonString) {
+            smartPrint(value: model)
         }
     }
-}
-class ModelT4: NSObject {
-    
-    var age: String
-    
-    init(age: String) {
-        self.age = age
+    struct OptionalArrayElementsExample: SmartCodable {
+        @SmartFlat
+        var array: [ArrayElement] = []
     }
-    
-    static func == (lhs: ModelT4, rhs: ModelT4) -> Bool {
-        return lhs.age == rhs.age
+
+    struct ArrayElement: SmartCodable {
+        var element: Int = 0
     }
 }

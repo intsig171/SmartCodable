@@ -13,48 +13,26 @@ import HandyJSON
 import CleanJSON
 import BTPrint
 
-import SmartCodable
-
 class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        let dict: [String: Any] = [
-            "name": "Mccc",
-//            "sex": 1,
-//            "dict": [
-//                "name": "😊xiao ming"
-//            ]
-        ]
-        
-        if let model = decode(Model.self, element: dict) {
-            print(model.name)
-//            print(model.dict)
+        let jsonStr = """
+        {
+            "age": "18",
+            "weight": "65.4",
+            "sex": "1"
         }
-        
-        
-    
-    }
-    
-    struct Model: SmartCodable {
-//        var sex: Any = 0
-        @SmartAny
-        var name: Any?
-        
-//        @SmartAny
-//        var dict: [String: Any] = [:]
-    }
-    
-    func decode<T: SmartCodable>(_ type: T.Type, element: Any) -> T? {
-        
-        if let dict = element as? [String: Any] {
-            let model = T.deserialize(from: dict)
-            return model
+        """
+        if let model = ZJSmartCodableModel.deserialize(from: jsonStr) {
+            smartPrint(value: model)
         }
-        return nil
+    }
+    //模型
+    struct ZJSmartCodableModel: SmartCodable {
+        var age: Int?
+        var weight: Double?
+        var sex: Bool?
     }
 }
-
