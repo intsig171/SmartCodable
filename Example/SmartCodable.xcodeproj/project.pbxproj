@@ -37,6 +37,8 @@
 		99328D9A2B513A300074036A /* area.json in Resources */ = {isa = PBXBuildFile; fileRef = 99328D982B5138210074036A /* area.json */; };
 		993822D42B5E52C0007D3268 /* BaseTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */; };
 		9955576E2BE0DCC6005F9ABD /* Introduce_10ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955576D2BE0DCC6005F9ABD /* Introduce_10ViewController.swift */; };
+		9955AC502C32B08700D25466 /* Container_keyedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955AC4F2C32B08700D25466 /* Container_keyedViewController.swift */; };
+		9955AC522C32B0FD00D25466 /* Container_unKeyedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9955AC512C32B0FD00D25466 /* Container_unKeyedViewController.swift */; };
 		9956B9B92BD92D1900C711F5 /* DecodingArrayLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956B9B82BD92D1900C711F5 /* DecodingArrayLogViewController.swift */; };
 		9957743B2BFD95E4003613C5 /* SpecialData_ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9957743A2BFD95E4003613C5 /* SpecialData_ColorViewController.swift */; };
 		995E03BD2C12F727009E1E5B /* Encode_IgnoredKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995E03BC2C12F727009E1E5B /* Encode_IgnoredKeyViewController.swift */; };
@@ -178,6 +180,8 @@
 		99328D982B5138210074036A /* area.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = area.json; sourceTree = "<group>"; };
 		993822D32B5E52C0007D3268 /* BaseTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTwoViewController.swift; sourceTree = "<group>"; };
 		9955576D2BE0DCC6005F9ABD /* Introduce_10ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_10ViewController.swift; sourceTree = "<group>"; };
+		9955AC4F2C32B08700D25466 /* Container_keyedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container_keyedViewController.swift; sourceTree = "<group>"; };
+		9955AC512C32B0FD00D25466 /* Container_unKeyedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container_unKeyedViewController.swift; sourceTree = "<group>"; };
 		9956B9B82BD92D1900C711F5 /* DecodingArrayLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingArrayLogViewController.swift; sourceTree = "<group>"; };
 		9957743A2BFD95E4003613C5 /* SpecialData_ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_ColorViewController.swift; sourceTree = "<group>"; };
 		995E03BC2C12F727009E1E5B /* Encode_IgnoredKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encode_IgnoredKeyViewController.swift; sourceTree = "<group>"; };
@@ -600,6 +604,8 @@
 		99A494E52B9028EB00393193 /* 数据测试 */ = {
 			isa = PBXGroup;
 			children = (
+				9955AC4F2C32B08700D25466 /* Container_keyedViewController.swift */,
+				9955AC512C32B0FD00D25466 /* Container_unKeyedViewController.swift */,
 				99CABA2A2B916DD30070DED0 /* BaseData */,
 				99CABA2B2B916DE40070DED0 /* Container */,
 				99D945882B91C4D500CC6470 /* SpecialData */,
@@ -986,6 +992,7 @@
 				99D945842B9182C800CC6470 /* Container_ArrayNestDictViewController.swift in Sources */,
 				9905129F2C08299200A2C5D8 /* Decoding_keyIgnoreViewController.swift in Sources */,
 				99D945852B9182C800CC6470 /* Container_DictNestDictViewController.swift in Sources */,
+				9955AC502C32B08700D25466 /* Container_keyedViewController.swift in Sources */,
 				996760212B3EC930006C83EC /* ArraySafe.swift in Sources */,
 				99CE4D5D2BC699D10006D435 /* BeforeDecodingViewController.swift in Sources */,
 				996760292B3EC930006C83EC /* BaseData_StringViewController.swift in Sources */,
@@ -999,6 +1006,7 @@
 				9967602B2B3EC930006C83EC /* Introduce_8ViewController.swift in Sources */,
 				99CE4D662BC6AFC90006D435 /* IntroduceViewController.swift in Sources */,
 				99153D772BD1124C004C01AD /* Test3ViewController.swift in Sources */,
+				9955AC522C32B0FD00D25466 /* Container_unKeyedViewController.swift in Sources */,
 				991452AA2BB50B2A00970575 /* KeyDecodingStrategyViewController.swift in Sources */,
 				99CE4D522BC687700006D435 /* Test2ViewController.swift in Sources */,
 				99C313342B99C32A0065FC45 /* Introduce_7ViewController.swift in Sources */,

@@ -46,19 +46,21 @@ class TestViewController: BaseViewController {
         
 
         
-        let dict: [String: Any] = [
-            "dict": [ "1": "2" ],
+        let arr = [
+            ["name": "mccc1", "age": 20, "hobby": [1, 2, 3, "4"]],
+            ["name": "mccc2", "age": 30],
         ]
         
         
-        
-        if let model = FeedModel.deserialize(from: dict) {
+        if let model = [FeedModel].deserialize(from: arr) {
             smartPrint(value: model)
         }
 
     }
     //模型
     struct FeedModel: SmartCodable {
-        var dict: [String: String] = [:]
+        var name: String = ""
+        var age: Int?
+        var hobby: [String] = []
     }
 }
