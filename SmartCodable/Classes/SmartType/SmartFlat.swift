@@ -16,19 +16,11 @@ public struct SmartFlat<T: Codable>: Codable {
     }
 
     public init(from decoder: Decoder) throws {
-        
         do {
             wrappedValue = try T(from: decoder)
         } catch  {
-            
-            
             wrappedValue = try Patcher<T>.defaultForType()
-//            print(error)
-            
-//            throw error
         }
-        
-        
     }
 
     public func encode(to encoder: Encoder) throws {

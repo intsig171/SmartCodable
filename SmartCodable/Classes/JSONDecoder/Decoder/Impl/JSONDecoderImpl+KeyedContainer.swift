@@ -439,14 +439,17 @@ extension JSONDecoderImpl.KeyedContainer {
     
     func decodeIfPresent<T>(_ type: T.Type, forKey key: K) throws -> T? where T: Decodable {
         
+        guard let value = try? getValue(forKey: key) else {
+            return optionalDecode(forKey: key)
+        }
+        
+        
         if type == CGFloat.self {
             return try decodeIfPresent(CGFloat.self, forKey: key) as? T
         }
         
-        if let value = try? getValue(forKey: key) {
-            if let decoded = impl.cache.tranform(value: value, for: key) as? T {
-                return decoded
-            }
+        if let decoded = impl.cache.tranform(value: value, for: key) as? T {
+            return decoded
         }
         
         guard let newDecoder = try? decoderForKeyCompatibleForJson(key, type: type) else {
@@ -471,13 +474,22 @@ extension JSONDecoderImpl.KeyedContainer {
     fileprivate func optionalDecode<T>(forKey key: Key) -> T? {
         
         guard let value = try? getValue(forKey: key) else {
+            SmartLog.createLog(impl: impl, forKey: key, value: nil, type: T.self)
+            if let initializer: T = impl.cache.getValue(forKey: key) {
+                return initializer
+            }
             return nil
         }
+        
         SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
-        guard let decoded = Patcher<T>.convertToType(from: value.peel) else {
+        
+        if let decoded = Patcher<T>.convertToType(from: value.peel) {
+            return decoded
+        } else if let initializer: T = impl.cache.getValue(forKey: key) {
+            return initializer
+        } else {
             return nil
         }
-        return decoded
     }
     
     

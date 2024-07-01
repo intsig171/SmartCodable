@@ -29,9 +29,7 @@ public struct SmartAny<T>: Codable {
                 return
             }
         }
-        
-        
-        
+                
         if let new = try? decoder.unwrap(as: SmartAnyImpl.self),
            let peel = new.peel as? T {
             self = .init(wrappedValue: peel)
@@ -41,9 +39,6 @@ public struct SmartAny<T>: Codable {
                 codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！")
             )
         }
-        
-        
-        
     }
     
     public func encode(to encoder: Encoder) throws {

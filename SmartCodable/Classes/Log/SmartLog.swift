@@ -77,9 +77,6 @@ extension SmartLog {
         impl: JSONDecoderImpl,
         error: DecodingError) {
             let className = impl.cache.topSnapshot?.typeName ?? ""
-            var path = impl.codingPath
-//            path.append(key)
-            
             var address = ""
             if let parsingMark = CodingUserInfoKey.parsingMark {
                 address = impl.userInfo[parsingMark] as? String ?? ""
