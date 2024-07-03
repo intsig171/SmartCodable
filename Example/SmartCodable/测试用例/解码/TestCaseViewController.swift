@@ -20,6 +20,7 @@ class TestCaseViewController: BaseViewController {
        
         
         dataArray = [
+            testCaseZero,
             testCaseOne,
             testCaseThree,
             testCaseTwo,
@@ -43,6 +44,18 @@ class TestCaseViewController: BaseViewController {
 
 extension TestCaseViewController {
     
+    
+    var testCaseZero: [String: Any] {
+        [
+            "title": "CaseOne - Container测试",
+            "list": [
+                ["name": "类型兼容 - keyed",   "vc": "Container_keyedViewController"],
+                ["name": "类型兼容 - unKeyed", "vc": "Container_unKeyedViewController"],
+            ]
+        ]
+    }
+    
+    
     var testCaseOne: [String: Any] {
         [
             "title": "CaseOne - 基础数据测试",
@@ -52,13 +65,6 @@ extension TestCaseViewController {
                 ["name": "类型兼容 - Int8",   "vc": "BaseData_Int8ViewController"],
                 ["name": "类型兼容 - String", "vc": "BaseData_StringViewController"],
                 ["name": "类型兼容 - Float",  "vc": "BaseData_FloatViewController"],
-
-            
-                
-
-                
-                
-                
             ]
         ]
     }

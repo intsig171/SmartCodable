@@ -19,29 +19,30 @@ class Test3ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let jsonString = """
-        {
-            "46": "aa",
-            "47": 100,
-        }
-        """
-        if let model = SubModel.deserialize(from: jsonString) {
+        let dict: [String: Any] = [
+            "subModel": [
+                "name": NSNull()
+            ],
+            "dict": ["a":1, "b": NSNull(), "c": ["aa": 2]],
+            "arr": [1, "2", "Mccc", [1,2,3]]
+        ]
+        if let model = Model.deserialize(from: dict) {
             smartPrint(value: model)
         }
     }
+    
+    struct Model: SmartCodable {
+        @SmartAny
+        var dict: Any?
+        
+        @SmartAny
+        var arr: Any?
+        
+//        var subModel: SubModel?
+    }
 
     struct SubModel: SmartCodable {
-        var a46: String?
-        var b47: Int?
-        
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.a46 <--- ["1314520", "5201314"],
-                CodingKeys.b47 <--- "47",
-            ]
-        }
-        
+        var name: String?
     }
 }
 

@@ -1,19 +1,16 @@
 //
-//  Container_DictViewController.swift
+//  Container_keyedViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/5/20.
+//  Created by qixin on 2024/7/1.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
 import Foundation
-
-
-
 import SmartCodable
 
 /// 兼容Int类型，只兼容String类型的int值。
-class Container_DictViewController: BaseViewController {
+class Container_keyedViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +42,7 @@ class Container_DictViewController: BaseViewController {
 
 
 /// 验证是keyedcontainer容器是字典的情况
-extension Container_DictViewController {
+extension Container_keyedViewController {
     
     func getDict1() -> [String: Any] {
         return [
@@ -81,7 +78,7 @@ extension Container_DictViewController {
 
 
 /// 验证是keyedcontainer容器是Model的情况
-extension Container_DictViewController {
+extension Container_keyedViewController {
     
     func getDict2() -> [String: Any] {
         return [
@@ -121,7 +118,7 @@ extension Container_DictViewController {
 }
 
 /// 验证是keyedcontainer容器下，使用SmartAny
-extension Container_DictViewController {
+extension Container_keyedViewController {
     
     func getDict3() -> [String: Any] {
         return [
@@ -163,7 +160,7 @@ extension Container_DictViewController {
 }
 
 /// 验证是keyedcontainer容器下，使用SmartAny
-extension Container_DictViewController {
+extension Container_keyedViewController {
     
     func getDict4() -> [String: Any] {
         return [
