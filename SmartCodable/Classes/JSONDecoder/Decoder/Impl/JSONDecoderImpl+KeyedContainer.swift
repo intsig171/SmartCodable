@@ -337,10 +337,10 @@ extension JSONDecoderImpl.KeyedContainer {
             return decoded
         }
         
-        guard case .string(let bool) = value else {
+        guard case .string(let string) = value else {
             return optionalDecode(forKey: key)
         }
-        return bool
+        return string
     }
     
     func decodeIfPresent(_ type: Float.Type, forKey key: K) throws -> Float? {
@@ -483,7 +483,7 @@ extension JSONDecoderImpl.KeyedContainer {
         
         SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
         
-        if let decoded = Patcher<T>.convertToType(from: value.peel) {
+        if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             return decoded
         } else if let initializer: T = impl.cache.getValue(forKey: key) {
             return initializer
@@ -510,7 +510,7 @@ extension JSONDecoderImpl.KeyedContainer {
         }
         
         SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
-        if let decoded = Patcher<T>.convertToType(from: value.peel) {
+        if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             return decoded
         } else {
             return try fillDefault()

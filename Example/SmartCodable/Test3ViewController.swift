@@ -19,12 +19,14 @@ class Test3ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SmartConfig.debugMode = .none
+        
         let dict: [String: Any] = [
-            "subModel": [
-                "name": NSNull()
-            ],
-            "dict": ["a":1, "b": NSNull(), "c": ["aa": 2]],
-            "arr": [1, "2", "Mccc", [1,2,3]]
+            "key": 5.1,
+            "key1":5.2,
+            "key2": 1.99,
+            "key3": 4.99,
+            "key4": 99.99,
         ]
         if let model = Model.deserialize(from: dict) {
             smartPrint(value: model)
@@ -32,17 +34,11 @@ class Test3ViewController: BaseViewController {
     }
     
     struct Model: SmartCodable {
-        @SmartAny
-        var dict: Any?
-        
-        @SmartAny
-        var arr: Any?
-        
-//        var subModel: SubModel?
-    }
-
-    struct SubModel: SmartCodable {
-        var name: String?
+        var key: String = ""
+        var key1: String = ""
+        var key2: String = ""
+        var key3: String = ""
+        var key4: String = ""
     }
 }
 

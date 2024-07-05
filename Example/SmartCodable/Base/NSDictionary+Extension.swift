@@ -22,6 +22,11 @@ extension Dictionary {
             return nil
         }
     }
+    
+    func toData() -> Data? {
+        guard JSONSerialization.isValidJSONObject(self) else { return nil }
+        return try? JSONSerialization.data(withJSONObject: self)
+    }
 }
 
 

@@ -36,7 +36,7 @@ extension JSONDecoderImpl {
 extension JSONDecoderImpl.SingleValueContainer {
     func decode(_: Bool.Type) throws -> Bool {
         guard case .bool(let bool) = self.value else {
-            if let trans = Patcher<Bool>.convertToType(from: value.peel) {
+            if let trans = Patcher<Bool>.convertToType(from: value, impl: impl) {
                 return trans
             }
             throw self.impl.createTypeMismatchError(type: Bool.self, value: self.value)
@@ -47,7 +47,7 @@ extension JSONDecoderImpl.SingleValueContainer {
 
     func decode(_: String.Type) throws -> String {
         guard case .string(let string) = self.value else {
-            if let trans = Patcher<String>.convertToType(from: value.peel) {
+            if let trans = Patcher<String>.convertToType(from: value, impl: impl) {
                 return trans
             }
             throw self.impl.createTypeMismatchError(type: String.self, value: self.value)
@@ -112,7 +112,7 @@ extension JSONDecoderImpl.SingleValueContainer {
         do {
             return try self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self)
         } catch {
-            if let trnas = Patcher<T>.convertToType(from: value.peel) {
+            if let trnas = Patcher<T>.convertToType(from: value, impl: impl) {
                 return trnas
             } else {
                 throw error
@@ -124,7 +124,7 @@ extension JSONDecoderImpl.SingleValueContainer {
         do {
             return try self.impl.unwrapFloatingPoint(from: self.value, as: T.self)
         } catch {
-            if let trnas = Patcher<T>.convertToType(from: value.peel) {
+            if let trnas = Patcher<T>.convertToType(from: value, impl: impl) {
                 return trnas
             } else {
                 throw error
