@@ -134,6 +134,22 @@ guard let model = AnyModel.deserialize(from: dict) else { return }
 
 
 
+⚠️： SmartAny 只允许修饰**Any**，**[Any]** 和 **[String: Any]** 类型。
+
+```
+// ❌ 错误的示范
+struct Model<T: SmartCodable>: SmartCodable {
+    @SmartAny
+    var data: T?
+}
+
+struct SubModel: SmartCodable {
+    var name: String?
+}
+```
+
+
+
 ### 2.Modeling of json strings（json字符串的模型化）
 
 ```

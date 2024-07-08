@@ -5,7 +5,7 @@
 //  Created by qixin on 2024/6/13.
 //
 
-/// Attribute wrapper, used to wrap Any.
+/// Attribute wrapper, used to wrap Any.SmartAny allows only Any, [Any], and [String: Any] types to be modified.
 @propertyWrapper
 public struct SmartAny<T>: Codable {
     public var wrappedValue: T
