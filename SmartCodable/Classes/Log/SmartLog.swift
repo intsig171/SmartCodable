@@ -17,7 +17,8 @@ public struct SmartConfig {
         
     }
     
-    /// Set debug mode
+    /// Set debugging mode, default is none. 
+    /// Note: When not debugging, set to none to reduce overhead.
     public static var debugMode: DebugMode {
         get { return _mode }
         set { _mode = newValue }
@@ -34,7 +35,7 @@ public struct SmartConfig {
     /// Once enabled, an assertion will be performed where parsing fails, providing a more direct reminder to the user that parsing has failed at this point.
     public static var openErrorAssert: Bool = false
     
-    private static var _mode = DebugMode.warning
+    private static var _mode = DebugMode.none
 }
 
 
