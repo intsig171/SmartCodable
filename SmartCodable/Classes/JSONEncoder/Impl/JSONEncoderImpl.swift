@@ -25,11 +25,10 @@ class JSONEncoderImpl {
         return self.singleValue
     }
 
-    init(options: SmartJSONEncoder._Options, codingPath: [CodingKey]) {
+    init(options: SmartJSONEncoder._Options, codingPath: [CodingKey], cache: EncodingCache? = nil) {
         self.options = options
         self.codingPath = codingPath
-        self.cache = EncodingCache()
-
+        self.cache = cache ?? EncodingCache()
     }
 }
 

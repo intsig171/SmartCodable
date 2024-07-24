@@ -18,34 +18,18 @@ class Test2ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        let dict: [String: Any] = [
-            "key": 4.99
+        let dic: [String : Any] = [
+            "timestamp": "1721721316"
         ]
         
-        let data = dict.toData()!
-        
-        let decoder = JSONDecoder()
-        
-        do {
-            let model = try decoder.decode(Model.self, from: data)
-            print(model)
-        } catch  {
-            print(error)
-        }
+        let model = Model.deserialize(from: dic)
+        smartPrint(value: model)
         
         
-
+        
     }
-    struct Model: Codable {
-        var key: String?
-        
-        init(from decoder: any Decoder) throws {
-            let container: KeyedDecodingContainer<Test2ViewController.Model.CodingKeys> = try decoder.container(keyedBy: Test2ViewController.Model.CodingKeys.self)
-            let double = try container.decodeIfPresent(Double.self, forKey: Test2ViewController.Model.CodingKeys.key)
-            
-            self.key = "\(String(describing: double))"
-        }
+    struct Model: SmartCodable {
+        var timestamp: UInt32?
     }
 }

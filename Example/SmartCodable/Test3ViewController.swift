@@ -12,6 +12,11 @@ import HandyJSON
 import CleanJSON
 
 
+/** 测试内容项
+ 1. 默认值的使用是否正常
+ 2. mappingForValue是否正常。
+ 3. 
+ */
 
 
 class Test3ViewController: BaseViewController {
@@ -21,27 +26,91 @@ class Test3ViewController: BaseViewController {
         
         SmartConfig.debugMode = .none
         
-        let dict: [String: Any] = [
-            "key": 5.1,
-            "key1":5.2,
-            "key2": 1.99,
-            "key3": 4.99,
-            "key4": 99.99,
-        ]
-        if let model = Model.deserialize(from: dict) {
-            smartPrint(value: model)
+        
+        let model = Model()
+        if let tranformValue = model.toDictionary(useMappedKeys: true) {
+            print(tranformValue)
+        }
+            
+        if let tranformValue = model.toJSONString(useMappedKeys: true, prettyPrint: true) {
+            print(tranformValue)
+        }
+        
+        print("\n 分割线 ------ \n")
+        
+        if let tranformValue = [model].toArray(useMappedKeys: true) {
+            print(tranformValue)
+        }
+        
+        if let tranformValue = [model].toJSONString(useMappedKeys: true, prettyPrint: true) {
+            print(tranformValue)
         }
     }
     
     struct Model: SmartCodable {
-        var key: String = ""
-        var key1: String = ""
-        var key2: String = ""
-        var key3: String = ""
-        var key4: String = ""
+        var modelKey: String = "hello"
+        
+        var subModel = SubModel()
+        
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+           [
+            CodingKeys.modelKey <--- ["mappedKey", "mappedKey1", "mappedKey2"],
+            CodingKeys.subModel <--- "mappedModel"
+           ]
+        }
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.modelKey <--- AValueTransformer()
+            ]
+        }
+    }
+    
+    struct SubModel: SmartCodable {
+        var modelKey: String = "good luck"
+        
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+           [
+            CodingKeys.modelKey <--- "mappedKey"
+           ]
+        }
+        
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.modelKey <--- BValueTransformer()
+            ]
+        }
     }
 }
 
 
 
+struct AValueTransformer: ValueTransformable {
+    func transformFromJSON(_ value: Any) -> String? {
+        return "hello Mccc"
+    }
+    
+    func transformToJSON(_ value: String) -> String? {
+        
+        return "hello Mccc to Json," + value
+    }
+    
+    typealias Object = String
+    
+    typealias JSON = String
+}
 
+struct BValueTransformer: ValueTransformable {
+    func transformFromJSON(_ value: Any) -> String? {
+        return "hello Mccc"
+    }
+    
+    func transformToJSON(_ value: String) -> String? {
+        
+        return "hello Xiaoming to Json," + value
+    }
+    
+    typealias Object = String
+    
+    typealias JSON = String
+}
