@@ -234,10 +234,17 @@ extension Data {
     }
     
     
-    fileprivate func _deserializeDict<T>(type: T.Type, options: Set<SmartDecodingOption>? = nil) throws -> T? where T: SmartDecodable {
+    internal func _deserializeDict<T>(type: T.Type, options: Set<SmartDecodingOption>? = nil, src: [String: Any]? = nil) throws -> T? where T: SmartDecodable {
 
         do {
             let _decoder = createDecoder(type: type, options: options)
+            
+            if let src = src, let key = CodingUserInfoKey.defaultValue {
+                var userinfo = _decoder.userInfo
+                userinfo.updateValue(src, forKey: key)
+                _decoder.userInfo = userinfo
+            }
+            
             var obj = try _decoder.decode(type, from: self)
             obj.didFinishMapping()
             return obj
@@ -297,7 +304,7 @@ extension Array {
 }
 
 /// 通过路径获取待解析的信息，再转换成data，提供给decoder解析。
-fileprivate func getInnerData(inside value: Any?, by designatedPath: String?) -> Data? {
+internal func getInnerData(inside value: Any?, by designatedPath: String?) -> Data? {
     
     func toObject(_ value: Any?) -> Any? {
         
