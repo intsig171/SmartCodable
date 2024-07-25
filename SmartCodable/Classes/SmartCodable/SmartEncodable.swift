@@ -24,42 +24,40 @@ public protocol SmartEncodable: Encodable {
 
 extension SmartEncodable {
 
-    public func toDictionary() -> [String: Any]? {
-        return _transformToJson(self, type: Self.self)
+    /// Serializes into a dictionary
+    /// - Parameter useMappedKeys: Whether to use the mapped key during encoding. The default value is false.
+    /// - Returns: dictionary
+    public func toDictionary(useMappedKeys: Bool = false) -> [String: Any]? {
+        return _transformToJson(self, type: Self.self, useMappedKeys: useMappedKeys)
     }
     
-    
     /// Serializes into a JSON string
+    /// - Parameter useMappedKeys: Whether to use the mapped key during encoding. The default value is false.
     /// - Parameter prettyPrint: Whether to format print (adds line breaks in the JSON)
     /// - Returns: JSON string
-    public func toJSONString(prettyPrint: Bool = false) -> String? {
-        
-        // is dictionary
-        if let jsonObject = self as? [String: Any] {
-            return _transformToJsonString(object: jsonObject, prettyPrint: prettyPrint, type: Self.self)
-        }
-        
-        // to dictionary
-        if let anyObject = toDictionary() {
+    public func toJSONString(useMappedKeys: Bool = false, prettyPrint: Bool = false) -> String? {
+        if let anyObject = toDictionary(useMappedKeys: useMappedKeys) {
             return _transformToJsonString(object: anyObject, prettyPrint: prettyPrint, type: Self.self)
         }
         return nil
     }
-    
 }
 
 
-
 extension Array where Element: SmartEncodable {
-    public func toArray() -> [Any]? {
-        return _transformToJson(self,type: Element.self)
+    /// Serializes into a array
+    /// - Parameter useMappedKeys: Whether to use the mapped key during encoding. The default value is false.
+    /// - Returns: array
+    public func toArray(useMappedKeys: Bool = false) -> [Any]? {
+        return _transformToJson(self,type: Element.self, useMappedKeys: useMappedKeys)
     }
     
     /// Serializes into a JSON string
+    /// - Parameter useMappedKeys: Whether to use the mapped key during encoding. The default value is false.
     /// - Parameter prettyPrint: Whether to format print (adds line breaks in the JSON)
     /// - Returns: JSON string
-    public func toJSONString(prettyPrint: Bool = false) -> String? {
-        if let anyObject = toArray() {
+    public func toJSONString(useMappedKeys: Bool = false, prettyPrint: Bool = false) -> String? {
+        if let anyObject = toArray(useMappedKeys: useMappedKeys) {
             return _transformToJsonString(object: anyObject, prettyPrint: prettyPrint, type: Element.self)
         }
         return nil
@@ -84,12 +82,20 @@ fileprivate func _transformToJsonString(object: Any, prettyPrint: Bool = false, 
 }
 
 
-fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type) -> T? {
+fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type, useMappedKeys: Bool = false) -> T? {
+    
     let jsonEncoder = SmartJSONEncoder()
+    if useMappedKeys {
+        if let key = CodingUserInfoKey.useMappedKeys {
+            var userInfo = jsonEncoder.userInfo
+            userInfo.updateValue(useMappedKeys, forKey: key)
+            jsonEncoder.userInfo = userInfo
+        }
+    }
+    
     if let jsonData = try? jsonEncoder.encode(some) {
         do {
             let json = try JSONSerialization.jsonObject(with: jsonData, options: .fragmentsAllowed)
-            
             if let temp = json as? T {
                 return temp
             } else {

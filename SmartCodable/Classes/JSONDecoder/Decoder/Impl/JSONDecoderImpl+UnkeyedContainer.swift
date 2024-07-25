@@ -224,7 +224,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
         SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
 
         
-        if let decoded = Patcher<T>.convertToType(from: value.peel) {
+        if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             self.currentIndex += 1
             return decoded
         } else {
@@ -356,7 +356,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
         }
         let key = _JSONKey(index: self.currentIndex)
         SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
-        if let decoded = Patcher<T>.convertToType(from: value.peel) {
+        if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             self.currentIndex += 1
             return decoded
         } else {

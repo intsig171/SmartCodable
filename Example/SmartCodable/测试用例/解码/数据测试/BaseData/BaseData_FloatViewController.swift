@@ -30,14 +30,7 @@ class BaseData_FloatViewController: BaseViewController {
         }
         """
         guard let model = CompatibleFloat.deserialize(from: json) else { return }
-        print(model.floatValue)
-        print(model.floatValue1)
-        print(model.floatValue2)
-        print(model.floatValue3)
-        print(model.floatValue4 as Any)
-
-        print(model.cgfloatValue)
-        print(model.doubleValue)
+        smartPrint(value: model)
         
         /**
          0.0

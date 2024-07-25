@@ -13,16 +13,8 @@ struct Patcher<T> {
         return try Provider.defaultValue()
     }
     
-    static func convertToType(from value: Any?) -> T? {
-        return Transformer.typeTransform(from: value)
-    }
-    
-    
-    static func patchWithConvertOrDefault(value: Any?) throws -> T {
-        if let value = value, let v = convertToType(from: value) {
-            return v
-        }
-        return try defaultForType()
+    static func convertToType(from value: JSONValue?, impl: JSONDecoderImpl) -> T? {
+        return Transformer.typeTransform(from: value, impl: impl)
     }
 }
 

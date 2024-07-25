@@ -19,75 +19,17 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SmartConfig.debugMode = .verbose
-        
-        let dict1: [String: Any] = [
-            :
+        let dic: [String : Any] = [
+            "timestamp": "1721721316"
         ]
         
-        let dict2: [String: Any] = [
-            "arr": NSNull(),
-            "optionalArr": NSNull(),
-            "arr1": NSNull(),
-            "optionalArr1": NSNull()
-        ]
-        
-        let dict3: [String: Any] = [
-            "arr": 1,
-            "optionalArr": 2,
-            "arr1": 3,
-            "optionalArr1": 4
-        ]
-        
-        let dict4: [String: Any] = [
-            "arr": [[ "name": "mccc1" ], [ "name": "mccc2" ]],
-            "optionalArr": [[ "name": "mccc1" ], [ "name": "mccc2" ]],
-        ]
+        let model = Model.deserialize(from: dic)
+        smartPrint(value: model)
         
         
         
-        print("-------------- 无key")
-        if let model = FeedModel.deserialize(from: dict1) {
-            smartPrint(value: model)
-        }
-
-        print("-------------- null")
-        if let model = FeedModel.deserialize(from: dict2) {
-            smartPrint(value: model)
-        }
-        
-        print("-------------- 类型错误")
-        if let model = FeedModel.deserialize(from: dict3) {
-            smartPrint(value: model)
-        }
-        
-        print("-------------- 解析正确的")
-        if let model = FeedModel.deserialize(from: dict4) {
-            smartPrint(value: model)
-        }
-
     }
-    //模型
-    struct FeedModel: SmartCodable {
-//        var arr: [Int] = []
-//        var optionalArr: [Int]?
-//        var optionalArr: [Int]? = [1, 1, 1]
-        
-//        var arr: [Int?] = []
-//        var optionalArr: [Int?]?
-//        var optionalArr: [Int?]? = [1, 1, 1]
-        
-//        @SmartAny
-//        var arr: [Any] = []
-//        @SmartAny
-//        var optionalArr: [Any]?
-        
-        
-        var arr: [SubModel] = []
-        var optionalArr: [SubModel]?
-    }
-    
-    struct SubModel: SmartCodable {
-        var name: String?
+    struct Model: SmartCodable {
+        var timestamp: UInt32?
     }
 }

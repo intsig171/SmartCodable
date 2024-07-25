@@ -74,7 +74,6 @@ extension _SpecialTreatmentEncoder {
             
             impl.cache.removeSnapshot(for: E.self)
             
-            
             return encoder.value
         }
     }
@@ -158,9 +157,43 @@ extension _SpecialTreatmentEncoder {
         if let additionalKey = additionalKey {
             var newCodingPath = self.codingPath
             newCodingPath.append(additionalKey)
-            return JSONEncoderImpl(options: self.options, codingPath: newCodingPath)
+            return JSONEncoderImpl(options: self.options, codingPath: newCodingPath, cache: impl.cache)
         }
-
         return self.impl
+    }
+}
+
+
+extension _SpecialTreatmentEncoder {
+    internal func _converted(_ key: CodingKey) -> CodingKey {
+        
+        var useMappedKeys = false
+        if let key = CodingUserInfoKey.useMappedKeys {
+            useMappedKeys = impl.userInfo[key] as? Bool ?? false
+        }
+            
+        if let objectType = impl.cache.cacheType {
+            if let mappings = objectType.mappingForKey() {
+                for mapping in mappings {
+                    if mapping.to.stringValue == key.stringValue {
+                        if useMappedKeys, let first = mapping.from.first {
+                            return _JSONKey.init(stringValue: first, intValue: nil)
+                        } else {
+                            return mapping.to
+                        }
+                    }
+                }
+            }
+        }
+                
+        switch self.options.keyEncodingStrategy {
+        case .useDefaultKeys:
+            return key
+        case .convertToSnakeCase:
+            let newKeyString = SmartJSONEncoder.KeyEncodingStrategy._convertToSnakeCase(key.stringValue)
+            return _JSONKey(stringValue: newKeyString, intValue: key.intValue)
+        case .custom(let converter):
+            return converter(codingPath + [key])
+        }
     }
 }
