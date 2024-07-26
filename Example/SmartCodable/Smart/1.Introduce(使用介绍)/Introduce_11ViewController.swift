@@ -14,28 +14,22 @@ class Introduce_11ViewController: BaseCompatibilityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
         
-        var dest = Model(name: "xiaoming", hobby: "football")
-        let src = Model(name: "dahuang", hobby: "sleep")
-
-//        print(dest)
-//        SmartUpdater.update(&dest, from: src, keyPath: \.name)
-//        
-//        print(dest)
-//        
-//        SmartUpdater.update(&dest, from: src, keyPaths: (\.name, \.hobby))
-//        
-//        print(dest)
+        var dic1: [String : Any] = [
+            "name": "mccc",
+            "age": 10
+        ]
+        let dic2: [String : Any] = [
+            "age": 200
+        ]
+        
+        guard var model = Model.deserialize(from: dic1) else { return }
+        SmartUpdater.update(&model, from: dic2)
+        smartPrint(value: model)
     }
-}
-
-
-extension Introduce_11ViewController {
-    
     struct Model: SmartCodable {
         var name: String = ""
-        var hobby: String?
+        var age: Int = 0
     }
 }
 
