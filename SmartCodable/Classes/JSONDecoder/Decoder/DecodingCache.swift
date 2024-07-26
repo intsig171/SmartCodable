@@ -25,7 +25,7 @@ class DecodingCache {
     }
     
     /// Cache the initial state of a Decodable object.
-    func cacheInitialState<T: Decodable>(for type: T.Type, src: [String: Any]?) {
+    func cacheInitialState<T: Decodable>(for type: T.Type) {
         
         
         if let object = type as? SmartDecodable.Type {
@@ -34,18 +34,13 @@ class DecodingCache {
             
             var snapshot = Snapshot()
             
-            if let src = src {
-                snapshot.initialValues = src
-            } else {
-                let instance = object.init()
-                let mirror = Mirror(reflecting: instance)
-                mirror.children.forEach { child in
-                    if let key = child.label {
-                        snapshot.initialValues[key] = child.value
-                    }
+            let instance = object.init()
+            let mirror = Mirror(reflecting: instance)
+            mirror.children.forEach { child in
+                if let key = child.label {
+                    snapshot.initialValues[key] = child.value
                 }
             }
-            
             snapshot.typeName = "\(type)"
 
             snapshot.transformers = object.mappingForValue() ?? []
@@ -71,7 +66,7 @@ class DecodingCache {
         
         if var cacheValue = snapshots.last?.initialValues[key.stringValue] {
             // When the CGFloat type is resolved, it is resolved as Double. So we need to do a type conversion.
-            if T.self == Double.self, let temp = cacheValue as? CGFloat {
+            if let temp = cacheValue as? CGFloat {
                 cacheValue = Double(temp)
             }
             

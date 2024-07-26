@@ -16,17 +16,17 @@ class Introduce_11ViewController: BaseCompatibilityViewController {
         super.viewDidLoad()
             
         
-//        var dest = Model(name: "xiaoming", hobby: "football")
-//        let src = Model(name: "dahuang", hobby: "sleep")
-//
-//        print(dest)
-//        SmartUpdater.update(&dest, from: src, keyPath: \.name)
-//        
-//        print(dest)
-//        
-//        SmartUpdater.update(&dest, from: src, keyPaths: (\.name, \.hobby))
-//        
-//        print(dest)
+        var dest = Model(name: "xiaoming", hobby: "football")
+        let src = Model(name: "dahuang", hobby: "sleep")
+
+        print(dest)
+        SmartUpdater.update(&dest, from: src, keyPath: \.name)
+        
+        print(dest)
+        
+        SmartUpdater.update(&dest, from: src, keyPaths: (\.name, \.hobby))
+        
+        print(dest)
     }
 }
 

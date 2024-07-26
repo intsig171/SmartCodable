@@ -19,29 +19,17 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var src = Model(name: "麒麟", age: 3, sub: [SubModel(name: "小麒麟", age: 6)])
-        let dict: [String: Any] = [
-            "name": "更新值",
-            "sub": [
-                [
-                    "name": "sub更新值",
-//                    "age": 100
-                ]
-            ]
+        let dic: [String : Any] = [
+            "timestamp": "1721721316"
         ]
         
-        SmartUpdater.update(&src, from: dict)
-        smartPrint(value: src)
+        let model = Model.deserialize(from: dic)
+        smartPrint(value: model)
+        
+        
+        
     }
-    
     struct Model: SmartCodable {
-        var name: String = "init"
-        var age: CGFloat = 1
-        var sub: [SubModel] = []
-    }
-    
-    struct SubModel: SmartCodable {
-        var name: String = "subinit"
-        var age: CGFloat = 1
+        var timestamp: UInt32?
     }
 }

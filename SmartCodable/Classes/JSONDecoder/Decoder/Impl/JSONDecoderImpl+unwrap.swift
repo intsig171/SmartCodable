@@ -42,15 +42,7 @@ extension JSONDecoderImpl {
             return try self.unwrapDictionary(as: type)
         }
         
-        
-        if let key = CodingUserInfoKey.defaultValue, let src = userInfo[key] as? [String: Any] {
-            let sub = src.value(for: codingPath)
-            cache.cacheInitialState(for: type, src: sub)
-        } else {
-            cache.cacheInitialState(for: type, src: nil)
-        }
-        
-        
+        cache.cacheInitialState(for: type)
         let decoded = try type.init(from: self)
         cache.clearLastState(for: type)
         return decoded
@@ -340,25 +332,3 @@ internal var _iso8601Formatter: ISO8601DateFormatter = {
     formatter.formatOptions = .withInternetDateTime
     return formatter
 }()
-
-
-protocol DictionaryCodable {
-    func value(for codingPath: [CodingKey]) -> [String: Any]?
-}
-
-extension Dictionary: DictionaryCodable where Key == String {
-    func value(for codingPath: [CodingKey]) -> [String: Any]? {
-        var value: Any? = self
-        
-        for key in codingPath {
-            if let dictionary = value as? [String: Any] {
-                value = dictionary[key.stringValue]
-            } else if let array = value as? [Any], let index = Int(key.stringValue), array.indices.contains(index) {
-                value = array[index]
-            } else {
-                return nil
-            }
-        }
-        return value as? [String: Any]
-    }
-}
