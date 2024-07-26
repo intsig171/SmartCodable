@@ -544,19 +544,26 @@ struct SubModel: SmartCodable {
 ### Update Existing Model（更新现有模型）
 
 ```
-var dest = Model(name: "xiaoming", hobby: "football")
-let src = Model(name: "dahuang", hobby: "sleep")    
+struct Model: SmartCodable {
+    var name: String = ""
+    var age: Int = 0
+}
 
-SmartUpdater.update(&dest, from: src, keyPath: \.name)
-// after this dest will be:
-// Model(name: "dahuang", hobby: Optional("football"))
-// instead of 
-// Model(name: "xiaoming", hobby: Optional("football"))
+var dic1: [String : Any] = [
+    "name": "mccc",
+    "age": 10
+]
+let dic2: [String : Any] = [
+    "age": 200
+]
+
+guard var model = Model.deserialize(from: dic1) else { return }
+
+SmartUpdater.update(&model, from: dic2)
+
+// now: model is ["name": mccc, "age": 200].
 ```
 
-If you need to change more than one at a time（如果你需要同时更改多个）
+It can accommodate any data structure, including nested array structures.
 
-```
-SmartUpdater.update(&dest, from: src, keyPaths: (\.name, \.hobby))
-```
-
+它可以适应任何数据结构，包括嵌套的数组结构。
