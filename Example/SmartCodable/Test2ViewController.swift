@@ -19,7 +19,7 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var dic1: [String : Any] = [
+        let dic1: [String : Any] = [
             "name": "mccc",
             "age": 10
         ]
