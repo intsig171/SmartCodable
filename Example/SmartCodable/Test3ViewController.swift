@@ -23,94 +23,21 @@ class Test3ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
+        let string = "{\"id\":1, \"sex\":{\"id\":1}}"
         
-        SmartConfig.debugMode = .none
-        
-        
-        let model = Model()
-        if let tranformValue = model.toDictionary(useMappedKeys: true) {
-            print(tranformValue)
-        }
-            
-        if let tranformValue = model.toJSONString(useMappedKeys: true, prettyPrint: true) {
-            print(tranformValue)
+        if let model = Model.deserialize(from: string) {
+            smartPrint(value: model)
         }
         
-        print("\n 分割线 ------ \n")
-        
-        if let tranformValue = [model].toArray(useMappedKeys: true) {
-            print(tranformValue)
-        }
-        
-        if let tranformValue = [model].toJSONString(useMappedKeys: true, prettyPrint: true) {
-            print(tranformValue)
-        }
     }
     
     struct Model: SmartCodable {
-        var modelKey: String = "hello"
-        
-        var subModel = SubModel()
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-           [
-            CodingKeys.modelKey <--- ["mappedKey", "mappedKey1", "mappedKey2"],
-            CodingKeys.subModel <--- "mappedModel"
-           ]
-        }
-        
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            [
-                CodingKeys.modelKey <--- AValueTransformer()
-            ]
-        }
+     var id: Int = 0
+        var sex: SubModel = SubModel()
     }
     
     struct SubModel: SmartCodable {
-        var modelKey: String = "good luck"
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-           [
-            CodingKeys.modelKey <--- "mappedKey"
-           ]
-        }
-        
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            [
-                CodingKeys.modelKey <--- BValueTransformer()
-            ]
-        }
+        var id : Int = 0
     }
-}
-
-
-
-struct AValueTransformer: ValueTransformable {
-    func transformFromJSON(_ value: Any) -> String? {
-        return "hello Mccc"
-    }
-    
-    func transformToJSON(_ value: String) -> String? {
-        
-        return "hello Mccc to Json," + value
-    }
-    
-    typealias Object = String
-    
-    typealias JSON = String
-}
-
-struct BValueTransformer: ValueTransformable {
-    func transformFromJSON(_ value: Any) -> String? {
-        return "hello Mccc"
-    }
-    
-    func transformToJSON(_ value: String) -> String? {
-        
-        return "hello Xiaoming to Json," + value
-    }
-    
-    typealias Object = String
-    
-    typealias JSON = String
 }
