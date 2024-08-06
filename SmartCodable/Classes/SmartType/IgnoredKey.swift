@@ -22,8 +22,16 @@ public struct IgnoredKey<T>: Codable {
             return
         }
         
+        // 属性被IgnoredKey修饰的时，如果自定义了该属性的解析策略，在此支持
+        if let key = impl.codingPath.last {
+            if let decoded = impl.cache.tranform(value: impl.json, for: key) as? T {
+                wrappedValue = decoded
+                return
+            }
+        }
+        
         /// Only those using the SmartJSONDecoder parser have the ability to be compatible with thrown exceptions.
-        if let key = CodingUserInfoKey.parsingMark, let mark = impl.userInfo[key] {
+        if let key = CodingUserInfoKey.parsingMark, let _ = impl.userInfo[key] {
             // 将异常抛出，在解析容器中进行兼容。
             throw DecodingError.typeMismatch(IgnoredKey<T>.self, DecodingError.Context(
                 codingPath: decoder.codingPath, debugDescription: "\(Self.self) does not participate in the parsing, please ignore it.")
