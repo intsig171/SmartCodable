@@ -13,53 +13,33 @@ class Test2ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        let subModel = SubModel()
+        let model = Model(type: 2, data: subModel)
         
-        let dict = [
-            "nick_name": "Mccc",
-            "self_age": 10,
-            "dict": ["k":"l"]
-        ] as [String : Any]
-                
-        guard let smartModel = SmartModel.deserialize(from: dict) else { return }
-        BTPrint.print(smartModel.dict)
-        smartPrint(value: smartModel)
-    }
-}
-
-struct SmartModel: SmartCodable {
-    
-    var nick_name: String?
-    @IgnoredKey
-    var dict: NSMutableDictionary = .init()
-    var self_age: String?
-    
-    static func mappingForValue() -> [SmartValueTransformer]? {
-        [
-            CodingKeys.dict <--- DictTransformer()
-        ]
-    }
-}
-
-struct DictTransformer: ValueTransformable {
-    func transformFromJSON(_ value: Any) -> NSMutableDictionary? {
+        let json = model.toJSONString()
         
-        if let dict = value as? NSDictionary {
-            let dictM = NSMutableDictionary(dictionary: dict)
-            
-            print("dictM = \(dictM)")
-            return dictM
+        print(json)
+    }
+    
+    class Model: SmartCodable {
+        init(type: Int, data: Any) {
+            self.type = type
+            self.data = data
         }
         
-        return nil
+        var type: Int?
         
+        @SmartAny
+        var data: Any?
         
-//        (value as? NSDictionary)?.mutableCopy() as? NSMutableDictionary
+        required init() { }
     }
     
-    func transformToJSON(_ value: NSMutableDictionary) -> [String : Any]? {
-        value as? [String: Any]
+    
+    
+    class SubModel: SmartCodable {
+        var name: String = "mccc"
+        required init() { }
     }
-
-    typealias Object = NSMutableDictionary
-    typealias JSON = [String: Any]
 }

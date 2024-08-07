@@ -51,6 +51,8 @@ public struct SmartAny<T>: Codable {
         } else if let arr = wrappedValue as? [Any] {
             let value = arr.cover
             try container.encode(value)
+        } else if let model = wrappedValue as? SmartCodable {
+            try container.encode(model)
         } else {
             let value = SmartAnyImpl(from: wrappedValue)
             try container.encode(value)
