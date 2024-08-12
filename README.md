@@ -8,9 +8,9 @@
 
 [![Swift Package Manager](https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager/)
 [![Platforms](https://img.shields.io/cocoapods/p/ExCodable.svg)](#readme)
-[![Build and Test](https://github.com/iwill/ExCodable/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/iwill/ExCodable/actions/workflows/build-and-test.yml)
-[![GitHub Releases (latest SemVer)](https://img.shields.io/github/v/release/iwill/ExCodable.svg?sort=semver)](https://github.com/iwill/ExCodable/releases)
-[![LICENSE](https://img.shields.io/github/license/iwill/ExCodable.svg)](https://github.com/iwill/ExCodable/blob/master/LICENSE)
+[![Build and Test](https://github.com/iwill/ExCodable/actions/workflows/build-and-test.yml/badge.svg)]()
+[![GitHub Releases (latest SemVer)](https://img.shields.io/github/v/release/iwill/ExCodable.svg?sort=semver)](https://github.com/intsig171/SmartCodable/releases)
+[![LICENSE](https://img.shields.io/github/license/iwill/ExCodable.svg)](https://github.com/intsig171/SmartCodable/blob/main/LICENSE)
 
 
 **SmartCodable** is a data parsing library based on Swift's **Codable** protocol, designed to provide more powerful and flexible parsing capabilities. By optimizing and rewriting the standard features of **Codable**, **SmartCodable** effectively solves common problems in the traditional parsing process and improves the fault tolerance and flexibility of parsing.
@@ -173,11 +173,6 @@ If you're looking forward to learning more about the Codable protocol and the de
 
 ## Github Stars
 ![GitHub stars](https://starchart.cc/intsig171/SmartCodable.svg?theme=dark)
-
-## Supporters
-[![Stargazers repo roster for @intsig171/SmartCodable](https://reporoster.com/stars/intsig171/SmartCodable)](https://github.com/intsig171/SmartCodable/stargazers)
-
-[![Forkers repo roster for @intsig171/SmartCodable](https://reporoster.com/forks/intsig171/SmartCodable)](https://github.com/intsig171/SmartCodable/network/members)
 
 ## Join us
 
