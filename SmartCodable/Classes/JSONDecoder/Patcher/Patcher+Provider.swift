@@ -12,7 +12,6 @@ import Foundation
 extension Patcher {
     struct Provider {
         static func defaultValue() throws -> T {
-            
                 
             if let value = T.self as? Defaultable.Type {
                 return value.defaultValue as! T
@@ -24,10 +23,8 @@ extension Patcher {
                 }
             } else if let object = T.self as? any SmartAssociatedEnumerable.Type {
                 return object.defaultCase as! T
-            } else {
-                throw DecodingError.valueNotFound(Self.self, DecodingError.Context(
-                        codingPath: [], debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
             }
+            
             throw DecodingError.valueNotFound(Self.self, DecodingError.Context(
                     codingPath: [], debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
         }
@@ -59,11 +56,8 @@ extension Array: Defaultable {
 }
 
 extension Dictionary: Defaultable {
-    static var defaultValue: Dictionary<Key, Value> {
-        return [:]
-    }
+    static var defaultValue: Dictionary<Key, Value> { return [:] }
 }
-
 
 extension String: Defaultable {
     static var defaultValue: String { "" }
@@ -86,7 +80,6 @@ extension CGFloat: Defaultable {
     static var defaultValue: CGFloat { 0.0 }
 }
 
-
 extension Int: Defaultable {
     static var defaultValue: Int { 0 }
 }
@@ -106,7 +99,6 @@ extension Int32: Defaultable {
 extension Int64: Defaultable {
     static var defaultValue: Int64 { 0 }
 }
-
 
 
 extension UInt: Defaultable {

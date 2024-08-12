@@ -13,33 +13,25 @@ class Test2ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        let subModel = SubModel()
-        let model = Model(type: 2, data: subModel)
+
         
-        let json = model.toJSONString()
+        let dict: [String: Any] = [
+            "nick_name": "Mccc"
+        ]
         
-        print(json)
+        let option = SmartDecodingOption.key(.fromSnakeCase)
+        guard let model = Model.deserialize(from: dict, options: [option]) else { return }
+        
+        smartPrint(value: model)
+        
+        let string = model.toJSONString(useMappedKeys: false)
+        print(string)
     }
     
-    class Model: SmartCodable {
-        init(type: Int, data: Any) {
-            self.type = type
-            self.data = data
-        }
+
+    struct Model: SmartCodable {
+        var nickName: String = ""
         
-        var type: Int?
         
-        @SmartAny
-        var data: Any?
-        
-        required init() { }
-    }
-    
-    
-    
-    class SubModel: SmartCodable {
-        var name: String = "mccc"
-        required init() { }
     }
 }
