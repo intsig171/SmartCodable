@@ -7,6 +7,13 @@
 
 import Foundation
 
+/** IgnoredKey 使用注意
+ * 1. 并不是真正的忽略被修饰属性的解析，而是解析的时候忽略使用数据。
+ * 2. 是否有对应数据，不同的处理：
+ *  - 有数据时候，会走进IgnoredKey的 `encode(to:)` 方法，抛出异常，让外部处理。
+ *  - 没有数据时，不会进来，会被当前一个普通数据解析处理，走无数据时的兜底逻辑。
+ */
+
 @propertyWrapper
 public struct IgnoredKey<T>: Codable {
     public var wrappedValue: T
