@@ -318,7 +318,9 @@ extension JSONDecoderImpl.KeyedContainer {
 extension JSONDecoderImpl.KeyedContainer {
     
     func decodeIfPresent(_ type: Bool.Type, forKey key: K) throws -> Bool? {
-        guard let value = try? getValue(forKey: key) else { return nil }
+        guard let value = try? getValue(forKey: key) else {
+            return optionalDecode(forKey: key)
+        }
         
         if let decoded = impl.cache.tranform(value: value, for: key) as? Bool {
             return decoded
@@ -331,7 +333,9 @@ extension JSONDecoderImpl.KeyedContainer {
     }
     
     func decodeIfPresent(_ type: String.Type, forKey key: K) throws -> String? {
-        guard let value = try? getValue(forKey: key) else { return nil }
+        guard let value = try? getValue(forKey: key) else {
+            return optionalDecode(forKey: key)
+        }
         
         if let decoded = impl.cache.tranform(value: value, for: key) as? String {
             return decoded
