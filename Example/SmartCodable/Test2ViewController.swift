@@ -16,22 +16,28 @@ class Test2ViewController: BaseViewController {
 
         
         let dict: [String: Any] = [
-            "nick_name": "Mccc"
+            "error": "200",
+            "code": 400,
+            "data": [
+                "code": "abc",
+                "lyricType": "9999999",
+                "expriryTime": "NaN"
+            ]
         ]
         
-        let option = SmartDecodingOption.key(.fromSnakeCase)
-        guard let model = Model.deserialize(from: dict, options: [option]) else { return }
-        
-        smartPrint(value: model)
-        
-        let string = model.toJSONString(useMappedKeys: false)
-        print(string)
+        guard let model = Model.deserialize(from: dict) else { return }
+        print(model)
     }
     
-
     struct Model: SmartCodable {
-        var nickName: String = ""
-        
-        
+        var error: Int?
+        var code: Int?
+        var data: SubModel?
+    }
+    
+    struct SubModel: SmartCodable {
+        var code: Int?
+        var lyricType: Int?
+        var expriryTime: Int?
     }
 }

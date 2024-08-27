@@ -172,14 +172,14 @@ private func _fixedWidthInteger<T: FixedWidthInteger>(from value: JSONValue) -> 
     case .string(let string):
         if let integer = T(string) {
             return integer
-        } else if let float = Double(string) {
-            return T(float)
+        } else if let float = Double(string), float.isFinite, float >= Double(T.min) && float <= Double(T.max), let integer = T(exactly: float) {
+            return integer
         }
     case .number(let number):
         if let integer = T(number) {
             return integer
-        } else if let float = Double(number) {
-            return T(float)
+        } else if let float = Double(number), float.isFinite, float >= Double(T.min) && float <= Double(T.max), let integer = T(exactly: float) {
+            return integer
         }
     default:
         break
