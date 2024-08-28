@@ -2,7 +2,7 @@
 //  TypePatcher.swift
 //  SmartCodable
 //
-//  Created by qixin on 2023/9/5.
+//  Created by Mccc on 2023/9/5.
 //
 
 import Foundation

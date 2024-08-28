@@ -2,7 +2,7 @@
 //  SmartColor.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/5/22.
+//  Created by Mccc on 2024/5/22.
 //
 
 import Foundation

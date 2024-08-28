@@ -2,7 +2,7 @@
 //  BaseTwoViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/1/22.
+//  Created by Mccc on 2024/1/22.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

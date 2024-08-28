@@ -2,7 +2,7 @@
 //  SmartDecodingError.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/2/27.
+//  Created by Mccc on 2024/2/27.
 //
 
 import Foundation

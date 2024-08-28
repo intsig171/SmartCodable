@@ -2,7 +2,7 @@
 //  Container_DictViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/5/20.
+//  Created by Mccc on 2024/5/20.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

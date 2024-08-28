@@ -2,7 +2,7 @@
 //  SmartAny.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/6/13.
+//  Created by Mccc on 2024/6/13.
 //
 
 /// Attribute wrapper, used to wrap Any.SmartAny allows only Any, [Any], and [String: Any] types to be modified.

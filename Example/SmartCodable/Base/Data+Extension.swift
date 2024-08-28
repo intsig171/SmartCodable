@@ -2,7 +2,7 @@
 //  Data+Extension.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/3/1.
+//  Created by Mccc on 2024/3/1.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

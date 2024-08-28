@@ -2,7 +2,7 @@
 //  CaseTwoViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/10/27.
+//  Created by Mccc on 2023/10/27.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 

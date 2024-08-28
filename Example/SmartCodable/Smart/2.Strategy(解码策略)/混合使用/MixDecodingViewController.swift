@@ -2,7 +2,7 @@
 //  MixDecodingViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/3/28.
+//  Created by Mccc on 2024/3/28.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

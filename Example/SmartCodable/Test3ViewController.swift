@@ -2,7 +2,7 @@
 //  Test3ViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/4/18.
+//  Created by Mccc on 2024/4/18.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

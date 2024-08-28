@@ -2,7 +2,7 @@
 //  SmartEncodable.swift
 //  SmartCodable
 //
-//  Created by qixin on 2023/9/4.
+//  Created by Mccc on 2023/9/4.
 //
 
 import Foundation

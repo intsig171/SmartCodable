@@ -2,7 +2,7 @@
 //  LogSnapshot.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/4/26.
+//  Created by Mccc on 2024/4/26.
 //
 
 import Foundation

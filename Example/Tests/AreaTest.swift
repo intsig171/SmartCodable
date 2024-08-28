@@ -2,7 +2,7 @@
 //  AreaTest.swift
 //  SmartCodable_Tests
 //
-//  Created by qixin on 2024/1/12.
+//  Created by Mccc on 2024/1/12.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

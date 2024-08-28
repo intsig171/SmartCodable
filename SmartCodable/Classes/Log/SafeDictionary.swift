@@ -2,7 +2,7 @@
 //  SafeDictionary.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/6/5.
+//  Created by Mccc on 2024/6/5.
 //
 
 import Foundation

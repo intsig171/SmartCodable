@@ -2,7 +2,7 @@
 //  File.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/9/6.
+//  Created by Mccc on 2023/9/6.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 

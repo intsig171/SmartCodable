@@ -2,7 +2,7 @@
 //  BaseCompatibilityViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/9/5.
+//  Created by Mccc on 2023/9/5.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 
