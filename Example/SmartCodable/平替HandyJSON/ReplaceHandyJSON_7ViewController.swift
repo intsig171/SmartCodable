@@ -14,17 +14,25 @@ class ReplaceHandyJSON_7ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let data = readPlistData() else { return }
+        guard let data = readPlistData("ReplaceHandyJSON_7_dict") else { return }
         
         if let model = Model.deserializePlist(from: data) {
+            smartPrint(value: model)
+        }
+        
+        
+        
+        guard let dataArr = readPlistData("ReplaceHandyJSON_7_arr") else { return }
+        
+        if let model = [Model].deserializePlist(from: dataArr) {
             smartPrint(value: model)
         }
 
     }
     
-    func readPlistData() -> Data? {
+    func readPlistData(_ name: String) -> Data? {
         // 获取plist文件的路径
-        if let path = Bundle.main.path(forResource: "SpecialData_data", ofType: "plist") {
+        if let path = Bundle.main.path(forResource: name, ofType: "plist") {
             // 将plist文件的内容加载到Data对象中
             if let data = FileManager.default.contents(atPath: path) {
                 return data

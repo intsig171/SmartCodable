@@ -229,6 +229,32 @@ extension Array where Element: SmartDecodable {
         
         return try? _data._deserializeArray(type: Self.self, options: options)
     }
+    
+    /// Deserializes into an array of models
+    /// - Parameter data: Data
+    /// - Parameter designatedPath: Specifies the data path to decode
+    /// - Parameter options: Decoding strategy
+    ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Array of models
+    public static func deserializePlist(from data: Data?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> [Element]? {
+        
+        
+        guard let data = data else {
+            SmartLog.logVerbose("Expected to decode Array but found nil instead.", in: "\(self)")
+            return nil
+        }
+        
+        guard let _tranData = data.tranformToJSONData() else {
+            return nil
+        }
+        
+        guard let _data = getInnerData(inside: _tranData, by: designatedPath) else {
+            SmartLog.logVerbose("Expected to decode Array but is cannot be data.", in: "\(self)")
+            return nil
+        }
+        
+        return try? _data._deserializeArray(type: Self.self, options: options)
+    }
 }
 
 
