@@ -137,6 +137,32 @@ extension SmartDecodable {
         
         return try? _data._deserializeDict(type: Self.self, options: options)
     }
+    
+    
+    /// Deserializes into a model
+    /// - Parameter data: Data
+    /// - Parameter designatedPath: Specifies the data path to decode
+    /// - Parameter options: Decoding strategy
+    ///   Duplicate enumeration items are not allowed, e.g., multiple keyStrategies cannot be passed in [only the first one is effective].
+    /// - Returns: Model
+    public static func deserializePlist(from data: Data?, designatedPath: String? = nil, options: Set<SmartDecodingOption>? = nil) -> Self? {
+        
+        guard let data = data else {
+            SmartLog.logVerbose("Expected to decode Dictionary but found nil instead.", in: "\(self)")
+            return nil
+        }
+        
+        guard let _tranData = data.tranformToJSONData() else {
+            return nil
+        }
+        
+        guard let _data = getInnerData(inside: _tranData, by: designatedPath) else {
+            SmartLog.logVerbose("Expected to decode Dictionary but is cannot be data.", in: "\(self)")
+            return nil
+        }
+        
+        return try? _data._deserializeDict(type: Self.self, options: options)
+    }
 }
 
 
@@ -258,6 +284,28 @@ extension Data {
     fileprivate func toObject() -> Any? {
         let jsonObject = try? JSONSerialization.jsonObject(with: self, options: .allowFragments)
         return jsonObject
+    }
+    
+    
+    /// 将Plist Data 转成 JSON Data
+    fileprivate func tranformToJSONData() -> Data? {
+        guard let jsonObject = try? PropertyListSerialization.propertyList(from: self, options: [], format: nil) else {
+            SmartLog.logVerbose("Failed to convert PropertyList Data to JSON Data.", in: "\(self)")
+            return nil
+        }
+        
+        guard JSONSerialization.isValidJSONObject(jsonObject) else {
+            SmartLog.logVerbose("Failed to convert PropertyList Data to JSON Data.", in: "\(self)")
+            return nil
+        }
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: [])
+            return jsonData
+        } catch {
+            SmartLog.logVerbose("Failed to convert PropertyList Data to JSON Data. \(error)", in: "\(self)")
+            return nil
+        }
     }
 }
 
