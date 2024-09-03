@@ -9,9 +9,7 @@
 [![Swift Package Manager](https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager/)
 [![Platforms](https://img.shields.io/cocoapods/p/ExCodable.svg)](#readme)
 [![Build and Test](https://github.com/iwill/ExCodable/actions/workflows/build-and-test.yml/badge.svg)]()
-[![GitHub Releases (latest SemVer)](https://img.shields.io/github/v/release/iwill/ExCodable.svg?sort=semver)](https://github.com/intsig171/SmartCodable/releases)
 [![LICENSE](https://img.shields.io/github/license/iwill/ExCodable.svg)](https://github.com/intsig171/SmartCodable/blob/main/LICENSE)
-
 
 **SmartCodable** is a data parsing library based on Swift's **Codable** protocol, designed to provide more powerful and flexible parsing capabilities. By optimizing and rewriting the standard features of **Codable**, **SmartCodable** effectively solves common problems in the traditional parsing process and improves the fault tolerance and flexibility of parsing.
 
@@ -27,6 +25,21 @@ let model = Model.deserialize(from: json)
 ```
 
 
+
+SmartCodable在Codable基础上做了大幅度的优化，支持：
+
+| 类型   | 特性             | 说明                                                         |
+| ------ | ---------------- | ------------------------------------------------------------ |
+| 兼容   | 强大的异常兼容   | 当遇到数据类型错误/值为null/缺少数据等情况触发的Codable异常，可以完美兼容。 |
+| 兼容   | 支持类型自适应   | 如JSON中是一个Int，但对应Model是String字段，会自动完成转化。 |
+| 兼容   | 支持属性初始值   | 当解析失败时，使用此值填充。                                 |
+| 兼容   | 内json的模型化   | 当某个数据是json时，支持进行Model化解析。                    |
+| 新特性 | 支持Any的解析    | Codable不支持Any，SmartCodable支持！                         |
+| 新特性 | 自定义Key映射    | 当数据字段和Model属性名不一致时，可以方便的自定义映射关系。  |
+| 新特性 | 自定义Value解析  | 支持自定义解析规则                                           |
+| 新特性 | 提供多种全局策略 | 数据的蛇形命名转驼峰，首字母转小写，首字母转大写             |
+| 新特性 | 解析完成的回调   | 你可以知道解析完成的时机，去做一些事情。                     |
+| 新特性 | 支持解析更新     | 对一个解析完成的model进行增量更新。                          |
 
 ## Use SmartCodable
 
@@ -91,6 +104,32 @@ If you don't know how to use it, check it out.
 如果你不知道如何使用，请查看它。
 
  [👉 How to use SmartCodable?](https://github.com/intsig171/SmartCodable/blob/develop/Document/README/Usages.md)
+
+
+
+### Supported types
+
+只要遵循了Codable，就可以参与解析。
+
+* Int/Int8/Int16/Int32/Int64
+
+* UInt/UInt8/UInt16/UInt32/UInt64
+
+* String
+
+* Bool
+
+* Float/CGFloat/Double
+
+* Dictionary（如果包含Any，请使用@SmartAny修饰该字典）
+
+* Array（如果包含Any，请使用@SmartAny修饰该数组）
+
+* URL/Date/Data/UIColor/enum
+
+* 其他遵循了Codable协议的类型。
+
+  
 
 
 
