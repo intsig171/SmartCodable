@@ -59,6 +59,8 @@ extension ReplaceHandyJSONViewController {
 
                 ["name": "6.枚举的解析",    "vc": "ReplaceHandyJSON_6ViewController"],
 
+                ["name": "7.plist文件的解析",    "vc": "ReplaceHandyJSON_7ViewController"],
+
             ]
         ]
     }
