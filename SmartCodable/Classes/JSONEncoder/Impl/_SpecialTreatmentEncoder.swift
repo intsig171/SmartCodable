@@ -84,7 +84,6 @@ extension _SpecialTreatmentEncoder {
             return value
         }
 
-        
         switch self.options.dateEncodingStrategy {
         case .deferredToDate:
             let encoder = self.getEncoder(for: additionalKey)
@@ -112,6 +111,10 @@ extension _SpecialTreatmentEncoder {
             try closure(date, encoder)
             // The closure didn't encode anything. Return the default keyed container.
             return encoder.value ?? .object([:])
+        @unknown default:
+            let encoder = self.getEncoder(for: additionalKey)
+            try date.encode(to: encoder)
+            return encoder.value ?? .null
         }
     }
 
@@ -131,6 +134,10 @@ extension _SpecialTreatmentEncoder {
             try closure(data, encoder)
             // The closure didn't encode anything. Return the default keyed container.
             return encoder.value ?? .object([:])
+        @unknown default:
+            let encoder = self.getEncoder(for: additionalKey)
+            try data.encode(to: encoder)
+            return encoder.value ?? .null
         }
     }
 
@@ -167,6 +174,8 @@ extension _SpecialTreatmentEncoder {
 extension _SpecialTreatmentEncoder {
     internal func _converted(_ key: CodingKey) -> CodingKey {
         
+        var newKey = key
+        
         var useMappedKeys = false
         if let key = CodingUserInfoKey.useMappedKeys {
             useMappedKeys = impl.userInfo[key] as? Bool ?? false
@@ -175,25 +184,29 @@ extension _SpecialTreatmentEncoder {
         if let objectType = impl.cache.cacheType {
             if let mappings = objectType.mappingForKey() {
                 for mapping in mappings {
-                    if mapping.to.stringValue == key.stringValue {
+                    if mapping.to.stringValue == newKey.stringValue {
                         if useMappedKeys, let first = mapping.from.first {
-                            return _JSONKey.init(stringValue: first, intValue: nil)
+                            newKey = _JSONKey.init(stringValue: first, intValue: nil)
                         } else {
-                            return mapping.to
+                            newKey = mapping.to
                         }
                     }
                 }
             }
         }
-                
+        
         switch self.options.keyEncodingStrategy {
+        case .toSnakeCase:
+            let newKeyString = SmartJSONEncoder.SmartKeyEncodingStrategy._convertToSnakeCase(newKey.stringValue)
+            return _JSONKey(stringValue: newKeyString, intValue: newKey.intValue)
+        case .firstLetterLower:
+            let newKeyString = SmartJSONEncoder.SmartKeyEncodingStrategy._convertFirstLetterToLowercase(newKey.stringValue)
+            return _JSONKey(stringValue: newKeyString, intValue: newKey.intValue)
+        case .firstLetterUpper:
+            let newKeyString = SmartJSONEncoder.SmartKeyEncodingStrategy._convertFirstLetterToUppercase(newKey.stringValue)
+            return _JSONKey(stringValue: newKeyString, intValue: newKey.intValue)
         case .useDefaultKeys:
-            return key
-        case .convertToSnakeCase:
-            let newKeyString = SmartJSONEncoder.KeyEncodingStrategy._convertToSnakeCase(key.stringValue)
-            return _JSONKey(stringValue: newKeyString, intValue: key.intValue)
-        case .custom(let converter):
-            return converter(codingPath + [key])
+            return newKey
         }
     }
 }

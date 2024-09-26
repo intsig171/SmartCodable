@@ -296,8 +296,7 @@ extension JSONDecoderImpl.KeyedContainer {
                    
                    // 检查 SmartPublished 包装器类型
                    if let publishedType = T.self as? any SmartPublishedProtocol.Type,
-                      let wrappedValue = decoded as? Any,
-                      let publishedValue = publishedType.createInstance(with: wrappedValue) as? T {
+                      let publishedValue = publishedType.createInstance(with: decoded) as? T {
                        return publishedValue
                    }
                }
