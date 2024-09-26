@@ -41,8 +41,8 @@ class Introduce_12ViewController: BaseViewController {
 class PublishedModel: ObservableObject, SmartCodable {
     required init() {}
     
-    @SmartPublished @SmartAny
-    var name: Any = "iOS Developer"
+    @SmartPublished
+    var name: String = "iOS Developer"
         
     static func mappingForKey() -> [SmartKeyTransformer]? {
         [CodingKeys.name <--- "newName"]
