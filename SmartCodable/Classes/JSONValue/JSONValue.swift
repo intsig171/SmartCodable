@@ -388,11 +388,14 @@ extension JSONValue {
 
                     nextIndex = stringBytes.index(after: nextIndex)
                     startCopyIndex = nextIndex
-                case UInt8(ascii: "/") where options.contains(.withoutEscapingSlashes) == false:
-                    bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
-                    bytes.append(contentsOf: [._backslash, UInt8(ascii: "/")])
-                    nextIndex = stringBytes.index(after: nextIndex)
-                    startCopyIndex = nextIndex
+                case UInt8(ascii: "/"):
+                    if #available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *), options.contains(.withoutEscapingSlashes) == false {
+                        bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
+                        bytes.append(contentsOf: [._backslash, UInt8(ascii: "/")])
+                        nextIndex = stringBytes.index(after: nextIndex)
+                        startCopyIndex = nextIndex
+                    }
+                    
                 default:
                     nextIndex = stringBytes.index(after: nextIndex)
                 }

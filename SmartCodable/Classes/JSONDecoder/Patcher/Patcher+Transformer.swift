@@ -31,7 +31,7 @@ extension Bool: TypeTransformable {
         case .string(let string):
             if ["1","YES","Yes","yes","TRUE","True","true"].contains(string) { return true }
             if ["0","NO","No","no","FALSE","False","false"].contains(string) { return false }
-        case .number(let number):
+        case .number(_):
             if let int = try? impl.unwrapFixedWidthInteger(from: value, as: Int.self) {
                 if int == 1 {
                     return true
