@@ -25,6 +25,7 @@
 		990512A52C0869CA00A2C5D8 /* Decoding_globalKeyStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512A42C0869CA00A2C5D8 /* Decoding_globalKeyStrategyViewController.swift */; };
 		990512A72C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512A62C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift */; };
 		990512A92C0873F200A2C5D8 /* Decoding_valueMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990512A82C0873F200A2C5D8 /* Decoding_valueMapViewController.swift */; };
+		990CBAF42CA4F5300099E4C7 /* 1231231.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990CBAF32CA4F5300099E4C7 /* 1231231.swift */; };
 		990ECFA92B95A45B003D37F1 /* Support_JSONStringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990ECFA82B95A45B003D37F1 /* Support_JSONStringViewController.swift */; };
 		991259ED2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EC2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift */; };
 		991259EF2BFB6C1000ED76B5 /* Container_DictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */; };
@@ -133,6 +134,7 @@
 		99D9458A2B91C75600CC6470 /* SpecialData_dateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D945892B91C75600CC6470 /* SpecialData_dateViewController.swift */; };
 		99D9458C2B91C80300CC6470 /* SpecialData_dataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458B2B91C80300CC6470 /* SpecialData_dataViewController.swift */; };
 		99D9458E2B91C80C00CC6470 /* SpecialData_FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9458D2B91C80C00CC6470 /* SpecialData_FloatViewController.swift */; };
+		99E438A92CA50D2E001C08B9 /* Introduce_12ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E438A82CA50D2E001C08B9 /* Introduce_12ViewController.swift */; };
 		99F9E8A62BB5139900D68037 /* MixDecodingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F9E8A52BB5139900D68037 /* MixDecodingViewController.swift */; };
 		AF374D4C62AA92DE0D9ED2B7 /* Pods_SmartCodable_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB62463C4F6AEFEAA2A5E1E /* Pods_SmartCodable_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -172,6 +174,7 @@
 		990512A42C0869CA00A2C5D8 /* Decoding_globalKeyStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoding_globalKeyStrategyViewController.swift; sourceTree = "<group>"; };
 		990512A62C086FBB00A2C5D8 /* Decoding_globalValueStrategyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoding_globalValueStrategyViewController.swift; sourceTree = "<group>"; };
 		990512A82C0873F200A2C5D8 /* Decoding_valueMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoding_valueMapViewController.swift; sourceTree = "<group>"; };
+		990CBAF32CA4F5300099E4C7 /* 1231231.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 1231231.swift; sourceTree = "<group>"; };
 		990ECFA82B95A45B003D37F1 /* Support_JSONStringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support_JSONStringViewController.swift; sourceTree = "<group>"; };
 		991259EC2BFB5B2000ED76B5 /* BaseData_Int8ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData_Int8ViewController.swift; sourceTree = "<group>"; };
 		991259EE2BFB6C1000ED76B5 /* Container_DictViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container_DictViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 		99D945892B91C75600CC6470 /* SpecialData_dateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_dateViewController.swift; sourceTree = "<group>"; };
 		99D9458B2B91C80300CC6470 /* SpecialData_dataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_dataViewController.swift; sourceTree = "<group>"; };
 		99D9458D2B91C80C00CC6470 /* SpecialData_FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialData_FloatViewController.swift; sourceTree = "<group>"; };
+		99E438A82CA50D2E001C08B9 /* Introduce_12ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Introduce_12ViewController.swift; sourceTree = "<group>"; };
 		99F9E8A52BB5139900D68037 /* MixDecodingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixDecodingViewController.swift; sourceTree = "<group>"; };
 		AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Example.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Example/Pods-SmartCodable_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartCodable_Tests.release.xcconfig"; path = "Target Support Files/Pods-SmartCodable_Tests/Pods-SmartCodable_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 				99675FDC2B3EC930006C83EC /* TestViewController.swift */,
 				99CE4D512BC687700006D435 /* Test2ViewController.swift */,
 				99153D762BD1124C004C01AD /* Test3ViewController.swift */,
+				990CBAF32CA4F5300099E4C7 /* 1231231.swift */,
 				99C1E70C2B99A55E0090E8FD /* 说明信息 */,
 				99675FDF2B3EC930006C83EC /* Smart */,
 				9902B4CE2BB2F32D00310E69 /* 平替HandyJSON */,
@@ -506,6 +511,7 @@
 				99CE4D632BC6AB8B0006D435 /* Introduce_9ViewController.swift */,
 				9955576D2BE0DCC6005F9ABD /* Introduce_10ViewController.swift */,
 				995E03C12C182C68009E1E5B /* Introduce_11ViewController.swift */,
+				99E438A82CA50D2E001C08B9 /* Introduce_12ViewController.swift */,
 				99CE4D652BC6AFC90006D435 /* IntroduceViewController.swift */,
 			);
 			path = "1.Introduce(使用介绍)";
@@ -1011,6 +1017,7 @@
 				996760402B3EC930006C83EC /* Introduce_3ViewController.swift in Sources */,
 				9956B9B92BD92D1900C711F5 /* DecodingArrayLogViewController.swift in Sources */,
 				998567292C12A3AE0021B7FD /* Encode_CustomKeyViewController.swift in Sources */,
+				99E438A92CA50D2E001C08B9 /* Introduce_12ViewController.swift in Sources */,
 				9967604A2B3EC930006C83EC /* BaseViewController.swift in Sources */,
 				9967601B2B3EC930006C83EC /* ViewController.swift in Sources */,
 				9985671A2C11C6010021B7FD /* Encode_SpecialData_dateViewController.swift in Sources */,
@@ -1082,6 +1089,7 @@
 				996760242B3EC930006C83EC /* BaseData_BoolViewController.swift in Sources */,
 				9985670E2C11B9810021B7FD /* TestEncodeCaseViewController.swift in Sources */,
 				996760372B3EC930006C83EC /* CaseOneViewController.swift in Sources */,
+				990CBAF42CA4F5300099E4C7 /* 1231231.swift in Sources */,
 				9902B4DC2BB304B400310E69 /* ReplaceHandyJSON_6ViewController.swift in Sources */,
 				9985671C2C11C6510021B7FD /* Encode_SpecialData_dataViewController.swift in Sources */,
 			);

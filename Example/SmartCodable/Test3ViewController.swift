@@ -19,25 +19,73 @@ import CleanJSON
  */
 
 
+import SmartCodable
+
 class Test3ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-        let string = "{\"id\":1, \"sex\":{\"id\":1}}"
+
         
-        if let model = Model.deserialize(from: string) {
-            smartPrint(value: model)
+        
+        let dict1: [String: Any] = [
+            "age": 10,
+            "name": "Mccc",
+            "location": [
+                "province": "Jiang zhou",
+                "city": "Su zhou",
+            ]
+            
+        ]
+        
+        if let jsonData = try? JSONSerialization.data(withJSONObject: dict1, options: []) {
+            // Successfully converted Dictionary to Data
+            print("JSON Data:", jsonData)
+            
+            do {
+                let obj = try JSONDecoder().decode(Model.self, from: jsonData)
+                print("obj = ", obj)
+
+            } catch {
+                print("error = ", error)
+            }
+            
+            // If you want to convert it back to a String for debugging purposes
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSON String:", jsonString)
+            }
         }
         
-    }
-    
-    struct Model: SmartCodable {
-     var id: Int = 0
-        var sex: SubModel = SubModel()
-    }
-    
-    struct SubModel: SmartCodable {
-        var id : Int = 0
+        if let model = Model.deserialize(from: dict1) {
+            smartPrint(value: model)
+            print("\n")
+            let dict = model.toDictionary() ?? [:]
+            print(dict)
+        }
     }
 }
+
+
+
+
+extension Test3ViewController {
+    struct Model: SmartCodable {
+        var name: String = ""
+        @IgnoredKey
+        var ignore: String = ""
+        @IgnoredKey
+        var ignore2 = ""
+        var age: Int = 0
+        var location: Location?
+    }
+    
+    struct Location: SmartCodable {
+        var province: String = ""
+        
+        // 忽略解析
+        @IgnoredKey
+        var city: String = "area123"
+    }
+}
+
+

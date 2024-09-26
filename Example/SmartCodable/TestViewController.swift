@@ -16,20 +16,8 @@ import BTPrint
 
 
 /** 字典的值情况
- * 无key
- * 值为null
- * 值类型错误
- */
-
-/** 字典的类型情况
- * 非可选基础字典
- * 可选基础字典
- *
- * 非可续Model
- * 可选Model
- *
- * 使用 SmartAny 修饰
- * 使用 SmartPlat 修饰
+ 1. @Published 修饰的属性的解析。
+ 2. 继承关系！！！！
  *
  */
 

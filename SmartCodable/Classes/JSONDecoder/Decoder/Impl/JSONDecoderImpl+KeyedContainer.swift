@@ -182,7 +182,7 @@ extension JSONDecoderImpl.KeyedContainer {
         guard let value = try? getValue(forKey: key) else {
             return try forceDecode(forKey: key)
         }
-            
+        
         if let decoded = impl.cache.tranform(value: value, for: key) as? String {
             return decoded
         }
@@ -288,11 +288,21 @@ extension JSONDecoderImpl.KeyedContainer {
             return try decode(CGFloat.self, forKey: key) as! T
         }
         
+        
+        print("type = \(type)");
+        // 如果值可以被成功获取
         if let value = try? getValue(forKey: key) {
-            if let decoded = impl.cache.tranform(value: value, for: key) as? T {
-                return decoded
-            }
-        }
+               if let decoded = impl.cache.tranform(value: value, for: key) {
+                   
+                   // 检查 SmartPublished 包装器类型
+                   if let publishedType = T.self as? any SmartPublishedProtocol.Type,
+                      let wrappedValue = decoded as? Any,
+                      let publishedValue = publishedType.createInstance(with: wrappedValue) as? T {
+                       return publishedValue
+                   }
+               }
+           }
+        
         
         
         if let type = type as? FlatType.Type {
@@ -463,7 +473,7 @@ extension JSONDecoderImpl.KeyedContainer {
         if let decoded = try? newDecoder.unwrap(as: type) {
             return didFinishMapping(decoded)
         }
-
+        
         if let decoded: T = optionalDecode(forKey: key) {
             return didFinishMapping(decoded)
         } else {
