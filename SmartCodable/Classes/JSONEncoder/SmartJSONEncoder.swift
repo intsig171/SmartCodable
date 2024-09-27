@@ -10,13 +10,14 @@ import Foundation
 open class SmartJSONEncoder: JSONEncoder {
 
     open var smartKeyEncodingStrategy: SmartKeyEncodingStrategy = .useDefaultKeys
+    open var smartDataEncodingStrategy: SmartDataEncodingStrategy = .base64
 
    
 
     /// Options set on the top-level encoder to pass down the encoding hierarchy.
     struct _Options {
         let dateEncodingStrategy: DateEncodingStrategy
-        let dataEncodingStrategy: DataEncodingStrategy
+        let dataEncodingStrategy: SmartDataEncodingStrategy
         let nonConformingFloatEncodingStrategy: NonConformingFloatEncodingStrategy
         let keyEncodingStrategy: SmartKeyEncodingStrategy
         let userInfo: [CodingUserInfoKey: Any]
@@ -25,7 +26,7 @@ open class SmartJSONEncoder: JSONEncoder {
     /// The options set on the top-level encoder.
     fileprivate var options: _Options {
         return _Options(dateEncodingStrategy: dateEncodingStrategy,
-                        dataEncodingStrategy: dataEncodingStrategy,
+                        dataEncodingStrategy: smartDataEncodingStrategy,
                         nonConformingFloatEncodingStrategy: nonConformingFloatEncodingStrategy,
                         keyEncodingStrategy: smartKeyEncodingStrategy,
                         userInfo: userInfo)

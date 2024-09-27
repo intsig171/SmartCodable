@@ -7,6 +7,14 @@
 
 import Foundation
 
+extension JSONDecoder {
+    public enum SmartDataDecodingStrategy : Sendable {
+        /// Decode the `Data` from a Base64-encoded string. This is the default strategy.
+        case base64
+    }
+}
+
+
 
 extension JSONDecoder {
     public enum SmartKeyDecodingStrategy : Sendable {

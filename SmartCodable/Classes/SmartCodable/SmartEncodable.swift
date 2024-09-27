@@ -29,7 +29,7 @@ public enum SmartEncodingOption: Hashable {
     /// date的默认策略是ReferenceDate（参考日期是指2001年1月1日 00:00:00 UTC），以秒为单位。
     case date(JSONEncoder.DateEncodingStrategy)
     
-    case data(JSONEncoder.DataEncodingStrategy)
+    case data(JSONEncoder.SmartDataEncodingStrategy)
     
     case float(JSONEncoder.NonConformingFloatEncodingStrategy)
     
@@ -128,7 +128,7 @@ fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type, useMappe
         for _option in _options {
             switch _option {
             case .data(let strategy):
-                jsonEncoder.dataEncodingStrategy = strategy
+                jsonEncoder.smartDataEncodingStrategy = strategy
                 
             case .date(let strategy):
                 jsonEncoder.dateEncodingStrategy = strategy

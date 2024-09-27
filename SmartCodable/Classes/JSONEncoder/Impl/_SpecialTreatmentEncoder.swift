@@ -120,24 +120,9 @@ extension _SpecialTreatmentEncoder {
 
     func wrapData(_ data: Data, for additionalKey: CodingKey?) throws -> JSONValue {
         switch self.options.dataEncodingStrategy {
-        case .deferredToData:
-            let encoder = self.getEncoder(for: additionalKey)
-            try data.encode(to: encoder)
-            return encoder.value ?? .null
-
         case .base64:
             let base64 = data.base64EncodedString()
             return .string(base64)
-
-        case .custom(let closure):
-            let encoder = self.getEncoder(for: additionalKey)
-            try closure(data, encoder)
-            // The closure didn't encode anything. Return the default keyed container.
-            return encoder.value ?? .object([:])
-        @unknown default:
-            let encoder = self.getEncoder(for: additionalKey)
-            try data.encode(to: encoder)
-            return encoder.value ?? .null
         }
     }
 

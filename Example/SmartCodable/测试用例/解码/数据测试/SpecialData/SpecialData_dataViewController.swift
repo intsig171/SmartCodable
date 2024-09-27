@@ -17,18 +17,8 @@ class SpecialData_dataViewController: BaseCompatibilityViewController {
         test()
     }
 
-    func getStrategy() -> JSONDecoder.DataDecodingStrategy {
-        //        let strategy: JSONDecoder.DataDecodingStrategy = .base64
-        
-        let strategy: JSONDecoder.DataDecodingStrategy = .custom({ decoder -> Data in
-            let container = try decoder.singleValueContainer()
-            let string = try container.decode(String.self)
-            guard let data = string.data(using: .utf8) else {
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "无法转换为Data类型")
-            }
-            return data
-        })
-        return strategy
+    func getStrategy() -> JSONDecoder.SmartDataDecodingStrategy {
+        return .base64
     }
     
     func test() {
@@ -38,7 +28,11 @@ class SpecialData_dataViewController: BaseCompatibilityViewController {
         if let model = DataModel.deserialize(from: dict, options: [.data(strategy)]) {
             print(model)
             print(model.aData.toString() ?? "")
+            
+            print(model.toDictionary())
         }
+        
+        
     }
 }
 
@@ -58,7 +52,7 @@ extension SpecialData_dataViewController {
     
     func getDictData(
         mode: Mode,
-        strategy: JSONDecoder.DataDecodingStrategy) -> [String: Any] {
+        strategy: JSONDecoder.SmartDataDecodingStrategy) -> [String: Any] {
             switch mode {
             case .keyless:
                 return [:]
@@ -80,21 +74,12 @@ extension SpecialData_dataViewController {
            
             
             switch strategy {
-                // 由于 JSON 标准本身不支持直接的二进制数据表示，我们通常不会在实践中看到 deferredToData 的直接应用。
-            case .deferredToData:
-                return [
-                    :
-                ]
+    
                 
             case .base64:
                 return [
                     "aData": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
                     "bData": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
-                ]
-            case .custom(_):
-                return [
-                    "aData": "Hello, world!",
-                    "bData": "Hello, world!",
                 ]
             }
             

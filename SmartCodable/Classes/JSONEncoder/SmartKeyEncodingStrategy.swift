@@ -6,6 +6,16 @@
 //
 
 import Foundation
+
+extension JSONEncoder {
+    /// Data的解析策略
+    /// 由于是JSONEncoder解析器只能解析JSON数据，所以Data类型只能用base64.
+    public enum SmartDataEncodingStrategy: Sendable {
+        case base64
+    }
+}
+
+
 extension JSONEncoder {
     
     public enum SmartKeyEncodingStrategy : Sendable {
