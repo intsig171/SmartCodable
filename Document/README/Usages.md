@@ -511,7 +511,9 @@ class Model: SmartDecodable {
 
 Inheritance does not have a particularly good implementation in Codable, but SmartCodable provides a combination (@SmartFlat) that indirectly implements inheritance requirements.
 
-继承在Codable中没有特别好的实现方案， SmartCodable提供了组合方式（@SmartFlat）用来间接实现继承的需求。
+继承在Codable中没有特别好的实现方案， 这里提供两种方案：
+
+1. SmartCodable提供了组合方式（@SmartFlat）用来间接实现继承的需求。
 
 ```
 let jsonString = """
@@ -539,7 +541,38 @@ struct SubModel: SmartCodable {
 }
 ```
 
+2. 重写`init(from decoder: Decoder) `  方法，接管解析。
 
+   ```
+   class BaseModel: SmartCodable {
+       var name: String = ""
+       var age: Int = 0
+       
+       enum CodingKeys: CodingKey {
+           case name
+           case age
+       }   
+       required init() { }
+   }
+   
+   class SubModel: BaseModel {
+       var nickName: String = ""    
+       enum CodingKeys: CodingKey {
+           case nickName
+       }
+       required init(from decoder: Decoder) throws {
+           try super.init(from: decoder)   
+           let container = try decoder.container(keyedBy: CodingKeys.self)
+           self.nickName = try container.decode(String.self, forKey: .nickName)
+       }
+       
+       required init() {
+           super.init()
+       }
+   }
+   ```
+
+   
 
 ### Update Existing Model（更新现有模型）
 
