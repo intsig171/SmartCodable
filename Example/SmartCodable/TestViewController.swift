@@ -22,6 +22,13 @@ import BTPrint
  */
 
 
+/**
+ V4.1.12 发布公告
+ 1. 【新功能】支持Combine，允许@Published修饰的属性解析。
+ 2. 【新功能】支持@igonreKey修饰的属性在encode时，不出现在json中（屏蔽这个属性key）
+ 3. 【新功能】支持encode时候的options，同decode的options使用。
+ 4. 【优化】Data类型在decode和encode时，只能使用base64解析.
+ */
 
 
 
