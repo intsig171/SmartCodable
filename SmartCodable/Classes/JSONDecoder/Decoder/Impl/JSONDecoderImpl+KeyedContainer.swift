@@ -288,8 +288,6 @@ extension JSONDecoderImpl.KeyedContainer {
             return try decode(CGFloat.self, forKey: key) as! T
         }
         
-        
-        print("type = \(type)");
         // 如果值可以被成功获取
         if let value = try? getValue(forKey: key) {
                if let decoded = impl.cache.tranform(value: value, for: key) {
