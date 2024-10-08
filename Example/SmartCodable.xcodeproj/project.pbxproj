@@ -823,10 +823,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = RA2G5HURUT;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = RA2G5HURUT;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -1239,6 +1241,7 @@
 			baseConfigurationReference = BC656B63C9031B22DEB5C8EB /* Pods-SmartCodable_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RA2G5HURUT;
 				INFOPLIST_FILE = SmartCodable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1255,6 +1258,7 @@
 			baseConfigurationReference = AD8215B5E8E50F277C1C4356 /* Pods-SmartCodable_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = RA2G5HURUT;
 				INFOPLIST_FILE = SmartCodable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1270,6 +1274,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB7246035010143E03C7616B /* Pods-SmartCodable_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = RA2G5HURUT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1293,6 +1298,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AFEADC35BC2373F1DC69B73B /* Pods-SmartCodable_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = RA2G5HURUT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

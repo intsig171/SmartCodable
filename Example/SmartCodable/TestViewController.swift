@@ -31,13 +31,10 @@ import BTPrint
  */
 
 
-
 class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
     }
 }

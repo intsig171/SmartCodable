@@ -13,15 +13,19 @@ import SmartCodable
 class Introduce_12ViewController: BaseViewController {
     var cancellables = Set<AnyCancellable>()
     
+    var model: PublishedModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "newName": 1,
+            "name": 1,
             "age": "333333"
         ]
         
         if let model = PublishedModel.deserialize(from: dict) {
+            
+            self.model = model
             print("反序列化后的 name 值: \(model.name)")
             
             // 正确访问 name 属性的 Publisher
@@ -31,9 +35,13 @@ class Introduce_12ViewController: BaseViewController {
                 }
                 .store(in: &cancellables)
             
-            // 修改 model 的 name 属性
-            model.name = "Updated iOS Developer"
+            
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // 修改 model 的 name 属性
+        model?.name = "Updated iOS Developer"
     }
 }
 
@@ -43,28 +51,22 @@ class PublishedModel: ObservableObject, SmartCodable {
     
     @SmartPublished
     var name: String = "iOS Developer"
-        
-    static func mappingForKey() -> [SmartKeyTransformer]? {
-        [CodingKeys.name <--- "newName"]
-    }
-    
-//    static func mappingForValue() -> [SmartValueTransformer]? {
-//        [
-//            CodingKeys.name <--- PublishedValueTransformer(),
-//        ]
+//        
+//    static func mappingForKey() -> [SmartKeyTransformer]? {
+//        [CodingKeys.name <--- "newName"]
 //    }
 }
 
-struct PublishedValueTransformer: ValueTransformable {
-    func transformFromJSON(_ value: Any) -> String? {
-        return "good"
-    }
-    
-    func transformToJSON(_ value: String) -> String? {
-        return "gooooooood"
-    }
-    
-    typealias Object = String
-    
-    typealias JSON = String
-}
+//struct PublishedValueTransformer: ValueTransformable {
+//    func transformFromJSON(_ value: Any) -> String? {
+//        return "good"
+//    }
+//    
+//    func transformToJSON(_ value: String) -> String? {
+//        return "gooooooood"
+//    }
+//    
+//    typealias Object = String
+//    
+//    typealias JSON = String
+//}

@@ -16,22 +16,17 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let model = Model()
-        
-        let json = model.toDictionary()
-        
-        print(json)
+        let dict = [
+            "name": 1.22222
+        ]
+        let model = Model.deserialize(from: dict)
+        print(model)
 
     }
     
     struct Model: SmartCodable {
-        var name: String = "Mccc"
+        var name: String = ""
         
-        @IgnoredKey(supportEncode: false)
-        var ignore1: String = "忽略的key1"
-        
-        @IgnoredKey(supportEncode: true)
-        var ignore2: String = "忽略的key2"
         
     }
 }

@@ -26,50 +26,80 @@ public protocol SmartPublishedProtocol {
     static func createInstance(with value: Any) -> Self?
 }
 
-/// PublishedContainer
-/// @Published使属性成为一个发布者，自动发布变更。
-/// ObservableObject可以被SwiftUI或其他观察者订阅以监听其变化。
-@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-public class PublishedContainer<Value>: ObservableObject {
-    @Published public var wrappedValue: Value
-    
-    public init(wrappedValue: Value) {
-        self.wrappedValue = wrappedValue
-    }
-}
 
-
-/// 属性包装器SmartPublished，允许在声明属性时附加额外的行为。
-/// container使用PublishedContainer管理值和发布功能。
-/// wrappedValue提供对实际值的访问。
 /// projectedValue提供一个发布者，可供订阅。
 @propertyWrapper
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 public struct SmartPublished<Value: Codable>: Codable {
-    private var container: PublishedContainer<Value>
-    
-    public var wrappedValue: Value {
-        get { container.wrappedValue }
-        set { container.wrappedValue = newValue }
-    }
-    
-    public var projectedValue: Published<Value>.Publisher {
-        container.$wrappedValue
-    }
-    
-    public init(wrappedValue: Value) {
-        self.container = PublishedContainer(wrappedValue: wrappedValue)
-    }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let value = try container.decode(Value.self)
-        self.container = PublishedContainer(wrappedValue: value)
+        self.wrappedValue = value
+        publisher = Publisher(wrappedValue)
     }
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(self.wrappedValue)
+    }
+    public var wrappedValue: Value {
+        // willSet 观察器在 wrappedValue 被修改前调用，会将新的值通过 publisher 发送出去，从而通知所有的订阅者。这实现了数据更新的响应式特性。
+        willSet {
+            publisher.subject.send(newValue)
+        }
+    }
+    
+    public var projectedValue: Publisher {
+        publisher
+    }
+    
+    private var publisher: Publisher
+    
+    public struct Publisher: Combine.Publisher {
+        public typealias Output = Value
+        public typealias Failure = Never
+        
+        // CurrentValueSubject 是 Combine 中的一种 Subject，它会保存当前值并向新订阅者发送当前值。相比于 PassthroughSubject，它在初始化时就要求有一个初始值，因此更适合这种包装属性的场景。
+        var subject: CurrentValueSubject<Value, Never>
+        
+        // 这个方法实现了 Publisher 协议，将 subscriber 传递给 subject，从而将订阅者连接到这个发布者上。
+        public func receive<S>(subscriber: S) where S: Subscriber, Self.Failure == S.Failure, Self.Output == S.Input {
+            subject.subscribe(subscriber)
+        }
+        
+        // Publisher 的构造函数接受一个初始值，并将其传递给 CurrentValueSubject 的初始化方法。
+        init(_ output: Output) {
+            subject = .init(output)
+        }
+    }
+    
+    public init(wrappedValue: Value) {
+        self.wrappedValue = wrappedValue
+        publisher = Publisher(wrappedValue)
+    }
+    
+    
+    /// 这个下标实现了对属性包装器的自定义访问逻辑，用于在包装器内自定义 wrappedValue 的访问和修改行为。
+    /// 参数解析：
+    /// observed：观察者，即外部的 ObservableObject 实例。
+    /// wrappedKeyPath：指向被包装值的引用键路径。
+    /// storageKeyPath：指向属性包装器自身的引用键路径。
+    public static subscript<OuterSelf: ObservableObject>(
+        _enclosingInstance observed: OuterSelf,
+        wrapped wrappedKeyPath: ReferenceWritableKeyPath<OuterSelf, Value>,
+        storage storageKeyPath: ReferenceWritableKeyPath<OuterSelf, Self>
+    ) -> Value {
+        get {
+            observed[keyPath: storageKeyPath].wrappedValue
+        }
+        set {
+            // 在设置新值之前，如果 observed 的 objectWillChange 属性是 ObservableObjectPublisher 类型，则它会发送通知，确保在属性值更新之前，订阅者能收到通知。
+            if let subject = observed.objectWillChange as? ObservableObjectPublisher {
+                subject.send() // 修改 wrappedValue 之前
+                observed[keyPath: storageKeyPath].wrappedValue = newValue
+            }
+        }
     }
 }
 
