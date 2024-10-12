@@ -290,15 +290,16 @@ extension JSONDecoderImpl.KeyedContainer {
         
         // 如果值可以被成功获取
         if let value = try? getValue(forKey: key) {
-               if let decoded = impl.cache.tranform(value: value, for: key) {
-                   
-                   // 检查 SmartPublished 包装器类型
-                   if let publishedType = T.self as? any SmartPublishedProtocol.Type,
-                      let publishedValue = publishedType.createInstance(with: decoded) as? T {
-                       return publishedValue
-                   }
-               }
-           }
+            if let decoded = impl.cache.tranform(value: value, for: key) {
+                if let tTypeValue = decoded as? T {
+                    return tTypeValue
+                } else if let publishedType = T.self as? any SmartPublishedProtocol.Type,
+                          let publishedValue = publishedType.createInstance(with: decoded) as? T {
+                    // // 检查 SmartPublished 包装器类型
+                    return publishedValue
+                }
+            }
+        }
         
         
         

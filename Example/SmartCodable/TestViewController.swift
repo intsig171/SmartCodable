@@ -14,7 +14,6 @@ import CleanJSON
 import BTPrint
 
 
-
 /** 字典的值情况
  1. @Published 修饰的属性的解析。
  2. 继承关系！！！！
@@ -35,6 +34,38 @@ class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let jsonString = """
+{
+
+    "enjoyCount": 462,
+    "talkCount": null,
+}
+    
+"""
         
+        guard let model = RecommendModel.deserialize(from: jsonString) else {
+            return
+        }
+        
+        print(model)
     }
+    
+    
+    struct RecommendModel: SmartCodable {
+
+        /// 点赞数
+        var enjoyCount: Int = 0
+        /// 评论数
+        var commentCount: Int = 0
+       
+        
+
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.commentCount <--- ["commentCount","talkCount","postCommentCount","topicCommentCount","topicTalkCount", "articleCommentCount"],
+                CodingKeys.enjoyCount <--- ["articleEnjoyCount","enjoyCount","topicEnjoyCount","postEnjoyCount"],
+            ]
+        }
+    }
+
 }

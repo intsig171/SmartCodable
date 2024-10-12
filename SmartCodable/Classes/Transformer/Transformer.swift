@@ -53,3 +53,46 @@ public protocol ValueTransformable {
 public func <---(location: CodingKey, tranformer: any ValueTransformable) -> SmartValueTransformer {
     SmartValueTransformer.init(location: location, tranformer: tranformer)
 }
+
+
+
+/** 便捷的Transformer
+ static func mappingForValue() -> [SmartValueTransformer]? {
+     [
+         CodingKeys.name <--- FastTransformer<String, String>(fromJSON: { json in
+             "abc"
+         }, toJSON: { object in
+             "123"
+         }),
+         CodingKeys.subModel <--- FastTransformer<TestEnum, String>(fromJSON: { json in
+             TestEnum.man
+         }, toJSON: { object in
+             object?.rawValue
+         }),
+     ]
+ }
+ */
+
+public struct FastTransformer<Object, JSON>: ValueTransformable {
+    
+    private let fromJSON: (JSON?) -> Object?
+    private let toJSON: ((Object?) -> JSON?)?
+    
+    
+    /// 便捷的转换器
+    /// - Parameters:
+    ///   - fromJSON: json 转 object
+    ///   - toJSON:  object 转 json， 如果需要转json，可以不实现。
+    public init(fromJSON: @escaping (JSON?) -> Object?, toJSON: ((Object?) -> JSON?)? = nil) {
+        self.fromJSON = fromJSON
+        self.toJSON = toJSON
+    }
+    
+    public func transformFromJSON(_ value: Any) -> Object? {
+        return fromJSON(value as? JSON)
+    }
+    
+    public func transformToJSON(_ value: Object) -> JSON? {
+        return toJSON?(value)
+    }
+}

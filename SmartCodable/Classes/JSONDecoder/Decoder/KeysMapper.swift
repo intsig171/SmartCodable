@@ -44,7 +44,7 @@ struct KeysMapper {
         type.mappingForKey()?.forEach { mapping in
             for oldKey in mapping.from {
                 let newKey = mapping.to.stringValue
-                if let value = newDict[oldKey], !(value is NSNull) {
+                if let value = newDict[oldKey] as? JSONValue, value != .null {
                     newDict[newKey] = newDict[oldKey]
                     break
                 } else { // Handles the case of a custom parsing path.
