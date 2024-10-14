@@ -17,42 +17,49 @@ class Test2ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "name": "mccc",
-            "subModel": "mccc111",
+//            "name": "mccc",
+            "age": 30,
+            "info": [
+                "name": "mccc111"
+            ],
+            "sub": [
+                "subname": "qilin",
+                "subage": 3,
+                "info": [
+                    "name": "qilin111"
+                ],
+            ]
 
         ]
         let model = Model.deserialize(from: dict)
-        print(model?.subModel?.rawValue)
-        
-        let dict1 = model?.toDictionary()
-        print(dict1)
+        BTPrint.print(model)
 
-    }
-    
-    struct Model: SmartCodable {
-        var name: String = ""
-        @SmartPublished
-        var subModel: TestEnum?
+        print("\n")
         
-        
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            [
-                CodingKeys.name <--- FastTransformer<String, String>(fromJSON: { json in
-                    "abc"
-                }),
-                CodingKeys.subModel <--- FastTransformer<TestEnum, String>(fromJSON: { json in
-                    TestEnum.man
-                }),
-            ]
-        }
+        let tranDict = model?.toDictionary() ?? [:]
+        BTPrint.print(tranDict)
     }
+}
+
+struct Model: SmartCodable {
+    var name: String = ""
+    var age: Int = 0
+    var sub: SubModel = SubModel()
     
-    enum TestEnum: String, SmartCaseDefaultable {
-    case man
+    static func mappingForKey() -> [SmartKeyTransformer]? {
+        [
+            CodingKeys.name <--- "info.name"
+        ]
     }
+}
+
+struct SubModel: SmartCodable {
+    var subname: String = ""
+    var subage: Int = 0
     
-    struct SubModel: SmartCodable {
-        var name: String = ""
-        
+    static func mappingForKey() -> [SmartKeyTransformer]? {
+        [
+            CodingKeys.subname <--- "info.name"
+        ]
     }
 }

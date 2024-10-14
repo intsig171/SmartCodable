@@ -35,37 +35,52 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let jsonString = """
+[
 {
-
-    "enjoyCount": 462,
-    "talkCount": null,
+    "enjoyCount": 1,
+    "commentCount": 1,
+},
+{
+    "enjoyCount": 2,
+    "commentCount": 2,
+},
+{
+    "enjoyCount": 2,
+    "commentCount": 2,
 }
+]
     
 """
-        
-        guard let model = RecommendModel.deserialize(from: jsonString) else {
+        guard let models = [RecommendModel].deserialize(from: jsonString) else {
             return
         }
+        print(models)
+        print("\n")
         
-        print(model)
+        let uniqueRecommends = Array(Set(models))
+        print(uniqueRecommends)
     }
     
-    
-    struct RecommendModel: SmartCodable {
+    struct RecommendModel: SmartCodable, Equatable, Hashable {
 
         /// 点赞数
         var enjoyCount: Int = 0
         /// 评论数
         var commentCount: Int = 0
-       
         
-
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.commentCount <--- ["commentCount","talkCount","postCommentCount","topicCommentCount","topicTalkCount", "articleCommentCount"],
-                CodingKeys.enjoyCount <--- ["articleEnjoyCount","enjoyCount","topicEnjoyCount","postEnjoyCount"],
-            ]
+        @IgnoredKey
+        var priceText: NSAttributedString? // 价格富文本
+        
+        
+        static func == (lhs: RecommendModel, rhs: RecommendModel) -> Bool {
+            return true
+        }
+        
+        // 手动实现 Hashable 协议
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(enjoyCount)
+            hasher.combine(commentCount)
         }
     }
-
+    
 }

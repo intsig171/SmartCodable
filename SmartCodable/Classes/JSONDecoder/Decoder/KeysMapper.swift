@@ -44,11 +44,15 @@ struct KeysMapper {
         type.mappingForKey()?.forEach { mapping in
             for oldKey in mapping.from {
                 let newKey = mapping.to.stringValue
+
+                // 先移除数据中原本的字段
+                newDict.removeValue(forKey: newKey)
+                
                 if let value = newDict[oldKey] as? JSONValue, value != .null {
                     newDict[newKey] = newDict[oldKey]
                     break
                 } else { // Handles the case of a custom parsing path.
-                    if newDict[newKey] == nil, let pathValue = newDict.getValue(forKeyPath: oldKey) {
+                    if let pathValue = newDict.getValue(forKeyPath: oldKey) {
                         newDict.updateValue(pathValue, forKey: newKey)
                     }
                 }
