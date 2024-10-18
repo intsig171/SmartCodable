@@ -28,7 +28,7 @@ struct KeysMapper {
         }
         return nil
     }
-
+    
     
     private static func parseJSON(from string: String, as type: SmartDecodable.Type) -> Any {
         guard let jsonObject = string.toJSONObject() else { return string }
@@ -42,19 +42,24 @@ struct KeysMapper {
     private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any] {
         var newDict = dict
         type.mappingForKey()?.forEach { mapping in
-            for oldKey in mapping.from {
-                let newKey = mapping.to.stringValue
-
-                // 先移除数据中原本的字段
+            let newKey = mapping.to.stringValue
+            
+            /** 判断原字段是否为干扰字段（映射关系中是否存在该字段）。
+             * 干扰字段场景：注意这种情况 CodingKeys.name <--- ["newName"]
+             * 有效字段场景：注意这种情况 CodingKeys.name <--- ["name", "newName"]
+             */
+            if !(mapping.from.contains(newKey)) {
                 newDict.removeValue(forKey: newKey)
-                
-                if let value = newDict[oldKey] as? JSONValue, value != .null {
+            }
+            
+            // break的作用： 优先使用第一个不为null的字段。
+            for oldKey in mapping.from {
+                if let value = newDict[oldKey] as? JSONValue, value != .null { // 映射关系在当前层
                     newDict[newKey] = newDict[oldKey]
                     break
-                } else { // Handles the case of a custom parsing path.
-                    if let pathValue = newDict.getValue(forKeyPath: oldKey) {
-                        newDict.updateValue(pathValue, forKey: newKey)
-                    }
+                } else if let pathValue = newDict.getValue(forKeyPath: oldKey) { // 映射关系需要根据路径跨层处理
+                    newDict.updateValue(pathValue, forKey: newKey)
+                    break
                 }
             }
         }

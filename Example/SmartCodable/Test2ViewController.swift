@@ -16,39 +16,29 @@ class Test2ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SmartConfig.debugMode = .none
+        
         let dict: [String: Any] = [
-//            "name": "mccc",
             "age": 30,
+            "name": "Mccc",
+            "newName": "newMccc",
             "info": [
                 "name": "mccc111"
             ],
-            "sub": [
-                "subname": "qilin",
-                "subage": 3,
-                "info": [
-                    "name": "qilin111"
-                ],
-            ]
-
         ]
         let model = Model.deserialize(from: dict)
         BTPrint.print(model)
-
-        print("\n")
-        
-        let tranDict = model?.toDictionary() ?? [:]
-        BTPrint.print(tranDict)
     }
 }
 
 struct Model: SmartCodable {
     var name: String = ""
     var age: Int = 0
-    var sub: SubModel = SubModel()
+    
     
     static func mappingForKey() -> [SmartKeyTransformer]? {
         [
-            CodingKeys.name <--- "info.name"
+            CodingKeys.name <--- ["info.name", "newName", "name", ]
         ]
     }
 }

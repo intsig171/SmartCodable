@@ -12,7 +12,8 @@ public protocol SmartDecodable: Decodable {
     /// The callback for when mapping is complete
     mutating func didFinishMapping()
     
-    /// The mapping relationship of decoding keys
+    /// The mapping relationship of decoding keys.
+    /// The first mapping relationship that is not null is preferred
     static func mappingForKey() -> [SmartKeyTransformer]?
     
     /// The strategy for decoding values
