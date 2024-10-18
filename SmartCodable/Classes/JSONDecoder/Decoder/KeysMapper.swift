@@ -54,10 +54,14 @@ struct KeysMapper {
             
             // break的作用： 优先使用第一个不为null的字段。
             for oldKey in mapping.from {
-                if let value = newDict[oldKey] as? JSONValue, value != .null { // 映射关系在当前层
+                // 映射关系在当前层
+                if let value = newDict[oldKey] as? JSONValue, value != .null {
                     newDict[newKey] = newDict[oldKey]
                     break
-                } else if let pathValue = newDict.getValue(forKeyPath: oldKey) { // 映射关系需要根据路径跨层处理
+                }
+                
+                // 映射关系需要根据路径跨层处理
+                if let pathValue = newDict.getValue(forKeyPath: oldKey) {
                     newDict.updateValue(pathValue, forKey: newKey)
                     break
                 }
