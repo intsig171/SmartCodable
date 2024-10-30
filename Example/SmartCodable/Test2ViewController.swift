@@ -8,10 +8,8 @@
 
 import SmartCodable
 import BTPrint
-import Combine
 
 class Test2ViewController: BaseViewController {
-    var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,37 +17,73 @@ class Test2ViewController: BaseViewController {
         SmartConfig.debugMode = .none
         
         let dict: [String: Any] = [
-            "age": 30,
-            "name": "Mccc",
-            "newName": "newMccc",
-            "info": [
-                "name": "mccc111"
+            "sub": [
+                "name": "Mccc"
             ],
+            "sub1": [
+                "name": "Mccc1111"
+            ],
+            
+            "subs": [
+                [
+                    "name": "Mccc"
+                ]
+            ],
+            
+            "subs1": [
+                [
+                    "name": "Mccc111"
+                ]            ],
+            
+            "name": "qilin",
+            "name1": "qilin1111",
+            
         ]
-        let model = Model.deserialize(from: dict)
-        BTPrint.print(model)
+        
+        let modelClass = Model()
+
+        if let model = Model.deserialize(from: dict) {
+            
+            print("\n")
+
+            print("name = \(model.name)")
+            print("name1 = \(model.name1)")
+            print("\n")
+            
+            print("sub = \(model.sub)")
+            print("sub1 = \(model.sub1)")
+            print("\n")
+            
+            print("subs = \(model.subs)")
+            print("subs1 = \(model.subs1)")
+            print("\n")
+        }
+        
+        
     }
 }
 
 struct Model: SmartCodable {
-    var name: String = ""
-    var age: Int = 0
     
+    @SmartAny
+    var subs: [SubModel]?
     
-    static func mappingForKey() -> [SmartKeyTransformer]? {
-        [
-            CodingKeys.name <--- ["info.name", "newName", "name", ]
-        ]
-    }
+    @SmartAny
+    var subs1: [SubModel] = []
+    
+    @SmartAny
+    var sub: SubModel?
+    
+    @SmartAny
+    var sub1: SubModel = SubModel()
+    
+    @SmartAny
+    var name: String?
+    
+    @SmartAny
+    var name1: String = "init"
 }
 
 struct SubModel: SmartCodable {
-    var subname: String = ""
-    var subage: Int = 0
-    
-    static func mappingForKey() -> [SmartKeyTransformer]? {
-        [
-            CodingKeys.subname <--- "info.name"
-        ]
-    }
+    var name: String = "init"
 }
