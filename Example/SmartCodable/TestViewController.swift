@@ -34,53 +34,58 @@ class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let jsonString = """
-[
-{
-    "enjoyCount": 1,
-    "commentCount": 1,
-},
-{
-    "enjoyCount": 2,
-    "commentCount": 2,
-},
-{
-    "enjoyCount": 2,
-    "commentCount": 2,
-}
-]
-    
-"""
-        guard let models = [RecommendModel].deserialize(from: jsonString) else {
-            return
-        }
-        print(models)
-        print("\n")
-        
-        let uniqueRecommends = Array(Set(models))
-        print(uniqueRecommends)
-    }
-    
-    struct RecommendModel: SmartCodable, Equatable, Hashable {
 
-        /// 点赞数
-        var enjoyCount: Int = 0
-        /// 评论数
-        var commentCount: Int = 0
+        let dict: [String: Any] = [
+            "size": 1,
+            "id": 2,
+            "name": "Mccc"
+        ]
         
-        @IgnoredKey
-        var priceText: NSAttributedString? // 价格富文本
-        
-        
-        static func == (lhs: RecommendModel, rhs: RecommendModel) -> Bool {
-            return true
-        }
-        
-        // 手动实现 Hashable 协议
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(enjoyCount)
-            hasher.combine(commentCount)
-        }
+        guard let model = C.deserialize(from: dict) else { return }
+
+        print(model.size)
+        print(model.id)
+        print(model.name)
     }
+}
+
+class A: SmartCodable {
+    var size: Int?
+    @IgnoredKey
+    var attr: NSMutableAttributedString?
+    required init() { }
+}
+
+class B: A {
+    var name: String?
     
+    enum CodingKeys: CodingKey {
+        case name
+    }
+    required init(from decoder: any Decoder) throws {
+        try super.init(from: decoder)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+    }
+    required init() {
+        super.init()
+    }
+}
+
+
+class C: B {
+    var id: Int?
+    enum CodingKeys: CodingKey {
+        case id
+    }
+    required init(from decoder: any Decoder) throws {
+        try super.init(from: decoder)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decodeIfPresent(Int.self, forKey: .id)
+    }
+    required init() {
+        super.init()
+    }
 }
