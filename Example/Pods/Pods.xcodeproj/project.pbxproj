@@ -89,7 +89,7 @@
 		5FE6C8838E9D37829B77DFD64962A813 /* SmartColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400B30EC0B34D7A48E962AC06BC1CC35 /* SmartColor.swift */; };
 		604D3C93C17978C23600EC415949AB64 /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DCF5151BEFE9D3018AFB99FE8F580F /* ConstraintInsets.swift */; };
 		611CEF7FF1EF9EA1BCEF6C73EEE3ACCF /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E88BDB3FDACE8F2B23F3247435107D /* ConstraintLayoutGuide.swift */; };
-		6159BF8E265A4AB0BB3906F988AFE444 /* SmartLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A190739C9B39F129EB5D3F1AD01C6 /* SmartLog.swift */; };
+		6159BF8E265A4AB0BB3906F988AFE444 /* SmartSentinel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A190739C9B39F129EB5D3F1AD01C6 /* SmartSentinel.swift */; };
 		61FCA0616CE6512DCA67D74562D6EA1D /* ReflectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF69AF530FDB1A1819B8E00A3E4775A /* ReflectionHelper.swift */; };
 		6221B84543F46615E02612C14274DD34 /* LogContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142BCBDEC28C3AB6AA978773E5CC527 /* LogContainer.swift */; };
 		62C1A489E5C6414819815F3219B52FE8 /* URLTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510325960A63C34B69B7173F76A69109 /* URLTransform.swift */; };
@@ -328,7 +328,7 @@
 		410A3FB7D8ABF0B00A9A1190AA20D141 /* SmartCodable-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SmartCodable-Info.plist"; sourceTree = "<group>"; };
 		418DA1AEA18C4A4A1E5D84FCB60DA427 /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Sources/Debugging.swift; sourceTree = "<group>"; };
 		41ACED5244DF58C103B2E79523334DEE /* SmartCodable-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SmartCodable-prefix.pch"; sourceTree = "<group>"; };
-		434BF8093C65490B915ADF860C1E87B9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		434BF8093C65490B915ADF860C1E87B9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		43E9440FF074C3295964D3A8D246D910 /* JSONDecoderImpl+Unwrap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "JSONDecoderImpl+Unwrap.swift"; sourceTree = "<group>"; };
 		43FB1C7B536B80216B8B21E7440AEC8C /* Pods-SmartCodable_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SmartCodable_Tests.modulemap"; sourceTree = "<group>"; };
 		4475151C4A7FB0660C3CDE88C6863EEF /* BTBubble+Location.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "BTBubble+Location.swift"; path = "BTBubble/Classes/BTBubble+Location.swift"; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 		6226D5547537E7D1F86B312E2F57D4F0 /* BTPrint-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BTPrint-umbrella.h"; sourceTree = "<group>"; };
 		62EE0A4B556D4D16395B0F6AD209BE55 /* _SpecialTreatmentEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = _SpecialTreatmentEncoder.swift; sourceTree = "<group>"; };
 		63337F29437FD6A05DCA6E50C4DF6945 /* ExtendCustomBasicType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExtendCustomBasicType.swift; path = Source/ExtendCustomBasicType.swift; sourceTree = "<group>"; };
-		639A190739C9B39F129EB5D3F1AD01C6 /* SmartLog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartLog.swift; sourceTree = "<group>"; };
+		639A190739C9B39F129EB5D3F1AD01C6 /* SmartSentinel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartSentinel.swift; sourceTree = "<group>"; };
 		63D6FCCD448B91FE5083D3C830B09E34 /* BTPrint */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BTPrint; path = BTPrint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6408E6D4E54868B52000CFEE639C74BB /* LogCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LogCache.swift; sourceTree = "<group>"; };
 		6655C4E157D6D96697E04CA6B9AA8A09 /* DateTransformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DateTransformer.swift; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 		87EF2DCAFAACA539DB4A58A75FC36303 /* FBSnapshotTestCasePlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCasePlatform.h; path = FBSnapshotTestCase/FBSnapshotTestCasePlatform.h; sourceTree = "<group>"; };
 		887F4600941DEFBBFA7F03E80BB2487D /* SmartKeyEncodingStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SmartKeyEncodingStrategy.swift; sourceTree = "<group>"; };
 		89305DC7AA8CF17C4DFF5582FDC4E381 /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
-		8BDE160E4A6F1343B7BC591BF1D13757 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		8BDE160E4A6F1343B7BC591BF1D13757 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		8D31C1D12C0D9C516CE738486208A159 /* HandyJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HandyJSON.h; path = Source/HandyJSON.h; sourceTree = "<group>"; };
 		9121AADFDAA9E940775A36390D6DDBC7 /* ToJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToJSON.swift; path = Sources/CleanJSON/ToJSON.swift; sourceTree = "<group>"; };
 		91D961BD3D7E5A4FD5EFC37B4EF49FD4 /* HandyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandyJSON-umbrella.h"; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 		9AB62CDC1D9A84669428234D73C264AF /* Pods-SmartCodable_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SmartCodable_Example-dummy.m"; sourceTree = "<group>"; };
 		9D33BCAA4236722F7930A6EB0E8F8175 /* URLTransformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = URLTransformer.swift; sourceTree = "<group>"; };
 		9D5AD1AE1022A579A49D4DE848C3C5D9 /* PointerType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PointerType.swift; path = Source/PointerType.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A11B531AF457EC4F99F06F115FDE0A45 /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = "<group>"; };
 		A247AF8B486EBFFB5B5CED8A27FD6D94 /* _CleanJSONDecoder+Decode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "_CleanJSONDecoder+Decode.swift"; path = "Sources/CleanJSON/_CleanJSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		A2F41D4908A500103C4D30F38F6829AA /* IgnoredKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IgnoredKey.swift; sourceTree = "<group>"; };
@@ -460,7 +460,7 @@
 		CD54121DDA84872534168702B5F92950 /* HandyJSON */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HandyJSON; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD07779AA8B42688ED0FF74BACC5AA5 /* AnyExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyExtensions.swift; path = Source/AnyExtensions.swift; sourceTree = "<group>"; };
 		CF572B5B26ACF0A775C07589992A5507 /* Pods-SmartCodable_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SmartCodable_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		CF9AAC33F460C4FF4255B05B17515C38 /* SmartCodable.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SmartCodable.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CF9AAC33F460C4FF4255B05B17515C38 /* SmartCodable.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SmartCodable.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CFC3023119381C8AA8F1A4F4106F012A /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Sources/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
 		CFE40591DCBDB38549AD0FC756F3D616 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
 		D20FD964253D6C1E0040497B2CA5505E /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Sources/LayoutConstraintItem.swift; sourceTree = "<group>"; };
@@ -595,7 +595,6 @@
 				7E972BBD4D0CAB239B62B38A7CFE09A9 /* Support Files */,
 				0E4E1A9219322C33F239A78C7F5E2F3B /* SwiftSupport */,
 			);
-			name = FBSnapshotTestCase;
 			path = FBSnapshotTestCase;
 			sourceTree = "<group>";
 		};
@@ -605,7 +604,6 @@
 				A9397F93F6330E1B99A7DED1D910245C /* SmartAny.swift */,
 				77A00CBAC997FC74D0B7D97BA346193B /* SmartAnyImpl.swift */,
 			);
-			name = SmartAny;
 			path = SmartAny;
 			sourceTree = "<group>";
 		};
@@ -646,7 +644,6 @@
 				DE0DAF964A0E975B4B68EFA56FCD83B9 /* JSONDecoderImpl+UnkeyedContainer.swift */,
 				43E9440FF074C3295964D3A8D246D910 /* JSONDecoderImpl+Unwrap.swift */,
 			);
-			name = Impl;
 			path = Impl;
 			sourceTree = "<group>";
 		};
@@ -675,7 +672,6 @@
 				4A22E62B9E2F61C5E2E300D5E7C8B1E3 /* SmartKeyDecodingStrategy.swift */,
 				1D965043AF3BAC3BD2462C7F1B04D7F0 /* Impl */,
 			);
-			name = Decoder;
 			path = Decoder;
 			sourceTree = "<group>";
 		};
@@ -709,7 +705,7 @@
 				21D483649AC19142DD597C611A17ECB7 /* JSONDecoder */,
 				DB5155EFEB19E83531ECE453C0165A4F /* JSONEncoder */,
 				0D5BBC34DE44BA55F276E49552FC81A9 /* JSONValue */,
-				A70F841C4A395A02050F29B06C9B5BD1 /* Log */,
+				A70F841C4A395A02050F29B06C9B5BD1 /* Sentinel */,
 				F2E8D9036A1CC555FFBA0797E1FFDF6B /* Pod */,
 				7E0A06D5A12BE0E8EF31932688D6285E /* SmartCodable */,
 				B61BCFAD7459CCD86E151F3BA5891F0B /* SmartType */,
@@ -792,7 +788,6 @@
 				510325960A63C34B69B7173F76A69109 /* URLTransform.swift */,
 				37704050BE514436D26A3EB63D42197C /* Support Files */,
 			);
-			name = HandyJSON;
 			path = HandyJSON;
 			sourceTree = "<group>";
 		};
@@ -809,7 +804,6 @@
 				EE7E7A774098C77B700C918B4B303354 /* BubbleTools.swift */,
 				8589C51E960CB6893CA744448B6E7B26 /* Support Files */,
 			);
-			name = BTBubble;
 			path = BTBubble;
 			sourceTree = "<group>";
 		};
@@ -820,7 +814,6 @@
 				027F28A4538E6CFB304B4FBA2BF92655 /* JSONSingleValueEncodingContainer.swift */,
 				08F9D8CE9FE30ECC0E28688ECACA45D5 /* JSONUnkeyedEncodingContainer.swift */,
 			);
-			name = Container;
 			path = Container;
 			sourceTree = "<group>";
 		};
@@ -889,17 +882,17 @@
 			path = "../Target Support Files/CleanJSON";
 			sourceTree = "<group>";
 		};
-		A70F841C4A395A02050F29B06C9B5BD1 /* Log */ = {
+		A70F841C4A395A02050F29B06C9B5BD1 /* Sentinel */ = {
 			isa = PBXGroup;
 			children = (
 				6408E6D4E54868B52000CFEE639C74BB /* LogCache.swift */,
 				1142BCBDEC28C3AB6AA978773E5CC527 /* LogContainer.swift */,
 				03314E02E03ABAF9A9A54FB7C3242E6A /* LogItem.swift */,
 				F7816E1F2BA5D3DB8020F2828F68E78C /* SafeDictionary.swift */,
-				639A190739C9B39F129EB5D3F1AD01C6 /* SmartLog.swift */,
+				639A190739C9B39F129EB5D3F1AD01C6 /* SmartSentinel.swift */,
 			);
-			name = Log;
-			path = SmartCodable/Classes/Log;
+			name = Sentinel;
+			path = SmartCodable/Classes/Sentinel;
 			sourceTree = "<group>";
 		};
 		AB4709EB2C22B719586DB965C4196A38 /* Impl */ = {
@@ -908,7 +901,6 @@
 				62EE0A4B556D4D16395B0F6AD209BE55 /* _SpecialTreatmentEncoder.swift */,
 				36F3588303C3D9B8727167CE1835E580 /* JSONEncoderImpl.swift */,
 			);
-			name = Impl;
 			path = Impl;
 			sourceTree = "<group>";
 		};
@@ -1064,7 +1056,6 @@
 				0F3C77A10532266D4C2017D4C5657D22 /* UILayoutSupport+Extensions.swift */,
 				D5089C05AA8DF4AEE19DA89A217C7CD8 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -1075,7 +1066,6 @@
 				325954676D102E8C484BC7A26E15B262 /* Patcher+Provider.swift */,
 				7C6914B3D982C726CD0198A9E5514539 /* Patcher+Transformer.swift */,
 			);
-			name = Patcher;
 			path = Patcher;
 			sourceTree = "<group>";
 		};
@@ -1101,7 +1091,6 @@
 				7F9222551C78E09BFE29291610498A56 /* PrintFormat.swift */,
 				1EC73E5802EDCA8941212E2C0320FD68 /* Support Files */,
 			);
-			name = BTPrint;
 			path = BTPrint;
 			sourceTree = "<group>";
 		};
@@ -1137,7 +1126,6 @@
 				9121AADFDAA9E940775A36390D6DDBC7 /* ToJSON.swift */,
 				98C45354D057DFD460070868850871E7 /* Support Files */,
 			);
-			name = CleanJSON;
 			path = CleanJSON;
 			sourceTree = "<group>";
 		};
@@ -1758,7 +1746,7 @@
 				0B7E73BCF3283DE2323ECAFDFD9F2A50 /* SmartJSONEncoder.swift in Sources */,
 				0A5BAC1A2DFD2A51F2F78D83967BA205 /* SmartKeyDecodingStrategy.swift in Sources */,
 				72C01E4E09EE55A0F1EAB0ED3F896289 /* SmartKeyEncodingStrategy.swift in Sources */,
-				6159BF8E265A4AB0BB3906F988AFE444 /* SmartLog.swift in Sources */,
+				6159BF8E265A4AB0BB3906F988AFE444 /* SmartSentinel.swift in Sources */,
 				AF7B34263411D9E91A7AF5C151C61ECE /* SmartPublished.swift in Sources */,
 				C28911B5711F181368C1194970F60E15 /* SmartUpdater.swift in Sources */,
 				E42050130358D7122BD0ADEACD8F9C01 /* Transformer.swift in Sources */,
@@ -2260,8 +2248,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

@@ -118,7 +118,7 @@ extension JSONDecoderImpl {
             guard let value = dictionary[key.stringValue] else {
                 throw DecodingError.keyNotFound(key, .init(
                     codingPath: self.codingPath,
-                    debugDescription: "No value associated with key \(key) (\"\(key.stringValue)\")."
+                    debugDescription: "No value associated with key \(key)."
                 ))
             }
             
@@ -486,14 +486,14 @@ extension JSONDecoderImpl.KeyedContainer {
     fileprivate func optionalDecode<T>(forKey key: Key) -> T? {
         
         guard let value = try? getValue(forKey: key) else {
-            SmartLog.createLog(impl: impl, forKey: key, value: nil, type: T.self)
+            SmartSentinel.monitorLog(impl: impl, forKey: key, value: nil, type: T.self)
             if let initializer: T = impl.cache.getValue(forKey: key) {
                 return initializer
             }
             return nil
         }
         
-        SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
+        SmartSentinel.monitorLog(impl: impl, forKey: key, value: value, type: T.self)
         
         if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             return decoded
@@ -517,11 +517,11 @@ extension JSONDecoderImpl.KeyedContainer {
         }
         
         guard let value = try? getValue(forKey: key) else {
-            SmartLog.createLog(impl: impl, forKey: key, value: nil, type: T.self)
+            SmartSentinel.monitorLog(impl: impl, forKey: key, value: nil, type: T.self)
             return try fillDefault()
         }
         
-        SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
+        SmartSentinel.monitorLog(impl: impl, forKey: key, value: value, type: T.self)
         if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             return decoded
         } else {

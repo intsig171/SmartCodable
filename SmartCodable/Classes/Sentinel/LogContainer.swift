@@ -31,11 +31,11 @@ struct LogContainer {
     }
     
     var containerTab: String {
-        return String(repeating: SmartConfig.space, count: formatCodingPath.count)
+        return String(repeating: SmartSentinel.space, count: formatCodingPath.count)
     }
     
     var fieldTab: String {
-        return containerTab + SmartConfig.space
+        return containerTab + SmartSentinel.space
     }
     
     var fildName: String {
@@ -48,8 +48,8 @@ struct LogContainer {
     
     func formatMessage() -> String {
         var message = ""
-        let modelSign = SmartConfig.modelSign
-        let attributeSign = SmartConfig.attributeSign
+        let modelSign = SmartSentinel.modelSign
+        let attributeSign = SmartSentinel.attributeSign
         
         // 处理最后一个元素
         if let last = formatCodingPath.last {

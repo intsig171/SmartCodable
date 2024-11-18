@@ -148,10 +148,10 @@ fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type, useMappe
             if let temp = json as? T {
                 return temp
             } else {
-                SmartLog.logVerbose("\(json)) is not a valid Type", in: "\(type)")
+                SmartSentinel.monitorAndPrint(debugDescription: "\(json)) is not a valid Type", error: nil, in: type)
             }
         } catch {
-            SmartLog.logVerbose("\(error)", in: "\(type)")
+            SmartSentinel.monitorAndPrint(debugDescription: "'JSONSerialization.jsonObject(:)' falied", error: nil, in: type)
         }
     }
     return nil
@@ -167,10 +167,10 @@ fileprivate func _transformToJsonString(object: Any, prettyPrint: Bool = false, 
             return String(data: jsonData, encoding: .utf8)
             
         } catch {
-            SmartLog.logVerbose("\(error)", in: "\(type)")
+            SmartSentinel.monitorAndPrint(debugDescription: "'JSONSerialization.data(:)' falied", error: error, in: type)
         }
     } else {
-        SmartLog.logVerbose("\(object)) is not a valid JSON Object", in: "\(type)")
+        SmartSentinel.monitorAndPrint(debugDescription: "\(object)) is not a valid JSON Object", error: nil, in: type)
     }
     return nil
 }

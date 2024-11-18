@@ -141,11 +141,11 @@ If you don't know how to use it, check it out.
 
 ## Debug log
 
-**SmartLog Error** indicates that **SmartCodable** encountered a resolution problem and executed compatibility logic. This does not mean that the analysis failed.
+**SmartSentinel Error** indicates that **SmartCodable** encountered a resolution problem and executed compatibility logic. This does not mean that the analysis failed.
 
 SmartCodable encourages the root of the resolution problem: it does not require SmartCodable compatibility logic.
 
-出现 **SmartLog Error** 日志代表着 **SmartCodable** 遇到了解析问题，执行了兼容逻辑。 并不代表着本次解析失败。
+出现 **SmartSentinel Error** 日志代表着 **SmartCodable** 遇到了解析问题，执行了兼容逻辑。 并不代表着本次解析失败。
 
 SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 
 

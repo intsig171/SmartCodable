@@ -13,9 +13,7 @@ class Test2ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        SmartConfig.debugMode = .none
-        
+                
         let dict: [String: Any] = [
             "sub": [
                 "name": "Mccc"

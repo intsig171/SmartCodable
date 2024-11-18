@@ -46,7 +46,7 @@ open class SmartJSONDecoder: JSONDecoder {
     /// - throws: An error if any value throws an error during decoding.
     open override func decode<T : Decodable>(_ type: T.Type, from data: Data) throws -> T {
                 
-        let mark = SmartLog.parsingMark()
+        let mark = SmartSentinel.parsingMark()
         if let parsingMark = CodingUserInfoKey.parsingMark {
             userInfo.updateValue(mark, forKey: parsingMark)
         }
@@ -56,16 +56,10 @@ open class SmartJSONDecoder: JSONDecoder {
             let json = try parser.parse()
             let impl = JSONDecoderImpl(userInfo: self.userInfo, from: json, codingPath: [], options: self.options)
             let value = try impl.unwrap(as: type)
-            SmartLog.printCacheLogs(in: "\(type)", parsingMark: mark)
+            SmartSentinel.monitorLogs(in: "\(type)", parsingMark: mark)
             return value
-        } catch let error as JSONError {
-            let err = DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: "The given data was not valid JSON.", underlyingError: error))
-                        
-            
-            SmartLog.logVerbose(err, in: "\(type)")
-            throw err
         } catch {
-            SmartLog.logVerbose("\(error)", in: "\(type)")
+            SmartSentinel.monitorAndPrint(debugDescription: "The given data was not valid JSON.", error: error, in: type)
             throw error
         }
     }

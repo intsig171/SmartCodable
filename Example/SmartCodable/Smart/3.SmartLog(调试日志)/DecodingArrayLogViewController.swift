@@ -14,10 +14,7 @@ class DecodingArrayLogViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-        SmartConfig.debugMode = .verbose
-        SmartConfig.space = "   "
-        
+            
         demo()
         demo1()
         demo2()

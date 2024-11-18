@@ -19,7 +19,6 @@ class ViewController: UIViewController {
         
         title = "SmartCodable"
         
-        SmartConfig.openErrorAssert = false
         
         dataArray = [
             other,

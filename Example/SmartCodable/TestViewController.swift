@@ -35,57 +35,28 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        SmartSentinel.debugMode = .alert
+        
         let dict: [String: Any] = [
-            "size": 1,
-            "id": 2,
-            "name": "Mccc"
+//            "a": 1,
+            "b": NSNull(),
+            "c": "Mccc"
         ]
         
-        guard let model = C.deserialize(from: dict) else { return }
+        guard let model = Model.deserialize(from: dict) else { return }
 
-        print(model.size)
-        print(model.id)
-        print(model.name)
+        print(#file,#function, #line)
+        
+        print(model.a)
+//        print(model.b)
+//        print(model.c)
     }
-}
-
-class A: SmartCodable {
-    var size: Int?
-    @IgnoredKey
-    var attr: NSMutableAttributedString?
-    required init() { }
-}
-
-class B: A {
-    var name: String?
     
-    enum CodingKeys: CodingKey {
-        case name
+    struct Model: SmartCodable {
+        var a: Int? = 0
+        var b: Int? = 0
+        var c: Int? = 0
     }
-    required init(from decoder: any Decoder) throws {
-        try super.init(from: decoder)
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decodeIfPresent(String.self, forKey: .name)
-    }
-    required init() {
-        super.init()
-    }
+
 }
 
-
-class C: B {
-    var id: Int?
-    enum CodingKeys: CodingKey {
-        case id
-    }
-    required init(from decoder: any Decoder) throws {
-        try super.init(from: decoder)
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decodeIfPresent(Int.self, forKey: .id)
-    }
-    required init() {
-        super.init()
-    }
-}

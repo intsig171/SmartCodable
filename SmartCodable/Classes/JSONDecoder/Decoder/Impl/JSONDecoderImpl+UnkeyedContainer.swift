@@ -216,12 +216,12 @@ extension JSONDecoderImpl.UnkeyedContainer {
 
         guard let value = try? self.getNextValue(ofType: T.self) else {
             let decoded: T = try Patcher<T>.defaultForType()
-            SmartLog.createLog(impl: impl, forKey: key, value: nil, type: T.self)
+            SmartSentinel.monitorLog(impl: impl, forKey: key, value: nil, type: T.self)
             self.currentIndex += 1
             return decoded
         }
         
-        SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
+        SmartSentinel.monitorLog(impl: impl, forKey: key, value: value, type: T.self)
 
         
         if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
@@ -355,7 +355,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
             return nil
         }
         let key = _JSONKey(index: self.currentIndex)
-        SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
+        SmartSentinel.monitorLog(impl: impl, forKey: key, value: value, type: T.self)
         if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             self.currentIndex += 1
             return decoded
