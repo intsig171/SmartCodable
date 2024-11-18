@@ -12,8 +12,8 @@ import Foundation
 import SmartCodable
 
 
-/** 日志等级 详细信息请查看 SmartSentinelConfig类
- * 通过配置SmartSentinelConfig.debugMode 设置日志登记
+/** 日志等级 详细信息请查看 SmartSentinel类
+ * 通过配置SmartSentinel.debugMode 设置日志登记
  */
 
 

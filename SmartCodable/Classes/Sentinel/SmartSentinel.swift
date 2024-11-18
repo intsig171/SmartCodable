@@ -38,7 +38,16 @@ public struct SmartSentinel {
     private static var _mode = Level.none
     
     private static var cache = LogCache()
-
+    
+    
+    
+        /// 回调闭包，用于在解析完成时传递日志
+        private static var logsHandler: ((String) -> Void)?
+    // MARK: - 解析完成时调用回调
+    /// 设置回调方法，传递解析完成时的日志记录
+    public static func onLogGenerated(handler: @escaping (String) -> Void) {
+        self.logsHandler = handler
+    }
 }
 
 
@@ -64,7 +73,7 @@ extension SmartSentinel {
             if let entry = value {
                 if entry.isNull { // 值为null
                     if isOptionalLog { return }
-                    let error = DecodingError.Keyed._valueNotFound(key: key, expectation: T.self, codingPath: path)
+                    let error = DecodingError._valueNotFound(key: key, expectation: T.self, codingPath: path)
                     SmartSentinel.verboseLog(error, className: className, parsingMark: address)
                 } else { // value类型不匹配
                     let error = DecodingError._typeMismatch(at: path, expectation: T.self, desc: entry.debugDataTypeDescription)
@@ -72,7 +81,7 @@ extension SmartSentinel {
                 }
             } else { // key不存在或value为nil
                 if isOptionalLog { return }
-                let error = DecodingError.Keyed._keyNotFound(key: key, codingPath: path)
+                let error = DecodingError._keyNotFound(key: key, codingPath: path)
                 SmartSentinel.verboseLog(error, className: className, parsingMark: address)
             }
         }
@@ -100,6 +109,8 @@ extension SmartSentinel {
             message += format
             message += getFooter()
             print(message)
+            
+            logsHandler?(message)
         }
         
         cache.clearCache(parsingMark: parsingMark)
@@ -109,28 +120,32 @@ extension SmartSentinel {
 
 
 extension SmartSentinel {
-    
-    
-    
     static func monitorAndPrint(level: SmartSentinel.Level = .alert, debugDescription: String, error: Error? = nil, in type: Any.Type?) {
         logIfNeeded(level: level) {
-            let header = getHeader()
-            let footer = getFooter()
-            
             let decodingError = (error as? DecodingError) ?? DecodingError.dataCorrupted(DecodingError.Context(codingPath: [], debugDescription: debugDescription, underlyingError: error))
             if let logItem = LogItem.make(with: decodingError) {
+                
+                var message: String = ""
+                message += getHeader()
                 if let type = type {
-                    let output = "\(type) 👈🏻 👀\n \(logItem.formartMessage)\n"
-                    print("\(header)\(output)\(footer)")
-                } else {
-                    let output = "\(logItem.formartMessage)\n"
-                    print("\(header)\(output)\(footer)")
+                    message += "\(type) 👈🏻 👀\n"
                 }
+                message += logItem.formartMessage + "\n"
+                message += getFooter()
+                print(message)
+                
+                logsHandler?(message)
             }
         }
     }
 }
 
+
+extension SmartSentinel {
+    public static func callBack(callback: (String) -> Void) {
+        
+    }
+}
 
 extension SmartSentinel {
     /// 生成唯一标记，用来标记是否本次解析。

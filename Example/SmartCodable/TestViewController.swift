@@ -35,28 +35,38 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SmartSentinel.debugMode = .alert
+//        SmartSentinel.onLogGenerated { logs in
+//            print("start----------")
+//            print(logs)
+//        }
         
         let dict: [String: Any] = [
 //            "a": 1,
             "b": NSNull(),
-            "c": "Mccc"
+//            "c": "Mccc"
         ]
         
-        guard let model = Model.deserialize(from: dict) else { return }
-
-        print(#file,#function, #line)
+        let abc1: String? = ""
+        let abc2: Data? = Data()
+        let abc3: [String: Any]? = [:]
         
-        print(model.a)
-//        print(model.b)
-//        print(model.c)
+         let _ = Model.deserialize(from: dict)
+//         let _ = Model.deserialize(from: abc2, designatedPath: "agfs")
+//         let _ = Model.deserialize(from: abc3, designatedPath: "agfs")
+
+        
     }
     
     struct Model: SmartCodable {
+//        var a: SubModel?
+        var b: SubModel?
+//        var c: SubModel?
+    }
+
+    struct SubModel: SmartCodable {
         var a: Int? = 0
         var b: Int? = 0
         var c: Int? = 0
     }
-
 }
 

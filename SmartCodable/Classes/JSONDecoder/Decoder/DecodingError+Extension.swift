@@ -10,20 +10,14 @@ import Foundation
 
 
 extension DecodingError {
-    struct Keyed {
-        static func _keyNotFound(key: CodingKey, codingPath: [CodingKey]) -> DecodingError {
-            DecodingError.keyNotFound(key, DecodingError.Context(codingPath: codingPath, debugDescription: "No value associated with key \(key) (\"\(key.stringValue)\")."))
-        }
-        
-        static func _valueNotFound(key: CodingKey, expectation: Any.Type, codingPath: [CodingKey]) -> DecodingError {
-            DecodingError.valueNotFound(expectation, DecodingError.Context(codingPath: codingPath, debugDescription: "Expected \(expectation) value but found null instead."))
-        }
+    static func _keyNotFound(key: CodingKey, codingPath: [CodingKey]) -> DecodingError {
+        DecodingError.keyNotFound(key, DecodingError.Context(codingPath: codingPath, debugDescription: "No value associated with key \(key) (\"\(key.stringValue)\")."))
     }
-}
-
-
-
-extension DecodingError {
+    
+    static func _valueNotFound(key: CodingKey, expectation: Any.Type, codingPath: [CodingKey]) -> DecodingError {
+        DecodingError.valueNotFound(expectation, DecodingError.Context(codingPath: codingPath, debugDescription: "Expected to decode '\(expectation)' but found 'null' instead."))
+    }
+    
     /// Returns a `.typeMismatch` error describing the expected type.
     ///
     /// - parameter path: The path of `CodingKey`s taken to decode a value of this type.
@@ -31,7 +25,7 @@ extension DecodingError {
     /// - parameter desc: The value that was encountered instead of the expected type.
     /// - returns: A `DecodingError` with the appropriate path and debug description.
     static func _typeMismatch(at path: [CodingKey], expectation: Any.Type, desc: String) -> DecodingError {
-        let description = "Expected to decode \(expectation) but found \(desc) instead."
+        let description = "Expected to decode '\(expectation)' but found \(desc) instead."
         return .typeMismatch(expectation, Context(codingPath: path, debugDescription: description))
     }
     
