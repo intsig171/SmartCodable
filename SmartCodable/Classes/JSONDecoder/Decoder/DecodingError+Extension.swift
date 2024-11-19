@@ -11,7 +11,7 @@ import Foundation
 
 extension DecodingError {
     static func _keyNotFound(key: CodingKey, codingPath: [CodingKey]) -> DecodingError {
-        DecodingError.keyNotFound(key, DecodingError.Context(codingPath: codingPath, debugDescription: "No value associated with key \(key) (\"\(key.stringValue)\")."))
+        DecodingError.keyNotFound(key, DecodingError.Context(codingPath: codingPath, debugDescription: "No value associated with key \(key)."))
     }
     
     static func _valueNotFound(key: CodingKey, expectation: Any.Type, codingPath: [CodingKey]) -> DecodingError {

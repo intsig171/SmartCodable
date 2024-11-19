@@ -116,10 +116,7 @@ extension JSONDecoderImpl {
         
         @inline(__always) private func getValue<LocalKey: CodingKey>(forKey key: LocalKey) throws -> JSONValue {
             guard let value = dictionary[key.stringValue] else {
-                throw DecodingError.keyNotFound(key, .init(
-                    codingPath: self.codingPath,
-                    debugDescription: "No value associated with key \(key)."
-                ))
+                throw DecodingError._keyNotFound(key: key, codingPath: self.codingPath)
             }
             
             return value

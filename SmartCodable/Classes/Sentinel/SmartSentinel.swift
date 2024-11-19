@@ -23,9 +23,8 @@ public struct SmartSentinel {
     }
     
     /// 是否满足日志记录的条件
-    public static var isValid: Bool {
+    static var isValid: Bool {
         return debugMode != .none
-
     }
     
     /// Set up different levels of padding
@@ -35,19 +34,18 @@ public struct SmartSentinel {
     /// Sets the tag for the property
     public static var attributeSign: String = "|- "
     
-    private static var _mode = Level.none
     
-    private static var cache = LogCache()
-    
-    
-    
-        /// 回调闭包，用于在解析完成时传递日志
-        private static var logsHandler: ((String) -> Void)?
-    // MARK: - 解析完成时调用回调
     /// 设置回调方法，传递解析完成时的日志记录
     public static func onLogGenerated(handler: @escaping (String) -> Void) {
         self.logsHandler = handler
     }
+    
+    private static var _mode = Level.none
+    
+    private static var cache = LogCache()
+    
+    /// 回调闭包，用于在解析完成时传递日志
+    private static var logsHandler: ((String) -> Void)?
 }
 
 
@@ -140,12 +138,6 @@ extension SmartSentinel {
     }
 }
 
-
-extension SmartSentinel {
-    public static func callBack(callback: (String) -> Void) {
-        
-    }
-}
 
 extension SmartSentinel {
     /// 生成唯一标记，用来标记是否本次解析。
