@@ -88,6 +88,19 @@ class DecodingCache {
                 } else if let value = cached as? T { // 当key缺失的时候，会进入
                     return value
                 }
+            } else {
+                // SmartAny 修饰一个可选的Model会走这里
+                for item in snapshots.reversed() {
+                    if let cached = item.initialValues["_" + key.stringValue] {
+                        if let value = cached as? IgnoredKey<T> {
+                            return value.wrappedValue
+                        } else if let value = cached as? SmartAny<T> {
+                            return value.wrappedValue
+                        } else if let value = cached as? T { 
+                            return value
+                        }
+                    }
+                }
             }
         }
         return nil

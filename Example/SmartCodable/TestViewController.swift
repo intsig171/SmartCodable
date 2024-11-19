@@ -41,16 +41,17 @@ class TestViewController: BaseViewController {
 //        }
         
         let dict: [String: Any] = [
-//            "a": 1,
-            "b": NSNull(),
-//            "c": "Mccc"
+            "a": NSNull(),
+//            "b": NSNull(),
+            "c": "Mccc"
         ]
         
         let abc1: String? = ""
         let abc2: Data? = Data()
         let abc3: [String: Any]? = [:]
         
-         let _ = Model.deserialize(from: dict)
+         let model = Model.deserialize(from: dict)
+        print(model)
 //         let _ = Model.deserialize(from: abc2, designatedPath: "agfs")
 //         let _ = Model.deserialize(from: abc3, designatedPath: "agfs")
 
@@ -58,15 +59,23 @@ class TestViewController: BaseViewController {
     }
     
     struct Model: SmartCodable {
-//        var a: SubModel?
-        var b: SubModel?
+        @SmartAny
+        var a: Int? = 0
+//        var c: String?
 //        var c: SubModel?
     }
 
     struct SubModel: SmartCodable {
-        var a: Int? = 0
-        var b: Int? = 0
+//        var a: Int? = 0
+//        @SmartAny
+//        var a: SubTwoModel? = SubTwoModel()
         var c: Int? = 0
+    }
+    
+    struct SubTwoModel: SmartCodable {
+//        var a: Int? = 0
+//        var b: Int? = 0
+        var c: Int = 100
     }
 }
 

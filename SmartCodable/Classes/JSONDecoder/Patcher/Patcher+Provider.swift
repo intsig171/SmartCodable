@@ -25,8 +25,8 @@ extension Patcher {
                 return object.defaultCase as! T
             }
             
-            throw DecodingError.valueNotFound(Self.self, DecodingError.Context(
-                    codingPath: [], debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
+            throw DecodingError.valueNotFound(T.self, DecodingError.Context(
+                    codingPath: [], debugDescription: "Expected \(T.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
         }
     }
 }
