@@ -17,7 +17,7 @@ struct LogCache {
     }
     
     mutating func clearCache(parsingMark: String) {
-        snapshotDict.removeValue(forKey: parsingMark)
+        snapshotDict.removeValue { $0.hasPrefix(parsingMark) }
     }
     
     mutating func formatLogs(parsingMark: String) -> String? {
@@ -28,8 +28,6 @@ struct LogCache {
         alignTypeNamesInAllSnapshots(parsingMark: parsingMark)
         
         let keyOrder = processArray(snapshotDict.getAllKeys(), parsingMark: parsingMark)
-        
-        
         let arr = keyOrder.compactMap {
             let container = snapshotDict.getValue(forKey: $0)
             return container?.formatMessage()
@@ -95,7 +93,19 @@ extension LogCache {
             mutableArray.insert(insertion.element, at: insertion.index)
         }
         
-        return mutableArray
+        let sortedArray = array.sorted { str1, str2 in
+            return str1 < str2
+//            // 按字符逐位比较
+//            for (char1, char2) in zip(str1, str2) {
+//                if char1 != char2 {
+//                    return char1 < char2
+//                }
+//            }
+//            // 如果前缀相同，短的字符串优先
+//            return str1.count < str2.count
+        }
+        
+        return sortedArray
     }
     
     mutating func filterLogItem() {

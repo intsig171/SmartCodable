@@ -68,8 +68,10 @@ struct LogContainer {
             message += "\(formatTypeName)\n"
         }
         
+        let sortedLogs = logs.sorted { $0.fieldName < $1.fieldName }
+        
         // 处理日志信息
-        for log in logs {
+        for log in sortedLogs {
             message += "\(fieldTab)\(attributeSign)"
             if let last = log.codingPath.last?.intValue {
                 message += "[Index \(last)] "

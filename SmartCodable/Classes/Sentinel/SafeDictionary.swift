@@ -32,6 +32,13 @@ class SafeDictionary<Key: Hashable, Value> {
         dictionary.removeValue(forKey: key)
     }
     
+    /// 新增：按条件批量移除键值对
+    func removeValue(where shouldRemove: (Key) -> Bool) {
+        lock.lock()
+        defer { lock.unlock() }
+        dictionary = dictionary.filter { !shouldRemove($0.key) }
+    }
+    
     func removeAll() {
         lock.lock()
         defer { lock.unlock() }

@@ -35,15 +35,19 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        SmartSentinel.onLogGenerated { logs in
-//            print("start----------")
-//            print(logs)
-//        }
-        
+
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let dict: [String: Any] = [
-            "a": NSNull(),
+            "a": [
+                "b": ["d": "mccc"]
+            ],
+            "d": [
+                "b": ["d": "mccc"]
+            ],
 //            "b": NSNull(),
-            "c": "Mccc"
+//            "a": "Mccc"
         ]
         
         let abc1: String? = ""
@@ -51,31 +55,27 @@ class TestViewController: BaseViewController {
         let abc3: [String: Any]? = [:]
         
          let model = Model.deserialize(from: dict)
-        print(model)
-//         let _ = Model.deserialize(from: abc2, designatedPath: "agfs")
-//         let _ = Model.deserialize(from: abc3, designatedPath: "agfs")
-
-        
     }
     
+    
     struct Model: SmartCodable {
-        @SmartAny
-        var a: Int? = 0
-//        var c: String?
-//        var c: SubModel?
+        var c: Int = 0
+        var b: Int = 0
+        var d: SubTwoModel = SubTwoModel()
+        var a: SubModel = SubModel()
+
     }
 
     struct SubModel: SmartCodable {
-//        var a: Int? = 0
-//        @SmartAny
-//        var a: SubTwoModel? = SubTwoModel()
+        var a: Int? = 0
         var c: Int? = 0
+        var b: SubTwoModel = SubTwoModel()
     }
     
     struct SubTwoModel: SmartCodable {
-//        var a: Int? = 0
-//        var b: Int? = 0
-        var c: Int = 100
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
     }
 }
 

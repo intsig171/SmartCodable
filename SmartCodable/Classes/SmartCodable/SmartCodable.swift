@@ -34,7 +34,7 @@ extension Array: SmartCodable where Element: SmartCodable { }
  优化项目
  1. 使用更直接的日志。直接使用throw error。
  2. 输出体中是否增加：TestViewController.swift viewDidLoad() 48
- 
+ 3. 优化日志排序（根据属性key进行大小排序）。
  
  2. 支持多种配置，接口中多余字段的未匹配的提醒。
  3. 日志更细化。使用更细节的解析信息。
