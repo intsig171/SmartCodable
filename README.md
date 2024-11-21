@@ -139,32 +139,66 @@ If you don't know how to use it, check it out.
 
 
 
-## Debug log
+## **Sentinel** 哨兵模式
 
-**SmartSentinel Error** indicates that **SmartCodable** encountered a resolution problem and executed compatibility logic. This does not mean that the analysis failed.
+SmartCodable内部集成了**Smart Sentinel**，它可以监听整个解析过程。当解析结束之后，输出格式化的日志信息。
 
-SmartCodable encourages the root of the resolution problem: it does not require SmartCodable compatibility logic.
-
-出现 **SmartSentinel Error** 日志代表着 **SmartCodable** 遇到了解析问题，执行了兼容逻辑。 并不代表着本次解析失败。
-
-SmartCodable鼓励从根本上解决解析中的问题，即：不需要用到SmartCodable的兼容逻辑。 
+该信息仅作辅助信息，帮助发现并排查问题。并不代表本次解析失败。
 
 ```
- ========================  [Smart Decoding Log]  ========================
- Family 👈🏻 👀
-    |- name    : Expected to decode String but found an array instead.
-    |- location: Expected to decode String but found an array instead.
-    |- date    : Expected to decode Date but found an array instead.
-    |> father: Father
-       |- name: Expected String value but found null instead.
-       |- age : Expected to decode Int but found a string/data instead.
-       |> dog: Dog
-          |- hobby: Expected to decode String but found a number instead.
-    |> sons: [Son]
-       |- [Index 0] hobby: Expected to decode String but found a number instead.
-       |- [Index 0] age  : Expected to decode Int but found a string/data instead.
-       |- [Index 1] age  : Expected to decode Int but found an array instead.
- =========================================================================
+================================  [Smart Sentinel]  ================================
+Array<SomeModel> 👈🏻 👀
+   ╆━ Index 0
+      ┆┄ a: Expected to decode 'Int' but found ‘String’ instead.
+      ┆┄ b: Expected to decode 'Int' but found ’Array‘ instead.
+      ┆┄ c: No value associated with key.
+      ╆━ sub: SubModel
+         ┆┄ sub_a: No value associated with key.
+         ┆┄ sub_b: No value associated with key.
+         ┆┄ sub_c: No value associated with key.
+      ╆━ sub2s: [SubTwoModel]
+         ╆━ Index 0
+            ┆┄ sub2_a: No value associated with key.
+            ┆┄ sub2_b: No value associated with key.
+            ┆┄ sub2_c: No value associated with key.
+         ╆━ Index 1
+            ┆┄ sub2_a: Expected to decode 'Int' but found ’Array‘ instead.
+   ╆━ Index 1
+      ┆┄ a: No value associated with key.
+      ┆┄ b: Expected to decode 'Int' but found ‘String’ instead.
+      ┆┄ c: Expected to decode 'Int' but found ’Array‘ instead.
+      ╆━ sub: SubModel
+         ┆┄ sub_a: Expected to decode 'Int' but found ‘String’ instead.
+      ╆━ sub2s: [SubTwoModel]
+         ╆━ Index 0
+            ┆┄ sub2_a: Expected to decode 'Int' but found ‘String’ instead.
+         ╆━ Index 1
+            ┆┄ sub2_a: Expected to decode 'Int' but found 'null' instead.
+====================================================================================
+```
+
+
+
+如果你要使用它，请开启它：
+
+```
+SmartSentinel.debugMode = .verbose
+
+public enum Level: Int {
+    /// 不记录日志
+    case none
+    /// 详细的日志
+    case verbose
+    /// 警告日志：仅仅包含类型不匹配的情况
+    case alert
+}
+```
+
+如果你想获取这个日志用来上传服务器：
+
+```
+SmartSentinel.onLogGenerated { logs in
+}
 ```
 
 

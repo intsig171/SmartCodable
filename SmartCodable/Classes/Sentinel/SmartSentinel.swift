@@ -148,8 +148,11 @@ extension SmartSentinel {
 extension SmartSentinel {
     
     public enum Level: Int {
+        /// 不记录日志
         case none
+        /// 详细的日志
         case verbose
+        /// 警告日志：仅仅包含类型不匹配的情况
         case alert
     }
     

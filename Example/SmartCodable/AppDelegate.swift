@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         SmartSentinel.debugMode = .verbose
         SmartSentinel.onLogGenerated { logs in
-            
+//            print(logs)
+            // 解析的日志， 可以用来上传服务器
         }
         
         
@@ -47,3 +48,4 @@ extension AppDelegate {
         window?.makeKeyAndVisible()
     }
 }
+

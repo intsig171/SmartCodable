@@ -70,26 +70,23 @@ class TestViewController: BaseViewController {
     
         
 //         let model = Model.deserialize(from: dict)
-        let model = [Model].deserialize(from: [dict, dict1])
+        let model = [SomeModel].deserialize(from: [dict, dict1])
 
     }
     
     
-    struct Model: SmartCodable {
+    struct SomeModel: SmartCodable {
         var sub: SubModel = SubModel()
         var sub2s: [SubTwoModel] = []
-
         var a: Int = 0
         var b: Int = 0
         var c: Int = 0
     }
-
     struct SubModel: SmartCodable {
         var sub_a: Int = 0
         var sub_b: Int = 0
         var sub_c: Int = 0
     }
-    
     struct SubTwoModel: SmartCodable {
         var sub2_a: Int = 0
         var sub2_b: Int = 0
