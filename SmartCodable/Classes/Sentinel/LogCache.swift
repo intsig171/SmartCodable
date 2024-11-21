@@ -22,19 +22,21 @@ struct LogCache {
     
     mutating func formatLogs(parsingMark: String) -> String? {
         
-        
         filterLogItem()
         
         alignTypeNamesInAllSnapshots(parsingMark: parsingMark)
         
         let keyOrder = processArray(snapshotDict.getAllKeys(), parsingMark: parsingMark)
+        
+        var lastPath: String = ""
         let arr = keyOrder.compactMap {
             let container = snapshotDict.getValue(forKey: $0)
-            return container?.formatMessage()
+            let message = container?.formatMessage(previousPath: lastPath)
+            lastPath = container?.path ?? ""
+            return message
         }
         
         if arr.isEmpty { return nil }
-        
         return arr.joined()
     }
 }
@@ -63,7 +65,7 @@ extension LogCache {
                 mutableArray.insert(newElement, at: 0)
                 
                 if let snap = snapshotDict.getValue(forKey: firstElement) {
-                    let container = LogContainer(typeName: "", logs: [], parsingMark: snap.parsingMark, codingPath: snap.codingPath.dropLast(2))
+                    let container = LogContainer(typeName: "", codingPath: snap.codingPath.dropLast(2), logs: [], parsingMark: snap.parsingMark)
                     snapshotDict.setValue(container, forKey: newElement)
                 }
             }
@@ -93,17 +95,7 @@ extension LogCache {
             mutableArray.insert(insertion.element, at: insertion.index)
         }
         
-        let sortedArray = array.sorted { str1, str2 in
-            return str1 < str2
-//            // 按字符逐位比较
-//            for (char1, char2) in zip(str1, str2) {
-//                if char1 != char2 {
-//                    return char1 < char2
-//                }
-//            }
-//            // 如果前缀相同，短的字符串优先
-//            return str1.count < str2.count
-        }
+        let sortedArray = array.sorted()
         
         return sortedArray
     }
@@ -153,19 +145,15 @@ extension LogCache {
         
         // 如果存在相同的typeName和path，则合并logs
         if var existingSnapshot = snapshotDict.getValue(forKey: key) {
-            
             if !existingSnapshot.logs.contains(where: { $0 == log }) {
                 existingSnapshot.logs.append(log)
                 snapshotDict.setValue(existingSnapshot, forKey: key)
-                
             }
         } else {
             // 创建新的snapshot并添加到字典中
-            let newSnapshot = LogContainer(typeName: className, logs: [log], parsingMark: parsingMark, codingPath: path)
+            let newSnapshot = LogContainer(typeName: className, codingPath: path, logs: [log], parsingMark: parsingMark)
             snapshotDict.setValue(newSnapshot, forKey: key)
         }
-        
-        
     }
     
     private func createKey(path: [CodingKey], parsingMark: String) -> String {
@@ -175,7 +163,6 @@ extension LogCache {
     
     private mutating func alignTypeNamesInAllSnapshots(parsingMark: String) {
         snapshotDict.updateEach { key, snapshot in
-            
             let maxLength = snapshot.logs.max(by: { $0.fieldName.count < $1.fieldName.count })?.fieldName.count ?? 0
             snapshot.logs = snapshot.logs.map { log in
                 var modifiedLog = log

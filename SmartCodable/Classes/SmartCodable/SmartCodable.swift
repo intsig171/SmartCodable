@@ -42,5 +42,25 @@ extension Array: SmartCodable where Element: SmartCodable { }
  5. 日志类型应该是
    - 聚合日志：提供日志等级。
    - 独立日志：数据异常情况等。
-   -
+ 
+ 
+ 修复SmartAny修饰Model，如果json值为null时的bug。
+ */
+
+/**
+ ========================  [Smart Decoding Log]  ========================
+ Family 👈🏻 👀
+    |- name: Expected to decode 'String' but found ’Array‘ instead.
+    |> fathers: [Father]
+       |> [Index 0]
+          |- name: Expected to decode 'String' but found 'null' instead.
+          |> dog: Dog
+              |- hobby: Expected to decode 'String' but found ’Number‘ instead.
+          |> dogs: [Dog]
+              |> [Index 0]
+                 |- [Index 0] hobby: Expected to decode 'String' but found ’Number‘ instead.
+    |> sons: [Son]
+       |> [Index 0]
+          |- hobby: Expected to decode 'String' but found ’Number‘ instead.
+ ========================================================================
  */

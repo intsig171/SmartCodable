@@ -35,41 +35,60 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+      
     }
+    
+   
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let dict: [String: Any] = [
-            "a": [
-                "b": ["d": "mccc"]
+            "a": "mccc",
+            "b": [],
+            "sub": [
+                "a": "Mccc"
             ],
-            "d": [
-                "b": ["d": "mccc"]
-            ],
-//            "b": NSNull(),
-//            "a": "Mccc"
+            "subs": [[
+                "d": []
+            ]]
         ]
         
-        let abc1: String? = ""
-        let abc2: Data? = Data()
-        let abc3: [String: Any]? = [:]
+        let dict1: [String: Any] = [
+            "c": "mccc",
+            "b": NSNull(),
+            "sub": [
+                "a": []
+            ],
+            "subs": [[
+                "a": [],
+                "b": "Mccc"
+            ],[
+                "b": []
+            ],[
+                "c": []
+            ]]
+        ]
         
-         let model = Model.deserialize(from: dict)
+    
+        
+//         let model = Model.deserialize(from: dict)
+        let model = [Model].deserialize(from: [dict, dict1])
+
     }
     
     
     struct Model: SmartCodable {
-        var c: Int = 0
-        var b: Int = 0
-        var d: SubTwoModel = SubTwoModel()
-        var a: SubModel = SubModel()
+        var sub: SubModel = SubModel()
+        var subs: [SubModel] = []
 
+        var aaaaaaa: Int = 0
+        var b: Int = 0
+        var c: Int = 0
     }
 
     struct SubModel: SmartCodable {
-        var a: Int? = 0
-        var c: Int? = 0
-        var b: SubTwoModel = SubTwoModel()
+        var a: Int = 0
+        var b: Int = 0
+        var c: Int = 0
     }
     
     struct SubTwoModel: SmartCodable {

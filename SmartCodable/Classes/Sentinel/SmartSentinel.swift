@@ -9,12 +9,6 @@ import Foundation
 
 public struct SmartSentinel {
     
-    public enum Level: Int {
-        case none
-        case verbose
-        case alert
-    }
-    
     /// Set debugging mode, default is none. 
     /// Note: When not debugging, set to none to reduce overhead.
     public static var debugMode: Level {
@@ -22,9 +16,9 @@ public struct SmartSentinel {
         set { _mode = newValue }
     }
     
-    /// 是否满足日志记录的条件
-    static var isValid: Bool {
-        return debugMode != .none
+    /// 设置回调方法，传递解析完成时的日志记录
+    public static func onLogGenerated(handler: @escaping (String) -> Void) {
+        self.logsHandler = handler
     }
     
     /// Set up different levels of padding
@@ -34,10 +28,10 @@ public struct SmartSentinel {
     /// Sets the tag for the property
     public static var attributeSign: String = "|- "
     
-    
-    /// 设置回调方法，传递解析完成时的日志记录
-    public static func onLogGenerated(handler: @escaping (String) -> Void) {
-        self.logsHandler = handler
+        
+    /// 是否满足日志记录的条件
+    fileprivate static var isValid: Bool {
+        return debugMode != .none
     }
     
     private static var _mode = Level.none
@@ -150,12 +144,19 @@ extension SmartSentinel {
 
 extension SmartSentinel {
     
+    public enum Level: Int {
+        case none
+        case verbose
+        case alert
+    }
+    
+    
     static func getHeader() -> String {
-        return "\n========================  [Smart Decoding Log]  ========================\n"
+        return "\n================================  [Smart Sentinel]  ================================\n"
     }
     
     static func getFooter() -> String {
-        return "========================================================================\n"
+        return "====================================================================================\n"
     }
     
     private static func logIfNeeded(level: SmartSentinel.Level, callback: () -> ()) {
