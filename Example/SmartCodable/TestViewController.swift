@@ -47,10 +47,10 @@ class TestViewController: BaseViewController {
             "sub": [
                 "a": "Mccc"
             ],
-            "subs": [[
+            "sub2s": [[
                 "d": []
             ],[
-                "sub_a": []
+                "sub2_a": []
             ]]
         ]
         
@@ -60,10 +60,10 @@ class TestViewController: BaseViewController {
             "sub": [
                 "sub_a": "Mccc"
             ],
-            "subs": [[
-                "sub_a": "Mccc"
+            "sub2s": [[
+                "sub2_a": "Mccc"
             ],[
-                "sub_a": NSNull()
+                "sub2_a": NSNull()
             ]]
         ]
         
@@ -77,23 +77,23 @@ class TestViewController: BaseViewController {
     
     struct Model: SmartCodable {
         var sub: SubModel = SubModel()
-        var subs: [SubModel] = []
+        var sub2s: [SubTwoModel] = []
 
-//        var a: Int = 0
-//        var b: Int = 0
+        var a: Int = 0
+        var b: Int = 0
         var c: Int = 0
     }
 
     struct SubModel: SmartCodable {
         var sub_a: Int = 0
-//        var b: Int = 0
-//        var c: Int = 0
+        var sub_b: Int = 0
+        var sub_c: Int = 0
     }
     
     struct SubTwoModel: SmartCodable {
-        var a: Int = 0
-        var b: Int = 0
-        var c: Int = 0
+        var sub2_a: Int = 0
+        var sub2_b: Int = 0
+        var sub2_c: Int = 0
     }
 }
 

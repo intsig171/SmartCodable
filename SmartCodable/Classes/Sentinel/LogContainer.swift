@@ -48,7 +48,6 @@ struct LogContainer {
         codingPath.last?.intValue != nil
     }
     var formatTypeName: String {
-//        isUnKeyed ? "[\(typeName)]" : typeName
         isUnKeyed ? "[\(typeName)]" : typeName
 
     }

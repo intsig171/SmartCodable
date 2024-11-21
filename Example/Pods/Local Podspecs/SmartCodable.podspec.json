@@ -1,6 +1,6 @@
 {
   "name": "SmartCodable",
-  "version": "4.2.6",
+  "version": "4.3.0-beta",
   "summary": "数据解析库",
   "homepage": "https://github.com/intsig171",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/intsig171/SmartCodable.git",
-    "tag": "4.2.6"
+    "tag": "4.3.0-beta"
   },
   "platforms": {
     "ios": "11.0",
