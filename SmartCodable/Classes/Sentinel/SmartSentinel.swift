@@ -24,11 +24,14 @@ public struct SmartSentinel {
     /// Set up different levels of padding
     public static var space: String = "   "
     /// Set the markup for the model
-    public static var modelSign: String = "|> "
-    /// Sets the tag for the property
-    public static var attributeSign: String = "|- "
+    public static var keyContainerSign: String = "╆━ "
     
-        
+    public static var unKeyContainerSign: String = "╆━ "
+    
+    /// Sets the tag for the property
+    public static var attributeSign: String = "┆┄ "
+    
+    
     /// 是否满足日志记录的条件
     fileprivate static var isValid: Bool {
         return debugMode != .none

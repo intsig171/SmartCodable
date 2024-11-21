@@ -26,7 +26,7 @@ struct LogCache {
         
         alignTypeNamesInAllSnapshots(parsingMark: parsingMark)
         
-        let keyOrder = processArray(snapshotDict.getAllKeys(), parsingMark: parsingMark)
+        let keyOrder = sortKeys(snapshotDict.getAllKeys(), parsingMark: parsingMark)
         
         var lastPath: String = ""
         let arr = keyOrder.compactMap {
@@ -43,60 +43,15 @@ struct LogCache {
 
 extension LogCache {
     
-    mutating func processArray(_ array: [String], parsingMark: String) -> [String] {
-        
-        var mutableArray = array.filter {
+    // 排序
+    func sortKeys(_ array: [String], parsingMark: String) -> [String] {
+        //  获取当前解析的keys
+        let filterArray = array.filter {
             $0.starts(with: parsingMark)
         }
+        guard !filterArray.isEmpty else { return [] }
         
-        guard !mutableArray.isEmpty else { return [] }
-        
-        
-        var indexToInsert: [(index: Int, element: String)] = []
-        
-        // 特别处理数组的第一个元素
-        if let firstElement = mutableArray.first {
-            let components = firstElement.components(separatedBy: "-")
-            if components.count >= 3,
-               components.last!.hasPrefix("Index "),
-               !components[components.count - 2].hasPrefix("Index "),
-               !components[components.count - 3].hasPrefix("Index ") {
-                let newElement = components.dropLast(2).joined(separator: "-")
-                mutableArray.insert(newElement, at: 0)
-                
-                if let snap = snapshotDict.getValue(forKey: firstElement) {
-                    let container = LogContainer(typeName: "", codingPath: snap.codingPath.dropLast(2), logs: [], parsingMark: snap.parsingMark)
-                    snapshotDict.setValue(container, forKey: newElement)
-                }
-            }
-        }
-        
-        // 处理数组的其余元素
-        for i in 1..<mutableArray.count {
-            let currentComponents = mutableArray[i].components(separatedBy: "-")
-            if currentComponents.count >= 3 {
-                let lastKey = currentComponents.last!
-                let secondLastKey = currentComponents[currentComponents.count - 2]
-                let thirdLastKey = currentComponents[currentComponents.count - 3]
-                
-                if lastKey.hasPrefix("Index "), !secondLastKey.hasPrefix("Index "), !thirdLastKey.hasPrefix("Index ") {
-                    let newElement = currentComponents.dropLast(2).joined(separator: "-")
-                    let previousElement = mutableArray[i - 1]
-                    
-                    if newElement != previousElement {
-                        indexToInsert.append((i, newElement))
-                    }
-                }
-            }
-        }
-        
-        // 插入新元素
-        for insertion in indexToInsert.reversed() {
-            mutableArray.insert(insertion.element, at: insertion.index)
-        }
-        
-        let sortedArray = array.sorted()
-        
+        let sortedArray = filterArray.sorted()
         return sortedArray
     }
     

@@ -48,7 +48,9 @@ struct LogContainer {
         codingPath.last?.intValue != nil
     }
     var formatTypeName: String {
+//        isUnKeyed ? "[\(typeName)]" : typeName
         isUnKeyed ? "[\(typeName)]" : typeName
+
     }
     
     /** pay attention to it
@@ -71,7 +73,11 @@ struct LogContainer {
         
         // 容器的信息
         for (index, item) in differents.enumerated() {
-            let containerInfo = "\(SmartSentinel.modelSign)\(item): \(formatTypeName)\n"
+            
+            let typeName = item.hasPrefix("Index ") ? "" : ": \(formatTypeName)"
+            
+            let sign = isUnKeyed ? SmartSentinel.unKeyContainerSign : SmartSentinel.keyContainerSign
+            let containerInfo = "\(sign)\(item)\(typeName)\n"
             let tabs = currentTabs + String(repeating: SmartSentinel.space, count: index)
             message += "\(tabs)\(containerInfo)"
         }

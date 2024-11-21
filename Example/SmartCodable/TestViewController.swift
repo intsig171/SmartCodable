@@ -49,22 +49,21 @@ class TestViewController: BaseViewController {
             ],
             "subs": [[
                 "d": []
+            ],[
+                "sub_a": []
             ]]
         ]
         
         let dict1: [String: Any] = [
-            "c": "mccc",
-            "b": NSNull(),
+            "b": "mccc",
+            "c": [],
             "sub": [
-                "a": []
+                "sub_a": "Mccc"
             ],
             "subs": [[
-                "a": [],
-                "b": "Mccc"
+                "sub_a": "Mccc"
             ],[
-                "b": []
-            ],[
-                "c": []
+                "sub_a": NSNull()
             ]]
         ]
         
@@ -80,15 +79,15 @@ class TestViewController: BaseViewController {
         var sub: SubModel = SubModel()
         var subs: [SubModel] = []
 
-        var aaaaaaa: Int = 0
-        var b: Int = 0
+//        var a: Int = 0
+//        var b: Int = 0
         var c: Int = 0
     }
 
     struct SubModel: SmartCodable {
-        var a: Int = 0
-        var b: Int = 0
-        var c: Int = 0
+        var sub_a: Int = 0
+//        var b: Int = 0
+//        var c: Int = 0
     }
     
     struct SubTwoModel: SmartCodable {
