@@ -44,6 +44,13 @@ struct LogContainer {
     var parsingMark: String
     
     
+    var isUnKeyed: Bool {
+        codingPath.last?.intValue != nil
+    }
+    var formatTypeName: String {
+        isUnKeyed ? "[\(typeName)]" : typeName
+    }
+    
     /** pay attention to it
      1. 每一条path都是完整的解析路径。
      2. 路径中的每一个点都是container（keyed or unkeyed）。
@@ -64,13 +71,13 @@ struct LogContainer {
         
         // 容器的信息
         for (index, item) in differents.enumerated() {
-            let containerInfo = "\(SmartSentinel.modelSign)\(item): \(typeName)\n"
+            let containerInfo = "\(SmartSentinel.modelSign)\(item): \(formatTypeName)\n"
             let tabs = currentTabs + String(repeating: SmartSentinel.space, count: index)
             message += "\(tabs)\(containerInfo)"
         }
         
         // 属性信息
-        let fieldTabs = currentTabs + String(repeating: SmartSentinel.space, count: differents.count + 1)
+        let fieldTabs = currentTabs + String(repeating: SmartSentinel.space, count: differents.count)
         for log in logs {
             message += "\(fieldTabs)\(SmartSentinel.attributeSign)\(log.formartMessage)"
         }
