@@ -1,5 +1,5 @@
 import XCTest
-import SmartCodable
+@testable import SmartCodable
 
 
 
