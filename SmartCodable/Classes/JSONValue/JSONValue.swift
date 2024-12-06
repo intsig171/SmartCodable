@@ -173,6 +173,22 @@ extension NSNumber {
         return nil
     }
 }
+enum JSONError: Swift.Error, Equatable {
+    case cannotConvertInputDataToUTF8
+    case unexpectedCharacter(ascii: UInt8, characterIndex: Int)
+    case unexpectedEndOfFile
+    case tooManyNestedArraysOrDictionaries(characterIndex: Int)
+    case invalidHexDigitSequence(String, index: Int)
+    case unexpectedEscapedCharacter(ascii: UInt8, in: String, index: Int)
+    case unescapedControlCharacterInString(ascii: UInt8, in: String, index: Int)
+    case expectedLowSurrogateUTF8SequenceAfterHighSurrogate(in: String, index: Int)
+    case couldNotCreateUnicodeScalarFromUInt32(in: String, index: Int, unicodeScalarValue: UInt32)
+    case numberWithLeadingZero(index: Int)
+    case numberIsNotRepresentableInSwift(parsed: String)
+    case singleFragmentFoundButNotAllowed
+    case invalidUTF8Sequence(Data, characterIndex: Int)
+}
+
 
 
 // for encdoe
@@ -376,12 +392,6 @@ extension JSONValue {
                     if #available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *), options.contains(.withoutEscapingSlashes) == false {
                         bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
                         bytes.append(contentsOf: [._backslash, UInt8(ascii: "/")])
-                        nextIndex = stringBytes.index(after: nextIndex)
-                        startCopyIndex = nextIndex
-                    } else {
-                        // 如果不满足条件，直接把字符添加到 bytes 中
-                        bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
-                        bytes.append(stringBytes[nextIndex])
                         nextIndex = stringBytes.index(after: nextIndex)
                         startCopyIndex = nextIndex
                     }

@@ -5,6 +5,7 @@
 //  Created by Mccc on 2024/5/17.
 //
 
+import Foundation
 internal struct JSONParser {
     var reader: DocumentReader
     var depth: Int = 0
@@ -90,7 +91,7 @@ internal struct JSONParser {
         self.depth += 1
         defer { depth -= 1 }
 
-        // parse first value or end immediately
+        // parse first value or end immediatly
         switch try reader.consumeWhitespace() {
         case ._space, ._return, ._newline, ._tab:
             preconditionFailure("Expected that all white space is consumed")
@@ -633,7 +634,6 @@ extension UInt8 {
     internal static let _backslash = UInt8(ascii: "\\")
 
 }
-
 extension Array where Element == UInt8 {
 
     internal static let _true = [UInt8(ascii: "t"), UInt8(ascii: "r"), UInt8(ascii: "u"), UInt8(ascii: "e")]
@@ -641,20 +641,3 @@ extension Array where Element == UInt8 {
     internal static let _null = [UInt8(ascii: "n"), UInt8(ascii: "u"), UInt8(ascii: "l"), UInt8(ascii: "l")]
 
 }
-
-enum JSONError: Swift.Error, Equatable {
-    case cannotConvertInputDataToUTF8
-    case unexpectedCharacter(ascii: UInt8, characterIndex: Int)
-    case unexpectedEndOfFile
-    case tooManyNestedArraysOrDictionaries(characterIndex: Int)
-    case invalidHexDigitSequence(String, index: Int)
-    case unexpectedEscapedCharacter(ascii: UInt8, in: String, index: Int)
-    case unescapedControlCharacterInString(ascii: UInt8, in: String, index: Int)
-    case expectedLowSurrogateUTF8SequenceAfterHighSurrogate(in: String, index: Int)
-    case couldNotCreateUnicodeScalarFromUInt32(in: String, index: Int, unicodeScalarValue: UInt32)
-    case numberWithLeadingZero(index: Int)
-    case numberIsNotRepresentableInSwift(parsed: String)
-    case singleFragmentFoundButNotAllowed
-    case invalidUTF8Sequence(Data, characterIndex: Int)
-}
-
