@@ -394,6 +394,11 @@ extension JSONValue {
                         bytes.append(contentsOf: [._backslash, UInt8(ascii: "/")])
                         nextIndex = stringBytes.index(after: nextIndex)
                         startCopyIndex = nextIndex
+                    } else {
+                        bytes.append(contentsOf: stringBytes[startCopyIndex ..< nextIndex])
+                        bytes.append(contentsOf: [._backslash, UInt8(ascii: "/")])
+                        nextIndex = stringBytes.index(after: nextIndex)
+                        startCopyIndex = nextIndex
                     }
                     
                 default:
