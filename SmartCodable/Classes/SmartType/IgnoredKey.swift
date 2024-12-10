@@ -18,12 +18,12 @@ import Foundation
 public struct IgnoredKey<T>: Codable {
     public var wrappedValue: T
 
-    var supportEncode: Bool = true
+    var isEncodable: Bool = true
     
-    /// 是否支持encode，encode的时候是否会出现在json中
-    public init(wrappedValue: T, supportEncode: Bool = true) {
+    /// isEncodable表示该属性是否支持编码, 默认不支持，即：不会加入json中。
+    public init(wrappedValue: T, isEncodable: Bool = false) {
         self.wrappedValue = wrappedValue
-        self.supportEncode = supportEncode
+        self.isEncodable = isEncodable
     }
 
     public init(from decoder: Decoder) throws {
@@ -55,7 +55,7 @@ public struct IgnoredKey<T>: Codable {
 
     public func encode(to encoder: Encoder) throws {
         
-        guard supportEncode else { return }
+        guard isEncodable else { return }
         
         // 如果 wrappedValue 符合 Encodable 协议，则手动进行编码
         if let encodableValue = wrappedValue as? Encodable {
