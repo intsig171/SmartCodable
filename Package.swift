@@ -20,7 +20,12 @@ let package = Package(
                 
             ],
             path: "SmartCodable/Classes"
+        ),
+        .testTarget(
+            name: "SmartCodableTests",
+            dependencies: ["SmartCodable"]
         )
+        
     ],
    swiftLanguageVersions: [.v5]
 )
