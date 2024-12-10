@@ -148,7 +148,7 @@ fileprivate func _transformToJson<T>(_ some: Encodable, type: Any.Type, useMappe
             if let temp = json as? T {
                 return temp
             } else {
-                SmartSentinel.monitorAndPrint(debugDescription: "\(json)) is not a valid Type", error: nil, in: type)
+                SmartSentinel.monitorAndPrint(debugDescription: "\(json)) is not a valid Type, wanted \(T.self) type.", error: nil, in: type)
             }
         } catch {
             SmartSentinel.monitorAndPrint(debugDescription: "'JSONSerialization.jsonObject(:)' falied", error: nil, in: type)
