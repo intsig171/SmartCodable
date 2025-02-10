@@ -12,6 +12,8 @@ target 'SmartCodable_Example' do
   #对比组
   pod 'HandyJSON', '5.0.0-beta.1'
   pod 'CleanJSON'
+  pod 'CodableWrappers'
+  
   
 
   target 'SmartCodable_Tests' do

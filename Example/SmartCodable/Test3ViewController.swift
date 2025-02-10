@@ -27,31 +27,38 @@ class Test3ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict1: [String: Any] = [
-            "code": "10000",
-            "msg": "成功",
-            "data": [
-                "guideSvga": "guideSvga",
-                "guideOnevga": "guideOnevga",
-                "loadingSvga": "loadingSvga",
-                "loadingSvgaBackgroundColor": "loadingSvgaBackgroundColor",
-            ]
+            "arr": ["123", "<null>"]
         ]
         
-        guard let model = ResponseData<HomeListModel>.deserialize(from: dict1) else { return }
+        guard let model = HomeListModel.deserialize(from: dict1) else { return }
         print(model)
     }
     
     struct HomeListModel: SmartCodable {
-        var guideSvga = ""
-        var guideOnevga = ""
-        var loadingSvga = ""
-        var loadingSvgaBackgroundColor = ""
-    }
-    
-    struct ResponseData<T>: SmartCodable where T: SmartCodable {
-        var code = ""
-        var msg = ""
-        var data: T?
+        var arr: [String] = []
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.arr <--- Tranformer()
+            ]
+        }
     }
 }
 
+
+struct Tranformer: ValueTransformable {
+    func transformFromJSON(_ value: Any) -> [String]? {
+        if let arr = value as? [String] {
+            return arr.filter { item in
+                item != "<null>"
+            }
+        }
+        return nil
+    }
+    
+    func transformToJSON(_ value: [String]) -> [String]? {
+        return nil
+    }
+    
+    typealias Object = [String]
+    typealias JSON = [String]
+}

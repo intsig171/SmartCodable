@@ -2,19 +2,21 @@ PODS:
   - BTBubble (0.0.5)
   - BTPrint (2.0.0)
   - CleanJSON (1.0.9)
+  - CodableWrappers (2.0.7)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - HandyJSON (5.0.0-beta.1)
-  - SmartCodable (4.3.0-beta)
+  - SmartCodable (4.3.2)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - BTBubble
   - BTPrint
   - CleanJSON
+  - CodableWrappers
   - FBSnapshotTestCase (~> 2.1.4)
   - HandyJSON (= 5.0.0-beta.1)
   - SmartCodable (from `../`)
@@ -25,6 +27,7 @@ SPEC REPOS:
     - BTBubble
     - BTPrint
     - CleanJSON
+    - CodableWrappers
     - FBSnapshotTestCase
     - HandyJSON
     - SnapKit
@@ -37,11 +40,12 @@ SPEC CHECKSUMS:
   BTBubble: c2a296a15665a742fb547f70414ee5b5252863e3
   BTPrint: 10badf738e56f84fc842fbfe69a9b90faf5e247c
   CleanJSON: 910a36465ce4829e264a902ccf6d1455fdd9f980
+  CodableWrappers: c14b64d713e28e5355368f1726afd898f7772c6d
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
-  SmartCodable: 8985750f1bb521bf7f94ab898260d77f4dc32f24
+  SmartCodable: 88fbf3d65207c2376fdbce4b080a3d578cb51be8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 7f3af03f81934df0c035518074a7abbec8fa9d3f
+PODFILE CHECKSUM: 5d27d59b258bdbe4d57e80e134b1efb9789e142b
 
 COCOAPODS: 1.15.2

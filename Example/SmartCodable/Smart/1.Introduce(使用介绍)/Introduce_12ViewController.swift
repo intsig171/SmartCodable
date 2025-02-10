@@ -17,14 +17,12 @@ class Introduce_12ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let dict: [String: Any] = [
             "name": 1,
             "age": "333333"
         ]
         
         if let model = PublishedModel.deserialize(from: dict) {
-            
             self.model = model
             print("反序列化后的 name 值: \(model.name)")
             
@@ -34,8 +32,6 @@ class Introduce_12ViewController: BaseViewController {
                     print("name 属性发生变化，新值为: \(newName)")
                 }
                 .store(in: &cancellables)
-            
-            
         }
     }
     

@@ -1,0 +1,6 @@
+framework module CodableWrappers {
+  umbrella header "CodableWrappers-umbrella.h"
+
+  export *
+  module * { export * }
+}

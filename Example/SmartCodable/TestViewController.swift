@@ -34,63 +34,27 @@ class TestViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      
-    }
-    
-   
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         let dict: [String: Any] = [
-            "a": "mccc",
-            "b": [],
-            "sub": [
-                "a": "Mccc"
-            ],
-            "sub2s": [[
-                "d": []
-            ],[
-                "sub2_a": []
-            ]]
+            "a": 20,
+//            "b": 200
         ]
-        
-        let dict1: [String: Any] = [
-            "b": "mccc",
-            "c": [],
-            "sub": [
-                "sub_a": "Mccc"
-            ],
-            "sub2s": [[
-                "sub2_a": "Mccc"
-            ],[
-                "sub2_a": NSNull()
-            ]]
-        ]
-        
-    
-        
-//         let model = Model.deserialize(from: dict)
-        let model = [SomeModel].deserialize(from: [dict, dict1])
 
+        if let model = Model.deserialize(from: dict) {
+            print(model.a)
+        }
     }
     
     
-    struct SomeModel: SmartCodable {
-        var sub: SubModel = SubModel()
-        var sub2s: [SubTwoModel] = []
+    struct Model: SmartCodable {
         var a: Int = 0
-        var b: Int = 0
-        var c: Int = 0
-    }
-    struct SubModel: SmartCodable {
-        var sub_a: Int = 0
-        var sub_b: Int = 0
-        var sub_c: Int = 0
-    }
-    struct SubTwoModel: SmartCodable {
-        var sub2_a: Int = 0
-        var sub2_b: Int = 0
-        var sub2_c: Int = 0
-    }
-}
+        
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.a <--- "b"
+            ]
+        }
 
+    }
+    
+}
