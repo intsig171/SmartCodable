@@ -234,6 +234,28 @@ If you are using HandyJSON and would like to replace it, follow this link.
 
 
 
+## Matters need attention（注意事项）
+
+### 1.  parse very large data(大数据量解析)
+
+When you parse very large data, try to avoid the compatibility of parsing exceptions, such as: more than one attribute is declared in the attribute, and the declared attribute type does not match. 
+
+Do not use @IgnoredKey when there are attributes that do not need to be parsed, override CodingKeys to ignore unwanted attribute parsing. 
+
+This can greatly improve the analytical efficiency.
+
+当你解析超大大数据时候，尽量避免解析异常的兼容，比如：属性中多声明了一属性，声明的属性类型不匹配。
+
+当有不需要参与解析属性，不要使用@IgnoredKey修饰，请重写CodingKeys忽略不需要的属性解析。
+
+这样可以大幅度的提升解析效率。
+
+
+
+
+
+
+
 ## FAQ
 
 If you're looking forward to learning more about the Codable protocol and the design thinking behind SmartCodable, check it out.
