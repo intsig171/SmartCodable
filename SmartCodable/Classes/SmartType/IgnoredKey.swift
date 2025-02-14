@@ -57,7 +57,16 @@ public struct IgnoredKey<T>: Codable {
         
         guard isEncodable else { return }
         
-        // 如果 wrappedValue 符合 Encodable 协议，则手动进行编码
+        /// 自定义编码策略
+        if let impl = encoder as? JSONEncoderImpl,
+            let key = impl.codingPath.last,
+            let jsonValue = impl.cache.tranform(from: wrappedValue, with: key),
+            let value = jsonValue.peel as? Encodable {
+            try value.encode(to: encoder)
+            return
+        }
+        
+        // 如果 wrappedValue 符合 Encodable 协议，则手动进行编码，否则使用nil替代。
         if let encodableValue = wrappedValue as? Encodable {
             try encodableValue.encode(to: encoder)
         } else {

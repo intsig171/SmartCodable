@@ -42,55 +42,36 @@ class TestViewController: BaseViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let dict: [String: Any] = [
-            "a": "mccc",
-            "b": [],
-            "sub": [
-                "a": "Mccc"
-            ],
-            "sub2s": [[
-                "d": []
-            ],[
-                "sub2_a": []
-            ]]
+            "a": "哈哈",
+            "b": "todo"
         ]
+//        let model = SomeModel.deserialize(from: dict)
+//        print(model)
         
-        let dict1: [String: Any] = [
-            "b": "mccc",
-            "c": [],
-            "sub": [
-                "sub_a": "Mccc"
-            ],
-            "sub2s": [[
-                "sub2_a": "Mccc"
-            ],[
-                "sub2_a": NSNull()
-            ]]
-        ]
-        
-    
-        
-//         let model = Model.deserialize(from: dict)
-        let model = [SomeModel].deserialize(from: [dict, dict1])
-
+        let model = SomeModel(a: "哈哈")
+        let diccc = model.toDictionary()
+        print(diccc)
     }
-    
     
     struct SomeModel: SmartCodable {
-        var sub: SubModel = SubModel()
-        var sub2s: [SubTwoModel] = []
-        var a: Int = 0
-        var b: Int = 0
-        var c: Int = 0
-    }
-    struct SubModel: SmartCodable {
-        var sub_a: Int = 0
-        var sub_b: Int = 0
-        var sub_c: Int = 0
-    }
-    struct SubTwoModel: SmartCodable {
-        var sub2_a: Int = 0
-        var sub2_b: Int = 0
-        var sub2_c: Int = 0
+//        var b: String = ""
+        @IgnoredKey(isEncodable: true)
+        var a: String = ""
+        static func mappingForValue() -> [SmartValueTransformer]? {
+            [
+                CodingKeys.a <--- NewRelationEnumTranformer()
+            ]
+        }
     }
 }
-
+struct NewRelationEnumTranformer: ValueTransformable {
+    func transformToJSON(_ value: String) -> Int? {
+        return 100
+    }
+    typealias Object = String
+    typealias JSON = Int
+    
+    func transformFromJSON(_ value: Any) -> String? {
+        return "Mccc"
+    }
+}
