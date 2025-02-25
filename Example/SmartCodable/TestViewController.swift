@@ -41,37 +41,38 @@ class TestViewController: BaseViewController {
    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let dict: [String: Any] = [
-            "a": "哈哈",
-            "b": "todo"
+
+        let dict: [String: Any] =
+        [
+          "data" : [
+            "enableJson" : "111",
+          ],
         ]
-//        let model = SomeModel.deserialize(from: dict)
-//        print(model)
         
-        let model = SomeModel(a: "哈哈")
-        let diccc = model.toDictionary()
-        print(diccc)
+
+
+        let model = ResultModel.deserialize(from: dict)
+        print(model?.data?.enableJson)
+        
     }
-    
-    struct SomeModel: SmartCodable {
-//        var b: String = ""
-        @IgnoredKey(isEncodable: true)
-        var a: String = ""
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            [
-                CodingKeys.a <--- NewRelationEnumTranformer()
-            ]
+
+    public struct ResultModel: SmartCodable {
+        public init() {}
+        
+//        //后台返回字段
+        @SmartAny
+        public var data: NotifyEnableModel?
+    }
+
+
+    struct NotifyEnableModel: SmartCodable {
+//        required init() {}
+        // 服务器返回 Json
+        var enableJson: String = ""
+        
+        mutating func didFinishMapping() {
+            enableJson = "2222"
+           print("NotifyEnableModel_didFinishMapping")
         }
-    }
-}
-struct NewRelationEnumTranformer: ValueTransformable {
-    func transformToJSON(_ value: String) -> Int? {
-        return 100
-    }
-    typealias Object = String
-    typealias JSON = Int
-    
-    func transformFromJSON(_ value: Any) -> String? {
-        return "Mccc"
     }
 }

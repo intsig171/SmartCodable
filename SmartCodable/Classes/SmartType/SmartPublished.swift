@@ -35,7 +35,13 @@ public struct SmartPublished<Value: Codable>: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let value = try container.decode(Value.self)
-        self.wrappedValue = value
+
+        if var temp = value as? SmartDecodable {
+            temp.didFinishMapping()
+            self.wrappedValue = temp as! Value
+        } else {
+            self.wrappedValue = value
+        }
         publisher = Publisher(wrappedValue)
     }
     

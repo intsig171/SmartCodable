@@ -19,8 +19,10 @@ class Introduce_12ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "name": 1,
-            "age": "333333"
+            "name": [
+                "a": "Mccc"
+            ],
+            
         ]
         
         if let model = PublishedModel.deserialize(from: dict) {
@@ -41,7 +43,7 @@ class Introduce_12ViewController: BaseViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // 修改 model 的 name 属性
-        model?.name = "Updated iOS Developer"
+        model?.name = ABC()
     }
 }
 
@@ -50,23 +52,18 @@ class PublishedModel: ObservableObject, SmartCodable {
     required init() {}
     
     @SmartPublished
-    var name: String = "iOS Developer"
-//        
-//    static func mappingForKey() -> [SmartKeyTransformer]? {
-//        [CodingKeys.name <--- "newName"]
-//    }
+    var name: ABC?
+    
+    
+
+    
+    
+
 }
 
-//struct PublishedValueTransformer: ValueTransformable {
-//    func transformFromJSON(_ value: Any) -> String? {
-//        return "good"
-//    }
-//    
-//    func transformToJSON(_ value: String) -> String? {
-//        return "gooooooood"
-//    }
-//    
-//    typealias Object = String
-//    
-//    typealias JSON = String
-//}
+struct ABC: SmartCodable {
+    var a: String = ""
+    mutating func didFinishMapping() {
+        print("执行了didFinishMapping")
+    }
+}

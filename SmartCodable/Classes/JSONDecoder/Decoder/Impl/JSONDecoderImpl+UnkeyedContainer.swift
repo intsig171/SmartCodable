@@ -368,6 +368,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
 
 
 extension JSONDecoderImpl.UnkeyedContainer {
+    // 被属性包装器包裹的，不会调用该方法。Swift的类型系统在运行时无法直接识别出wrappedValue的实际类型.
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {
         if var value = decodeValue as? SmartDecodable {
             value.didFinishMapping()

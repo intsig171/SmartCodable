@@ -187,6 +187,10 @@ extension Container_keyedViewController {
     struct FlatModel: SmartCodable {
         var name: String = ""
         var age: Int = 0
+        
+        func didFinishMapping() {
+            print("执行了didFinishMapping")
+        }
     }
 }
 

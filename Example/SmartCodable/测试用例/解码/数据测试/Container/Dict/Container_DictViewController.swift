@@ -190,6 +190,10 @@ extension Container_DictViewController {
     struct FlatModel: SmartCodable {
         var name: String = ""
         var age: Int = 0
+        
+        mutating func didFinishMapping() {
+            print("执行了didFinishMapping")
+        }
     }
 }
 

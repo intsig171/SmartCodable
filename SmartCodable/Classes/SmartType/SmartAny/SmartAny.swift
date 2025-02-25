@@ -6,6 +6,9 @@
 //
 
 /// Attribute wrapper, used to wrap Any.SmartAny allows only Any, [Any], and [String: Any] types to be modified.
+/// 被属性包装器包裹的，不会调用didFinishMapping方法。
+/// Swift的类型系统在运行时无法直接识别出wrappedValue的实际类型，需要各个属性包装器自行处理。
+
 @propertyWrapper
 public struct SmartAny<T>: Codable {
     public var wrappedValue: T
@@ -37,7 +40,12 @@ public struct SmartAny<T>: Codable {
             // 类型检查
             if let _type = T.self as? Decodable.Type {
                 if let decoded = try? _type.init(from: decoder) as? T {
-                    self = .init(wrappedValue: decoded)
+                    if var temp = decoded as? SmartDecodable {
+                        temp.didFinishMapping()
+                        self = .init(wrappedValue: temp as! T)
+                    } else {
+                        self = .init(wrappedValue: decoded)
+                    }
                     return
                 }
             }

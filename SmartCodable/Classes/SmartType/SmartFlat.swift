@@ -7,6 +7,10 @@
 
 
 import Foundation
+
+/// 被属性包装器包裹的，不会调用didFinishMapping方法。
+/// Swift的类型系统在运行时无法直接识别出wrappedValue的实际类型，需要各个属性包装器自行处理。
+
 @propertyWrapper
 public struct SmartFlat<T: Codable>: Codable {
     public var wrappedValue: T
@@ -17,7 +21,13 @@ public struct SmartFlat<T: Codable>: Codable {
 
     public init(from decoder: Decoder) throws {
         do {
-            wrappedValue = try T(from: decoder)
+            let temp = try T(from: decoder)
+            if var t = temp as? SmartDecodable {
+                t.didFinishMapping()
+                wrappedValue = t as! T
+            } else {
+                wrappedValue = temp
+            }
         } catch  {
             wrappedValue = try Patcher<T>.defaultForType()
         }
