@@ -5,15 +5,6 @@
 //  Created by qixin on 2024/9/26.
 //
 
-#if canImport(Combine) && swift(>=5.1)
-import Foundation
-import SwiftUI
-import Combine
-
-
-/// 这段代码实现了一个自定义的属性包装器 SmartPublished，
-/// 将Combine 的发布功能与 Codable 的数据序列化能力结合。通过属性包装器简化属性的声明，同时支持相应式编程。
-/// 用于结合 Combine 的功能和编码解码支持。以下是对整个代码的说明。
 
 
 /// 协议SmartPublishedProtocol，目标是为任何遵循该协议的类型提供统一的接口。
@@ -26,7 +17,15 @@ public protocol SmartPublishedProtocol {
     static func createInstance(with value: Any) -> Self?
 }
 
+#if canImport(Combine) && swift(>=5.1)
+import Foundation
+import SwiftUI
+import Combine
 
+
+/// 这段代码实现了一个自定义的属性包装器 SmartPublished，
+/// 将Combine 的发布功能与 Codable 的数据序列化能力结合。通过属性包装器简化属性的声明，同时支持相应式编程。
+/// 用于结合 Combine 的功能和编码解码支持。以下是对整个代码的说明。
 /// projectedValue提供一个发布者，可供订阅。
 @propertyWrapper
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -103,7 +102,7 @@ public struct SmartPublished<Value: Codable>: Codable {
     }
 }
 
-
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 extension SmartPublished: WrapperLifecycle {
     func wrappedValueDidFinishMapping() -> SmartPublished<Value>? {
         if var temp = wrappedValue as? SmartDecodable {

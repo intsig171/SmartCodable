@@ -374,7 +374,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
             value.didFinishMapping()
             if let temp = value as? T { return temp }
         } else if let value = decodeValue as? WrapperLifecycle {
-            if var temp = value.wrappedValueDidFinishMapping() as? T {
+            if let temp = value.wrappedValueDidFinishMapping() as? T {
                 return temp
             }
         }
