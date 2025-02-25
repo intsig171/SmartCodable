@@ -21,13 +21,7 @@ public struct SmartFlat<T: Codable>: Codable {
 
     public init(from decoder: Decoder) throws {
         do {
-            let temp = try T(from: decoder)
-            if var t = temp as? SmartDecodable {
-                t.didFinishMapping()
-                wrappedValue = t as! T
-            } else {
-                wrappedValue = temp
-            }
+            wrappedValue = try T(from: decoder)
         } catch  {
             wrappedValue = try Patcher<T>.defaultForType()
         }
@@ -37,6 +31,18 @@ public struct SmartFlat<T: Codable>: Codable {
         try wrappedValue.encode(to: encoder)
     }
 }
+
+extension SmartFlat: WrapperLifecycle {
+    func wrappedValueDidFinishMapping() -> SmartFlat<T>? {
+        if var temp = wrappedValue as? SmartDecodable {
+            temp.didFinishMapping()
+            return SmartFlat(wrappedValue: temp as! T)
+        }
+        return nil
+    }
+}
+
+
 
 // Used to mark the flat type
 protocol FlatType { 
@@ -52,4 +58,5 @@ extension SmartFlat: FlatType {
 protocol _ArrayMark { }
 // 这里将 Array 类型扩展，使得它在元素类型 (Element) 符合 Decodable 协议时，满足 _Array 协议。也就是说，只有当数组中的元素符合 Decodable 协议时，这个数组类型才会被标记为 _Array。
 extension Array: _ArrayMark where Element: Decodable { }
+
 

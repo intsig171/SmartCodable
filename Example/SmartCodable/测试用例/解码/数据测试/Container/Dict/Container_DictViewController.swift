@@ -192,6 +192,8 @@ extension Container_DictViewController {
         var age: Int = 0
         
         mutating func didFinishMapping() {
+            
+            age = 1000
             print("执行了didFinishMapping")
         }
     }
