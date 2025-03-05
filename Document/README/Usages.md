@@ -148,6 +148,13 @@ struct SubModel: SmartCodable {
 }
 ```
 
+⚠️： SmartAny 是通过Swift中属性包装器实现的，如果你用反射获取属性名，或被添加"_"，这是属性包装器的特性。请注意。
+```
+let e = Mirror(reflecting: self).children
+for item in e {
+   print(item.label)
+}
+```
 
 
 ### 2.Modeling of json strings（json字符串的模型化）
