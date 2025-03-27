@@ -35,44 +35,35 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      
+        let dict: [String: Any] =
+        [
+            "location" : "suzhou",
+            "name": "Mccc",
+            "age": 18
+        ]
+
+        guard let model = Model.deserialize(from: dict) else { return }
+        
+        let transDict = model.toDictionary() ?? [:]
+        print(transDict)
     }
     
    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        let dict: [String: Any] =
-        [
-          "data" : [
-            "enableJson" : "111",
-          ],
-        ]
-        
-
-
-        let model = ResultModel.deserialize(from: dict)
-        print(model?.data?.enableJson)
         
     }
 
-    public struct ResultModel: SmartCodable {
-        public init() {}
+    struct Model: SmartCodable {
+        var location: String = ""
         
-//        //后台返回字段
-        @SmartAny
-        public var data: NotifyEnableModel?
+        @SmartFlat
+        var model: BaseModel?
     }
-
-
-    struct NotifyEnableModel: SmartCodable {
-//        required init() {}
-        // 服务器返回 Json
-        var enableJson: String = ""
-        
-        mutating func didFinishMapping() {
-            enableJson = "2222"
-           print("NotifyEnableModel_didFinishMapping")
-        }
+    
+    struct BaseModel: SmartCodable {
+        var name: String = ""
+        var age: Int = 0
     }
 }

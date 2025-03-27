@@ -72,8 +72,17 @@ extension _SpecialTreatmentEncoder {
             let encoder = self.getEncoder(for: additionalKey)
             try encodable.encode(to: encoder)
             
+            // 如果是被SmartFlat修饰的，需要向上层encode，让数据恢复原样。
+            if encodable is FlatType {
+                if let object = encoder.value?.object {
+                    for (key, value) in object {
+                        self.impl.object?.set(value, for: key)
+                    }
+                    return nil
+                }
+            }
+        
             impl.cache.removeSnapshot(for: E.self)
-            
             return encoder.value
         }
     }
