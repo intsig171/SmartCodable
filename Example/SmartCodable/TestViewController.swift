@@ -35,6 +35,12 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+    }
+    
+   
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let dict: [String: Any] =
         [
             "location" : "suzhou",
@@ -46,12 +52,9 @@ class TestViewController: BaseViewController {
         
         let transDict = model.toDictionary() ?? [:]
         print(transDict)
-    }
-    
-   
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        
+        let json = model.toJSONString() ?? ""
+        print(json)
         
     }
 
@@ -65,5 +68,6 @@ class TestViewController: BaseViewController {
     struct BaseModel: SmartCodable {
         var name: String = ""
         var age: Int = 0
+        
     }
 }
