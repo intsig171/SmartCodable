@@ -42,9 +42,9 @@ extension JSONDecoderImpl {
             return try self.unwrapDictionary(as: type)
         }
         
-        cache.cacheInitialState(for: type)
+        cache.cacheSnapshot(for: type)
         let decoded = try type.init(from: self)
-        cache.clearLastState(for: type)
+        cache.removeSnapshot(for: type)
         return decoded
     }
     

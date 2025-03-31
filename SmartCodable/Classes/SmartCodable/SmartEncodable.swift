@@ -71,8 +71,34 @@ extension SmartEncodable {
 
     /// Serializes into a dictionary
     /// - Parameter useMappedKeys: Whether to use the mapped key during encoding. The default value is false.
+    ///   -- CodingKeys.array <--- "out_array", 为ture时，使用"out_array"。
     /// - Parameter options: encoding options
     /// - Returns: dictionary
+    
+    
+    /// Serializes the object into a dictionary representation.
+    ///
+    /// - Parameters:
+    ///   - useMappedKeys: Determines whether to use source field names defined in `SmartKeyTransformer` during encoding.
+    ///     - When `true`: Uses the first field name from `SmartKeyTransformer.from` (e.g., given `property <--- ["json_field", "alt_field"]`, uses `"json_field"`)
+    ///     - When `false` (default): Uses the destination property name from `SmartKeyTransformer.to`
+    ///   - options: Optional set of encoding configuration options that control serialization behavior
+    ///
+    /// - Returns: A dictionary representation of the object, or `nil` if encoding fails
+    ///
+    /// - Example:
+    ///   ```
+    ///   struct Model: SmartCodable {
+    ///       var data: String
+    ///       static func mappingForKey() -> [SmartKeyTransformer]? {
+    ///           [CodingKeys.data <--- ["json_data", "alt_data"]]
+    ///       }
+    ///   }
+    ///
+    ///   let model = Model(data: "value")
+    ///   let dict1 = model.toDictionary() // ["data": "value"]
+    ///   let dict2 = model.toDictionary(useMappedKeys: true) // ["json_data": "value"]
+    ///   ```
     public func toDictionary(useMappedKeys: Bool = false, options: Set<SmartEncodingOption>? = nil) -> [String: Any]? {
         return _transformToJson(self, type: Self.self, useMappedKeys: useMappedKeys, options: options)
     }

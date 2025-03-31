@@ -9,26 +9,19 @@ import Foundation
 
 
 /// Records the default values of model properties during decoding, used for filling in when decoding fails.
-class DecodingCache {
+class DecodingCache: Cachable {
     
-    
+    typealias SomeSnapshot = DecodingSnapshot
+
     /// Stores a snapshot of the Model being parsed.
     /// Why array records must be used
     /// - avoid parsing confusion with multi-level nested models
-    private(set) var snapshots: [Snapshot] = []
-    
-    /// The type of the property being parsed
-    var decodedType: SmartDecodable.Type?
-    
-    var topSnapshot: Snapshot? {
-        return self.snapshots.last
-    }
-    
+    var snapshots: [DecodingSnapshot] = []
+
     /// Cache the initial state of a Decodable object.
-    func cacheInitialState<T: Decodable>(for type: T.Type) {
+    func cacheSnapshot<T>(for type: T.Type) {
         if let object = type as? SmartDecodable.Type {
-            decodedType = object
-            var snapshot = Snapshot()
+            var snapshot = DecodingSnapshot()
             
             let instance = object.init()
             // 递归处理所有的 superclassMirror
@@ -46,16 +39,15 @@ class DecodingCache {
             let mirror = Mirror(reflecting: instance)
             captureInitialValues(from: mirror)
             
-
-            snapshot.typeName = "\(type)"
+            snapshot.objectType = object
             snapshot.transformers = object.mappingForValue() ?? []
             snapshots.append(snapshot)
         }
     }
     
     /// Clears the decoding status of the last record
-    func clearLastState<T: Decodable>(for type: T.Type) {
-        
+    func removeSnapshot<T>(for type: T.Type) {
+
         // If the current type being decoded does not inherit from SmartDecodable Model, it does not need to be processed.
         // The properties within the model being decoded should not be cleared. They can be cleared only after decoding is complete.
         if let _ = T.self as? SmartDecodable.Type {
@@ -120,15 +112,13 @@ class DecodingCache {
 }
 
 
-extension DecodingCache {
-    struct Snapshot {
-        /// The current decoding type
-        var typeName: String = ""
-        
-        /// The current decoding path (ensuring the correspondence through the decoding path)
-        var initialValues: [String: Any] = [:]
-        
-        /// Records the custom transformer for properties
-        var transformers: [SmartValueTransformer] = []
-    }
+
+struct DecodingSnapshot: Snapshot {
+    var objectType: (any SmartDecodable.Type)?
+    
+    typealias ObjectType = SmartDecodable.Type
+    
+    var initialValues: [String : Any] = [:]
+    
+    var transformers: [SmartValueTransformer] = []
 }

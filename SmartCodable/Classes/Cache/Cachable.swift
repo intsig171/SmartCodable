@@ -10,12 +10,14 @@ import Foundation
 
 protocol Cachable {
             
+    associatedtype SomeSnapshot: Snapshot
+
     /// Stores a snapshot of the Model being parsed.
     /// Why array records must be used
     /// - avoid parsing confusion with multi-level nested models
-    var snapshots: [Snapshot] { set get }
+    var snapshots: [SomeSnapshot] { set get }
     
-    var topSnapshot: Snapshot? { get }
+    var topSnapshot: SomeSnapshot? { get }
     
     func cacheSnapshot<T>(for type: T.Type)
     
@@ -24,30 +26,34 @@ protocol Cachable {
 
 
 extension Cachable {
-    var topSnapshot: Snapshot? {
+    var topSnapshot: SomeSnapshot? {
         return snapshots.last
-    }
-    
-    mutating func removeSnapshot<T>(for type: T.Type) {
-        
-        // If the current type being decoded does not inherit from SmartDecodable Model, it does not need to be processed.
-        // The properties within the model being decoded should not be cleared. They can be cleared only after decoding is complete.
-        if let _ = T.self as? SmartEncodable.Type {
-            if snapshots.count > 0 {
-                snapshots.removeLast()
-            }
-        }
     }
 }
 
 
-struct Snapshot {
+protocol Snapshot {
+    
+    associatedtype ObjectType
+
+    
     /// The current decoding or encoding type
-    var objectType: SmartEncodable.Type?
+    var objectType: ObjectType? { set get }
+
+    var objectTypeName: String? { get }
     
     /// The current decoding path (ensuring the correspondence through the decoding path)
-    var initialValues: [String: Any] = [:]
+    var initialValues: [String: Any] { set get }
     
     /// Records the custom transformer for properties
-    var transformers: [SmartValueTransformer] = []
+    var transformers: [SmartValueTransformer] { set get }
+}
+
+extension Snapshot {
+    var objectTypeName: String? {
+        if let t = objectType {
+            return String(describing: t)
+        }
+        return nil
+    }
 }

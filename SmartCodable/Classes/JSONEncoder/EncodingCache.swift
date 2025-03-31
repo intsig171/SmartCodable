@@ -9,13 +9,14 @@ import Foundation
 
 
 class EncodingCache: Cachable {
-    
-    var snapshots: [Snapshot] = []
+    typealias SomeSnapshot = EncodingSnapshot
+
+    var snapshots: [EncodingSnapshot] = []
     
     func cacheSnapshot<T>(for type: T.Type) {
         if let object = type as? SmartEncodable.Type {
             
-            var snapshot = Snapshot()
+            var snapshot = EncodingSnapshot()
             let instance = object.init()
             let mirror = Mirror(reflecting: instance)
             mirror.children.forEach { child in
@@ -26,6 +27,14 @@ class EncodingCache: Cachable {
             snapshot.objectType = object
             snapshot.transformers = object.mappingForValue() ?? []
             snapshots.append(snapshot)
+        }
+    }
+    
+    func removeSnapshot<T>(for type: T.Type) {
+        if let _ = T.self as? SmartEncodable.Type {
+            if snapshots.count > 0 {
+                snapshots.removeLast()
+            }
         }
     }
 }
@@ -75,6 +84,14 @@ extension EncodingCache {
 
 
 
-
+struct EncodingSnapshot: Snapshot {
+    var objectType: (any SmartEncodable.Type)?
+    
+    typealias ObjectType = SmartEncodable.Type
+    
+    var initialValues: [String : Any] = [:]
+    
+    var transformers: [SmartValueTransformer] = []
+}
 
 

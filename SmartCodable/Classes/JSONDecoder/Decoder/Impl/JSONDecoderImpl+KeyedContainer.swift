@@ -574,7 +574,7 @@ fileprivate func _convertDictionary(_ dictionary: [String: JSONValue], impl: JSO
         }, uniquingKeysWith: { (first, _) in first })
     }
     
-    guard let type = impl.cache.decodedType else { return dictionary }
+    guard let type = impl.cache.topSnapshot?.objectType else { return dictionary }
     
     if let tempValue = KeysMapper.convertFrom(JSONValue.object(dictionary), type: type), let dict = tempValue.object {
         return dict
