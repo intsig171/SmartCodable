@@ -42,9 +42,6 @@ protocol Snapshot {
 
     var objectTypeName: String? { get }
     
-    /// The current decoding path (ensuring the correspondence through the decoding path)
-    var initialValues: [String: Any] { set get }
-    
     /// Records the custom transformer for properties
     var transformers: [SmartValueTransformer] { set get }
 }

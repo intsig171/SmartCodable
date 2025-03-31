@@ -60,7 +60,7 @@ class DecodingCache: Cachable {
     /// Gets the initialization value of the attribute (key)
     func getValue<T>(forKey key: CodingKey) -> T? {
         
-        if var cacheValue = snapshots.last?.initialValues[key.stringValue] {
+        if var cacheValue = topSnapshot?.initialValues[key.stringValue] {
             // When the CGFloat type is resolved, it is resolved as Double. So we need to do a type conversion.
             if let temp = cacheValue as? CGFloat {
                 cacheValue = Double(temp)
@@ -72,7 +72,7 @@ class DecodingCache: Cachable {
                 return caseValue.rawValue as? T
             }
         } else { // @propertyWrapper type， value logic
-            if let cached = snapshots.last?.initialValues["_" + key.stringValue] {
+            if let cached = topSnapshot?.initialValues["_" + key.stringValue] {
                 if let value = cached as? IgnoredKey<T> {
                     return value.wrappedValue
                 } else if let value = cached as? SmartAny<T> {
@@ -118,7 +118,8 @@ struct DecodingSnapshot: Snapshot {
     
     typealias ObjectType = SmartDecodable.Type
     
-    var initialValues: [String : Any] = [:]
-    
     var transformers: [SmartValueTransformer] = []
+    
+    /// 记录当前Container中，属性的默认值
+    var initialValues: [String : Any] = [:]
 }

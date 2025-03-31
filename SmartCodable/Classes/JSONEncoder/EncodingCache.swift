@@ -17,13 +17,6 @@ class EncodingCache: Cachable {
         if let object = type as? SmartEncodable.Type {
             
             var snapshot = EncodingSnapshot()
-            let instance = object.init()
-            let mirror = Mirror(reflecting: instance)
-            mirror.children.forEach { child in
-                if let key = child.label {
-                    snapshot.initialValues[key] = child.value
-                }
-            }
             snapshot.objectType = object
             snapshot.transformers = object.mappingForValue() ?? []
             snapshots.append(snapshot)
@@ -88,9 +81,7 @@ struct EncodingSnapshot: Snapshot {
     var objectType: (any SmartEncodable.Type)?
     
     typealias ObjectType = SmartEncodable.Type
-    
-    var initialValues: [String : Any] = [:]
-    
+        
     var transformers: [SmartValueTransformer] = []
 }
 
