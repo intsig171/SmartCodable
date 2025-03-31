@@ -71,7 +71,8 @@ extension _SpecialTreatmentEncoder {
             
             let encoder = self.getEncoder(for: additionalKey)
             try encodable.encode(to: encoder)
-            
+            impl.cache.removeSnapshot(for: E.self)
+
             // 如果是被SmartFlat修饰的，需要向上层encode，让数据恢复原样。
             if encodable is FlatType {
                 if let object = encoder.value?.object {
@@ -82,7 +83,6 @@ extension _SpecialTreatmentEncoder {
                 }
             }
         
-            impl.cache.removeSnapshot(for: E.self)
             return encoder.value
         }
     }
@@ -175,7 +175,7 @@ extension _SpecialTreatmentEncoder {
             useMappedKeys = impl.userInfo[key] as? Bool ?? false
         }
             
-        if let objectType = impl.cache.cacheType {
+        if let objectType = impl.cache.topSnapshot?.objectType {
             if let mappings = objectType.mappingForKey() {
                 for mapping in mappings {
                     if mapping.to.stringValue == newKey.stringValue {

@@ -9,11 +9,7 @@ import Foundation
 
 
 protocol Cachable {
-    
-    associatedtype CacheType
-    
-    var cacheType: CacheType? { get set }
-    
+            
     /// Stores a snapshot of the Model being parsed.
     /// Why array records must be used
     /// - avoid parsing confusion with multi-level nested models
@@ -36,7 +32,7 @@ extension Cachable {
         
         // If the current type being decoded does not inherit from SmartDecodable Model, it does not need to be processed.
         // The properties within the model being decoded should not be cleared. They can be cleared only after decoding is complete.
-        if let _ = T.self as? CacheType {
+        if let _ = T.self as? SmartEncodable.Type {
             if snapshots.count > 0 {
                 snapshots.removeLast()
             }
@@ -46,8 +42,8 @@ extension Cachable {
 
 
 struct Snapshot {
-    /// The current decoding type
-    var typeName: String = ""
+    /// The current decoding or encoding type
+    var objectType: SmartEncodable.Type?
     
     /// The current decoding path (ensuring the correspondence through the decoding path)
     var initialValues: [String: Any] = [:]

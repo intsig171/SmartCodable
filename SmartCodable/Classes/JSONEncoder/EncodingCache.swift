@@ -10,14 +10,10 @@ import Foundation
 
 class EncodingCache: Cachable {
     
-    typealias CacheType = SmartEncodable.Type
-
-    var cacheType: CacheType?
     var snapshots: [Snapshot] = []
     
     func cacheSnapshot<T>(for type: T.Type) {
         if let object = type as? SmartEncodable.Type {
-            cacheType = object
             
             var snapshot = Snapshot()
             let instance = object.init()
@@ -27,7 +23,7 @@ class EncodingCache: Cachable {
                     snapshot.initialValues[key] = child.value
                 }
             }
-            snapshot.typeName = "\(type)"
+            snapshot.objectType = object
             snapshot.transformers = object.mappingForValue() ?? []
             snapshots.append(snapshot)
         }
@@ -37,31 +33,33 @@ class EncodingCache: Cachable {
 extension EncodingCache {
     
     func tranform(from value: Any, with key: CodingKey?) -> JSONValue? {
- 
-        if let trans = topSnapshot?.transformers, let key = key {
-            
-            let wantKey = key.stringValue
-            let tran = trans.first(where: { transformer in
-                if wantKey == transformer.location.stringValue {
-                    return true
-                } else {
-                    
-                    if let keyTransformers = cacheType?.mappingForKey() {
-                        for keyTransformer in keyTransformers {
-                            if keyTransformer.from.contains(wantKey) {
-                                return true
-                            }
+        
+        guard let top = topSnapshot, let key = key else { return nil }
+        
+        let trans = top.transformers
+        
+        let wantKey = key.stringValue
+        let targetTran = trans.first(where: { transformer in
+            if wantKey == transformer.location.stringValue {
+                return true
+            } else {
+                
+                if let keyTransformers = top.objectType?.mappingForKey() {
+                    for keyTransformer in keyTransformers {
+                        if keyTransformer.from.contains(wantKey) {
+                            return true
                         }
                     }
-                    return false
                 }
-            })
-            
-            
-            if let tran = tran, let decoded = tranform(decodedValue: value, transformer: tran.tranformer) {
-                return JSONValue.make(decoded)
+                return false
             }
+        })
+        
+        
+        if let tran = targetTran, let decoded = tranform(decodedValue: value, transformer: tran.tranformer) {
+            return JSONValue.make(decoded)
         }
+        
         return nil
     }
     
