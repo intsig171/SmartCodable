@@ -8,8 +8,15 @@
 import Foundation
 
 
-/// 作用于属性包装器的标识
+
+/// A marker protocol for property wrappers that need lifecycle callbacks.
 protocol WrapperLifecycle {
-    ///  被包裹的属性解码完成的回调，一般是遵循SmartDecode协议的model
+    
+    /**
+     Callback invoked when the wrapped value finishes decoding/mapping.
+     
+     - Returns: An optional new instance of the wrapper with processed value
+     - Note: Primarily used by property wrappers containing types conforming to SmartDecodable
+     */
     func wrappedValueDidFinishMapping() -> Self?
 }

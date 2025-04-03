@@ -8,9 +8,14 @@
 
 import Foundation
 
-/// 被属性包装器包裹的，不会调用didFinishMapping方法。
-/// Swift的类型系统在运行时无法直接识别出wrappedValue的实际类型，需要各个属性包装器自行处理。
-
+/**
+ A property wrapper that provides flat decoding/encoding of values while handling type conversion errors.
+ 
+ Important Notes:
+ 1. Properties wrapped by property wrappers won't automatically call `didFinishMapping` methods.
+ 2. Swift's type system can't directly identify the actual type of wrappedValue at runtime,
+    so each property wrapper needs to handle this manually.
+ */
 @propertyWrapper
 public struct SmartFlat<T: Codable>: Codable {
     public var wrappedValue: T
@@ -50,13 +55,21 @@ protocol FlatType {
 }
 
 extension SmartFlat: FlatType {
+    /// Determines if the wrapped type is an array
     static var isArray: Bool { T.self is _ArrayMark.Type }
 }
 
-// 当 T 是一个数组并且其元素类型符合 Decodable 协议时，
-// T.self 会被 _Array 扩展所覆盖，这样 T.self is _Array.Type 就会返回 true。
+/**
+ Marker protocol for array types with Decodable elements.
+ 
+ When T is an array with elements conforming to Decodable,
+ T.self will be covered by the Array extension, making T.self is _ArrayMark.Type return true.
+ */
 protocol _ArrayMark { }
-// 这里将 Array 类型扩展，使得它在元素类型 (Element) 符合 Decodable 协议时，满足 _Array 协议。也就是说，只有当数组中的元素符合 Decodable 协议时，这个数组类型才会被标记为 _Array。
+
+
+/// This extension marks Array types as _ArrayMark when their Element conforms to Decodable.
+/// This means only arrays with Decodable elements will be marked as _ArrayMark.
 extension Array: _ArrayMark where Element: Decodable { }
 
 

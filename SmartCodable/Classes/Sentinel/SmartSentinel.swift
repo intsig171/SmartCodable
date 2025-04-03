@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// Central logging configuration and utilities
 public struct SmartSentinel {
     
     /// Set debugging mode, default is none. 

@@ -50,3 +50,5 @@ struct Student: SmartCodable {
         case woman = "女"
     }
 }
+
+

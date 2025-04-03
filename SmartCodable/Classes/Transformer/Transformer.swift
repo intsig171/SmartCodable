@@ -73,6 +73,7 @@ public func <---(location: CodingKey, tranformer: any ValueTransformable) -> Sma
  }
  */
 
+
 public struct FastTransformer<Object, JSON>: ValueTransformable {
     
     private let fromJSON: (JSON?) -> Object?

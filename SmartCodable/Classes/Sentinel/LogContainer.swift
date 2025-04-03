@@ -6,19 +6,11 @@
 //
 
 
-/** todo
- 1. 通过当前容器的路径 path
- 2. 记录上一个Container的path，根本Container进行对比。获取相同的路径，处理不同的路径。
- "Index 0"
- "Index 0/sub"
- "Index 0/sub"
- "Index 1"
- "Index 1/sub"
- "Index 1/sub"
- "Index 1/sub"
- */
+
 
 import Foundation
+
+/// Represents a container of related log entries with common coding path
 struct LogContainer {
     
     /// 当前容器的类型（如果是unkeyed，就是Index+X。如果是keyed，就是Model的名称）

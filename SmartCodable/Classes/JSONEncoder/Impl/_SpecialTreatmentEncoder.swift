@@ -73,7 +73,7 @@ extension _SpecialTreatmentEncoder {
             try encodable.encode(to: encoder)
             impl.cache.removeSnapshot(for: E.self)
 
-            // 如果是被SmartFlat修饰的，需要向上层encode，让数据恢复原样。
+            // If it is modified by SmartFlat, you need to encode to the upper layer to restore the data.
             if encodable is FlatType {
                 if let object = encoder.value?.object {
                     for (key, value) in object {

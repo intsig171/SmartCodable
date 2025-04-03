@@ -53,17 +53,16 @@ class PublishedModel: ObservableObject, SmartCodable {
     
     @SmartPublished
     var name: ABC?
-    
-    
-
-    
-    
-
 }
 
 struct ABC: SmartCodable {
     var a: String = ""
-    mutating func didFinishMapping() {
-        print("执行了didFinishMapping")
-    }
 }
+let dict: [String: Any] = [
+    "name": [
+        "a": "Mccc"
+    ],
+    
+]
+
+

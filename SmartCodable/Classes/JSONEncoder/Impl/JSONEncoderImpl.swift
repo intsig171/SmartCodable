@@ -7,8 +7,9 @@ class JSONEncoderImpl {
     var userInfo: [CodingUserInfoKey: Any] {
         options.userInfo
     }
-    
-    /// 记录当前keyed容器的各个属性的初始化值， 不支持Unkey容器的记录。
+
+    /// Records the initialization values of each attribute of the current keyed container.
+    /// Records of Unkey containers are not supported.    var cache: EncodingCache
     var cache: EncodingCache
 
     var singleValue: JSONValue?
@@ -71,7 +72,6 @@ extension JSONEncoderImpl: Encoder {
 }
 
 // this is a private protocol to implement convenience methods directly on the EncodingContainers
-
 extension JSONEncoderImpl: _SpecialTreatmentEncoder {
     var impl: JSONEncoderImpl {
         return self

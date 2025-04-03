@@ -8,23 +8,24 @@
 import Foundation
 
 
-/// Records the default values of model properties during decoding, used for filling in when decoding fails.
+/// Caches default values during decoding operations
+/// Used to provide fallback values when decoding fails
 class DecodingCache: Cachable {
     
     typealias SomeSnapshot = DecodingSnapshot
 
-    /// Stores a snapshot of the Model being parsed.
-    /// Why array records must be used
-    /// - avoid parsing confusion with multi-level nested models
+    /// Stack of decoding snapshots
     var snapshots: [DecodingSnapshot] = []
 
-    /// Cache the initial state of a Decodable object.
+    /// Creates and stores a snapshot of initial values for a Decodable type
+    /// - Parameter type: The Decodable type to cache
     func cacheSnapshot<T>(for type: T.Type) {
         if let object = type as? SmartDecodable.Type {
+
             var snapshot = DecodingSnapshot()
-            
             let instance = object.init()
-            // 递归处理所有的 superclassMirror
+            
+            // Recursively captures initial values from a type and its superclasses
             func captureInitialValues(from mirror: Mirror) {
                 mirror.children.forEach { child in
                     if let key = child.label {
@@ -35,7 +36,7 @@ class DecodingCache: Cachable {
                     captureInitialValues(from: superclassMirror)
                 }
             }
-            // 获取当前类和所有父类的属性值
+            // Continue with superclass properties
             let mirror = Mirror(reflecting: instance)
             captureInitialValues(from: mirror)
             
@@ -45,59 +46,49 @@ class DecodingCache: Cachable {
         }
     }
     
-    /// Clears the decoding status of the last record
+    /// Removes the most recent snapshot for the given type
+    /// - Parameter type: The type to remove from cache
     func removeSnapshot<T>(for type: T.Type) {
-
-        // If the current type being decoded does not inherit from SmartDecodable Model, it does not need to be processed.
-        // The properties within the model being decoded should not be cleared. They can be cleared only after decoding is complete.
-        if let _ = T.self as? SmartDecodable.Type {
-            if snapshots.count > 0 {
-                snapshots.removeLast()
-            }
+        guard T.self is SmartDecodable.Type else { return }
+        if !snapshots.isEmpty {
+            snapshots.removeLast()
         }
     }
-    
-    /// Gets the initialization value of the attribute (key)
+}
+
+
+extension DecodingCache {
+    /// Retrieves a cached value for the given coding key
+    /// - Parameter key: The coding key to look up
+    /// - Returns: The cached value if available, nil otherwise
     func getValue<T>(forKey key: CodingKey) -> T? {
         
-        if var cacheValue = topSnapshot?.initialValues[key.stringValue] {
-            // When the CGFloat type is resolved, it is resolved as Double. So we need to do a type conversion.
-            if let temp = cacheValue as? CGFloat {
-                cacheValue = Double(temp)
-            }
-            
-            if let value = cacheValue as? T {
-                return value
-            } else if let caseValue = cacheValue as? (any SmartCaseDefaultable) {
-                return caseValue.rawValue as? T
-            }
-        } else { // @propertyWrapper type， value logic
-            if let cached = topSnapshot?.initialValues["_" + key.stringValue] {
-                if let value = cached as? IgnoredKey<T> {
-                    return value.wrappedValue
-                } else if let value = cached as? SmartAny<T> {
-                    return value.wrappedValue
-                } else if let value = cached as? T { // 当key缺失的时候，会进入
-                    return value
-                }
-            } else {
-                // SmartAny 修饰一个可选的Model会走这里
-                for item in snapshots.reversed() {
-                    if let cached = item.initialValues["_" + key.stringValue] {
-                        if let value = cached as? IgnoredKey<T> {
-                            return value.wrappedValue
-                        } else if let value = cached as? SmartAny<T> {
-                            return value.wrappedValue
-                        } else if let value = cached as? T { 
-                            return value
-                        }
-                    }
-                }
-            }
+        guard let cacheValue = topSnapshot?.initialValues[key.stringValue] else {
+            // Handle @propertyWrapper cases (prefixed with underscore)
+            return handlePropertyWrapperCases(for: key)
         }
+        
+        // When the CGFloat type is resolved,
+        // it is resolved as Double. So we need to do a type conversion.
+        if let temp = cacheValue as? CGFloat {
+            return Double(temp) as? T
+        }
+        
+        if let value = cacheValue as? T {
+            return value
+        } else if let caseValue = cacheValue as? any SmartCaseDefaultable {
+            return caseValue.rawValue as? T
+        }
+        
         return nil
     }
     
+    
+    /// Transforms a JSON value using the appropriate transformer
+    /// - Parameters:
+    ///   - value: The JSON value to transform
+    ///   - key: The associated coding key (if available)
+    /// - Returns: The transformed value or nil if no transformer applies
     func tranform(value: JSONValue, for key: CodingKey?) -> Any? {
         if let lastKey = key {
             let container = topSnapshot?.transformers.first(where: {
@@ -109,17 +100,48 @@ class DecodingCache: Cachable {
         }
         return nil
     }
+    
+    /// Handles property wrapper cases (properties prefixed with underscore)
+    private func handlePropertyWrapperCases<T>(for key: CodingKey) -> T? {
+        if let cached = topSnapshot?.initialValues["_" + key.stringValue] {
+            return extractWrappedValue(from: cached)
+        }
+        
+        // Search through all snapshots for property wrapper values
+        for item in snapshots.reversed() {
+            if let cached = item.initialValues["_" + key.stringValue] {
+                return extractWrappedValue(from: cached)
+            }
+        }
+        
+        return nil
+    }
+    
+    /// Extracts wrapped value from potential property wrapper types
+    private func extractWrappedValue<T>(from value: Any) -> T? {
+        if let wrapper = value as? IgnoredKey<T> {
+            return wrapper.wrappedValue
+        } else if let wrapper = value as? SmartAny<T> {
+            return wrapper.wrappedValue
+        } else if let value = value as? T {
+            return value
+        }
+        return nil
+    }
 }
 
 
 
+/// Snapshot of decoding state for a particular model
 struct DecodingSnapshot: Snapshot {
-    var objectType: (any SmartDecodable.Type)?
     
     typealias ObjectType = SmartDecodable.Type
     
+    var objectType: (any SmartDecodable.Type)?
+    
     var transformers: [SmartValueTransformer] = []
     
-    /// 记录当前Container中，属性的默认值
+    /// Dictionary storing initial values of properties
+    /// Key: Property name, Value: Initial value
     var initialValues: [String : Any] = [:]
 }

@@ -7,20 +7,25 @@
 
 import Foundation
 
-
+/// A protocol defining caching capabilities for model snapshots
+/// Used to maintain state during encoding/decoding operations
 protocol Cachable {
             
     associatedtype SomeSnapshot: Snapshot
 
-    /// Stores a snapshot of the Model being parsed.
-    /// Why array records must be used
-    /// - avoid parsing confusion with multi-level nested models
+    /// Array of snapshots representing the current parsing stack
+    /// - Note: Using an array prevents confusion with multi-level nested models
     var snapshots: [SomeSnapshot] { set get }
     
+    /// The most recent snapshot in the stack (top of stack)
     var topSnapshot: SomeSnapshot? { get }
     
+    /// Caches a new snapshot for the given type
+    /// - Parameter type: The model type being processed
     func cacheSnapshot<T>(for type: T.Type)
     
+    /// Removes the snapshot for the given type
+    /// - Parameter type: The model type to remove from cache
     mutating func removeSnapshot<T>(for type: T.Type)
 }
 
@@ -32,14 +37,15 @@ extension Cachable {
 }
 
 
+/// Represents a snapshot of model state during encoding/decoding
 protocol Snapshot {
     
     associatedtype ObjectType
-
     
-    /// The current decoding or encoding type
+    /// The current type being encoded/decoded
     var objectType: ObjectType? { set get }
 
+    /// String representation of the object type
     var objectTypeName: String? { get }
     
     /// Records the custom transformer for properties

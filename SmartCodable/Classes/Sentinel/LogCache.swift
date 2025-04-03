@@ -7,19 +7,31 @@
 
 import Foundation
 
+/**
+ A logging system for tracking and reporting decoding errors in SmartCodable parsing.
+ 
+ The system provides:
+ - Hierarchical error logging with visual formatting
+ - Configurable logging levels
+ - Thread-safe logging operations
+ - Customizable output handlers
+ */
 struct LogCache {
     
     private var snapshotDict = SafeDictionary<String, LogContainer>()
     
+    /// Saves a decoding error to the log cache
     mutating func save(error: DecodingError, className: String, parsingMark: String) {
         let log = LogItem.make(with: error)
         cacheLog(log, className: className, parsingMark: parsingMark)
     }
     
+    /// Clears cached logs for a specific parsing session
     mutating func clearCache(parsingMark: String) {
         snapshotDict.removeValue { $0.hasPrefix(parsingMark) }
     }
     
+    /// Formats all logs for a parsing session into a readable string
     mutating func formatLogs(parsingMark: String) -> String? {
         
         filterLogItem()
@@ -43,7 +55,7 @@ struct LogCache {
 
 extension LogCache {
     
-    // 排序
+    /// Sorts log keys for consistent output ordering
     func sortKeys(_ array: [String], parsingMark: String) -> [String] {
         //  获取当前解析的keys
         let filterArray = array.filter {
@@ -55,8 +67,8 @@ extension LogCache {
         return sortedArray
     }
     
+    /// Filters duplicate log items across containers
     mutating func filterLogItem() {
-        // 使用正则表达式匹配 keys
         let pattern = "Index \\d+"
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         var matchedKeys = snapshotDict.getAllKeys().filter { key in
@@ -91,6 +103,7 @@ extension LogCache {
         snapshotDict = tempDict
     }
     
+    /// Caches an individual log item
     private mutating func cacheLog(_ log: LogItem?, className: String, parsingMark: String) {
         
         guard let log = log else { return }
@@ -111,11 +124,13 @@ extension LogCache {
         }
     }
     
+    /// Creates a unique key for a log entry
     private func createKey(path: [CodingKey], parsingMark: String) -> String {
         let arr = path.map { $0.stringValue }
         return parsingMark + "\(arr.joined(separator: "-"))"
     }
     
+    /// Aligns field names for consistent visual output
     private mutating func alignTypeNamesInAllSnapshots(parsingMark: String) {
         snapshotDict.updateEach { key, snapshot in
             let maxLength = snapshot.logs.max(by: { $0.fieldName.count < $1.fieldName.count })?.fieldName.count ?? 0

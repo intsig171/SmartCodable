@@ -5,13 +5,20 @@
 //  Created by Mccc on 2024/6/13.
 //
 
-/// Attribute wrapper, used to wrap Any.SmartAny allows only Any, [Any], and [String: Any] types to be modified.
-/// 被属性包装器包裹的，不会调用didFinishMapping方法。
-/// Swift的类型系统在运行时无法直接识别出wrappedValue的实际类型，需要各个属性包装器自行处理。
-
-
-
-
+/**
+ * A property wrapper that enables dynamic type handling for Codable properties.
+ *
+ * Usage Example:
+ *
+ * ```
+ * struct UserProfile: SmartCodable {
+ *     @SmartAny var name: Any?          // Can be String, Int, etc.
+ *     @SmartAny var age: Any?           // Number or other types
+ *     @SmartAny var metadata: [String: Any] = [:]  // Flexible dictionary
+ *     @SmartAny var tags: [Any] = []    // Mixed-type array
+ * }
+ * ```
+ */
 @propertyWrapper
 public struct SmartAny<T>: Codable {
     

@@ -41,96 +41,27 @@ class TestViewController: BaseViewController {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let arr: [String: Any] = [
-            "out_array": [
-                [
-                    "person_name": "jack",
-                    "person_age": 11,
-                    "person_array": [
-                        [
-                            "person_sub_name": "tom",
-                            "person_sub_age": 2
-                        ],
-                        [
-                            "person_sub_name": "jb",
-                            "person_sub_age": 3
-                        ]
-                    ]
-                ]
-            ],
-            "out_mapping": [
-                "1": 1,
-                "2": 2
-            ],
-            "out_dict": [
-                "person_name": "jim",
-                "person_age": 1111,
-                "person_array": [
-                    [
-                        "person_sub_name": "小明",
-                        "person_sub_age": 2
-                    ],
-                    [
-                        "person_sub_name": "小李",
-                        "person_sub_age": 3
-                    ]
-                ]
-            ]
+        
+        let dict: [String: Any] =  [
+            "date": "2024-06-06",
+            "data": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
+            "url": "https://www.baidu.com"
         ]
         
-        if let model = OutModel.deserialize(from: arr) {
-            smartPrint(value: model)
-            print(model.toDictionary(useMappedKeys: true))
-        }
+        let tf = DateFormatter()
+        tf.dateFormat = "yyyy-MM-dd"
+        let model = Model.deserialize(from: dict, options: [.date(.formatted(tf))])
+        print(model)
         
     }
+
     
-    class OutModel: SmartCodable {
-        var dict: PersonModel = PersonModel()
-        var mapping: [String: Int] = [:]
-        var array: [PersonModel] = []
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            return [
-                CodingKeys.array <--- "out_array",
-                CodingKeys.mapping <--- "out_mapping",
-                CodingKeys.dict <--- "out_dict"
-            ]
-        }
-        
-        required init() {
-        }
-    }
-    
-    class PersonModel: SmartCodable {
-        var name: String = ""
-        var age: Int = 0
-        var array: [PersonSubModel] = []
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            return [
-                CodingKeys.name <--- "person_name",
-                CodingKeys.age <--- "person_age",
-                CodingKeys.array <--- "person_array"
-            ]
-        }
-        
-        required init() {
-        }
-    }
-    
-    class PersonSubModel: SmartCodable {
-        var name = ""
-        var age = 0
-        
-        static func mappingForKey() -> [SmartKeyTransformer]? {
-            [
-                CodingKeys.name <--- "person_sub_name",
-                CodingKeys.age <--- "person_sub_age"
-            ]
-        }
-        
-        required init() {
-        }
+    struct Model: SmartCodable {
+        var date: Date?
+        var data: Data?
+        var url: URL?
     }
 }
+
+
+

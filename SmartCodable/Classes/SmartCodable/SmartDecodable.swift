@@ -7,16 +7,27 @@
 
 import Foundation
 
-
+/**
+ A protocol that enhances Swift's Decodable with additional customization options for decoding.
+ 
+ Conforming types gain:
+ - Post-decoding mapping callbacks
+ - Custom key and value transformation strategies
+ - Convenient deserialization methods
+ 
+ Requirements:
+ - Implement `didFinishMapping()` for post-processing
+ - Optionally provide key/value mapping strategies
+ */
 public protocol SmartDecodable: Decodable {
-    /// The callback for when mapping is complete
+    /// Callback invoked after successful decoding for post-processing
     mutating func didFinishMapping()
     
-    /// The mapping relationship of decoding keys.
-    /// The first mapping relationship that is not null is preferred
+    /// Defines key mapping transformations during decoding
+    /// First non-null mapping is preferred
     static func mappingForKey() -> [SmartKeyTransformer]?
     
-    /// The strategy for decoding values
+    /// Defines value transformation strategies during decoding
     static func mappingForValue() -> [SmartValueTransformer]?
     
     init()
@@ -34,7 +45,7 @@ extension SmartDecodable {
 public enum SmartDecodingOption: Hashable {
     
     
-    /// date的默认策略是ReferenceDate（参考日期是指2001年1月1日 00:00:00 UTC），以秒为单位。
+    /// The default policy for date is ReferenceDate (January 1, 2001 00:00:00 UTC), in seconds.
     case date(JSONDecoder.DateDecodingStrategy)
     
     case data(JSONDecoder.SmartDataDecodingStrategy)

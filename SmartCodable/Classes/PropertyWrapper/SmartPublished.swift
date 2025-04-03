@@ -7,9 +7,13 @@
 
 
 
-/// 协议SmartPublishedProtocol，目标是为任何遵循该协议的类型提供统一的接口。
-/// WrappedValue定义泛型类型，必须要求符合 Codable 协议。
-/// createInstance方法，尝试给定义的值创建实例。
+/**
+ Protocol defining requirements for types that can publish wrapped Codable values.
+ 
+ Provides a unified interface for any type conforming to this protocol.
+ - WrappedValue: The generic type that must conform to Codable
+ - createInstance: Attempts to create an instance from any value
+ */
 public protocol SmartPublishedProtocol {
     associatedtype WrappedValue: Codable
     init(wrappedValue: WrappedValue)
@@ -23,10 +27,14 @@ import SwiftUI
 import Combine
 
 
-/// 这段代码实现了一个自定义的属性包装器 SmartPublished，
-/// 将Combine 的发布功能与 Codable 的数据序列化能力结合。通过属性包装器简化属性的声明，同时支持相应式编程。
-/// 用于结合 Combine 的功能和编码解码支持。以下是对整个代码的说明。
-/// projectedValue提供一个发布者，可供订阅。
+/**
+ A property wrapper that combines Combine's publishing functionality with Codable serialization.
+ 
+ Key Features:
+ - Simplifies property declaration with property wrapper syntax
+ - Supports reactive programming through Combine publishers
+ - Maintains Codable compatibility for serialization
+ */
 @propertyWrapper
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 public struct SmartPublished<Value: Codable>: Codable {
@@ -43,18 +51,29 @@ public struct SmartPublished<Value: Codable>: Codable {
         try container.encode(self.wrappedValue)
     }
     public var wrappedValue: Value {
-        // willSet 观察器在 wrappedValue 被修改前调用，会将新的值通过 publisher 发送出去，从而通知所有的订阅者。这实现了数据更新的响应式特性。
+        // Notify subscribers before value changes
         willSet {
             publisher.subject.send(newValue)
         }
     }
     
+    /// The publisher that exposes the wrapped value's changes
     public var projectedValue: Publisher {
         publisher
     }
     
     private var publisher: Publisher
     
+    // MARK: - Publisher Implementation
+    
+    /**
+     The publisher that broadcasts changes to the wrapped value.
+     
+     Uses CurrentValueSubject which:
+     - Maintains the current value
+     - Sends current value to new subscribers
+     - More suitable than PassthroughSubject for property wrapper scenarios
+     */
     public struct Publisher: Combine.Publisher {
         public typealias Output = Value
         public typealias Failure = Never
@@ -79,11 +98,14 @@ public struct SmartPublished<Value: Codable>: Codable {
     }
     
     
-    /// 这个下标实现了对属性包装器的自定义访问逻辑，用于在包装器内自定义 wrappedValue 的访问和修改行为。
-    /// 参数解析：
-    /// observed：观察者，即外部的 ObservableObject 实例。
-    /// wrappedKeyPath：指向被包装值的引用键路径。
-    /// storageKeyPath：指向属性包装器自身的引用键路径。
+    /**
+     Custom subscript for property wrapper integration with ObservableObject.
+     
+     - Parameters:
+       - observed: The ObservableObject instance containing this property
+       - wrappedKeyPath: Reference to the wrapped value
+       - storageKeyPath: Reference to this property wrapper instance
+     */
     public static subscript<OuterSelf: ObservableObject>(
         _enclosingInstance observed: OuterSelf,
         wrapped wrappedKeyPath: ReferenceWritableKeyPath<OuterSelf, Value>,
@@ -93,9 +115,9 @@ public struct SmartPublished<Value: Codable>: Codable {
             observed[keyPath: storageKeyPath].wrappedValue
         }
         set {
-            // 在设置新值之前，如果 observed 的 objectWillChange 属性是 ObservableObjectPublisher 类型，则它会发送通知，确保在属性值更新之前，订阅者能收到通知。
+            // Notify observers before changing value
             if let subject = observed.objectWillChange as? ObservableObjectPublisher {
-                subject.send() // 修改 wrappedValue 之前
+                subject.send()
                 observed[keyPath: storageKeyPath].wrappedValue = newValue
             }
         }
@@ -104,6 +126,7 @@ public struct SmartPublished<Value: Codable>: Codable {
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 extension SmartPublished: WrapperLifecycle {
+    /// Handles post-mapping lifecycle events for wrapped values
     func wrappedValueDidFinishMapping() -> SmartPublished<Value>? {
         if var temp = wrappedValue as? SmartDecodable {
             temp.didFinishMapping()
@@ -114,11 +137,9 @@ extension SmartPublished: WrapperLifecycle {
 }
 
 
-/// 协议扩展
-/// 使 SmartPublished 符合 SmartPublishedProtocol。
-/// 利用泛型和类型检查，从任意值创建 SmartPublished 实例。
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
 extension SmartPublished: SmartPublishedProtocol {
+    /// Creates an instance from any value if possible
     public static func createInstance(with value: Any) -> SmartPublished? {
         if let value = value as? Value {
             return SmartPublished(wrappedValue: value)
@@ -133,76 +154,3 @@ extension SmartPublished: SmartPublishedProtocol {
 
 
 
-
-
-
-/**
- @propertyWrapper
- public struct AnySmartPublished<Value: Codable>: Codable {
-     public var wrappedValue: Value
-     
-     public init(wrappedValue: Value) {
-         self.wrappedValue = wrappedValue
-     }
-     
-     public init(from decoder: Decoder) throws {
-         let container = try decoder.singleValueContainer()
-         self.wrappedValue = try container.decode(Value.self)
-     }
-     
-     public func encode(to encoder: Encoder) throws {
-         var container = encoder.singleValueContainer()
-         try container.encode(wrappedValue)
-     }
- }
-
- protocol SmartPublishedProtocol {
-     associatedtype WrappedValue
-     init(wrappedValue: WrappedValue)
-     
-     static func createInstance(with value: Any) -> Self?
- }
-
- extension AnySmartPublished: SmartPublishedProtocol {
-     static func createInstance(with value: Any) -> AnySmartPublished? {
-         if let value = value as? Value {
-             return AnySmartPublished(wrappedValue: value)
-         }
-         return nil
-     }
- }
- */
-
-
-
-
-/**
- // 自定义的 PublishedCodable 属性包装器
- @propertyWrapper
- public class PublishedCodable<Value: Codable>: Codable {
-
-     // 包含 Published 的属性
-     @Published public var wrappedValue: Value
-
-     // 用于暴露 Published 的 publisher
-     public var projectedValue: Published<Value>.Publisher {
-         return $wrappedValue
-     }
-
-     public init(wrappedValue: Value) {
-         self.wrappedValue = wrappedValue
-     }
-
-     // 解码器的实现
-     required public init(from decoder: Decoder) throws {
-         let container = try decoder.singleValueContainer()
-         self._wrappedValue = Published(wrappedValue: try container.decode(Value.self))
-     }
-
-     // 编码器的实现
-     public func encode(to encoder: Encoder) throws {
-         var container = encoder.singleValueContainer()
-         try container.encode(wrappedValue)
-     }
- }
- */

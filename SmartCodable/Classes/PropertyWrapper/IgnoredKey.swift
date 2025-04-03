@@ -7,33 +7,45 @@
 
 import Foundation
 
-/** IgnoredKey 使用注意
- * 1. 并不是真正的忽略被修饰属性的解析，而是解析的时候忽略使用数据。
- * 2. 是否有对应数据，不同的处理：
- *  - 有数据时候，会走进IgnoredKey的 `encode(to:)` 方法，抛出异常，让外部处理。
- *  - 没有数据时，不会进来，会被当前一个普通数据解析处理，走无数据时的兜底逻辑。
+/**
+ A property wrapper that marks a property to be ignored during encoding/decoding.
+ 
+ Key Usage Notes:
+ 1. Doesn't truly ignore parsing of the decorated property, but ignores using the parsed data.
+ 2. Different handling based on data presence:
+    - When data exists: Enters `encode(to:)` method and throws an exception for external handling
+    - When no data exists: Treated as normal data parsing, falls back to default logic
+ 
+ - Note: This is particularly useful for properties that should maintain their default values
+   rather than being overwritten by decoded values.
  */
-
 @propertyWrapper
 public struct IgnoredKey<T>: Codable {
+    
+    /// The underlying value being wrapped
     public var wrappedValue: T
 
+    /// Determines whether this property should be included in encoding
     var isEncodable: Bool = true
     
-    /// isEncodable表示该属性是否支持编码, 默认不支持，即：不会加入json中。
+
+    /// Initializes an IgnoredKey with a wrapped value and encoding control
+    /// - Parameters:
+    ///   - wrappedValue: The initial/default value
+    ///   - isEncodable: Whether the property should be included in encoding (default: false)
     public init(wrappedValue: T, isEncodable: Bool = false) {
         self.wrappedValue = wrappedValue
         self.isEncodable = isEncodable
     }
 
     public init(from decoder: Decoder) throws {
-        
+        // Attempt to get default value first
         guard let impl = decoder as? JSONDecoderImpl else {
             wrappedValue = try Patcher<T>.defaultForType()
             return
         }
         
-        // 属性被IgnoredKey修饰的时，如果自定义了该属性的解析策略，在此支持
+        // Support for custom decoding strategies on IgnoredKey properties
         if let key = impl.codingPath.last {
             if let decoded = impl.cache.tranform(value: impl.json, for: key) as? T {
                 wrappedValue = decoded
@@ -41,9 +53,8 @@ public struct IgnoredKey<T>: Codable {
             }
         }
         
-        /// Only those using the SmartJSONDecoder parser have the ability to be compatible with thrown exceptions.
+        /// Special handling for SmartJSONDecoder parser - throws exceptions to be handled by container
         if let key = CodingUserInfoKey.parsingMark, let _ = impl.userInfo[key] {
-            // 将异常抛出，在解析容器中进行兼容。
             throw DecodingError.typeMismatch(IgnoredKey<T>.self, DecodingError.Context(
                 codingPath: decoder.codingPath, debugDescription: "\(Self.self) does not participate in the parsing, please ignore it.")
             )
@@ -57,7 +68,6 @@ public struct IgnoredKey<T>: Codable {
         
         guard isEncodable else { return }
         
-        /// 自定义编码策略
         if let impl = encoder as? JSONEncoderImpl,
             let key = impl.codingPath.last,
             let jsonValue = impl.cache.tranform(from: wrappedValue, with: key),
@@ -66,7 +76,7 @@ public struct IgnoredKey<T>: Codable {
             return
         }
         
-        // 如果 wrappedValue 符合 Encodable 协议，则手动进行编码，否则使用nil替代。
+        // Manual encoding for Encodable types, nil otherwise
         if let encodableValue = wrappedValue as? Encodable {
             try encodableValue.encode(to: encoder)
         } else {
