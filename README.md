@@ -24,7 +24,7 @@
 </a>
 </p>
 
-### English | [中文](https://github.com/intsig171/SmartCodable/README_CN.md)
+### English | [中文](https://github.com/intsig171/SmartCodable/blob/main/README_CN.md)
 
 SmartCodable redefines Swift data parsing by augmenting Apple's native Codable with production-ready resilience and flexibility. Where standard Codable fails on real-world data, SmartCodable delivers bulletproof parsing with minimal boilerplate.
 
