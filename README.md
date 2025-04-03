@@ -325,10 +325,9 @@ struct ABC: SmartCodable {
 }
 
 if let model = PublishedModel.deserialize(from: dict) {
-    // 正确访问 name 属性的 Publisher
     model.$name
         .sink { newName in
-            print("name 属性发生变化，新值为: \(newName)")
+            print("name updated，newValue is: \(newName)")
         }
         .store(in: &cancellables)
 }
