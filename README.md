@@ -30,7 +30,7 @@ SmartCodable redefines Swift data parsing by augmenting Apple's native Codable w
 
 ## **SmartCodable vs Codable**
 
-| Feature Category           | English Description                                          |
+| 🎯 Feature                  | 💬 Description                                                |
 | :------------------------- | :----------------------------------------------------------- |
 | **Error Tolerance**        | Military-grade handling of type mismatches, null values, and missing keys |
 | **Type Adaptation**        | Automatic bidirectional type conversion (String⇄Number, Number⇄Bool, etc.) |
