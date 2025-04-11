@@ -14,6 +14,7 @@ struct Patcher<T> {
     }
     
     static func convertToType(from value: JSONValue?, impl: JSONDecoderImpl) -> T? {
+        guard let value = value else { return nil }
         return Transformer.typeTransform(from: value, impl: impl)
     }
 }

@@ -30,10 +30,19 @@ public func <---(to: CodingKey, from: [String]) -> SmartKeyTransformer {
 
 public struct SmartValueTransformer {
     var location: CodingKey
-    var tranformer: any ValueTransformable
-    public init(location: CodingKey, tranformer: any ValueTransformable) {
+    var performer: any ValueTransformable
+    public init(location: CodingKey, performer: any ValueTransformable) {
         self.location = location
-        self.tranformer = tranformer
+        self.performer = performer
+    }
+    
+    /// Transforms a JSON value using the appropriate transformer
+    /// - Parameters:
+    ///   - value: The JSON value to transform
+    ///   - key: The associated coding key (if available)
+    /// - Returns: The transformed value or nil if no transformer applies
+    func tranform(value: JSONValue) -> Any? {
+        return performer.transformFromJSON(value.peel)
     }
 }
 
@@ -50,13 +59,13 @@ public protocol ValueTransformable {
 }
 
 
-public func <---(location: CodingKey, tranformer: any ValueTransformable) -> SmartValueTransformer {
-    SmartValueTransformer.init(location: location, tranformer: tranformer)
+public func <---(location: CodingKey, performer: any ValueTransformable) -> SmartValueTransformer {
+    SmartValueTransformer.init(location: location, performer: performer)
 }
 
 
 
-/** 便捷的Transformer
+/** Fast Transformer
  static func mappingForValue() -> [SmartValueTransformer]? {
      [
          CodingKeys.name <--- FastTransformer<String, String>(fromJSON: { json in
@@ -72,8 +81,6 @@ public func <---(location: CodingKey, tranformer: any ValueTransformable) -> Sma
      ]
  }
  */
-
-
 public struct FastTransformer<Object, JSON>: ValueTransformable {
     
     private let fromJSON: (JSON?) -> Object?

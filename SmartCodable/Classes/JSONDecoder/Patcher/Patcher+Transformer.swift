@@ -9,9 +9,8 @@ import Foundation
 
 extension Patcher {
     struct Transformer {
-        static func typeTransform(from jsonValue: JSONValue?, impl: JSONDecoderImpl) -> T? {
-            guard let value = jsonValue else { return nil }
-            return (T.self as? TypeTransformable.Type)?.transformValue(from: value, impl: impl) as? T
+        static func typeTransform(from jsonValue: JSONValue, impl: JSONDecoderImpl) -> T? {
+            return (T.self as? TypeTransformable.Type)?.transformValue(from: jsonValue, impl: impl) as? T
         }
     }
 }
@@ -32,7 +31,7 @@ extension Bool: TypeTransformable {
             if ["1","YES","Yes","yes","TRUE","True","true"].contains(string) { return true }
             if ["0","NO","No","no","FALSE","False","false"].contains(string) { return false }
         case .number(_):
-            if let int = try? impl.unwrapFixedWidthInteger(from: value, as: Int.self) {
+            if let int = impl.unwrapFixedWidthInteger(from: value, as: Int.self) {
                 if int == 1 {
                     return true
                 } else if int == 0 {
@@ -53,9 +52,9 @@ extension String: TypeTransformable {
         case .string(let string):
             return string
         case .number(let number):
-            if let int = try? impl.unwrapFixedWidthInteger(from: value, as: Int.self) {
+            if let int = impl.unwrapFixedWidthInteger(from: value, as: Int.self) {
                 return "\(int)"
-            } else if let double = try? impl.unwrapFloatingPoint(from: value, as: Double.self) {
+            } else if let double = impl.unwrapFloatingPoint(from: value, as: Double.self) {
                 return "\(double)"
             }
             return number

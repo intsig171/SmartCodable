@@ -5,22 +5,6 @@
 //  Created by qixin on 2024/9/26.
 //
 
-
-
-/**
- Protocol defining requirements for types that can publish wrapped Codable values.
- 
- Provides a unified interface for any type conforming to this protocol.
- - WrappedValue: The generic type that must conform to Codable
- - createInstance: Attempts to create an instance from any value
- */
-public protocol SmartPublishedProtocol {
-    associatedtype WrappedValue: Codable
-    init(wrappedValue: WrappedValue)
-    
-    static func createInstance(with value: Any) -> Self?
-}
-
 #if canImport(Combine) && swift(>=5.1)
 import Foundation
 import SwiftUI
@@ -125,7 +109,7 @@ public struct SmartPublished<Value: Codable>: Codable {
 }
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-extension SmartPublished: WrapperLifecycle {
+extension SmartPublished: PostDecodingHookable {
     /// Handles post-mapping lifecycle events for wrapped values
     func wrappedValueDidFinishMapping() -> SmartPublished<Value>? {
         if var temp = wrappedValue as? SmartDecodable {
@@ -138,7 +122,7 @@ extension SmartPublished: WrapperLifecycle {
 
 
 @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-extension SmartPublished: SmartPublishedProtocol {
+extension SmartPublished: PropertyWrapperInitializable {
     /// Creates an instance from any value if possible
     public static func createInstance(with value: Any) -> SmartPublished? {
         if let value = value as? Value {

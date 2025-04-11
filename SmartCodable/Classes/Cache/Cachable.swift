@@ -49,7 +49,7 @@ protocol Snapshot {
     var objectTypeName: String? { get }
     
     /// Records the custom transformer for properties
-    var transformers: [SmartValueTransformer] { set get }
+    var transformers: [SmartValueTransformer]? { set get }
 }
 
 extension Snapshot {

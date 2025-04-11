@@ -19,24 +19,62 @@ class ViewController: UIViewController {
         
         title = "SmartCodable"
         
-        
-        dataArray = [
-            other,
-            smart_introduce,
-            smart_test,
-            replace_HandyJSON,
-            smart_customDecoding,
-            smart_debug,
-            smart_case,
-        ]
+        let count = 10000 // or 1, 10, 100, 1000, 10000
+        let data = airportsJSON(count: count)
+
+        guard let objects = [Smart].deserialize(from: data) else {
+            return
+        }
         
         
-        view.addSubview(tableView)
-        tableView.frame = view.bounds
-        tableView.reloadData()
+//        dataArray = [
+//            other,
+//            smart_introduce,
+//            smart_test,
+//            replace_HandyJSON,
+//            smart_customDecoding,
+//            smart_debug,
+//            smart_case,
+//        ]
+//        
+//        
+//        view.addSubview(tableView)
+//        tableView.frame = view.bounds
+//        tableView.reloadData()
     }
     
-    lazy var tableView = UITableView.make(registerCells: [UITableViewCell.self], delegate: self, style: .grouped)
+    func airportsJSON(count: Int) -> Data {
+        let resource = "airports\(count)"
+        let url = Bundle.main.url(forResource: resource, withExtension: "json")
+        guard let url = url,
+            let data = try? Data(contentsOf: url) else {
+                fatalError()
+        }
+        return data
+    }
+    
+    // SmartCodable
+    struct Smart: SmartCodable {
+        
+        var name: String?
+        var iata: String?
+        var icao: String?
+        var coordinates: [Double]?
+        var runways: [Runway]?
+        
+        struct Runway: SmartCodable {
+            enum Surface: String, SmartCaseDefaultable {
+                case rigid, flexible, gravel, sealed, unpaved, other
+            }
+            
+            var direction: String?
+            var distance: Int?
+            var surface: Surface?
+        }
+    }
+
+    
+//    lazy var tableView = UITableView.make(registerCells: [UITableViewCell.self], delegate: self, style: .grouped)
 }
 
 

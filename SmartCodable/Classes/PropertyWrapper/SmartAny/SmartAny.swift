@@ -37,10 +37,14 @@ public struct SmartAny<T>: Codable {
         let value = decoder.json
         if let key = decoder.codingPath.last {
             // Note the case where T is nil. nil as? T is true.
-            if let cached = decoder.cache.tranform(value: value, for: key),
-               let decoded = cached as? T {
-                self = .init(wrappedValue: decoded)
-                return
+            if let tranformer = decoder.cache.valueTransformer(for: key) {
+                if let decoded = tranformer.tranform(value: value) as? T {
+                    self = .init(wrappedValue: decoded)
+                    return
+                } else {
+                    throw DecodingError.typeMismatch(Self.self, DecodingError.Context(
+                        codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！"))
+                }
             }
         }
                 
@@ -83,7 +87,7 @@ public struct SmartAny<T>: Codable {
 }
 
 
-extension SmartAny: WrapperLifecycle {
+extension SmartAny: PostDecodingHookable {
     func wrappedValueDidFinishMapping() -> SmartAny<T>? {
         if var temp = wrappedValue as? SmartDecodable {
             temp.didFinishMapping()

@@ -20,28 +20,16 @@ class DecodingCache: Cachable {
     /// Creates and stores a snapshot of initial values for a Decodable type
     /// - Parameter type: The Decodable type to cache
     func cacheSnapshot<T>(for type: T.Type) {
+        
+        // 减少动态派发开销，is 检查是编译时静态行为，比 as? 动态转换更高效。
+        guard type is SmartDecodable.Type else { return }
+        
         if let object = type as? SmartDecodable.Type {
-
-            var snapshot = DecodingSnapshot()
-            let instance = object.init()
-            
-            // Recursively captures initial values from a type and its superclasses
-            func captureInitialValues(from mirror: Mirror) {
-                mirror.children.forEach { child in
-                    if let key = child.label {
-                        snapshot.initialValues[key] = child.value
-                    }
-                }
-                if let superclassMirror = mirror.superclassMirror {
-                    captureInitialValues(from: superclassMirror)
-                }
-            }
-            // Continue with superclass properties
-            let mirror = Mirror(reflecting: instance)
-            captureInitialValues(from: mirror)
-            
+            let snapshot = DecodingSnapshot()
+            // [initialValues] Lazy initialization:
+            // Generate initial values via reflection only when first accessed,
+            // using the recorded objectType to optimize parsing performance.
             snapshot.objectType = object
-            snapshot.transformers = object.mappingForValue() ?? []
             snapshots.append(snapshot)
         }
     }
@@ -61,8 +49,17 @@ extension DecodingCache {
     /// Retrieves a cached value for the given coding key
     /// - Parameter key: The coding key to look up
     /// - Returns: The cached value if available, nil otherwise
-    func getValue<T>(forKey key: CodingKey) -> T? {
+    func initialValue<T>(forKey key: CodingKey?) -> T? {
+                
+        guard let key = key else { return nil }
         
+        
+        // Lazy initialization: Generate initial values via reflection only when first accessed,
+        // using the recorded objectType to optimize parsing performance
+        if topSnapshot?.initialValues.isEmpty ?? true {
+            populateInitialValues()
+        }
+
         guard let cacheValue = topSnapshot?.initialValues[key.stringValue] else {
             // Handle @propertyWrapper cases (prefixed with underscore)
             return handlePropertyWrapperCases(for: key)
@@ -70,7 +67,7 @@ extension DecodingCache {
         
         // When the CGFloat type is resolved,
         // it is resolved as Double. So we need to do a type conversion.
-        if let temp = cacheValue as? CGFloat {
+        if T.self == CGFloat.self, let temp = cacheValue as? CGFloat {
             return Double(temp) as? T
         }
         
@@ -83,23 +80,21 @@ extension DecodingCache {
         return nil
     }
     
-    
-    /// Transforms a JSON value using the appropriate transformer
-    /// - Parameters:
-    ///   - value: The JSON value to transform
-    ///   - key: The associated coding key (if available)
-    /// - Returns: The transformed value or nil if no transformer applies
-    func tranform(value: JSONValue, for key: CodingKey?) -> Any? {
-        if let lastKey = key {
-            let container = topSnapshot?.transformers.first(where: {
-                $0.location.stringValue == lastKey.stringValue
-            })
-            if let tranformValue = container?.tranformer.transformFromJSON(value.peel) {
-                return tranformValue
-            }
+    /// 获取转换器
+    func valueTransformer(for key: CodingKey?) -> SmartValueTransformer? {
+        guard let lastKey = key else { return nil }
+        
+        // Initialize transformers only once
+        if topSnapshot?.transformers?.isEmpty ?? true {
+            return nil
         }
-        return nil
+        
+        let transformer = topSnapshot?.transformers?.first(where: {
+            $0.location.stringValue == lastKey.stringValue
+        })
+        return transformer
     }
+    
     
     /// Handles property wrapper cases (properties prefixed with underscore)
     private func handlePropertyWrapperCases<T>(for key: CodingKey) -> T? {
@@ -107,14 +102,9 @@ extension DecodingCache {
             return extractWrappedValue(from: cached)
         }
         
-        // Search through all snapshots for property wrapper values
-        for item in snapshots.reversed() {
-            if let cached = item.initialValues["_" + key.stringValue] {
-                return extractWrappedValue(from: cached)
-            }
-        }
-        
-        return nil
+        return snapshots.reversed().lazy.compactMap {
+            $0.initialValues["_" + key.stringValue]
+        }.first.flatMap(extractWrappedValue)
     }
     
     /// Extracts wrapped value from potential property wrapper types
@@ -128,18 +118,39 @@ extension DecodingCache {
         }
         return nil
     }
+    
+    private func populateInitialValues() {
+        guard let type = topSnapshot?.objectType else { return }
+        
+        // Recursively captures initial values from a type and its superclasses
+        func captureInitialValues(from mirror: Mirror) {
+            mirror.children.forEach { child in
+                if let key = child.label {
+                    snapshots.last?.initialValues[key] = child.value
+                }
+            }
+            if let superclassMirror = mirror.superclassMirror {
+                captureInitialValues(from: superclassMirror)
+            }
+        }
+        
+        let mirror = Mirror(reflecting: type)
+        captureInitialValues(from: mirror)
+    }
 }
 
 
 
 /// Snapshot of decoding state for a particular model
-struct DecodingSnapshot: Snapshot {
+class DecodingSnapshot: Snapshot {
     
     typealias ObjectType = SmartDecodable.Type
     
     var objectType: (any SmartDecodable.Type)?
     
-    var transformers: [SmartValueTransformer] = []
+    lazy var transformers: [SmartValueTransformer]? = {
+        objectType?.mappingForValue()
+    }()
     
     /// Dictionary storing initial values of properties
     /// Key: Property name, Value: Initial value

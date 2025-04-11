@@ -45,7 +45,8 @@ class TestViewController: BaseViewController {
         let dict: [String: Any] =  [
             "date": "2024-06-06",
             "data": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
-            "url": "https://www.baidu.com"
+            "url": "https://www.baidu.com",
+            "int": "Mccc"
         ]
         
         let tf = DateFormatter()
@@ -57,9 +58,32 @@ class TestViewController: BaseViewController {
 
     
     struct Model: SmartCodable {
-        var date: Date?
-        var data: Data?
-        var url: URL?
+//        var date: Date?
+//        var data: Data?
+//        var url: URL?
+        var int: Int? = 100
+        
+//        static func mappingForValue() -> [SmartValueTransformer]? {
+//            [
+//                CodingKeys.int <--- IntTransformer()
+//            ]
+//        }
+    }
+    
+    struct IntTransformer: ValueTransformable {
+        func transformToJSON(_ value: Int) -> Int? {
+            return value
+        }
+        
+        func transformFromJSON(_ value: Any) -> Int? {
+            if let temp = value as? Int {
+                return 100 + temp
+            }
+            return nil
+        }
+        
+        typealias Object = Int
+        typealias JSON = Int
     }
 }
 

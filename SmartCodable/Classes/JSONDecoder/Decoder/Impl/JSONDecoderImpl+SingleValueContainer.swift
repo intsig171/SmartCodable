@@ -109,26 +109,30 @@ extension JSONDecoderImpl.SingleValueContainer {
     
     @inline(__always) private func decodeFixedWidthInteger<T: FixedWidthInteger>() throws -> T {
         
-        do {
-            return try self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self)
-        } catch {
-            if let trnas = Patcher<T>.convertToType(from: value, impl: impl) {
-                return trnas
-            } else {
-                throw error
-            }
+        if let decoded = impl.unwrapFixedWidthInteger(from: self.value, as: T.self) {
+            return decoded
+        }
+        if let trnas = Patcher<T>.convertToType(from: value, impl: impl) {
+            return trnas
+        } else {
+            throw DecodingError.dataCorrupted(.init(
+                codingPath: codingPath,
+                debugDescription: "Parsed JSON number does not fit in \(T.self)."))
         }
     }
 
     @inline(__always) private func decodeFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() throws -> T {
-        do {
-            return try self.impl.unwrapFloatingPoint(from: self.value, as: T.self)
-        } catch {
-            if let trnas = Patcher<T>.convertToType(from: value, impl: impl) {
-                return trnas
-            } else {
-                throw error
-            }
+        
+        if let decoded = impl.unwrapFloatingPoint(from: value, as: T.self) {
+            return decoded
+        }
+        if let trnas = Patcher<T>.convertToType(from: value, impl: impl) {
+            return trnas
+        } else {
+            throw DecodingError.typeMismatch(T.self, .init(
+                codingPath: codingPath,
+                debugDescription: "Expected to decode \(T.self) but found \(value.debugDataTypeDescription) instead."
+            ))
         }
     }
 }
