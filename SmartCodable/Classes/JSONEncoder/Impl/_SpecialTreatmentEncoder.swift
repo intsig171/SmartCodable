@@ -2,7 +2,7 @@
 //  _SpecialTreatmentEncoder.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/6/3.
+//  Created by Mccc on 2024/6/3.
 //
 
 import Foundation
@@ -71,9 +71,18 @@ extension _SpecialTreatmentEncoder {
             
             let encoder = self.getEncoder(for: additionalKey)
             try encodable.encode(to: encoder)
-            
             impl.cache.removeSnapshot(for: E.self)
-            
+
+            // If it is modified by SmartFlat, you need to encode to the upper layer to restore the data.
+            if encodable is FlatType {
+                if let object = encoder.value?.object {
+                    for (key, value) in object {
+                        self.impl.object?.set(value, for: key)
+                    }
+                    return nil
+                }
+            }
+        
             return encoder.value
         }
     }
@@ -84,7 +93,6 @@ extension _SpecialTreatmentEncoder {
             return value
         }
 
-        
         switch self.options.dateEncodingStrategy {
         case .deferredToDate:
             let encoder = self.getEncoder(for: additionalKey)
@@ -112,25 +120,18 @@ extension _SpecialTreatmentEncoder {
             try closure(date, encoder)
             // The closure didn't encode anything. Return the default keyed container.
             return encoder.value ?? .object([:])
+        @unknown default:
+            let encoder = self.getEncoder(for: additionalKey)
+            try date.encode(to: encoder)
+            return encoder.value ?? .null
         }
     }
 
     func wrapData(_ data: Data, for additionalKey: CodingKey?) throws -> JSONValue {
         switch self.options.dataEncodingStrategy {
-        case .deferredToData:
-            let encoder = self.getEncoder(for: additionalKey)
-            try data.encode(to: encoder)
-            return encoder.value ?? .null
-
         case .base64:
             let base64 = data.base64EncodedString()
             return .string(base64)
-
-        case .custom(let closure):
-            let encoder = self.getEncoder(for: additionalKey)
-            try closure(data, encoder)
-            // The closure didn't encode anything. Return the default keyed container.
-            return encoder.value ?? .object([:])
         }
     }
 
@@ -167,33 +168,39 @@ extension _SpecialTreatmentEncoder {
 extension _SpecialTreatmentEncoder {
     internal func _converted(_ key: CodingKey) -> CodingKey {
         
+        var newKey = key
+        
         var useMappedKeys = false
         if let key = CodingUserInfoKey.useMappedKeys {
             useMappedKeys = impl.userInfo[key] as? Bool ?? false
         }
             
-        if let objectType = impl.cache.cacheType {
+        if let objectType = impl.cache.topSnapshot?.objectType {
             if let mappings = objectType.mappingForKey() {
                 for mapping in mappings {
-                    if mapping.to.stringValue == key.stringValue {
+                    if mapping.to.stringValue == newKey.stringValue {
                         if useMappedKeys, let first = mapping.from.first {
-                            return _JSONKey.init(stringValue: first, intValue: nil)
+                            newKey = _JSONKey.init(stringValue: first, intValue: nil)
                         } else {
-                            return mapping.to
+                            newKey = mapping.to
                         }
                     }
                 }
             }
         }
-                
+        
         switch self.options.keyEncodingStrategy {
+        case .toSnakeCase:
+            let newKeyString = SmartJSONEncoder.SmartKeyEncodingStrategy._convertToSnakeCase(newKey.stringValue)
+            return _JSONKey(stringValue: newKeyString, intValue: newKey.intValue)
+        case .firstLetterLower:
+            let newKeyString = SmartJSONEncoder.SmartKeyEncodingStrategy._convertFirstLetterToLowercase(newKey.stringValue)
+            return _JSONKey(stringValue: newKeyString, intValue: newKey.intValue)
+        case .firstLetterUpper:
+            let newKeyString = SmartJSONEncoder.SmartKeyEncodingStrategy._convertFirstLetterToUppercase(newKey.stringValue)
+            return _JSONKey(stringValue: newKeyString, intValue: newKey.intValue)
         case .useDefaultKeys:
-            return key
-        case .convertToSnakeCase:
-            let newKeyString = SmartJSONEncoder.KeyEncodingStrategy._convertToSnakeCase(key.stringValue)
-            return _JSONKey(stringValue: newKeyString, intValue: key.intValue)
-        case .custom(let converter):
-            return converter(codingPath + [key])
+            return newKey
         }
     }
 }

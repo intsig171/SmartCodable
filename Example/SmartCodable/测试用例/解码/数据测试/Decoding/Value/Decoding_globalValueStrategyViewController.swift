@@ -2,7 +2,7 @@
 //  Decoding_globalValueStrategyViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/5/30.
+//  Created by Mccc on 2024/5/30.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

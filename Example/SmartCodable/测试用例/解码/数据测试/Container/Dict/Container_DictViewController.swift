@@ -2,7 +2,7 @@
 //  Container_DictViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/5/20.
+//  Created by Mccc on 2024/5/20.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
@@ -190,6 +190,12 @@ extension Container_DictViewController {
     struct FlatModel: SmartCodable {
         var name: String = ""
         var age: Int = 0
+        
+        mutating func didFinishMapping() {
+            
+            age = 1000
+            print("执行了didFinishMapping")
+        }
     }
 }
 

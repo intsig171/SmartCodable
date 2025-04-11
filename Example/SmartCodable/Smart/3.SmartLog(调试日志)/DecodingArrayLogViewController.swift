@@ -2,7 +2,7 @@
 //  DecodingArrayLogViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/4/24.
+//  Created by Mccc on 2024/4/24.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
@@ -14,14 +14,11 @@ class DecodingArrayLogViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-        SmartConfig.debugMode = .verbose
-        SmartConfig.space = "   "
-        
-        demo()
-        demo1()
-        demo2()
-        demo3()
+            
+//        demo()
+//        demo1()
+//        demo2()
+//        demo3()
         demo4()
     }
     
@@ -75,13 +72,16 @@ class DecodingArrayLogViewController: BaseViewController {
             "name": [],
             "date": [],
             "location": [],
-            "father": [
+            "fathers": [[
                 "name": NSNull(),
                 "age": "123",
                 "dog": [
                     "hobby": 123,
-                ]
-            ],
+                ],
+                "dogs": [[
+                    "hobby": 123,
+                ]]
+            ]],
             "sons": [
                 [
                     "hobby": 123,
@@ -102,23 +102,25 @@ class DecodingArrayLogViewController: BaseViewController {
 extension DecodingArrayLogViewController {
     struct Family: SmartCodable {
         var name: String = "我的家"
-        var location: String = ""
-        var date: Date = Date()
+//        var location: String = ""
+//        var date: Date = Date()
 
-        var father: Father = Father()
+        var fathers: [Father] = []
         var sons: [Son] = []
     }
 
     struct Father: SmartCodable {
         var name: String = ""
-        var age: Int = 0
+//        var age: Int = 0
         var dog: Dog = Dog()
+        var dogs: [Dog] = []
+
     }
 
 
     struct Son: SmartCodable {
         var hobby: String = ""
-        var age: Int = 0
+//        var age: Int = 0
     }
 
     struct Dog: SmartCodable {

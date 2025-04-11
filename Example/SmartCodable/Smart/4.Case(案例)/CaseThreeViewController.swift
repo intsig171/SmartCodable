@@ -2,7 +2,7 @@
 //  CaseThreeViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/11/22.
+//  Created by Mccc on 2023/11/22.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 
@@ -15,14 +15,11 @@ class CaseThreeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // name不会被解析
         let dict = [
             "name": "小明",
             "age": "10"
         ]
-        
-        
-
         guard let model = CaseThreeModel.deserialize(from: dict) else { return }
         print(model)
 

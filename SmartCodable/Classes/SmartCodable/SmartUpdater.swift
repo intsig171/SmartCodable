@@ -2,7 +2,7 @@
 //  SmartUpdater.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/5/30.
+//  Created by Mccc on 2024/5/30.
 //
 
 import Foundation
@@ -46,14 +46,9 @@ public struct SmartUpdater<T: SmartCodable> {
     ///   - dest: A reference to the target object (the inout keyword indicates that this object will be modified within the method).
     ///   - src: A Dictionary object containing the JSON data.
     public static func update(_ dest: inout T, from src: [String: Any]?) {
-        
         guard let src = src else { return }
-
         var destDict = dest.toDictionary() ?? [:]
         updateDict(&destDict, from: src)
-        
-        print(destDict)
-        
         if let model = T.deserialize(from: destDict) {
             dest = model
         }

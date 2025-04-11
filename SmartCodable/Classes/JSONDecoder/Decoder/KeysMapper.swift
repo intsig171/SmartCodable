@@ -2,23 +2,32 @@
 //  KeysMapper.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/5/27.
+//  Created by Mccc on 2024/5/27.
 //
 
 import Foundation
+
+/// Handles key mapping and conversion for JSON values during decoding
 struct KeysMapper {
     
+    /// Converts JSON values according to the target type's key mapping rules
+    /// - Parameters:
+    ///   - jsonValue: The original JSON value to convert
+    ///   - type: The target type for decoding
+    /// - Returns: Converted JSON value or nil if conversion fails
     static func convertFrom(_ jsonValue: JSONValue, type: Any.Type) -> JSONValue? {
         
-        //type is not Model, there is no renaming requirement for key.
+        // Type is not Model, no key renaming needed
         guard let type = type as? SmartDecodable.Type else { return jsonValue }
         
         switch jsonValue {
         case .string(let stringValue):
+            // Handle string values that might contain JSON
             let value = parseJSON(from: stringValue, as: type)
             return JSONValue.make(value)
             
         case .object(let dictValue):
+            // Convert dictionary keys according to mapping rules
             if let dict = mapDictionary(dict: dictValue, using: type) as? [String: JSONValue] {
                 return JSONValue.object(dict)
             }
@@ -28,29 +37,45 @@ struct KeysMapper {
         }
         return nil
     }
-
     
+    /// Parses a string into JSON object and applies key mapping
     private static func parseJSON(from string: String, as type: SmartDecodable.Type) -> Any {
         guard let jsonObject = string.toJSONObject() else { return string }
         if let dict = jsonObject as? [String: Any] {
+            // Apply key mapping to dictionary
             return mapDictionary(dict: dict, using: type)
         } else {
             return jsonObject
         }
     }
     
+    /// Applies key mapping rules to a dictionary
     private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any] {
         var newDict = dict
         type.mappingForKey()?.forEach { mapping in
+            let newKey = mapping.to.stringValue
+            
+            /**
+             * Check if the original field is an interference field (exists in mapping relationship)
+             * Interference field scenario: Note cases like CodingKeys.name <--- ["newName"]
+             * Valid field scenario: Note cases like CodingKeys.name <--- ["name", "newName"]
+             */
+            if !(mapping.from.contains(newKey)) {
+                newDict.removeValue(forKey: newKey)
+            }
+            
+            // break effect: Prefer the first non-null field
             for oldKey in mapping.from {
-                let newKey = mapping.to.stringValue
-                if let value = newDict[oldKey], !(value is NSNull) {
+                // Mapping exists at current level
+                if let value = newDict[oldKey] as? JSONValue, value != .null {
                     newDict[newKey] = newDict[oldKey]
                     break
-                } else { // Handles the case of a custom parsing path.
-                    if newDict[newKey] == nil, let pathValue = newDict.getValue(forKeyPath: oldKey) {
-                        newDict.updateValue(pathValue, forKey: newKey)
-                    }
+                }
+                
+                // Mapping requires cross-level path handling
+                if let pathValue = newDict.getValue(forKeyPath: oldKey) {
+                    newDict.updateValue(pathValue, forKey: newKey)
+                    break
                 }
             }
         }

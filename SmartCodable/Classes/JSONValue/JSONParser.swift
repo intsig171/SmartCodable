@@ -2,7 +2,7 @@
 //  JSONParser.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/5/17.
+//  Created by Mccc on 2024/5/17.
 //
 
 import Foundation

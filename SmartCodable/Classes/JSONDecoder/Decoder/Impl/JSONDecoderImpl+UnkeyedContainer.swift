@@ -2,7 +2,7 @@
 //  JSONDecoderImpl+UnkeyedContainer.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/5/17.
+//  Created by Mccc on 2024/5/17.
 //
 
 import Foundation
@@ -216,12 +216,12 @@ extension JSONDecoderImpl.UnkeyedContainer {
 
         guard let value = try? self.getNextValue(ofType: T.self) else {
             let decoded: T = try Patcher<T>.defaultForType()
-            SmartLog.createLog(impl: impl, forKey: key, value: nil, type: T.self)
+            SmartSentinel.monitorLog(impl: impl, forKey: key, value: nil, type: T.self)
             self.currentIndex += 1
             return decoded
         }
         
-        SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
+        SmartSentinel.monitorLog(impl: impl, forKey: key, value: value, type: T.self)
 
         
         if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
@@ -355,7 +355,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
             return nil
         }
         let key = _JSONKey(index: self.currentIndex)
-        SmartLog.createLog(impl: impl, forKey: key, value: value, type: T.self)
+        SmartSentinel.monitorLog(impl: impl, forKey: key, value: value, type: T.self)
         if let decoded = Patcher<T>.convertToType(from: value, impl: impl) {
             self.currentIndex += 1
             return decoded
@@ -368,10 +368,15 @@ extension JSONDecoderImpl.UnkeyedContainer {
 
 
 extension JSONDecoderImpl.UnkeyedContainer {
+    // 被属性包装器包裹的，不会调用该方法。Swift的类型系统在运行时无法直接识别出wrappedValue的实际类型.
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {
         if var value = decodeValue as? SmartDecodable {
             value.didFinishMapping()
             if let temp = value as? T { return temp }
+        } else if let value = decodeValue as? WrapperLifecycle {
+            if let temp = value.wrappedValueDidFinishMapping() as? T {
+                return temp
+            }
         }
         return decodeValue
     }

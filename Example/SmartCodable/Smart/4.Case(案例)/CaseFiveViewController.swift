@@ -2,7 +2,7 @@
 //  CaseFiveViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/11/30.
+//  Created by Mccc on 2023/11/30.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 
@@ -30,7 +30,22 @@ class CaseFiveViewController : BaseViewController {
         // 此时的data是一个字符串，不是字典类型。
         guard let model = ApiConmon<StringModel>.deserialize(from: json) else { return }
         print(model)
+        guard let model1 = ApiConmon<String>.deserialize(from: json) else { return }
+        print(model1)
         
+        
+        let jsonNull = """
+        {
+          "data": null,
+          "message": "200"
+        }
+        """
+        guard let model2 = ApiConmon<String>.deserialize(from: jsonNull) else { return }
+        print(model2)
+
+        // 此时的data是一个字符串，不是字典类型。
+        guard let model3 = ApiConmon<StringModel>.deserialize(from: json) else { return }
+        print(model3)
         
         
         let json1 = """
@@ -42,8 +57,8 @@ class CaseFiveViewController : BaseViewController {
           "message": "200"
         }
         """
-        guard let model1 = ApiConmon<DataModel>.deserialize(from: json1) else { return }
-        print(model1)
+        guard let model4 = ApiConmon<DataModel>.deserialize(from: json1) else { return }
+        print(model4)
         
         
         let json2 = """
@@ -61,8 +76,8 @@ class CaseFiveViewController : BaseViewController {
           "message": "200"
         }
         """
-        guard let model2 = ApiConmon<[DataModel]>.deserialize(from: json2) else { return }
-        print(model2)
+        guard let model5 = ApiConmon<[DataModel]>.deserialize(from: json2) else { return }
+        print(model5)
         
     }
 }
@@ -79,7 +94,7 @@ struct DataModel: SmartCodable {
     var age: Int = 0
 }
 
-struct ApiConmon<Element: SmartCodable>: SmartCodable {
+struct ApiConmon<Element: Codable>: SmartCodable {
     init() { }
     
     var data: Element?

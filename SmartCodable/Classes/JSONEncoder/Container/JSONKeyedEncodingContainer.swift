@@ -2,7 +2,7 @@
 //  JSONKeyedEncodingContainer.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/6/3.
+//  Created by Mccc on 2024/6/3.
 //
 
 import Foundation
@@ -108,8 +108,9 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
         if let jsonValue = impl.cache.tranform(from: value, with: convertedKey) {
             self.object.set(jsonValue, for: convertedKey.stringValue)
         } else {
-            let encoded = try self.wrapEncodable(value, for: convertedKey)
-            self.object.set(encoded ?? .object([:]), for: convertedKey.stringValue)
+            if let encoded = try? self.wrapEncodable(value, for: convertedKey) {
+                self.object.set(encoded, for: convertedKey.stringValue)
+            }
         }
     }
 

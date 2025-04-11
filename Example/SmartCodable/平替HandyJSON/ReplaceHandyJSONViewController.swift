@@ -2,7 +2,7 @@
 //  ReplaceHandyJSONViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/3/26.
+//  Created by Mccc on 2024/3/26.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
@@ -58,6 +58,8 @@ extension ReplaceHandyJSONViewController {
                 ["name": "5.处理继承关系",    "vc": "ReplaceHandyJSON_5ViewController"],
 
                 ["name": "6.枚举的解析",    "vc": "ReplaceHandyJSON_6ViewController"],
+
+                ["name": "7.plist文件的解析",    "vc": "ReplaceHandyJSON_7ViewController"],
 
             ]
         ]

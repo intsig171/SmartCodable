@@ -2,7 +2,7 @@
 //  JSONDecoderImpl.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/5/17.
+//  Created by Mccc on 2024/5/17.
 //
 
 import Foundation
@@ -62,11 +62,7 @@ extension JSONDecoderImpl: Decoder {
         default:
             break
         }
-        
-        throw DecodingError.typeMismatch([String: JSONValue].self, DecodingError.Context(
-            codingPath: self.codingPath,
-            debugDescription: "Expected to decode \([String: JSONValue].self) but found \(self.json.debugDataTypeDescription) instead."
-        ))
+        throw DecodingError._typeMismatch(at: codingPath, expectation: [String: JSONValue].self, desc: json.debugDataTypeDescription)
     }
     
     

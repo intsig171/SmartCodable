@@ -2,7 +2,7 @@
 //  TypePatcher.swift
 //  SmartCodable
 //
-//  Created by qixin on 2023/9/5.
+//  Created by Mccc on 2023/9/5.
 //
 
 import Foundation
@@ -31,7 +31,7 @@ extension Bool: TypeTransformable {
         case .string(let string):
             if ["1","YES","Yes","yes","TRUE","True","true"].contains(string) { return true }
             if ["0","NO","No","no","FALSE","False","false"].contains(string) { return false }
-        case .number(let number):
+        case .number(_):
             if let int = try? impl.unwrapFixedWidthInteger(from: value, as: Int.self) {
                 if int == 1 {
                     return true
@@ -172,14 +172,14 @@ private func _fixedWidthInteger<T: FixedWidthInteger>(from value: JSONValue) -> 
     case .string(let string):
         if let integer = T(string) {
             return integer
-        } else if let float = Double(string) {
-            return T(float)
+        } else if let float = Double(string), float.isFinite, float >= Double(T.min) && float <= Double(T.max), let integer = T(exactly: float) {
+            return integer
         }
     case .number(let number):
         if let integer = T(number) {
             return integer
-        } else if let float = Double(number) {
-            return T(float)
+        } else if let float = Double(number), float.isFinite, float >= Double(T.min) && float <= Double(T.max), let integer = T(exactly: float) {
+            return integer
         }
     default:
         break

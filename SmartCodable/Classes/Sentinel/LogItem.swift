@@ -2,7 +2,7 @@
 //  LogItem.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/4/23.
+//  Created by Mccc on 2024/4/23.
 //
 
 import Foundation
@@ -87,4 +87,13 @@ extension LogItem {
         return nil
     }
     
+}
+
+extension Array {
+    fileprivate func removeFromEnd(_ count: Int) -> [Element]? {
+        guard count >= 0 else { return nil }
+        let endIndex = self.count - count
+        guard endIndex >= 0 else { return nil }
+        return Array(self.prefix(endIndex))
+    }
 }

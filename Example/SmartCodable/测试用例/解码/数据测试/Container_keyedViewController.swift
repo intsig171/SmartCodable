@@ -2,7 +2,7 @@
 //  Container_keyedViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/7/1.
+//  Created by Mccc on 2024/7/1.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
@@ -187,6 +187,9 @@ extension Container_keyedViewController {
     struct FlatModel: SmartCodable {
         var name: String = ""
         var age: Int = 0
+        
+        func didFinishMapping() {
+            print("执行了didFinishMapping")
+        }
     }
 }
-

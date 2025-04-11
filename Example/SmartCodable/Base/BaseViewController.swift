@@ -132,18 +132,44 @@ extension String {
     }
     
     public func toDictionary() -> [String: Any]? {
-        if let jsonData = data(using: .utf8) {
-            do {
-                // 尝试反序列化JSON数据到字典
-                if let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-                    return dictionary
-                }
-            } catch {
-                return nil
-            }
+            return self.parseToAny() as? [String: Any]
         }
-        return nil
-    }
+        
+        private func parseToAny() -> Any? {
+            if let jsonData = self.data(using: .utf8) {
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
+                    
+                    if let dictionary = jsonObject as? [String: Any] {
+                        var mutableDictionary = dictionary
+                        for (key, value) in dictionary {
+                            if let nestedString = value as? String {
+                                if let nestedObject = nestedString.parseToAny() {
+                                    mutableDictionary[key] = nestedObject
+                                }
+                            }
+                        }
+                        return mutableDictionary
+                    } else if let array = jsonObject as? [Any] {
+                        var mutableArray = array
+                        for (index, value) in array.enumerated() {
+                            if let nestedString = value as? String {
+                                if let nestedObject = nestedString.parseToAny() {
+                                    mutableArray[index] = nestedObject
+                                }
+                            }
+                        }
+                        return mutableArray
+                    } else {
+                        return jsonObject
+                    }
+                } catch {
+                    print("Error deserializing JSON: \(error)")
+                    return nil
+                }
+            }
+            return nil
+        }
     
     public func toArray() -> [[String: Any]]? {
         if let jsonData = data(using: .utf8) {

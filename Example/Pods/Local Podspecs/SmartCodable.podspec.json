@@ -1,18 +1,18 @@
 {
   "name": "SmartCodable",
-  "version": "4.1.3-beta",
-  "summary": "数据解析库",
+  "version": "4.3.9",
+  "summary": "Swift数据解析库",
   "homepage": "https://github.com/intsig171",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Mccc": "mancong@bertadata.com"
+    "Mccc": "562863544@qq.com"
   },
   "source": {
     "git": "https://github.com/intsig171/SmartCodable.git",
-    "tag": "4.1.3-beta"
+    "tag": "4.3.9"
   },
   "platforms": {
     "ios": "11.0",

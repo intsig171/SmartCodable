@@ -2,7 +2,7 @@
 //  IntroduceViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/4/10.
+//  Created by Mccc on 2024/4/10.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 
@@ -51,6 +51,7 @@ extension IntroduceViewController {
                 ["name": "9. 支持UIColor的解析",  "vc": "Introduce_9ViewController"],
                 ["name": "10. 指定解析路径",  "vc": "Introduce_10ViewController"],
                 ["name": "11. 更新现有模型",  "vc": "Introduce_11ViewController"],
+                ["name": "12. 支持Combine",  "vc": "Introduce_12ViewController"],
 
 
             ]

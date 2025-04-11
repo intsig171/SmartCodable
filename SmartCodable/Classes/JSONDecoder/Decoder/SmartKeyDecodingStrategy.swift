@@ -2,10 +2,18 @@
 //  SmartKeyDecodingStrategy.swift
 //  SmartCodable
 //
-//  Created by qixin on 2024/3/27.
+//  Created by Mccc on 2024/3/27.
 //
 
 import Foundation
+
+extension JSONDecoder {
+    public enum SmartDataDecodingStrategy : Sendable {
+        /// Decode the `Data` from a Base64-encoded string. This is the default strategy.
+        case base64
+    }
+}
+
 
 
 extension JSONDecoder {

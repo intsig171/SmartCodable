@@ -17,7 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-        SmartConfig.debugMode = .verbose
+        SmartSentinel.debugMode = .verbose
+        SmartSentinel.onLogGenerated { logs in
+//            print(logs)
+            // 解析的日志， 可以用来上传服务器
+        }
+        
+        
         
         initRootViewController()
         
@@ -42,3 +48,4 @@ extension AppDelegate {
         window?.makeKeyAndVisible()
     }
 }
+

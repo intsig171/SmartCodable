@@ -2,7 +2,7 @@
 //  Encode_BaseData_IntViewController.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2024/6/6.
+//  Created by Mccc on 2024/6/6.
 //  Copyright © 2024 CocoaPods. All rights reserved.
 //
 

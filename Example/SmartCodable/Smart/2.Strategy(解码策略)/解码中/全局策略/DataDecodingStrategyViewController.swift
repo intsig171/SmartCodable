@@ -2,7 +2,7 @@
 //  DataDecodingStrategy.swift
 //  SmartCodable_Example
 //
-//  Created by qixin on 2023/11/30.
+//  Created by Mccc on 2023/11/30.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 
