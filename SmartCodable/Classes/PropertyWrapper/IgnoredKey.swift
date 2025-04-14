@@ -89,10 +89,6 @@ public struct IgnoredKey<T>: Codable {
 }
 extension JSONDecoderImpl {
     fileprivate func smartDecode<T>(type: T.Type) throws -> T {
-        if let value: T = cache.initialValue(forKey: codingPath.last) {
-            return value
-        } else {
-            return try Patcher<T>.defaultForType()
-        }
+        try cache.initialValue(forKey: codingPath.last)
     }
 }

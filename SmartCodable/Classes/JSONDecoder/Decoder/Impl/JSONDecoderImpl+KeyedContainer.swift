@@ -261,7 +261,7 @@ extension JSONDecoderImpl.KeyedContainer {
         
         guard let value = getValue(forKey: key) else {
             SmartSentinel.monitorLog(impl: impl, forKey: key, value: nil, type: T.self)
-            return impl.cache.initialValue(forKey: key)
+            return impl.cache.initialValueIfPresent(forKey: key)
         }
         
         SmartSentinel.monitorLog(impl: impl, forKey: key, value: value, type: T.self)
@@ -271,7 +271,7 @@ extension JSONDecoderImpl.KeyedContainer {
                 return decoded
             }
         }
-        return impl.cache.initialValue(forKey: key)
+        return impl.cache.initialValueIfPresent(forKey: key)
     }
     
     

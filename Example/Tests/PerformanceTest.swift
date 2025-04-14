@@ -27,6 +27,7 @@ class PerformanceTest: XCTestCase {
             }
         }
     }
+    
     //【1000】0.026 使用SmartJSONDecoder解析遵循Codable协议的model
     func testCleanJsonDecoder() {
         measure {
@@ -60,17 +61,17 @@ struct CodableModel: Codable {
     let iata: String
     let icao: String
     let coordinates: [Double]
-    let runways: [Runway]
+//    let runways: [Runway]
 
-    struct Runway: Codable {
-        enum Surface: String, Codable {
-            case rigid, flexible, gravel, sealed, unpaved, other
-        }
-        
-        let direction: String
-        let distance: Int
-        let surface: Surface
-    }
+//    struct Runway: Codable {
+//        enum Surface: String, Codable {
+//            case rigid, flexible, gravel, sealed, unpaved, other
+//        }
+//        
+//        let direction: String
+//        let distance: Int
+//        let surface: Surface
+//    }
 }
 
 
@@ -83,15 +84,15 @@ struct SmartModel: SmartCodable {
     var iata: String?
     var icao: String?
     var coordinates: [Double]?
-    var runways: [Runway]?
-    
-    struct Runway: SmartCodable {
-        enum Surface: String, SmartCaseDefaultable {            
-            case rigid, flexible, gravel, sealed, unpaved, other
-        }
-        
-        var direction: String?
-        var distance: Int?
-        var surface: Surface?
-    }
+//    var runways: [Runway]?
+//    
+//    struct Runway: SmartCodable {
+//        enum Surface: String, SmartCaseDefaultable {            
+//            case rigid, flexible, gravel, sealed, unpaved, other
+//        }
+//        
+//        var direction: String?
+//        var distance: Int?
+//        var surface: Surface?
+//    }
 }

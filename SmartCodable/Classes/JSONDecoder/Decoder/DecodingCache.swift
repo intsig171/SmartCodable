@@ -49,7 +49,7 @@ extension DecodingCache {
     /// Retrieves a cached value for the given coding key
     /// - Parameter key: The coding key to look up
     /// - Returns: The cached value if available, nil otherwise
-    func initialValue<T>(forKey key: CodingKey?) -> T? {
+    func initialValueIfPresent<T>(forKey key: CodingKey?) -> T? {
                 
         guard let key = key else { return nil }
         
@@ -78,6 +78,14 @@ extension DecodingCache {
         }
         
         return nil
+    }
+    
+    
+    func initialValue<T>(forKey key: CodingKey?) throws -> T {
+        guard let value: T = initialValueIfPresent(forKey: key) else {
+            return try Patcher<T>.defaultForType()
+        }
+        return value
     }
     
     /// 获取转换器
@@ -134,7 +142,7 @@ extension DecodingCache {
             }
         }
         
-        let mirror = Mirror(reflecting: type)
+        let mirror = Mirror(reflecting: type.init())
         captureInitialValues(from: mirror)
     }
 }
