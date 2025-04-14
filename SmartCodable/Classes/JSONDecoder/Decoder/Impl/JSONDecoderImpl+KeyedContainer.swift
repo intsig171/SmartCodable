@@ -399,7 +399,7 @@ extension JSONDecoderImpl.KeyedContainer {
             return nil
         }
 
-        guard let newDecoder = try? decoderForKeyCompatibleForJson(key, type: type) else { return nil }
+        guard let newDecoder = try? decoderForKeyCompatibleForJson(key, type: type) else { return _compatibleDecode(forKey: key) }
         
         if let decoded = try? newDecoder.unwrap(as: type) {
             return didFinishMapping(decoded)
