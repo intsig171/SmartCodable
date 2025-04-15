@@ -2,7 +2,9 @@
 
 
 
-## HandyJSON 如何处理继承关系的解析的？
+## HandyJSON 如何处理继承的解析
+
+`HandyJSON` 能自动处理继承层级中的所有属性，子类无需额外实现任何方法，使用方式非常简洁，示例如下：
 
 ```
 class BaseModel: HandyJSON {
@@ -20,30 +22,56 @@ let dict = [
 ] as [String : Any]
 
 guard let model = Model.deserialize(from: dict) else { return }
-print(model.age)
-print(model.name)
+print(model.age)  // 10
+print(model.name) // 小明
 ```
 
-不得不感叹：HandyJSON在处理继承关系上确实好用。
 
 
+## Codable 如何处理继承的解析
 
-## SmartCodable 如何处理继承关系的解析的？
+Swift 编译器仅会对显式遵循`Codable`协议的**当前类型**自动合成编解码方法。
 
-父类遵循了`Codable`协议，所以系统针对父类自动生成了
+当父类遵循 `Codable` 时，其自身的属性会被自动处理。但子类新增属性不会被自动处理，因此我们需要**重写编解码方法，手动实现新增属性的编解码逻辑，并调用super实现**。
 
-* `encode(to encoder: Encoder)`方法 
-*  `required init(from decoder: Decoder)` 方法。
+例如：（相比 `HandyJSON`显得繁琐一些😓）
 
-子类虽然继承自父类，但并没有重写这两个方法，所以在编码过程中，找到的依然是父类的方法，最终仅父类属性可以被成功编码。
+```
+class BaseModel: Codable {
+    var name: String = ""
+    required init() { }
+}
+
+class SubModel: BaseModel {
+    var age: Int = 0
+    
+    private enum CodingKeys: CodingKey {
+        case age
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.age = try container.decode(Int.self, forKey: .age)
+        try super.init(from: decoder)
+    }
+    
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(age, forKey: .age)
+    }
+    
+    required init() { super.init() }
+}
+```
 
 
+### 为什么子类必须手动实现？
 
-### 通过SIL验证
-
+我们可以通过`SIL（Swift Intermediate Language）`验证编译器的行为。
 ```
 class BaseModel : Decodable & Encodable {
-    
+
     @_hasStorage @_hasInitialValue var name: String { get set }
     required init()
     
@@ -64,12 +92,6 @@ class BaseModel : Decodable & Encodable {
 }
 ```
 
-BaseModel的SIL代码中：
-
-* 系统自动生成了CodingKeys
-* 系统自动生成了 `func encode(to encoder: Encoder)`
-* 系统自动生成了 `required init(from decoder: Decoder) throws`
-
 ```
 @_inheritsConvenienceInitializers class SubModel : BaseModel {
     @_hasStorage @_hasInitialValue var age: Int { get set }
@@ -79,27 +101,46 @@ BaseModel的SIL代码中：
 }
 ```
 
-SubModel的SIL代码中：
+可以看到：
 
-系统自动生成了 `required init(from decoder: Decoder) throws`
+- 对于父类，由于显式遵循了 `Codable`  协议，编译器自动合成了`init(from decoder:)`、`encode(to encoder:)`和`CodingKeys`
 
+- 对于子类：
 
-
-对于基类，编译器可以自动合成`encode(to:)`和`init(from:)`方法。
-
-对于子类，编译器只会自动合成`init(from:)`方法，因为它是一个`required`初始化器。
-
-这是因为子类可能会添加新的属性，而编译器不知道如何自动合成这些新属性的编码逻辑，除非它们也都是`Codable`。
+  - **不会自动合成** `encode(to:)`（不是 `required` 方法, 子类也没有显式的遵循`Codable`协议）
 
 
-
-对于`init(from decoder:)`方法即便子类SIL中显示了`required init(from decoder: Decoder) throws`的存在，如果没有在这个方法中显式地处理`age`属性的解码逻辑，`age`就不会被自动解码。所以，正如之前解释的，要确保`age`属性被正确解码，你需要在`Model`类中实现自定义的解码逻辑
-
-对于`encode(to:)`方法，编译器不会自动合成这个方法，因为它不是必须的（不是`required`）。如果你的子类添加了新的`Codable`属性，并且你没有提供自定义的`encode(to:)`方法，那么这些新属性将不会被编码。在这种情况下，你需要手动实现`encode(to:)`方法来确保所有属性都被正确编码。
+  - **不会自动合成** `CodingKeys`（没有显式的遵循`Codable`协议）
 
 
+  - 会合成 `init(from:)`（因为是`required`初始化方法，合成的这个方法中**不会包含子类新增属性的解码逻辑**）
 
-### 正确的处理继承关系的解码
+
+因此，若子类也有需要被编码/解码的属性, 就**必须在子类中重写** `init(from:)` 和 `encode(to:)`。
+
+
+
+## SmartCodable 如何处理继承的解析
+
+`SmartCodable` 是对原生 `Codable` 的增强，天然支持`Codable`继承的处理方案，也提供了其它方案选择，可以根据各自项目的情况选择最优方案。
+
+- 基于继承的实现（类似原生Codable）
+- 基于Protocol的实现
+- 基于@SmartFlat的实现
+- 基于Protocol + @SmartFlat的混合实现
+
+
+### 方案一：基于继承的实现（同Codable）
+与原生 Codable 实现类似，但使用 `SmartCodable` 增强解析器，具备类型容错能力。
+
+**优点：**
+
+- 原生 `Codable` 写法，符合直觉
+- 支持类型不一致、字段缺失、nil等场景的容错
+
+**缺点：**
+
+- 子类仍需手动实现新增属性的编解码逻辑，代码量较多
 
 ```
 class BaseModel: SmartCodable {
@@ -107,7 +148,7 @@ class BaseModel: SmartCodable {
     required init() { }
 }
 
-class Model: BaseModel {
+class SubModel: BaseModel {
     var age: Int = 0
     
     private enum CodingKeys: CodingKey {
@@ -117,22 +158,114 @@ class Model: BaseModel {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.age = try container.decode(Int.self, forKey: .age)
-        
         try super.init(from: decoder)
     }
     
     override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(age, forKey: .age)
-        try super.encode(to: encoder)
     }
     
-    required init() {
-        super.init()
-    }
+    required init() { super.init() }
 }
 ```
 
+### 方案二：基于Protocol的实现
+通过协议定义公共属性，避免继承带来的复杂度。适用轻量级共享属性定义。
+**优点：**
 
+- 不需要手动实现子类编解码逻辑
+- 子类间具有协议这个公共类型
 
-在子类中重写`init(from decoder:)`方法，完成子类属性解码的同时，执行`try super.init(from: decoder)`方法调用父类的`init(from decoder:)`。 
+**缺点：**
+
+- 每个子类都需实现协议中的属性，存在一定重复
+```
+protocol BaseModel {
+    var name: String { set get }
+    var sex: Int { set get }
+}
+
+class SubModel: BaseModel, SmartCodable {
+    required init() {}
+    
+    var name: String = ""
+    var sex: Int = 0
+    
+    var age: Int = 0
+}
+```
+
+### 方案三：基于@SmartFlat的实现
+使用组合代替继承，将父类作为属性嵌入到子类中。`@SmartFlat`属性包装器会从当前JSON节点提取数据填充该属性。
+**优点：**
+
+- 不需要手动实现子类编解码逻辑
+- 避免了`Protocol`方案中，各子类重复实现基协议的繁琐
+
+**缺点：**
+
+- 缺失子类间的公共类型
+```
+class BaseModel: SmartCodable {
+    required init() {}
+    
+    var name: String = ""
+    var sex: Int = 0
+}
+
+class SubModel: SmartCodable {
+    required init() {}
+    
+    var age: Int = 0
+    
+    @SmartFlat
+    var manBase: BaseModel = .init()
+}
+
+let dict = [
+        "name": "小明",
+        "sex": 1,
+        "age": 10,
+] as [String : Any]
+
+guard let model = SubModel.deserialize(from: dict) else { return }
+print(model.manBase.name) // 小明
+print(model.manBase.sex)  // 1
+print(model.age)  // 10
+```
+
+### 方案四：基于Protocol + @SmartFlat的实现
+结合`Protocol` 和`@SmartFlat`两种方案的优点，规避各自的不足，比较灵活。
+**优点：**
+
+- 不需要手动实现子类编解码逻辑
+- 避免了`Protocol`方案中，各子类重复实现基协议的繁琐
+- 避免了`@SmartFlat`方案中，缺失了各子类的公共类型约束
+
+**缺点：**
+
+- 不是真正的继承😂
+
+```
+protocol ManBaseModelProtocol {
+    var manBase: BaseModel { set get }
+}
+
+class BaseModel: SmartCodable {
+    required init() {}
+    
+    var name: String = ""
+    var sex: Int = 0
+}
+
+class SubModel: SmartCodable, ManBaseModelProtocol {
+    required init() {}
+    
+    @SmartFlat
+    var manBase: BaseModel = .init()
+    
+    var age: Int = 0
+}
+```
