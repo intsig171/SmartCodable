@@ -1,0 +1,35 @@
+{
+  "name": "CodableWrapper",
+  "version": "1.1.1",
+  "summary": "A short description of CodableWrapper.",
+  "description": "CodableWrapper Pod",
+  "homepage": "https://github.com/winddpan/CodableWrapper",
+  "authors": {
+    "winddpan": "https://github.com/winddpan"
+  },
+  "source": {
+    "git": "git@github.com:winddpan/CodableWrapper.git",
+    "tag": "1.1.1"
+  },
+  "platforms": {
+    "ios": "13.0"
+  },
+  "source_files": "Sources/CodableWrapper/*{.swift}",
+  "preserve_paths": [
+    "Package.swift",
+    "Sources/CodableWrapperMacros",
+    "Tests",
+    "Bin"
+  ],
+  "pod_target_xcconfig": {
+    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+  },
+  "user_target_xcconfig": {
+    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+  },
+  "script_phases": {
+    "name": "Build CodableWrapper macro plugin",
+    "script": "    env -i PATH=\"$PATH\" \"$SHELL\" -l -c \"swift build -c release --package-path \\\"$PODS_TARGET_SRCROOT\\\" --build-path \\\"${PODS_BUILD_DIR}/CodableWrapper\\\"\"\n",
+    "execution_position": "before_compile"
+  }
+}

@@ -65,7 +65,7 @@ extension Introduce_8ViewController {
     
     /// 关联值枚举的解析， 需要自己接管decode
     enum Sex: SmartAssociatedEnumerable {
-        static var defaultCase: Sex = .man
+        static let defaultCase: Sex = .man
         case man
         case women
         case other(String)

@@ -58,11 +58,6 @@ class PublishedModel: ObservableObject, SmartCodable {
 struct ABC: SmartCodable {
     var a: String = ""
 }
-let dict: [String: Any] = [
-    "name": [
-        "a": "Mccc"
-    ],
-    
-]
+
 
 

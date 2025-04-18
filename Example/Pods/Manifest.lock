@@ -2,6 +2,7 @@ PODS:
   - BTBubble (0.0.5)
   - BTPrint (2.0.0)
   - CleanJSON (1.0.9)
+  - CodableWrapper (1.1.1)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - BTBubble
   - BTPrint
   - CleanJSON
+  - CodableWrapper (from `https://github.com/winddpan/CodableWrapper.git`)
   - FBSnapshotTestCase (~> 2.1.4)
   - HandyJSON (= 5.0.0-beta.1)
   - SmartCodable (from `../`)
@@ -30,18 +32,26 @@ SPEC REPOS:
     - SnapKit
 
 EXTERNAL SOURCES:
+  CodableWrapper:
+    :git: https://github.com/winddpan/CodableWrapper.git
   SmartCodable:
     :path: "../"
+
+CHECKOUT OPTIONS:
+  CodableWrapper:
+    :commit: eb90d37dbdf4ea437d6f86b874bac1e6da75f1b4
+    :git: https://github.com/winddpan/CodableWrapper.git
 
 SPEC CHECKSUMS:
   BTBubble: c2a296a15665a742fb547f70414ee5b5252863e3
   BTPrint: 10badf738e56f84fc842fbfe69a9b90faf5e247c
   CleanJSON: 910a36465ce4829e264a902ccf6d1455fdd9f980
+  CodableWrapper: fb0b898e73f2e5b996e9d82b6c8441da72e50256
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
   SmartCodable: ee927cffd7879e4dbf03ac52c035e6107a885a77
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 7f3af03f81934df0c035518074a7abbec8fa9d3f
+PODFILE CHECKSUM: 7d5fff01030a5781395917b0c3ec5ec7dc5847b0
 
 COCOAPODS: 1.15.2
