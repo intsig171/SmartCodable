@@ -129,6 +129,8 @@ extension SpecialData_dateViewController {
                     "aDate": "01-03-2024",
                     "bDate": "01-03-2024",
                 ]
+            @unknown default:
+                return [:]
             }
             
         }

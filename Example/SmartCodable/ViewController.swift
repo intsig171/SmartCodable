@@ -19,7 +19,6 @@ class ViewController: UIViewController {
         
         title = "SmartCodable"
         
-        
         dataArray = [
             other,
             smart_introduce,

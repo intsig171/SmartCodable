@@ -37,7 +37,7 @@ public struct SmartFlat<T: Codable>: Codable {
     }
 }
 
-extension SmartFlat: WrapperLifecycle {
+extension SmartFlat: PostDecodingHookable {
     func wrappedValueDidFinishMapping() -> SmartFlat<T>? {
         if var temp = wrappedValue as? SmartDecodable {
             temp.didFinishMapping()
@@ -47,6 +47,16 @@ extension SmartFlat: WrapperLifecycle {
     }
 }
 
+
+extension SmartFlat: PropertyWrapperInitializable {
+    /// Creates an instance from any value if possible
+    public static func createInstance(with value: Any) -> SmartFlat? {
+        if let value = value as? T {
+            return SmartFlat(wrappedValue: value)
+        }
+        return nil
+    }
+}
 
 
 // Used to mark the flat type

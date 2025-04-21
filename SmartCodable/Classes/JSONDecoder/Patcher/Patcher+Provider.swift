@@ -12,21 +12,31 @@ import Foundation
 extension Patcher {
     struct Provider {
         static func defaultValue() throws -> T {
-                
-            if let value = T.self as? Defaultable.Type {
-                return value.defaultValue as! T
-            } else if let object = T.self as? SmartDecodable.Type {
-                return object.init() as! T
-            } else if let object = T.self as? any SmartCaseDefaultable.Type {
-                if let first = object.allCases.first as? T {
-                    return first 
-                }
-            } else if let object = T.self as? any SmartAssociatedEnumerable.Type {
-                return object.defaultCase as! T
+            
+            
+            if let defaultable = T.self as? Defaultable.Type {
+                return defaultable.defaultValue as! T
             }
             
-            throw DecodingError.valueNotFound(T.self, DecodingError.Context(
-                    codingPath: [], debugDescription: "Expected \(T.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
+            // 处理 SmartDecodable 类型的对象
+            if let decodable = T.self as? SmartDecodable.Type {
+                return decodable.init() as! T
+            }
+            
+            // 处理 SmartCaseDefaultable 类型的对象
+            if let caseDefaultable = T.self as? any SmartCaseDefaultable.Type {
+                if let firstCase = caseDefaultable.allCases.first as? T {
+                    return firstCase
+                }
+            }
+            
+            // 处理 SmartAssociatedEnumerable 类型的对象
+            if let associatedEnumerable = T.self as? any SmartAssociatedEnumerable.Type {
+                return associatedEnumerable.defaultCase as! T
+            }
+            
+            // 如果都没有匹配的类型，抛出错误
+            throw DecodingError.valueNotFound(T.self, DecodingError.Context(codingPath: [], debugDescription: "Expected \(T.self) value，but an exception occurred！Please report this issue（请上报该问题）"))
         }
     }
 }

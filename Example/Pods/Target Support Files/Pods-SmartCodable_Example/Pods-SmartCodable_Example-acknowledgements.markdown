@@ -124,7 +124,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## SmartCodable
 
-Copyright (c) 2023 mancong@bertadata.com <mancong@bertadata.com>
+Copyright (c) 2023 intsig171.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

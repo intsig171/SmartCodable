@@ -51,8 +51,13 @@ struct KeysMapper {
     
     /// Applies key mapping rules to a dictionary
     private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any] {
+        
+        guard let mappings = type.mappingForKey(), !mappings.isEmpty else {
+            return dict
+        }
+        
         var newDict = dict
-        type.mappingForKey()?.forEach { mapping in
+        mappings.forEach { mapping in
             let newKey = mapping.to.stringValue
             
             /**
@@ -68,7 +73,7 @@ struct KeysMapper {
             for oldKey in mapping.from {
                 // Mapping exists at current level
                 if let value = newDict[oldKey] as? JSONValue, value != .null {
-                    newDict[newKey] = newDict[oldKey]
+                    newDict[newKey] = value
                     break
                 }
                 

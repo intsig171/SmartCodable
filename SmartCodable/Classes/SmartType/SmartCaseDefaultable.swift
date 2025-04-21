@@ -42,13 +42,11 @@ public extension SmartAssociatedEnumerable {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: des))
         }
         
-        let value = _decoder.json
-        
-        if let tranform = _decoder.cache.tranform(value: value, for: _decoder.codingPath.last) as? Self {
-            self = tranform
-        } else {
-            throw DecodingError.valueNotFound(Self.self, DecodingError.Context.init(codingPath: _decoder.codingPath, debugDescription: "未对关联值枚举实现自定义解析策略"))
+        guard let tranformer = _decoder.cache.valueTransformer(for: _decoder.codingPath.last),
+           let decoded = tranformer.tranform(value: _decoder.json) as? Self else {
+            throw DecodingError.valueNotFound(Self.self, DecodingError.Context.init(codingPath: _decoder.codingPath, debugDescription: "No custom parsing policy is implemented for associated value enumerations"))
         }
+        self = decoded
     }
 
     func encode(to encoder: Encoder) throws {

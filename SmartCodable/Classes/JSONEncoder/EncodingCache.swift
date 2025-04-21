@@ -20,7 +20,7 @@ class EncodingCache: Cachable {
             
             var snapshot = EncodingSnapshot()
             snapshot.objectType = object
-            snapshot.transformers = object.mappingForValue() ?? []
+            snapshot.transformers = object.mappingForValue()
             snapshots.append(snapshot)
         }
     }
@@ -45,15 +45,12 @@ extension EncodingCache {
     func tranform(from value: Any, with key: CodingKey?) -> JSONValue? {
         
         guard let top = topSnapshot, let key = key else { return nil }
-        
-        let trans = top.transformers
-        
+                
         let wantKey = key.stringValue
-        let targetTran = trans.first(where: { transformer in
+        let targetTran = top.transformers?.first(where: { transformer in
             if wantKey == transformer.location.stringValue {
                 return true
             } else {
-                
                 if let keyTransformers = top.objectType?.mappingForKey() {
                     for keyTransformer in keyTransformers {
                         if keyTransformer.from.contains(wantKey) {
@@ -65,7 +62,7 @@ extension EncodingCache {
             }
         })
         
-        if let tran = targetTran, let decoded = transform(decodedValue: value, transformer: tran.tranformer) {
+        if let tran = targetTran, let decoded = transform(decodedValue: value, performer: tran.performer) {
             return JSONValue.make(decoded)
         }
         
@@ -73,9 +70,9 @@ extension EncodingCache {
     }
     
     /// Performs the actual value transformation
-    private func transform<Transform: ValueTransformable>(decodedValue: Any, transformer: Transform) -> Any? {
+    private func transform<Transform: ValueTransformable>(decodedValue: Any, performer: Transform) -> Any? {
         guard let value = decodedValue as? Transform.Object else { return nil }
-        return transformer.transformToJSON(value)
+        return performer.transformToJSON(value)
     }
 }
 
@@ -88,7 +85,7 @@ struct EncodingSnapshot: Snapshot {
     
     typealias ObjectType = SmartEncodable.Type
         
-    var transformers: [SmartValueTransformer] = []
+    var transformers: [SmartValueTransformer]?
 }
 
 

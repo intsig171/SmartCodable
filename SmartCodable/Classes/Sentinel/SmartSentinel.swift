@@ -11,7 +11,7 @@ import Foundation
 /// Central logging configuration and utilities
 public struct SmartSentinel {
     
-    /// Set debugging mode, default is none. 
+    /// Set debugging mode, default is none.
     /// Note: When not debugging, set to none to reduce overhead.
     public static var debugMode: Level {
         get { return _mode }
@@ -50,38 +50,38 @@ public struct SmartSentinel {
 
 extension SmartSentinel {
     static func monitorLog<T>(impl: JSONDecoderImpl, isOptionalLog: Bool = false,
-                                  forKey key: CodingKey, value: JSONValue?, type: T.Type) {
-            
-            guard SmartSentinel.debugMode != .none else { return }
-            
-            // 如果被忽略了，就不要输出log了。
-            let typeString = String(describing: T.self)
-            guard !typeString.starts(with: "IgnoredKey<") else { return }
-            
-            let className = impl.cache.topSnapshot?.objectTypeName ?? ""
-            var path = impl.codingPath
-            path.append(key)
-            
-            var address = ""
-            if let parsingMark = CodingUserInfoKey.parsingMark {
-                address = impl.userInfo[parsingMark] as? String ?? ""
-            }
-            
-            if let entry = value {
-                if entry.isNull { // 值为null
-                    if isOptionalLog { return }
-                    let error = DecodingError._valueNotFound(key: key, expectation: T.self, codingPath: path)
-                    SmartSentinel.verboseLog(error, className: className, parsingMark: address)
-                } else { // value类型不匹配
-                    let error = DecodingError._typeMismatch(at: path, expectation: T.self, desc: entry.debugDataTypeDescription)
-                    SmartSentinel.alertLog(error: error, className: className, parsingMark: address)
-                }
-            } else { // key不存在或value为nil
-                if isOptionalLog { return }
-                let error = DecodingError._keyNotFound(key: key, codingPath: path)
-                SmartSentinel.verboseLog(error, className: className, parsingMark: address)
-            }
+                              forKey key: CodingKey?, value: JSONValue?, type: T.Type) {
+        
+        guard SmartSentinel.debugMode != .none else { return }
+        guard let key = key else { return }
+        // 如果被忽略了，就不要输出log了。
+        let typeString = String(describing: T.self)
+        guard !typeString.starts(with: "IgnoredKey<") else { return }
+        
+        let className = impl.cache.topSnapshot?.objectTypeName ?? ""
+        var path = impl.codingPath
+        path.append(key)
+        
+        var address = ""
+        if let parsingMark = CodingUserInfoKey.parsingMark {
+            address = impl.userInfo[parsingMark] as? String ?? ""
         }
+        
+        if let entry = value {
+            if entry.isNull { // 值为null
+                if isOptionalLog { return }
+                let error = DecodingError._valueNotFound(key: key, expectation: T.self, codingPath: path)
+                SmartSentinel.verboseLog(error, className: className, parsingMark: address)
+            } else { // value类型不匹配
+                let error = DecodingError._typeMismatch(at: path, expectation: T.self, desc: entry.debugDataTypeDescription)
+                SmartSentinel.alertLog(error: error, className: className, parsingMark: address)
+            }
+        } else { // key不存在或value为nil
+            if isOptionalLog { return }
+            let error = DecodingError._keyNotFound(key: key, codingPath: path)
+            SmartSentinel.verboseLog(error, className: className, parsingMark: address)
+        }
+    }
     
     private static func verboseLog(_ error: DecodingError, className: String, parsingMark: String) {
         logIfNeeded(level: .verbose) {

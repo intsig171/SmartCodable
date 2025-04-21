@@ -49,26 +49,20 @@ extension JSONDecoderImpl {
     }
     
     func unwrapFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>(
-        from value: JSONValue,
-        for additionalKey: CodingKey? = nil,
-        as type: T.Type) throws -> T {
+        from value: JSONValue, for additionalKey: CodingKey? = nil, as type: T.Type) -> T? {
+            
+            if let tranformer = cache.valueTransformer(for: additionalKey) {
+                guard let decoded = tranformer.tranform(value: value) as? T else { return nil }
+                return decoded
+            }
+            
             if case .number(let number) = value {
-                guard let floatingPoint = T(number), floatingPoint.isFinite else {
-                    var path = self.codingPath
-                    if let additionalKey = additionalKey {
-                        path.append(additionalKey)
-                    }
-                    throw DecodingError.dataCorrupted(.init(
-                        codingPath: path,
-                        debugDescription: "Parsed JSON number <\(number)> does not fit in \(T.self)."))
-                }
-                
+                guard let floatingPoint = T(number), floatingPoint.isFinite else { return nil }
                 return floatingPoint
             }
             
             if case .string(let string) = value,
-               case .convertFromString(let posInfString, let negInfString, let nanString) =
-                self.options.nonConformingFloatDecodingStrategy {
+               case .convertFromString(let posInfString, let negInfString, let nanString) = self.options.nonConformingFloatDecodingStrategy {
                 if string == posInfString {
                     return T.infinity
                 } else if string == negInfString {
@@ -77,75 +71,93 @@ extension JSONDecoderImpl {
                     return T.nan
                 }
             }
-            
-            throw self.createTypeMismatchError(type: T.self, for: additionalKey, value: value)
+
+            return nil
         }
     
     func unwrapFixedWidthInteger<T: FixedWidthInteger>(
-        from value: JSONValue,
-        for additionalKey: CodingKey? = nil,
-        as type: T.Type) throws -> T
-    {
-        guard case .number(let number) = value else {
-            throw self.createTypeMismatchError(type: T.self, for: additionalKey, value: value)
+        from value: JSONValue, for additionalKey: CodingKey? = nil, as type: T.Type) -> T? {
+            
+            if let tranformer = cache.valueTransformer(for: additionalKey) {
+                return tranformer.tranform(value: value) as? T
+            }
+            
+            guard case .number(let number) = value else { return nil }
+            
+            // this is the fast pass. Number directly convertible to Integer
+            if let integer = T(number) {
+                return integer
+            }
+            
+            // this is the really slow path... If the fast path has failed. For example for "34.0" as
+            // an integer, we try to go through NSNumber
+            if let nsNumber = NSNumber.fromJSONNumber(number) {
+                if type == UInt8.self, NSNumber(value: nsNumber.uint8Value) == nsNumber {
+                    return nsNumber.uint8Value as? T
+                }
+                if type == Int8.self, NSNumber(value: nsNumber.int8Value) == nsNumber {
+                    return nsNumber.int8Value as? T
+                }
+                if type == UInt16.self, NSNumber(value: nsNumber.uint16Value) == nsNumber {
+                    return nsNumber.uint16Value as? T
+                }
+                if type == Int16.self, NSNumber(value: nsNumber.int16Value) == nsNumber {
+                    return nsNumber.int16Value as? T
+                }
+                if type == UInt32.self, NSNumber(value: nsNumber.uint32Value) == nsNumber {
+                    return nsNumber.uint32Value as? T
+                }
+                if type == Int32.self, NSNumber(value: nsNumber.int32Value) == nsNumber {
+                    return nsNumber.int32Value as? T
+                }
+                if type == UInt64.self, NSNumber(value: nsNumber.uint64Value) == nsNumber {
+                    return nsNumber.uint64Value as? T
+                }
+                if type == Int64.self, NSNumber(value: nsNumber.int64Value) == nsNumber {
+                    return nsNumber.int64Value as? T
+                }
+                if type == UInt.self, NSNumber(value: nsNumber.uintValue) == nsNumber {
+                    return nsNumber.uintValue as? T
+                }
+                if type == Int.self, NSNumber(value: nsNumber.intValue) == nsNumber {
+                    return nsNumber.intValue as? T
+                }
+            }
+            return nil
+        }
+    
+    func unwrapBoolValue(from value: JSONValue, for additionalKey: CodingKey? = nil) -> Bool? {
+        
+        if let tranformer = cache.valueTransformer(for: additionalKey) {
+            return tranformer.tranform(value: value) as? Bool
         }
         
-        // this is the fast pass. Number directly convertible to Integer
-        if let integer = T(number) {
-            return integer
+        guard case .bool(let bool) = value else { return nil }
+        return bool
+    }
+    
+    func unwrapStringValue(from value: JSONValue, for additionalKey: CodingKey? = nil) -> String? {
+        
+        if let tranformer = cache.valueTransformer(for: additionalKey) {
+            return tranformer.tranform(value: value) as? String
         }
         
-        // this is the really slow path... If the fast path has failed. For example for "34.0" as
-        // an integer, we try to go through NSNumber
-        if let nsNumber = NSNumber.fromJSONNumber(number) {
-            if type == UInt8.self, NSNumber(value: nsNumber.uint8Value) == nsNumber {
-                return nsNumber.uint8Value as! T
-            }
-            if type == Int8.self, NSNumber(value: nsNumber.int8Value) == nsNumber {
-                return nsNumber.int8Value as! T
-            }
-            if type == UInt16.self, NSNumber(value: nsNumber.uint16Value) == nsNumber {
-                return nsNumber.uint16Value as! T
-            }
-            if type == Int16.self, NSNumber(value: nsNumber.int16Value) == nsNumber {
-                return nsNumber.int16Value as! T
-            }
-            if type == UInt32.self, NSNumber(value: nsNumber.uint32Value) == nsNumber {
-                return nsNumber.uint32Value as! T
-            }
-            if type == Int32.self, NSNumber(value: nsNumber.int32Value) == nsNumber {
-                return nsNumber.int32Value as! T
-            }
-            if type == UInt64.self, NSNumber(value: nsNumber.uint64Value) == nsNumber {
-                return nsNumber.uint64Value as! T
-            }
-            if type == Int64.self, NSNumber(value: nsNumber.int64Value) == nsNumber {
-                return nsNumber.int64Value as! T
-            }
-            if type == UInt.self, NSNumber(value: nsNumber.uintValue) == nsNumber {
-                return nsNumber.uintValue as! T
-            }
-            if type == Int.self, NSNumber(value: nsNumber.intValue) == nsNumber {
-                return nsNumber.intValue as! T
-            }
-        }
-        
-        var path = self.codingPath
-        if let additionalKey = additionalKey {
-            path.append(additionalKey)
-        }
-        throw DecodingError.dataCorrupted(.init(
-            codingPath: path,
-            debugDescription: "Parsed JSON number <\(number)> does not fit in \(T.self)."))
+        guard case .string(let string) = value else { return nil }
+        return string
     }
 }
 
 extension JSONDecoderImpl {
     private func unwrapDate() throws -> Date {
         
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? Date {
-            return decoded
+        if let tranformer = cache.valueTransformer(for: codingPath.last) {
+            if let decoded = tranformer.tranform(value: json) as? Date {
+                return decoded
+            } else {
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Date is not valid , unknown anomaly"))
+            }
         }
+        
         
         switch self.options.dateDecodingStrategy {
         case .deferredToDate:
@@ -191,8 +203,11 @@ extension JSONDecoderImpl {
     
     private func unwrapData() throws -> Data {
         
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? Data {
-            return decoded
+        if let tranformer = cache.valueTransformer(for: codingPath.last) {
+            if let decoded = tranformer.tranform(value: json) as? Data {
+                return decoded
+            }
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Data is not valid Base64."))
         }
         
         switch self.options.dataDecodingStrategy {
@@ -210,9 +225,15 @@ extension JSONDecoderImpl {
     
     private func unwrapURL() throws -> URL {
         
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? URL {
-            return decoded
+        if let tranformer = cache.valueTransformer(for: codingPath.last) {
+            if let decoded = tranformer.tranform(value: json) as? URL {
+                return decoded
+            }
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: self.codingPath,
+                                      debugDescription: "Invalid URL string."))
         }
+        
         
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
         let string = try container.decode(String.self)
@@ -227,9 +248,15 @@ extension JSONDecoderImpl {
     
     private func unwrapSmartColor() throws -> SmartColor {
         
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartColor {
-            return decoded
+        if let tranformer = cache.valueTransformer(for: codingPath.last) {
+            if let decoded = tranformer.tranform(value: json) as? SmartColor {
+                return decoded
+            }
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: self.codingPath,
+                                      debugDescription: "Invalid Color string."))
         }
+        
         
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
         let string = try container.decode(String.self)
@@ -244,8 +271,13 @@ extension JSONDecoderImpl {
     
     private func unwrapDecimal() throws -> Decimal {
         
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? Decimal {
-            return decoded
+        if let tranformer = cache.valueTransformer(for: codingPath.last) {
+            if let decoded = tranformer.tranform(value: json) as? Decimal {
+                return decoded
+            }
+            throw DecodingError.dataCorrupted(.init(
+                codingPath: self.codingPath,
+                debugDescription: "Parsed JSON number does not fit in \(Decimal.self)."))
         }
         
         guard case .number(let numberString) = self.json else {

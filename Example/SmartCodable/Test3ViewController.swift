@@ -1,24 +1,3 @@
-//
-//  Test3ViewController.swift
-//  SmartCodable_Example
-//
-//  Created by Mccc on 2024/4/18.
-//  Copyright © 2024 CocoaPods. All rights reserved.
-//
-
-import Foundation
-import SmartCodable
-import HandyJSON
-import CleanJSON
-
-
-/** 测试内容项
- 1. 默认值的使用是否正常
- 2. mappingForValue是否正常。
- 3.
- */
-
-
 import SmartCodable
 
 class Test3ViewController: BaseViewController {
@@ -26,32 +5,56 @@ class Test3ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dict1: [String: Any] = [
-            "code": "10000",
-            "msg": "成功",
-            "data": [
-                "guideSvga": "guideSvga",
-                "guideOnevga": "guideOnevga",
-                "loadingSvga": "loadingSvga",
-                "loadingSvgaBackgroundColor": "loadingSvgaBackgroundColor",
-            ]
+        let dict: [String: Any] = [
+            "type": "String",
+            "value": "Mccc"
         ]
         
-        guard let model = ResponseData<HomeListModel>.deserialize(from: dict1) else { return }
+        let dict1: [String: Any] = [
+            "type": "Boolean",
+            "value": true
+        ]
+        
+        guard let model = Model.deserialize(from: dict) else { return }
         print(model)
+        
+        
+        guard let model1 = Model.deserialize(from: dict1) else { return }
+        print(model1)
     }
     
-    struct HomeListModel: SmartCodable {
-        var guideSvga = ""
-        var guideOnevga = ""
-        var loadingSvga = ""
-        var loadingSvgaBackgroundColor = ""
+    struct Model: SmartCodable {
+        @SmartAny
+        private var value: Any?
+        private var type: String = ""
+        
+        public var enumValue: Value? = .error
+        
+        mutating func didFinishMapping() {
+          
+            guard let value = value else { return }
+            
+            switch type {
+            case "String":
+                if let s = value as? String {
+                    enumValue = Value.string(s)
+                }
+                
+            case "Boolean":
+                if let b = value as? Bool {
+                    enumValue = Value.bool(b)
+                }
+            default:
+                break
+            }
+        }
     }
     
-    struct ResponseData<T>: SmartCodable where T: SmartCodable {
-        var code = ""
-        var msg = ""
-        var data: T?
+    
+    enum Value: SmartAssociatedEnumerable {
+        static var defaultCase: Value = .error
+        case error
+        case string(String)
+        case bool(Bool)
     }
 }
-

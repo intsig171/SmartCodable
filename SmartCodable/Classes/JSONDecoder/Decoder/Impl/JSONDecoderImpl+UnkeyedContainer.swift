@@ -32,9 +32,7 @@ extension JSONDecoderImpl {
             //   If the value is not null, does not increment currentIndex.
             return false
         }
-
         
-
         mutating func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws
             -> KeyedDecodingContainer<NestedKey> where NestedKey: CodingKey
         {
@@ -190,7 +188,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
         }
         
         let key = _JSONKey(index: self.currentIndex)
-        guard let result = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
+        guard let result = self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
             return try forceDecode()
         }
         self.currentIndex += 1
@@ -202,7 +200,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
         }
         
         let key = _JSONKey(index: self.currentIndex)
-        guard let result = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
+        guard let result = self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
             return try forceDecode()
         }
         self.currentIndex += 1
@@ -215,7 +213,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
         let key = _JSONKey(index: currentIndex)
 
         guard let value = try? self.getNextValue(ofType: T.self) else {
-            let decoded: T = try Patcher<T>.defaultForType()
+            let decoded: T = try impl.cache.initialValue(forKey: key)
             SmartSentinel.monitorLog(impl: impl, forKey: key, value: nil, type: T.self)
             self.currentIndex += 1
             return decoded
@@ -228,7 +226,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
             self.currentIndex += 1
             return decoded
         } else {
-            let decoded: T = try Patcher<T>.defaultForType()
+            let decoded: T = try impl.cache.initialValue(forKey: key)
             self.currentIndex += 1
             return decoded
         }
@@ -330,7 +328,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
         }
         
         let key = _JSONKey(index: self.currentIndex)
-        guard let result = try? self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
+        guard let result = self.impl.unwrapFixedWidthInteger(from: value, for: key, as: T.self) else {
             return optionalDecode()
         }
         self.currentIndex += 1
@@ -342,7 +340,7 @@ extension JSONDecoderImpl.UnkeyedContainer {
         }
         
         let key = _JSONKey(index: self.currentIndex)
-        guard let result = try? self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
+        guard let result = self.impl.unwrapFloatingPoint(from: value, for: key, as: T.self) else {
             return optionalDecode()
         }
         self.currentIndex += 1
@@ -370,10 +368,14 @@ extension JSONDecoderImpl.UnkeyedContainer {
 extension JSONDecoderImpl.UnkeyedContainer {
     // 被属性包装器包裹的，不会调用该方法。Swift的类型系统在运行时无法直接识别出wrappedValue的实际类型.
     fileprivate func didFinishMapping<T>(_ decodeValue: T) -> T {
+        
+        // 减少动态派发开销，is 检查是编译时静态行为，比 as? 动态转换更高效。
+        guard T.self is SmartDecodable.Type else { return decodeValue }
+        
         if var value = decodeValue as? SmartDecodable {
             value.didFinishMapping()
             if let temp = value as? T { return temp }
-        } else if let value = decodeValue as? WrapperLifecycle {
+        } else if let value = decodeValue as? PostDecodingHookable {
             if let temp = value.wrappedValueDidFinishMapping() as? T {
                 return temp
             }

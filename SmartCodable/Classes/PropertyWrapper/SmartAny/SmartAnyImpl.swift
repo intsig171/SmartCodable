@@ -206,8 +206,15 @@ extension SmartAnyImpl {
 
 extension JSONDecoderImpl {
     fileprivate func unwrapSmartAny() throws -> SmartAnyImpl {
-        if let decoded = cache.tranform(value: json, for: codingPath.last) as? SmartAnyImpl {
-            return decoded
+        
+        if let tranformer = cache.valueTransformer(for: codingPath.last) {
+            if let decoded = tranformer.tranform(value: json) as? SmartAnyImpl {
+                return decoded
+            } else {
+                throw DecodingError.dataCorrupted(
+                    DecodingError.Context(codingPath: self.codingPath,
+                                          debugDescription: "Invalid SmartAny."))
+            }
         }
         
         let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
@@ -348,7 +355,7 @@ extension JSONDecoderImpl.SingleValueContainer {
     }
     
     @inline(__always) private func decodeIfPresentFixedWidthInteger<T: FixedWidthInteger>() -> T? {
-        guard let decoded = try? self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self) else {
+        guard let decoded = self.impl.unwrapFixedWidthInteger(from: self.value, as: T.self) else {
             return nil
         }
         return decoded
@@ -356,7 +363,7 @@ extension JSONDecoderImpl.SingleValueContainer {
 
     @inline(__always) private func decodeIfPresentFloatingPoint<T: LosslessStringConvertible & BinaryFloatingPoint>() -> T? {
         
-        guard let decoded = try? self.impl.unwrapFloatingPoint(from: self.value, as: T.self) else {
+        guard let decoded = self.impl.unwrapFloatingPoint(from: self.value, as: T.self) else {
             return nil
         }
         return decoded

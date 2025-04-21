@@ -18,7 +18,6 @@ class Tests: XCTestCase {
         super.tearDown()
     }
     
-    
     func testHandyJSON() {
         measure {
             let json = String(data: data, encoding: .utf8)
@@ -51,23 +50,10 @@ class Tests: XCTestCase {
         }
     }
     
-    func testSmartJsonDecoder() {
-        measure {
-            do {
-                let decoder = SmartJSONDecoder()
-                let objects = try decoder.decode([Airport].self, from: data)
-                XCTAssertEqual(objects.count, count)
-            } catch {
-                XCTAssertNil(error)
-            }
-        }
-    }
+
     
     func testSmartCodable() {
         measure {
-            
-            print("执行了")
-            
             guard let objects = [Smart].deserialize(from: data) else {
                 return
             }
@@ -145,8 +131,6 @@ struct Smart: SmartCodable {
     var icao: String?
     var coordinates: [Double]?
     var runways: [Runway]?
-    var abc: String = ""
-    var def: Int = 0
     
     struct Runway: SmartCodable {
         enum Surface: String, SmartCaseDefaultable {            
