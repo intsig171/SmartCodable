@@ -20,12 +20,19 @@
  * ```
  */
 @propertyWrapper
-public struct SmartAny<T>: Codable {
+public struct SmartAny<T>: Codable, PropertyWrapperInitializable {
     
     public var wrappedValue: T
 
     public init(wrappedValue: T) {
         self.wrappedValue = wrappedValue
+    }
+    
+    public static func createInstance(with value: Any) -> SmartAny<T>? {
+        if let value = value as? T {
+            return SmartAny(wrappedValue: value)
+        }
+        return nil
     }
 
     public init(from decoder: Decoder) throws {

@@ -30,7 +30,10 @@ protocol PostDecodingHookable {
  - createInstance: Attempts to create an instance from any value
  */
 public protocol PropertyWrapperInitializable {
-    associatedtype WrappedValue: Codable
+    associatedtype WrappedValue
+    
+    var wrappedValue: WrappedValue { get }
+    
     init(wrappedValue: WrappedValue)
     
     static func createInstance(with value: Any) -> Self?
