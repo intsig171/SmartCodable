@@ -43,32 +43,18 @@ class TestViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let dict: [String: Any] =  [
-            "name": ["Mccc"]
+            "height": 100.1
         ]
 
         let model = Model.deserialize(from: dict)
-//        print(model)
-        
-        let tranformer = model?.toJSONString() ?? ""
-        print(tranformer)
+        print(model)
+
     }
 
     
     struct Model: SmartCodable {
-        @SmartAny
-        var name: [Any]?
         
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            [
-                CodingKeys.name <--- FastTransformer<[Any], Any>(fromJSON: { json in
-//                    print("from json")
-                    return []
-                }, toJSON: { object in
-                    print("to json")
-                    return object
-                })
-            ]
-        }
+        var height: Double?
     }
 }
 
