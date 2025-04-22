@@ -43,10 +43,10 @@ class TestViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let dict: [String: Any] =  [
-            "height": 100.1
+            "height": "1729402611000"
         ]
 
-        let model = Model.deserialize(from: dict)
+        let model = Model.deserialize(from: dict, options: [.date(.millisecondsSince1970)])
         print(model)
 
     }
@@ -54,7 +54,14 @@ class TestViewController: BaseViewController {
     
     struct Model: SmartCodable {
         
-        var height: Double?
+        var height: Date?
+        
+        
+//        static func mappingForValue() -> [SmartValueTransformer]? {
+//            [
+//                CodingKeys.height <--- SmartDateTransformer(isMilliseconds: true)
+//            ]
+//        }
     }
 }
 
