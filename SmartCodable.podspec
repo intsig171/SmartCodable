@@ -20,17 +20,28 @@ Pod::Spec.new do |s|
   s.author           = { 'Mccc' => '562863544@qq.com' }
   s.source           = { :git => 'https://github.com/intsig171/SmartCodable.git', :tag => s.version.to_s }
   
-  s.ios.deployment_target = '11.0'
-  s.tvos.deployment_target = "12.0"
-  s.osx.deployment_target = '10.13'
-  s.watchos.deployment_target = '5.0'
-  s.visionos.deployment_target = "1.0"
+  s.ios.deployment_target = '13.0'
 
-  s.swift_version         = '5.0'
+  s.source_files = 'Sources/CodableWrapper/**/*{.swift}'
+  s.preserve_paths = ["Package.swift", "Sources/CodableWrapperMacros", "Tests", "Bin"]
   
+  s.pod_target_xcconfig = {
+    "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+  }
   
-  s.source_files = 'SmartCodable/Classes/**/*'
+  s.user_target_xcconfig = {
+    "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+  }
 
+  script = <<-SCRIPT
+    env -i PATH="$PATH" "$SHELL" -l -c "swift build -c release --package-path \\"$PODS_TARGET_SRCROOT\\" --build-path \\"${PODS_BUILD_DIR}/CodableWrapper\\""
+    SCRIPT
+  
+  s.script_phase = {
+      :name => 'Build CodableWrapper macro plugin',
+      :script => script,
+      :execution_position => :before_compile
+  }
 end
 
 

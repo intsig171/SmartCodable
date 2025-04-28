@@ -15,13 +15,26 @@ class Test2ViewController: BaseViewController {
         super.viewDidLoad()
 
 
-        myFunction()
+        let dict: [String: Any] = [
+            "name": "Mccc",
+            "age": "20"
+        ]
+        
+        let model = StudentModel.deserialize(from: dict)
+        print(model?.name)
+        print(model?.age)
         
     }
     
-    func myFunction() {
-        print("Currently running \(#function)")
+    class BaseModel: SmartCodable {
+        var name: String = ""
         
-        #warning("Something's wrong")
+        required init() { }
+    }
+    
+    @InheritedSmartCodable
+    class StudentModel: BaseModel {
+        var age: Int = 0
     }
 }
+

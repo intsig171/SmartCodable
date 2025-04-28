@@ -68,6 +68,6 @@ open class SmartJSONDecoder: JSONDecoder {
 
 extension CodingUserInfoKey {
     /// This parsing tag is used to summarize logs.
-    static var parsingMark = CodingUserInfoKey.init(rawValue: "Stamrt.parsingMark")
+    static let parsingMark = CodingUserInfoKey.init(rawValue: "Stamrt.parsingMark")
 }
 

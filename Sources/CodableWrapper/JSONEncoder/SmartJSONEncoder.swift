@@ -87,6 +87,6 @@ extension EncodingError {
 
 extension CodingUserInfoKey {
     /// 是否使用映射之后的key
-    static var useMappedKeys = CodingUserInfoKey.init(rawValue: "Stamrt.useMappedKeys")
+    static let useMappedKeys = CodingUserInfoKey.init(rawValue: "Stamrt.useMappedKeys")
 }
 

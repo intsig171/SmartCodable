@@ -24,14 +24,14 @@ public struct SmartSentinel {
     }
     
     /// Set up different levels of padding
-    public static var space: String = "   "
+    public static let space: String = "   "
     /// Set the markup for the model
-    public static var keyContainerSign: String = "╆━ "
+    public static let keyContainerSign: String = "╆━ "
     
-    public static var unKeyContainerSign: String = "╆━ "
+    public static let unKeyContainerSign: String = "╆━ "
     
     /// Sets the tag for the property
-    public static var attributeSign: String = "┆┄ "
+    public static let attributeSign: String = "┆┄ "
     
     
     /// 是否满足日志记录的条件
@@ -39,12 +39,12 @@ public struct SmartSentinel {
         return debugMode != .none
     }
     
-    private static var _mode = Level.none
+    nonisolated(unsafe) private static var _mode = Level.none
     
-    private static var cache = LogCache()
+    nonisolated(unsafe) private static var cache = LogCache()
     
     /// 回调闭包，用于在解析完成时传递日志
-    private static var logsHandler: ((String) -> Void)?
+    nonisolated(unsafe) private static var logsHandler: ((String) -> Void)?
 }
 
 
@@ -85,13 +85,13 @@ extension SmartSentinel {
     
     private static func verboseLog(_ error: DecodingError, className: String, parsingMark: String) {
         logIfNeeded(level: .verbose) {
-            cache.save(error: error, className: className, parsingMark: parsingMark)
+//            cache.save(error: error, className: className, parsingMark: parsingMark)
         }
     }
     
     private static func alertLog(error: DecodingError, className: String, parsingMark: String) {
         logIfNeeded(level: .alert) {
-            cache.save(error: error, className: className, parsingMark: parsingMark)
+//            cache.save(error: error, className: className, parsingMark: parsingMark)
         }
     }
     
@@ -99,18 +99,18 @@ extension SmartSentinel {
         
         guard SmartSentinel.isValid else { return }
         
-        if let format = cache.formatLogs(parsingMark: parsingMark) {
-            var message: String = ""
-            message += getHeader()
-            message += name + " 👈🏻 👀\n"
-            message += format
-            message += getFooter()
-            print(message)
-            
-            logsHandler?(message)
-        }
-        
-        cache.clearCache(parsingMark: parsingMark)
+//        if let format = cache.formatLogs(parsingMark: parsingMark) {
+//            var message: String = ""
+//            message += getHeader()
+//            message += name + " 👈🏻 👀\n"
+//            message += format
+//            message += getFooter()
+//            print(message)
+//            
+//            logsHandler?(message)
+//        }
+//        
+//        cache.clearCache(parsingMark: parsingMark)
     }
 }
 
@@ -149,7 +149,7 @@ extension SmartSentinel {
 
 extension SmartSentinel {
     
-    public enum Level: Int {
+    public enum Level: Int, Sendable {
         /// 不记录日志
         case none
         /// 详细的日志

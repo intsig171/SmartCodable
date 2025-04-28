@@ -15,13 +15,24 @@
     "tag": "4.4.0-beta.2"
   },
   "platforms": {
-    "ios": "11.0",
-    "tvos": "12.0",
-    "osx": "10.13",
-    "watchos": "5.0",
-    "visionos": "1.0"
+    "ios": "13.0"
   },
-  "swift_versions": "5.0",
-  "source_files": "SmartCodable/Classes/**/*",
-  "swift_version": "5.0"
+  "source_files": "Sources/CodableWrapper/**/*{.swift}",
+  "preserve_paths": [
+    "Package.swift",
+    "Sources/CodableWrapperMacros",
+    "Tests",
+    "Bin"
+  ],
+  "pod_target_xcconfig": {
+    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+  },
+  "user_target_xcconfig": {
+    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+  },
+  "script_phases": {
+    "name": "Build CodableWrapper macro plugin",
+    "script": "    env -i PATH=\"$PATH\" \"$SHELL\" -l -c \"swift build -c release --package-path \\\"$PODS_TARGET_SRCROOT\\\" --build-path \\\"${PODS_BUILD_DIR}/CodableWrapper\\\"\"\n",
+    "execution_position": "before_compile"
+  }
 }
