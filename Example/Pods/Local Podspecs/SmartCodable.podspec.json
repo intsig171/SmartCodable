@@ -17,22 +17,22 @@
   "platforms": {
     "ios": "13.0"
   },
-  "source_files": "Sources/CodableWrapper/**/*{.swift}",
+  "source_files": "Sources/SmartCodable/**/*{.swift}",
   "preserve_paths": [
     "Package.swift",
-    "Sources/CodableWrapperMacros",
+    "Sources/SmartCodableMacros",
     "Tests",
     "Bin"
   ],
   "pod_target_xcconfig": {
-    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros"
   },
   "user_target_xcconfig": {
-    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/CodableWrapper/release/CodableWrapperMacros-tool#CodableWrapperMacros"
+    "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros"
   },
   "script_phases": {
-    "name": "Build CodableWrapper macro plugin",
-    "script": "    env -i PATH=\"$PATH\" \"$SHELL\" -l -c \"swift build -c release --package-path \\\"$PODS_TARGET_SRCROOT\\\" --build-path \\\"${PODS_BUILD_DIR}/CodableWrapper\\\"\"\n",
+    "name": "Build SmartCodable macro plugin",
+    "script": "    env -i PATH=\"$PATH\" \"$SHELL\" -l -c \"swift build -c release --package-path \\\"$PODS_TARGET_SRCROOT\\\" --build-path \\\"${PODS_BUILD_DIR}/SmartCodable\\\"\"\n",
     "execution_position": "before_compile"
   }
 }

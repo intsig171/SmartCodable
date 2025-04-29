@@ -2,7 +2,7 @@ import SwiftCompilerPlugin
 import SwiftSyntaxMacros
 
 @main
-struct CodableWrapperPlugin: CompilerPlugin {
+struct SmartCodablePlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
         InheritedSmartCodableMacro.self
     ]

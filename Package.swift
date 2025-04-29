@@ -3,13 +3,13 @@ import CompilerPluginSupport
 import PackageDescription
 
 let package = Package(
-    name: "CodableWrapper",
+    name: "SmartCodable",
     platforms: [.macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .macCatalyst(.v13), .visionOS(.v1)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "CodableWrapper",
-            targets: ["CodableWrapper"]
+            name: "SmartCodable",
+            targets: ["SmartCodable"]
         )
     ],
     dependencies: [
@@ -21,7 +21,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         // Macro implementation that performs the source transformation of a macro.
         .macro(
-            name: "CodableWrapperMacros",
+            name: "SmartCodableMacros",
             dependencies: [
                 .product(name: "SwiftSyntax", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
@@ -34,14 +34,14 @@ let package = Package(
 
         // Library that exposes a macro as part of its API, which is used in client programs.
         .target(
-            name: "CodableWrapper",
-            dependencies: ["CodableWrapperMacros"]),
+            name: "SmartCodable",
+            dependencies: ["SmartCodableMacros"]),
 
         // A test target used to develop the macro implementation.
         .testTarget(
-            name: "CodableWrapperTests",
+            name: "SmartCodableTests",
             dependencies: [
-                "CodableWrapper",
+                "SmartCodable",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
             ]
         ),

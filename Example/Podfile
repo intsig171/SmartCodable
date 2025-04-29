@@ -13,7 +13,6 @@ target 'SmartCodable_Example' do
   pod 'HandyJSON', '5.0.0-beta.1'
   pod 'CleanJSON'
 #  pod 'MetaCodable'
-  pod 'CodableWrapper', :git => 'https://github.com/winddpan/CodableWrapper.git'
 
   target 'SmartCodable_Tests' do
     inherit! :search_paths
