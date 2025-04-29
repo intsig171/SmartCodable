@@ -16,8 +16,10 @@ class Test2ViewController: BaseViewController {
 
 
         let dict: [String: Any] = [
-            "name": "Mccc",
-            "age": "20"
+            "studentName": NSNull(),
+//            "studentAge": "20"
+            "age": []
+
         ]
         
         let model = StudentModel.deserialize(from: dict)
@@ -27,7 +29,14 @@ class Test2ViewController: BaseViewController {
     }
     
     class BaseModel: SmartCodable {
-        var name: String = ""
+        @SmartAny
+        var name: String = "123"
+        
+        class func mappingForKey() -> [SmartKeyTransformer]? {
+            return [
+                CodingKeys.name <--- "studentName"
+            ]
+        }
         
         required init() { }
     }
@@ -38,10 +47,10 @@ class Test2ViewController: BaseViewController {
     }
 }
 
-
-
 /**
  @SmartSubclass
  @SmartMember
  @SmartInherit
+ @SmartInherited
+ @SmartChild
  */

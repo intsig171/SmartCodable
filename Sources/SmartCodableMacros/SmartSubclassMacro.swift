@@ -163,7 +163,7 @@ public struct SmartSubclassMacro: MemberMacro {
     // 辅助方法：生成required init()方法
     private static func generateRequiredInit() -> DeclSyntax {
         return """
-        override required init() {
+        required init() {
             super.init()
         }
         """
