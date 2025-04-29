@@ -1,5 +1,5 @@
 //
-//  MemberMacro.swift
+//  SmartSubclassMacro.swift
 //  Mccc
 //
 //  Created by qixin on 2025/4/24.
@@ -35,7 +35,7 @@ struct PropertyInfo {
 }
   
 /// A macro that automatically implements SmartCodable inheritance support
-public struct InheritedSmartCodableMacro: MemberMacro {
+public struct SmartSubclassMacro: MemberMacro {
     public static func expansion(
         of node: AttributeSyntax,
         providingMembersOf declaration: some DeclGroupSyntax,
@@ -43,7 +43,7 @@ public struct InheritedSmartCodableMacro: MemberMacro {
     ) throws -> [DeclSyntax] {
         // 确保是类声明
         guard let classDecl = declaration.as(ClassDeclSyntax.self) else {
-            throw MacroError.message("@InheritedSmartCodable 只能用于类")
+            throw MacroError.message("@SmartSubclassMacro 只能用于类")
         }
           
         // 获取类的属性
