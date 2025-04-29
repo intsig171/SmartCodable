@@ -96,10 +96,10 @@ extension TestCaseViewController {
             "list": [
                 ["name": "特殊格式 - Date",       "vc": "SpecialData_dateViewController"],
                 ["name": "特殊格式 - Data",       "vc": "SpecialData_dataViewController"],
+                ["name": "特殊格式 - Color",      "vc": "SpecialData_ColorViewController"],
                 ["name": "特殊格式 - Float",      "vc": "SpecialData_FloatViewController"],
                 ["name": "特殊格式 - URL",        "vc": "SpecialData_URLViewController"],
                 ["name": "特殊格式 - Enum",       "vc": "SpecialData_EnumViewController"],
-                ["name": "特殊格式 - SmartColor", "vc": "SpecialData_ColorViewController"],
                 ["name": "特殊格式 - SmartAny",   "vc": "SpecialData_SmartAnyViewController"],
 
             ]

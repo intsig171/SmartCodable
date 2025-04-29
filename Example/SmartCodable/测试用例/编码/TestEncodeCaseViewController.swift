@@ -59,11 +59,11 @@ extension TestEncodeCaseViewController {
             "list": [
                 ["name": "Date",                 "vc": "Encode_SpecialData_dateViewController"],
                 ["name": "Data",                 "vc": "Encode_SpecialData_dataViewController"],
+                ["name": "Color",                "vc": "Encode_SpecialData_colorViewController"],
                 ["name": "URL",                  "vc": "Encode_SpecialData_urlViewController"],
                 ["name": "Enum",                 "vc": "Encode_SpecialData_enumViewController"],
-                ["name": "SmartColor",           "vc": "Encode_SpecialData_colorViewController"],
                 ["name": "SmartAny",             "vc": "Encode_SpecialData_anyViewController"],
-                ["name": "嵌套模型",              "vc": "Encode_SpecialData_modelViewController"],
+                ["name": "嵌套模型",               "vc": "Encode_SpecialData_modelViewController"],
             ]
         ]
     }

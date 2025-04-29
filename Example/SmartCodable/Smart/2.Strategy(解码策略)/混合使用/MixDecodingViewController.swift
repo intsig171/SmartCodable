@@ -58,8 +58,8 @@ extension MixDecodingViewController {
 //        var date2: Date?
 //        var data: Data?
 //        var url: URL?
-        
-//        var color: SmartColor?
+//        @SmartHexColor
+//        var color: UIColor?
 
         // case 1 【解析前】：解析忽略
 //        enum CodingKeys: CodingKey {

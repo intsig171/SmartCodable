@@ -53,7 +53,7 @@ class CustomDecodingValueViewContriller: BaseViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.backgroundColor = model?.color?.peel
+        view.backgroundColor = model?.color
 //        if let url = model?.url {
 //            UIApplication.shared.open(url)
 //        }
@@ -77,7 +77,8 @@ extension CustomDecodingValueViewContriller {
         var url: URL?
         
         var ignoreKey: String?
-        var color: SmartColor?
+        @SmartHexColor
+        var color: UIColor?
         
         var sub: SmartSubModel?
         
@@ -103,7 +104,8 @@ extension CustomDecodingValueViewContriller {
     struct SmartSubModel: SmartCodable {
 
         var subDate: Date?
-        var subColor: SmartColor?
+        @SmartHexColor
+        var subColor: UIColor?
         var subData: Data?
 
         
@@ -118,7 +120,6 @@ extension CustomDecodingValueViewContriller {
                 CodingKeys.subData <--- SmartDataTransformer(),
 
                 CodingKeys.subDate <--- SmartDateTransformer(),
-                CodingKeys.subColor <--- SmartHexColorTransformer()
             ]
         }
     }
