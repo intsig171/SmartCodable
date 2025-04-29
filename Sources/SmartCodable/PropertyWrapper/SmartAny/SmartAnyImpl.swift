@@ -114,12 +114,29 @@ extension SmartAnyImpl {
 extension SmartAnyImpl: Codable {
     public init(from decoder: Decoder) throws {
         
-        guard let decoder = decoder as? JSONDecoderImpl,
-              let container = try? decoder.singleValueContainer() as? JSONDecoderImpl.SingleValueContainer else {
-            throw DecodingError.typeMismatch(SmartAnyImpl.self, DecodingError.Context(
-                codingPath: decoder.codingPath, debugDescription: "Expected \(Self.self) value，but an exception occurred！Please report this issue（请上报该问题）")
+        
+        guard let decoder = decoder as? JSONDecoderImpl else {
+            throw DecodingError.typeMismatch(
+                SmartAnyImpl.self,
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Expected \(Self.self) value, but decoder type mismatch"
+                )
             )
         }
+        
+        guard let containerAny = try? decoder.singleValueContainer(),
+              let container = containerAny as? JSONDecoderImpl.SingleValueContainer else {
+            throw DecodingError.typeMismatch(
+                SmartAnyImpl.self,
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Expected \(Self.self) value, but container type mismatch"
+                )
+            )
+        }
+        
+        
        
         if container.decodeNil() {
             self = .null(NSNull())

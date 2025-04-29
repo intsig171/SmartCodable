@@ -5,7 +5,6 @@
 //  Created by qixin on 2024/9/26.
 //
 
-#if canImport(Combine) && swift(>=5.1)
 import Foundation
 import SwiftUI
 import Combine
@@ -131,9 +130,7 @@ extension SmartPublished: PropertyWrapperInitializable {
         return nil
     }
 }
-#else
-#error("SmartPublished requires iOS 13 or later. Please update your deployment target.")
-#endif
+
 
 
 

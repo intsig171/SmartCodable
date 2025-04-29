@@ -147,7 +147,7 @@ extension SmartDecodable {
             return nil
         }
         
-        return try? _data._deserializeDict(type: Self.self, options: options)
+        return _data._deserializeDict(type: Self.self, options: options)
     }
     
     
@@ -173,7 +173,7 @@ extension SmartDecodable {
             return nil
         }
         
-        return try? _data._deserializeDict(type: Self.self, options: options)
+        return _data._deserializeDict(type: Self.self, options: options)
     }
 
 }
@@ -240,7 +240,7 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        return try? _data._deserializeArray(type: Self.self, options: options)
+        return _data._deserializeArray(type: Self.self, options: options)
     }
     
     /// Deserializes into an array of models
@@ -266,7 +266,7 @@ extension Array where Element: SmartDecodable {
             return nil
         }
         
-        return try? _data._deserializeArray(type: Self.self, options: options)
+        return _data._deserializeArray(type: Self.self, options: options)
     }
 }
 
@@ -296,7 +296,7 @@ extension Data {
     }
     
     
-    fileprivate func _deserializeDict<T>(type: T.Type, options: Set<SmartDecodingOption>? = nil) throws -> T? where T: SmartDecodable {
+    fileprivate func _deserializeDict<T>(type: T.Type, options: Set<SmartDecodingOption>? = nil) -> T? where T: SmartDecodable {
 
         do {
             let _decoder = createDecoder(type: type, options: options)
@@ -309,7 +309,7 @@ extension Data {
     }
     
     
-    fileprivate func _deserializeArray<T>(type: [T].Type, options: Set<SmartDecodingOption>? = nil) throws -> [T]? where T: SmartDecodable {
+    fileprivate func _deserializeArray<T>(type: [T].Type, options: Set<SmartDecodingOption>? = nil) -> [T]? where T: SmartDecodable {
 
         do {
             let _decoder = createDecoder(type: type, options: options)

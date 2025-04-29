@@ -32,9 +32,16 @@ class Test2ViewController: BaseViewController {
         required init() { }
     }
     
-    @InheritedSmartCodable
+    @SmartSubclass
     class StudentModel: BaseModel {
         var age: Int = 0
     }
 }
 
+
+
+/**
+ @SmartSubclass
+ @SmartMember
+ @SmartInherit
+ */

@@ -61,7 +61,7 @@ public struct SmartAny<T>: Codable, PropertyWrapperInitializable {
             
             // 类型检查
             if let _type = T.self as? Decodable.Type {
-                if let decoded = try? _type.init(from: decoder) as? T {
+                if let decoded = try _type.init(from: decoder) as? T {
                     self = .init(wrappedValue: decoded)
                     return
                 }

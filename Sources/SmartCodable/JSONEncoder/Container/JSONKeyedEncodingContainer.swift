@@ -108,7 +108,7 @@ struct JSONKeyedEncodingContainer<K: CodingKey>: KeyedEncodingContainerProtocol,
         if let jsonValue = impl.cache.tranform(from: value, with: convertedKey) {
             self.object.set(jsonValue, for: convertedKey.stringValue)
         } else {
-            if let encoded = try? self.wrapEncodable(value, for: convertedKey) {
+            if let encoded = try self.wrapEncodable(value, for: convertedKey) {
                 self.object.set(encoded, for: convertedKey.stringValue)
             }
         }
