@@ -383,10 +383,6 @@ extension JSONDecoderImpl.KeyedContainer {
 
 extension JSONDecoderImpl.KeyedContainer {
     @inline(__always)private func _decodeDecodableIfPresent<T: Decodable>(_ type: T.Type, forKey key: K) -> T? {
-     
-        if type == CGFloat.self {
-            return try? decodeIfPresent(CGFloat.self, forKey: key) as? T
-        }
         
         // 检查是否有值转换器
         if let transformer = impl.cache.valueTransformer(for: key) {

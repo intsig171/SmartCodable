@@ -14,23 +14,39 @@ public struct SmartDateTransformer: ValueTransformable {
     public typealias JSON = Double
     public typealias Object = Date
         
-    public init() {}
+    private var _milliseconds: Bool
 
     
+    public init(isMilliseconds: Bool = false) {
+        _milliseconds = isMilliseconds
+    }
+    
     public func transformFromJSON(_ value: Any) -> Date? {
-        if let timeInt = value as? Double {
-            return Date(timeIntervalSinceReferenceDate: timeInt)
+        
+        if _milliseconds {
+            if let timeInt = value as? Double {
+                return Date(timeIntervalSince1970: timeInt / 1000.0)
+            }
+            
+            if let timeStr = value as? String, let timeDouble = Double(timeStr) {
+                return Date(timeIntervalSince1970: timeDouble / 1000.0)
+            }
+        } else {
+            if let timeInt = value as? Double {
+                return Date(timeIntervalSince1970: timeInt)
+            }
+            
+            if let timeStr = value as? String, let timeDouble = Double(timeStr) {
+                return Date(timeIntervalSince1970: timeDouble)
+            }
         }
-
-        if let timeStr = value as? String {
-            return Date(timeIntervalSince1970: TimeInterval(atof(timeStr)))
-        }
-
+        
         return nil
     }
     
     public func transformToJSON(_ value: Date) -> Double? {
-        return Double(value.timeIntervalSince1970)
+        let timeInterval = value.timeIntervalSince1970
+        return _milliseconds ? timeInterval * 1000.0 : timeInterval
     }
 }
 

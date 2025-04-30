@@ -31,6 +31,18 @@ extension JSONDecoderImpl {
         if type == Decimal.self {
             return try self.unwrapDecimal() as! T
         }
+
+        
+        if type == CGFloat.self {
+            return try unwrapCGFloat() as! T
+        }
+        
+        // If you are parsing a SmartColor type property, which is not handled here,
+        // you will enter SmartColor's `init(decoder:)` method.
+        if type == SmartColor.self {
+            return try self.unwrapSmartColor() as! T
+        }
+        
         if type is _JSONStringDictionaryDecodableMarker.Type {
             return try self.unwrapDictionary(as: type)
         }
@@ -262,6 +274,33 @@ extension JSONDecoderImpl {
         
         return decimal
     }
+    
+    
+    private func unwrapCGFloat() throws -> CGFloat {
+        if let transformer = cache.valueTransformer(for: codingPath.last) {
+            if let decoded = transformer.tranform(value: json) as? CGFloat {
+                return decoded
+            }
+            throw DecodingError.dataCorrupted(.init(
+                codingPath: self.codingPath,
+                debugDescription: "Parsed JSON value cannot be transformed to \(CGFloat.self)."))
+        }
+        
+        guard case .number(let numberString) = self.json else {
+            throw DecodingError.typeMismatch(CGFloat.self, DecodingError.Context(
+                codingPath: self.codingPath,
+                debugDescription: "Expected a JSON number for \(CGFloat.self), but found."))
+        }
+        
+        guard let doubleValue = Double(numberString) else {
+            throw DecodingError.dataCorrupted(.init(
+                codingPath: self.codingPath,
+                debugDescription: "Parsed JSON number <\(numberString)> is not a valid Double for conversion to \(CGFloat.self)."))
+        }
+        
+        return CGFloat(doubleValue)
+    }
+    
     
     private func unwrapDictionary<T: Decodable>(as: T.Type) throws -> T {
         guard let dictType = T.self as? (_JSONStringDictionaryDecodableMarker & Decodable).Type else {

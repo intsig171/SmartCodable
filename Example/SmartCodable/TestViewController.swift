@@ -43,47 +43,25 @@ class TestViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let dict: [String: Any] =  [
-            "date": "2024-06-06",
-            "data": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
-            "url": "https://www.baidu.com",
-            "int": "Mccc"
+            "height": "1729402611000"
         ]
-        
-        let tf = DateFormatter()
-        tf.dateFormat = "yyyy-MM-dd"
-        let model = Model.deserialize(from: dict, options: [.date(.formatted(tf))])
+
+        let model = Model.deserialize(from: dict, options: [.date(.millisecondsSince1970)])
         print(model)
-        
+
     }
 
     
     struct Model: SmartCodable {
-//        var date: Date?
-//        var data: Data?
-//        var url: URL?
-        var int: Int? = 100
+        
+        var height: Date?
+        
         
 //        static func mappingForValue() -> [SmartValueTransformer]? {
 //            [
-//                CodingKeys.int <--- IntTransformer()
+//                CodingKeys.height <--- SmartDateTransformer(isMilliseconds: true)
 //            ]
 //        }
-    }
-    
-    struct IntTransformer: ValueTransformable {
-        func transformToJSON(_ value: Int) -> Int? {
-            return value
-        }
-        
-        func transformFromJSON(_ value: Any) -> Int? {
-            if let temp = value as? Int {
-                return 100 + temp
-            }
-            return nil
-        }
-        
-        typealias Object = Int
-        typealias JSON = Int
     }
 }
 
