@@ -95,8 +95,8 @@ extension CustomDecodingValueViewContriller {
                 CodingKeys.cgFloat <--- CGFloatTransformer(),
                 
                 CodingKeys.url <--- SmartURLTransformer(prefix: "https://"),
-                CodingKeys.date2 <--- SmartDateTransformer(),
-                CodingKeys.date1 <--- SmartDateFormatTransformer(format)
+                CodingKeys.date2 <--- SmartDateTransformer(strategy: .timestamp),
+                CodingKeys.date1 <--- SmartDateTransformer(strategy: .formatted(format))
             ]
         }
     }
@@ -119,7 +119,7 @@ extension CustomDecodingValueViewContriller {
             [
                 CodingKeys.subData <--- SmartDataTransformer(),
 
-                CodingKeys.subDate <--- SmartDateTransformer(),
+                CodingKeys.subDate <--- SmartDateTransformer(strategy: .timestamp),
             ]
         }
     }

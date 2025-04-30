@@ -28,6 +28,7 @@ class SpecialData_ColorViewController: BaseCompatibilityViewController {
         
         let trans = model.toDictionary()
         print(trans)
+
     }
 }
 
@@ -38,7 +39,7 @@ extension SpecialData_ColorViewController {
         var color1: UIColor?
         @SmartHexColor
         var color2: UIColor?
-        @SmartHexColor
+        @SmartHexColor(encodeHexFormat: .rgb(.none))
         var color3: UIColor? = .yellow
         @SmartHexColor
         var color4: UIColor? = .red

@@ -50,7 +50,7 @@ extension Decoding_valueMapViewController {
             return [
                 CodingKeys.int <--- IntTranformer(),
                 CodingKeys.string <--- StringTranformer(),
-                CodingKeys.date <--- SmartDateFormatTransformer(df),
+                CodingKeys.date <--- SmartDateTransformer(strategy: .formatted(df)),
                 CodingKeys.subModel <--- SubModelTranformer()
             ]
         }
