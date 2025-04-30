@@ -24,8 +24,10 @@ class SpecialData_ColorViewController: BaseCompatibilityViewController {
         
         guard let model = Model.deserialize(from: dict) else { return }
         smartPrint(value: model)
+
         
-        view.backgroundColor = model.color3
+        let trans = model.toDictionary()
+        print(trans)
     }
 }
 

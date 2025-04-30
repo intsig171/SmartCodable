@@ -8,12 +8,6 @@
 /**
  * A property wrapper that enables UIColor/NSColor handling in Codable properties by decoding hex strings.
  *
- * Supported hex string formats:
-   - RGB, RGBA, RRGGBB, RRGGBBAA
-   - #RGB, #RGBA, #RRGGBB, #RRGGBBAA
-   - 0xRGB, 0xRGBA, 0xRRGGBB, 0xRRGGBBAA
-   - 0XRGB, 0XRGBA, 0XRRGGBB, 0XRRGGBBAA
- *
  * Usage Example:
  *
  * ```
@@ -34,175 +28,270 @@ public typealias ColorObject = NSColor
 public typealias ColorObject = UIColor // 根据 VisionKit 框架设置适当的颜色类型
 #endif
 
-public enum SmartColorHexFormat {
-    // 常见
-    case RGB
-    case RGBA
-    case RRGGBB
-    case RRGGBBAA
-    // 不常见
-    case ARGB
-    case AARRGGBB
-}
+
 
 @propertyWrapper
 public struct SmartHexColor: Codable {
     public var wrappedValue: ColorObject?
+    
+    private var encodeHexFormat: HexFormat?
 
-    public init(wrappedValue: ColorObject?) {
+    public init(wrappedValue: ColorObject?, encodeHexFormat: HexFormat? = nil) {
         self.wrappedValue = wrappedValue
+        self.encodeHexFormat = encodeHexFormat
     }
-
+    
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let hexString = try container.decode(String.self)
+        
+        guard
+            let format = SmartHexColor.HexFormat.format(for: hexString),
+            let color = SmartHexColor.toColor(from: hexString, format: format)
+        else {
+            throw DecodingError.dataCorruptedError(
+                in: container,
+                debugDescription: "Cannot decode SmartHexColor from '\(hexString)'. Supported formats: HexFormat."
+            )
+        }
+        
+        if encodeHexFormat == nil {
+            self.encodeHexFormat = format
+        }
+        self.wrappedValue = color
+    }
+    
+    
+    public func encode(to encoder: Encoder) throws {
+        
+        var container = encoder.singleValueContainer()
+        guard let color = wrappedValue else {
+            return try container.encodeNil() // 更明确地记录 nil
+        }
 
-        // 使用常见的格式解码 .RRGGBB, .RRGGBBAA, .RGB, .RGBA
-        if let color = SmartColorHexFormat.color(from: hexString, with: [.RRGGBB, .RRGGBBAA, .RGB, .RGBA]) {
-            self.wrappedValue = color
+        let format = encodeHexFormat ?? .rrggbb(.none)
+        
+        guard let hexString = SmartHexColor.toHexString(from: color, format: format) else {
+            throw EncodingError.invalidValue(
+                color,
+                EncodingError.Context(
+                    codingPath: encoder.codingPath,
+                    debugDescription: "Failed to convert color to hex string with format \(format)"
+                )
+            )
+        }
+        
+        try container.encode(hexString)
+    }
+}
+
+
+
+extension SmartHexColor {
+    
+    public static func toColor(from hex: String, format: SmartHexColor.HexFormat) -> ColorObject? {
+        // 1. 移除前缀
+        let hexString = normalizedHexString(from: hex, prefix: format.prefix)
+        
+        // 2. 将字符串转换为 UInt64
+        guard let hexValue = UInt64(hexString, radix: 16) else { return nil }
+        
+        // 3. 按格式解析颜色分量
+        func component(_ value: UInt64, shift: Int, mask: UInt64) -> CGFloat {
+            return CGFloat((value >> shift) & mask) / 255
+        }
+        
+        let r, g, b, a: CGFloat
+        
+        switch format {
+        case .rgb:
+            r = CGFloat((hexValue >> 8) & 0xF) / 15
+            g = CGFloat((hexValue >> 4) & 0xF) / 15
+            b = CGFloat(hexValue & 0xF) / 15
+            a = 1.0
+            
+        case .rgba:
+            r = CGFloat((hexValue >> 12) & 0xF) / 15
+            g = CGFloat((hexValue >> 8) & 0xF) / 15
+            b = CGFloat((hexValue >> 4) & 0xF) / 15
+            a = CGFloat(hexValue & 0xF) / 15
+            
+        case .rrggbb:
+            r = component(hexValue, shift: 16, mask: 0xFF)
+            g = component(hexValue, shift: 8, mask: 0xFF)
+            b = component(hexValue, shift: 0, mask: 0xFF)
+            a = 1.0
+            
+        case .rrggbbaa:
+            r = component(hexValue, shift: 24, mask: 0xFF)
+            g = component(hexValue, shift: 16, mask: 0xFF)
+            b = component(hexValue, shift: 8, mask: 0xFF)
+            a = component(hexValue, shift: 0, mask: 0xFF)
+        }
+        
+#if os(macOS)
+        return NSColor(calibratedRed: r, green: g, blue: b, alpha: a)
+#else
+        return UIColor(red: r, green: g, blue: b, alpha: a)
+#endif
+    }
+    
+    /// 移除前缀并转小写
+    private static func normalizedHexString(from hex: String, prefix: String) -> String {
+        let trimmedHex = hex.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        
+        if !prefix.isEmpty, trimmedHex.hasPrefix(prefix.lowercased()) {
+            return String(trimmedHex.dropFirst(prefix.count))
         } else {
-            throw DecodingError.dataCorruptedError(in: container,
-                                                   debugDescription: "Cannot decode SmartHexColor from provided hex string. Only the following hex string formats are supported: RGB, RGBA, RRGGBB, RRGGBBAA, #RGB, #RGBA, #RRGGBB, #RRGGBBAA, 0xRGB, 0xRGBA, 0xRRGGBB, 0xRRGGBBAA, 0XRGB, 0XRGBA, 0XRRGGBB, 0XRRGGBBAA.")
+            return trimmedHex
         }
     }
 
-    public func encode(to encoder: Encoder) throws {
-        // 使用固定的格式编码 #RRGGBB
-        if let value = wrappedValue, let hexString = SmartColorHexFormat.RRGGBB.string(from: value) {
-            var container = encoder.singleValueContainer()
-            try container.encode(hexString)
+    
+    public static func toHexString(from color: ColorObject, format: SmartHexColor.HexFormat) -> String? {
+        guard let components = color.rgbaComponents else { return nil }
+
+        func clamped255(_ value: CGFloat) -> Int {
+            return min(max(Int(value * 255), 0), 255)
+        }
+        
+        let r = clamped255(components.r)
+        let g = clamped255(components.g)
+        let b = clamped255(components.b)
+        let a = clamped255(components.a)
+
+        func prefixString(_ prefix: SmartHexColor.HexFormat.Prefix) -> String {
+            switch prefix {
+            case .hash: return "#"
+            case .zeroX: return "0x"
+            case .none: return ""
+            }
+        }
+
+        switch format {
+        case .rgb(let prefix):
+            return "\(prefixString(prefix))" + String(format: "%01X%01X%01X", r >> 4, g >> 4, b >> 4)
+
+        case .rgba(let prefix):
+            return "\(prefixString(prefix))" + String(format: "%01X%01X%01X%01X", r >> 4, g >> 4, b >> 4, a >> 4)
+
+        case .rrggbb(let prefix):
+            return "\(prefixString(prefix))" + String(format: "%02X%02X%02X", r, g, b)
+
+        case .rrggbbaa(let prefix):
+            return "\(prefixString(prefix))" + String(format: "%02X%02X%02X%02X", r, g, b, a)
         }
     }
 }
 
-// MARK: internal
 
-extension SmartColorHexFormat {
-    static func hexValue(from string: String) -> (UInt64, String)? {
-        let string = string.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        guard string.count >= 3 else { return nil }
-
-        let hexString: String
-
-        if string.hasPrefix("#") {
-            hexString = String(string[string.index(string.startIndex, offsetBy: 1) ..< string.endIndex])
-        } else if string.hasPrefix("0x") {
-            hexString = String(string[string.index(string.startIndex, offsetBy: 2) ..< string.endIndex])
-        } else {
-            hexString = string.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-            if string.count == hexString.count {
-                // 无前缀的Hex String
+extension SmartHexColor {
+    
+    /// 定义 16 进制颜色代码的格式（支持带 `#` 和不带 `#` 的格式）
+    ///
+    /// ## 格式说明
+    /// - **无透明度**：
+    ///   - `RGB`：3 位，例如 `F00`（等价于 `FF0000`）
+    ///   - `#RGB`：带 `#` 前缀的 3 位，例如 `#F00`
+    ///   - `RRGGBB`：6 位，例如 `FF0000`
+    ///   - `#RRGGBB`：带 `#` 前缀的 6 位，例如 `#FF0000`
+    ///
+    /// - **带透明度**：
+    ///   - `RGBA`：4 位，例如 `F008`（等价于 `FF000088`）
+    ///   - `#RGBA`：带 `#` 前缀的 4 位，例如 `#F008`
+    ///   - `RRGGBBAA`：8 位，例如 `FF000080`
+    ///   - `#RRGGBBAA`：带 `#` 前缀的 8 位，例如 `#FF000080`
+    ///
+    /// > 注意：枚举值名称中的 `hash` 表示格式包含 `#` 前缀。
+    public enum HexFormat {
+        /// 3 位无透明度（如 `F00`）
+        case rgb(Prefix)
+        
+        /// 6 位无透明度（如 `FF0000`）
+        case rrggbb(Prefix)
+        
+        /// 4 位带透明度（如 `F008`）
+        case rgba(Prefix)
+        
+        /// 8 位带透明度（如 `FF000080`）
+        case rrggbbaa(Prefix)
+        
+        
+        var prefix: String {
+            switch self {
+            case .rgb(let prefix):
+                return prefix.rawValue
+            case .rrggbb(let prefix):
+                return prefix.rawValue
+            case .rgba(let prefix):
+                return prefix.rawValue
+            case .rrggbbaa(let prefix):
+                return prefix.rawValue
+            }
+        }
+                
+        public enum Prefix {
+            case hash
+            case zeroX
+            case none
+            
+            var rawValue: String {
+                switch self {
+                case .hash:
+                    return "#"
+                case .zeroX:
+                    return "0x"
+                case .none:
+                    return ""
+                }
+            }
+        }
+        
+        /// 根据给定的 hex 字符串，自动识别并返回相应的 `HexFormat`
+        static func format(for hexString: String) -> HexFormat? {
+            let trimmedHex = hexString.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            
+            // 判断是否有前缀并根据不同前缀选择不同的处理方法
+            if trimmedHex.hasPrefix("#") {
+                let pureHex = String(trimmedHex.dropFirst())
+                return detectFormat(from: pureHex, withPrefix: .hash)
+            } else if trimmedHex.hasPrefix("0x") {
+                let pureHex = String(trimmedHex.dropFirst(2))
+                return detectFormat(from: pureHex, withPrefix: .zeroX)
             } else {
-                // 未知前缀 不支持
+                return detectFormat(from: trimmedHex, withPrefix: .none)
+            }
+        }
+        
+        // 自动识别和推断 HexFormat
+        private static func detectFormat(from hex: String, withPrefix prefix: Prefix) -> HexFormat? {
+            switch hex.count {
+            case 3:
+                return .rgb(prefix)
+            case 4:
+                return .rgba(prefix)
+            case 6:
+                return .rrggbb(prefix)
+            case 8:
+                return .rrggbbaa(prefix)
+            default:
                 return nil
             }
         }
-
-        guard let hexValue = UInt64(hexString, radix: 16) else { return nil }
-        return (hexValue, hexString)
     }
+}
 
-    static func color(from string: String, with formats: [SmartColorHexFormat]) -> ColorObject? {
-        guard let hexInfo = hexValue(from: string) else {
-            return nil
-        }
 
-        for format in formats {
-            if let color = format.color(from: hexInfo.0, hexStringCount: hexInfo.1.count) {
-                return color
-            }
-        }
 
-        return nil
-    }
-
-    func color(from string: String) -> ColorObject? {
-        guard let hexInfo = SmartColorHexFormat.hexValue(from: string) else {
-            return nil
-        }
-        return color(from: hexInfo.0, hexStringCount: hexInfo.1.count)
-    }
-
-    func string(from color: ColorObject, prefix: String = "#") -> String? {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-
-#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
-        guard color.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else { return nil }
+private extension ColorObject {
+    var rgbaComponents: (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)? {
+#if os(macOS)
+        guard let converted = usingColorSpace(.deviceRGB) else { return nil }
+        return (converted.redComponent, converted.greenComponent, converted.blueComponent, converted.alphaComponent)
 #else
-        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-#endif
-
-        switch self {
-        case .RGB:
-            return String(format: "%@%1x%1x%1x", prefix, Int(red * 15), Int(green * 15), Int(blue * 15))
-        case .RGBA:
-            return String(format: "%@%1x%1x%1x%1x", prefix, Int(red * 15), Int(green * 15), Int(blue * 15), Int(alpha * 15))
-        case .ARGB:
-            return String(format: "%@%1x%1x%1x%1x", prefix, Int(alpha * 15), Int(red * 15), Int(green * 15), Int(blue * 15))
-        case .RRGGBB:
-            let rgb: Int = (Int(red * 255) << 16) | (Int(green * 255) << 8) | Int(blue * 255)
-            return String(format: "%@%06x", prefix, rgb)
-        case .RRGGBBAA:
-            let rgba: Int = (Int(red * 255) << 24) | (Int(green * 255) << 16) | (Int(blue * 255) << 8) | Int(alpha * 255)
-            return String(format: "%@%08x", prefix, rgba)
-        case .AARRGGBB:
-            let argb: Int = (Int(alpha * 255) << 24) | (Int(red * 255) << 16) | (Int(green * 255) << 8) | Int(blue * 255)
-            return String(format: "%@%08x", prefix, argb)
-        }
-    }
-
-    func color(from hexValue: UInt64, hexStringCount: Int) -> ColorObject? {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 1 // 默认1
-
-        switch self {
-        case .RGB where hexStringCount == 3:
-            red = CGFloat((hexValue & 0xF00) >> 8) / CGFloat(15)
-            green = CGFloat((hexValue & 0xF0) >> 4) / CGFloat(15)
-            blue = CGFloat(hexValue & 0xF) / CGFloat(15)
-
-        case .RGBA where hexStringCount == 4:
-            red = CGFloat((hexValue & 0xF000) >> 12) / CGFloat(15)
-            green = CGFloat((hexValue & 0xF00) >> 8) / CGFloat(15)
-            blue = CGFloat((hexValue & 0xF0) >> 4) / CGFloat(15)
-            alpha = CGFloat(hexValue & 0xF) / CGFloat(15)
-
-        case .ARGB where hexStringCount == 4:
-            alpha = CGFloat((hexValue & 0xF000) >> 12) / CGFloat(15)
-            red = CGFloat((hexValue & 0xF00) >> 8) / CGFloat(15)
-            green = CGFloat((hexValue & 0xF0) >> 4) / CGFloat(15)
-            blue = CGFloat(hexValue & 0xF) / CGFloat(15)
-
-        case .RRGGBB where hexStringCount == 6:
-            red = CGFloat((hexValue & 0xFF0000) >> 16) / CGFloat(255)
-            green = CGFloat((hexValue & 0xFF00) >> 8) / CGFloat(255)
-            blue = CGFloat(hexValue & 0xFF) / CGFloat(255)
-
-        case .RRGGBBAA where hexStringCount == 8:
-            red = CGFloat((hexValue & 0xFF000000) >> 24) / CGFloat(255)
-            green = CGFloat((hexValue & 0xFF0000) >> 16) / CGFloat(255)
-            blue = CGFloat((hexValue & 0xFF00) >> 8) / CGFloat(255)
-            alpha = CGFloat(hexValue & 0xFF) / CGFloat(255)
-
-        case .AARRGGBB where hexStringCount == 8:
-            alpha = CGFloat((hexValue & 0xFF000000) >> 24) / CGFloat(255)
-            red = CGFloat((hexValue & 0xFF0000) >> 16) / CGFloat(255)
-            green = CGFloat((hexValue & 0xFF00) >> 8) / CGFloat(255)
-            blue = CGFloat(hexValue & 0xFF) / CGFloat(255)
-
-        default:
-            return nil
-        }
-
-#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
-        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-#else
-        return NSColor(calibratedRed: red, green: green, blue: blue, alpha: alpha)
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        guard getRed(&r, green: &g, blue: &b, alpha: &a) else { return nil }
+        return (r, g, b, a)
 #endif
     }
 }

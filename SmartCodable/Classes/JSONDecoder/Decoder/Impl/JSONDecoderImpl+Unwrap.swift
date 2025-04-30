@@ -31,16 +31,8 @@ extension JSONDecoderImpl {
         if type == Decimal.self {
             return try self.unwrapDecimal() as! T
         }
-
-        
         if type == CGFloat.self {
             return try unwrapCGFloat() as! T
-        }
-        
-        // If you are parsing a SmartColor type property, which is not handled here,
-        // you will enter SmartColor's `init(decoder:)` method.
-        if type == SmartColor.self {
-            return try self.unwrapSmartColor() as! T
         }
         
         if type is _JSONStringDictionaryDecodableMarker.Type {
