@@ -21,7 +21,7 @@ class Introduce_9ViewController: BaseCompatibilityViewController {
         ]
         
         guard let model = Model.deserialize(from: dict) else { return }
-        print(model.color.peel)
+        print(model.color)
     }
 }
 
@@ -29,7 +29,8 @@ class Introduce_9ViewController: BaseCompatibilityViewController {
 extension Introduce_9ViewController {
     
     struct Model: SmartCodable {
-        var color: SmartColor = .color(UIColor.white)
+        @SmartHexColor
+        var color: UIColor? = .white
     }
 }
 
