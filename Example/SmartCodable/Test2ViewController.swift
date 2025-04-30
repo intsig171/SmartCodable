@@ -8,6 +8,7 @@
 
 import SmartCodable
 import BTPrint
+import CodableWrapper
 
 class Test2ViewController: BaseViewController {
     
@@ -16,8 +17,8 @@ class Test2ViewController: BaseViewController {
 
 
         let dict: [String: Any] = [
-            "studentName": NSNull(),
-//            "studentAge": "20"
+            "name": "Mccc",
+            "studentAge": "20",
             "age": []
 
         ]
@@ -29,22 +30,33 @@ class Test2ViewController: BaseViewController {
     }
     
     class BaseModel: SmartCodable {
-        @SmartAny
         var name: String = "123"
-        
-        class func mappingForKey() -> [SmartKeyTransformer]? {
-            return [
-                CodingKeys.name <--- "studentName"
-            ]
-        }
-        
         required init() { }
     }
     
     @SmartSubclass
-    class StudentModel: BaseModel {
-        var age: Int = 0
+    public class StudentModel: BaseModel {
+        var age: Int?
+        
+        var location: String = ""
+        
+        required init() {
+            super.init()
+        }
     }
+   
+    
+    
+//    @Codable
+//    class BaseModel1 {
+//        let userName: String = ""
+//    }
+//
+//    @CodableSubclass
+//    class SubModel: BaseModel1 {
+//        let age: Int
+//    }
+
 }
 
 /**

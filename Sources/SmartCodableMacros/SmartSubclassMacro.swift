@@ -41,11 +41,16 @@ public struct SmartSubclassMacro: MemberMacro {
         providingMembersOf declaration: some DeclGroupSyntax,
         in context: some MacroExpansionContext
     ) throws -> [DeclSyntax] {
-        // 确保是类声明
+        
         guard let classDecl = declaration.as(ClassDeclSyntax.self) else {
-            throw MacroError.message("@SmartSubclassMacro 只能用于类")
+            throw MacroError.message("@SmartSubclassMacro can only be applied to class declarations")
         }
-          
+
+        guard let inheritedNames = classDecl.inheritanceClause?.inheritedTypes,
+              !inheritedNames.isEmpty else {
+            throw MacroError.message("@SmartSubclassMacro requires the class to inherit from a parent class")
+        }
+
         // 获取类的属性
         let properties = extractProperties(from: classDecl)
           
@@ -53,20 +58,29 @@ public struct SmartSubclassMacro: MemberMacro {
         if properties.isEmpty {
             return []
         }
-          
+        
+        var members: [DeclSyntax] = []
+        
         // 生成CodingKeys枚举
-        let codingKeysDecl = generateCodingKeysEnum(for: properties)
-          
+        members.append(generateCodingKeysEnum(for: properties))
+
         // 生成init(from:)方法
-        let initFromDecoder = generateInitFromDecoder(for: properties)
-          
+        members.append(generateInitFromDecoder(for: properties))
+
         // 生成encode(to:)方法
-        let encodeToEncoder = generateEncodeToEncoder(for: properties)
-          
+        members.append(generateEncodeToEncoder(for: properties))
+
         // 生成required init()方法
         let requiredInit = generateRequiredInit()
-          
-        return [codingKeysDecl, initFromDecoder, encodeToEncoder, requiredInit]
+        
+
+        if hasRequiredInitializer(classDecl) {
+            return members
+        } else {
+            // 生成required init()方法
+            members.append(generateRequiredInit())
+            return members
+        }
     }
       
     // 辅助方法：提取类的属性
@@ -160,6 +174,19 @@ public struct SmartSubclassMacro: MemberMacro {
         """
     }
       
+    
+    // 检查是否已存在required init()
+    private static func hasRequiredInitializer(_ classDecl: ClassDeclSyntax) -> Bool {
+        for member in classDecl.memberBlock.members {
+            if let initializer = member.decl.as(InitializerDeclSyntax.self),
+               initializer.signature.parameterClause.parameters.isEmpty,
+               initializer.modifiers.contains(where: { $0.name.text == "required" }) == true {
+                return true
+            }
+        }
+        return false
+    }
+    
     // 辅助方法：生成required init()方法
     private static func generateRequiredInit() -> DeclSyntax {
         return """

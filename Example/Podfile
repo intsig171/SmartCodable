@@ -4,7 +4,7 @@ platform :ios, '13.0'
 
 target 'SmartCodable_Example' do
   pod 'SmartCodable', :path => '../'
-  
+  pod 'CodableWrapper', :git => 'https://github.com/winddpan/CodableWrapper.git'
   pod 'SnapKit'
   pod 'BTPrint'
   pod 'BTBubble'

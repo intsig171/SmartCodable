@@ -1,8 +1,17 @@
 import XCTest
+import SwiftSyntax
+import SwiftSyntaxBuilder
+import SwiftSyntaxMacros
+import SwiftSyntaxMacrosTestSupport
+import XCTest
 @testable import SmartCodable
 
+import SmartCodableMacros
 
-
+let testMacros: [String: Macro.Type] = [
+    "SmartSubclass": SmartSubclassMacro.self
+    
+]
 
 class Tests: XCTestCase {
     
@@ -14,6 +23,8 @@ class Tests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
+    
+    
     
     
     func testBase() {
