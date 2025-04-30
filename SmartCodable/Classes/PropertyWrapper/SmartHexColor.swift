@@ -148,7 +148,7 @@ extension SmartHexColor {
     }
 
     
-    public static func toHexString(from color: ColorObject, format: SmartHexColor.HexFormat) -> String? {
+    static func toHexString(from color: ColorObject, format: SmartHexColor.HexFormat) -> String? {
         guard let components = color.rgbaComponents else { return nil }
 
         func clamped255(_ value: CGFloat) -> Int {
@@ -160,26 +160,20 @@ extension SmartHexColor {
         let b = clamped255(components.b)
         let a = clamped255(components.a)
 
-        func prefixString(_ prefix: SmartHexColor.HexFormat.Prefix) -> String {
-            switch prefix {
-            case .hash: return "#"
-            case .zeroX: return "0x"
-            case .none: return ""
-            }
-        }
+        
 
         switch format {
         case .rgb(let prefix):
-            return "\(prefixString(prefix))" + String(format: "%01X%01X%01X", r >> 4, g >> 4, b >> 4)
+            return prefix.rawValue + String(format: "%01X%01X%01X", r >> 4, g >> 4, b >> 4)
 
         case .rgba(let prefix):
-            return "\(prefixString(prefix))" + String(format: "%01X%01X%01X%01X", r >> 4, g >> 4, b >> 4, a >> 4)
+            return prefix.rawValue + String(format: "%01X%01X%01X%01X", r >> 4, g >> 4, b >> 4, a >> 4)
 
         case .rrggbb(let prefix):
-            return "\(prefixString(prefix))" + String(format: "%02X%02X%02X", r, g, b)
+            return prefix.rawValue + String(format: "%02X%02X%02X", r, g, b)
 
         case .rrggbbaa(let prefix):
-            return "\(prefixString(prefix))" + String(format: "%02X%02X%02X%02X", r, g, b, a)
+            return prefix.rawValue + String(format: "%02X%02X%02X%02X", r, g, b, a)
         }
     }
 }
