@@ -43,27 +43,39 @@ class TestViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let dict: [String: Any] =  [
-            "height": "1729402611000"
+            "height": "1729402611000",
+            "sub": [
+                "name": "Mccc"
+            ]
         ]
-
-        let model = Model.deserialize(from: dict, options: [.date(.millisecondsSince1970)])
-        print(model)
-
+        let model = Model.deserialize(from: dict)
+        print(model?.height)
+        print(model?.sub?.name)
+        print(model?.sub?.s)
     }
-
     
-    struct Model: SmartCodable {
+    enum Status: Int, SmartCaseDefaultable {
+        case a = 1
+        case unown = -1
+    }
+    
+    class BaseModel: NSObject { }
+    
+    class Model: BaseModel, SmartCodable {
+        var height: Double?
+        var sub: SubModel?
         
-        var height: Date?
+        required override init() { }
+    }
+    
+    class SubModel: BaseModel, SmartCodable {
+        var name: String = ""
+        var s: Status = .unown
         
-        
-//        static func mappingForValue() -> [SmartValueTransformer]? {
-//            [
-//                CodingKeys.height <--- SmartDateTransformer(isMilliseconds: true)
-//            ]
-//        }
+        required override init() { }
     }
 }
+
 
 
 
