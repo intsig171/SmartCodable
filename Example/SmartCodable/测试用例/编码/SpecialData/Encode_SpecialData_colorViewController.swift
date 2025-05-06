@@ -34,13 +34,8 @@ class Encode_SpecialData_colorViewController: BaseViewController {
 
 extension Encode_SpecialData_colorViewController {
     struct Model: SmartCodable {
-        var a: SmartColor?
-        
-        static func mappingForValue() -> [SmartValueTransformer]? {
-            return [
-                CodingKeys.a <--- SmartHexColorTransformer()
-            ]
-        }
+        @SmartHexColor
+        var a: UIColor?
     }
 }
 

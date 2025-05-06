@@ -282,7 +282,7 @@ extension Data {
                     _decoder.smartDataDecodingStrategy = strategy
                     
                 case .date(let strategy):
-                    _decoder.dateDecodingStrategy = strategy
+                    _decoder.smartDateDecodingStrategy = strategy
                     
                 case .float(let strategy):
                     _decoder.nonConformingFloatDecodingStrategy = strategy

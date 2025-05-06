@@ -7,7 +7,7 @@ import Foundation
 //===----------------------------------------------------------------------===//
 
 /// `JSONEncoder` facilitates the encoding of `Encodable` values into JSON.
-open class SmartJSONEncoder: JSONEncoder {
+open class SmartJSONEncoder: JSONEncoder, @unchecked Sendable {
 
     open var smartKeyEncodingStrategy: SmartKeyEncodingStrategy = .useDefaultKeys
     open var smartDataEncodingStrategy: SmartDataEncodingStrategy = .base64
@@ -25,7 +25,7 @@ open class SmartJSONEncoder: JSONEncoder {
 
     /// The options set on the top-level encoder.
     fileprivate var options: _Options {
-        return _Options(dateEncodingStrategy: dateEncodingStrategy,
+        return _Options(dateEncodingStrategy: .secondsSince1970,
                         dataEncodingStrategy: smartDataEncodingStrategy,
                         nonConformingFloatEncodingStrategy: nonConformingFloatEncodingStrategy,
                         keyEncodingStrategy: smartKeyEncodingStrategy,

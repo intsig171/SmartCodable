@@ -42,8 +42,8 @@ extension Encode_SpecialData_dateViewController {
             let tf = DateFormatter()
             tf.dateFormat = "yyyy-MM-dd"
             return [
-                CodingKeys.a <--- SmartDateFormatTransformer(tf),
-                CodingKeys.b <--- SmartDateFormatTransformer(tf)
+                CodingKeys.a <--- SmartDateTransformer(strategy: .formatted(tf)),
+                CodingKeys.b <--- SmartDateTransformer(strategy: .formatted(tf))
             ]
         }
     }

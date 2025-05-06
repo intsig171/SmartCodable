@@ -31,15 +31,8 @@ extension JSONDecoderImpl {
         if type == Decimal.self {
             return try self.unwrapDecimal() as! T
         }
-        
         if type == CGFloat.self {
             return try unwrapCGFloat() as! T
-        }
-        
-        // If you are parsing a SmartColor type property, which is not handled here,
-        // you will enter SmartColor's `init(decoder:)` method.
-        if type == SmartColor.self {
-            return try self.unwrapSmartColor() as! T
         }
         
         if type is _JSONStringDictionaryDecodableMarker.Type {
@@ -162,46 +155,53 @@ extension JSONDecoderImpl {
             }
         }
         
+        let container = SingleValueContainer(impl: self, codingPath: codingPath, json: json)
+
         
-        switch self.options.dateDecodingStrategy {
-        case .deferredToDate:
-            return try Date(from: self)
-            
-        case .secondsSince1970:
-            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-            let double = try container.decode(Double.self)
-            return Date(timeIntervalSince1970: double)
-            
-        case .millisecondsSince1970:
-            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-            let double = try container.decode(Double.self)
-            return Date(timeIntervalSince1970: double / 1000.0)
-            
-        case .iso8601:
-            if #available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
-                let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-                let string = try container.decode(String.self)
-                guard let date = _iso8601Formatter.date(from: string) else {
-                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
+        if let dateDecodingStrategy = self.options.dateDecodingStrategy  {
+            switch dateDecodingStrategy {
+            case .deferredToDate:
+                return try Date(from: self)
+                
+            case .secondsSince1970:
+                let double = try container.decode(Double.self)
+                return Date(timeIntervalSince1970: double)
+                
+            case .millisecondsSince1970:
+                let double = try container.decode(Double.self)
+                return Date(timeIntervalSince1970: double / 1000.0)
+                
+            case .iso8601:
+                if #available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
+                    let string = try container.decode(String.self)
+                    guard let date = _iso8601Formatter.date(from: string) else {
+                        throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
+                    }
+                    
+                    return date
+                } else {
+                    fatalError("ISO8601DateFormatter is unavailable on this platform.")
                 }
                 
+            case .formatted(let formatter):
+                let string = try container.decode(String.self)
+                guard let date = formatter.date(from: string) else {
+                    throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
+                }
                 return date
-            } else {
-                fatalError("ISO8601DateFormatter is unavailable on this platform.")
+                
+            case .custom(let closure):
+                return try closure(self)
+            @unknown default:
+                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Date is not valid , unknown anomaly"))
             }
-            
-        case .formatted(let formatter):
-            let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-            let string = try container.decode(String.self)
-            guard let date = formatter.date(from: string) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Date string does not match format expected by formatter."))
-            }
+        }
+        
+        // 如果没有设置策略，使用 DateParser 做兜底解析
+        if let (date, _) = DateParser.parse(json.peel) {
             return date
-            
-        case .custom(let closure):
-            return try closure(self)
-        @unknown default:
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Encountered Date is not valid , unknown anomaly"))
+        } else {
+            throw DecodingError.dataCorrupted(.init(codingPath: codingPath, debugDescription: "Unsupported date format: \(json)"))
         }
     }
     
@@ -248,29 +248,6 @@ extension JSONDecoderImpl {
                                       debugDescription: "Invalid URL string."))
         }
         return url
-    }
-    
-    private func unwrapSmartColor() throws -> SmartColor {
-        
-        if let tranformer = cache.valueTransformer(for: codingPath.last) {
-            if let decoded = tranformer.tranform(value: json) as? SmartColor {
-                return decoded
-            }
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: self.codingPath,
-                                      debugDescription: "Invalid Color string."))
-        }
-        
-        
-        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-        let string = try container.decode(String.self)
-        
-        guard let color = ColorObject.hex(string) else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: self.codingPath,
-                                      debugDescription: "Invalid Color string."))
-        }
-        return SmartColor(from: color)
     }
     
     private func unwrapDecimal() throws -> Decimal {
@@ -372,7 +349,6 @@ extension Decodable {
             || Self.self == Data.self
             || Self.self == Decimal.self
             || Self.self == SmartAnyImpl.self
-            || Self.self == SmartColor.self
             || Self.self is _JSONStringDictionaryDecodableMarker.Type
         {
             return try decoder.unwrap(as: Self.self)

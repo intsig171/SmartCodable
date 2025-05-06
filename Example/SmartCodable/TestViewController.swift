@@ -43,18 +43,61 @@ class TestViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let dict: [String: Any] =  [
-            "height": "1729402611000"
+            "color": "000000",
+            "color1": "ffffff",
+            "color2": "#000000",
+            "color3": "0xffffff",
+            "date": "2024-02-01",
+            "date1": "2024-02-01 11:11",
+            "date2": "2024-02-01 11:11:11",
+            "date3": "1746501765",
+            "date4": "1746501764000"
         ]
 
-        let model = Model.deserialize(from: dict, options: [.date(.millisecondsSince1970)])
-        print(model)
+        let model = Model.deserialize(from: dict)
+//        print(model?.color)
+//        print(model?.color2)
+//        print(model?.color3)
+        
+        print(model?.date)
+//        print(model?.date1)
+//        print(model?.date2)
+//        print(model?.date3)
+//        print(model?.date4)
+        
+        print("\n\n")
+        
+        
+        let transDict = model?.toJSONString(prettyPrint: true) ?? ""
+        print(transDict)
 
     }
 
     
     struct Model: SmartCodable {
+//        
+//        @SmartHexColor
+//        var color: UIColor?
+//        
+//        @SmartHexColor
+//        var color1: UIColor?
+//        @SmartHexColor
+//        var color2: UIColor?
+//        @SmartHexColor
+//        var color3: UIColor?
         
-        var height: Date?
+        
+//        @SmartDate
+        var date: Date?
+//        @SmartDate
+//        var date1: Date?
+//        @SmartDate
+//        var date2: Date?
+//        @SmartDate
+//        var date3: Date?
+//        @SmartDate
+//        var date4: Date?
+        
         
         
 //        static func mappingForValue() -> [SmartValueTransformer]? {
