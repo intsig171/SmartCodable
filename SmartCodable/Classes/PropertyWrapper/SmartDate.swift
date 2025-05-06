@@ -17,9 +17,9 @@ import AppKit
 @propertyWrapper
 public struct SmartDate: Codable {
     public var wrappedValue: Date?
-    private var encodeFormat: DateEncodeFormat?
+    private var encodeFormat: DateStrategy?
 
-    public init(wrappedValue: Date?, encodeFormat: DateEncodeFormat? = nil) {
+    public init(wrappedValue: Date?, encodeFormat: SmartDate.DateStrategy? = nil) {
         self.wrappedValue = wrappedValue
         self.encodeFormat = encodeFormat
     }
@@ -27,26 +27,21 @@ public struct SmartDate: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
 
-        if let timestamp = try? container.decode(Double.self) {
-            // 判断是否为毫秒
-            if timestamp > 1_000_000_000_000 {
-                self.wrappedValue = Date(timeIntervalSince1970: timestamp / 1000)
-                self.encodeFormat = .timestampMilliseconds
-            } else {
-                self.wrappedValue = Date(timeIntervalSince1970: timestamp)
-                self.encodeFormat = .timestamp
-            }
-            return
+        let raw: Any
+        if let double = try? container.decode(Double.self) {
+            raw = double
+        } else if let string = try? container.decode(String.self) {
+            raw = string
+        } else {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unsupported date value")
         }
-
-        let raw = try container.decode(String.self)
-        guard let (date, format) = SmartDate.detectAndParse(from: raw) else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Unsupported date format: '\(raw)'")
+        
+        guard let (date, format) = DateParser.parse(raw) else {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(raw)")
         }
+        
         self.wrappedValue = date
-        
-        
-        if encodeFormat == nil {
+        if self.encodeFormat == nil {
             self.encodeFormat = format
         }
     }
@@ -57,7 +52,7 @@ public struct SmartDate: Codable {
             return try container.encodeNil()
         }
 
-        let format = encodeFormat ?? .iso8601
+        let format = encodeFormat ?? .timestamp
         
         switch format {
         case .timestamp:
@@ -75,7 +70,7 @@ public struct SmartDate: Codable {
 
 
 extension SmartDate {
-    public enum DateEncodeFormat {
+    public enum DateStrategy {
         case timestamp                  // seconds
         case timestampMilliseconds      // milliseconds
         case iso8601
@@ -84,34 +79,55 @@ extension SmartDate {
 }
 
 
+struct DateParser {
+    private static let knownFormats: [String] = [
+        "yyyy-MM-dd HH:mm:ss",
+        "yyyy-MM-dd",
+        "yyyy/MM/dd",
+        "MM/dd/yyyy",
+        "yyyy-MM-dd HH:mm",
+        "yyyy-MM-dd'T'HH:mm:ssZ",
+        "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    ]
 
+    private static let locale = Locale(identifier: "en_US_POSIX")
 
-extension SmartDate {
-    static func detectAndParse(from string: String) -> (Date, DateEncodeFormat)? {
-        let formats: [String] = [
-            "yyyy-MM-dd HH:mm:ss",
-            "yyyy-MM-dd",
-            "yyyy/MM/dd",
-            "MM/dd/yyyy",
-            "yyyy-MM-dd HH:mm",
-            "yyyy-MM-dd'T'HH:mm:ssZ",
-            "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        ]
+    static func parse(_ raw: Any) -> (Date, SmartDate.DateStrategy)? {
+        // 优先尝试时间戳解析
+        if let result = parseTimestamp(from: raw) {
+            return result
+        }
 
-        let formatter = DateFormatter()
-        for format in formats {
-            formatter.dateFormat = format
-            if let date = formatter.date(from: string) {
-                return (date, .formatted(formatter))
+        // 其次处理 String
+        if let string = raw as? String {
+            // 尝试匹配 knownFormats
+            let formatter = DateFormatter()
+            formatter.locale = locale
+            for format in knownFormats {
+                formatter.dateFormat = format
+                if let date = formatter.date(from: string) {
+                    return (date, .formatted(formatter))
+                }
+            }
+
+            // 尝试 ISO8601 yyyy-MM-dd'T'HH:mm:ssZ
+            let isoFormatter = ISO8601DateFormatter()
+            if let date = isoFormatter.date(from: string) {
+                return (date, .iso8601)
             }
         }
 
-        // Try ISO8601
-        let isoFormatter = ISO8601DateFormatter()
-        if let date = isoFormatter.date(from: string) {
-            return (date, .iso8601)
+        return nil
+    }
+    
+    private static func parseTimestamp(from raw: Any) -> (Date, SmartDate.DateStrategy)? {
+        if let double = raw as? Double ?? Double(raw as? String ?? "") {
+            if double > 1_000_000_000_000 {
+                return (Date(timeIntervalSince1970: double / 1000), .timestampMilliseconds)
+            } else {
+                return (Date(timeIntervalSince1970: double), .timestamp)
+            }
         }
-
         return nil
     }
 }

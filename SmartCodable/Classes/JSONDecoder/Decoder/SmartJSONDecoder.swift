@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class SmartJSONDecoder: JSONDecoder {
+open class SmartJSONDecoder: JSONDecoder, @unchecked Sendable {
     
     
     open var smartDataDecodingStrategy: SmartDataDecodingStrategy = .base64
