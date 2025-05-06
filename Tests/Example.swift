@@ -24,7 +24,46 @@ class Tests: XCTestCase {
         super.tearDown()
     }
     
-    
+    func testCodableSubclassExpansion() {
+        assertMacroExpansion(
+            """
+            @SmartSubclass
+            class UserModel: BaseModel {
+                @SmartAny
+                var age: Int = 0
+            }
+            """,
+            expandedSource: """
+            class UserModel: BaseModel {
+                @SmartAny
+                var age: Int = 0
+            
+                enum CodingKeys: CodingKey {
+                    case age
+                }
+
+                required init(from decoder: Decoder) throws {
+                    try super.init(from: decoder)
+
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    self.age = try container.decodeIfPresent(Int.self, forKey: .age) ?? self.age
+                }
+
+                override func encode(to encoder: Encoder) throws {
+                    try super.encode(to: encoder)
+
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+                    try container.encode(age, forKey: .age)
+                }
+
+                required init() {
+                    super.init()
+                }
+            }
+            """,
+            macros: testMacros
+        )
+    }
     
     
     func testBase() {
@@ -59,4 +98,5 @@ struct Smart: SmartCodable {
         case women = 0
     }
 }
+
 

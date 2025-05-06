@@ -1,5 +1,5 @@
 //
-//  TestCaseViewController.swift
+//  TestDecodeCaseViewController.swift
 //  SmartCodable_Example
 //
 //  Created by Mccc on 2024/2/29.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TestCaseViewController: BaseViewController {
+class TestDecodeCaseViewController: BaseViewController {
     
     
     
@@ -41,7 +41,7 @@ class TestCaseViewController: BaseViewController {
 
 
 
-extension TestCaseViewController {
+extension TestDecodeCaseViewController {
     
     
     var testCaseZero: [String: Any] {
@@ -138,7 +138,7 @@ extension TestCaseViewController {
 
 
 
-extension TestCaseViewController: UITableViewDelegate, UITableViewDataSource {
+extension TestDecodeCaseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataArray.count
@@ -203,7 +203,7 @@ extension TestCaseViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 
-extension TestCaseViewController {
+extension TestDecodeCaseViewController {
     
     func createViewControllerObject(form className: String) -> BaseViewController? {
         let projectName = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? ""

@@ -21,16 +21,22 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/intsig171/SmartCodable.git', :tag => s.version.to_s }
   
   s.ios.deployment_target = '13.0'
+  s.tvos.deployment_target = '13.0'
+  s.osx.deployment_target = '10.15'
+  s.watchos.deployment_target = '6.0'
+  s.visionos.deployment_target = '1.0'
 
   s.source_files = 'Sources/SmartCodable/**/*{.swift}'
   s.preserve_paths = ["Package.swift", "Sources/SmartCodableMacros", "Tests", "Bin"]
   
   s.pod_target_xcconfig = {
-    "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros"
+    "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros",
+    "SUPPORTS_MACCATALYST" => "YES"
   }
-  
+
   s.user_target_xcconfig = {
-    "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros"
+    "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros",
+    "SUPPORTS_MACCATALYST" => "YES"
   }
 
   script = <<-SCRIPT

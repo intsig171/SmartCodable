@@ -27,10 +27,15 @@ public enum MacroError: Error, CustomStringConvertible {
 struct PropertyInfo {
     let name: String
     let type: String
+    let isWrapped: Bool
     let isStored: Bool
       
     var codingKeyName: String {
         return name
+    }
+    
+    var accessName: String {
+        isWrapped ? "_\(name)" : name
     }
 }
   
@@ -69,9 +74,6 @@ public struct SmartSubclassMacro: MemberMacro {
 
         // 生成encode(to:)方法
         members.append(generateEncodeToEncoder(for: properties))
-
-        // 生成required init()方法
-        let requiredInit = generateRequiredInit()
         
 
         if hasRequiredInitializer(classDecl) {
@@ -103,8 +105,8 @@ public struct SmartSubclassMacro: MemberMacro {
                 }
                   
                 let name = identifier.identifier.text
-                let type = typeAnnotation.type.description.trimmingCharacters(in: .whitespacesAndNewlines)
-                  
+                let baseType = typeAnnotation.type.description.trimmingCharacters(in: .whitespacesAndNewlines)
+
                 // 检查是否是存储属性（有初始值或没有getter/setter）
                 let isStored = binding.accessorBlock == nil ||
                                (binding.accessorBlock?.accessors.as(AccessorDeclListSyntax.self) == nil &&
@@ -112,7 +114,23 @@ public struct SmartSubclassMacro: MemberMacro {
                   
                 // 只添加存储属性
                 if isStored {
-                    properties.append(PropertyInfo(name: name, type: type, isStored: true))
+                    
+                    // 判断是否使用了属性包装器
+                    var effectiveType = baseType
+                    var isWrapped = false
+                    let attrs = varDecl.attributes
+                    if !attrs.isEmpty {
+                        for attr in attrs {
+                            if let attrSyntax = attr.as(AttributeSyntax.self),
+                               let wrapperName = attrSyntax.attributeName.as(IdentifierTypeSyntax.self) {
+                                effectiveType = "\(wrapperName.name.text)<\(baseType)>"
+                                isWrapped = true
+                                break
+                            }
+                        }
+                    }
+                    
+                    properties.append(PropertyInfo(name: name, type: effectiveType, isWrapped: isWrapped, isStored: true))
                 }
             }
         }
@@ -124,7 +142,7 @@ public struct SmartSubclassMacro: MemberMacro {
     private static func generateCodingKeysEnum(for properties: [PropertyInfo]) -> DeclSyntax {
         let caseDeclarations = properties.map { property in
             "case \(property.codingKeyName)"
-        }.joined(separator: "\n        ")
+        }.joined(separator: "\n")
           
         return """
         enum CodingKeys: CodingKey {
@@ -136,7 +154,7 @@ public struct SmartSubclassMacro: MemberMacro {
     // 辅助方法：生成init(from:)方法
     private static func generateInitFromDecoder(for properties: [PropertyInfo]) -> DeclSyntax {
         let decodingStatements = properties.map { property in
-            let propertyName = property.name
+            let propertyName = property.accessName
             let propertyType = property.type
               
             // 处理可选类型
@@ -161,8 +179,8 @@ public struct SmartSubclassMacro: MemberMacro {
     // 辅助方法：生成encode(to:)方法
     private static func generateEncodeToEncoder(for properties: [PropertyInfo]) -> DeclSyntax {
         let encodingStatements = properties.map { property in
-            "try container.encode(\(property.name), forKey: .\(property.codingKeyName))"
-        }.joined(separator: "\n        ")
+            "try container.encode(\(property.accessName), forKey: .\(property.codingKeyName))"
+        }.joined(separator: "\n")
           
         return """
         override func encode(to encoder: Encoder) throws {

@@ -45,8 +45,9 @@ extension ViewController {
         [
             "title": "测试用例",
             "list": [
-                ["name": "解码测试用例 >>>", "vc": "TestCaseViewController"],
+                ["name": "解码测试用例 >>>", "vc": "TestDecodeCaseViewController"],
                 ["name": "编码测试用例 >>>", "vc": "TestEncodeCaseViewController"],
+                ["name": "继承测试用例 >>>", "vc": "TestInheritCaseViewController"],
             ]
         ]
     }

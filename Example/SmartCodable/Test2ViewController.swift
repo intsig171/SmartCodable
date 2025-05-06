@@ -40,29 +40,6 @@ class Test2ViewController: BaseViewController {
         
         var location: String = ""
         
-        required init() {
-            super.init()
-        }
+
     }
-   
-    
-    
-//    @Codable
-//    class BaseModel1 {
-//        let userName: String = ""
-//    }
-//
-//    @CodableSubclass
-//    class SubModel: BaseModel1 {
-//        let age: Int
-//    }
-
 }
-
-/**
- @SmartSubclass
- @SmartMember
- @SmartInherit
- @SmartInherited
- @SmartChild
- */

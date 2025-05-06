@@ -52,17 +52,42 @@ extension BaseViewController {
     }
     
     func smartPrint(value: Any?) {
-        
         guard let value = value else { return }
-        debugPrint("\(type(of: value))的属性打印信息：")
-        let mirr = Mirror(reflecting: value)
-        for (key, value) in mirr.children {
-            printValueType(key: key ?? "", value: value)
-        }
         
+        var mirror: Mirror? = Mirror(reflecting: value)
+        var level = 0
+
+        while let currentMirror = mirror {
+            let typeName = String(describing: currentMirror.subjectType)
+            print("🧩 第 \(level + 1) 层：\(typeName) 的属性")
+
+            for (key, val) in currentMirror.children {
+                guard let key = key else { continue }
+                let typeString = String(describing: type(of: val))
+                let valueString = unwrapOptional(val)
+                print("    ▸ \(key): \(typeString) = \(valueString)")
+            }
+
+            mirror = currentMirror.superclassMirror
+            level += 1
+        }
+
         print("\n")
     }
 
+    /// 去除 Optional(...) 的冗余包装
+    private func unwrapOptional(_ value: Any) -> String {
+        let mirror = Mirror(reflecting: value)
+        if mirror.displayStyle != .optional {
+            return "\(value)"
+        }
+
+        if let child = mirror.children.first {
+            return unwrapOptional(child.value) // 递归去嵌套 Optional
+        } else {
+            return "nil"
+        }
+    }
 }
 
 
