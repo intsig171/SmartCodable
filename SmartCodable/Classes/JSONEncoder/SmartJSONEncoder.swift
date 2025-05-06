@@ -7,7 +7,7 @@ import Foundation
 //===----------------------------------------------------------------------===//
 
 /// `JSONEncoder` facilitates the encoding of `Encodable` values into JSON.
-open class SmartJSONEncoder: JSONEncoder {
+open class SmartJSONEncoder: JSONEncoder, @unchecked Sendable {
 
     open var smartKeyEncodingStrategy: SmartKeyEncodingStrategy = .useDefaultKeys
     open var smartDataEncodingStrategy: SmartDataEncodingStrategy = .base64

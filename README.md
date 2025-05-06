@@ -218,23 +218,6 @@ struct RelationEnumTranformer: ValueTransformable {
 
 
 
-#### 3.2 SmartColor
-
-To decode hexadecimal colors, use SmartColor. Use `color.peel` to get the UIColor object.
-
-```
-struct Model: SmartCodable {
-    var color: SmartColor = .color(UIColor.white)
-}
-
-let dict = [
-    "color": "7DA5E3"
-]
-guard let model = Model.deserialize(from: dict) else { return }
-print(model.color.peel)
-```
-
-
 
 ### 4. propertyWrapper
 
@@ -333,6 +316,34 @@ if let model = PublishedModel.deserialize(from: dict) {
 }
 ```
 
+#### 4.5 @SmartHexColor
+
+Adds Codable support for UIColor/NSColor using hex string encoding/decoding.
+
+Supported hex string formats:
+   - RGB, RGBA, RRGGBB, RRGGBBAA
+   - #RGB, #RGBA, #RRGGBB, #RRGGBBAA
+   - 0xRGB, 0xRGBA, 0xRRGGBB, 0xRRGGBBAA
+   - 0XRGB, 0XRGBA, 0XRRGGBB, 0XRRGGBBAA
+
+```
+ struct SomeModel: SmartCodable {
+     @SmartHexColor
+     var titleColor: UIColor? = .white
+     @SmartHexColor
+     var descColor: UIColor?
+ }
+ 
+ let dic: [String: Any] = [
+     "titleColor": "000000",
+     "descColor": "#FFFFFF",
+ ]
+
+ let model = SomeModel.deserialize(from: dic)
+ print(model?.titleColor ?? .clear) // UIExtendedSRGBColorSpace 0 0 0 1
+ print(model?.descColor ?? .clear)  // UIExtendedSRGBColorSpace 1 1 1 1
+ 
+```
 
 
 ### 5. Deserialization API

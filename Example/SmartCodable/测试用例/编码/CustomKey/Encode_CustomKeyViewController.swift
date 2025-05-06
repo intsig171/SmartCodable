@@ -56,7 +56,7 @@ extension Encode_CustomKeyViewController {
             let tf = DateFormatter()
             tf.dateFormat = "yyyy-MM-dd"
             return [
-                CodingKeys.aKey <--- SmartDateFormatTransformer(tf),
+                CodingKeys.aKey <--- SmartDateTransformer(strategy: .formatted(tf)),
                 CodingKeys.bKey <--- SmartURLTransformer(prefix: "https://")
             ]
         }

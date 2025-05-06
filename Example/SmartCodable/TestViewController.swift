@@ -43,39 +43,70 @@ class TestViewController: BaseViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let dict: [String: Any] =  [
-            "height": "1729402611000",
-            "sub": [
-                "name": "Mccc"
-            ]
+            "color": "000000",
+            "color1": "ffffff",
+            "color2": "#000000",
+            "color3": "0xffffff",
+            "date": "2024-02-01",
+            "date1": "2024-02-01 11:11",
+            "date2": "2024-02-01 11:11:11",
+            "date3": "1746501765",
+            "date4": "1746501764000"
         ]
+
         let model = Model.deserialize(from: dict)
-        print(model?.height)
-        print(model?.sub?.name)
-        print(model?.sub?.s)
-    }
-    
-    enum Status: Int, SmartCaseDefaultable {
-        case a = 1
-        case unown = -1
-    }
-    
-    class BaseModel: NSObject { }
-    
-    class Model: BaseModel, SmartCodable {
-        var height: Double?
-        var sub: SubModel?
+//        print(model?.color)
+//        print(model?.color2)
+//        print(model?.color3)
         
-        required override init() { }
-    }
-    
-    class SubModel: BaseModel, SmartCodable {
-        var name: String = ""
-        var s: Status = .unown
+        print(model?.date)
+        print(model?.date1)
+        print(model?.date2)
+        print(model?.date3)
+        print(model?.date4)
         
-        required override init() { }
+        print("\n\n")
+        
+        
+        let transDict = model?.toJSONString(prettyPrint: true) ?? ""
+        print(transDict)
+
+    }
+
+    
+    struct Model: SmartCodable {
+//        
+//        @SmartHexColor
+//        var color: UIColor?
+//        
+//        @SmartHexColor
+//        var color1: UIColor?
+//        @SmartHexColor
+//        var color2: UIColor?
+//        @SmartHexColor
+//        var color3: UIColor?
+        
+        
+        @SmartDate
+        var date: Date?
+        @SmartDate
+        var date1: Date?
+        @SmartDate
+        var date2: Date?
+        @SmartDate
+        var date3: Date?
+        @SmartDate
+        var date4: Date?
+        
+        
+        
+//        static func mappingForValue() -> [SmartValueTransformer]? {
+//            [
+//                CodingKeys.height <--- SmartDateTransformer(isMilliseconds: true)
+//            ]
+//        }
     }
 }
-
 
 
 

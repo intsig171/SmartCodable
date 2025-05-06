@@ -31,15 +31,8 @@ extension JSONDecoderImpl {
         if type == Decimal.self {
             return try self.unwrapDecimal() as! T
         }
-        
         if type == CGFloat.self {
             return try unwrapCGFloat() as! T
-        }
-        
-        // If you are parsing a SmartColor type property, which is not handled here,
-        // you will enter SmartColor's `init(decoder:)` method.
-        if type == SmartColor.self {
-            return try self.unwrapSmartColor() as! T
         }
         
         if type is _JSONStringDictionaryDecodableMarker.Type {
@@ -250,29 +243,6 @@ extension JSONDecoderImpl {
         return url
     }
     
-    private func unwrapSmartColor() throws -> SmartColor {
-        
-        if let tranformer = cache.valueTransformer(for: codingPath.last) {
-            if let decoded = tranformer.tranform(value: json) as? SmartColor {
-                return decoded
-            }
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: self.codingPath,
-                                      debugDescription: "Invalid Color string."))
-        }
-        
-        
-        let container = SingleValueContainer(impl: self, codingPath: self.codingPath, json: self.json)
-        let string = try container.decode(String.self)
-        
-        guard let color = ColorObject.hex(string) else {
-            throw DecodingError.dataCorrupted(
-                DecodingError.Context(codingPath: self.codingPath,
-                                      debugDescription: "Invalid Color string."))
-        }
-        return SmartColor(from: color)
-    }
-    
     private func unwrapDecimal() throws -> Decimal {
         
         if let tranformer = cache.valueTransformer(for: codingPath.last) {
@@ -372,7 +342,6 @@ extension Decodable {
             || Self.self == Data.self
             || Self.self == Decimal.self
             || Self.self == SmartAnyImpl.self
-            || Self.self == SmartColor.self
             || Self.self is _JSONStringDictionaryDecodableMarker.Type
         {
             return try decoder.unwrap(as: Self.self)

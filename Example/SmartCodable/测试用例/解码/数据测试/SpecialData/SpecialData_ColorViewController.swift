@@ -24,18 +24,25 @@ class SpecialData_ColorViewController: BaseCompatibilityViewController {
         
         guard let model = Model.deserialize(from: dict) else { return }
         smartPrint(value: model)
+
         
-        view.backgroundColor = model.color3.peel
+        let trans = model.toDictionary()
+        print(trans)
+
     }
 }
 
 
 extension SpecialData_ColorViewController {
     struct Model: SmartCodable {
-        var color1: SmartColor?
-        var color2: SmartColor?
-        var color3: SmartColor = .color(UIColor.yellow)
-        var color4: SmartColor = .color(UIColor.red)
+        @SmartHexColor
+        var color1: UIColor?
+        @SmartHexColor
+        var color2: UIColor?
+        @SmartHexColor(encodeHexFormat: .rgb(.none))
+        var color3: UIColor? = .yellow
+        @SmartHexColor
+        var color4: UIColor? = .red
     }
 }
 
