@@ -86,6 +86,7 @@ struct DateParser {
         "yyyy/MM/dd",
         "MM/dd/yyyy",
         "yyyy-MM-dd HH:mm",
+        "yyyy-MM-dd'T'HH:mm:ss",
         "yyyy-MM-dd'T'HH:mm:ssZ",
         "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     ]

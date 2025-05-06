@@ -14,7 +14,7 @@ open class SmartJSONDecoder: JSONDecoder, @unchecked Sendable {
     
     /// Options set on the top-level encoder to pass down the decoding hierarchy.
     struct _Options {
-        let dateDecodingStrategy: DateDecodingStrategy
+        let dateDecodingStrategy: DateDecodingStrategy?
         let dataDecodingStrategy: SmartDataDecodingStrategy
         let nonConformingFloatDecodingStrategy: NonConformingFloatDecodingStrategy
         let keyDecodingStrategy: SmartKeyDecodingStrategy
@@ -24,13 +24,15 @@ open class SmartJSONDecoder: JSONDecoder, @unchecked Sendable {
     /// The options set on the top-level decoder.
     var options: _Options {
         return _Options(
-            dateDecodingStrategy: dateDecodingStrategy,
+            dateDecodingStrategy: smartDateDecodingStrategy,
             dataDecodingStrategy: smartDataDecodingStrategy,
             nonConformingFloatDecodingStrategy: nonConformingFloatDecodingStrategy,
             keyDecodingStrategy: smartKeyDecodingStrategy,
             userInfo: userInfo
         )
     }
+    
+    open var smartDateDecodingStrategy: DateDecodingStrategy?
     
     open var smartKeyDecodingStrategy: SmartKeyDecodingStrategy = .useDefaultKeys
 

@@ -60,10 +60,10 @@ class TestViewController: BaseViewController {
 //        print(model?.color3)
         
         print(model?.date)
-        print(model?.date1)
-        print(model?.date2)
-        print(model?.date3)
-        print(model?.date4)
+//        print(model?.date1)
+//        print(model?.date2)
+//        print(model?.date3)
+//        print(model?.date4)
         
         print("\n\n")
         
@@ -87,16 +87,16 @@ class TestViewController: BaseViewController {
 //        var color3: UIColor?
         
         
-        @SmartDate
+//        @SmartDate
         var date: Date?
-        @SmartDate
-        var date1: Date?
-        @SmartDate
-        var date2: Date?
-        @SmartDate
-        var date3: Date?
-        @SmartDate
-        var date4: Date?
+//        @SmartDate
+//        var date1: Date?
+//        @SmartDate
+//        var date2: Date?
+//        @SmartDate
+//        var date3: Date?
+//        @SmartDate
+//        var date4: Date?
         
         
         

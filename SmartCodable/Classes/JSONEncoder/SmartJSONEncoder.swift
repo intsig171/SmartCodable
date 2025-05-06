@@ -25,7 +25,7 @@ open class SmartJSONEncoder: JSONEncoder, @unchecked Sendable {
 
     /// The options set on the top-level encoder.
     fileprivate var options: _Options {
-        return _Options(dateEncodingStrategy: dateEncodingStrategy,
+        return _Options(dateEncodingStrategy: .secondsSince1970,
                         dataEncodingStrategy: smartDataEncodingStrategy,
                         nonConformingFloatEncodingStrategy: nonConformingFloatEncodingStrategy,
                         keyEncodingStrategy: smartKeyEncodingStrategy,

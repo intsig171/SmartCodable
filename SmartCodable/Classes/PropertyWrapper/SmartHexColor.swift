@@ -20,12 +20,12 @@
  * ```
  */
 
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
+import UIKit
 public typealias ColorObject = UIColor
 #elseif os(macOS)
+import AppKit
 public typealias ColorObject = NSColor
-#else
-public typealias ColorObject = UIColor // 根据 VisionKit 框架设置适当的颜色类型
 #endif
 
 
@@ -164,10 +164,10 @@ extension SmartHexColor {
 
         switch format {
         case .rgb(let prefix):
-            return prefix.rawValue + String(format: "%01X%01X%01X", r >> 4, g >> 4, b >> 4)
+            return prefix.rawValue + String(format: "%01X%01X%01X", (r >> 4), (g >> 4), (b >> 4))
 
         case .rgba(let prefix):
-            return prefix.rawValue + String(format: "%01X%01X%01X%01X", r >> 4, g >> 4, b >> 4, a >> 4)
+            return prefix.rawValue + String(format: "%01X%01X%01X%01X", (r >> 4), (g >> 4), (b >> 4), (a >> 4))
 
         case .rrggbb(let prefix):
             return prefix.rawValue + String(format: "%02X%02X%02X", r, g, b)
