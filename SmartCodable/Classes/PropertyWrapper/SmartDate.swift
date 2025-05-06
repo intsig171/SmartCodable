@@ -90,17 +90,16 @@ struct DateParser {
         "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     ]
 
+    // https://developer.apple.com/library/archive/qa/qa1480/_index.html
     private static let locale = Locale(identifier: "en_US_POSIX")
 
     static func parse(_ raw: Any) -> (Date, SmartDate.DateStrategy)? {
-        // 优先尝试时间戳解析
         if let result = parseTimestamp(from: raw) {
             return result
         }
 
-        // 其次处理 String
         if let string = raw as? String {
-            // 尝试匹配 knownFormats
+            // try knownFormats
             let formatter = DateFormatter()
             formatter.locale = locale
             for format in knownFormats {
