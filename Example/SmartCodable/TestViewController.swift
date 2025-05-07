@@ -87,8 +87,8 @@ class TestViewController: BaseViewController {
 //        var color3: UIColor?
         
         
-//        @SmartDate
-        var date: Date?
+        @SmartAny
+        var date: [String: Any] = [:]
 //        @SmartDate
 //        var date1: Date?
 //        @SmartDate
