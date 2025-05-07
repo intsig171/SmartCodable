@@ -1,6 +1,6 @@
 {
   "name": "SmartCodable",
-  "version": "5.0.0-beta.3",
+  "version": "5.0.0-beta.4",
   "summary": "Swift数据解析库",
   "homepage": "https://github.com/intsig171",
   "license": {
@@ -12,14 +12,10 @@
   },
   "source": {
     "git": "https://github.com/intsig171/SmartCodable.git",
-    "tag": "5.0.0-beta.3"
+    "tag": "5.0.0-beta.4"
   },
   "platforms": {
-    "ios": "13.0",
-    "tvos": "13.0",
-    "osx": "10.15",
-    "watchos": "6.0",
-    "visionos": "1.0"
+    "ios": "13.0"
   },
   "source_files": "Sources/SmartCodable/**/*{.swift}",
   "preserve_paths": [

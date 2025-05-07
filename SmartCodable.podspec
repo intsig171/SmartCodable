@@ -12,7 +12,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
-  s.version          = '5.0.0-beta.3'
+  s.version          = '5.0.0-beta.4'
   s.summary          = 'Swift数据解析库'
   
   s.homepage         = 'https://github.com/intsig171'
@@ -21,10 +21,10 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/intsig171/SmartCodable.git', :tag => s.version.to_s }
   
   s.ios.deployment_target = '13.0'
-  s.tvos.deployment_target = '13.0'
-  s.osx.deployment_target = '10.15'
-  s.watchos.deployment_target = '6.0'
-  s.visionos.deployment_target = '1.0'
+#  s.tvos.deployment_target = '13.0'
+#  s.osx.deployment_target = '10.15'
+#  s.watchos.deployment_target = '6.0'
+#  s.visionos.deployment_target = '1.0'
 
   s.source_files = 'Sources/SmartCodable/**/*{.swift}'
   s.preserve_paths = ["Package.swift", "Sources/SmartCodableMacros", "Tests", "Bin"]
