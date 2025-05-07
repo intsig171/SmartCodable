@@ -164,7 +164,7 @@ public struct SmartSubclassMacro: MemberMacro {
             } else {
                 return "self.\(propertyName) = try container.decodeIfPresent(\(propertyType).self, forKey: .\(property.codingKeyName)) ?? self.\(propertyName)"
             }
-        }.joined(separator: "\n        ")
+        }.joined(separator: "\n")
           
         return """
         required init(from decoder: Decoder) throws {
