@@ -25,7 +25,7 @@ extension Patcher {
             
             // 处理 SmartCaseDefaultable 类型的对象
             if let caseDefaultable = T.self as? any SmartCaseDefaultable.Type {
-                if let firstCase = caseDefaultable.allCases.first as? T {
+                if let first = caseDefaultable.allCases.first, let firstCase = first as? T {
                     return firstCase
                 }
             }
