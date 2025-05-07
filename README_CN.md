@@ -26,7 +26,7 @@
 
 ### 中文 | [English](https://github.com/intsig171/SmartCodable)
 
-SmartCodable通过增强苹果原生Codable的能力，为Swift数据解析提供了生产级的健壮性和灵活性。当标准Codable在真实数据场景中失败时，SmartCodable能以最简化的样板代码实现防弹解析。
+SmartCodable 通过增强苹果原生的 Codable 能力，为 Swift 数据解析提供了生产级的健壮性与灵活性。当标准 Codable 在真实数据场景中难以胜任时，SmartCodable 能以最少的样板代码，实现更稳健、容错性更强的解析逻辑
 
 ## **SmartCodable vs Codable**
 
@@ -35,6 +35,7 @@ SmartCodable通过增强苹果原生Codable的能力，为Swift数据解析提�
 | **错误容忍**     | 军用级处理类型不匹配、空值和缺失键                    |
 | **类型自适应**   | 自动双向类型转换(字符串⇄数字、数字⇄布尔等)            |
 | **默认值回退**   | 解析失败时回退到属性初始化值                          |
+| **支持继承**     | 无障碍的支持继承                                      |
 | **键映射**       | 多源键映射与优先级系统                                |
 | **值转换**       | 自定义值转换器                                        |
 | **集合安全**     | 安全集合处理(空数组→nil、无效元素→过滤)               |
@@ -48,6 +49,8 @@ SmartCodable通过增强苹果原生Codable的能力，为Swift数据解析提�
 | **路径导航**     | 使用点符号深度访问JSON(`designatedPath: "data.user"`) |
 | **属性列表支持** | 原生支持解析PropertyList数据而无需JSON转换            |
 | **解析诊断**     | 通过`SmartSentinel.monitorLogs()`实时监控             |
+
+
 
 
 
@@ -65,10 +68,10 @@ SmartCodable通过增强苹果原生Codable的能力，为Swift数据解析提�
 | **自定义属性解析-重命名** | 支持自定义解码键(重命名模型属性)                   | ✅            | ✅         |
 | **自定义属性解析-忽略**   | 支持忽略特定模型属性的解码                         | ✅            | ✅         |
 | **designatedPath支持**    | 支持自定义解析路径                                 | ✅            | ✅         |
-| **模型继承**              | Codable对继承支持较弱(可能但不方便)                | ❌            | ✅         |
+| **模型继承**              | 使用`@SmartSubclass` 修饰Model                     | ✅            | ✅         |
 | **自定义解析路径**        | 指定从JSON层级中开始解析的路径                     | ✅            | ✅         |
 | **复杂数据解码**          | 支持解码过程中的高级数据处理(如数据扁平化)         | ✅            | ⚠️         |
-| **解码性能**              | SmartCodable平均性能提升30%                        | ✅            | ⚠️         |
+| **解码性能**              | SmartCodable平均性能提升20%                        | ✅            | ⚠️         |
 | **错误日志**              | 提供兼容性处理的故障排查日志                       | ✅            | ❌         |
 | **安全性**                | 实现稳定性和安全性更高                             | ✅            | ❌         |
 
@@ -76,32 +79,41 @@ SmartCodable通过增强苹果原生Codable的能力，为Swift数据解析提�
 
 **核心优势**：
 
-- 性能提升30%
+- 性能提升20%
 - 实现更稳定安全
 - 内置错误诊断
 - 更优秀的复杂数据处理能力
 
 
 
-## **SmartCodable支持的类型对比**
+## **SmartCodable支持的类型**
 
-| 类型               | 示例                                 |
-| :----------------- | :----------------------------------- |
-| **整型**           | `Int`, `Int8-64`, `UInt`, `UInt8-64` |
-| **浮点型**         | `Float`, `Double`, `CGFloat`         |
-| **布尔型**         | `Bool`(接受`true`/`1`/`"true"`)      |
-| **字符串**         | `String`(支持从数字自动转换)         |
-| **Foundation类型** | `URL`, `Date`, `Data`, `UIColor`     |
-| **枚举**           | 所有`RawRepresentable`枚举           |
-| **集合类型**       | `[String: Codable]`, `[Codable]`     |
-| **嵌套模型**       | 任何`Codable`自定义类型              |
-| **包装器**         | `@SmartAny`, `@IgnoredKey`等         |
+| 类型               | 示例                                                         |
+| :----------------- | :----------------------------------------------------------- |
+| **整型**           | `Int`, `Int8-64`, `UInt`, `UInt8-64`                         |
+| **浮点型**         | `Float`, `Double`, `CGFloat`                                 |
+| **布尔型**         | `Bool`(接受`true`/`1`/`"true"`)                              |
+| **字符串**         | `String`(支持从数字自动转换)                                 |
+| **Foundation类型** | `URL`, `Date`, `Data`                                        |
+| **枚举**           | 所有`RawRepresentable`枚举                                   |
+| **集合类型**       | `[String: Codable]`, `[Codable]`                             |
+| **嵌套模型**       | 任何`Codable`自定义类型                                      |
+| **包装器**         | `@SmartAny`, `@IgnoredKey`, `@SmartFlat`, `@SmartHexColor`, `@SmartDate`, `@SmartPublished`. |
+
+
 
 ## 安装指南
 
-### Swift Package Manager
+### Requirements
 
-在`Package.swift`中添加：
+| Xcode     | Minimun Deployments | 功能       | Version |
+| --------- | ------------------- | ---------- | ------- |
+| Xcode15+  | iOS13+ / macOS11+   | 支持继承   | 5.0+    |
+| < Xcode15 | < iOS13 / macOS11   | 不支持继承 | 4.0+    |
+
+
+
+### Swift Package Manager
 
 ```
 dependencies: [
@@ -110,8 +122,6 @@ dependencies: [
 ```
 
 ### CocoaPods
-
-在`Podfile`中添加：
 
 ```
 pod 'SmartCodable'
@@ -131,13 +141,13 @@ let user = User.deserialize(from: ["name": "John", "age": 30])
 
 
 
-# 反序列化
+## 反序列化
 
 要使类/结构体支持从JSON反序列化，需要遵循'SmartCodable'协议。
 
 ### 1. 基础用法
 
-遵循'SmartCodable'协议，类需要实现空初始化器：
+遵循 `SmartCodable` 协议，类需要实现空初始化器：
 
 ```
 class BasicTypes: SmartCodable {
@@ -147,8 +157,6 @@ class BasicTypes: SmartCodable {
 }
 let model = BasicTypes.deserialize(from: json)
 ```
-
-### 2. 结构体用法
 
 对于结构体，编译器会提供默认的空初始化器：
 
@@ -160,177 +168,13 @@ struct BasicTypes: SmartCodable {
 let model = BasicTypes.deserialize(from: json)
 ```
 
-### 3. 特殊属性支持
 
-#### 3.1 枚举
 
-要使枚举可转换，必须遵循`SmartCaseDefaultable`协议：
+### 2. API介绍
 
-```
-struct Student: SmartCodable {
-    var name: String = ""
-    var sex: Sex = .man
+#### 2.1 deserialize
 
-    enum Sex: String, SmartCaseDefaultable {
-        case man = "man"
-        case woman = "woman"
-    }
-}
-let model = Student.deserialize(from: json)
-```
-
-#### 关联值枚举解码
-
-使枚举遵循**SmartAssociatedEnumerable**，重写**mappingForValue**方法接管解码过程：
-
-```
-struct Model: SmartCodable {
-    var sex: Sex = .man
-    static func mappingForValue() -> [SmartValueTransformer]? {
-        [
-            CodingKeys.sex <--- RelationEnumTranformer()
-        ]
-    }
-}
-
-enum Sex: SmartAssociatedEnumerable {    
-    case man
-    case women
-    case other(String)
-}
-
-struct RelationEnumTranformer: ValueTransformable {
-    typealias Object = Sex
-    typealias JSON = String
-
-    func transformToJSON(_ value: Introduce_8ViewController.Sex?) -> String? {
-        // 自定义处理
-    }
-    func transformFromJSON(_ value: Any?) -> Sex? {
-        // 自定义处理
-    }
-}
-```
-
-#### 3.2 SmartColor
-
-使用SmartColor解码十六进制颜色，通过`color.peel`获取UIColor对象：
-
-```
-struct Model: SmartCodable {
-    var color: SmartColor = .color(UIColor.white)
-}
-
-let dict = [
-    "color": "7DA5E3"
-]
-guard let model = Model.deserialize(from: dict) else { return }
-print(model.color.peel)
-```
-
-### 4. 属性包装器
-
-#### 4.1 @SmartAny
-
-Codable不支持Any解析，但可以通过@SmartAny实现：
-
-```
-struct Model: SmartCodable {
-    @SmartAny var dict: [String: Any] = [:]
-    @SmartAny var arr: [Any] = []
-    @SmartAny var any: Any?
-}
-let dict: [String: Any] = [
-    "dict": ["name": "Lisa"],
-    "arr": [1,2,3],
-    "any": "Mccc"
-]
-
-let model = Model.deserialize(from: dict)
-print(model)
-// 输出: Model(dict: ["name": "Lisa"], arr: [1, 2, 3], any: "Mccc")
-```
-
-#### 4.2 @IgnoredKey
-
-如果需要忽略属性解析，可以重写`CodingKeys`或使用`@IgnoredKey`：
-
-```
-struct Model: SmartCodable {
-    @IgnoredKey
-    var name: String = ""
-}
-
-let dict: [String: Any] = [
-    "name": "Mccc"
-]
-
-let model = Model.deserialize(from: dict)
-print(model)
-// 输出: Model(name: "")
-```
-
-#### 4.3 @SmartFlat
-
-```
-struct Model: SmartCodable {
-    var name: String = ""
-    var age: Int = 0
-  
-    @SmartFlat
-    var model: FlatModel?
-   
-}
-struct FlatModel: SmartCodable {
-    var name: String = ""
-    var age: Int = 0
-}
-
-let dict: [String: Any] =  [
-    "name": "Mccc",
-    "age": 18,
-]
-
-let model = Model.deserialize(from: dict)
-print(model)
-// 输出: Model(name: "Mccc", age: 18, model: FlatModel(name: "Mccc", age: 18))
-```
-
-#### 4.4 @SmartPublished
-
-```
-class PublishedModel: ObservableObject, SmartCodable {
-    required init() {}
-    
-    @SmartPublished
-    var name: ABC?
-}
-
-struct ABC: SmartCodable {
-    var a: String = ""
-}
-
-if let model = PublishedModel.deserialize(from: dict) {
-    // 正确访问name属性的Publisher
-    model.$name
-        .sink { newName in
-            print("name属性发生变化，新值为: \(newName)")
-        }
-        .store(in: &cancellables)
-}
-```
-
-### 5. 反序列化API
-
-#### 5.1 deserialize
-
-1. **类型安全**
-   只有遵循`SmartCodable`的类型(或`[SmartCodable]`数组)才能使用这些方法
-2. **输入灵活性**
-   支持多种输入格式：
-   - 原始字典/数组(`[String: Any]`/`[Any]`)
-   - JSON字符串
-   - 二进制`Data`
+只有遵循`SmartCodable`的类型(或`[SmartCodable]`数组)才能使用这些方法
 
 ```
 public static func deserialize(from dict: [String: Any]?, designatedPath: String? = nil,  options: Set<SmartDecodingOption>? = nil) -> Self?
@@ -350,7 +194,7 @@ public static func deserializePlist(from data: Data?, designatedPath: String? = 
 | JSON字符串 | `Model.deserialize(from: jsonString)` | 通过UTF-8转换为`Data` |
 | 二进制数据 | `Model.deserialize(from: data)`       | 直接处理              |
 
-**2. 深度路径导航(`designatedPath`)**
+**2. 深度路径解析(`designatedPath`)**
 
 ```
 // JSON结构:
@@ -365,13 +209,6 @@ public static func deserializePlist(from data: Data?, designatedPath: String? = 
 // 访问嵌套数据:
 Model.deserialize(from: json, designatedPath: "data.user.info")
 ```
-
-**路径解析规则**:
-
-1. 点分隔的路径组件
-2. 处理字典和数组
-3. 任何路径段无效时返回`nil`
-4. 空路径返回整个内容
 
 **3. 解码策略(`options`)**
 
@@ -394,7 +231,7 @@ let options: Set<SmartDecodingOption> = [
 
 > ⚠️ **重要**: 每种策略类型只允许一个选项(重复时最后一个生效)
 
-#### 5.2 解码成功后调用的后处理回调
+#### 2.2 解码成功后调用的后处理回调
 
 ```
 struct Model: SmartCodable {
@@ -405,32 +242,35 @@ struct Model: SmartCodable {
 }
 ```
 
-#### 5.2 键转换
+#### 2.3 键转换
 
-定义解码时的键映射转换，优先使用第一个非空映射：
+定义解码时的键映射转换，优先使用第一个有效映射：
 
 ```
-static func mappingForKey() -> [SmartKeyTransformer]? {
-    return [
-        CodingKeys.id <--- ["user_id", "userId", "id"],
-        CodingKeys.joinDate <--- "joined_at"
-    ]
+struct Model: SmartCodable {
+    var name: String = ""
+    var age: Int?
+    
+    static func mappingForKey() -> [SmartKeyTransformer]? {
+        [
+            CodingKeys.name <--- ["nickName", "realName"],
+            CodingKeys.age <--- "stu_age",
+        ]
+    }
 }
 ```
 
-#### 5.3 **值转换**
+#### 2.4 **值转换**
 
 在JSON值和自定义类型间转换
 
 **内置值转换器**
 
-| 转换器                         | JSON类型      | 对象类型    | 描述                                                  |
-| :----------------------------- | :------------ | :---------- | :---------------------------------------------------- |
-| **SmartDataTransformer**       | String        | Data        | Base64字符串和Data对象间转换                          |
-| **SmartHexColorTransformer**   | String        | ColorObject | 十六进制颜色字符串转平台特定颜色对象(UIColor/NSColor) |
-| **SmartDateTransformer**       | Double/String | Date        | 处理多种日期格式(时间戳Double或String)转Date对象      |
-| **SmartDateFormatTransformer** | String        | Date        | 使用DateFormatter处理自定义日期字符串格式             |
-| **SmartURLTransformer**        | String        | URL         | 字符串转URL，可选编码和添加前缀                       |
+| 转换器                   | JSON类型 | 对象类型 | 描述                                           |
+| :----------------------- | :------- | :------- | :--------------------------------------------- |
+| **SmartDataTransformer** | String   | Data     | Base64字符串和Data对象间转换                   |
+| **SmartDateTransformer** | Any      | Date     | 处理多种日期格式(时间戳，DateFormat)转Date对象 |
+| **SmartURLTransformer**  | String   | URL      | 字符串转URL，可选编码和添加前缀                |
 
 ```
 struct Model: SmartCodable {
@@ -442,8 +282,8 @@ struct Model: SmartCodable {
         format.dateFormat = "yyyy-MM-dd"
         return [
             CodingKeys.url <--- SmartURLTransformer(prefix: "https://"),
-            CodingKeys.date2 <--- SmartDateTransformer(),
-            CodingKeys.date1 <--- SmartDateFormatTransformer(format)
+            CodingKeys.date1 <--- SmartDateTransformer(strategy: .timestamp),
+            CodingKeys.date2 <--- SmartDateTransformer(strategy: .formatted(format))
         ]
     }
 }
@@ -483,32 +323,297 @@ static func mappingForValue() -> [SmartValueTransformer]? {
 }
 ```
 
-#### 5.4 更新现有模型
 
-可适应任何数据结构，包括嵌套数组结构：
+
+
+
+
+
+### 3. 属性包装器
+
+通过自定义属性包装器，赋予模型属性更强大的编解码行为和运行时特性，如类型兼容、键忽略、值扁平化、颜色转换和发布订阅等。这些包装器大大简化了手动处理 `Codable` 限制的工作，并提升了模型的表达力与灵活性。
+
+| 包装器名          | 功能简述                                                     |
+| ----------------- | ------------------------------------------------------------ |
+| `@SmartAny`       | 支持 `Any` 类型的编码和解码，包括 `[Any]` 和 `[String: Any]`。 |
+| `@IgnoredKey`     | 忽略属性的编解码，等效于不声明在 `CodingKeys` 中。           |
+| `@SmartFlat`      | 将子对象的字段“扁平合并”到当前结构体的字段中进行解码/编码。  |
+| `@SmartHexColor`  | 支持将十六进制字符串自动转换为颜色对象，如 `UIColor` / `NSColor`。 |
+| `@SmartPublished` | 为 `@Published` 属性自动生成支持 `Codable` 的 getter/setter 逻辑。 |
+
+#### 3.1 @SmartAny
+
+Codable不支持Any解析，但可以通过@SmartAny实现：
+
+```
+struct Model: SmartCodable {
+    @SmartAny var dict: [String: Any] = [:]
+    @SmartAny var arr: [Any] = []
+    @SmartAny var any: Any?
+}
+let dict: [String: Any] = [
+    "dict": ["name": "Lisa"],
+    "arr": [1,2,3],
+    "any": "Mccc"
+]
+
+let model = Model.deserialize(from: dict)
+print(model)
+// 输出: Model(dict: ["name": "Lisa"], arr: [1, 2, 3], any: "Mccc")
+```
+
+#### 3.2 @IgnoredKey
+
+如果需要忽略属性解析，可以重写`CodingKeys`或使用`@IgnoredKey`：
+
+```
+struct Model: SmartCodable {
+    @IgnoredKey
+    var name: String = ""
+}
+
+let dict: [String: Any] = [
+    "name": "Mccc"
+]
+
+let model = Model.deserialize(from: dict)
+print(model)
+// 输出: Model(name: "")
+```
+
+
+
+#### 3.3 @SmartFlat
+
+**将结构体属性的解码/编码“扁平化处理”**，即：**在解析当前对象时，自动将其自身字段合并赋值给被包装的子对象**。
 
 ```
 struct Model: SmartCodable {
     var name: String = ""
     var age: Int = 0
+  
+    @SmartFlat
+    var model: FlatModel?
+   
+}
+struct FlatModel: SmartCodable {
+    var name: String = ""
+    var age: Int = 0
 }
 
-var dic1: [String : Any] = [
-    "name": "mccc",
-    "age": 10
+let dict: [String: Any] =  [
+    "name": "Mccc",
+    "age": 18,
 ]
-let dic2: [String : Any] = [
-    "age": 200
-]
-guard var model = Model.deserialize(from: dic1) else { return }
-SmartUpdater.update(&model, from: dic2)
 
-// 现在: model是 ["name": mccc, "age": 200].
+let model = Model.deserialize(from: dict)
+print(model)
+// 输出: Model(name: "Mccc", age: 18, model: FlatModel(name: "Mccc", age: 18))
 ```
 
-### 6. 特殊支持
 
-#### 6.1 智能字符串化JSON解析
+
+#### 3.4 @SmartHexColor
+
+```
+struct Model: SmartCodable {
+    @SmartHexColor
+    var color: UIColor?
+}
+
+let dict: [String: Any] = [
+    "color": "7DA5E3"
+]
+
+let model = Model.deserialize(from: dict)
+print(model)
+// 输出: Model(color: UIExtendedSRGBColorSpace 0.490196 0.647059 0.890196 1)
+```
+
+#### 3.5 @SmartPublished
+
+```
+class PublishedModel: ObservableObject, SmartCodable {
+    required init() {}
+    
+    @SmartPublished
+    var name: ABC?
+}
+
+struct ABC: SmartCodable {
+    var a: String = ""
+}
+
+if let model = PublishedModel.deserialize(from: dict) {
+    // 正确访问name属性的Publisher
+    model.$name
+        .sink { newName in
+            print("name属性发生变化，新值为: \(newName)")
+        }
+        .store(in: &cancellables)
+}
+```
+
+
+
+### 4. 支持继承
+
+该功能由于使用了 **Swift Macro**，需要使用 **Swift 5.9+**，对应的 **iOS 13+**，因此只在SmartCodable的5.0+版本中支持。
+
+>  如需要在更低版本使用继承，请查看： [低版本中的继承](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest2.md)
+
+如果你需要继承，请使用 `@SmartSubclass` 标注为子类。
+
+#### 4.1 基础使用
+
+```
+class BaseModel: SmartCodable {
+    var name: String = ""
+    required init() { }
+}
+
+@SmartSubclass
+public class StudentModel: BaseModel {
+    var age: Int?
+}
+```
+
+
+
+#### 4.2 子类实现协议方法
+
+直接实现即可，不需要 `override` 修饰。
+
+```
+class BaseModel: SmartCodable {
+    var name: String = ""
+    required init() { }
+}
+
+@SmartSubclass
+public class StudentModel: BaseModel {
+    var age: Int?
+    
+    public static func mappingForKey() -> [SmartKeyTransformer]? {
+        [ CodingKeys.age <--- "stu_age" ]
+    }
+}
+```
+
+
+
+#### 4.3 父类实现协议方法
+
+```
+class BaseModel: SmartCodable {
+    var name: String = ""
+    required init() { }
+    
+    public static func mappingForKey() -> [SmartKeyTransformer]? {
+        [ CodingKeys.name <--- "stu_name" ]
+    }
+}
+
+@SmartSubclass
+public class StudentModel: BaseModel {
+    var age: Int?
+}
+```
+
+
+
+#### 4.4 父子类同时实现协议方法
+
+需要注意几点：
+
+* 父类的类协议方法需要使用 `class`  修饰。
+* 子类的类协议方法需要获取父类的实现。
+
+```
+class BaseModel: SmartCodable {
+    var name: String = ""
+    required init() { }
+    
+    class func mappingForKey() -> [SmartKeyTransformer]? {
+        [ CodingKeys.name <--- "stu_name" ]
+    }
+}
+
+@SmartSubclass
+class StudentModel: BaseModel {
+    var age: Int?
+    
+    override static func mappingForKey() -> [SmartKeyTransformer]? {
+        let trans = [ CodingKeys.age <--- "stu_age" ]
+        
+        if let superTrans = super.mappingForKey() {
+            return trans + superTrans
+        } else {
+            return trans
+        }
+    }
+}
+```
+
+
+
+
+
+### 5. 特殊支持
+
+#### 5.1 支持枚举
+
+要使枚举可转换，必须遵循`SmartCaseDefaultable`协议：
+
+```
+struct Student: SmartCodable {
+    var name: String = ""
+    var sex: Sex = .man
+
+    enum Sex: String, SmartCaseDefaultable {
+        case man = "man"
+        case woman = "woman"
+    }
+}
+let model = Student.deserialize(from: json)
+```
+
+要支持 **关联值枚举解码** 使枚举遵循**SmartAssociatedEnumerable**，重写**mappingForValue**方法接管解码过程：
+
+```
+struct Model: SmartCodable {
+    var sex: Sex = .man
+    static func mappingForValue() -> [SmartValueTransformer]? {
+        [
+            CodingKeys.sex <--- RelationEnumTranformer()
+        ]
+    }
+}
+
+enum Sex: SmartAssociatedEnumerable {    
+    case man
+    case women
+    case other(String)
+}
+
+struct RelationEnumTranformer: ValueTransformable {
+    typealias Object = Sex
+    typealias JSON = String
+
+    func transformToJSON(_ value: Sex?) -> String? {
+        // 自定义处理
+    }
+    func transformFromJSON(_ value: Any?) -> Sex? {
+        // 自定义处理
+    }
+}
+```
+
+
+
+
+
+#### 5.2 字符串JSON解析
 
 SmartCodable在解码时自动处理字符串化的JSON值，无缝转换为嵌套模型对象或数组，同时保持所有键映射规则：
 
@@ -534,7 +639,7 @@ let dict: [String: Any] = [
 guard let model = Model.deserialize(from: dict) else { return }
 ```
 
-#### 6.2 兼容性
+#### 5.3 兼容性
 
 当属性解析失败时，SmartCodable会对抛出的异常进行兼容处理，确保整个解析过程不会中断：
 
@@ -563,13 +668,42 @@ struct Model: SmartCodable {
 
 当类型转换失败时，会获取当前解析属性的初始化值进行填充。
 
-#### 6.3 解析超大体积数据
+
+
+#### 5.4 更新现有模型
+
+可适应任何数据结构，包括嵌套数组结构：
+
+```
+struct Model: SmartCodable {
+    var name: String = ""
+    var age: Int = 0
+}
+
+var dic1: [String : Any] = [
+    "name": "mccc",
+    "age": 10
+]
+let dic2: [String : Any] = [
+    "age": 200
+]
+guard var model = Model.deserialize(from: dic1) else { return }
+SmartUpdater.update(&model, from: dic2)
+
+// 现在: model是 ["name": mccc, "age": 200].
+```
+
+
+
+#### 5.5 解析超大体积数据
 
 当解析超大体积数据时，尽量避免解析异常的兼容处理，例如：属性中声明了多个属性，且声明的属性类型不匹配。
 
 不需要解析的属性不要使用@IgnoredKey，而是重写CodingKeys来忽略不需要解析的属性。
 
 这样可以大幅提高解析效率。
+
+
 
 ## **哨兵系统(Sentinel)**
 

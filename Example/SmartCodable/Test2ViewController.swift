@@ -30,16 +30,32 @@ class Test2ViewController: BaseViewController {
     }
     
     class BaseModel: SmartCodable {
-        var name: String = "123"
+        var name: String = ""
         required init() { }
+        
+        class func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.name <--- "stu_name"
+            ]
+        }
     }
     
     @SmartSubclass
-    public class StudentModel: BaseModel {
+    class StudentModel: BaseModel {
         var age: Int?
         
-        var location: String = ""
-        
-
+        override static func mappingForKey() -> [SmartKeyTransformer]? {
+            let trans = [ CodingKeys.age <--- "stu_age" ]
+            
+            if let superTrans = super.mappingForKey() {
+                return trans + superTrans
+            } else {
+                return trans
+            }
+        }
     }
 }
+
+
+
+
