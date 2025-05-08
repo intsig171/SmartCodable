@@ -1,18 +1,18 @@
 {
   "name": "SmartCodable",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "summary": "Swift数据解析库",
-  "homepage": "https://github.com/intsig171",
+  "homepage": "https://github.com/iAmMccc/SmartCodable",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Mccc": "https://github.com/intsig171"
+    "Mccc": "https://github.com/iAmMccc"
   },
   "source": {
-    "git": "https://github.com/intsig171/SmartCodable.git",
-    "tag": "5.0.1"
+    "git": "https://github.com/iAmMccc/SmartCodable.git",
+    "tag": "5.0.2"
   },
   "swift_versions": "5.0",
   "platforms": {
