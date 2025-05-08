@@ -12,7 +12,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
-  s.version          = '5.0.0-beta.5'
+  s.version          = '5.0.0-beta.6'
   s.summary          = 'Swift数据解析库'
   
   s.homepage         = 'https://github.com/intsig171'
@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Mccc' => 'https://github.com/intsig171' }
   s.source           = { :git => 'https://github.com/intsig171/SmartCodable.git', :tag => s.version.to_s }
   
+
   s.swift_version    = '5.0'
 
   s.ios.deployment_target = '11.0'
@@ -27,9 +28,6 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.13'
   s.watchos.deployment_target = '5.0'
   s.visionos.deployment_target = "1.0"
-
-#  s.source_files = 'Sources/SmartCodable/Core/**/*{.swift}'
-#  s.exclude_files = 'Sources/SmartCodable/MacroSupport/**/*'
 
   s.default_subspecs = ['Core']
 
@@ -41,6 +39,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'Inherit' do |ss|
       
+    ss.ios.deployment_target = '13.0'
     ss.dependency 'SmartCodable/Core'
     ss.source_files = 'Sources/SmartCodable/MacroSupport/*{.swift}'
     
