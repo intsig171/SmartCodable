@@ -102,23 +102,30 @@ If you are using HandyJSON and would like to replace it, follow this link.
 
 ## Installation
 
-### Swift Package Manager
+### 🛠 CocoaPods Installation
 
-Add to your `Package.swift`:
+| Version     | Installation Method          | Platform Requirements                                        | Inheritance Support |
+| :---------- | :--------------------------- | :----------------------------------------------------------- | :------------------ |
+| Basic       | `pod 'SmartCodable'`         | `iOS 12+` `tvOS 12+` `macOS 10.13+` <br>`watchOS 5.0+` `visionOS 1.0+` | ❌                   |
+| Inheritance | `pod 'SmartCodable/Inherit'` | `iOS 13+` `macOS 11+`                                        | ✅                   |
+
+⚠️ **Important Notes**:
+
+- If you don't have strong inheritance requirements, the basic version is recommended
+- Using inheritance features requires downloading `swift-syntax` dependencies for the first time (may take longer)
+- Inheritance features require Xcode 15+ and Swift 5.9+
+
+
+
+### 📦 Swift Package Manager
 
 ```
 dependencies: [
-    .package(url: "https://github.com/intsig171/SmartCodable.git")
+    .package(url: "https://github.com/intsig171/SmartCodable.git", from: "xxx")
 ]
 ```
 
-### CocoaPods
 
-Add to your `Podfile`:
-
-```
-pod 'SmartCodable'
-```
 
 ### Usage Examples
 

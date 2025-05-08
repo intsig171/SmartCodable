@@ -104,12 +104,19 @@ SmartCodable 通过增强苹果原生的 Codable 能力，为 Swift 数据解析
 
 ## 安装指南
 
-### Requirements
+### CocoaPods 安装
 
-| Xcode     | Minimun Deployments | 功能       | Version |
-| --------- | ------------------- | ---------- | ------- |
-| Xcode15+  | iOS13+ / macOS11+   | 支持继承   | 5.0+    |
-| < Xcode15 | < iOS13 / macOS11   | 不支持继承 | 4.0+    |
+| 版本   | 安装方式                     | 平台要求                                                     | 继承功能支持 |
+| ------ | :--------------------------- | :----------------------------------------------------------- | :----------- |
+| 基础版 | `pod 'SmartCodable'`         | `iOS 12+` `tvOS 12+` `osx10.13+` ` watchOS 5.0+` `visionos 1.0+ ` | ❌ 否         |
+| 继承版 | `pod 'SmartCodable/Inherit'` | `iOS 13+`  `macOS 11+`                                       | ✅ 是         |
+
+⚠️ **重要提示**：
+
+* 如没有强继承需求，推荐使用基础版本
+* 使用继承功能，首次安装需要下载 `swift-syntax` 依赖（可能耗时较长）
+
+- 使用继承功能，需要 Xcode 15+ 和 Swift 5.9+
 
 
 
@@ -117,15 +124,11 @@ SmartCodable 通过增强苹果原生的 Codable 能力，为 Swift 数据解析
 
 ```
 dependencies: [
-    .package(url: "https://github.com/intsig171/SmartCodable.git")
+    .package(url: "https://github.com/intsig171/SmartCodable.git", from: "xxx")
 ]
 ```
 
-### CocoaPods
 
-```
-pod 'SmartCodable'
-```
 
 ### 使用示例
 

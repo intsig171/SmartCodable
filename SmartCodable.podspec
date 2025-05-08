@@ -40,6 +40,7 @@ Pod::Spec.new do |s|
   s.subspec 'Inherit' do |ss|
       
     ss.ios.deployment_target = '13.0'
+    ss.osx.deployment_target = '11.0'
     ss.dependency 'SmartCodable/Core'
     ss.source_files = 'Sources/SmartCodable/MacroSupport/*{.swift}'
     
