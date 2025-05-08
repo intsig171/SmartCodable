@@ -6,55 +6,41 @@ class Test3ViewController: BaseViewController {
         super.viewDidLoad()
         
         let dict: [String: Any] = [
-            "type": "String",
-            "value": "Mccc"
+            "nickName": "String",
         ]
-        
-        let dict1: [String: Any] = [
-            "type": "Boolean",
-            "value": true
-        ]
-        
         guard let model = Model.deserialize(from: dict) else { return }
         print(model)
-        
-        
-        guard let model1 = Model.deserialize(from: dict1) else { return }
-        print(model1)
+
+        let tranformer1 = model.toDictionary()
+        print(tranformer1 as Any)
     }
     
     struct Model: SmartCodable {
-        @SmartAny
-        private var value: Any?
-        private var type: String = ""
+        var name: String = ""
+        var nickName: String = ""
+        var bigName: String = ""
         
-        public var enumValue: Value? = .error
+        enum CodingKeys: CodingKey {
+            case name
+            case nickName
+            case bigName
+        }
+
+        static func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.name <--- ["nickName"],
+                CodingKeys.bigName <--- ["nickName"],
+            ]
+        }
         
-        mutating func didFinishMapping() {
-          
-            guard let value = value else { return }
-            
-            switch type {
-            case "String":
-                if let s = value as? String {
-                    enumValue = Value.string(s)
-                }
-                
-            case "Boolean":
-                if let b = value as? Bool {
-                    enumValue = Value.bool(b)
-                }
-            default:
-                break
-            }
+        
+        func encode(to encoder: any Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(nickName, forKey: CodingKeys.nickName)
+            try container.encode(name, forKey: CodingKeys.name)
+            try container.encode(bigName, forKey: CodingKeys.bigName)
+
         }
     }
-    
-    
-    enum Value: SmartAssociatedEnumerable {
-        static var defaultCase: Value = .error
-        case error
-        case string(String)
-        case bool(Bool)
-    }
 }
+

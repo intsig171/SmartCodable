@@ -8,82 +8,54 @@
 
 import SmartCodable
 import BTPrint
+import CodableWrapper
 
 class Test2ViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         let dict: [String: Any] = [
-            "size": [],
-            "id": 2,
-            "name": "Mccc"
+            "name": "Mccc",
+            "studentAge": "20",
+            "age": []
+
         ]
         
-        guard let model = C.deserialize(from: dict) else { return }
-
-        print(model.size)
-        print(model.id)
-        print(model.name)
-        print("\n")
+//        let model = StudentModel.deserialize(from: dict)
+//        print(model?.name)
+//        print(model?.age)
         
-        model.size = nil
-        
-        let ddd = model.toDictionary()
-        print(ddd)
-        
-        
-    }
-}
-
-class A: SmartCodable {
-    var size: Int? = 10
-    required init() { }
-}
-
-class B: A {
-    var name: String = "Mccc"
-    
-    enum CodingKeys: CodingKey {
-        case name
-    }
-    required init(from decoder: any Decoder) throws {
-        try super.init(from: decoder)
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
     }
     
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(name, forKey: .name)
+    class BaseModel: SmartCodable {
+        var name: String = ""
+        required init() { }
+        
+        class func mappingForKey() -> [SmartKeyTransformer]? {
+            [
+                CodingKeys.name <--- "stu_name"
+            ]
+        }
     }
     
-    required init() {
-        super.init()
-    }
+//    @SmartSubclass
+//    class StudentModel: BaseModel {
+//        var age: Int?
+//        
+//        override static func mappingForKey() -> [SmartKeyTransformer]? {
+//            let trans = [ CodingKeys.age <--- "stu_age" ]
+//            
+//            if let superTrans = super.mappingForKey() {
+//                return trans + superTrans
+//            } else {
+//                return trans
+//            }
+//        }
+//    }
 }
 
 
-class C: B {
-    var id: Int = 1
-    enum CodingKeys: CodingKey {
-        case id
-    }
-    required init(from decoder: any Decoder) throws {
-        try super.init(from: decoder)
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
-    }
-    required init() {
-        super.init()
-    }
-    
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-    }
-}
+
+

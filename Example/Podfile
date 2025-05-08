@@ -3,8 +3,12 @@ use_frameworks!
 platform :ios, '13.0'
 
 target 'SmartCodable_Example' do
-  pod 'SmartCodable', :path => '../'
+#  pod 'SmartCodable', :path => '../'
   
+  pod 'SmartCodable/Inherit', :path => '../SmartCodable.podspec'
+  
+  
+  pod 'CodableWrapper', :git => 'https://github.com/winddpan/CodableWrapper.git'
   pod 'SnapKit'
   pod 'BTPrint'
   pod 'BTBubble'
@@ -12,7 +16,7 @@ target 'SmartCodable_Example' do
   #对比组
   pod 'HandyJSON', '5.0.0-beta.1'
   pod 'CleanJSON'
-  
+#  pod 'MetaCodable'
 
   target 'SmartCodable_Tests' do
     inherit! :search_paths
