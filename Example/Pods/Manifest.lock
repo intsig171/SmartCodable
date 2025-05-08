@@ -9,8 +9,8 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - HandyJSON (5.0.0-beta.1)
-  - SmartCodable/Core (5.0.0)
-  - SmartCodable/Inherit (5.0.0):
+  - SmartCodable/Core (5.0.1)
+  - SmartCodable/Inherit (5.0.1):
     - SmartCodable/Core
   - SnapKit (5.6.0)
 
@@ -51,7 +51,7 @@ SPEC CHECKSUMS:
   CodableWrapper: fb0b898e73f2e5b996e9d82b6c8441da72e50256
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
-  SmartCodable: f9044db9e186638d79080d8dc679236727f4db4c
+  SmartCodable: 7e69a11c4905c48bf0d9f9eeb2e3a165da2e69d9
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
 PODFILE CHECKSUM: 60610a5cdfa6a077fd7b8e2be458175cd4b92762
