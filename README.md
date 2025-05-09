@@ -118,10 +118,10 @@ If you are using HandyJSON and would like to replace it, follow this link.
 
 ### 🛠 CocoaPods Installation
 
-| Version     | Installation Method          | Platform Requirements                                        | Inheritance Support |
-| :---------- | :--------------------------- | :----------------------------------------------------------- | :------------------ |
-| Basic       | `pod 'SmartCodable'`         | `iOS 12+` `tvOS 12+` `macOS 10.13+` <br>`watchOS 5.0+` `visionOS 1.0+` | ❌                   |
-| Inheritance | `pod 'SmartCodable/Inherit'` | `iOS 13+` `macOS 11+`                                        | ✅                   |
+| Version     | Installation Method          | Platform Requirements                                        |
+| :---------- | :--------------------------- | :----------------------------------------------------------- |
+| Basic       | `pod 'SmartCodable'`         | `iOS 12+` `tvOS 12+` `macOS 10.13+` `watchOS 5.0+` `visionOS 1.0+` |
+| Inheritance | `pod 'SmartCodable/Inherit'` | `iOS 13+` `macOS 11+`                                        |
 
 ⚠️ **Important Notes**:
 
@@ -786,7 +786,7 @@ If you're looking forward to learning more about the Codable protocol and the de
 
 
 ## Github Stars
-![GitHub stars](https://starchart.cc/iAmMccc/SmartCodable.svg?theme=dark)
+![GitHub stars](https://starchart.cc/iAmMccc/SmartCodable.svg)
 
 ## Join the SmartCodable Community 🚀
 

@@ -755,7 +755,7 @@ SmartSentinel.onLogGenerated { logs in  }
 
 ## GitHub星标
 
-![GitHub stars](https://starchart.cc/iAmMccc/SmartCodable.svg?theme=dark)
+![GitHub stars](https://starchart.cc/iAmMccc/SmartCodable.svg)
 
 ## 加入SmartCodable社区 🚀
 
