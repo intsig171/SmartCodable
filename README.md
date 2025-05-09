@@ -4,11 +4,14 @@
 <h1 align="center">SmartCodable - Ultimate Codable Enhancement for Swift</h1>
 
 <p align="center">
-<a href="https://github.com/iAmMccc/SmartCodable/wiki">
-    <img src="https://img.shields.io/badge/Documentation-available-brightgreen.svg" alt="Documentation">
-</a>
 <a href="https://github.com/iAmMccc/SmartCodable/releases">
     <img src="https://img.shields.io/github/v/release/iAmMccc/SmartCodable?color=blue&label=version" alt="Latest Release">
+</a>
+<a href="https://github.com/iAmMccc/SmartCodable/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/iAmMccc/SmartCodable/CI.yml?branch=main&label=build%20status&logo=github" alt="Build Status">
+</a>
+<a href="https://github.com/iAmMccc/SmartCodable/wiki">
+    <img src="https://img.shields.io/badge/Documentation-available-brightgreen.svg" alt="Documentation">
 </a>
 <a href="https://swift.org/package-manager/">
     <img src="https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat" alt="SPM Supported">
@@ -16,10 +19,18 @@
 <a href="https://swift.org/">
     <img src="https://img.shields.io/badge/Swift-5.0%2B-orange.svg" alt="Swift 5.0+">
 </a>
+</p>
+
+<p align="center">
+<a href="https://www.apple.com/swift/">
+    <img src="https://img.shields.io/badge/platform-iOS%2FmacOS%2FtvOS%2FwatchOS-blue.svg" alt="Platform Support">
+</a>
+<a href="https://github.com/iAmMccc/SmartCodable/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/iAmMccc/SmartCodable" alt="Contributors">
+</a>
 <a href="https://github.com/iAmMccc/SmartCodable/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-black.svg" alt="MIT License">
 </a>
-
 <a href="https://deepwiki.com/intsig171/SmartCodable">
     <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
 </a>

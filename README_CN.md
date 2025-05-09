@@ -1,30 +1,4 @@
-<p align="center">
-<img src="https://github.com/intsig171/SmartCodable/assets/87351449/89de27ac-1760-42ee-a680-4811a043c8b1" alt="SmartCodable" title="SmartCodable" width="500"/>
-</p>
 <h1 align="center">SmartCodable - Ultimate Codable Enhancement for Swift</h1>
-
-<p align="center">
-<a href="https://github.com/iAmMccc/SmartCodable/wiki">
-    <img src="https://img.shields.io/badge/Documentation-available-brightgreen.svg" alt="Documentation">
-</a>
-<a href="https://github.com/iAmMccc/SmartCodable/releases">
-    <img src="https://img.shields.io/github/v/release/iAmMccc/SmartCodable?color=blue&label=version" alt="Latest Release">
-</a>
-<a href="https://swift.org/package-manager/">
-    <img src="https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat" alt="SPM Supported">
-</a>
-<a href="https://swift.org/">
-    <img src="https://img.shields.io/badge/Swift-5.0%2B-orange.svg" alt="Swift 5.0+">
-</a>
-<a href="https://github.com/iAmMccc/SmartCodable/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-black.svg" alt="MIT License">
-</a>
-<a href="https://deepwiki.com/intsig171/SmartCodable">
-    <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
-</a>
-</P>
-
-
 
 ### 中文 | [English](https://github.com/iAmMccc/SmartCodable)
 
