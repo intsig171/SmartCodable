@@ -108,7 +108,7 @@ If you are using HandyJSON and would like to replace it, follow this link.
 
 | Version     | Installation Method          | Platform Requirements                                        |
 | :---------- | :--------------------------- | :----------------------------------------------------------- |
-| Basic       | `pod 'SmartCodable'`         | `iOS 12+` `tvOS 12+` `macOS 10.13+` <br>`watchOS 5.0+` `visionOS 1.0+` |
+| Basic       | `pod 'SmartCodable'`         | `iOS 12+` `tvOS 12+` `macOS 10.13+` `watchOS 5.0+` `visionOS 1.0+` |
 | Inheritance | `pod 'SmartCodable/Inherit'` | `iOS 13+` `macOS 11+`                                        |
 
 ⚠️ **Important Notes**:
