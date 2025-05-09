@@ -8,7 +8,7 @@
     <img src="https://img.shields.io/github/v/release/iAmMccc/SmartCodable?color=blue&label=version" alt="Latest Release">
 </a>
 <a href="https://github.com/iAmMccc/SmartCodable/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/iAmMccc/SmartCodable/CI.yml?branch=main&label=build%20status&logo=github" alt="Build Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/iAmMccc/SmartCodable/swift.yml?branch=main&label=build%20status&logo=github" alt="Build Status">
 </a>
 <a href="https://github.com/iAmMccc/SmartCodable/wiki">
     <img src="https://img.shields.io/badge/Documentation-available-brightgreen.svg" alt="Documentation">
@@ -20,6 +20,7 @@
     <img src="https://img.shields.io/badge/Swift-5.0%2B-orange.svg" alt="Swift 5.0+">
 </a>
 </p>
+
 
 <p align="center">
 <a href="https://www.apple.com/swift/">
