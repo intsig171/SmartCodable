@@ -6,12 +6,18 @@
 
 | 💡 questions                         | answers                                                      |
 | ----------------------------------- | ------------------------------------------------------------ |
-| 1 在mapping方法中支持解析忽略       | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest1.md) |
-| 2 像HandyJSON一样支持继承关系的解析 | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest2.md) |
-| 3 支持初始值填充                    | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest3.md) |
+| 1 在mapping方法中支持解析忽略       | [不采纳的理由](https://github.com/iAmMccc/SmartCodable/blob/main/Document/QA/QA1.md) |
+| 2 像HandyJSON一样支持继承关系的解析 | [实现逻辑](https://github.com/iAmMccc/SmartCodable/blob/main/Document/QA/QA2.md) |
+| 3 支持初始值填充                    | [实现逻辑](https://github.com/iAmMccc/SmartCodable/blob/main/Document/QA/QA3.md) |
 | 4 提供HandyJSON的替换指导           | [替换指导](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/CompareWithHandyJSON.md) |
 
 
+
+
+
+### SmartCodable Wiki
+
+[想了解更多请访问wiki](https://github.com/iAmMccc/SmartCodable/wiki)
 
 
 

@@ -4,9 +4,6 @@
 <h1 align="center">SmartCodable - Ultimate Codable Enhancement for Swift</h1>
 
 <p align="center">
-<a href="https://github.com/iAmMccc/SmartCodable/actions?query=workflow%3Abuild">
-    <img src="https://img.shields.io/github/actions/workflow/status/iAmMccc/SmartCodable/build.yml?branch=main&label=build" alt="Build Status">
-  </a>
 <a href="https://github.com/iAmMccc/SmartCodable/wiki">
     <img src="https://img.shields.io/badge/Documentation-available-brightgreen.svg" alt="Documentation">
 </a>
@@ -22,7 +19,11 @@
 <a href="https://github.com/iAmMccc/SmartCodable/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-black.svg" alt="MIT License">
 </a>
-</p>
+<a href="https://deepwiki.com/intsig171/SmartCodable">
+    <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
+</a>
+</P>
+
 
 
 ### 中文 | [English](https://github.com/iAmMccc/SmartCodable)
@@ -76,7 +77,7 @@ SmartCodable 通过增强苹果原生的 Codable 能力，为 Swift 数据解析
 | **错误日志**              | 提供兼容性处理的故障排查日志                       | ✅            | ❌         |
 | **安全性**                | 实现稳定性和安全性更高                             | ✅            | ❌         |
 
-[👉 **SmartCodable - 与HandyJSON对比**](https://github.com/iAmMccc/SmartCodable/blob/develop/Document/README/CompareWithHandyJSON.md)
+[👉 **SmartCodable - 与HandyJSON对比**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/CompareWithHandyJSON.md)
 
 **核心优势**：
 
@@ -464,7 +465,7 @@ if let model = PublishedModel.deserialize(from: dict) {
 
 该功能由于使用了 **Swift Macro**，需要使用 **Swift 5.9+**，对应的 **iOS 13+**，因此只在SmartCodable的5.0+版本中支持。
 
->  如需要在更低版本使用继承，请查看： [低版本中的继承](https://github.com/iAmMccc/SmartCodable/blob/main/Document/Suggest/suggest2.md)
+>  如需要在更低版本使用继承，请查看： [低版本中的继承](https://github.com/iAmMccc/SmartCodable/blob/main/Document/QA/QA2.md)
 
 如果你需要继承，请使用 `@SmartSubclass` 标注为子类。
 
@@ -774,7 +775,7 @@ SmartSentinel.onLogGenerated { logs in  }
 
 [👉 **SmartCodable测试**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/HowToTest.md)
 
-[👉 **学习SmartCodable**](https://github.com/iAmMccc/SmartCodable/blob/develop/Document/README/LearnMore.md)
+[👉 **学习SmartCodable**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/LearnMore.md)
 
 
 

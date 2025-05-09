@@ -463,7 +463,7 @@ print(model)
 
 This feature relies on **Swift Macros**, which requires **Swift 5.9+** and is compatible with **iOS 13+**. Therefore, it is only supported in SmartCodable version 5.0 and above.
 
-> For using inheritance on lower versions, refer to: [Inheritance in Lower Versions](https://github.com/iAmMccc/SmartCodable/blob/main/Document/Suggest/suggest2.md)
+> For using inheritance on lower versions, refer to: [Inheritance in Lower Versions](https://github.com/iAmMccc/SmartCodable/blob/main/Document/QA/QA2.md)
 
 If you need inheritance support, annotate your subclass with `@SmartSubclass`.
 
