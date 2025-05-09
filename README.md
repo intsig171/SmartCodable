@@ -4,9 +4,7 @@
 <h1 align="center">SmartCodable - Ultimate Codable Enhancement for Swift</h1>
 
 <p align="center">
-<a href="https://github.com/iAmMccc/SmartCodable/actions?query=workflow%3Abuild">
-    <img src="https://img.shields.io/github/actions/workflow/status/iAmMccc/SmartCodable/build.yml?branch=main&label=build" alt="Build Status">
-  </a>
+
 <a href="https://github.com/iAmMccc/SmartCodable/wiki">
     <img src="https://img.shields.io/badge/Documentation-available-brightgreen.svg" alt="Documentation">
 </a>
@@ -21,6 +19,10 @@
 </a>
 <a href="https://github.com/iAmMccc/SmartCodable/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-black.svg" alt="MIT License">
+</a>
+
+<a href="https://deepwiki.com/intsig171/SmartCodable">
+    <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
 </a>
 </p>
 
