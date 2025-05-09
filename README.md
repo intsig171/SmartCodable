@@ -774,7 +774,7 @@ If you're looking forward to learning more about the Codable protocol and the de
 
 
 ## Github Stars
-![GitHub stars](https://starchart.cc/iAmMccc/SmartCodable.svg?theme=dark)
+![GitHub stars](https://starchart.cc/iAmMccc/SmartCodable.svg)
 
 ## Join the SmartCodable Community 🚀
 
