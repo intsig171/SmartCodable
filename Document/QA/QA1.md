@@ -1,8 +1,4 @@
-# #suggest 1 在mapping方法中支持解析忽略
-
-
-
-结果：目前无法支持。
+# #QA1 在mapping方法中支持解析忽略
 
 
 
@@ -254,3 +250,18 @@ bb0(%0 : $*Decoder, %1 : $@thin User.Type):
 ### 总结一下
 
 Codable 是通过 隐式实现的 CodingKeys 实现的解析映射，如果想要改变这个必须重写CodingKeys。 目前作者没有技术方法可以控制这种重新（在Model外）。
+
+
+
+## 使用 @IgnoredKey 忽略
+
+```
+struct Home: SmartCodable {
+    var name: String = ""
+
+    @IgnoredKey
+    var area: String = ""
+}
+```
+
+作者使用属性包装器 `@IgnoredKey` 忽略掉json中的值解析，进而实现了 **伪忽略**，实质上还是会解析，只是不使用json值，直接进入失败兜底逻辑，使用属性的初始化值替代。

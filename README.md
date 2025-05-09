@@ -4,7 +4,6 @@
 <h1 align="center">SmartCodable - Ultimate Codable Enhancement for Swift</h1>
 
 <p align="center">
-
 <a href="https://github.com/iAmMccc/SmartCodable/wiki">
     <img src="https://img.shields.io/badge/Documentation-available-brightgreen.svg" alt="Documentation">
 </a>
@@ -78,7 +77,7 @@ SmartCodable redefines Swift data parsing by augmenting Apple's native Codable w
 
 If you are using HandyJSON and would like to replace it, follow this link.
 
- [👉 **SmartCodable - Compare With HandyJSON**](https://github.com/iAmMccc/SmartCodable/blob/develop/Document/README/CompareWithHandyJSON.md)
+ [👉 **SmartCodable - Compare With HandyJSON**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/CompareWithHandyJSON.md)
 
 **Key Advantages**:
 
@@ -770,7 +769,7 @@ If you're looking forward to learning more about the Codable protocol and the de
 
 [👉 **SmartCodable Test**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/HowToTest.md)
 
-[👉 **learn SmartCodable**](https://github.com/iAmMccc/SmartCodable/blob/develop/Document/README/LearnMore.md)
+[👉 **learn SmartCodable**](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/LearnMore.md)
 
 
 

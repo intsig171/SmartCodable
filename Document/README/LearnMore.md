@@ -7,12 +7,9 @@
 | 💡 questions                         | answers                                                      |
 | ----------------------------------- | ------------------------------------------------------------ |
 | 1 在mapping方法中支持解析忽略       | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest1.md) |
-| 2 像HandyJSON一样支持继承关系的解析 | [不采纳的理由](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest2.md) |
+| 2 像HandyJSON一样支持继承关系的解析 | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest2.md) |
 | 3 支持初始值填充                    | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest3.md) |
-| 4 提供HandyJSON的替换指导           | [替换指导](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest4.md) |
-| 5 提供全局的Key映射策略             | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest5.md) |
-| 6 支持UIColor的解析                 | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest6.md) |
-| 7 增加单个Value的自定义转换策略     | [实现逻辑](https://github.com/intsig171/SmartCodable/blob/main/Document/Suggest/suggest7.md) |
+| 4 提供HandyJSON的替换指导           | [替换指导](https://github.com/iAmMccc/SmartCodable/blob/main/Document/README/CompareWithHandyJSON.md) |
 
 
 
