@@ -52,8 +52,7 @@ Pod::Spec.new do |s|
     }
 
     ss.user_target_xcconfig = {
-      "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros",
-      "SUPPORTS_MACCATALYST" => "YES"
+      "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros"
     }
 
     script = <<-SCRIPT
