@@ -75,7 +75,6 @@ extension SmartEncodable {
     /// - Parameter options: encoding options
     /// - Returns: dictionary
     
-    
     /// Serializes the object into a dictionary representation.
     ///
     /// - Parameters:

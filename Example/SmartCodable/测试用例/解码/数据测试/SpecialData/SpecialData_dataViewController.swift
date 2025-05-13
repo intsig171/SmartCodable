@@ -50,40 +50,24 @@ extension SpecialData_dataViewController {
     }
     
     
-    func getDictData(
-        mode: Mode,
-        strategy: JSONDecoder.SmartDataDecodingStrategy) -> [String: Any] {
-            switch mode {
-            case .keyless:
-                return [:]
-            case .null:
-                return [
-                    "aData": NSNull(),
-                    "bData": NSNull(),
-                ]
-            case .typeMismatch:
-                return [
-                    "aData": [],
-                    "bData": [ : ]
-                ]
-            case .normal:
-                break
-            }
-            
-            
-           
-            
-            switch strategy {
-    
-                
-            case .base64:
-                return [
-                    "aData": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
-                    "bData": "aHR0cHM6Ly93d3cucWl4aW4uY29t",
-                ]
-            }
-            
+    func getDictData(mode: Mode, strategy: JSONDecoder.SmartDataDecodingStrategy) -> [String: Any] {
+        switch mode {
+        case .keyless:
+            return [:]
+        case .null:
+            return [
+                "aData": NSNull(),
+                "bData": NSNull(),
+            ]
+        case .typeMismatch:
+            return [
+                "aData": [],
+                "bData": [ : ]
+            ]
+        case .normal:
+            return [:]
         }
+    }
 }
 
 

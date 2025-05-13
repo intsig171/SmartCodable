@@ -22,9 +22,12 @@ class Test2ViewController: BaseViewController {
         ]
         
         let model = StudentModel.deserialize(from: dict)
-        print(model?.name)
-        print(model?.age)
+        print(model?.name as Any)
+        print(model?.age as Any)
         
+        let transDict = model?.toJSONString(prettyPrint: true) ?? ""
+        print("\n Model -> JSON")
+        print(transDict)
     }
     
     class BaseModel: SmartCodable {
