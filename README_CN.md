@@ -89,10 +89,15 @@ SmartCodable 通过增强苹果原生的 Codable 能力，为 Swift 数据解析
 
 ⚠️ **重要提示**：
 
-* 如没有强继承需求，推荐使用基础版本
-* 使用继承功能，首次安装需要下载 `swift-syntax` 依赖（可能耗时较长）
+- 如果你没有强烈的继承需求，推荐使用基础版
+- 继承功能需要 **Swift 宏支持**，**Xcode 15+** 和 **Swift 5.9+**
 
-- 使用继承功能，需要 Xcode 15+ 和 Swift 5.9+
+📌 **关于 Swift 宏支持（CocoaPods）**：
+
+- 使用继承功能时，首次需要下载 `swift-syntax` 依赖（可能会耗时较长）
+- CocoaPods 内部通过设置 `user_target_xcconfig["OTHER_SWIFT_FLAGS"]` 来加载宏插件。
+- 这可能会影响主工程的构建标志，并在复杂项目或 CI 环境中导致构建行为的差异。
+- 如需自定义配置或遇到问题，请访问 [提交问题](https://github.com/iAmMccc/SmartCodable/issues) 页面。
 
 
 

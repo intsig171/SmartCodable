@@ -126,8 +126,19 @@ If you are using HandyJSON and would like to replace it, follow this link.
 ⚠️ **Important Notes**:
 
 - If you don't have strong inheritance requirements, the basic version is recommended
-- Using inheritance features requires downloading `swift-syntax` dependencies for the first time (may take longer)
-- Inheritance features require Xcode 15+ and Swift 5.9+
+
+- Inheritance features require **Swift Macro support**, **Xcode 15+**, and **Swift 5.9+**
+
+  
+
+  
+
+📌 **About Swift Macros Support (CocoaPods)**:
+
+* requires downloading `swift-syntax` dependencies for the first time (may take longer)
+* CocoaPods internally sets `user_target_xcconfig["OTHER_SWIFT_FLAGS"]` to load the macro plugin during build.
+* This may affect your main target's build flags and lead to subtle differences in complex projects or CI environments.
+* If needed, please [open an issue](https://github.com/iAmMccc/SmartCodable/issues) for custom setups.
 
 
 
