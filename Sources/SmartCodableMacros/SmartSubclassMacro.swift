@@ -147,7 +147,11 @@ public struct SmartSubclassMacro: MemberMacro {
     // 辅助方法：生成encode(to:)方法
     private static func generateEncodeToEncoder(for properties: [ModelMemberProperty]) -> DeclSyntax {
         let encodingStatements = properties.map { property in
-            "try container.encode(\(property.accessName), forKey: .\(property.codingKeyName))"
+            if property.type.hasSuffix("?") {
+                return "try container.encodeIfPresent(\(property.accessName), forKey: .\(property.codingKeyName))"
+            } else {
+                return "try container.encode(\(property.accessName), forKey: .\(property.codingKeyName))"
+            }
         }.joined(separator: "\n")
           
         return """
