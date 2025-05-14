@@ -457,14 +457,34 @@ class BaseModel: SmartCodable {
 }
 
 @SmartSubclass
-public class StudentModel: BaseModel {
+class StudentModel: BaseModel {
     var age: Int?
 }
 ```
 
 
 
-#### 4.2 子类实现协议方法
+#### 4.2 父类实现协议方法
+
+```
+class BaseModel: SmartCodable {
+    var name: String = ""
+    required init() { }
+    
+    static func mappingForKey() -> [SmartKeyTransformer]? {
+        [ CodingKeys.name <--- "stu_name" ]
+    }
+}
+
+@SmartSubclass
+class StudentModel: BaseModel {
+    var age: Int?
+}
+```
+
+
+
+#### 4.3 子类实现协议方法
 
 直接实现即可，不需要 `override` 修饰。
 
@@ -472,37 +492,23 @@ public class StudentModel: BaseModel {
 class BaseModel: SmartCodable {
     var name: String = ""
     required init() { }
+    
+    class func mappingForKey() -> [SmartKeyTransformer]? {
+        retrun nil
+    }
 }
 
 @SmartSubclass
-public class StudentModel: BaseModel {
+class StudentModel: BaseModel {
     var age: Int?
     
-    public static func mappingForKey() -> [SmartKeyTransformer]? {
+    override static func mappingForKey() -> [SmartKeyTransformer]? {
         [ CodingKeys.age <--- "stu_age" ]
     }
 }
 ```
 
 
-
-#### 4.3 父类实现协议方法
-
-```
-class BaseModel: SmartCodable {
-    var name: String = ""
-    required init() { }
-    
-    public static func mappingForKey() -> [SmartKeyTransformer]? {
-        [ CodingKeys.name <--- "stu_name" ]
-    }
-}
-
-@SmartSubclass
-public class StudentModel: BaseModel {
-    var age: Int?
-}
-```
 
 
 

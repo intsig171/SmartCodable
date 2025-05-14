@@ -499,7 +499,7 @@ class BaseModel: SmartCodable {
 }
 
 @SmartSubclass
-public class StudentModel: BaseModel {
+class StudentModel: BaseModel {
     var age: Int?
 }
 ```
@@ -512,13 +512,17 @@ Just implement it directly—no need for the `override` keyword.
 class BaseModel: SmartCodable {
     var name: String = ""
     required init() { }
+    
+    class func mappingForKey() -> [SmartKeyTransformer]? {
+        retrun nil
+    }
 }
 
 @SmartSubclass
-public class StudentModel: BaseModel {
+class StudentModel: BaseModel {
     var age: Int?
     
-    public static func mappingForKey() -> [SmartKeyTransformer]? {
+    override static func mappingForKey() -> [SmartKeyTransformer]? {
         [ CodingKeys.age <--- "stu_age" ]
     }
 }
@@ -531,13 +535,13 @@ class BaseModel: SmartCodable {
     var name: String = ""
     required init() { }
     
-    public static func mappingForKey() -> [SmartKeyTransformer]? {
+    static func mappingForKey() -> [SmartKeyTransformer]? {
         [ CodingKeys.name <--- "stu_name" ]
     }
 }
 
 @SmartSubclass
-public class StudentModel: BaseModel {
+class StudentModel: BaseModel {
     var age: Int?
 }
 ```
