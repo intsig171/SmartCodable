@@ -30,9 +30,6 @@ public struct SmartSubclassMacro: MemberMacro {
 
         // 获取类的属性
         let properties = try extractProperties(from: classDecl)
-          
-        // 如果没有属性，则不需要生成任何代码
-        if properties.isEmpty { return [] }
         
         var members: [DeclSyntax] = []
         
