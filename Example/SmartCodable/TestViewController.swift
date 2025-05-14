@@ -42,69 +42,27 @@ class TestViewController: BaseViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        let dict: [String: Any] =  [
-            "color": "000000",
-            "color1": "ffffff",
-            "color2": "#000000",
-            "color3": "0xffffff",
-            "date": "2024-02-01",
-            "date1": "2024-02-01 11:11",
-            "date2": "2024-02-01 11:11:11",
-            "date3": "1746501765",
-            "date4": "1746501764000"
+        
+        let dict: [String: Any] = [
+            "temp": "temp",
+            "age": []
         ]
+        
+        guard let model = Model.deserialize(from: dict) else { return }
+        
+        print(model)
+        
+        let dict1 = model.toDictionary() ?? [:]
+        let json = model.toJSONString(prettyPrint: true) ?? ""
 
-        let model = Model.deserialize(from: dict)
-//        print(model?.color)
-//        print(model?.color2)
-//        print(model?.color3)
-        
-        print(model?.date)
-//        print(model?.date1)
-//        print(model?.date2)
-//        print(model?.date3)
-//        print(model?.date4)
-        
-        print("\n\n")
-        
-        
-        let transDict = model?.toJSONString(prettyPrint: true) ?? ""
-        print(transDict)
-
+        print(dict1)
+        print(json)
     }
 
-    
     struct Model: SmartCodable {
-//        
-//        @SmartHexColor
-//        var color: UIColor?
-//        
-//        @SmartHexColor
-//        var color1: UIColor?
-//        @SmartHexColor
-//        var color2: UIColor?
-//        @SmartHexColor
-//        var color3: UIColor?
-        
-        
-        @SmartAny
-        var date: [String: Any] = [:]
-//        @SmartDate
-//        var date1: Date?
-//        @SmartDate
-//        var date2: Date?
-//        @SmartDate
-//        var date3: Date?
-//        @SmartDate
-//        var date4: Date?
-        
-        
-        
-//        static func mappingForValue() -> [SmartValueTransformer]? {
-//            [
-//                CodingKeys.height <--- SmartDateTransformer(isMilliseconds: true)
-//            ]
-//        }
+        var name: String?
+        var age: Int?
+        var temp: String?
     }
 }
 
