@@ -395,6 +395,7 @@ extension JSONDecoderImpl.KeyedContainer {
             return nil
         }
         
+        /// @SmartFlat的处理
         if let type = type as? FlatType.Type {
             if type.isArray {
                 return try? T(from: superDecoder(forKey: key))
@@ -402,7 +403,6 @@ extension JSONDecoderImpl.KeyedContainer {
                 return try? T(from: impl)
             }
         }
-        
 
         guard let newDecoder = try? decoderForKeyCompatibleForJson(key, type: type) else {
             return _compatibleDecode(forKey: key)
