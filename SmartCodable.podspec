@@ -34,9 +34,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'Core' do |ss|
     ss.source_files = 'Sources/SmartCodable/Core/**/*{.swift}'
-    ss.pod_target_xcconfig = {
-      'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES'
-    }
   end
   
   
@@ -51,8 +48,7 @@ Pod::Spec.new do |s|
 
     ss.pod_target_xcconfig = {
       "OTHER_SWIFT_FLAGS" => "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros",
-      "SUPPORTS_MACCATALYST" => "YES",
-      'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES'
+      "SUPPORTS_MACCATALYST" => "YES"
     }
 
     ss.user_target_xcconfig = {
