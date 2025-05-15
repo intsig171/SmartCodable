@@ -15,7 +15,7 @@ class Introduce_11ViewController: BaseCompatibilityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var dic1: [String : Any] = [
+        let dic1: [String : Any] = [
             "name": "mccc",
             "age": 10
         ]

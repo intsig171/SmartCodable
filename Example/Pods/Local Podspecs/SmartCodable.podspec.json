@@ -1,6 +1,6 @@
 {
   "name": "SmartCodable",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "summary": "Swift数据解析库",
   "homepage": "https://github.com/iAmMccc/SmartCodable",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/iAmMccc/SmartCodable.git",
-    "tag": "5.0.6"
+    "tag": "5.0.7"
   },
   "swift_versions": "5.0",
   "platforms": {
@@ -28,10 +28,7 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "Sources/SmartCodable/Core/**/*{.swift}",
-      "pod_target_xcconfig": {
-        "BUILD_LIBRARY_FOR_DISTRIBUTION": "YES"
-      }
+      "source_files": "Sources/SmartCodable/Core/**/*{.swift}"
     },
     {
       "name": "Inherit",
@@ -52,8 +49,7 @@
       ],
       "pod_target_xcconfig": {
         "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros",
-        "SUPPORTS_MACCATALYST": "YES",
-        "BUILD_LIBRARY_FOR_DISTRIBUTION": "YES"
+        "SUPPORTS_MACCATALYST": "YES"
       },
       "user_target_xcconfig": {
         "OTHER_SWIFT_FLAGS": "-Xfrontend -load-plugin-executable -Xfrontend $(PODS_BUILD_DIR)/SmartCodable/release/SmartCodableMacros-tool#SmartCodableMacros"
@@ -61,7 +57,10 @@
       "script_phases": {
         "name": "Build SmartCodable macro plugin",
         "script": "      env -i PATH=\"$PATH\" \"$SHELL\" -l -c \"swift build -c release --package-path \\\"$PODS_TARGET_SRCROOT\\\" --build-path \\\"${PODS_BUILD_DIR}/SmartCodable\\\"\"\n",
-        "execution_position": "before_compile"
+        "execution_position": "before_compile",
+        "output_files": [
+          "${PODS_BUILD_DIR}/SmartCodable/release/SmartCodableMacros-tool"
+        ]
       }
     }
   ],

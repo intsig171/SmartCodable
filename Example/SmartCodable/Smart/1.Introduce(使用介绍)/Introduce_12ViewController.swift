@@ -28,12 +28,12 @@ class Introduce_12ViewController: BaseViewController {
         if let model = PublishedModel.deserialize(from: dict) {
             
             self.model = model
-            print("反序列化后的 name 值: \(model.name)")
+            print("反序列化后的 name 值: \(model.name as Any)")
             
             // 正确访问 name 属性的 Publisher
             model.$name
                 .sink { newName in
-                    print("name 属性发生变化，新值为: \(newName)")
+                    print("name 属性发生变化，新值为: \(newName  as Any)")
                 }
                 .store(in: &cancellables)
             

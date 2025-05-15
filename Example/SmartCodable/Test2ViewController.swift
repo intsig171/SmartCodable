@@ -84,5 +84,5 @@ func testSmartCodableInherit() {
         }
         """
         let obj = SMCClassPerson.deserialize(from: deJsonStr)
-        print("height:", obj?.height)
+    print("height:", obj?.height as Any)
 }

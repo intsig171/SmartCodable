@@ -36,14 +36,14 @@ class Introduce_1ViewController: BaseViewController {
         let arr = [dict, dict]
         let arrJson = arr.bt_toJSONString() ?? ""
         let arrData = arrJson.data(using: .utf8)!
-        guard let models1 = [Model].deserialize(from: arr) else { return }
-        smartPrint(value: model1)
+        guard let model11 = [Model].deserialize(from: arr) else { return }
+        smartPrint(value: model11)
         
-        guard let models2 = [Model].deserialize(from: arrJson) else { return }
-        smartPrint(value: model2)
+        guard let models22 = [Model].deserialize(from: arrJson) else { return }
+        smartPrint(value: models22)
         
-        guard let models3 = [Model].deserialize(from: arrData) else { return }
-        smartPrint(value: model3)
+        guard let models33 = [Model].deserialize(from: arrData) else { return }
+        smartPrint(value: models33)
     }
 }
 

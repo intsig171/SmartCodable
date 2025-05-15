@@ -21,7 +21,7 @@ class Introduce_9ViewController: BaseCompatibilityViewController {
         ]
         
         guard let model = Model.deserialize(from: dict) else { return }
-        print(model.color)
+        print(model.color as Any)
     }
 }
 

@@ -27,7 +27,7 @@ class SpecialData_ColorViewController: BaseCompatibilityViewController {
 
         
         let trans = model.toDictionary()
-        print(trans)
+        print(trans as Any)
 
     }
 }

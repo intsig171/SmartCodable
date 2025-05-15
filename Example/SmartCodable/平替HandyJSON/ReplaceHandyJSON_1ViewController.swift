@@ -24,19 +24,21 @@ class ReplaceHandyJSON_1ViewController: BaseViewController {
         guard let handyModel = HandyModel.deserialize(from: dict) else { return }
         let toDict = handyModel.toJSON()
         let toJsonStr = handyModel.toJSONString()
+        print(toDict as Any)
+        print(toJsonStr as Any)
         
-        guard let smartModel = SmartModel.deserialize(from: dict) else { return }
-        let toDict1 = smartModel.toDictionary()
-        let toJsonStr1 = smartModel.toJSONString()
-        
-        
-        guard let handyModels = [HandyModel].deserialize(from: [dict]) as? [HandyModel] else { return }
-        let toArr = handyModels.toJSON()
-        let toArrStr = handyModels.toJSONString()
-        
-        guard let smartModels = [SmartModel].deserialize(from: [dict]) else { return }
-        let toArr1 = smartModels.toArray()
-        let toArrStr1 = smartModels.toJSONString()
+//        guard let smartModel = SmartModel.deserialize(from: dict) else { return }
+//        let toDict1 = smartModel.toDictionary()
+//        let toJsonStr1 = smartModel.toJSONString()
+//        
+//        
+//        guard let handyModels = [HandyModel].deserialize(from: [dict]) as? [HandyModel] else { return }
+//        let toArr = handyModels.toJSON()
+//        let toArrStr = handyModels.toJSONString()
+//        
+//        guard let smartModels = [SmartModel].deserialize(from: [dict]) else { return }
+//        let toArr1 = smartModels.toArray()
+//        let toArrStr1 = smartModels.toJSONString()
     }
 }
 

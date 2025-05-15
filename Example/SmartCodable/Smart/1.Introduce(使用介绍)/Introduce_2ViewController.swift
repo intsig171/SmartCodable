@@ -98,10 +98,10 @@ class Introduce_2ViewController: BaseViewController {
         smartPrint(value: xiaoMing)
 
         let arrTranform = models.toArray() ?? []
-        smartPrint(value: xiaoMing)
+        smartPrint(value: arrTranform)
 
         let arrJson = models.toJSONString() ?? ""
-        smartPrint(value: xiaoMing)
+        smartPrint(value: arrJson)
     }
 }
 

@@ -12,7 +12,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SmartCodable'
-  s.version          = '5.0.6'
+  s.version          = '5.0.7'
   s.summary          = 'Swift数据解析库'
   
   s.homepage         = 'https://github.com/iAmMccc/SmartCodable'
@@ -62,7 +62,10 @@ Pod::Spec.new do |s|
     ss.script_phase = {
       :name => 'Build SmartCodable macro plugin',
       :script => script,
-      :execution_position => :before_compile
+      :execution_position => :before_compile,
+      :output_files => [
+        "${PODS_BUILD_DIR}/SmartCodable/release/SmartCodableMacros-tool"
+      ]
     }
   end
 end

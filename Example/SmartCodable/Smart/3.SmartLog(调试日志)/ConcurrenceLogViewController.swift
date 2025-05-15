@@ -14,7 +14,7 @@ class ConcurrenceLogViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dict: [String: Any] = [:]
+        let dict: [String: String] = [:]
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         let group = DispatchGroup()

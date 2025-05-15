@@ -29,7 +29,7 @@ class SpecialData_dataViewController: BaseCompatibilityViewController {
             print(model)
             print(model.aData.toString() ?? "")
             
-            print(model.toDictionary())
+            print(model.toDictionary() as Any)
         }
         
         

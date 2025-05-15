@@ -39,12 +39,12 @@ public struct SmartSentinel {
         return debugMode != .none
     }
     
-    nonisolated(unsafe) private static var _mode = Level.none
+    private static var _mode = Level.none
     
-    nonisolated(unsafe) private static var cache = LogCache()
+    private static var cache = LogCache()
     
     /// 回调闭包，用于在解析完成时传递日志
-    nonisolated(unsafe) private static var logsHandler: ((String) -> Void)?
+    private static var logsHandler: ((String) -> Void)?
 }
 
 

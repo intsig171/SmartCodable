@@ -1,4 +1,3 @@
-import CodableWrapper
 
 class Test3ViewController: BaseViewController {
     
@@ -6,17 +5,6 @@ class Test3ViewController: BaseViewController {
         super.viewDidLoad()
         
 
-    }
-    
-    @Codable
-    class Model {
-        var name: String = ""
-    }
-    
-    @CodableSubclass
-    class SubModel: Model {
-//        var age = [:]
-        var age1: Int?
     }
 }
 

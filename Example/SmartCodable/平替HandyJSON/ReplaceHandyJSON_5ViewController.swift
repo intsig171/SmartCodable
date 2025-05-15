@@ -23,12 +23,12 @@ class ReplaceHandyJSON_5ViewController: BaseViewController {
         ] as [String : Any]
         
         guard let handyModel = HandyModel.deserialize(from: dict) else { return }
-        print(handyModel.name)
-        print(handyModel.age)
+        print(handyModel.name as Any)
+        print(handyModel.age as Any)
         
         guard let smartModel = SmartModel.deserialize(from: dict) else { return }
-        print(smartModel.name)
-        print(smartModel.age)
+        print(smartModel.name as Any)
+        print(smartModel.age as Any)
     }
 }
 extension ReplaceHandyJSON_5ViewController {
