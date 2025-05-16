@@ -44,25 +44,18 @@ class TestViewController: BaseViewController {
         
         
         let dict: [String: Any] = [
-            "temp": "temp",
-            "age": []
+            "age": 25.2
         ]
         
         guard let model = Model.deserialize(from: dict) else { return }
         
         print(model)
-        
-        let dict1 = model.toDictionary() ?? [:]
-        let json = model.toJSONString(prettyPrint: true) ?? ""
-
-        print(dict1)
-        print(json)
     }
 
     struct Model: SmartCodable {
-        var name: String?
-        var age: Int?
-        var temp: String?
+        
+        var age: Int = 0
+        
     }
 }
 
