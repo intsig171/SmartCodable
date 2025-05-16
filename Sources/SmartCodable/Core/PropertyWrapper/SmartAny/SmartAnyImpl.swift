@@ -213,10 +213,16 @@ extension SmartAnyImpl {
         case let v as NSNumber:      return .number(v)
         case let v as String:        return .string(v)
         case let v as [String: Any]: return .dict(v.mapValues { convertToSmartAny($0) })
+        case let v as SmartCodable:
+            if let dict = v.toDictionary() {
+                return .dict(dict.mapValues { convertToSmartAny($0) })
+            }
         case let v as [Any]:         return .array(v.map { convertToSmartAny($0) })
         case is NSNull:              return .null(NSNull())
-        default:                     return .null(NSNull())
+        default:                     break
         }
+        
+        return .null(NSNull())
     }
 }
 

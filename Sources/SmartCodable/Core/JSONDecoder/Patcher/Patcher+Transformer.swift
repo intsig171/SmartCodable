@@ -171,22 +171,34 @@ private func _fixedWidthInteger<T: FixedWidthInteger>(from value: JSONValue) -> 
     case .string(let string):
         if let integer = T(string) {
             return integer
-        } else if let float = Double(string), float.isFinite, float >= Double(T.min) && float <= Double(T.max), let integer = T(exactly: float) {
-            return integer
+        } else if let float = Double(string) {
+            return _convertFloatToInteger(float)
         }
     case .number(let number):
         if let integer = T(number) {
             return integer
-        } else if let float = Double(number), float.isFinite, float >= Double(T.min) && float <= Double(T.max) {
-            
-            if let integer = T(exactly: float) {
-                return integer
-            }
-            
-            
+        } else if let float = Double(number) {
+            return _convertFloatToInteger(float)
         }
     default:
         break
     }
     return nil
+}
+
+/// 统一的浮点数转整数方法（包含范围检查和转换策略）
+private func _convertFloatToInteger<T: FixedWidthInteger>(_ float: Double) -> T? {
+    // 前置检查
+    guard float.isFinite,
+          float >= Double(T.min),
+          float <= Double(T.max) else {
+        return nil
+    }
+    
+    // 应用转换策略
+    switch SmartCoding.numberConversionStrategy {
+    case .strict:   return T(exactly: float)
+    case .truncate: return T(float)
+    case .rounded:  return T(float.rounded())
+    }
 }
