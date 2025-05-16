@@ -23,8 +23,9 @@ struct KeysMapper {
         switch jsonValue {
         case .string(let stringValue):
             // Handle string values that might contain JSON
-            let value = parseJSON(from: stringValue, as: type)
-            return JSONValue.make(value)
+            if let value = parseJSON(from: stringValue, as: type) {
+                return JSONValue.make(value)
+            }
             
         case .object(let dictValue):
             // Convert dictionary keys according to mapping rules
@@ -39,7 +40,7 @@ struct KeysMapper {
     }
     
     /// Parses a string into JSON object and applies key mapping
-    private static func parseJSON(from string: String, as type: SmartDecodable.Type) -> Any {
+    private static func parseJSON(from string: String, as type: SmartDecodable.Type) -> Any? {
         guard let jsonObject = string.toJSONObject() else { return string }
         if let dict = jsonObject as? [String: Any] {
             // Apply key mapping to dictionary
@@ -50,11 +51,9 @@ struct KeysMapper {
     }
     
     /// Applies key mapping rules to a dictionary
-    private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any] {
+    private static func mapDictionary(dict: [String: Any], using type: SmartDecodable.Type) -> [String: Any]? {
         
-        guard let mappings = type.mappingForKey(), !mappings.isEmpty else {
-            return dict
-        }
+        guard let mappings = type.mappingForKey(), !mappings.isEmpty else { return nil }
         
         var newDict = dict
         mappings.forEach { mapping in
@@ -72,13 +71,13 @@ struct KeysMapper {
             // break effect: Prefer the first non-null field
             for oldKey in mapping.from {
                 // Mapping exists at current level
-                if let value = newDict[oldKey] as? JSONValue, value != .null {
+                if let value = dict[oldKey] as? JSONValue, value != .null {
                     newDict[newKey] = value
                     break
                 }
                 
                 // Mapping requires cross-level path handling
-                if let pathValue = newDict.getValue(forKeyPath: oldKey) {
+                if let pathValue = dict.getValue(forKeyPath: oldKey) {
                     newDict.updateValue(pathValue, forKey: newKey)
                     break
                 }
