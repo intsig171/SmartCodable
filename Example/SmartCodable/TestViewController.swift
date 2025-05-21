@@ -35,7 +35,7 @@ class TestViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        SmartSentinel.debugMode = .verbose
     }
     
     
@@ -44,20 +44,36 @@ class TestViewController: BaseViewController {
         
         
         let dict: [String: Any] = [
-            "age": 25.2
+            "id": "abc",
+            "profile": [
+              "age": "twenty"
+            ]
         ]
         
-        guard let model = Model.deserialize(from: dict) else { return }
+        
+        
+        
+//        let model1 = dict.decode(type: User.self)
+//        print(model1)
+        
+        
+        
+        guard let model = User.deserialize(from: dict) else { return }
         
         print(model)
     }
 
-    struct Model: SmartCodable {
-        
+    
+    struct User: SmartCodable {
+        var id: String = ""
+        var profile: Profile?
+    }
+    
+    struct Profile: SmartCodable {
         var age: Int = 0
-        
     }
 }
+
 
 
 

@@ -85,13 +85,13 @@ extension SmartSentinel {
     
     private static func verboseLog(_ error: DecodingError, className: String, parsingMark: String) {
         logIfNeeded(level: .verbose) {
-//            cache.save(error: error, className: className, parsingMark: parsingMark)
+            cache.save(error: error, className: className, parsingMark: parsingMark)
         }
     }
     
     private static func alertLog(error: DecodingError, className: String, parsingMark: String) {
         logIfNeeded(level: .alert) {
-//            cache.save(error: error, className: className, parsingMark: parsingMark)
+            cache.save(error: error, className: className, parsingMark: parsingMark)
         }
     }
     
@@ -99,18 +99,18 @@ extension SmartSentinel {
         
         guard SmartSentinel.isValid else { return }
         
-//        if let format = cache.formatLogs(parsingMark: parsingMark) {
-//            var message: String = ""
-//            message += getHeader()
-//            message += name + " 👈🏻 👀\n"
-//            message += format
-//            message += getFooter()
-//            print(message)
-//            
-//            logsHandler?(message)
-//        }
-//        
-//        cache.clearCache(parsingMark: parsingMark)
+        if let format = cache.formatLogs(parsingMark: parsingMark) {
+            var message: String = ""
+            message += getHeader()
+            message += name + " 👈🏻 👀\n"
+            message += format
+            message += getFooter()
+            print(message)
+            
+            logsHandler?(message)
+        }
+        
+        cache.clearCache(parsingMark: parsingMark)
     }
 }
 
