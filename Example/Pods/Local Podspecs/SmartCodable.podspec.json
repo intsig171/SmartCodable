@@ -1,6 +1,6 @@
 {
   "name": "SmartCodable",
-  "version": "5.0.9",
+  "version": "5.0.10",
   "summary": "Swift数据解析库",
   "homepage": "https://github.com/iAmMccc/SmartCodable",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/iAmMccc/SmartCodable.git",
-    "tag": "5.0.9"
+    "tag": "5.0.10"
   },
   "swift_versions": "5.0",
   "platforms": {
